@@ -4,7 +4,11 @@
   "description": "Search form for searching tickets",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server.js",
+    "build": "NODE_ENV=production webpack",
+    "build-dev": "NODE_ENV=dev webpack",
+    "dev": "run-p build-dev server"
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,8 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "express": "^4.15.4",
+    "npm-run-all": "^4.1.1",
     "webpack": "^3.5.5"
   },
   "dependencies": {
