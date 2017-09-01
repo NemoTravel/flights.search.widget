@@ -2,8 +2,8 @@ import React from 'react';
 import VerticalForm from './VerticalForm';
 
 export default class MainComponent extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
 	
 	render() {

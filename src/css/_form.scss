@@ -1,5 +1,5 @@
 &-form {
-	&__item {
+	&__block {
 		border-bottom: 1px solid #E6E6E6;
 
 		&__header {
@@ -10,13 +10,13 @@
 			cursor: pointer;
 			display: flex;
 			align-items: center;
+			user-select: none;
 
 			&:before {
-				content: "\e90b";
 				position: relative;
+				width: 1.2rem;
 				top: -1px;
 				font-family: "OpenSkyIcons", sans-serif;
-				font-size: 18px;
 				font-weight: normal;
 				color: $headers-font-color;
 				margin-right: 0.8rem;
@@ -35,6 +35,7 @@
 
 			&_active {
 				&:after {
+					margin-top: 0;
 					transform: translate(0, -50%) rotate(-90deg);
 				}
 			}
@@ -42,6 +43,26 @@
 
 		&__body {
 			padding: 0.9rem;
+			display: none;
+			
+			&_active {
+				display: block;
+			}
+		}
+		
+		&_tickets &__header:before {
+			content: "\e90b";
+			font-size: 18px;
+		}
+		
+		&_registration &__header:before {
+			content: "\e900";
+			font-size: 15px;
+		}
+		
+		&_bookings &__header:before {
+			content: "\e909";
+			font-size: 16px;
 		}
 	}
 

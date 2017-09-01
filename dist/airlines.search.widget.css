@@ -2850,11 +2850,11 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-.nemo-widget-form__item {
+.nemo-widget-form__block {
   border-bottom: 1px solid #E6E6E6;
 }
 
-.nemo-widget-form__item__header {
+.nemo-widget-form__block__header {
   position: relative;
   padding: 0.9rem;
   font-weight: 600;
@@ -2862,20 +2862,20 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  user-select: none;
 }
 
-.nemo-widget-form__item__header:before {
-  content: "\E90B";
+.nemo-widget-form__block__header:before {
   position: relative;
+  width: 1.2rem;
   top: -1px;
   font-family: "OpenSkyIcons", sans-serif;
-  font-size: 18px;
   font-weight: normal;
   color: #1B75BC;
   margin-right: 0.8rem;
 }
 
-.nemo-widget-form__item__header:after {
+.nemo-widget-form__block__header:after {
   content: "\E90E";
   position: absolute;
   top: 50%;
@@ -2886,12 +2886,33 @@
   transform: translate(0, -50%) rotate(90deg);
 }
 
-.nemo-widget-form__item__header_active:after {
+.nemo-widget-form__block__header_active:after {
+  margin-top: 0;
   transform: translate(0, -50%) rotate(-90deg);
 }
 
-.nemo-widget-form__item__body {
+.nemo-widget-form__block__body {
   padding: 0.9rem;
+  display: none;
+}
+
+.nemo-widget-form__block__body_active {
+  display: block;
+}
+
+.nemo-widget-form__block_tickets .nemo-widget-form__block__header:before {
+  content: "\E90B";
+  font-size: 18px;
+}
+
+.nemo-widget-form__block_registration .nemo-widget-form__block__header:before {
+  content: "\E900";
+  font-size: 15px;
+}
+
+.nemo-widget-form__block_bookings .nemo-widget-form__block__header:before {
+  content: "\E909";
+  font-size: 16px;
 }
 
 .nemo-widget-form .nemo-widget-form__searchButton {

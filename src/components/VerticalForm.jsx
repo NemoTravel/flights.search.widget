@@ -1,60 +1,40 @@
 import React from 'react';
+import { verticalFormReducer, defaultState } from '../reducers/VerticalFormReducer';
+import { createStore } from 'redux';
+
+import TicketsBlock from './VerticalForm/Block/Tickets';
+import RegistrationBlock from './VerticalForm/Block/Registration';
+import BookingsBlock from './VerticalForm/Block/Bookings';
 
 export default class VerticalForm extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+		
+		this.state = defaultState;
+		this.store = createStore(verticalFormReducer);
+		
+		this.store.subscribe(() => {
+			this.setState(this.store.getState());
+		});
+	}
+	
+	toggleBlockTickets() {
+		this.store.dispatch({ type: `TOGGLE_BLOCK`, blockName: 'tickets' })
+	}
+	
+	toggleBlockRegistration() {
+		this.store.dispatch({ type: `TOGGLE_BLOCK`, blockName: 'registration' })
+	}
+	
+	toggleBlockBookings() {
+		this.store.dispatch({ type: `TOGGLE_BLOCK`, blockName: 'bookings' })
 	}
 	
 	render() {
 		return <section className="nemo-widget-form nemo-widget-form_vertical">
-			<div className="nemo-widget-form__item nemo-widget-form__item_tickets">
-				<div className="nemo-widget-form__item__header nemo-widget-form__item__header_active">
-					Купить авиабилеты
-				</div>
-				
-				<div className="nemo-widget-form__item__body">
-					<div className="form-group">
-						<input type="text" className="form-control nemo-widget-form__departure" spellCheck={false}/>
-						<input type="text" className="form-control nemo-widget-form__arrival" spellCheck={false}/>
-					</div>
-					
-					<div className="form-group row">
-						<div className="col nemo-widget-form__departure__date__col">
-							<input type="text" className="form-control" readOnly={true} spellCheck={false}/>
-						</div>
-						
-						<div className="col nemo-widget-form__arrival__date__col">
-							<input type="text" className="form-control" readOnly={true} spellCheck={false}/>
-						</div>
-					</div>
-					
-					<div className="form-group">
-						<input type="text" className="form-control" readOnly={true} spellCheck={false}/>
-					</div>
-					
-					<div className="form-group nemo-widget-form__pseudoBlocks">
-						<a href="#" className="nemo-widget-pseudoLink">У меня есть купон на скидку</a>
-					</div>
-					
-					<div className="form-group nemo-widget-form__pseudoBlocks">
-						<a href="#" className="nemo-widget-pseudoLink">Оплата милями</a>
-					</div>
-					
-					<button className="btn btn-primary nemo-widget-form__searchButton">Найти</button>
-				</div>
-			</div>
-			
-			<div className="nemo-widget-form__item nemo-widget-form__item_registration">
-				<div className="nemo-widget-form__item__header">
-					Регистрация на рейс
-				</div>
-			</div>
-			
-			<div className="nemo-widget-form__item nemo-widget-form__item_bookings">
-				<div className="nemo-widget-form__item__header">
-					Бронирования
-				</div>
-			</div>
+			<TicketsBlock isActive={this.state.blockIsActive.tickets} toggle={this.toggleBlockTickets.bind(this)}/>
+			<RegistrationBlock isActive={this.state.blockIsActive.registration} toggle={this.toggleBlockRegistration.bind(this)}/>
+			<BookingsBlock isActive={this.state.blockIsActive.bookings} toggle={this.toggleBlockBookings.bind(this)}/>
 		</section>;
 	}
 }
