@@ -1,4 +1,5 @@
 // Creating our own bootstrap bundle.
+@import "~bootstrap/scss/bootstrap-reboot";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
@@ -8,10 +9,6 @@
 @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
 @import "~bootstrap/scss/transitions";
-@import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/badge";
 @import "~bootstrap/scss/progress";
 @import "~bootstrap/scss/media";
-@import "~bootstrap/scss/close";
-@import "~bootstrap/scss/modal";
-@import "~bootstrap/scss/tooltip";

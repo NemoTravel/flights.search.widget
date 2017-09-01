@@ -1,4 +1,5 @@
 import React from 'react';
+import VerticalForm from './VerticalForm';
 
 export default class MainComponent extends React.Component {
 	constructor() {
@@ -6,11 +7,8 @@ export default class MainComponent extends React.Component {
 	}
 	
 	render() {
-		return <div className="container">
-			Hello Nemo!
-			<div>
-				<a href="#" className="btn btn-primary">Click me</a>
-			</div>
-		</div>;
+		return <section className="nemo-widget">
+			<VerticalForm/>
+		</section>;
 	}
 }

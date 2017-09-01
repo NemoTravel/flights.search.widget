@@ -1,0 +1,74 @@
+&-form {
+	&__item {
+		border-bottom: 1px solid #E6E6E6;
+
+		&__header {
+			position: relative;
+			padding: 0.9rem;
+			font-weight: 600;
+			color: $headers-font-color;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+
+			&:before {
+				content: "\e90b";
+				position: relative;
+				top: -1px;
+				font-family: "OpenSkyIcons", sans-serif;
+				font-size: 18px;
+				font-weight: normal;
+				color: $headers-font-color;
+				margin-right: 0.8rem;
+			}
+
+			&:after {
+				content: "\e90e";
+				position: absolute;
+				top: 50%;
+				margin-top: 5px;
+				right: 1.2rem;
+				font-family: "OpenSkyIcons", sans-serif;
+				color: $headers-font-color;
+				transform: translate(0, -50%) rotate(90deg);
+			}
+
+			&_active {
+				&:after {
+					transform: translate(0, -50%) rotate(-90deg);
+				}
+			}
+		}
+
+		&__body {
+			padding: 0.9rem;
+		}
+	}
+
+	& &__searchButton {
+		width: 100%;
+		padding: 0.7rem;
+	}
+
+	& &__departure {
+		&__date {
+			&__col {
+				padding-right: 0.5rem;
+			}
+		}
+	}
+
+	& &__arrival {
+		border-top: none;
+
+		&__date {
+			&__col {
+				padding-left: 0.5rem;
+			}
+		}
+	}
+	
+	&__pseudoBlocks {
+		text-align: center;
+	}
+}

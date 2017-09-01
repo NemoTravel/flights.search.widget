@@ -88,6 +88,19 @@ let config = {
 					fallback: 'style-loader',
 					publicPath: path.resolve(__dirname, 'dist')
 				})
+			},
+			
+			// Handling fonts and converting them to base64 format.
+			{
+				test: /\.woff$/,
+				loader: 'url-loader',
+				options: {
+					limit: 50000,
+					mimetype: 'application/font-woff'
+				},
+				include: [
+					path.resolve(__dirname, 'src/css/fonts')
+				]
 			}
 		]
 	},

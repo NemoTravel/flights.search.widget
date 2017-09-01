@@ -1,0 +1,62 @@
+/*
+ * ----------------------------------------------------------------------
+ * BUTTONS
+ * ----------------------------------------------------------------------
+ */
+.btn {
+	border-radius: 0;
+	cursor: pointer;
+	border: none;
+	font-weight: 700;
+	font-size: 14px;
+	
+	&:active {
+		border: none;
+	}
+	
+	&:focus {
+		box-shadow: none;
+	}
+}
+
+.btn-primary {
+	background-color: $main-button-color;
+	color: $common-font-color;
+	
+	&:hover {
+		background-color: $main-button-color_hover;
+		color: $common-font-color;
+	}
+	
+	&:active {
+		background-color: $main-button-color_hover;
+	}
+}
+
+/*
+ * ----------------------------------------------------------------------
+ * FORMS
+ * ----------------------------------------------------------------------
+ */
+.form-control {
+	border-radius: 0;
+	border-color: #ccc;
+	color: $common-font-color;
+	font-weight: 600;
+	font-size: 15px;
+	position: relative;
+	padding: 0.65rem 0.75rem;
+
+	&[readonly] {
+		background-color: inherit;
+	}
+	
+	&:focus {
+		border-color: #ccc;
+		z-index: 10;
+		
+		&:not([disabled]) {
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+		}
+	}
+}
