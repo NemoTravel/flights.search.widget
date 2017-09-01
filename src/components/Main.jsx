@@ -6,6 +6,11 @@ export default class MainComponent extends React.Component {
 	}
 	
 	render() {
-		return <div>Hello Nemo!</div>;
+		return <div className="container">
+			Hello Nemo!
+			<div>
+				<a href="#" className="btn btn-primary">Click me</a>
+			</div>
+		</div>;
 	}
 }

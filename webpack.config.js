@@ -78,6 +78,8 @@ let config = {
 					use: [
 						// Allows to import CSS through JavaScript.
 						'css-loader',
+						// Resolving relative URL in CSS code.
+						'resolve-url-loader',
 						// Compiles Sass to CSS.
 						'sass-loader',
 						// Using autoprefixe plugin.
