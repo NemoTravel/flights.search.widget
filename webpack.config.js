@@ -1,8 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const moduleName = 'airlines.search.widget';
+
 // For DEV mode prepend "NODE_ENV=dev" before "webpack" command.
 // terminal: NODE_ENV=dev webpack
 const isDevMode = process.env.NODE_ENV === 'dev';
+
+// Streaming compiled styles to the separate ".css" file.
+const extractSass = new ExtractTextPlugin({
+	filename: `${moduleName}.css`
+});
 
 let config = {
 	// Root folder for Webpack.
@@ -27,7 +36,7 @@ let config = {
 		// Path for loading assets.
 		publicPath: '/dist/',
 		// Output file name.
-		filename: 'airlines.search.widget.min.js'
+		filename: `${moduleName}.min.js`
 	},
 
 	resolve: {
@@ -40,10 +49,10 @@ let config = {
 	},
 
 	module: {
+		// List of loaders ("handlers") for different types of files.
 		rules: [
-			// List of loaders ("handlers") for different types of files.
+			// Handling ".jsx" and ".js" files in "/src" folder with Babel-Loader.
 			{
-				// Handling ".jsx" and ".js" files in "/src" folder with Babel-Loader.
 				test: /\.jsx?$/,
 				loader: 'babel-loader',
 				// Converting JSX and ES6 to the common ES5 standart.
@@ -57,11 +66,33 @@ let config = {
 				exclude: [
 					path.resolve(__dirname, 'node_modules')
 				]
+			},
+			
+			// Handling ".scss" files, converting them to ".css", appending vendor prefixes.
+			{
+				test: /\.scss$/,
+				include: [
+					path.resolve(__dirname, 'src/css')
+				],
+				use: extractSass.extract({
+					use: [
+						// Allows to import CSS through JavaScript.
+						'css-loader',
+						// Compiles Sass to CSS.
+						'sass-loader',
+						// Using autoprefixe plugin.
+						'postcss-loader'
+					],
+					fallback: 'style-loader',
+					publicPath: path.resolve(__dirname, 'dist')
+				})
 			}
 		]
 	},
 
-	plugins: []
+	plugins: [
+		extractSass
+	]
 };
 
 if (!isDevMode) {
