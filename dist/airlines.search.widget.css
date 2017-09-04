@@ -2835,6 +2835,7 @@
   font-size: 15px;
   position: relative;
   padding: 0.65rem 0.75rem;
+  line-height: normal;
 }
 
 .nemo-widget .form-control[readonly] {
@@ -2924,6 +2925,10 @@
   padding-right: 0.5rem;
 }
 
+.nemo-widget-form .nemo-widget-form__departure__date__col input {
+  cursor: pointer;
+}
+
 .nemo-widget-form .nemo-widget-form__arrival {
   border-top: none;
 }
@@ -2932,8 +2937,64 @@
   padding-left: 0.5rem;
 }
 
+.nemo-widget-form .nemo-widget-form__arrival__date__col input {
+  cursor: pointer;
+}
+
+.nemo-widget-form .nemo-widget-form__input__wrapper {
+  position: relative;
+}
+
+.nemo-widget-form .nemo-widget-form__input__arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
+  z-index: 11;
+  color: #999;
+  font-size: 5px;
+}
+
+.nemo-widget-form .nemo-widget-form__input__arrow:after {
+  content: "\E90A";
+}
+
+.nemo-widget-form .nemo-widget-form__input__calendar {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  font-size: 13px;
+  color: #B3B3B3;
+  z-index: 1;
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.nemo-widget-form .nemo-widget-form__input__calendar:after {
+  content: "\E90D";
+}
+
 .nemo-widget-form__pseudoBlocks {
   text-align: center;
+}
+
+.nemo-widget .nemo-widget-icon {
+  font-family: "OpenSkyIcons", sans-serif !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 }
 
 .nemo-widget .nemo-widget-pseudoLink {

@@ -75,6 +75,10 @@
 		&__date {
 			&__col {
 				padding-right: 0.5rem;
+				
+				input {
+					cursor: pointer;
+				}
 			}
 		}
 	}
@@ -85,6 +89,54 @@
 		&__date {
 			&__col {
 				padding-left: 0.5rem;
+				
+				input {
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+	& &__input {
+		&__wrapper {
+			position: relative;
+		}
+		
+		&__arrow {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 2rem;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			cursor: pointer;
+			z-index: 11;
+			color: #999;
+			font-size: 5px;
+			
+			&:after {
+				content: "\e90a";
+			}
+		}
+		
+		&__calendar {
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 2rem;
+			font-size: 13px;
+			color: #B3B3B3;
+			z-index: 1;
+			cursor: pointer;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			
+			&:after {
+				content: "\e90d";
 			}
 		}
 	}

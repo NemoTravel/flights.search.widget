@@ -1,5 +1,7 @@
 import React from 'react';
 import Block from 'components/VerticalForm/Block';
+import Autocomplete from 'components/VerticalForm/Block/Tickets/Autocomplete';
+import Datepicker from 'components/VerticalForm/Block/Tickets/Datepicker';
 
 export default class Tickets extends Block {
 	render() {
@@ -10,18 +12,13 @@ export default class Tickets extends Block {
 
 			<div className={this.getBodyClass()}>
 				<div className="form-group">
-					<input type="text" className="form-control nemo-widget-form__departure" spellCheck={false}/>
-					<input type="text" className="form-control nemo-widget-form__arrival" spellCheck={false}/>
+					<Autocomplete type="departure" placeholder="Откуда"/>
+					<Autocomplete type="arrival" placeholder="Куда"/>
 				</div>
 
 				<div className="form-group row">
-					<div className="col nemo-widget-form__departure__date__col">
-						<input type="text" className="form-control" readOnly={true} spellCheck={false}/>
-					</div>
-
-					<div className="col nemo-widget-form__arrival__date__col">
-						<input type="text" className="form-control" readOnly={true} spellCheck={false}/>
-					</div>
+					<Datepicker type="departure" placeholder="Вылет туда"/>
+					<Datepicker type="arrival" placeholder="Обратно"/>
 				</div>
 
 				<div className="form-group">
@@ -38,6 +35,6 @@ export default class Tickets extends Block {
 
 				<button className="btn btn-primary nemo-widget-form__searchButton">Найти</button>
 			</div>
-		</div>
+		</div>;
 	}
 }
