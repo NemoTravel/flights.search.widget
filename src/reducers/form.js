@@ -7,9 +7,17 @@ const initialState = {
 		registration: false,
 		bookings: false
 	},
-	isLoading: {
-		departure: false,
-		arrival: false
+	autocomplete: {
+		departure: {
+			isLoading: false,
+			suggestions: [],
+			value: ''
+		},
+		arrival: {
+			isLoading: false,
+			suggestions: [],
+			value: ''
+		}
 	}
 };
 
@@ -22,14 +30,24 @@ export default function form(state = initialState, action) {
 			newState.blockIsActive[action.payload] = !state.blockIsActive[action.payload];
 			return newState;
 			
-		case types.AUTOCOMPLETE_IS_LOADING:
+		case types.AUTOCOMPLETE_LOADING_STARTED:
 			newState = cloneDeep(state);
-			newState.isLoading[action.payload] = true;
+			newState.autocomplete[action.payload].isLoading = true;
 			return newState;
 			
-		case types.AUTOCOMPLETE_IS_LOADED:
+		case types.AUTOCOMPLETE_LOADING_FINISHED:
 			newState = cloneDeep(state);
-			newState.isLoading[action.payload] = false;
+			newState.autocomplete[action.payload].isLoading = false;
+			return newState;
+			
+		case types.AUTOCOMPLETE_SUGGESTIONS_CHANGED:
+			newState = cloneDeep(state);
+			newState.autocomplete[action.payload.fieldType].suggestions = action.payload.suggestions;
+			return newState;
+			
+		case types.AUTOCOMPLETE_VALUE_CHANGED:
+			newState = cloneDeep(state);
+			newState.autocomplete[action.payload.fieldType].value = action.payload.value;
 			return newState;
 
 		default:

@@ -14,35 +14,63 @@ export function toggleBlock(blockName) {
 	}
 }
 
-export function showAutocompleteLoading(fieldType) {
+export function startAutocompleteLoading(fieldType) {
 	return {
-		type: types.AUTOCOMPLETE_IS_LOADING,
+		type: types.AUTOCOMPLETE_LOADING_STARTED,
 		payload: fieldType
 	};
 }
 
-export function hideAutocompleteLoading(fieldType) {
+export function finishAutocompleteLoading(fieldType) {
 	return {
-		type: types.AUTOCOMPLETE_IS_LOADED,
+		type: types.AUTOCOMPLETE_LOADING_FINISHED,
 		payload: fieldType
 	};
 }
 
-export function autocompleteRequest(searchText, fieldType) {
+export function changeAutocompleteSuggestions(suggestions, fieldType) {
+	return {
+		type: types.AUTOCOMPLETE_SUGGESTIONS_CHANGED,
+		payload: {
+			fieldType,
+			suggestions
+		}
+	};
+}
+
+export function changeAutocompleteValue(value, fieldType) {
+	return {
+		type: types.AUTOCOMPLETE_VALUE_CHANGED,
+		payload: {
+			fieldType,
+			value
+		}
+	};
+}
+
+export function sendAutocompleteRequest(searchText, fieldType) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		dispatch(showAutocompleteLoading(fieldType));
+		dispatch(startAutocompleteLoading(fieldType));
 		
-		axios.get(`${state.system.API_URL}/autocomplete/${encodeURIComponent(searchText)}`)
+		axios.get(`${state.system.API_URL}/autocomplete/${searchText}`)
 			.then((response) => {
 				const data = response.data;
-	
-				if (data) {
-					// TODO
+				
+				// Some basic parser.
+				if (data && data.guide.autocomplete.iata instanceof Array) {
+					const { airports } = data.guide;
+					const { iata } = data.guide.autocomplete;
+					// Trying to match suggested airports by IATA.
+					const suggestions = iata.filter(({ IATA }) => IATA in airports).map(({ IATA }) => airports[IATA]);
+					
+					dispatch(changeAutocompleteSuggestions(suggestions, fieldType));
+					dispatch(finishAutocompleteLoading(fieldType));
 				}
-
-				dispatch(hideAutocompleteLoading(fieldType));
+				else {
+					dispatch(finishAutocompleteLoading(fieldType));
+				}
 			});
 	};
 }
