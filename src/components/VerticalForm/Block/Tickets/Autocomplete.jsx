@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import Autosuggest from 'react-autosuggest';
 
 export default class Autocomplete extends Component {
 	constructor(props) {
 		super(props);
 		this.autocompleteTimeout = null;
-		this.autocompleteWaitTime = 150;
+		this.autocompleteWaitTime = 200;
 
-		this.changeHandler = this.changeHandler.bind(this);
+		this.fetchSuggestions = this.fetchSuggestions.bind(this);
+		this.onChangeHandler = this.onChangeHandler.bind(this);
 	}
-	
-	changeHandler(event) {
+
+	fetchSuggestions({ value }) {
 		const { autocompleteRequest, type } = this.props;
-		const searchText = event.target.value;
+		const searchText = value;
 		
 		// We don't want to harass servers too much.
 		clearTimeout(this.autocompleteTimeout);
@@ -22,30 +24,36 @@ export default class Autocomplete extends Component {
 		}, this.autocompleteWaitTime);
 	}
 	
+	onChangeHandler(event, { newValue }) {
+		this.props.changeAutocompleteValue(newValue, this.props.type);
+	}
+	
 	render() {
+		const { isLoading, placeholder, autocomplete, type } = this.props;
+		const inputClassName = `form-control nemo-widget-form__${type} nemo-widget-form__input`;
+		
 		// Shortcuts for some functions.
-		const 
-			getRef = (input) => this.inputField = input,
-			focusInput = (event) => this.inputField.focus();
+		// const 
+		// 	getRef = (input) => this.inputField = input,
+		// 	focusInput = (event) => this.inputField.focus();
 		
-		let inputClassName = `form-control nemo-widget-form__${this.props.type} nemo-widget-form__input`;
-		
-		// Show loading spinner.
-		if (this.props.isLoading) {
-			inputClassName += ' nemo-widget-form__input_loading';
-		}
-
 		return <div className="nemo-widget-form__input__wrapper">
-			<input 
-				type="text" 
-				className={inputClassName} 
-				onChange={this.changeHandler} 
-				placeholder={this.props.placeholder} 
-				spellCheck={false} 
-				ref={getRef}
+			<Autosuggest
+				suggestions={autocomplete.suggestions}
+				onSuggestionsFetchRequested={this.fetchSuggestions}
+				onSuggestionsClearRequested={() => null}
+				getSuggestionValue={(item) => item.IATA}
+				renderSuggestion={(item) => <div>{item.IATA}</div>}
+				inputProps={{
+					className: isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
+					spellCheck: false,
+					placeholder,
+					value: autocomplete.value,
+					onChange: this.onChangeHandler
+				}}
 			/>
 			
-			<div className="nemo-widget-icon nemo-widget-form__input__arrow" onClick={focusInput}/>
+			<div className="nemo-widget-icon nemo-widget-form__input__arrow"/>
 		</div>;
 	}
 }

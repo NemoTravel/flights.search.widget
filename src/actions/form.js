@@ -21,10 +21,23 @@ export function showAutocompleteLoading(fieldType) {
 	};
 }
 
-export function hideAutocompleteLoading(fieldType) {
+export function autocompleteIsLoaded(array, fieldType) {
 	return {
 		type: types.AUTOCOMPLETE_IS_LOADED,
-		payload: fieldType
+		payload: {
+			fieldType,
+			array
+		}
+	};
+}
+
+export function changeAutocompleteValue(value, fieldType) {
+	return {
+		type: types.AUTOCOMPLETE_VALUE_CHANGED,
+		payload: {
+			fieldType,
+			value
+		}
 	};
 }
 
@@ -37,12 +50,13 @@ export function autocompleteRequest(searchText, fieldType) {
 		axios.get(`${state.system.API_URL}/autocomplete/${encodeURIComponent(searchText)}`)
 			.then((response) => {
 				const data = response.data;
-	
-				if (data) {
-					// TODO
+				
+				if (data && data.guide.autocomplete.iata instanceof Array) {
+					dispatch(autocompleteIsLoaded(data.guide.autocomplete.iata, fieldType));
 				}
-
-				dispatch(hideAutocompleteLoading(fieldType));
+				else {
+					dispatch(autocompleteIsLoaded([], fieldType));
+				}
 			});
 	};
 }

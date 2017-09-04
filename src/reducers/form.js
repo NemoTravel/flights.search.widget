@@ -10,6 +10,16 @@ const initialState = {
 	isLoading: {
 		departure: false,
 		arrival: false
+	},
+	autocomplete: {
+		departure: {
+			suggestions: [],
+			value: ''
+		},
+		arrival: {
+			suggestions: [],
+			value: ''
+		}
 	}
 };
 
@@ -29,7 +39,13 @@ export default function form(state = initialState, action) {
 			
 		case types.AUTOCOMPLETE_IS_LOADED:
 			newState = cloneDeep(state);
-			newState.isLoading[action.payload] = false;
+			newState.isLoading[action.payload.fieldType] = false;
+			newState.autocomplete[action.payload.fieldType].suggestions = action.payload.array;
+			return newState;
+			
+		case types.AUTOCOMPLETE_VALUE_CHANGED:
+			newState = cloneDeep(state);
+			newState.autocomplete[action.payload.fieldType].value = action.payload.value;
 			return newState;
 
 		default:
