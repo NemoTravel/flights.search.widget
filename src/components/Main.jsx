@@ -1,5 +1,5 @@
 import React from 'react';
-import VerticalForm from './VerticalForm';
+import VerticalForm from 'components/VerticalForm';
 
 export default class MainComponent extends React.Component {
 	constructor(props) {

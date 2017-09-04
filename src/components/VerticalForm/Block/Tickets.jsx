@@ -1,5 +1,5 @@
 import React from 'react';
-import Block from '../Block';
+import Block from 'components/VerticalForm/Block';
 
 export default class Tickets extends Block {
 	render() {

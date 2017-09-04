@@ -1,6 +1,7 @@
 import React from 'react';
-import { verticalFormReducer, defaultState } from '../reducers/VerticalFormReducer';
+import { verticalFormReducer, defaultState } from 'reducers/VerticalFormReducer';
 import { createStore } from 'redux';
+import ActionsCreator from 'ActionsCreator';
 
 import TicketsBlock from './VerticalForm/Block/Tickets';
 import RegistrationBlock from './VerticalForm/Block/Registration';
@@ -19,15 +20,15 @@ export default class VerticalForm extends React.Component {
 	}
 	
 	toggleBlockTickets() {
-		this.store.dispatch({ type: `TOGGLE_BLOCK`, blockName: 'tickets' })
+		this.store.dispatch(ActionsCreator.toggleBlock('tickets'));
 	}
 	
 	toggleBlockRegistration() {
-		this.store.dispatch({ type: `TOGGLE_BLOCK`, blockName: 'registration' })
+		this.store.dispatch(ActionsCreator.toggleBlock('registration'));
 	}
 	
 	toggleBlockBookings() {
-		this.store.dispatch({ type: `TOGGLE_BLOCK`, blockName: 'bookings' })
+		this.store.dispatch(ActionsCreator.toggleBlock('bookings'));
 	}
 	
 	render() {

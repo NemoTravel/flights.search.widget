@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash';
+import ActionsCreator from 'ActionsCreator';
 
 export const defaultState = {
 	blockIsActive: {
@@ -12,7 +13,7 @@ export function verticalFormReducer(state = defaultState, action) {
 	let newState = cloneDeep(state);
 	
 	switch (action.type) {
-		case 'TOGGLE_BLOCK':
+		case ActionsCreator.TOGGLE_BLOCK:
 			newState.blockIsActive[action.blockName] = !newState.blockIsActive[action.blockName];
 			break;
 	}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Block from '../Block';
+import Block from 'components/VerticalForm/Block';
 
 export default class Registration extends Block {
 	render() {
