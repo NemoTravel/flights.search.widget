@@ -7,7 +7,7 @@ import BookingsBlock from 'components/VerticalForm/Block/Bookings';
 export default class VerticalForm extends Component {
 	render() {
 		const { blockIsActive, autocomplete } = this.props.state;
-		const { toggleBlock, sendAutocompleteRequest, changeAutocompleteValue } = this.props.actions;
+		const { toggleBlock, sendAutocompleteRequest, changeAutocompleteValue, changeAutocompleteSuggestions } = this.props.actions;
 		
 		return <section className="nemo-widget-form nemo-widget-form_vertical">
 			<TicketsBlock 
@@ -16,6 +16,7 @@ export default class VerticalForm extends Component {
 				autocomplete={autocomplete}
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				changeAutocompleteValue={changeAutocompleteValue}
+				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 			/>
 			
 			<RegistrationBlock 

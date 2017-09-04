@@ -9,6 +9,11 @@ export default class Autocomplete extends Component {
 
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
+		this.clearSuggestions = this.clearSuggestions.bind(this);
+	}
+	
+	clearSuggestions() {
+		this.props.changeAutocompleteSuggestions([], this.props.type);
 	}
 
 	fetchSuggestions({ value }) {
@@ -41,7 +46,7 @@ export default class Autocomplete extends Component {
 			<Autosuggest
 				suggestions={autocomplete.suggestions}
 				onSuggestionsFetchRequested={this.fetchSuggestions}
-				onSuggestionsClearRequested={() => null}
+				onSuggestionsClearRequested={this.clearSuggestions}
 				getSuggestionValue={(item) => item.IATA}
 				renderSuggestion={(item) => <div>{item.IATA}</div>}
 				inputProps={{

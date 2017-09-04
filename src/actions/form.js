@@ -21,12 +21,19 @@ export function startAutocompleteLoading(fieldType) {
 	};
 }
 
-export function finishAutocompleteLoading(array, fieldType) {
+export function finishAutocompleteLoading(fieldType) {
 	return {
 		type: types.AUTOCOMPLETE_LOADING_FINISHED,
+		payload: fieldType
+	};
+}
+
+export function changeAutocompleteSuggestions(suggestions, fieldType) {
+	return {
+		type: types.AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 		payload: {
 			fieldType,
-			array
+			suggestions
 		}
 	};
 }
@@ -52,7 +59,8 @@ export function sendAutocompleteRequest(searchText, fieldType) {
 				const data = response.data;
 				
 				if (data && data.guide.autocomplete.iata instanceof Array) {
-					dispatch(finishAutocompleteLoading(data.guide.autocomplete.iata, fieldType));
+					dispatch(changeAutocompleteSuggestions(data.guide.autocomplete.iata, fieldType));
+					dispatch(finishAutocompleteLoading(fieldType));
 				}
 				else {
 					dispatch(finishAutocompleteLoading([], fieldType));

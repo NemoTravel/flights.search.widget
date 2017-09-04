@@ -37,8 +37,12 @@ export default function form(state = initialState, action) {
 			
 		case types.AUTOCOMPLETE_LOADING_FINISHED:
 			newState = cloneDeep(state);
-			newState.autocomplete[action.payload.fieldType].isLoading = false;
-			newState.autocomplete[action.payload.fieldType].suggestions = action.payload.array;
+			newState.autocomplete[action.payload].isLoading = false;
+			return newState;
+			
+		case types.AUTOCOMPLETE_SUGGESTIONS_CHANGED:
+			newState = cloneDeep(state);
+			newState.autocomplete[action.payload.fieldType].suggestions = action.payload.suggestions;
 			return newState;
 			
 		case types.AUTOCOMPLETE_VALUE_CHANGED:
