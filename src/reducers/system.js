@@ -2,7 +2,7 @@ import { types } from 'actions';
 import { cloneDeep } from 'lodash';
 
 const initialState = {
-	APIUrl: ''
+	API_URL: ''
 };
 
 export default function system(state = initialState, action) {

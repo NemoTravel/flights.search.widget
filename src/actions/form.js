@@ -30,9 +30,11 @@ export function hideAutocompleteLoading(fieldType) {
 
 export function autocompleteRequest(searchText, fieldType) {
 	return (dispatch, getState) => {
+		const state = getState();
+		
 		dispatch(showAutocompleteLoading(fieldType));
 		
-		axios.get(`http://nemo1/api/guide/autocomplete/iata/${encodeURIComponent(searchText)}`)
+		axios.get(`${state.system.API_URL}/autocomplete/${encodeURIComponent(searchText)}`)
 			.then((response) => {
 				const data = response.data;
 	
