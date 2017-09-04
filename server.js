@@ -3,7 +3,7 @@ const server = express();
 const path = require('path');
 const opn = require('opn');
 
-server.use(express.static('./dist'));
+server.use(express.static('./'));
 
 server.get('/', function (req, res) {
 	res.sendFile(path.resolve(__dirname, 'index.html'));

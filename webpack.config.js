@@ -43,7 +43,8 @@ let config = {
 		// Where to look for modules.
 		modules: [
 			'node_modules',
-			path.resolve(__dirname, 'src')
+			path.resolve(__dirname, 'src'),
+			path.resolve(__dirname, 'dist')
 		],
 		extensions: ['.js', '.json', '.jsx', '.css']
 	},
@@ -101,6 +102,19 @@ let config = {
 				include: [
 					path.resolve(__dirname, 'src/css/fonts')
 				]
+			},
+			
+			{
+				// test: /\.svg$/,
+				// loader: 'url-loader',
+				// include: [
+				// 	path.resolve(__dirname, 'src/css/images')
+				// ],
+				// options: {
+				// 	publicPath: '',
+				// 	outputPath: '',
+				// 	name: '/[name].[ext]'
+				// }
 			}
 		]
 	},

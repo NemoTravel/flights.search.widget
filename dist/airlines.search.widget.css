@@ -2983,6 +2983,11 @@
   content: "\E90D";
 }
 
+.nemo-widget-form .nemo-widget-form__input_loading {
+  background: url("/dist/images/form/spinner.svg") no-repeat 90% center;
+  background-size: 20px;
+}
+
 .nemo-widget-form__pseudoBlocks {
   text-align: center;
 }

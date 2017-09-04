@@ -5,6 +5,8 @@ import Datepicker from 'components/VerticalForm/Block/Tickets/Datepicker';
 
 export default class Tickets extends Block {
 	render() {
+		const { autocompleteRequest, isLoading } = this.props;
+		
 		return <div className="nemo-widget-form__block nemo-widget-form__block_tickets">
 			<div className={this.getHeaderClass()} onClick={this.toggleHandler}>
 				Купить авиабилеты
@@ -12,8 +14,8 @@ export default class Tickets extends Block {
 
 			<div className={this.getBodyClass()}>
 				<div className="form-group">
-					<Autocomplete type="departure" placeholder="Откуда"/>
-					<Autocomplete type="arrival" placeholder="Куда"/>
+					<Autocomplete type="departure" placeholder="Откуда" isLoading={isLoading.departure} autocompleteRequest={autocompleteRequest}/>
+					<Autocomplete type="arrival" placeholder="Куда" isLoading={isLoading.arrival} autocompleteRequest={autocompleteRequest}/>
 				</div>
 
 				<div className="form-group row">

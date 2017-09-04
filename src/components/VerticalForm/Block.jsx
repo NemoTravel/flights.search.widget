@@ -14,7 +14,7 @@ export default class Block extends React.Component {
 	}
 
 	toggleHandler() {
-		return this.props.toggleHandler(this.props.type);
+		return this.props.toggleBlock(this.props.type);
 	}
 	
 	getHeaderClass() {
