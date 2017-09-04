@@ -4,7 +4,7 @@ import Block from 'components/VerticalForm/Block';
 export default class Tickets extends Block {
 	render() {
 		return <div className="nemo-widget-form__block nemo-widget-form__block_tickets">
-			<div className={this.getHeaderClass()} onClick={this.props.toggle}>
+			<div className={this.getHeaderClass()} onClick={this.toggleHandler}>
 				Купить авиабилеты
 			</div>
 

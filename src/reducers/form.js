@@ -1,4 +1,4 @@
-import ActionsCreator from 'ActionsCreator';
+import { types } from 'actions';
 import { cloneDeep } from 'lodash';
 
 const initialState = {
@@ -11,9 +11,9 @@ const initialState = {
 
 export default function form(state = initialState, action) {
 	switch (action.type) {
-		case ActionsCreator.TOGGLE_BLOCK:
+		case types.TOGGLE_BLOCK:
 			let newState = cloneDeep(state);
-			newState.blockIsActive[action.blockName] = !state.blockIsActive[action.blockName];
+			newState.blockIsActive[action.payload] = !state.blockIsActive[action.payload];
 			return newState;
 
 		default:

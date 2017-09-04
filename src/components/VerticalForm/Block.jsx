@@ -9,6 +9,12 @@ export default class Block extends React.Component {
 
 		this.inactiveBodyClass = 'nemo-widget-form__block__body';
 		this.activeBodyClass = 'nemo-widget-form__block__body nemo-widget-form__block__body_active';
+		
+		this.toggleHandler = this.toggleHandler.bind(this);
+	}
+
+	toggleHandler() {
+		return this.props.toggleHandler(this.props.type);
 	}
 	
 	getHeaderClass() {
