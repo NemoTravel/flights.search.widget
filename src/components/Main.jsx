@@ -1,14 +1,27 @@
 import React from 'react';
-import VerticalForm from 'components/VerticalForm';
+import { connect } from 'react-redux';
+// import VerticalForm from 'components/VerticalForm';
 
-export default class MainComponent extends React.Component {
+class Main extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 	
+	// render() {
+	// 	return <section className="nemo-widget">
+	// 		<VerticalForm/>
+	// 	</section>;
+	// }
+	
 	render() {
-		return <section className="nemo-widget">
-			<VerticalForm/>
-		</section>;
+		return <div>Test</div>
 	}
 }
+
+function mapStateToProps(state) {
+	return {
+		form: state.form
+	}
+}
+
+export default connect(mapStateToProps)(Main);
