@@ -16,7 +16,7 @@ server.route('/api/autocomplete/(:search)?').get((req, res) => {
 	const searchString = req.params.search;
 	
 	if (searchString) {
-		axios.get(`${baseDemoAPIURL}/guide/autocomplete/iata/${searchString}`)
+		axios.get(`${baseDemoAPIURL}/guide/autocomplete/iata/${encodeURIComponent(searchString)}`)
 			.then(({data}) => res.json(data))
 			.catch(() => res.sendStatus(400));
 	}

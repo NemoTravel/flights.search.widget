@@ -54,16 +54,22 @@ export function sendAutocompleteRequest(searchText, fieldType) {
 		
 		dispatch(startAutocompleteLoading(fieldType));
 		
-		axios.get(`${state.system.API_URL}/autocomplete/${encodeURIComponent(searchText)}`)
+		axios.get(`${state.system.API_URL}/autocomplete/${searchText}`)
 			.then((response) => {
 				const data = response.data;
 				
+				// Some basic parser.
 				if (data && data.guide.autocomplete.iata instanceof Array) {
-					dispatch(changeAutocompleteSuggestions(data.guide.autocomplete.iata, fieldType));
+					const { airports } = data.guide;
+					const { iata } = data.guide.autocomplete;
+					// Trying to match suggested airports by IATA.
+					const suggestions = iata.filter(({ IATA }) => IATA in airports).map(({ IATA }) => airports[IATA]);
+					
+					dispatch(changeAutocompleteSuggestions(suggestions, fieldType));
 					dispatch(finishAutocompleteLoading(fieldType));
 				}
 				else {
-					dispatch(finishAutocompleteLoading([], fieldType));
+					dispatch(finishAutocompleteLoading(fieldType));
 				}
 			});
 	};

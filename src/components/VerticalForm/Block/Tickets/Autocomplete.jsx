@@ -11,11 +11,19 @@ export default class Autocomplete extends Component {
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.clearSuggestions = this.clearSuggestions.bind(this);
 	}
-	
+
+	/**
+	 * Clear loaded autocomplete suggestions.
+	 */
 	clearSuggestions() {
 		this.props.changeAutocompleteSuggestions([], this.props.type);
 	}
 
+	/**
+	 * Load autocomplete suggestions by given search string.
+	 * 
+	 * @param value
+	 */
 	fetchSuggestions({ value }) {
 		const { sendAutocompleteRequest, type } = this.props;
 		const searchText = value;
@@ -28,7 +36,13 @@ export default class Autocomplete extends Component {
 			sendAutocompleteRequest(searchText, type);
 		}, this.autocompleteWaitTime);
 	}
-	
+
+	/**
+	 * Change autocomplete value.
+	 * 
+	 * @param event
+	 * @param newValue
+	 */
 	onChangeHandler(event, { newValue }) {
 		this.props.changeAutocompleteValue(newValue, this.props.type);
 	}
@@ -47,8 +61,8 @@ export default class Autocomplete extends Component {
 				suggestions={autocomplete.suggestions}
 				onSuggestionsFetchRequested={this.fetchSuggestions}
 				onSuggestionsClearRequested={this.clearSuggestions}
-				getSuggestionValue={(item) => item.IATA}
-				renderSuggestion={(item) => <div>{item.IATA}</div>}
+				getSuggestionValue={(item) => item.name}
+				renderSuggestion={(item) => <div>{item.name}</div>}
 				inputProps={{
 					className: autocomplete.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
 					spellCheck: false,
