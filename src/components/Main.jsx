@@ -29,7 +29,8 @@ class Main extends Component {
  */
 function mapStateToProps(state) {
 	return {
-		form: state.form
+		form: state.form,
+		system: state.system
 	}
 }
 

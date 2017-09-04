@@ -36,7 +36,8 @@ let config = {
 		// Path for loading assets.
 		publicPath: '/dist/',
 		// Output file name.
-		filename: `${moduleName}.min.js`
+		filename: `${moduleName}.min.js`,
+		library: 'AirlinesSearchWidget'
 	},
 
 	resolve: {

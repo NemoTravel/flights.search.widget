@@ -27,5 +27,11 @@
 <body>
 	<div id="root" class="wrapper"></div>
 	<script src="dist/airlines.search.widget.min.js"></script>
+	<script>
+		var Widget = window['AirlinesSearchWidget'];
+		Widget.init({
+			APIUrl: 'http://localhost:5555/api'
+		});
+	</script>
 </body>
 </html>

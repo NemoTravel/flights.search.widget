@@ -29,7 +29,7 @@ export function hideAutocompleteLoading(fieldType) {
 }
 
 export function autocompleteRequest(searchText, fieldType) {
-	return (dispatch) => {
+	return (dispatch, getState) => {
 		dispatch(showAutocompleteLoading(fieldType));
 		
 		axios.get(`http://nemo1/api/guide/autocomplete/iata/${encodeURIComponent(searchText)}`)
