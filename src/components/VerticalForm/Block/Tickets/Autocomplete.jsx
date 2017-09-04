@@ -29,7 +29,7 @@ export default class Autocomplete extends Component {
 	}
 	
 	render() {
-		const { isLoading, placeholder, autocomplete, type } = this.props;
+		const { placeholder, autocomplete, type } = this.props;
 		const inputClassName = `form-control nemo-widget-form__${type} nemo-widget-form__input`;
 		
 		// Shortcuts for some functions.
@@ -45,7 +45,7 @@ export default class Autocomplete extends Component {
 				getSuggestionValue={(item) => item.IATA}
 				renderSuggestion={(item) => <div>{item.IATA}</div>}
 				inputProps={{
-					className: isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
+					className: autocomplete.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
 					spellCheck: false,
 					placeholder,
 					value: autocomplete.value,
