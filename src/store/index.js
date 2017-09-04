@@ -1,6 +1,12 @@
 import { createStore } from 'redux';
 import rootReducer from 'reducers';
 
+/**
+ * Create Redux-store.
+ * 
+ * @param defaultState
+ * @returns {Store}
+ */
 export function getStore(defaultState) {
 	const store = createStore(rootReducer, defaultState);
 
