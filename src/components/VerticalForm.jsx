@@ -10,9 +10,22 @@ export default class VerticalForm extends Component {
 		const { toggleBlock, autocompleteRequest } = this.props.actions;
 		
 		return <section className="nemo-widget-form nemo-widget-form_vertical">
-			<TicketsBlock type="tickets" isActive={blockIsActive.tickets} isLoading={isLoading} toggleBlock={toggleBlock} autocompleteRequest={autocompleteRequest}/>
-			<RegistrationBlock type="registration" isActive={blockIsActive.registration} toggleBlock={toggleBlock}/>
-			<BookingsBlock type="bookings" isActive={blockIsActive.bookings} toggleBlock={toggleBlock}/>
+			<TicketsBlock 
+				isActive={blockIsActive.tickets} 
+				isLoading={isLoading} 
+				toggleBlock={toggleBlock} 
+				autocompleteRequest={autocompleteRequest}
+			/>
+			
+			<RegistrationBlock 
+				isActive={blockIsActive.registration} 
+				toggleBlock={toggleBlock}
+			/>
+			
+			<BookingsBlock 
+				isActive={blockIsActive.bookings} 
+				toggleBlock={toggleBlock}
+			/>
 		</section>;
 	}
 }

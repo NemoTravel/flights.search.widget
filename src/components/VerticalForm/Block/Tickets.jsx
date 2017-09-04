@@ -4,6 +4,10 @@ import Autocomplete from 'components/VerticalForm/Block/Tickets/Autocomplete';
 import Datepicker from 'components/VerticalForm/Block/Tickets/Datepicker';
 
 export default class Tickets extends Block {
+	get type() {
+		return 'tickets';
+	}
+	
 	render() {
 		const { autocompleteRequest, isLoading } = this.props;
 		
