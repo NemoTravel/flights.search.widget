@@ -14,16 +14,16 @@ export function toggleBlock(blockName) {
 	}
 }
 
-export function showAutocompleteLoading(fieldType) {
+export function startAutocompleteLoading(fieldType) {
 	return {
-		type: types.AUTOCOMPLETE_IS_LOADING,
+		type: types.AUTOCOMPLETE_LOADING_STARTED,
 		payload: fieldType
 	};
 }
 
-export function autocompleteIsLoaded(array, fieldType) {
+export function finishAutocompleteLoading(array, fieldType) {
 	return {
-		type: types.AUTOCOMPLETE_IS_LOADED,
+		type: types.AUTOCOMPLETE_LOADING_FINISHED,
 		payload: {
 			fieldType,
 			array
@@ -41,21 +41,21 @@ export function changeAutocompleteValue(value, fieldType) {
 	};
 }
 
-export function autocompleteRequest(searchText, fieldType) {
+export function sendAutocompleteRequest(searchText, fieldType) {
 	return (dispatch, getState) => {
 		const state = getState();
 		
-		dispatch(showAutocompleteLoading(fieldType));
+		dispatch(startAutocompleteLoading(fieldType));
 		
 		axios.get(`${state.system.API_URL}/autocomplete/${encodeURIComponent(searchText)}`)
 			.then((response) => {
 				const data = response.data;
 				
 				if (data && data.guide.autocomplete.iata instanceof Array) {
-					dispatch(autocompleteIsLoaded(data.guide.autocomplete.iata, fieldType));
+					dispatch(finishAutocompleteLoading(data.guide.autocomplete.iata, fieldType));
 				}
 				else {
-					dispatch(autocompleteIsLoaded([], fieldType));
+					dispatch(finishAutocompleteLoading([], fieldType));
 				}
 			});
 	};

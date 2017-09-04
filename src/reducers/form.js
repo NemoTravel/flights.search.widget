@@ -32,12 +32,12 @@ export default function form(state = initialState, action) {
 			newState.blockIsActive[action.payload] = !state.blockIsActive[action.payload];
 			return newState;
 			
-		case types.AUTOCOMPLETE_IS_LOADING:
+		case types.AUTOCOMPLETE_LOADING_STARTED:
 			newState = cloneDeep(state);
 			newState.isLoading[action.payload] = true;
 			return newState;
 			
-		case types.AUTOCOMPLETE_IS_LOADED:
+		case types.AUTOCOMPLETE_LOADING_FINISHED:
 			newState = cloneDeep(state);
 			newState.isLoading[action.payload.fieldType] = false;
 			newState.autocomplete[action.payload.fieldType].suggestions = action.payload.array;

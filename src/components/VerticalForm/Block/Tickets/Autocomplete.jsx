@@ -12,7 +12,7 @@ export default class Autocomplete extends Component {
 	}
 
 	fetchSuggestions({ value }) {
-		const { autocompleteRequest, type } = this.props;
+		const { sendAutocompleteRequest, type } = this.props;
 		const searchText = value;
 		
 		// We don't want to harass servers too much.
@@ -20,7 +20,7 @@ export default class Autocomplete extends Component {
 		
 		// So we send request only if user hasn't been typing something for a while.
 		this.autocompleteTimeout = setTimeout(() => {
-			autocompleteRequest(searchText, type);
+			sendAutocompleteRequest(searchText, type);
 		}, this.autocompleteWaitTime);
 	}
 	

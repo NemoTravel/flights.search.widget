@@ -9,7 +9,7 @@ export default class Tickets extends Block {
 	}
 	
 	render() {
-		const { autocompleteRequest, isLoading, autocomplete, changeAutocompleteValue } = this.props;
+		const { sendAutocompleteRequest, isLoading, autocomplete, changeAutocompleteValue } = this.props;
 		
 		return <div className="nemo-widget-form__block nemo-widget-form__block_tickets">
 			<div className={this.getHeaderClass()} onClick={this.toggleHandler}>
@@ -23,8 +23,8 @@ export default class Tickets extends Block {
 						placeholder="Откуда" 
 						changeAutocompleteValue={changeAutocompleteValue} 
 						isLoading={isLoading.departure} 
-						autocomplete={autocomplete.departure} 
-						autocompleteRequest={autocompleteRequest}
+						autocomplete={autocomplete.departure}
+						sendAutocompleteRequest={sendAutocompleteRequest}
 					/>
 					
 					<Autocomplete 
@@ -32,8 +32,8 @@ export default class Tickets extends Block {
 						placeholder="Куда" 
 						changeAutocompleteValue={changeAutocompleteValue} 
 						isLoading={isLoading.arrival} 
-						autocomplete={autocomplete.arrival} 
-						autocompleteRequest={autocompleteRequest}
+						autocomplete={autocomplete.arrival}
+						sendAutocompleteRequest={sendAutocompleteRequest}
 					/>
 				</div>
 
