@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
 
 /**
@@ -8,7 +9,15 @@ import rootReducer from 'reducers';
  * @returns {Store}
  */
 export function getStore(defaultState) {
-	const store = createStore(rootReducer, defaultState);
+	// Thunk middleware allows us to create functions instead of plain objects in action-creators (for async purposes).
+	// @see https://github.com/gaearon/redux-thunk#motivation
+	const store = createStore(
+		rootReducer,
+		defaultState, 
+		applyMiddleware(
+			thunk
+		)
+	);
 
 	if (module.hot) {
 		module.hot.accept('../reducers', () => {
