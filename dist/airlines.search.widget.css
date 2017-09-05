@@ -3062,6 +3062,35 @@
   z-index: 1;
 }
 
+.nemo-widget-form .nemo-widget-form__input__switcher {
+  width: 24px;
+  height: 24px;
+  transform: rotate(90deg);
+  color: #ccc;
+  background: #fff;
+  z-index: 11;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  position: absolute;
+  top: -12px;
+  right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.nemo-widget-form .nemo-widget-form__input__switcher:hover {
+  background: #1B75BC;
+  border-color: #1B75BC;
+  color: #fff;
+}
+
+.nemo-widget-form .nemo-widget-form__input__switcher:after {
+  content: "\E901";
+}
+
 .nemo-widget-form .nemo-widget-form__input_loading {
   background: url("/dist/images/form/spinner.svg") no-repeat 90% center;
   background-size: 20px;

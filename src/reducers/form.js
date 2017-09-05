@@ -56,6 +56,27 @@ export default function form(state = initialState, action) {
 			newState = cloneDeep(state);
 			newState.search[action.payload.fieldType].airport = action.payload.airport;
 			return newState;
+			
+		case types.SWITCH_AIRPORTS:
+			const departureAirport = state.search.departure.airport;
+			const arrivalAirport = state.search.arrival.airport;
+			
+			if (departureAirport || arrivalAirport) {
+				newState = cloneDeep(state);
+				
+				const departureInpurtValue = newState.search.departure.inputValue;
+				const arrivalInpurtValue = newState.search.arrival.inputValue;
+
+				newState.search.departure.airport = arrivalAirport;
+				newState.search.arrival.airport = departureAirport;
+
+				newState.search.departure.inputValue = arrivalInpurtValue;
+				newState.search.arrival.inputValue = departureInpurtValue;
+				
+				return newState;
+			}
+
+			return state;
 
 		default:
 			return state;

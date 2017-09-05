@@ -220,6 +220,35 @@
 			z-index: 1;
 		}
 		
+		&__switcher {
+			width: 24px;
+			height: 24px;
+			transform: rotate(90deg);
+			color: #ccc;
+			background: #fff;
+			z-index: 11;
+			border: 1px solid #ccc;
+			border-radius: 50%;
+			position: absolute;
+			top: -12px;
+			right: 2rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 12px;
+			cursor: pointer;
+			
+			&:hover {
+				background: #1B75BC;
+				border-color: #1B75BC;
+				color: #fff;
+			}
+			
+			&:after {
+				content: "\e901";
+			}
+		}
+		
 		&_loading {
 			background: url('/dist/images/form/spinner.svg') no-repeat 90% center;
 			background-size: 20px;

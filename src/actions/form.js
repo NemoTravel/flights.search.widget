@@ -58,6 +58,12 @@ export function selectAirport(airport, fieldType) {
 	};
 }
 
+export function switchAirports() {
+	return {
+		type: types.SWITCH_AIRPORTS
+	};
+}
+
 export function sendAutocompleteRequest(searchText, fieldType) {
 	return (dispatch, getState) => {
 		const state = getState();

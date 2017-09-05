@@ -74,6 +74,25 @@ export default class Autocomplete extends Component {
 	}
 
 	/**
+	 * Render airport IATA code hint.
+	 * 
+	 * @returns {*}
+	 */
+	renderAirportCode() {
+		const search = this.props.search;
+		return search.isLoading || !search.airport ? '' : <span className="nemo-widget-form__input__airportCode">{search.airport.IATA}</span>;
+	}
+
+	/**
+	 * Render airport switcher.
+	 * 
+	 * @returns {*}
+	 */
+	renderSwitcher() {
+		return this.props.switchAirports ? <div className="nemo-widget-icon nemo-widget-form__input__switcher" onClick={this.props.switchAirports}/> : null;
+	}
+
+	/**
 	 * Set selected airport to the state.
 	 * 
 	 * @param {Object} event
@@ -115,9 +134,8 @@ export default class Autocomplete extends Component {
 				}}
 			/>
 			
-			{
-				search.isLoading || !search.airport ? '' : <span className="nemo-widget-form__input__airportCode">{search.airport.IATA}</span>
-			}
+			{this.renderAirportCode()}
+			{this.renderSwitcher()}
 			
 			<div className="nemo-widget-icon nemo-widget-form__input__arrow"/>
 		</div>;
