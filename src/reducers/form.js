@@ -7,16 +7,18 @@ const initialState = {
 		registration: false,
 		bookings: false
 	},
-	autocomplete: {
+	search: {
 		departure: {
 			isLoading: false,
 			suggestions: [],
-			value: ''
+			inputValue: '',
+			airport: null
 		},
 		arrival: {
 			isLoading: false,
 			suggestions: [],
-			value: ''
+			inputValue: '',
+			airport: null
 		}
 	}
 };
@@ -32,22 +34,27 @@ export default function form(state = initialState, action) {
 			
 		case types.AUTOCOMPLETE_LOADING_STARTED:
 			newState = cloneDeep(state);
-			newState.autocomplete[action.payload].isLoading = true;
+			newState.search[action.payload].isLoading = true;
 			return newState;
 			
 		case types.AUTOCOMPLETE_LOADING_FINISHED:
 			newState = cloneDeep(state);
-			newState.autocomplete[action.payload].isLoading = false;
+			newState.search[action.payload].isLoading = false;
 			return newState;
 			
 		case types.AUTOCOMPLETE_SUGGESTIONS_CHANGED:
 			newState = cloneDeep(state);
-			newState.autocomplete[action.payload.fieldType].suggestions = action.payload.suggestions;
+			newState.search[action.payload.fieldType].suggestions = action.payload.suggestions;
 			return newState;
 			
-		case types.AUTOCOMPLETE_VALUE_CHANGED:
+		case types.AUTOCOMPLETE_INPUT_VALUE_CHANGED:
 			newState = cloneDeep(state);
-			newState.autocomplete[action.payload.fieldType].value = action.payload.value;
+			newState.search[action.payload.fieldType].inputValue = action.payload.value;
+			return newState;
+			
+		case types.AIRPORT_SELECTED:
+			newState = cloneDeep(state);
+			newState.search[action.payload.fieldType].airport = action.payload.airport;
 			return newState;
 
 		default:

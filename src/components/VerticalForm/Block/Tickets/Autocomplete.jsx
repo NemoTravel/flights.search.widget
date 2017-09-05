@@ -11,6 +11,7 @@ export default class Autocomplete extends Component {
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.clearSuggestions = this.clearSuggestions.bind(this);
 		this.renderSuggestion = this.renderSuggestion.bind(this);
+		this.selectSuggestion = this.selectSuggestion.bind(this);
 	}
 
 	/**
@@ -18,6 +19,10 @@ export default class Autocomplete extends Component {
 	 */
 	clearSuggestions() {
 		this.props.changeAutocompleteSuggestions([], this.props.type);
+		
+		if (this.props.search.airport) {
+			this.props.changeAutocompleteInputValue(this.props.search.airport.name, this.props.type);
+		}
 	}
 
 	/**
@@ -41,11 +46,11 @@ export default class Autocomplete extends Component {
 	/**
 	 * Change autocomplete value.
 	 * 
-	 * @param event
-	 * @param newValue
+	 * @param {Object} event
+	 * @param {String} searchString
 	 */
-	onChangeHandler(event, { newValue }) {
-		this.props.changeAutocompleteValue(newValue, this.props.type);
+	onChangeHandler(event, { newValue: searchString }) {
+		this.props.changeAutocompleteInputValue(searchString, this.props.type);
 	}
 
 	/**
@@ -62,9 +67,19 @@ export default class Autocomplete extends Component {
 			<span className="nemo-widget-form__input__suggestion__code">{airportIATA}</span>
 		</div>;
 	}
+
+	/**
+	 * Set selected airport to the state.
+	 * 
+	 * @param {Object} event
+	 * @param {Object} airport
+	 */
+	selectSuggestion(event, { suggestion: airport }) {
+		this.props.selectAirport(airport, this.props.type);
+	}
 	
 	render() {
-		const { placeholder, autocomplete, type } = this.props;
+		const { placeholder, search, type } = this.props;
 		const inputClassName = `form-control nemo-widget-form__${type} nemo-widget-form__input`;
 		
 		// Shortcuts for some functions.
@@ -75,20 +90,25 @@ export default class Autocomplete extends Component {
 		return <div className="nemo-widget-form__input__wrapper">
 			<Autosuggest
 				id={type}
-				suggestions={autocomplete.suggestions}
+				suggestions={search.suggestions}
 				onSuggestionsFetchRequested={this.fetchSuggestions}
 				onSuggestionsClearRequested={this.clearSuggestions}
 				getSuggestionValue={(item) => item.name}
 				renderSuggestion={this.renderSuggestion}
+				onSuggestionSelected={this.selectSuggestion}
 				focusInputOnSuggestionClick={false}
 				inputProps={{
-					className: autocomplete.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
+					className: search.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
 					spellCheck: false,
 					placeholder,
-					value: autocomplete.value,
+					value: search.inputValue,
 					onChange: this.onChangeHandler
 				}}
 			/>
+			
+			{
+				search.isLoading || !search.airport ? '' : <span className="nemo-widget-form__input__airportCode">{search.airport.IATA}</span>
+			}
 			
 			<div className="nemo-widget-icon nemo-widget-form__input__arrow"/>
 		</div>;

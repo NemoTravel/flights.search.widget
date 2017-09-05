@@ -38,12 +38,22 @@ export function changeAutocompleteSuggestions(suggestions, fieldType) {
 	};
 }
 
-export function changeAutocompleteValue(value, fieldType) {
+export function changeAutocompleteInputValue(value, fieldType) {
 	return {
-		type: types.AUTOCOMPLETE_VALUE_CHANGED,
+		type: types.AUTOCOMPLETE_INPUT_VALUE_CHANGED,
 		payload: {
 			fieldType,
 			value
+		}
+	};
+}
+
+export function selectAirport(airport, fieldType) {
+	return {
+		type: types.AIRPORT_SELECTED,
+		payload: {
+			fieldType,
+			airport
 		}
 	};
 }

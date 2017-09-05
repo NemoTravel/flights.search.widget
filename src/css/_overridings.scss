@@ -42,11 +42,13 @@
 	border-radius: 0;
 	border-color: #ccc;
 	color: $common-font-color;
+	background-color: transparent;
 	font-weight: 600;
 	font-size: 15px;
 	position: relative;
 	padding: 0.65rem 0.75rem;
 	line-height: normal;
+	z-index: 2;
 
 	&[readonly] {
 		background-color: inherit;
@@ -58,6 +60,7 @@
 		
 		&:not([disabled]) {
 			box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+			background-color: transparent;
 		}
 	}
 }

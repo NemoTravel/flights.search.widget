@@ -2831,11 +2831,13 @@
   border-radius: 0;
   border-color: #ccc;
   color: #666666;
+  background-color: transparent;
   font-weight: 600;
   font-size: 15px;
   position: relative;
   padding: 0.65rem 0.75rem;
   line-height: normal;
+  z-index: 2;
 }
 
 .nemo-widget .form-control[readonly] {
@@ -2849,6 +2851,7 @@
 
 .nemo-widget .form-control:focus:not([disabled]) {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
 }
 
 .nemo-widget-form__block {
@@ -2921,6 +2924,10 @@
   padding: 0.7rem;
 }
 
+.nemo-widget-form .nemo-widget-form__departure {
+  padding-right: 4.5rem;
+}
+
 .nemo-widget-form .nemo-widget-form__departure__date__col {
   padding-right: 0.5rem;
 }
@@ -2931,6 +2938,7 @@
 
 .nemo-widget-form .nemo-widget-form__arrival {
   border-top: none;
+  padding-right: 4.5rem;
 }
 
 .nemo-widget-form .nemo-widget-form__arrival__date__col {
@@ -2993,7 +3001,7 @@
   text-transform: uppercase;
   color: #B3B3B3;
   position: absolute;
-  right: 30px;
+  right: 2rem;
   margin-top: -1px;
   top: 50%;
   transform: translateY(-50%);
@@ -3038,6 +3046,20 @@
 
 .nemo-widget-form .nemo-widget-form__input__calendar:after {
   content: "\E90D";
+}
+
+.nemo-widget-form .nemo-widget-form__input__airportCode {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  color: #B3B3B3;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 16px;
+  right: 2rem;
+  z-index: 1;
 }
 
 .nemo-widget-form .nemo-widget-form__input_loading {

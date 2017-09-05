@@ -72,6 +72,8 @@
 	}
 
 	& &__departure {
+		padding-right: 4.5rem;
+		
 		&__date {
 			&__col {
 				padding-right: 0.5rem;
@@ -85,6 +87,7 @@
 
 	& &__arrival {
 		border-top: none;
+		padding-right: 4.5rem;
 
 		&__date {
 			&__col {
@@ -155,7 +158,7 @@
 				text-transform: uppercase;
 				color: #B3B3B3;
 				position: absolute;
-				right: 30px;
+				right: 2rem;
 				margin-top: -1px;
 				top: 50%;
 				transform: translateY(-50%);
@@ -201,6 +204,20 @@
 			&:after {
 				content: "\e90d";
 			}
+		}
+		
+		&__airportCode {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			display: flex;
+			align-items: center;
+			color: #B3B3B3;
+			font-weight: 400;
+			font-size: 15px;
+			line-height: 16px;
+			right: 2rem;
+			z-index: 1;
 		}
 		
 		&_loading {
