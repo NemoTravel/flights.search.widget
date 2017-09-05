@@ -3,7 +3,10 @@ import { cloneDeep } from 'lodash';
 
 const initialState = {
 	API_URL: '',
-	airline: null
+	airline: null,
+	form: {
+		hideAirportIATA: false
+	}
 };
 
 export default function system(state = initialState, action) {

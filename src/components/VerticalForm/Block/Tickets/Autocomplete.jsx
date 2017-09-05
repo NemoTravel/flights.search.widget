@@ -12,6 +12,7 @@ export default class Autocomplete extends Component {
 		this.clearSuggestions = this.clearSuggestions.bind(this);
 		this.clearAirport = this.clearAirport.bind(this);
 		this.renderSuggestion = this.renderSuggestion.bind(this);
+		this.renderInputField = this.renderInputField.bind(this);
 		this.selectSuggestion = this.selectSuggestion.bind(this);
 	}
 
@@ -79,8 +80,15 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderAirportCode() {
-		const search = this.props.search;
-		return search.isLoading || !search.airport ? '' : <span className="nemo-widget-form__input__airportCode">{search.airport.IATA}</span>;
+		const { isLoading, airport } = this.props.search;
+		const isActive = !this.props.system.form.hideAirportIATA && !isLoading && airport;
+		let className = 'nemo-widget-form__input__airportCode';
+		
+		if (this.props.system.airline) {
+			className += ' nemo-widget-form__input__airportCode_withArrow';
+		}
+		
+		return isActive ? <span className={className}>{airport.IATA}</span> : null;
 	}
 
 	/**
@@ -89,7 +97,35 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderSwitcher() {
-		return this.props.switchAirports ? <div className="nemo-widget-icon nemo-widget-form__input__switcher" onClick={this.props.switchAirports}/> : null;
+		let className = 'nemo-widget-icon nemo-widget-form__input__switcher';
+
+		if (this.props.system.airline) {
+			className += ' nemo-widget-icon nemo-widget-form__input__switcher_withArrow';
+		}
+		
+		return this.props.switchAirports ? <div className={className} onClick={this.props.switchAirports}/> : null;
+	}
+
+	/**
+	 * Render select-like arrow.
+	 * Enabled if `airline` config parameter has been specified.
+	 * 
+	 * Sets focus on autocomplete input field and runs autocomplete request.
+	 * 
+	 * @returns {*}
+	 */
+	renderArrow() {
+		return this.props.system.airline ? <div className="nemo-widget-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/> : null;
+	}
+
+	/**
+	 * Render autocomplete input field.
+	 * 
+	 * @param {Object} inputProps
+	 * @returns {XML}
+	 */
+	renderInputField(inputProps) {
+		return <input type="text" {...inputProps} ref={input => this.inputField = input} />
 	}
 
 	/**
@@ -106,11 +142,6 @@ export default class Autocomplete extends Component {
 		const { placeholder, search, type } = this.props;
 		const inputClassName = `form-control nemo-widget-form__${type} nemo-widget-form__input`;
 		
-		// Shortcuts for some functions.
-		// const 
-		// 	getRef = (input) => this.inputField = input,
-		// 	focusInput = (event) => this.inputField.focus();
-		
 		return <div className="nemo-widget-form__input__wrapper">
 			<Autosuggest
 				id={type}
@@ -124,6 +155,7 @@ export default class Autocomplete extends Component {
 				shouldRenderSuggestions={(value) => {
 					return this.props.system.airline || (value && (!search.airport || search.airport.name !== value));
 				}}
+				renderInputComponent={this.renderInputField}
 				inputProps={{
 					className: search.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
 					spellCheck: false,
@@ -136,8 +168,7 @@ export default class Autocomplete extends Component {
 			
 			{this.renderAirportCode()}
 			{this.renderSwitcher()}
-			
-			<div className="nemo-widget-icon nemo-widget-form__input__arrow"/>
+			{this.renderArrow()}
 		</div>;
 	}
 }

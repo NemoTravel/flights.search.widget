@@ -31,7 +31,10 @@
 		var Widget = window['AirlinesSearchWidget'];
 		Widget.init({
 			API_URL: 'http://localhost:5555/api',
-//			airline: 'SU'
+			form: {
+				hideAirportIATA: false
+			},
+			airline: null
 		});
 	</script>
 </body>

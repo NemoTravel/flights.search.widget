@@ -4,7 +4,7 @@ const path = require('path');
 const opn = require('opn');
 const axios = require('axios');
 
-const baseDemoAPIURL = 'http://nemo1/api';
+const baseDemoAPIURL = 'http://demo.nemo.travel/api';
 
 server.use(express.static('./'));
 

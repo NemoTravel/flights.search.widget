@@ -216,8 +216,12 @@
 			font-weight: 400;
 			font-size: 15px;
 			line-height: 16px;
-			right: 2rem;
+			right: 1rem;
 			z-index: 1;
+			
+			&_withArrow {
+				right: 2rem;
+			}
 		}
 		
 		&__switcher {
@@ -231,7 +235,7 @@
 			border-radius: 50%;
 			position: absolute;
 			top: -12px;
-			right: 2rem;
+			right: 1rem;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -246,6 +250,10 @@
 			
 			&:after {
 				content: "\e901";
+			}
+
+			&_withArrow {
+				right: 2rem;
 			}
 		}
 		
