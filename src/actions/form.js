@@ -70,7 +70,15 @@ export function sendAutocompleteRequest(searchText, fieldType) {
 		
 		dispatch(startAutocompleteLoading(fieldType));
 		
-		axios.get(`${state.system.API_URL}/autocomplete/${searchText}`)
+		let url = `${state.system.API_URL}/autocomplete`;
+		
+		if (state.system.airline) {
+			url += '/airline/' + state.system.airline;
+		}
+		
+		url += '/' + searchText;
+		
+		axios.get(url)
 			.then((response) => {
 				const data = response.data;
 				

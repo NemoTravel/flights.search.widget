@@ -2,7 +2,8 @@ import { types } from 'actions';
 import { cloneDeep } from 'lodash';
 
 const initialState = {
-	API_URL: ''
+	API_URL: '',
+	airline: null
 };
 
 export default function system(state = initialState, action) {

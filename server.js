@@ -4,7 +4,7 @@ const path = require('path');
 const opn = require('opn');
 const axios = require('axios');
 
-const baseDemoAPIURL = 'http://demo.nemo.travel/api';
+const baseDemoAPIURL = 'http://nemo1/api';
 
 server.use(express.static('./'));
 
@@ -12,17 +12,20 @@ server.get('/', (req, res) => {
 	res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
+const proxy = (url, response) => {
+	axios.get(url)
+		.then(({data}) => response.json(data))
+		.catch(() => response.sendStatus(400));
+};
+
 server.route('/api/autocomplete/(:search)?').get((req, res) => {
-	const searchString = req.params.search;
-	
-	if (searchString) {
-		axios.get(`${baseDemoAPIURL}/guide/autocomplete/iata/${encodeURIComponent(searchString)}`)
-			.then(({data}) => res.json(data))
-			.catch(() => res.sendStatus(400));
-	}
-	else {
-		res.sendStatus(400);
-	}
+	const search = req.params.search;
+	proxy(`${baseDemoAPIURL}/guide/autocomplete/iata/${encodeURIComponent(search)}`, res);
+});
+
+server.route('/api/autocomplete/airline/:iata/(:search)?').get((req, res) => {
+	const { search, iata } = req.params;
+	proxy(`${baseDemoAPIURL}/guide/autocomplete/airline/${iata}/${encodeURIComponent(search)}`, res);
 });
 
 server.listen(5555);

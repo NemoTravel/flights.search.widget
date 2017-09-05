@@ -122,7 +122,7 @@ export default class Autocomplete extends Component {
 				onSuggestionSelected={this.selectSuggestion}
 				focusInputOnSuggestionClick={false}
 				shouldRenderSuggestions={(value) => {
-					return value && (!search.airport || search.airport.name !== value);
+					return this.props.system.airline || (value && (!search.airport || search.airport.name !== value));
 				}}
 				inputProps={{
 					className: search.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,

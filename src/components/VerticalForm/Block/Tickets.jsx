@@ -9,7 +9,7 @@ export default class Tickets extends Block {
 	}
 	
 	render() {
-		const { search } = this.props;
+		const { search, system } = this.props;
 		const { 
 			changeAutocompleteInputValue, 
 	  		changeAutocompleteSuggestions, 
@@ -33,6 +33,7 @@ export default class Tickets extends Block {
 						sendAutocompleteRequest={sendAutocompleteRequest}
 						changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 						selectAirport={selectAirport}
+						system={system}
 					/>
 					
 					<Autocomplete 
@@ -44,6 +45,7 @@ export default class Tickets extends Block {
 						changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 						selectAirport={selectAirport}
 						switchAirports={switchAirports}
+						system={system}
 					/>
 				</div>
 

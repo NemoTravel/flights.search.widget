@@ -13,10 +13,10 @@ import * as formActions from 'actions/form';
  */
 class Main extends Component {
 	render() {
-		const { form, formActions } = this.props;
+		const { form, formActions, system } = this.props;
 		
 		return <section className="nemo-widget">
-			<VerticalForm state={form} actions={formActions}/>
+			<VerticalForm state={form} actions={formActions} system={system}/>
 		</section>;
 	}
 }
