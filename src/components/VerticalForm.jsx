@@ -12,22 +12,18 @@ export default class VerticalForm extends Component {
 		return <section className="nemo-widget-form nemo-widget-form_vertical">
 			<TicketsBlock 
 				isActive={blockIsActive.tickets} 
-				toggleBlock={toggleBlock}
 				search={search}
-				sendAutocompleteRequest={sendAutocompleteRequest}
-				changeAutocompleteInputValue={changeAutocompleteInputValue}
-				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
-				selectAirport={selectAirport}
+				actions={this.props.actions}
 			/>
 			
 			<RegistrationBlock 
-				isActive={blockIsActive.registration} 
-				toggleBlock={toggleBlock}
+				isActive={blockIsActive.registration}
+				actions={{toggleBlock}}
 			/>
 			
 			<BookingsBlock 
-				isActive={blockIsActive.bookings} 
-				toggleBlock={toggleBlock}
+				isActive={blockIsActive.bookings}
+				actions={{toggleBlock}}
 			/>
 		</section>;
 	}

@@ -83,6 +83,10 @@ export function sendAutocompleteRequest(searchText, fieldType) {
 				else {
 					dispatch(finishAutocompleteLoading(fieldType));
 				}
+			})
+			.catch(() => {
+				dispatch(changeAutocompleteSuggestions([], fieldType));
+				dispatch(finishAutocompleteLoading(fieldType));
 			});
 	};
 }

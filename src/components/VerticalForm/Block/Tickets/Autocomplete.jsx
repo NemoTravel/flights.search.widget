@@ -10,6 +10,7 @@ export default class Autocomplete extends Component {
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.clearSuggestions = this.clearSuggestions.bind(this);
+		this.clearAirport = this.clearAirport.bind(this);
 		this.renderSuggestion = this.renderSuggestion.bind(this);
 		this.selectSuggestion = this.selectSuggestion.bind(this);
 	}
@@ -19,10 +20,14 @@ export default class Autocomplete extends Component {
 	 */
 	clearSuggestions() {
 		this.props.changeAutocompleteSuggestions([], this.props.type);
-		
-		if (this.props.search.airport) {
-			this.props.changeAutocompleteInputValue(this.props.search.airport.name, this.props.type);
-		}
+	}
+
+	/**
+	 * Reset selected airport.
+	 */
+	clearAirport() {
+		this.props.selectAirport(null, this.props.type);
+		this.props.changeAutocompleteInputValue('', this.props.type);
 	}
 
 	/**
@@ -97,12 +102,16 @@ export default class Autocomplete extends Component {
 				renderSuggestion={this.renderSuggestion}
 				onSuggestionSelected={this.selectSuggestion}
 				focusInputOnSuggestionClick={false}
+				shouldRenderSuggestions={(value) => {
+					return value && (!search.airport || search.airport.name !== value);
+				}}
 				inputProps={{
 					className: search.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
 					spellCheck: false,
 					placeholder,
 					value: search.inputValue,
-					onChange: this.onChangeHandler
+					onChange: this.onChangeHandler,
+					onFocus: this.clearAirport
 				}}
 			/>
 			
