@@ -2904,7 +2904,7 @@
   display: block;
 }
 
-.nemo-widget-form__block_tickets .nemo-widget-form__block__header:before {
+.nemo-widget-form__block_search .nemo-widget-form__block__header:before {
   content: "\E90B";
   font-size: 18px;
 }

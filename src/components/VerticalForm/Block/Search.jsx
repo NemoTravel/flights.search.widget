@@ -1,11 +1,11 @@
 import React from 'react';
 import Block from 'components/VerticalForm/Block';
-import Autocomplete from 'components/VerticalForm/Block/Tickets/Autocomplete';
-import Datepicker from 'components/VerticalForm/Block/Tickets/Datepicker';
+import Autocomplete from 'components/VerticalForm/Block/Search/Autocomplete';
+import Datepicker from 'components/VerticalForm/Block/Search/Datepicker';
 
-export default class Tickets extends Block {
+export default class Search extends Block {
 	get type() {
-		return 'tickets';
+		return 'search';
 	}
 	
 	render() {
@@ -18,7 +18,7 @@ export default class Tickets extends Block {
 		  	sendAutocompleteRequest 
 		} = this.props.actions;
 		
-		return <div className="nemo-widget-form__block nemo-widget-form__block_tickets">
+		return <div className="nemo-widget-form__block nemo-widget-form__block_search">
 			<div className={this.getHeaderClass()} onClick={this.toggleHandler}>
 				Купить авиабилеты
 			</div>

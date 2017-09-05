@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash';
 
 const initialState = {
 	blockIsActive: {
-		tickets: true,
+		search: true,
 		registration: false,
 		bookings: false
 	},

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TicketsBlock from 'components/VerticalForm/Block/Tickets';
+import SearchBlock from 'components/VerticalForm/Block/Search';
 import RegistrationBlock from 'components/VerticalForm/Block/Registration';
 import BookingsBlock from 'components/VerticalForm/Block/Bookings';
 
@@ -10,8 +10,8 @@ export default class VerticalForm extends Component {
 		const { toggleBlock } = this.props.actions;
 		
 		return <section className="nemo-widget-form nemo-widget-form_vertical">
-			<TicketsBlock 
-				isActive={blockIsActive.tickets} 
+			<SearchBlock 
+				isActive={blockIsActive.search} 
 				search={search}
 				actions={this.props.actions}
 				system={this.props.system}
