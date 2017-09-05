@@ -2945,6 +2945,63 @@
   position: relative;
 }
 
+.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__suggestions-container {
+  position: absolute;
+  z-index: 12;
+  left: 0;
+  right: 0;
+  border: 1px solid #e6e6e6;
+  max-height: 370px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: opacity, 450ms, ease;
+  overflow: auto;
+  display: none;
+  background-color: #ffffff;
+}
+
+.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__suggestions-container--open {
+  display: block;
+}
+
+.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__suggestions-list {
+  margin-bottom: 0;
+}
+
+.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__suggestion {
+  list-style-type: none;
+  background: #fff;
+  transition: background, .4s, ease;
+  display: block;
+  padding: 10px 90px 10px 20px;
+  color: #666;
+  font-size: 15px;
+  line-height: 16px;
+  position: relative;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__suggestion:hover {
+  background: rgba(0, 76, 186, 0.07);
+}
+
+.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__suggestion:not(:last-of-type) {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.nemo-widget-form .nemo-widget-form__input__suggestion__code {
+  text-transform: uppercase;
+  color: #B3B3B3;
+  position: absolute;
+  right: 30px;
+  margin-top: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 16px;
+}
+
 .nemo-widget-form .nemo-widget-form__input__arrow {
   position: absolute;
   display: flex;

@@ -10,6 +10,7 @@ export default class Autocomplete extends Component {
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.clearSuggestions = this.clearSuggestions.bind(this);
+		this.renderSuggestion = this.renderSuggestion.bind(this);
 	}
 
 	/**
@@ -46,6 +47,21 @@ export default class Autocomplete extends Component {
 	onChangeHandler(event, { newValue }) {
 		this.props.changeAutocompleteValue(newValue, this.props.type);
 	}
+
+	/**
+	 * Render element from suggestions (autocomplete) list.
+	 * 
+	 * @param {Object} item
+	 * @returns {XML}
+	 */
+	renderSuggestion(item) {
+		const { name: airportName, IATA: airportIATA } = item;
+		
+		return <div className="nemo-widget-form__input__suggestion">
+			<span className="nemo-widget-form__input__suggestion__title">{airportName}</span>
+			<span className="nemo-widget-form__input__suggestion__code">{airportIATA}</span>
+		</div>;
+	}
 	
 	render() {
 		const { placeholder, autocomplete, type } = this.props;
@@ -58,11 +74,13 @@ export default class Autocomplete extends Component {
 		
 		return <div className="nemo-widget-form__input__wrapper">
 			<Autosuggest
+				id={type}
 				suggestions={autocomplete.suggestions}
 				onSuggestionsFetchRequested={this.fetchSuggestions}
 				onSuggestionsClearRequested={this.clearSuggestions}
 				getSuggestionValue={(item) => item.name}
-				renderSuggestion={(item) => <div>{item.name}</div>}
+				renderSuggestion={this.renderSuggestion}
+				focusInputOnSuggestionClick={false}
 				inputProps={{
 					className: autocomplete.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
 					spellCheck: false,

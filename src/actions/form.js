@@ -65,6 +65,8 @@ export function sendAutocompleteRequest(searchText, fieldType) {
 					// Trying to match suggested airports by IATA.
 					const suggestions = iata.filter(({ IATA }) => IATA in airports).map(({ IATA }) => airports[IATA]);
 					
+					// Clear previous suggestions first (to avoid rendering collisions).
+					dispatch(changeAutocompleteSuggestions([], fieldType));
 					dispatch(changeAutocompleteSuggestions(suggestions, fieldType));
 					dispatch(finishAutocompleteLoading(fieldType));
 				}
