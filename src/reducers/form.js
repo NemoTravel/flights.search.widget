@@ -8,6 +8,7 @@ const initialState = {
 		isActive: true,
 		departure: {
 			isLoading: false,
+			isDatepickerActive: true,
 			suggestions: [],
 			inputValue: '',
 			airport: null,
@@ -15,6 +16,7 @@ const initialState = {
 		},
 		arrival: {
 			isLoading: false,
+			isDatepickerActive: false,
 			suggestions: [],
 			inputValue: '',
 			airport: null,
@@ -38,6 +40,11 @@ export default function form(state = initialState, action) {
 		case types.TOGGLE_BLOCK:
 			newState = cloneDeep(state);
 			newState[action.payload].isActive = !state[action.payload].isActive;
+			return newState;
+			
+		case types.TOGGLE_DATEPICKER:
+			newState = cloneDeep(state);
+			newState.search[action.payload.fieldType].isDatepickerActive = action.payload.isActive;
 			return newState;
 			
 		case types.AUTOCOMPLETE_LOADING_STARTED:

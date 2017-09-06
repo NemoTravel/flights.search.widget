@@ -74,6 +74,16 @@ export function selectDate(date, fieldType) {
 	};
 }
 
+export function toggleDatePicker(isActive, fieldType) {
+	return {
+		type: types.TOGGLE_DATEPICKER,
+		payload: {
+			fieldType,
+			isActive
+		}
+	};
+}
+
 export function sendAutocompleteRequest(searchText, fieldType) {
 	return (dispatch, getState) => {
 		const state = getState();

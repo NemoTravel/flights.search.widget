@@ -199,7 +199,7 @@
 			width: 2rem;
 			font-size: 13px;
 			color: #B3B3B3;
-			z-index: 1;
+			z-index: 2;
 			cursor: pointer;
 			right: 0;
 			top: 0;
@@ -207,6 +207,37 @@
 			
 			&:after {
 				content: "\e90d";
+			}
+		}
+		
+		&__closer {
+			width: 20px;
+			height: 20px;
+			color: #fff;
+			background: #1B75BC;
+			z-index: 11;
+			border: 1px solid #1B75BC;
+			border-radius: 50%;
+			position: absolute;
+			top: -10px;
+			right: -10px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 10px;
+			cursor: pointer;
+			
+			&:hover {
+				background: #1B75BC;
+				border-color: #1B75BC;
+				color: #fff;
+			}
+
+			&:after {
+				content: "\E902";
+				margin-left: 0;
+				margin-top: 0;
+				transform: rotate(45deg);
 			}
 		}
 		
@@ -268,6 +299,18 @@
 		
 		&_pointer {
 			cursor: pointer;
+		}
+	}
+
+	&__date {
+		&_disabled {
+			background: #F2F2F2 !important;
+			border-color: #F2F2F2 !important;
+			
+			&:hover {
+				background: #E6E6E6 !important;
+				border-color: #E6E6E6 !important;
+			}
 		}
 	}
 	

@@ -3,6 +3,12 @@ import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 
 class Datepicker extends Component {
+	constructor(props) {
+		super(props);
+		
+		this.enable = this.enable.bind(this);
+		this.disable = this.disable.bind(this);
+	}
 	
 	/**
 	 * Global date format.
@@ -23,28 +29,68 @@ class Datepicker extends Component {
 	}
 
 	/**
+	 * Activate datepicker on focus.
+	 */
+	enable() {
+		if (this.props.toggleDatePicker && !this.props.isActive) {
+			this.props.toggleDatePicker(true, this.props.type);
+		}
+	}
+
+	/**
+	 * Deactivate datepicker.
+	 */
+	disable() {
+		if (this.props.toggleDatePicker && this.props.isActive) {
+			this.props.toggleDatePicker(false, this.props.type);
+			this.props.selectDate(null, this.props.type);
+		}
+	}
+
+	/**
 	 * Custom input field with wrapper.
 	 * 
 	 * @returns {XML}
 	 */
 	renderCustomInput() {
-		const { inputProps, date } = this.props;
-		let formattedDate = '';
+		const { inputProps, date, isActive, toggleDatePicker } = this.props;
+		let formattedDate = '',
+			className = 'form-control nemo-widget-form__date';
+		
+		if (!isActive) {
+			className += ' nemo-widget-form__date_disabled';
+		}
 		
 		if (date) {
 			formattedDate = date.format(Datepicker.dateFormat);
 		}
 		
 		return <div className="nemo-widget-form__input__wrapper">
-			<input type="text" className="form-control" readOnly={true} spellCheck={false} value={formattedDate} {...inputProps}/>
-			<div className="nemo-ui-icon nemo-widget-form__input__calendar"/>
+			<input 
+				type="text" 
+				className={className} 
+				readOnly={true} 
+				spellCheck={false} 
+				value={formattedDate} 
+				ref={input => this.inputField = input}
+				{...inputProps}
+			/>
+			
+			{
+				toggleDatePicker && isActive ?
+					<div className="nemo-ui-icon nemo-widget-form__input__closer" onClick={this.disable}/>
+					: null
+			}
+			
+			<div className="nemo-ui-icon nemo-widget-form__input__calendar" onClick={() => this.inputField.focus()}/>
 		</div>;
 	}
 	
 	render() {
-		const { date, system } = this.props;
+		const { date, system, isActive } = this.props;
 		
 		return <DatePicker
+			disabled={!isActive}
 			locale={system.locale}
 			dropdownMode="scroll"
 			showMonthDropdown={false}
@@ -53,6 +99,7 @@ class Datepicker extends Component {
 			dateFormat={Datepicker.dateFormat}
 			dateFormatCalendar={Datepicker.dateFormatCalendar}
 			selected={date}
+			onFocus={this.enable}
 			{...this.props}
 		/>;
 	}
