@@ -10,13 +10,15 @@ const initialState = {
 			isLoading: false,
 			suggestions: [],
 			inputValue: '',
-			airport: null
+			airport: null,
+			date: null
 		},
 		arrival: {
 			isLoading: false,
 			suggestions: [],
 			inputValue: '',
-			airport: null
+			airport: null,
+			date: null
 		}
 	},
 	// - flight registration process
@@ -61,6 +63,11 @@ export default function form(state = initialState, action) {
 		case types.AIRPORT_SELECTED:
 			newState = cloneDeep(state);
 			newState.search[action.payload.fieldType].airport = action.payload.airport;
+			return newState;
+			
+		case types.DATE_SELECTED:
+			newState = cloneDeep(state);
+			newState.search[action.payload.fieldType].date = action.payload.date;
 			return newState;
 			
 		case types.SWITCH_AIRPORTS:

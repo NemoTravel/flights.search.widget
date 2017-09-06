@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 
 class Datepicker extends Component {
+	
 	/**
 	 * Global date format.
 	 * 
@@ -20,12 +21,22 @@ class Datepicker extends Component {
 	static get dateFormatCalendar() {
 		return 'MMMM';
 	}
-	
+
+	/**
+	 * Custom input field with wrapper.
+	 * 
+	 * @returns {XML}
+	 */
 	renderCustomInput() {
-		const { inputProps } = this.props;
+		const { inputProps, date } = this.props;
+		let formattedDate = '';
+		
+		if (date) {
+			formattedDate = date.format(Datepicker.dateFormat);
+		}
 		
 		return <div className="nemo-widget-form__input__wrapper">
-			<input type="text" className="form-control" readOnly={true} spellCheck={false} {...inputProps}/>
+			<input type="text" className="form-control" readOnly={true} spellCheck={false} value={formattedDate} {...inputProps}/>
 			<div className="nemo-ui-icon nemo-widget-form__input__calendar"/>
 		</div>;
 	}

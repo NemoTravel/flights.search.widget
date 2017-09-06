@@ -15,7 +15,8 @@ export default class Search extends Block {
 	  		changeAutocompleteSuggestions, 
 		  	selectAirport,
 	   		switchAirports, 
-		  	sendAutocompleteRequest 
+		  	sendAutocompleteRequest,
+			selectDate
 		} = this.props.actions;
 		
 		return <div className="nemo-widget-form__block nemo-widget-form__block_search">
@@ -50,8 +51,8 @@ export default class Search extends Block {
 				</div>
 
 				<div className="form-group row">
-					<Datepicker type="departure" placeholder="Вылет туда"/>
-					<Datepicker type="arrival" placeholder="Обратно"/>
+					<Datepicker type="departure" selectDate={selectDate} state={state.departure} placeholder="Вылет туда"/>
+					<Datepicker type="arrival" selectDate={selectDate} state={state.arrival} placeholder="Обратно"/>
 				</div>
 
 				<div className="form-group">
