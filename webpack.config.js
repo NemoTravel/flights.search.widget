@@ -57,10 +57,15 @@ let config = {
 			{
 				test: /\.jsx?$/,
 				loader: 'babel-loader',
-				// Converting JSX and ES6 to the common ES5 standart.
+				// Converting JSX and ES6 && ES7 to the common ES5 standart.
 				options: {
-					plugins: ['transform-runtime'],
-					presets: ['es2015', 'react']
+					plugins: [
+						'transform-runtime',
+						'transform-react-remove-prop-types',
+						'transform-react-constant-elements',
+						'transform-react-inline-elements'
+					],
+					presets: ['es2015', 'stage-0', 'react']
 				},
 				include: [
 					path.resolve(__dirname, 'src')
@@ -127,7 +132,8 @@ let config = {
 	},
 
 	plugins: [
-		extractSass
+		extractSass,
+		new webpack.NoEmitOnErrorsPlugin()
 	]
 };
 
@@ -148,6 +154,8 @@ if (!isDevMode) {
 			}
 		})
 	);
+
+	config.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
 }
 
 module.exports = config;
