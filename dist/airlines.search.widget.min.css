@@ -3480,6 +3480,20 @@
   border-radius: 0;
 }
 
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day:hover:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 0 6px 6px;
+  border-color: transparent transparent transparent #fff;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  transition: opacity, 450ms, ease;
+}
+
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day--today,
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day--keyboard-selected {
   color: #3FA9F5;

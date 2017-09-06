@@ -74,6 +74,20 @@
 				color: #fff;
 				background: #3FA9F5;
 				border-radius: 0;
+
+				&:after {
+					content: "";
+					width: 0;
+					height: 0;
+					border-style: solid;
+					border-width: 6px 0 6px 6px;
+					border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #fff;
+					position: absolute;
+					left: 0;
+					top: 50%;
+					transform: translate(0, -50%);
+					transition: opacity, 450ms, ease;
+				}
 			}
 			
 			&--today, &--keyboard-selected {
