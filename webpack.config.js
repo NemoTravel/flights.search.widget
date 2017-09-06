@@ -59,6 +59,7 @@ let config = {
 				loader: 'babel-loader',
 				// Converting JSX and ES6 to the common ES5 standart.
 				options: {
+					plugins: ['transform-runtime'],
 					presets: ['es2015', 'react']
 				},
 				include: [
