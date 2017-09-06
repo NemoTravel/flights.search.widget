@@ -64,6 +64,16 @@ export function switchAirports() {
 	};
 }
 
+export function selectDate(date, fieldType) {
+	return {
+		type: types.DATE_SELECTED,
+		payload: {
+			fieldType,
+			date
+		}
+	};
+}
+
 export function sendAutocompleteRequest(searchText, fieldType) {
 	return (dispatch, getState) => {
 		const state = getState();

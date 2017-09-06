@@ -1,3 +1,5 @@
+@import "variables";
+
 &-form {
 	&__block {
 		border-bottom: 1px solid #E6E6E6;
@@ -76,6 +78,7 @@
 		
 		&__date {
 			&__col {
+				position: static;
 				padding-right: 0.5rem;
 				
 				input {
@@ -91,6 +94,7 @@
 
 		&__date {
 			&__col {
+				position: static;
 				padding-left: 0.5rem;
 				
 				input {
@@ -260,6 +264,10 @@
 		&_loading {
 			background: url('/dist/images/form/spinner.svg') no-repeat 90% center;
 			background-size: 20px;
+		}
+		
+		&_pointer {
+			cursor: pointer;
 		}
 	}
 	

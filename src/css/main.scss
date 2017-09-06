@@ -1,41 +1,15 @@
-@import "variables";
 @import "fonts";
 
 .nemo-widget {
+	@import "variables";
 	@import "bootstrap";
+	@import "reactDatepicker";
 	@import "overridings";
+	@import "ui";
 	@import "form";
 	
 	font-family: "Open Sans", sans-serif;
 	font-size: inherit;
 	color: $common-font-color;
 	background-color: #ffffff;
-
-	& &-icon {
-		font-family: "OpenSkyIcons", sans-serif !important;
-		speak: none;
-		font-style: normal;
-		font-weight: normal;
-		font-variant: normal;
-		text-transform: none;
-		line-height: 1;
-	}
-	
-	& &-pseudoLink {
-		display: inline-block;
-		border-bottom: 1px dotted $headers-font-color;
-		color: $headers-font-color;
-		font-size: 13px;
-		font-weight: 600;
-		vertical-align: middle;
-		transition: border-color, 450ms, ease;
-		text-decoration: none;
-		
-		&:hover {
-			text-decoration: none;
-			background: none;
-			border-bottom-color: rgba(0, 0, 0, 0);
-			color: $headers-font-color;
-		}
-	}
 }

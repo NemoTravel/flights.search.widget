@@ -1,0 +1,19 @@
+@import "../variables";
+
+.nemo-ui-pseudoLink {
+	display: inline-block;
+	border-bottom: 1px dotted $headers-font-color;
+	color: $headers-font-color;
+	font-size: 13px;
+	font-weight: 600;
+	vertical-align: middle;
+	transition: border-color, 450ms, ease;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+		background: none;
+		border-bottom-color: rgba(0, 0, 0, 0);
+		color: $headers-font-color;
+	}
+}

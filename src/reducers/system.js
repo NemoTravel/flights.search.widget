@@ -4,8 +4,10 @@ import { cloneDeep } from 'lodash';
 const initialState = {
 	API_URL: '',
 	airline: null,
+	locale: 'en',
 	form: {
-		hideAirportIATA: false
+		showAirportIATA: false,
+		readOnlyAutocomplete: false
 	}
 };
 

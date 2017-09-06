@@ -10,7 +10,7 @@ const isDevMode = process.env.NODE_ENV === 'dev';
 
 // Streaming compiled styles to the separate ".css" file.
 const extractSass = new ExtractTextPlugin({
-	filename: `${moduleName}.css`
+	filename: `${moduleName}.min.css`
 });
 
 let config = {
@@ -79,7 +79,12 @@ let config = {
 				use: extractSass.extract({
 					use: [
 						// Allows to import CSS through JavaScript.
-						'css-loader',
+						{
+							loader: 'css-loader',
+							options: {
+								minimize: !isDevMode
+							}
+						},
 						// Resolving relative URL in CSS code.
 						'resolve-url-loader',
 						// Compiles Sass to CSS.

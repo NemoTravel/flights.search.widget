@@ -3,6 +3,8 @@ import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
 
 /**
+ * @TODO move store to separate file.
+ * 
  * Create Redux-store.
  * 
  * @param defaultState
