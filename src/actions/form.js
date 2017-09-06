@@ -90,13 +90,11 @@ export function sendAutocompleteRequest(searchText, fieldType) {
 		
 		dispatch(startAutocompleteLoading(fieldType));
 		
-		let url = `${state.system.API_URL}/autocomplete`;
-		
+		let url = `${state.system.API_URL}/guide/autocomplete/iata/${searchText}`;
+
 		if (state.system.airline) {
-			url += '/airline/' + state.system.airline;
+			url += `?airlineIATA=${state.system.airline}`;
 		}
-		
-		url += '/' + searchText;
 		
 		axios.get(url)
 			.then((response) => {
