@@ -6,7 +6,8 @@ const initialState = {
 	airline: null,
 	locale: 'en',
 	form: {
-		hideAirportIATA: false
+		showAirportIATA: false,
+		readOnlyAutocomplete: false
 	}
 };
 

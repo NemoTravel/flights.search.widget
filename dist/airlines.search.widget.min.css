@@ -3801,6 +3801,10 @@
   background-size: 20px;
 }
 
+.nemo-widget-form .nemo-widget-form__input_pointer {
+  cursor: pointer;
+}
+
 .nemo-widget-form__pseudoBlocks {
   text-align: center;
 }
