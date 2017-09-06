@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
+import { connect } from 'react-redux';
 
-export default class Datepicker extends Component {
+class Datepicker extends Component {
+	/**
+	 * Global date format.
+	 * 
+	 * @returns {string}
+	 */
 	static get dateFormat() {
 		return 'DD.MM.YYYY';
+	}
+
+	/**
+	 * Date format for the calendar title.
+	 * 
+	 * @returns {string}
+	 */
+	static get dateFormatCalendar() {
+		return 'MMMM';
 	}
 	
 	renderCustomInput() {
@@ -16,14 +31,20 @@ export default class Datepicker extends Component {
 	}
 	
 	render() {
-		const { date } = this.props;
+		const { date, system } = this.props;
 		
-		return <DatePicker 
+		return <DatePicker
+			locale={system.locale}
+			dropdownMode="scroll"
+			showMonthDropdown={false}
 			customInput={this.renderCustomInput()}
 			calendarClassName="nemo-ui-datepicker" 
-			dateFormat={Datepicker.dateFormat} 
+			dateFormat={Datepicker.dateFormat}
+			dateFormatCalendar={Datepicker.dateFormatCalendar}
 			selected={date}
 			{...this.props}
 		/>;
 	}
 }
+
+export default connect(({ system }) => { return { system }; })(Datepicker);

@@ -6,7 +6,7 @@ export default class Datepicker extends Component {
 		const { placeholder, type } = this.props;
 
 		return <div className={`col nemo-widget-form__${type}__date__col`}>
-			<NemoDatepicker inputProps={{ placeholder }} />
+			<NemoDatepicker excludeDates={[]} inputProps={{ placeholder }} />
 		</div>;
 	}
 }

@@ -1,3 +1,134 @@
 .nemo-ui-datepicker {
+	border-radius: 0;
+	box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
+	color: #333;
+	background: #fff;
+	border: 1px solid #ccc;
+	border-bottom-color: #bbb;
 	
+	.react-datepicker {
+		&__triangle {
+			display: none;
+		}
+		
+		&__header {
+			background-color: #fff;
+			border-bottom: none;
+			padding-top: 13px;
+		}
+		
+		&__navigation {
+			top: 10px;
+			
+			&--previous, &--next {
+				height: 22px;
+				width: 22px;
+				border: none;
+				border-radius: 50%;
+				background: url('/dist/images/form/circleNext.svg') no-repeat center;
+				
+				&:hover {
+					background: #1B75BC url('/dist/images/form/circleNext-hover.svg') no-repeat center;
+				}
+			}
+
+			&--previous {
+				transform: rotate(180deg);
+			}
+		}
+		
+		&__current {
+			&-month {
+				padding-bottom: 9px;
+				font-size: 17px;
+				line-height: 18px;
+				font-weight: 600;
+				color: #808080;
+				text-transform: capitalize;
+			}
+		}
+		
+		&__day {
+			color: #666;
+			position: relative;
+			width: 2.3rem;
+			height: 2rem;
+			line-height: 2rem;
+			margin: 1px;
+			
+			&-name {
+				color: #ccc;
+				font-size: 12px;
+				font-family: "Arial", sans-serif;
+				font-weight: 700;
+				text-align: center;
+				padding-bottom: 3px;
+				text-transform: lowercase;
+				width: 2.3rem;
+				height: 2rem;
+				line-height: 2rem;
+				margin: 1px;
+			}
+
+			&:hover {
+				color: #fff;
+				background: #3FA9F5;
+				border-radius: 0;
+			}
+			
+			&--today, &--keyboard-selected {
+				color: #3FA9F5;
+				font-weight: 700;
+				background: #fff;
+			}
+
+			&--selected {
+				color: #fff;
+				background: #3FA9F5;
+				border-radius: 0;
+				font-weight: 400;
+				
+				&:after {
+					content: "";
+					width: 0;
+					height: 0;
+					border-style: solid;
+					border-width: 6px 0 6px 10px;
+					border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #fff;
+					position: absolute;
+					left: 0;
+					top: 50%;
+					transform: translate(0, -50%);
+					transition: opacity, 450ms, ease;
+				}
+			}
+
+			&--disabled {
+				color: #ccc;
+
+				&:hover {
+					color: #ccc;
+					background: #fff;
+					
+					&:after {
+						content: "";
+						width: 0;
+						height: 0;
+						border-style: solid;
+						border-width: 6px 0 6px 10px;
+						border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #fff;
+						position: absolute;
+						left: 0;
+						top: 50%;
+						transform: translate(0, -50%);
+						transition: opacity, 450ms, ease;
+					}
+				}
+			}
+			
+			&--outside-month {
+				color: #ccc;
+			}
+		}
+	}
 }
