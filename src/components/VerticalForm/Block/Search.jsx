@@ -59,11 +59,11 @@ export default class Search extends Block {
 				</div>
 
 				<div className="form-group nemo-widget-form__pseudoBlocks">
-					<a href="#" className="nemo-widget-pseudoLink">У меня есть купон на скидку</a>
+					<a href="#" className="nemo-ui-pseudoLink">У меня есть купон на скидку</a>
 				</div>
 
 				<div className="form-group nemo-widget-form__pseudoBlocks">
-					<a href="#" className="nemo-widget-pseudoLink">Оплата милями</a>
+					<a href="#" className="nemo-ui-pseudoLink">Оплата милями</a>
 				</div>
 
 				<button className="btn btn-primary nemo-widget-form__searchButton">Найти</button>

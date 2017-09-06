@@ -97,10 +97,10 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderSwitcher() {
-		let className = 'nemo-widget-icon nemo-widget-form__input__switcher';
+		let className = 'nemo-ui-icon nemo-widget-form__input__switcher';
 
 		if (this.props.system.airline) {
-			className += ' nemo-widget-icon nemo-widget-form__input__switcher_withArrow';
+			className += ' nemo-ui-icon nemo-widget-form__input__switcher_withArrow';
 		}
 		
 		return this.props.switchAirports ? <div className={className} onClick={this.props.switchAirports}/> : null;
@@ -115,7 +115,7 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderArrow() {
-		return this.props.system.airline ? <div className="nemo-widget-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/> : null;
+		return this.props.system.airline ? <div className="nemo-ui-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/> : null;
 	}
 
 	/**

@@ -4,7 +4,7 @@ import Main from 'components/Main';
 import { Provider } from 'react-redux';
 import { getStore } from 'store';
 import { loadConfig } from 'actions/system';
-import styles from './css/main.scss';
+import './css/main.scss';
 
 /**
  * This will be exported to the global scope as `AirlinesSearchWidget.init`.
