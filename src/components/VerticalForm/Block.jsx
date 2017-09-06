@@ -22,11 +22,11 @@ export default class Block extends React.Component {
 	}
 	
 	getHeaderClass() {
-		return this.props.isActive ? this.activeHeaderClass : this.inactiveHeaderClass;
+		return this.props.state.isActive ? this.activeHeaderClass : this.inactiveHeaderClass;
 	}
 	
 	getBodyClass() {
-		return this.props.isActive ? this.activeBodyClass : this.inactiveBodyClass;
+		return this.props.state.isActive ? this.activeBodyClass : this.inactiveBodyClass;
 	}
 	
 	render() {

@@ -6,24 +6,23 @@ import BookingsBlock from 'components/VerticalForm/Block/Bookings';
 
 export default class VerticalForm extends Component {
 	render() {
-		const { blockIsActive, search } = this.props.state;
+		const { search, registration, bookings } = this.props.state;
 		const { toggleBlock } = this.props.actions;
 		
 		return <section className="nemo-widget-form nemo-widget-form_vertical">
 			<SearchBlock 
-				isActive={blockIsActive.search} 
-				search={search}
+				state={search}
 				actions={this.props.actions}
 				system={this.props.system}
 			/>
 			
-			<RegistrationBlock 
-				isActive={blockIsActive.registration}
+			<RegistrationBlock
+				state={registration}
 				actions={{toggleBlock}}
 			/>
 			
-			<BookingsBlock 
-				isActive={blockIsActive.bookings}
+			<BookingsBlock
+				state={bookings}
 				actions={{toggleBlock}}
 			/>
 		</section>;

@@ -9,7 +9,7 @@ export default class Search extends Block {
 	}
 	
 	render() {
-		const { search, system } = this.props;
+		const { state, system } = this.props;
 		const { 
 			changeAutocompleteInputValue, 
 	  		changeAutocompleteSuggestions, 
@@ -29,7 +29,7 @@ export default class Search extends Block {
 						type="departure" 
 						placeholder="Откуда" 
 						changeAutocompleteInputValue={changeAutocompleteInputValue} 
-						search={search.departure}
+						state={state.departure}
 						sendAutocompleteRequest={sendAutocompleteRequest}
 						changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 						selectAirport={selectAirport}
@@ -40,7 +40,7 @@ export default class Search extends Block {
 						type="arrival" 
 						placeholder="Куда" 
 						changeAutocompleteInputValue={changeAutocompleteInputValue} 
-						search={search.arrival}
+						state={state.arrival}
 						sendAutocompleteRequest={sendAutocompleteRequest}
 						changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 						selectAirport={selectAirport}

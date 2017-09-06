@@ -1,13 +1,11 @@
 import { types } from 'actions';
 import { cloneDeep } from 'lodash';
 
+// Search form consists of three toggleable blocks:
 const initialState = {
-	blockIsActive: {
-		search: true,
-		registration: false,
-		bookings: false
-	},
+	// - search fields (airport autocompeletes, datepicker, passengers)
 	search: {
+		isActive: true,
 		departure: {
 			isLoading: false,
 			suggestions: [],
@@ -20,6 +18,14 @@ const initialState = {
 			inputValue: '',
 			airport: null
 		}
+	},
+	// - flight registration process
+	registration: {
+		isActive: false
+	},
+	// - block for checking booking status
+	bookings: {
+		isActive: false
 	}
 };
 
@@ -29,7 +35,7 @@ export default function form(state = initialState, action) {
 	switch (action.type) {
 		case types.TOGGLE_BLOCK:
 			newState = cloneDeep(state);
-			newState.blockIsActive[action.payload] = !state.blockIsActive[action.payload];
+			newState[action.payload].isActive = !state[action.payload].isActive;
 			return newState;
 			
 		case types.AUTOCOMPLETE_LOADING_STARTED:

@@ -80,7 +80,7 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderAirportCode() {
-		const { isLoading, airport } = this.props.search;
+		const { isLoading, airport } = this.props.state;
 		const isActive = !this.props.system.form.hideAirportIATA && !isLoading && airport;
 		let className = 'nemo-widget-form__input__airportCode';
 		
@@ -139,13 +139,13 @@ export default class Autocomplete extends Component {
 	}
 	
 	render() {
-		const { placeholder, search, type } = this.props;
+		const { placeholder, state, type } = this.props;
 		const inputClassName = `form-control nemo-widget-form__${type} nemo-widget-form__input`;
 		
 		return <div className="nemo-widget-form__input__wrapper">
 			<Autosuggest
 				id={type}
-				suggestions={search.suggestions}
+				suggestions={state.suggestions}
 				onSuggestionsFetchRequested={this.fetchSuggestions}
 				onSuggestionsClearRequested={this.clearSuggestions}
 				getSuggestionValue={(item) => item.name}
@@ -153,14 +153,14 @@ export default class Autocomplete extends Component {
 				onSuggestionSelected={this.selectSuggestion}
 				focusInputOnSuggestionClick={false}
 				shouldRenderSuggestions={(value) => {
-					return this.props.system.airline || (value && (!search.airport || search.airport.name !== value));
+					return this.props.system.airline || (value && (!state.airport || state.airport.name !== value));
 				}}
 				renderInputComponent={this.renderInputField}
 				inputProps={{
-					className: search.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
+					className: state.isLoading ? inputClassName + ' nemo-widget-form__input_loading' : inputClassName,
 					spellCheck: false,
 					placeholder,
-					value: search.inputValue,
+					value: state.inputValue,
 					onChange: this.onChangeHandler,
 					onFocus: this.clearAirport
 				}}
