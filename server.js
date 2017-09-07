@@ -2,7 +2,9 @@ const express = require('express');
 const server = express();
 const path = require('path');
 const opn = require('opn');
+const compression = require('compression');
 
+server.use(compression());
 server.use(express.static('./'));
 
 server.get('/', (req, res) => {
