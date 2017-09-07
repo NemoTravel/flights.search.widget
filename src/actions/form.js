@@ -17,14 +17,14 @@ export function toggleBlock(blockName) {
 export function startAutocompleteLoading(fieldType) {
 	return {
 		type: types.AUTOCOMPLETE_LOADING_STARTED,
-		payload: fieldType
+		payload: { fieldType }
 	};
 }
 
 export function finishAutocompleteLoading(fieldType) {
 	return {
 		type: types.AUTOCOMPLETE_LOADING_FINISHED,
-		payload: fieldType
+		payload: { fieldType }
 	};
 }
 
