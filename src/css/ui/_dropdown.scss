@@ -1,0 +1,9 @@
+@import "../variables";
+
+.nemo-ui-dropdown {
+	&__content {
+		&_hidden {
+			display: none;
+		}
+	}
+}

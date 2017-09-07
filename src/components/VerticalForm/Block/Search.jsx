@@ -2,6 +2,7 @@ import React from 'react';
 import Block from 'components/VerticalForm/Block';
 import Autocomplete from 'components/VerticalForm/Block/Search/Autocomplete';
 import Datepicker from 'components/VerticalForm/Block/Search/Datepicker';
+import NemoDropdown from 'components/UI/Dropdown';
 
 export default class Search extends Block {
 	get type() {
@@ -69,7 +70,14 @@ export default class Search extends Block {
 				</div>
 
 				<div className="form-group">
-					<input type="text" className="form-control" readOnly={true} spellCheck={false}/>
+					<NemoDropdown 
+						triggerElement={
+							<input type="text" className="form-control" readOnly={true} spellCheck={false}/>
+						}
+						contentElement={
+							<div>kek</div>
+						}
+					/>
 				</div>
 
 				<div className="form-group nemo-widget-form__pseudoBlocks">
