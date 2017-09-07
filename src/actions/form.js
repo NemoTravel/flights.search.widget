@@ -92,8 +92,8 @@ export function sendAutocompleteRequest(searchText, fieldType) {
 		
 		let url = `${state.system.API_URL}/guide/autocomplete/iata/${searchText}`;
 
-		if (state.system.airline) {
-			url += `?airlineIATA=${state.system.airline}`;
+		if (state.system.routingGrid) {
+			url += `?airlineIATA=${state.system.routingGrid}`;
 		}
 		
 		axios.get(url)

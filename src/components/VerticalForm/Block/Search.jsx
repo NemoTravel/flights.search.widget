@@ -56,6 +56,7 @@ export default class Search extends Block {
 					<Datepicker 
 						type="departure" 
 						selectDate={selectDate} 
+						maxDate={state.arrival.date}
 						state={state.departure} 
 						placeholder="Вылет туда"
 					/>
@@ -64,6 +65,7 @@ export default class Search extends Block {
 						type="arrival" 
 						toggleDatePicker={toggleDatePicker} 
 						selectDate={selectDate} 
+						minDate={state.departure.date}
 						state={state.arrival}
 						popperPlacement="top-end"
 						placeholder="Обратно"

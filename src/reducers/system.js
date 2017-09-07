@@ -2,7 +2,7 @@ import { types } from 'actions';
 
 const initialState = {
 	API_URL: '',
-	airline: null,
+	routingGrid: null,
 	locale: 'en',
 	form: {
 		showAirportIATA: false,

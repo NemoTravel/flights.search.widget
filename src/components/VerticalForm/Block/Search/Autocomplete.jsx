@@ -21,7 +21,9 @@ export default class Autocomplete extends Component {
 	 * Clear loaded autocomplete suggestions.
 	 */
 	clearSuggestions() {
-		this.props.changeAutocompleteSuggestions([], this.props.type);
+		if (!this.props.system.routingGrid) {
+			this.props.changeAutocompleteSuggestions([], this.props.type);
+		}
 	}
 
 	/**
@@ -38,16 +40,19 @@ export default class Autocomplete extends Component {
 	 * @param value
 	 */
 	fetchSuggestions({ value }) {
-		const { sendAutocompleteRequest, type } = this.props;
+		const { sendAutocompleteRequest, type, state, system } = this.props;
 		const searchText = value;
 		
-		// We don't want to harass servers too much.
-		clearTimeout(this.autocompleteTimeout);
-		
-		// So we send request only if user hasn't been typing something for a while.
-		this.autocompleteTimeout = setTimeout(() => {
-			sendAutocompleteRequest(searchText, type);
-		}, this.autocompleteWaitTime);
+		// Do not load routing grid twice.
+		if (!system.routingGrid || !state.suggestions.length) {
+			// We don't want to harass servers too much.
+			clearTimeout(this.autocompleteTimeout);
+
+			// So we send request only if user hasn't been typing something for a while.
+			this.autocompleteTimeout = setTimeout(() => {
+				sendAutocompleteRequest(searchText, type);
+			}, this.autocompleteWaitTime);
+		}
 	}
 
 	/**
@@ -85,7 +90,7 @@ export default class Autocomplete extends Component {
 		const isActive = this.props.system.form.showAirportIATA && !isLoading && airport;
 		let className = classnames(
 			'nemo-widget-form__input__airportCode',
-			{ 'nemo-widget-form__input__airportCode_withArrow': this.props.system.airline }
+			{ 'nemo-widget-form__input__airportCode_withArrow': this.props.system.routingGrid }
 		);
 		
 		return isActive ? <span className={className}>{airport.IATA}</span> : null;
@@ -99,7 +104,7 @@ export default class Autocomplete extends Component {
 	renderSwitcher() {
 		let className = classnames(
 			'nemo-ui-icon nemo-widget-form__input__switcher',
-			{ 'nemo-ui-icon nemo-widget-form__input__switcher_withArrow': this.props.system.airline }
+			{ 'nemo-ui-icon nemo-widget-form__input__switcher_withArrow': this.props.system.routingGrid }
 		);
 		
 		return this.props.switchAirports ? <div className={className} onClick={this.props.switchAirports}/> : null;
@@ -107,14 +112,14 @@ export default class Autocomplete extends Component {
 
 	/**
 	 * Render select-like arrow.
-	 * Enabled if `airline` config parameter has been specified.
+	 * Enabled if `routingGrid` config parameter has been specified.
 	 * 
 	 * Sets focus on autocomplete input field and runs autocomplete request.
 	 * 
 	 * @returns {*}
 	 */
 	renderArrow() {
-		return this.props.system.airline ? <div className="nemo-ui-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/> : null;
+		return this.props.system.routingGrid ? <div className="nemo-ui-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/> : null;
 	}
 
 	/**
@@ -156,7 +161,7 @@ export default class Autocomplete extends Component {
 				onSuggestionSelected={this.selectSuggestion}
 				focusInputOnSuggestionClick={false}
 				shouldRenderSuggestions={(value) => {
-					return config.airline || (value && (!state.airport || state.airport.name !== value));
+					return config.routingGrid || (value && (!state.airport || state.airport.name !== value));
 				}}
 				renderInputComponent={this.renderInputField}
 				inputProps={{
