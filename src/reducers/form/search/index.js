@@ -74,28 +74,6 @@ function searchReducer(state, { type, payload }) {
 
 		case types.DATE_SELECTED:
 			return { ...state, date: payload.date };
-
-		// case types.SWITCH_AIRPORTS:
-		// 	const departureAirport = state.departure.airport;
-		// 	const arrivalAirport = state.arrival.airport;
-		//
-		// 	if (departureAirport || arrivalAirport) {
-		// 		const { departure:departureField } = state;
-		// 		const { arrival:arrivalField } = state;
-		//
-		// 		const departureInpurtValue = departureField.inputValue;
-		// 		const arrivalInpurtValue = arrivalField.inputValue;
-		//
-		// 		departureField.airport = arrivalAirport;
-		// 		arrivalField.airport = departureAirport;
-		//
-		// 		departureField.inputValue = arrivalInpurtValue;
-		// 		arrivalField.inputValue = departureInpurtValue;
-		//
-		// 		return { ...state, departure: departureField, arrival: arrivalField };
-		// 	}
-		//
-		// 	return state;
 	}
 
 	return state;
