@@ -64,7 +64,8 @@ export default class Search extends Block {
 						type="arrival" 
 						toggleDatePicker={toggleDatePicker} 
 						selectDate={selectDate} 
-						state={state.arrival} 
+						state={state.arrival}
+						popperPlacement="top-end"
 						placeholder="Обратно"
 					/>
 				</div>

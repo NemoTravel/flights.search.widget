@@ -14,18 +14,20 @@ class Passengers extends Component {
 	 */
 	renderCounters() {
 		const { passengers } = this.props;
-		const { addPassenger, removePassenger } = this.props.actions;
+		const { addPassenger, removePassenger, calculateTitle } = this.props.actions;
 		const counters = [];
+		const passTypes = passengers.types;
 
-		for (const passType in passengers) {
-			if (passengers.hasOwnProperty(passType)) {
-				const passenger = passengers[passType];
+		for (const passType in passTypes) {
+			if (passTypes.hasOwnProperty(passType)) {
+				const passenger = passTypes[passType];
 
 				if (passenger.isActive) {
 					counters.push(
 						<Counter 
 							addPassenger={addPassenger} 
-							removePassenger={removePassenger} 
+							removePassenger={removePassenger}
+							calculateTitle={calculateTitle} 
 							title={passenger.title} 
 							code={passenger.code} 
 							count={passenger.count}
@@ -44,8 +46,10 @@ class Passengers extends Component {
 	 * @returns {XML}
 	 */
 	renderDropdownTrigger() {
+		const title = this.props.passengers.title;
+		
 		return <div className="nemo-widget-form-passengers__trigger nemo-widget-form__input__wrapper">
-			<input type="text" className="form-control" value="1 Пассажир" readOnly={true} spellCheck={false} ref={input => this.inputField = input}/>
+			<input type="text" className="form-control" value={title} readOnly={true} spellCheck={false} ref={input => this.inputField = input}/>
 			<div className="nemo-ui-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/>
 		</div>;
 	}

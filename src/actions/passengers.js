@@ -13,3 +13,9 @@ export function removePassenger(passType) {
 		payload: passType
 	};
 }
+
+export function calculateTitle() {
+	return {
+		type: types.CALCULATE_PASSENGERS_TITLE
+	};
+}
