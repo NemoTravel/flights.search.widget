@@ -1,7 +1,6 @@
 import { types } from 'actions';
 
 const initialState = {
-	isActive: true,
 	departure: {
 		isLoading: false,
 		isDatepickerActive: true,
@@ -24,13 +23,6 @@ export default function searchReducer(state = initialState, action) {
 	let field, fieldType;
 	
 	switch (action.type) {
-		case types.TOGGLE_BLOCK:
-			// Sorry. Move it to the separate action.
-			if (action.payload === 'search') {
-				return {...state, isActive: !state.isActive};
-			}
-			break;
-
 		case types.TOGGLE_DATEPICKER:
 			fieldType = action.payload.fieldType;
 			field = state[fieldType];
