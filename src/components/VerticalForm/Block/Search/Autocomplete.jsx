@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
+import classnames from 'classnames';
 
 export default class Autocomplete extends Component {
 	constructor(props) {
@@ -82,11 +83,10 @@ export default class Autocomplete extends Component {
 	renderAirportCode() {
 		const { isLoading, airport } = this.props.state;
 		const isActive = this.props.system.form.showAirportIATA && !isLoading && airport;
-		let className = 'nemo-widget-form__input__airportCode';
-		
-		if (this.props.system.airline) {
-			className += ' nemo-widget-form__input__airportCode_withArrow';
-		}
+		let className = classnames(
+			'nemo-widget-form__input__airportCode',
+			{ 'nemo-widget-form__input__airportCode_withArrow': this.props.system.airline }
+		);
 		
 		return isActive ? <span className={className}>{airport.IATA}</span> : null;
 	}
@@ -97,11 +97,10 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderSwitcher() {
-		let className = 'nemo-ui-icon nemo-widget-form__input__switcher';
-
-		if (this.props.system.airline) {
-			className += ' nemo-ui-icon nemo-widget-form__input__switcher_withArrow';
-		}
+		let className = classnames(
+			'nemo-ui-icon nemo-widget-form__input__switcher',
+			{ 'nemo-ui-icon nemo-widget-form__input__switcher_withArrow': this.props.system.airline }
+		);
 		
 		return this.props.switchAirports ? <div className={className} onClick={this.props.switchAirports}/> : null;
 	}
@@ -140,15 +139,11 @@ export default class Autocomplete extends Component {
 	
 	render() {
 		const { placeholder, state, type, system:config } = this.props;
-		let inputClassName = `form-control nemo-widget-form__${type} nemo-widget-form__input`;
-		
-		if (state.isLoading) {
-			inputClassName += ' nemo-widget-form__input_loading';
-		}
-		
-		if (config.form.readOnlyAutocomplete) {
-			inputClassName += ' nemo-widget-form__input_pointer';
-		}
+		let inputClassName = classnames(
+			`form-control nemo-widget-form__${type} nemo-widget-form__input`,
+			{ 'nemo-widget-form__input_loading': state.isLoading },
+			{ 'nemo-widget-form__input_pointer': config.form.readOnlyAutocomplete }
+		);
 		
 		return <div className="nemo-widget-form__input__wrapper">
 			<Autosuggest

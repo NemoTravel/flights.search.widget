@@ -19,7 +19,7 @@ export default class Datepicker extends Component {
 	
 	render() {
 		const 
-			{ placeholder, type, state, toggleDatePicker, selectDate } = this.props,
+			{ placeholder, type, state, toggleDatePicker, selectDate, popperPlacement } = this.props,
 			minDate = moment(), // allow to pick dates between today...
 			maxDate = moment().add(1, 'years'); // ...and +1 year
 
@@ -33,6 +33,7 @@ export default class Datepicker extends Component {
 				maxDate={maxDate}
 				toggleDatePicker={toggleDatePicker}
 				selectDate={selectDate}
+				popperPlacement={popperPlacement}
 				inputProps={{ placeholder }}
 			/>
 		</div>;

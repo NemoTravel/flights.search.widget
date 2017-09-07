@@ -2,6 +2,7 @@ import React from 'react';
 import Block from 'components/VerticalForm/Block';
 import Autocomplete from 'components/VerticalForm/Block/Search/Autocomplete';
 import Datepicker from 'components/VerticalForm/Block/Search/Datepicker';
+import Passengers from 'components/VerticalForm/Block/Search/Passengers';
 
 export default class Search extends Block {
 	get type() {
@@ -63,13 +64,14 @@ export default class Search extends Block {
 						type="arrival" 
 						toggleDatePicker={toggleDatePicker} 
 						selectDate={selectDate} 
-						state={state.arrival} 
+						state={state.arrival}
+						popperPlacement="top-end"
 						placeholder="Обратно"
 					/>
 				</div>
 
 				<div className="form-group">
-					<input type="text" className="form-control" readOnly={true} spellCheck={false}/>
+					<Passengers/>
 				</div>
 
 				<div className="form-group nemo-widget-form__pseudoBlocks">
