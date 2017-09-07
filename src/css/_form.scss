@@ -305,6 +305,8 @@
 	}
 
 	&__date {
+		-webkit-appearance: none;
+		
 		&_disabled {
 			background: #F2F2F2 !important;
 			border-color: #F2F2F2 !important;
