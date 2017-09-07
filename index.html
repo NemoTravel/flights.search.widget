@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Title</title>
 	<style>
 		* {
 			padding: 0;
 			margin: 0;
+		}
+		
+		html, body {
+			width: 100%;
+			height: 100%;
 		}
 		
 		html {
@@ -17,15 +23,21 @@
 			background-color: #333333;
 		}
 		
-		.wrapper {
+		.nemo-widget-testWrapper {
 			width: 350px;
+		}
+
+		@media screen and (max-width: 540px) {
+			.nemo-widget-testWrapper {
+				width: 100%;
+			}
 		}
 	</style>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i&amp;subset=cyrillic" rel="stylesheet">
 	<link rel="stylesheet" href="dist/airlines.search.widget.min.css">
 </head>
 <body>
-	<div id="root" class="wrapper"></div>
+	<div id="root" class="nemo-widget-testWrapper"></div>
 	<script src="dist/airlines.search.widget.min.js"></script>
 	<script>
 		var Widget = window['AirlinesSearchWidget'];
