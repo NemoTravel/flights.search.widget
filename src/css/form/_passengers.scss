@@ -1,0 +1,93 @@
+&-passengers {
+	position: relative;
+
+	&__trigger {
+		&, input {
+			cursor: pointer;
+		}
+	}
+
+	&__content {
+		position: absolute;
+		z-index: 12;
+		margin-top: -1px;
+		left: 0;
+		right: 0;
+		border: 1px solid #e6e6e6;
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+		background-color: #fff;
+		font-size: 15px;
+		line-height: 16px;
+		font-weight: 400;
+	}
+
+	&__item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 20px;
+
+		&:not(:last-of-type) {
+			border-bottom: 1px solid #e6e6e6;
+		}
+
+		&_disabled {
+			color: #B3B3B3;
+		}
+	}
+
+	&__title {
+		font-weight: 600;
+	}
+
+	&__counter {
+		display: flex;
+		align-items: center;
+		font-weight: 600;
+	}
+
+	&__icon {
+		border: 1px solid #F2F2F2;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		color: #1B75BC;
+		font-size: 9px;
+		cursor: pointer;
+
+		&:after {
+			content: "";
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		&:hover {
+			background-color: #1B75BC;
+			border-color: #1B75BC;
+			color: #fff;
+		}
+	}
+
+	&__minus {
+		&:after {
+			width: 18px;
+			height: 19px;
+			content: "\e903";
+		}
+	}
+
+	&__plus {
+		&:after {
+			width: 19px;
+			height: 19px;
+			content: "\e902";
+		}
+	}
+
+	&__number {
+		font-size: 14px;
+		padding: 0 7px;
+	}
+}

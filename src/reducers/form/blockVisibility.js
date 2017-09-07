@@ -2,8 +2,8 @@ import { types } from 'actions';
 
 const initialState = {
 	search: true,
-	registration: true,
-	bookings: true
+	registration: false,
+	bookings: false
 };
 
 export default function blockVisibilityReducer(state = initialState, action) {
