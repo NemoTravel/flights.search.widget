@@ -28,12 +28,18 @@ const initialState = {
 };
 
 export default function passengersReducer(state = initialState, { type, payload }) {
+	let newState = state;
+	
 	switch (type) {
 		case types.ADD_PASSENGER:
-			return state;
+			newState = { ...state };
+			newState[payload].count++;
+			return newState;
 			
 		case types.REMOVE_PASSENGER:
-			return state;
+			newState = { ...state };
+			newState[payload].count--;
+			return newState;
 	}
 	
 	return state;

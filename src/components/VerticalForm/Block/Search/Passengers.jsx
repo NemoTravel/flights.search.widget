@@ -24,8 +24,8 @@ class Passengers extends Component {
 				if (passenger.isActive) {
 					counters.push(
 						<Counter 
-							addPassenger={() => addPassenger(passenger.code)} 
-							removePassenger={() => removePassenger(passenger.code)} 
+							addPassenger={addPassenger} 
+							removePassenger={removePassenger} 
 							title={passenger.title} 
 							code={passenger.code} 
 							count={passenger.count}

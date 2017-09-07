@@ -2,6 +2,26 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 
 export default class Counter extends Component {
+	constructor(props) {
+		super(props);
+		
+		this.removePassenger = this.removePassenger.bind(this);
+		this.addPassenger = this.addPassenger.bind(this);
+	}
+	
+	removePassenger() {
+		const { count, code } = this.props;
+		
+		if (count) {
+			this.props.removePassenger(code);
+		}
+	}
+
+	addPassenger() {
+		const { code } = this.props;
+		this.props.addPassenger(code);
+	}
+	
 	render() {
 		const { title, count } = this.props;
 		const itemClassName = classnames(
@@ -17,9 +37,9 @@ export default class Counter extends Component {
 		return <div className={itemClassName}>
 			<div className="nemo-widget-form-passengers__title">{title}</div>
 			<div className="nemo-widget-form-passengers__counter">
-				<div className={minusClassName} onClick={this.props.removePassenger}/>
+				<div className={minusClassName} onClick={this.removePassenger}/>
 				<div className="nemo-widget-form-passengers__number">{count}</div>
-				<div className="nemo-ui-icon nemo-widget-form-passengers__icon nemo-widget-form-passengers__plus" onClick={this.props.addPassenger}/>
+				<div className="nemo-ui-icon nemo-widget-form-passengers__icon nemo-widget-form-passengers__plus" onClick={this.addPassenger}/>
 			</div>
 		</div>;
 	}
