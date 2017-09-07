@@ -1,6 +1,7 @@
 import React from 'react';
 import Block from 'components/VerticalForm/Block';
-import Autocomplete from 'components/VerticalForm/Block/Search/Autocomplete';
+import DepartureAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Departure';
+import ArrivalAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Arrival';
 import Datepicker from 'components/VerticalForm/Block/Search/Datepicker';
 import Passengers from 'components/VerticalForm/Block/Search/Passengers';
 
@@ -10,16 +11,8 @@ export default class Search extends Block {
 	}
 	
 	render() {
-		const { state, system } = this.props;
-		const { 
-			changeAutocompleteInputValue, 
-	  		changeAutocompleteSuggestions, 
-		  	selectAirport,
-	   		switchAirports, 
-		  	sendAutocompleteRequest,
-			selectDate, 
-	  		toggleDatePicker
-		} = this.props.actions;
+		const { state } = this.props;
+		const { selectDate, toggleDatePicker } = this.props.actions;
 		
 		return <div className="nemo-widget-form__block nemo-widget-form__block_search">
 			<div className={this.getHeaderClass()} onClick={this.toggleHandler}>
@@ -28,28 +21,8 @@ export default class Search extends Block {
 
 			<div className={this.getBodyClass()}>
 				<div className="form-group">
-					<Autocomplete 
-						type="departure" 
-						placeholder="Откуда" 
-						changeAutocompleteInputValue={changeAutocompleteInputValue} 
-						state={state.departure}
-						sendAutocompleteRequest={sendAutocompleteRequest}
-						changeAutocompleteSuggestions={changeAutocompleteSuggestions}
-						selectAirport={selectAirport}
-						system={system}
-					/>
-					
-					<Autocomplete 
-						type="arrival" 
-						placeholder="Куда" 
-						changeAutocompleteInputValue={changeAutocompleteInputValue} 
-						state={state.arrival}
-						sendAutocompleteRequest={sendAutocompleteRequest}
-						changeAutocompleteSuggestions={changeAutocompleteSuggestions}
-						selectAirport={selectAirport}
-						switchAirports={switchAirports}
-						system={system}
-					/>
+					<DepartureAutocomplete/>
+					<ArrivalAutocomplete/>
 				</div>
 
 				<div className="form-group row">

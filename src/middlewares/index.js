@@ -1,5 +1,5 @@
 import { types } from 'actions';
-import { selectAirport, changeAutocompleteInputValue } from 'actions/form';
+import { selectAirport, changeAutocompleteInputValue } from 'actions/autocomplete';
 
 /**
  * This action changes two different state trees (departure and arrival blocks),

@@ -3,6 +3,9 @@ import Autosuggest from 'react-autosuggest';
 import classnames from 'classnames';
 
 export default class Autocomplete extends Component {
+	get type() { return null; }
+	get placeholder() { return ''; }
+	
 	constructor(props) {
 		super(props);
 		this.autocompleteTimeout = null;
@@ -22,7 +25,7 @@ export default class Autocomplete extends Component {
 	 */
 	clearSuggestions() {
 		if (!this.props.system.routingGrid) {
-			this.props.changeAutocompleteSuggestions([], this.props.type);
+			this.props.changeAutocompleteSuggestions([], this.type);
 		}
 	}
 
@@ -30,8 +33,8 @@ export default class Autocomplete extends Component {
 	 * Reset selected airport.
 	 */
 	clearAirport() {
-		this.props.selectAirport(null, this.props.type);
-		this.props.changeAutocompleteInputValue('', this.props.type);
+		this.props.selectAirport(null, this.type);
+		this.props.changeAutocompleteInputValue('', this.type);
 	}
 
 	/**
@@ -40,7 +43,7 @@ export default class Autocomplete extends Component {
 	 * @param value
 	 */
 	fetchSuggestions({ value }) {
-		const { sendAutocompleteRequest, type, state, system } = this.props;
+		const { sendAutocompleteRequest, state, system } = this.props;
 		const searchText = value;
 		
 		// Do not load routing grid twice.
@@ -50,7 +53,7 @@ export default class Autocomplete extends Component {
 
 			// So we send request only if user hasn't been typing something for a while.
 			this.autocompleteTimeout = setTimeout(() => {
-				sendAutocompleteRequest(searchText, type);
+				sendAutocompleteRequest(searchText, this.type);
 			}, this.autocompleteWaitTime);
 		}
 	}
@@ -62,7 +65,7 @@ export default class Autocomplete extends Component {
 	 * @param {String} searchString
 	 */
 	onChangeHandler(event, { newValue: searchString }) {
-		this.props.changeAutocompleteInputValue(searchString, this.props.type);
+		this.props.changeAutocompleteInputValue(searchString, this.type);
 	}
 
 	/**
@@ -102,12 +105,7 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderSwitcher() {
-		let className = classnames(
-			'nemo-ui-icon nemo-widget-form__input__switcher',
-			{ 'nemo-ui-icon nemo-widget-form__input__switcher_withArrow': this.props.system.routingGrid }
-		);
-		
-		return this.props.switchAirports ? <div className={className} onClick={this.props.switchAirports}/> : null;
+		return null;
 	}
 
 	/**
@@ -139,20 +137,20 @@ export default class Autocomplete extends Component {
 	 * @param {Object} airport
 	 */
 	selectSuggestion(event, { suggestion: airport }) {
-		this.props.selectAirport(airport, this.props.type);
+		this.props.selectAirport(airport, this.type);
 	}
 	
 	render() {
-		const { placeholder, state, type, system:config } = this.props;
+		const { state, system:config } = this.props;
 		let inputClassName = classnames(
-			`form-control nemo-widget-form__${type} nemo-widget-form__input`,
+			`form-control nemo-widget-form__${this.type} nemo-widget-form__input`,
 			{ 'nemo-widget-form__input_loading': state.isLoading },
 			{ 'nemo-widget-form__input_pointer': config.form.readOnlyAutocomplete }
 		);
 		
 		return <div className="nemo-widget-form__input__wrapper">
 			<Autosuggest
-				id={type}
+				id={this.type}
 				suggestions={state.suggestions}
 				onSuggestionsFetchRequested={this.fetchSuggestions}
 				onSuggestionsClearRequested={this.clearSuggestions}
@@ -168,7 +166,7 @@ export default class Autocomplete extends Component {
 					className: inputClassName,
 					spellCheck: false,
 					readOnly: config.form.readOnlyAutocomplete,
-					placeholder,
+					placeholder: this.placeholder,
 					value: state.inputValue,
 					onChange: this.onChangeHandler,
 					onFocus: this.clearAirport

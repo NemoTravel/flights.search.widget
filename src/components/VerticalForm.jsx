@@ -14,7 +14,6 @@ export default class VerticalForm extends Component {
 				isActive={blockVisibility.search}
 				state={search}
 				actions={this.props.actions}
-				system={this.props.system}
 			/>
 			
 			<RegistrationBlock
