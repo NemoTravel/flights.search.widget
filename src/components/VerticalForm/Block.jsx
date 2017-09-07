@@ -1,15 +1,9 @@
 import React from 'react';
+import classnames from 'classnames';
 
 export default class Block extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.inactiveHeaderClass = 'nemo-widget-form__block__header';
-		this.activeHeaderClass = 'nemo-widget-form__block__header nemo-widget-form__block__header_active';
-
-		this.inactiveBodyClass = 'nemo-widget-form__block__body';
-		this.activeBodyClass = 'nemo-widget-form__block__body nemo-widget-form__block__body_active';
-		
 		this.toggleHandler = this.toggleHandler.bind(this);
 	}
 	
@@ -22,11 +16,11 @@ export default class Block extends React.Component {
 	}
 	
 	getHeaderClass() {
-		return this.props.isActive ? this.activeHeaderClass : this.inactiveHeaderClass;
+		return classnames('nemo-widget-form__block__header', { 'nemo-widget-form__block__header_active': this.props.isActive });
 	}
 	
 	getBodyClass() {
-		return this.props.isActive ? this.activeBodyClass : this.inactiveBodyClass;
+		return classnames('nemo-widget-form__block__body', { 'nemo-widget-form__block__body_active': this.props.isActive });
 	}
 	
 	render() {

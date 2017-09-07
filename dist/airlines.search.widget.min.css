@@ -3593,6 +3593,8 @@
 
 .nemo-widget-form-passengers__title {
   font-weight: 600;
+  max-width: 70%;
+  overflow: hidden;
 }
 
 .nemo-widget-form-passengers__counter {
@@ -3623,6 +3625,14 @@
   background-color: #1B75BC;
   border-color: #1B75BC;
   color: #fff;
+}
+
+.nemo-widget-form-passengers__icon_disabled,
+.nemo-widget-form-passengers__icon_disabled:hover {
+  background-color: #fff;
+  border-color: #F2F2F2;
+  color: #F2F2F2;
+  cursor: not-allowed;
 }
 
 .nemo-widget-form-passengers__minus:after {

@@ -38,6 +38,8 @@
 
 	&__title {
 		font-weight: 600;
+		max-width: 70%;
+		overflow: hidden;
 	}
 
 	&__counter {
@@ -67,6 +69,15 @@
 			background-color: #1B75BC;
 			border-color: #1B75BC;
 			color: #fff;
+		}
+		
+		&_disabled {
+			&, &:hover {
+				background-color: #fff;
+				border-color: #F2F2F2;
+				color: #F2F2F2;
+				cursor: not-allowed;
+			}
 		}
 	}
 
