@@ -12,16 +12,20 @@ function getPassengersConfig(state) {
 	return state.form.search.passengers;
 }
 
+function getConfig(state) {
+	return state.system;
+}
+
 export const getPassengersArray = createSelector(
-	[ getPassengersConfig ],
-	(passengersConfig = {}) => {
+	[ getPassengersConfig, getConfig ],
+	(passengersConfig = {}, systemConfig = {}) => {
 		let result = [];
 		
 		for (let passType in passengersConfig) {
 			if (passengersConfig.hasOwnProperty(passType)) {
 				let passConfig = passengersConfig[passType];
 				
-				if (passConfig.isActive) {
+				if (passConfig.code !== 'INS' || systemConfig.form.enableInfantsWithSeats) {
 					result.push(passConfig);
 				}
 			}
