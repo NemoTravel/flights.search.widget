@@ -6,7 +6,8 @@ const initialState = {
 	locale: 'en',
 	form: {
 		showAirportIATA: false,
-		readOnlyAutocomplete: false
+		readOnlyAutocomplete: false,
+		enableInfantsWithSeats: false
 	}
 };
 

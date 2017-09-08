@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import NemoDropdown from 'components/UI/Dropdown';
 import Counter from 'components/VerticalForm/Block/Search/Passengers/Counter';
 import * as passengersActions from 'actions/passengers';
+import { getPassengersTitle, getPassengersArray } from 'selectors';
 
 class Passengers extends Component {
 
@@ -13,31 +14,19 @@ class Passengers extends Component {
 	 * @returns {Array}
 	 */
 	renderCounters() {
-		const { passengers } = this.props;
-		const { addPassenger, removePassenger, calculateTitle } = this.props.actions;
-		const counters = [];
-		const passTypes = passengers.types;
-
-		for (const passType in passTypes) {
-			if (passTypes.hasOwnProperty(passType)) {
-				const passenger = passTypes[passType];
-
-				if (passenger.isActive) {
-					counters.push(
-						<Counter 
-							addPassenger={addPassenger} 
-							removePassenger={removePassenger}
-							calculateTitle={calculateTitle} 
-							title={passenger.title} 
-							code={passenger.code} 
-							count={passenger.count}
-						/>
-					);
-				}
-			}
-		}
+		const { array } = this.props;
+		const { addPassenger, removePassenger } = this.props.actions;
 		
-		return counters;
+		return array.map((passenger, i) => {
+			return <Counter
+				key={i}
+				addPassenger={addPassenger}
+				removePassenger={removePassenger}
+				title={passenger.title}
+				code={passenger.code}
+				count={passenger.count}
+			/>;
+		});
 	}
 
 	/**
@@ -46,10 +35,8 @@ class Passengers extends Component {
 	 * @returns {XML}
 	 */
 	renderDropdownTrigger() {
-		const title = this.props.passengers.title;
-		
 		return <div className="nemo-widget-form-passengers__trigger nemo-widget-form__input__wrapper">
-			<input type="text" className="form-control" value={title} readOnly={true} spellCheck={false} ref={input => this.inputField = input}/>
+			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false} ref={input => this.inputField = input}/>
 			<div className="nemo-ui-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/>
 		</div>;
 	}
@@ -72,7 +59,8 @@ class Passengers extends Component {
 
 function mapStateToProps(state) {
 	return {
-		passengers: state.form.search.passengers
+		array: getPassengersArray(state),
+		title: getPassengersTitle(state)
 	};
 }
 

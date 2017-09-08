@@ -7,7 +7,6 @@ export default class Counter extends Component {
 		
 		this.removePassenger = this.removePassenger.bind(this);
 		this.addPassenger = this.addPassenger.bind(this);
-		this.props.calculateTitle();
 	}
 	
 	removePassenger() {
@@ -15,14 +14,12 @@ export default class Counter extends Component {
 		
 		if (count) {
 			this.props.removePassenger(code);
-			this.props.calculateTitle();
 		}
 	}
 
 	addPassenger() {
 		const { code } = this.props;
 		this.props.addPassenger(code);
-		this.props.calculateTitle();
 	}
 	
 	render() {
