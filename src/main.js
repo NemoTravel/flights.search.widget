@@ -10,15 +10,20 @@ import './css/main.scss';
  * This will be exported to the global scope as `AirlinesSearchWidget.init`.
  */
 export function init(config = {}) {
-	const store = getStore();
+	if (config.rootElement) {
+		const store = getStore();
 
-	// Load initial config.
-	store.dispatch(loadConfig(config));
-	
-	ReactDOM.render(
-		<Provider store={store}>
-			<Main />
-		</Provider>,
-		document.getElementById('root')
-	);
+		// Load initial config.
+		store.dispatch(loadConfig(config));
+
+		ReactDOM.render(
+			<Provider store={store}>
+				<Main/>
+			</Provider>,
+			config.rootElement
+		);
+	}
+	else {
+		throw Error('Please specify `rootElement` parameter in the configuration object.');
+	}
 }

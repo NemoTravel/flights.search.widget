@@ -37,20 +37,18 @@
 	<link rel="stylesheet" href="airlines.search.widget.min.css">
 </head>
 <body>
-	<div id="root" class="nemo-widget-testWrapper"></div>
-	<script src="airlines.search.widget.min.js"></script>
-	<script>
-		var Widget = window['AirlinesSearchWidget'];
-		Widget.init({
-			API_URL: 'http://widget.mlsd.ru/api',
-			form: {
-				showAirportIATA: true,
-				readOnlyAutocomplete: false,
-				enableInfantsWithSeats: true
-			},
-			locale: 'ru',
-//			routingGrid: 'SU'
-		});
-	</script>
+<div id="root" class="nemo-widget-testWrapper"></div>
+<script src="airlines.search.widget.min.js"></script>
+<script>
+	AirlinesSearchWidget.init({
+		rootElement: document.getElementById('root'),
+		API_URL: 'http://widget.mlsd.ru/api',
+		showAirportIATA: true,
+		readOnlyAutocomplete: false,
+		enableInfantsWithSeats: true,
+		locale: 'ru'
+//		routingGrid: 'SU'
+	});
+</script>
 </body>
 </html>

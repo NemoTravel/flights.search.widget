@@ -25,7 +25,7 @@ export const getPassengersArray = createSelector(
 			if (passengersConfig.hasOwnProperty(passType)) {
 				let passConfig = passengersConfig[passType];
 				
-				if (passConfig.code !== 'INS' || systemConfig.form.enableInfantsWithSeats) {
+				if (passConfig.code !== 'INS' || systemConfig.enableInfantsWithSeats) {
 					result.push(passConfig);
 				}
 			}

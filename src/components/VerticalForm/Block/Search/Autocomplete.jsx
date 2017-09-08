@@ -90,7 +90,7 @@ export default class Autocomplete extends Component {
 	 */
 	renderAirportCode() {
 		const { isLoading, airport } = this.props.state;
-		const isActive = this.props.system.form.showAirportIATA && !isLoading && airport;
+		const isActive = this.props.system.showAirportIATA && !isLoading && airport;
 		let className = classnames(
 			'nemo-widget-form__input__airportCode',
 			{ 'nemo-widget-form__input__airportCode_withArrow': this.props.system.routingGrid }
@@ -145,7 +145,7 @@ export default class Autocomplete extends Component {
 		let inputClassName = classnames(
 			`form-control nemo-widget-form__${this.type} nemo-widget-form__input`,
 			{ 'nemo-widget-form__input_loading': state.isLoading },
-			{ 'nemo-widget-form__input_pointer': config.form.readOnlyAutocomplete }
+			{ 'nemo-widget-form__input_pointer': config.readOnlyAutocomplete }
 		);
 		
 		return <div className="nemo-widget-form__input__wrapper">
@@ -165,7 +165,7 @@ export default class Autocomplete extends Component {
 				inputProps={{
 					className: inputClassName,
 					spellCheck: false,
-					readOnly: config.form.readOnlyAutocomplete,
+					readOnly: config.readOnlyAutocomplete,
 					placeholder: this.placeholder,
 					value: state.inputValue,
 					onChange: this.onChangeHandler,

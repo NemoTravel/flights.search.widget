@@ -1,14 +1,13 @@
 import { types } from 'actions';
 
 const initialState = {
+	rootElement: null,
 	API_URL: '',
 	routingGrid: null,
 	locale: 'en',
-	form: {
-		showAirportIATA: false,
-		readOnlyAutocomplete: false,
-		enableInfantsWithSeats: false
-	}
+	showAirportIATA: false,
+	readOnlyAutocomplete: false,
+	enableInfantsWithSeats: false
 };
 
 export default function system(state = initialState, action) {
