@@ -5,10 +5,10 @@ const opn = require('opn');
 const compression = require('compression');
 
 server.use(compression());
-server.use(express.static('./'));
+server.use(express.static('./dist'));
 
 server.get('/', (req, res) => {
-	res.sendFile(path.resolve(__dirname, 'index.html'));
+	res.sendFile(path.resolve(__dirname, './dist/index.html'));
 });
 
 server.listen(5555);

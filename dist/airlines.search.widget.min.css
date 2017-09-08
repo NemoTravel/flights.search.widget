@@ -3430,12 +3430,12 @@
   width: 22px;
   border: none;
   border-radius: 50%;
-  background: url("/dist/images/form/circleNext.svg") no-repeat center;
+  background: url("/images/form/circleNext.svg") no-repeat center;
 }
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__navigation--previous:hover,
 .nemo-widget .nemo-ui-datepicker .react-datepicker__navigation--next:hover {
-  background: #1B75BC url("/dist/images/form/circleNext-hover.svg") no-repeat center;
+  background: #1B75BC url("/images/form/circleNext-hover.svg") no-repeat center;
 }
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__navigation--previous {
@@ -3931,7 +3931,7 @@
 }
 
 .nemo-widget-form .nemo-widget-form__input_loading {
-  background: url("/dist/images/form/spinner.svg") no-repeat 90% center;
+  background: url("/images/form/spinner.svg") no-repeat 90% center;
   background-size: 20px;
 }
 
