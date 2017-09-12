@@ -1,4 +1,4 @@
-import { types } from 'actions';
+import { TOGGLE_BLOCK } from 'actions';
 
 /**
  * Show/hide dropdown blocks on the search form.
@@ -8,7 +8,7 @@ import { types } from 'actions';
  */
 export function toggleBlock(blockName) {
 	return {
-		type: types.TOGGLE_BLOCK,
+		type: TOGGLE_BLOCK,
 		payload: blockName
 	}
 }

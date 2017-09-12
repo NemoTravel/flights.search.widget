@@ -1,8 +1,8 @@
-import { types } from 'actions';
+import { LOAD_CONFIG } from 'actions';
 
 export function loadConfig(config) {
 	return {
-		type: types.LOAD_CONFIG,
+		type: LOAD_CONFIG,
 		payload: config
 	};
 }

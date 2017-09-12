@@ -1,4 +1,4 @@
-import { types } from 'actions';
+import { TOGGLE_BLOCK } from 'actions';
 
 const initialState = {
 	search: true,
@@ -8,7 +8,7 @@ const initialState = {
 
 export default function blockVisibilityReducer(state = initialState, action) {
 	switch (action.type) {
-		case types.TOGGLE_BLOCK:
+		case TOGGLE_BLOCK:
 			return { ...state, [action.payload]: !state[action.payload] };
 	}
 	

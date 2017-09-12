@@ -1,8 +1,8 @@
-import { types } from 'actions';
+import { SELECT_DATE, TOGGLE_DATEPICKER } from 'actions';
 
 export function selectDate(date, objectType) {
 	return {
-		type: types.SELECT_DATE,
+		type: SELECT_DATE,
 		objectType,
 		payload: {
 			date
@@ -12,7 +12,7 @@ export function selectDate(date, objectType) {
 
 export function toggleDatePicker(isActive, objectType) {
 	return {
-		type: types.TOGGLE_DATEPICKER,
+		type: TOGGLE_DATEPICKER,
 		objectType,
 		payload: {
 			objectType,

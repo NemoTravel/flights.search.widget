@@ -1,4 +1,4 @@
-import { types } from 'actions';
+import { ADD_PASSENGER, REMOVE_PASSENGER } from 'actions';
 import { combineReducers } from 'redux';
 import { filterReducer } from 'reducers';
 
@@ -10,10 +10,10 @@ const initialState = {
 
 function passengersReducer(state, { type, payload }) {
 	switch (type) {
-		case types.ADD_PASSENGER:
+		case ADD_PASSENGER:
 			return { ...state, count: state.count + 1 };
 			
-		case types.REMOVE_PASSENGER:
+		case REMOVE_PASSENGER:
 			return { ...state, count: state.count - 1 };
 	}
 	

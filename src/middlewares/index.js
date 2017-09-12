@@ -1,4 +1,4 @@
-import { types } from 'actions';
+import { SWITCH_AIRPORTS } from 'actions';
 import { selectAirport, changeAutocompleteInputValue } from 'actions/autocomplete';
 
 /**
@@ -8,7 +8,7 @@ import { selectAirport, changeAutocompleteInputValue } from 'actions/autocomplet
  * @param store
  */
 export const switchAirports = (store) => (next) => (action) => {
-	if (action.type === types.SWITCH_AIRPORTS) {
+	if (action.type === SWITCH_AIRPORTS) {
 		const 
 			state = store.getState(),
 			departureAirport = state.form.autocomplete.departure.airport,

@@ -1,4 +1,4 @@
-import { types } from 'actions';
+import { LOAD_CONFIG } from 'actions';
 
 const initialState = {
 	rootElement: null,
@@ -12,7 +12,7 @@ const initialState = {
 
 export default function system(state = initialState, action) {
 	switch (action.type) {
-		case types.LOAD_CONFIG:
+		case LOAD_CONFIG:
 			const newConfig = action.payload;
 			const newState = {};
 			

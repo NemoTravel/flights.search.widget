@@ -1,29 +1,36 @@
-import { types } from 'actions';
 import axios from 'axios';
+import { 
+	SWITCH_AIRPORTS, 
+	AUTOCOMPLETE_LOADING_STARTED, 
+	AUTOCOMPLETE_LOADING_FINISHED,
+	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
+	AUTOCOMPLETE_INPUT_VALUE_CHANGED,
+	AIRPORT_SELECTED
+} from 'actions';
 
 export function switchAirports() {
 	return {
-		type: types.SWITCH_AIRPORTS
+		type: SWITCH_AIRPORTS
 	};
 }
 
 export function startAutocompleteLoading(objectType) {
 	return {
-		type: types.AUTOCOMPLETE_LOADING_STARTED,
+		type: AUTOCOMPLETE_LOADING_STARTED,
 		objectType
 	};
 }
 
 export function finishAutocompleteLoading(objectType) {
 	return {
-		type: types.AUTOCOMPLETE_LOADING_FINISHED,
+		type: AUTOCOMPLETE_LOADING_FINISHED,
 		objectType
 	};
 }
 
 export function changeAutocompleteSuggestions(suggestions, objectType) {
 	return {
-		type: types.AUTOCOMPLETE_SUGGESTIONS_CHANGED,
+		type: AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 		objectType,
 		payload: {
 			suggestions
@@ -33,7 +40,7 @@ export function changeAutocompleteSuggestions(suggestions, objectType) {
 
 export function changeAutocompleteInputValue(value, objectType) {
 	return {
-		type: types.AUTOCOMPLETE_INPUT_VALUE_CHANGED,
+		type: AUTOCOMPLETE_INPUT_VALUE_CHANGED,
 		objectType,
 		payload: {
 			value
@@ -43,7 +50,7 @@ export function changeAutocompleteInputValue(value, objectType) {
 
 export function selectAirport(airport, objectType) {
 	return {
-		type: types.AIRPORT_SELECTED,
+		type: AIRPORT_SELECTED,
 		objectType,
 		payload: {
 			airport

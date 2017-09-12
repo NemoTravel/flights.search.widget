@@ -1,4 +1,4 @@
-import { types } from 'actions';
+import { TOGGLE_DATEPICKER, SELECT_DATE } from 'actions';
 import { combineReducers } from 'redux';
 import { filterReducer } from 'reducers';
 
@@ -9,10 +9,10 @@ const initialState = {
 
 function datesReducer(state, { type, payload }) {
 	switch (type) {
-		case types.TOGGLE_DATEPICKER:
+		case TOGGLE_DATEPICKER:
 			return { ...state, isActive: payload.isActive };
 
-		case types.SELECT_DATE:
+		case SELECT_DATE:
 			return { ...state, date: payload.date };
 	}
 
