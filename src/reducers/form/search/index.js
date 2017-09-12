@@ -2,6 +2,7 @@ import { types } from 'actions';
 import { combineReducers } from 'redux';
 import passengers from 'reducers/form/search/passengers';
 import dates from 'reducers/form/search/dates';
+import autocomplete from 'reducers/form/search/autocomplete';
 
 // So, here we have two similar blocks that should be handled with the only one reducer.
 // Departure block and the arrival block are absolutely identical, except the fact that
@@ -52,6 +53,7 @@ function searchReducer(state, { type, payload }) {
 export default combineReducers({
 	departure: departureSearchReducer,
 	arrival: arrivalSearchReducer,
+	autocomplete,
 	passengers,
 	dates
 });

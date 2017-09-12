@@ -1,8 +1,7 @@
 import React from 'react';
 import Block from 'components/VerticalForm/Block';
-import DepartureAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Departure';
-import ArrivalAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Arrival';
 import DatesContainer from 'components/VerticalForm/Block/Search/DatesContainer';
+import AutocompleteContainer from 'components/VerticalForm/Block/Search/AutocompleteContainer';
 import Passengers from 'components/VerticalForm/Block/Search/Passengers';
 
 export default class Search extends Block {
@@ -17,11 +16,7 @@ export default class Search extends Block {
 			</div>
 
 			<div className={this.getBodyClass()}>
-				<div className="form-group">
-					<DepartureAutocomplete/>
-					<ArrivalAutocomplete/>
-				</div>
-
+				<AutocompleteContainer/>
 				<DatesContainer/>
 				<Passengers/>
 
