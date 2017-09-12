@@ -36,12 +36,12 @@ function passenger(state, { type }) {
 }
 
 export default function passengersReducer(state = initialState, action) {
-	if (action.objectType) {
+	if (action.passengerType) {
 		return {
 			...state,
-			[action.objectType]: passenger(state[action.objectType], action)
+			[action.passengerType]: passenger(state[action.passengerType], action)
 		};
 	}
 
 	return state;
-};
+}

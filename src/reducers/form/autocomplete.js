@@ -5,17 +5,23 @@ import {
 	AUTOCOMPLETE_INPUT_VALUE_CHANGED,
 	AIRPORT_SELECTED
 } from 'actions';
-import { combineReducers } from 'redux';
-import { filterReducer } from 'reducers';
 
 const initialState = {
-	isLoading: false,
-	suggestions: [],
-	inputValue: '',
-	airport: null
+	departure: {
+		isLoading: false,
+		suggestions: [],
+		inputValue: '',
+		airport: null
+	},
+	arrival: {
+		isLoading: false,
+		suggestions: [],
+		inputValue: '',
+		airport: null
+	}
 };
 
-function autocompleteReducer(state, { type, payload }) {
+function autocomplete(state, { type, payload }) {
 	switch (type) {
 		case AUTOCOMPLETE_LOADING_STARTED:
 			return { ...state, isLoading: true };
@@ -36,7 +42,13 @@ function autocompleteReducer(state, { type, payload }) {
 	return state;
 }
 
-export default combineReducers({
-	departure: filterReducer('departure', autocompleteReducer, { ...initialState }),
-	arrival: filterReducer('arrival', autocompleteReducer, { ...initialState })
-});
+export default function autocompleteReducer(state = initialState, action) {
+	if (action.autocompleteType) {
+		return {
+			...state,
+			[action.autocompleteType]: autocomplete(state[action.autocompleteType], action)
+		};
+	}
+
+	return state;
+}

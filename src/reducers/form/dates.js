@@ -1,13 +1,17 @@
 import { TOGGLE_DATEPICKER, SELECT_DATE } from 'actions';
-import { combineReducers } from 'redux';
-import { filterReducer } from 'reducers';
 
 const initialState = {
-	isActive: true,
-	date: null
+	departure: {
+		isActive: true,
+		date: null
+	},
+	return: {
+		isActive: false,
+		date: null
+	}
 };
 
-function datesReducer(state, { type, payload }) {
+function date(state, { type, payload }) {
 	switch (type) {
 		case TOGGLE_DATEPICKER:
 			return { ...state, isActive: payload.isActive };
@@ -19,7 +23,13 @@ function datesReducer(state, { type, payload }) {
 	return state;
 }
 
-export default combineReducers({
-	departure: filterReducer('departure', datesReducer, { ...initialState }),
-	return: filterReducer('return', datesReducer, { ...initialState, isActive: false }),
-});
+export default function datesReducer(state = initialState, action) {
+	if (action.dateType) {
+		return {
+			...state,
+			[action.dateType]: date(state[action.dateType], action)
+		};
+	}
+
+	return state;
+}

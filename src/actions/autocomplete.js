@@ -14,55 +14,55 @@ export function switchAirports() {
 	};
 }
 
-export function startAutocompleteLoading(objectType) {
+export function startAutocompleteLoading(autocompleteType) {
 	return {
 		type: AUTOCOMPLETE_LOADING_STARTED,
-		objectType
+		autocompleteType
 	};
 }
 
-export function finishAutocompleteLoading(objectType) {
+export function finishAutocompleteLoading(autocompleteType) {
 	return {
 		type: AUTOCOMPLETE_LOADING_FINISHED,
-		objectType
+		autocompleteType
 	};
 }
 
-export function changeAutocompleteSuggestions(suggestions, objectType) {
+export function changeAutocompleteSuggestions(suggestions, autocompleteType) {
 	return {
 		type: AUTOCOMPLETE_SUGGESTIONS_CHANGED,
-		objectType,
+		autocompleteType,
 		payload: {
 			suggestions
 		}
 	};
 }
 
-export function changeAutocompleteInputValue(value, objectType) {
+export function changeAutocompleteInputValue(value, autocompleteType) {
 	return {
 		type: AUTOCOMPLETE_INPUT_VALUE_CHANGED,
-		objectType,
+		autocompleteType,
 		payload: {
 			value
 		}
 	};
 }
 
-export function selectAirport(airport, objectType) {
+export function selectAirport(airport, autocompleteType) {
 	return {
 		type: AIRPORT_SELECTED,
-		objectType,
+		autocompleteType,
 		payload: {
 			airport
 		}
 	};
 }
 
-export function sendAutocompleteRequest(searchText, objectType) {
+export function sendAutocompleteRequest(searchText, autocompleteType) {
 	return (dispatch, getState) => {
 		const state = getState();
 
-		dispatch(startAutocompleteLoading(objectType));
+		dispatch(startAutocompleteLoading(autocompleteType));
 
 		let url = `${state.system.API_URL}/guide/autocomplete/iata/${searchText}`;
 
@@ -82,17 +82,17 @@ export function sendAutocompleteRequest(searchText, objectType) {
 					const suggestions = iata.filter(({ IATA }) => IATA in airports).map(({ IATA }) => airports[IATA]);
 	
 					// Clear previous suggestions first (to avoid rendering collisions).
-					dispatch(changeAutocompleteSuggestions([], objectType));
-					dispatch(changeAutocompleteSuggestions(suggestions, objectType));
-					dispatch(finishAutocompleteLoading(objectType));
+					dispatch(changeAutocompleteSuggestions([], autocompleteType));
+					dispatch(changeAutocompleteSuggestions(suggestions, autocompleteType));
+					dispatch(finishAutocompleteLoading(autocompleteType));
 				}
 				else {
-					dispatch(finishAutocompleteLoading(objectType));
+					dispatch(finishAutocompleteLoading(autocompleteType));
 				}
 			})
 			.catch(() => {
-				dispatch(changeAutocompleteSuggestions([], objectType));
-				dispatch(finishAutocompleteLoading(objectType));
+				dispatch(changeAutocompleteSuggestions([], autocompleteType));
+				dispatch(finishAutocompleteLoading(autocompleteType));
 			});
 	};
 }

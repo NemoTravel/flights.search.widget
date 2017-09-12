@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import rootReducer from 'reducers';
 import { switchAirports } from 'middlewares';
 
@@ -15,6 +16,7 @@ export function getStore() {
 	return createStore(
 		rootReducer,
 		applyMiddleware(
+			logger,
 			thunk,
 			switchAirports
 		)
