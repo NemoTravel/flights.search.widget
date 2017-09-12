@@ -9,6 +9,8 @@ class DatesContainer extends Component {
 	render() {
 		const { departureDatepicker, returnDatepicker, locale } = this.props;
 		const { selectDate, toggleDatePicker } = this.props.actions;
+		const hightlightedDatesForDeparture = returnDatepicker.date ? [returnDatepicker.date] : [];
+		const hightlightedDatesForReturn = departureDatepicker.date ? [departureDatepicker.date] : [];
 		
 		return <div className="form-group row">
 			<DepartureDatepicker
@@ -17,6 +19,7 @@ class DatesContainer extends Component {
 				isActive={departureDatepicker.isActive}
 				maxDate={returnDatepicker.date}
 				selectDate={selectDate}
+				highlightDates={hightlightedDatesForDeparture}
 			/>
 			
 			<ReturnDatepicker
@@ -26,6 +29,7 @@ class DatesContainer extends Component {
 				minDate={departureDatepicker.date}
 				selectDate={selectDate}
 				toggleDatePicker={toggleDatePicker}
+				highlightDates={hightlightedDatesForReturn}
 			/>
 		</div>;
 	}

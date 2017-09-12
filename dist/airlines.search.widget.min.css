@@ -3476,7 +3476,7 @@
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day:hover {
   color: #fff;
-  background: #3FA9F5;
+  background: rgba(63, 169, 245, 0.6);
   border-radius: 0;
 }
 
@@ -3501,14 +3501,16 @@
   background: #fff;
 }
 
-.nemo-widget .nemo-ui-datepicker .react-datepicker__day--selected {
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day--selected,
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day--highlighted {
   color: #fff;
   background: #3FA9F5;
   border-radius: 0;
   font-weight: 400;
 }
 
-.nemo-widget .nemo-ui-datepicker .react-datepicker__day--selected:after {
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day--selected:after,
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day--highlighted:after {
   content: "";
   width: 0;
   height: 0;
@@ -3735,6 +3737,12 @@
   cursor: pointer;
 }
 
+.nemo-widget-form .nemo-widget-form__departure__date__col .react-datepicker__day--highlighted:after {
+  transform: translate(0, -50%) rotate(180deg);
+  right: 0;
+  left: auto;
+}
+
 .nemo-widget-form .nemo-widget-form__arrival {
   border-top: none;
   padding-right: 4.5rem;
@@ -3747,6 +3755,19 @@
 
 .nemo-widget-form .nemo-widget-form__return__date__col input {
   cursor: pointer;
+}
+
+.nemo-widget-form .nemo-widget-form__return__date__col .react-datepicker__day--selected:after,
+.nemo-widget-form .nemo-widget-form__return__date__col .react-datepicker__day:hover:after {
+  transform: translate(0, -50%) rotate(180deg);
+  right: 0;
+  left: auto;
+}
+
+.nemo-widget-form .nemo-widget-form__return__date__col .react-datepicker__day--highlighted:after {
+  transform: translate(0, -50%) rotate(0deg);
+  right: auto;
+  left: 0;
 }
 
 .nemo-widget-form .nemo-widget-form__input__wrapper {

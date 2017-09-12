@@ -86,6 +86,14 @@
 				input {
 					cursor: pointer;
 				}
+
+				.react-datepicker__day--highlighted {
+					&:after {
+						transform: translate(0, -50%) rotate(180deg);
+						right: 0;
+						left: auto;
+					}
+				}
 			}
 		}
 	}
@@ -103,6 +111,22 @@
 
 				input {
 					cursor: pointer;
+				}
+
+				.react-datepicker__day--selected, .react-datepicker__day:hover {
+					&:after {
+						transform: translate(0, -50%) rotate(180deg);
+						right: 0;
+						left: auto;
+					}
+				}
+
+				.react-datepicker__day--highlighted {
+					&:after {
+						transform: translate(0, -50%) rotate(0deg);
+						right: auto;
+						left: 0;
+					}
 				}
 			}
 		}
