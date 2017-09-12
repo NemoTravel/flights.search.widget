@@ -7,7 +7,7 @@ const initialState = {
 	date: null
 };
 
-function datesReducer(state = initialState, { type, payload }) {
+function datesReducer(state, { type, payload }) {
 	switch (type) {
 		case types.TOGGLE_DATEPICKER:
 			return { ...state, isActive: payload.isActive };
@@ -21,5 +21,5 @@ function datesReducer(state = initialState, { type, payload }) {
 
 export default combineReducers({
 	departure: filterReducer('departure', datesReducer, { ...initialState }),
-	return: filterReducer('return', datesReducer, { ...initialState }),
+	return: filterReducer('return', datesReducer, { ...initialState, isActive: false }),
 });

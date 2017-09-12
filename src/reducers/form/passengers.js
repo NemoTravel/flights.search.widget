@@ -1,42 +1,28 @@
 import { types } from 'actions';
+import { combineReducers } from 'redux';
+import { filterReducer } from 'reducers';
 
 const initialState = {
-	ADT: {
-		title: 'Взрослые (12+)',
-		code: 'ADT',
-		count: 1
-	},
-	CLD: {
-		title: 'Дети (2-11)',
-		code: 'CLD',
-		count: 0
-	},
-	INF: {
-		title: 'Младенцы (0-2)',
-		code: 'INF',
-		count: 0
-	},
-	INS: {
-		title: 'Младенцы с местом (0-2)',
-		code: 'INS',
-		count: 0
-	}
+	title: '',
+	code: '',
+	count: 0
 };
 
-export default function passengersReducer(state = { ...initialState }, { type, payload }) {
-	let newState = state;
-	
+function passengersReducer(state, { type, payload }) {
 	switch (type) {
 		case types.ADD_PASSENGER:
-			newState = { ...state };
-			newState[payload].count++;
-			return newState;
+			return { ...state, count: state.count + 1 };
 			
 		case types.REMOVE_PASSENGER:
-			newState = { ...state };
-			newState[payload].count--;
-			return newState;
+			return { ...state, count: state.count - 1 };
 	}
 	
 	return state;
 }
+
+export default combineReducers({
+	ADT: filterReducer('ADT', passengersReducer, { ...initialState, code: 'ADT', title: 'Взрослые (12+)', count: 1 }),
+	CLD: filterReducer('CLD', passengersReducer, { ...initialState, code: 'CLD', title: 'Дети (2-11)' }),
+	INF: filterReducer('INF', passengersReducer, { ...initialState, code: 'INF', title: 'Младенцы (0-2)' }),
+	INS: filterReducer('INS', passengersReducer, { ...initialState, code: 'INS', title: 'Младенцы с местом (0-2)' })
+});

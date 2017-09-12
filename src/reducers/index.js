@@ -21,7 +21,7 @@ import system from 'reducers/system';
  */
 export function filterReducer(objectType, reducer, defaultState) {
 	return (state = defaultState, action) => {
-		return action.payload && action.payload.objectType === objectType ? reducer(state, action) : state
+		return action.objectType === objectType ? reducer(state, action) : state
 	};
 }
 

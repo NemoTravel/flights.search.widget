@@ -1,15 +1,15 @@
 import { types } from 'actions';
 
-export function addPassenger(passType) {
+export function addPassenger(objectType) {
 	return {
 		type: types.ADD_PASSENGER,
-		payload: passType
+		objectType
 	};
 }
 
-export function removePassenger(passType) {
+export function removePassenger(objectType) {
 	return {
 		type: types.REMOVE_PASSENGER,
-		payload: passType
+		objectType
 	};
 }

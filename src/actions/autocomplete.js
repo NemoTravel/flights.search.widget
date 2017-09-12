@@ -10,22 +10,22 @@ export function switchAirports() {
 export function startAutocompleteLoading(objectType) {
 	return {
 		type: types.AUTOCOMPLETE_LOADING_STARTED,
-		payload: { objectType }
+		objectType
 	};
 }
 
 export function finishAutocompleteLoading(objectType) {
 	return {
 		type: types.AUTOCOMPLETE_LOADING_FINISHED,
-		payload: { objectType }
+		objectType
 	};
 }
 
 export function changeAutocompleteSuggestions(suggestions, objectType) {
 	return {
 		type: types.AUTOCOMPLETE_SUGGESTIONS_CHANGED,
+		objectType,
 		payload: {
-			objectType,
 			suggestions
 		}
 	};
@@ -34,8 +34,8 @@ export function changeAutocompleteSuggestions(suggestions, objectType) {
 export function changeAutocompleteInputValue(value, objectType) {
 	return {
 		type: types.AUTOCOMPLETE_INPUT_VALUE_CHANGED,
+		objectType,
 		payload: {
-			objectType,
 			value
 		}
 	};
@@ -44,8 +44,8 @@ export function changeAutocompleteInputValue(value, objectType) {
 export function selectAirport(airport, objectType) {
 	return {
 		type: types.AIRPORT_SELECTED,
+		objectType,
 		payload: {
-			objectType,
 			airport
 		}
 	};
