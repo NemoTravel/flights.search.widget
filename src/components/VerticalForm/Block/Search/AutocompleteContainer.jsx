@@ -18,8 +18,8 @@ class AutocompleteContainer extends Component {
 
 function mapStateToProps(state) {
 	return {
-		departureAutocomplete: state.form.search.departure,
-		arrivalAutocomplete: state.form.search.arrival,
+		departureAutocomplete: state.form.autocomplete.departure,
+		arrivalAutocomplete: state.form.autocomplete.arrival,
 		system: state.system
 	};
 }

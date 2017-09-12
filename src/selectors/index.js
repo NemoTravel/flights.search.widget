@@ -9,7 +9,7 @@ import { createSelector } from 'reselect';
  */
 
 function getPassengersConfig(state) {
-	return state.form.search.passengers;
+	return state.form.passengers;
 }
 
 function getConfig(state) {

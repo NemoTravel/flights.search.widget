@@ -34,8 +34,8 @@ class DatesContainer extends Component {
 function mapStateToProps(state) {
 	return {
 		locale: state.system.locale,
-		departureDatepicker: state.form.search.dates.departure,
-		returnDatepicker: state.form.search.dates.return
+		departureDatepicker: state.form.dates.departure,
+		returnDatepicker: state.form.dates.return
 	};
 }
 

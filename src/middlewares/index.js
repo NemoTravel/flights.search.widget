@@ -11,13 +11,13 @@ export const switchAirports = (store) => (next) => (action) => {
 	if (action.type === types.SWITCH_AIRPORTS) {
 		const 
 			state = store.getState(),
-			departureAirport = state.form.search.departure.airport,
-			arrivalAirport = state.form.search.arrival.airport;
+			departureAirport = state.form.autocomplete.departure.airport,
+			arrivalAirport = state.form.autocomplete.arrival.airport;
 
 		if (departureAirport || arrivalAirport) {
 			const 
-				departureInputValue = state.form.search.departure.inputValue,
-				arrivalInputValue = state.form.search.arrival.inputValue;
+				departureInputValue = state.form.autocomplete.departure.inputValue,
+				arrivalInputValue = state.form.autocomplete.arrival.inputValue;
 
 			next(selectAirport(departureAirport, 'arrival'));
 			next(selectAirport(arrivalAirport, 'departure'));
