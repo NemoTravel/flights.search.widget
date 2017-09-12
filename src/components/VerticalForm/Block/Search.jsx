@@ -2,7 +2,7 @@ import React from 'react';
 import Block from 'components/VerticalForm/Block';
 import DepartureAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Departure';
 import ArrivalAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Arrival';
-import Datepicker from 'components/VerticalForm/Block/Search/Datepicker';
+import DatesContainer from 'components/VerticalForm/Block/Search/DatesContainer';
 import Passengers from 'components/VerticalForm/Block/Search/Passengers';
 
 export default class Search extends Block {
@@ -11,9 +11,6 @@ export default class Search extends Block {
 	}
 	
 	render() {
-		const { state } = this.props;
-		const { selectDate, toggleDatePicker } = this.props.actions;
-		
 		return <div className="nemo-widget-form__block nemo-widget-form__block_search">
 			<div className={this.getHeaderClass()} onClick={this.toggleHandler}>
 				Купить авиабилеты
@@ -25,29 +22,8 @@ export default class Search extends Block {
 					<ArrivalAutocomplete/>
 				</div>
 
-				<div className="form-group row">
-					<Datepicker 
-						type="departure" 
-						selectDate={selectDate} 
-						maxDate={state.arrival.date}
-						state={state.departure} 
-						placeholder="Вылет туда"
-					/>
-					
-					<Datepicker 
-						type="arrival" 
-						toggleDatePicker={toggleDatePicker} 
-						selectDate={selectDate} 
-						minDate={state.departure.date}
-						state={state.arrival}
-						popperPlacement="top-end"
-						placeholder="Обратно"
-					/>
-				</div>
-
-				<div className="form-group">
-					<Passengers/>
-				</div>
+				<DatesContainer/>
+				<Passengers/>
 
 				<div className="form-group nemo-widget-form__pseudoBlocks">
 					<a href="#" className="nemo-ui-pseudoLink">У меня есть купон на скидку</a>

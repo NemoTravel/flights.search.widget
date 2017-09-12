@@ -3,39 +3,53 @@ import NemoDatepicker from 'components/UI/Datepicker';
 import moment from 'moment';
 
 export default class Datepicker extends Component {
+	get type() { return null; }
+	get placeholder() { return ''; }
+	get popperPlacement() { return null; }
+	
 	constructor(props) {
 		super(props);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 	}
 
 	/**
-	 * Select date
+	 * Select date.
 	 * 
 	 * @param {Moment} date
 	 */
 	onChangeHandler(date) {
-		this.props.selectDate(date, this.props.type);
+		this.props.selectDate(date, this.type);
 	}
 	
 	render() {
-		const 
-			{ placeholder, type, state, toggleDatePicker, selectDate, popperPlacement, minDate:minDateProp, maxDate:maxDateProp } = this.props;
+		const { 
+		  	toggleDatePicker, 
+		  	selectDate,
+			locale,
+			date,
+			isActive,
+		  	minDate:minDateProp, 
+		  	maxDate:maxDateProp, 
+		  	highlightDates = [] 
+		} = this.props;
 		
 		let minDate = minDateProp ? minDateProp : moment();
 		let maxDate = maxDateProp ? maxDateProp : moment().add(1, 'years');
 
-		return <div className={`col nemo-widget-form__${type}__date__col`}>
+		return <div className={`col nemo-widget-form__${this.type}__date__col`}>
 			<NemoDatepicker 
-				type={type}
-				isActive={state.isDatepickerActive} 
+				type={this.type}
+				isActive={isActive} 
 				onChange={this.onChangeHandler} 
-				date={state.date}
+				locale={locale}
+				date={date}
 				minDate={minDate} 
 				maxDate={maxDate}
+				highlightDates={highlightDates}
 				toggleDatePicker={toggleDatePicker}
 				selectDate={selectDate}
-				popperPlacement={popperPlacement}
-				inputProps={{ placeholder }}
+				popperPlacement={this.popperPlacement}
+				inputProps={{ placeholder: this.placeholder }}
 			/>
 		</div>;
 	}

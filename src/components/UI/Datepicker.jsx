@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
-import { connect } from 'react-redux';
 
-class Datepicker extends Component {
+export default class Datepicker extends Component {
 	constructor(props) {
 		super(props);
 		
@@ -87,11 +86,11 @@ class Datepicker extends Component {
 	}
 	
 	render() {
-		const { date, system, isActive } = this.props;
+		const { date, locale, isActive } = this.props;
 		
 		return <DatePicker
 			disabled={!isActive}
-			locale={system.locale}
+			locale={locale}
 			dropdownMode="scroll"
 			showMonthDropdown={false}
 			customInput={this.renderCustomInput()}
@@ -104,5 +103,3 @@ class Datepicker extends Component {
 		/>;
 	}
 }
-
-export default connect(({ system }) => { return { system }; })(Datepicker);

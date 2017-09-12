@@ -93,12 +93,14 @@
 	& &__arrival {
 		border-top: none;
 		padding-right: 4.5rem;
+	}
 
+	& &__return {
 		&__date {
 			&__col {
 				position: static;
 				padding-left: 0.5rem;
-				
+
 				input {
 					cursor: pointer;
 				}

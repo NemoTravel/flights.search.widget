@@ -51,7 +51,7 @@ class Passengers extends Component {
 	}
 	
 	render() {
-		return <div className="nemo-widget-form-passengers">
+		return <div className="form-group nemo-widget-form-passengers">
 			<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
 		</div>;
 	}

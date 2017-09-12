@@ -3740,12 +3740,12 @@
   padding-right: 4.5rem;
 }
 
-.nemo-widget-form .nemo-widget-form__arrival__date__col {
+.nemo-widget-form .nemo-widget-form__return__date__col {
   position: static;
   padding-left: 0.5rem;
 }
 
-.nemo-widget-form .nemo-widget-form__arrival__date__col input {
+.nemo-widget-form .nemo-widget-form__return__date__col input {
   cursor: pointer;
 }
 

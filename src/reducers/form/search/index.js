@@ -1,45 +1,24 @@
 import { types } from 'actions';
 import { combineReducers } from 'redux';
 import passengers from 'reducers/form/search/passengers';
+import dates from 'reducers/form/search/dates';
 
 // So, here we have two similar blocks that should be handled with the only one reducer.
 // Departure block and the arrival block are absolutely identical, except the fact that
 // the arrival block has datepicker disabled by default.
 const initialState = {
 	isLoading: false,
-	isDatepickerActive: true,
 	suggestions: [],
 	inputValue: '',
-	airport: null,
-	date: null
+	airport: null
 };
 
-/**
- * @param state
- * @param action
- * @returns {*}
- */
 function departureSearchReducer(state = initialState, action) {
-	if (action.payload && action.payload.fieldType === 'departure') {
-		return searchReducer(state, action);
-	}
-	
-	return state;
+	return action.payload && action.payload.fieldType === 'departure' ? searchReducer(state, action) : state;
 }
 
-/**
- * Note that we set `isDatepickerActive` to `false` in the initial state.
- * 
- * @param state
- * @param action
- * @returns {*}
- */
-function arrivalSearchReducer(state = {...initialState, isDatepickerActive: false }, action) {
-	if (action.payload && action.payload.fieldType === 'arrival') {
-		return searchReducer(state, action);
-	}
-	
-	return state;
+function arrivalSearchReducer(state = {...initialState }, action) {
+	return action.payload && action.payload.fieldType === 'arrival' ? searchReducer(state, action) : state;
 }
 
 /**
@@ -47,16 +26,10 @@ function arrivalSearchReducer(state = {...initialState, isDatepickerActive: fals
  * Every action has a `fieldType` (`arrival` or `departure`) property in it's payload, 
  * so the functions above can decide which reducer to use with the dispatched action.
  * 
- * @param state
- * @param type
- * @param payload
- * @returns {*}
+ * This solution should be used across the whole application.
  */
 function searchReducer(state, { type, payload }) {
 	switch (type) {
-		case types.TOGGLE_DATEPICKER:
-			return { ...state, isDatepickerActive: payload.isActive };
-
 		case types.AUTOCOMPLETE_LOADING_STARTED:
 			return { ...state, isLoading: true };
 
@@ -71,9 +44,6 @@ function searchReducer(state, { type, payload }) {
 
 		case types.AIRPORT_SELECTED:
 			return { ...state, airport: payload.airport };
-
-		case types.DATE_SELECTED:
-			return { ...state, date: payload.date };
 	}
 
 	return state;
@@ -82,5 +52,6 @@ function searchReducer(state, { type, payload }) {
 export default combineReducers({
 	departure: departureSearchReducer,
 	arrival: arrivalSearchReducer,
-	passengers
+	passengers,
+	dates
 });
