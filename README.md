@@ -1,6 +1,48 @@
 # Airlines Search Widget
 
-### Команды для разработки
+## Установка виджета
+
+Для работы виджета необходимо любым удобным способом подключить на страницу файлы из папки `dist`:
+* файл стилизации виджета: `airlines.search.widget.min.css`
+* файл с JavaScript-кодом виджета: `airlines.search.widget.min.js`
+* в той же папке, где будет расположен файл стилизации, следует разместить папку `images`, необходимую для корректного отображения изображений
+
+## Инициализация виджета на странице
+
+При подключении файла `airlines.search.widget.min.js`, на странице становится доступен JavaScript-объект `AirlinesSearchWidget` с единственным методом `init`, запускающим инициализацию виджета:
+
+```html
+<div id="root"></div>
+<link rel="stylesheet" href="airlines.search.widget.min.css">
+<script src="airlines.search.widget.min.js"></script>
+<script>
+    AirlinesSearchWidget.init({
+        API_URL: 'http://widget.mlsd.ru/api',
+        rootElement: document.getElementById('root'),
+        showAirportIATA: true,
+        enableInfantsWithSeats: true,
+        locale: 'ru'
+    });
+</script>
+```
+
+Также, пример инициализации виджета приведен в файле `/dist/index.html`.
+
+## Конфигурация
+
+В метод `init` передается объект конфигурации виджета. Возможные параметры конфигурации:
+
+| Название параметра | Обязательный параметр | Тип значения | Значение по умолчанию | Описание |
+| :- | :- | :- | :- | :- |
+| **API_URL** | **да** | `string` | - | Адрес для API запросов |
+| **rootElement** | **да** | `HTMLElement` | - | DOM-элемент в который будет встраиваться виджет |
+| enableInfantsWithSeats | - | `boolean` | `false` | Позволять выбирать на форме поиска младенцев с местом в качестве пассажиров |
+| locale | - | `string` | `"en"` | Язык интерфейса |
+| readOnlyAutocomplete | - | `boolean` | `false` | Запретить ввод текста в поля автокомплита аэропортов (рекомендуется использовать вместе с параметром `routingGrid`) |
+| routingGrid | - | `string` | `null` | Двухбуквенный IATA-код авиакомпании. Если указан, автокомплит аэропортов переключается в режим поиска по маршрутной сетке авиакомпании. Также, при клике в поле автокомплита, отображаются все возможные пункты назначений авиакомпании. |
+| showAirportIATA | - | `boolean` | `false` | Отображать в поле автокомплита IATA-код выбранного аэропорта |
+
+## Команды для разработки
 
 * `npm run build` — генерирует минифицированные CSS и JavaScript пакеты в папку `/dist/`
 * `npm run build-dev` — генерирует полноразмерные CSS и JavaScript пакеты, и Webpack начинает отслеживать изменения в файлах (`watch: true`)
