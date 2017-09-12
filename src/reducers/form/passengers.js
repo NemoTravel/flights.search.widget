@@ -23,7 +23,7 @@ const initialState = {
 	}
 };
 
-export default function passengersReducer(state = initialState, { type, payload }) {
+export default function passengersReducer(state = { ...initialState }, { type, payload }) {
 	let newState = state;
 	
 	switch (type) {

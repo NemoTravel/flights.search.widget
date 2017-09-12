@@ -1,5 +1,6 @@
 import { types } from 'actions';
 import { combineReducers } from 'redux';
+import { filterReducer } from 'reducers';
 
 const initialState = {
 	isLoading: false,
@@ -7,14 +8,6 @@ const initialState = {
 	inputValue: '',
 	airport: null
 };
-
-function departureAutocompleteReducer(state = initialState, action) {
-	return action.payload && action.payload.fieldType === 'departure' ? autocompleteReducer(state, action) : state;
-}
-
-function arrivalAutocompleteReducer(state = {...initialState }, action) {
-	return action.payload && action.payload.fieldType === 'arrival' ? autocompleteReducer(state, action) : state;
-}
 
 function autocompleteReducer(state, { type, payload }) {
 	switch (type) {
@@ -38,6 +31,6 @@ function autocompleteReducer(state, { type, payload }) {
 }
 
 export default combineReducers({
-	departure: departureAutocompleteReducer,
-	arrival: arrivalAutocompleteReducer
+	departure: filterReducer('departure', autocompleteReducer, { ...initialState }),
+	arrival: filterReducer('arrival', autocompleteReducer, { ...initialState })
 });

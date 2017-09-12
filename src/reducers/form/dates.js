@@ -1,18 +1,11 @@
 import { types } from 'actions';
 import { combineReducers } from 'redux';
+import { filterReducer } from 'reducers';
 
 const initialState = {
 	isActive: true,
 	date: null
 };
-
-function departureDateReducer(state = initialState, action) {
-	return action.payload && action.payload.fieldType === 'departure' ? datesReducer(state, action) : state;
-}
-
-function returnDateReducer(state = {...initialState, isActive: false }, action) {
-	return action.payload && action.payload.fieldType === 'return' ? datesReducer(state, action) : state;
-}
 
 function datesReducer(state = initialState, { type, payload }) {
 	switch (type) {
@@ -27,6 +20,6 @@ function datesReducer(state = initialState, { type, payload }) {
 }
 
 export default combineReducers({
-	departure: departureDateReducer,
-	return: returnDateReducer,
+	departure: filterReducer('departure', datesReducer, { ...initialState }),
+	return: filterReducer('return', datesReducer, { ...initialState }),
 });

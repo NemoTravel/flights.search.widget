@@ -1,20 +1,20 @@
 import { types } from 'actions';
 
-export function selectDate(date, fieldType) {
+export function selectDate(date, objectType) {
 	return {
 		type: types.SELECT_DATE,
 		payload: {
-			fieldType,
+			objectType,
 			date
 		}
 	};
 }
 
-export function toggleDatePicker(isActive, fieldType) {
+export function toggleDatePicker(isActive, objectType) {
 	return {
 		type: types.TOGGLE_DATEPICKER,
 		payload: {
-			fieldType,
+			objectType,
 			isActive
 		}
 	};
