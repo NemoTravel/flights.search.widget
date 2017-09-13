@@ -1,8 +1,15 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
 import rootReducer from 'reducers';
 import { switchAirports } from 'middlewares';
+
+let middlewares = [thunk, switchAirports];
+
+// Include redux-logger in development mode.
+if (process.env.NODE_ENV !== 'production') {
+	const logger = require('redux-logger').default;
+	middlewares.push(logger);
+}
 
 /**
  * Create Redux-store.
@@ -15,10 +22,6 @@ export function getStore() {
 
 	return createStore(
 		rootReducer,
-		applyMiddleware(
-			logger,
-			thunk,
-			switchAirports
-		)
+		applyMiddleware(...middlewares)
 	);
 }

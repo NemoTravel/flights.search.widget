@@ -8,7 +8,7 @@ import ReturnDatepicker from 'components/VerticalForm/Block/Search/Datepicker/Re
 class DatesContainer extends Component {
 	render() {
 		const { departureDatepicker, returnDatepicker, locale } = this.props;
-		const { selectDate, toggleDatePicker } = this.props.actions;
+		const { datepickerChange, toggleDatePicker } = this.props.actions;
 		const hightlightedDatesForDeparture = returnDatepicker.date ? [returnDatepicker.date] : [];
 		const hightlightedDatesForReturn = departureDatepicker.date ? [departureDatepicker.date] : [];
 		
@@ -17,8 +17,7 @@ class DatesContainer extends Component {
 				locale={locale}
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}
-				maxDate={returnDatepicker.date}
-				selectDate={selectDate}
+				datepickerChange={datepickerChange}
 				highlightDates={hightlightedDatesForDeparture}
 			/>
 			
@@ -26,8 +25,7 @@ class DatesContainer extends Component {
 				locale={locale}
 				date={returnDatepicker.date}
 				isActive={returnDatepicker.isActive}
-				minDate={departureDatepicker.date}
-				selectDate={selectDate}
+				datepickerChange={datepickerChange}
 				toggleDatePicker={toggleDatePicker}
 				highlightDates={hightlightedDatesForReturn}
 			/>

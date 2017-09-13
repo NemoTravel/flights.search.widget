@@ -18,13 +18,13 @@ export default class Datepicker extends Component {
 	 * @param {Moment} date
 	 */
 	onChangeHandler(date) {
-		this.props.selectDate(date, this.type);
+		this.props.datepickerChange(date, this.type);
 	}
 	
 	render() {
 		const { 
-		  	toggleDatePicker, 
-		  	selectDate,
+		  	toggleDatePicker,
+		  	datepickerChange,
 			locale,
 			date,
 			isActive,
@@ -47,7 +47,7 @@ export default class Datepicker extends Component {
 				maxDate={maxDate}
 				highlightDates={highlightDates}
 				toggleDatePicker={toggleDatePicker}
-				selectDate={selectDate}
+				datepickerChange={datepickerChange}
 				popperPlacement={this.popperPlacement}
 				inputProps={{ placeholder: this.placeholder }}
 			/>

@@ -42,7 +42,7 @@ export default class Datepicker extends Component {
 	disable() {
 		if (this.props.toggleDatePicker && this.props.isActive) {
 			this.props.toggleDatePicker(false, this.props.type);
-			this.props.selectDate(null, this.props.type);
+			this.props.datepickerChange(null, this.props.type);
 		}
 	}
 

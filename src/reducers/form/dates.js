@@ -1,11 +1,14 @@
 import { TOGGLE_DATEPICKER, SELECT_DATE } from 'actions';
 
+export const DEPARTURE_DATE_TYPE = 'departure';
+export const RETURN_DATE_TYPE = 'return';
+
 const initialState = {
-	departure: {
+	[DEPARTURE_DATE_TYPE]: {
 		isActive: true,
 		date: null
 	},
-	return: {
+	[RETURN_DATE_TYPE]: {
 		isActive: false,
 		date: null
 	}

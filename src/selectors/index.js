@@ -37,15 +37,7 @@ export const getPassengersArray = createSelector(
 
 export const getTotalPassengersCount = createSelector(
 	[ getPassengersArray ],
-	(passengersArray = []) => {
-		let result = 0;
-
-		passengersArray.map((passenger) => {
-			result += parseInt(passenger.count);
-		});
-
-		return result;
-	}
+	(passengersArray = []) => passengersArray.reduce((result, passenger) => result + parseInt(passenger.count), 0)
 );
 
 export const getPassengersTitle = createSelector(
