@@ -30,7 +30,7 @@ export function datepickerChange(date, dateType) {
 			let anotherDate = getDateByType(state, DEPARTURE_DATE_TYPE);
 
 			if (anotherDate && anotherDate.isAfter(date)) {
-				dispatch(selectDate(null, DEPARTURE_DATE_TYPE));
+				dispatch(selectDate(date, DEPARTURE_DATE_TYPE));
 			}
 		}
 

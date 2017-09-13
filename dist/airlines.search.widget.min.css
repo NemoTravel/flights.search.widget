@@ -3459,6 +3459,10 @@
   text-transform: capitalize;
 }
 
+.nemo-widget .nemo-ui-datepicker .react-datepicker__week {
+  margin-bottom: 2px;
+}
+
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day {
   color: #666;
   position: relative;
@@ -3466,6 +3470,7 @@
   height: 2rem;
   line-height: 2rem;
   margin: 0;
+  transition: background 0.2s cubic-bezier(0.27, 0.67, 0.28, 0.87);
 }
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day-name {
@@ -3493,17 +3498,20 @@
   color: #ccc;
 }
 
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day:hover {
+  background: rgba(63, 169, 245, 0.3);
+  border-radius: 0;
+}
+
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day--highlighted {
-  color: #fff;
-  background: rgba(63, 169, 245, 0.5);
+  color: #3fa9f5;
+  background: rgba(63, 169, 245, 0.2);
   border-radius: 0;
   font-weight: 400;
 }
 
-.nemo-widget .nemo-ui-datepicker .react-datepicker__day:hover {
-  color: #fff;
-  background: #3fa9f5;
-  border-radius: 0;
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day--highlighted:hover {
+  background: rgba(63, 169, 245, 0.4);
 }
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day--disabled {
@@ -3974,6 +3982,7 @@
 .nemo-widget-form__date_disabled {
   background: #F2F2F2 !important;
   border-color: #F2F2F2 !important;
+  transition: background 0.2s cubic-bezier(0.27, 0.67, 0.28, 0.87) !important;
 }
 
 .nemo-widget-form__date_disabled:hover {

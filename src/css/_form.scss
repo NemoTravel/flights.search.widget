@@ -349,6 +349,7 @@
 		&_disabled {
 			background: #F2F2F2 !important;
 			border-color: #F2F2F2 !important;
+			transition: background 0.2s $transition-function !important;
 			
 			&:hover {
 				background: #E6E6E6 !important;

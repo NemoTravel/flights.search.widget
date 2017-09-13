@@ -1,3 +1,5 @@
+@import "../variables";
+
 .nemo-ui-datepicker {
 	border-radius: 0;
 	box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
@@ -55,6 +57,10 @@
 			}
 		}
 		
+		&__week {
+			margin-bottom: 2px;
+		}
+		
 		&__day {
 			color: #666;
 			position: relative;
@@ -62,6 +68,7 @@
 			height: 2rem;
 			line-height: 2rem;
 			margin: 0;
+			transition: background 0.2s $transition-function;
 			
 			&-name {
 				color: #ccc;
@@ -87,23 +94,26 @@
 				color: #ccc;
 			}
 
+			&:hover {
+				background: rgba(63, 169, 245, 0.3);
+				border-radius: 0;
+			}
+
 			&--highlighted {
-				color: #fff;
-				background: rgba(63, 169, 245, 0.5);
+				color: rgba(63, 169, 245, 1);
+				background: rgba(63, 169, 245, 0.2);
 				border-radius: 0;
 				font-weight: 400;
+
+				&:hover {
+					background: rgba(63, 169, 245, 0.4);
+				}
 			}
 
 			&--selected {
 				@extend .nemo-ui-datepicker__specialDay;
 			}
 
-			&:hover {
-				color: #fff;
-				background: rgba(63, 169, 245, 1);
-				border-radius: 0;
-			}
-			
 			&--disabled {
 				color: #ccc;
 
