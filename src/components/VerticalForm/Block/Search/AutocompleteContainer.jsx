@@ -6,13 +6,35 @@ import DepartureAutocomplete from 'components/VerticalForm/Block/Search/Autocomp
 import ArrivalAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Arrival';
 
 class AutocompleteContainer extends Component {
+	constructor(props) {
+		super(props);
+		
+		this.getArrivalRef = this.getArrivalRef.bind(this);
+	}
+	
+	getArrivalRef(input) { 
+		this.arrivalInput = input; 
+	}
+	
 	render() {
 		const { departureAutocomplete, arrivalAutocomplete, system } = this.props;
+		let originalSelectAirport = this.props.actions.selectAirport;
+		
+		// Focus next autocomplete field after selecting the airport.
+		const selectAirport = (airport, autocompleteType) => {
+			originalSelectAirport(airport, autocompleteType);
+			
+			if (autocompleteType === 'departure') {
+				this.arrivalInput.focus();
+			}
+		};
+		
+		const actions = { ...this.props.actions, selectAirport };
 		
 		return <div className="form-group">
-			<DepartureAutocomplete state={departureAutocomplete} system={system} {...this.props.actions}/>
-			<ArrivalAutocomplete state={arrivalAutocomplete} system={system} {...this.props.actions}/>
-		</div>;
+			<DepartureAutocomplete state={departureAutocomplete} system={system} {...actions}/>
+			<ArrivalAutocomplete state={arrivalAutocomplete} system={system} {...actions} getRef={this.getArrivalRef}/>
+		</div>
 	}
 }
 

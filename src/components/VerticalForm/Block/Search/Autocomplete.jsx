@@ -43,14 +43,13 @@ export default class Autocomplete extends Component {
 	 * @param value
 	 */
 	fetchSuggestions({ value }) {
-		const { sendAutocompleteRequest, state, system } = this.props;
+		const { sendAutocompleteRequest, system } = this.props;
 		const searchText = value;
 		
-		// Do not load routing grid twice.
-		if (!system.routingGrid || !state.suggestions.length) {
+		if (searchText || system.routingGrid) {
 			// We don't want to harass servers too much.
 			clearTimeout(this.autocompleteTimeout);
-
+			
 			// So we send request only if user hasn't been typing something for a while.
 			this.autocompleteTimeout = setTimeout(() => {
 				sendAutocompleteRequest(searchText, this.type);
@@ -127,7 +126,15 @@ export default class Autocomplete extends Component {
 	 * @returns {XML}
 	 */
 	renderInputField(inputProps) {
-		return <input type="text" {...inputProps} ref={input => this.inputField = input} />
+		const getRef = (input) => {
+			this.inputField = input;
+			
+			if (this.props.getRef) {
+				this.props.getRef(input);
+			}
+		};
+		
+		return <input type="text" {...inputProps} ref={getRef} />
 	}
 
 	/**
@@ -159,7 +166,7 @@ export default class Autocomplete extends Component {
 				onSuggestionSelected={this.selectSuggestion}
 				focusInputOnSuggestionClick={false}
 				shouldRenderSuggestions={(value) => {
-					return config.routingGrid || (value && (!state.airport || state.airport.name !== value));
+					return config.routingGrid || (value && value.length > 1);
 				}}
 				renderInputComponent={this.renderInputField}
 				inputProps={{
@@ -168,8 +175,7 @@ export default class Autocomplete extends Component {
 					readOnly: config.readOnlyAutocomplete,
 					placeholder: this.placeholder,
 					value: state.inputValue,
-					onChange: this.onChangeHandler,
-					onFocus: this.clearAirport
+					onChange: this.onChangeHandler
 				}}
 			/>
 			
