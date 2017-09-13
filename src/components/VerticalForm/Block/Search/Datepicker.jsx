@@ -25,6 +25,7 @@ export default class Datepicker extends Component {
 		const { 
 		  	toggleDatePicker,
 		  	datepickerChange,
+		  	getRef,
 			locale,
 			date,
 			isActive,
@@ -45,6 +46,7 @@ export default class Datepicker extends Component {
 				date={date}
 				minDate={minDate} 
 				maxDate={maxDate}
+				getRef={getRef}
 				highlightDates={highlightDates}
 				toggleDatePicker={toggleDatePicker}
 				datepickerChange={datepickerChange}

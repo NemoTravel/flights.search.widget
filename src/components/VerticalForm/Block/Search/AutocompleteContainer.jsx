@@ -20,7 +20,7 @@ class AutocompleteContainer extends Component {
 		const { departureAutocomplete, arrivalAutocomplete, system } = this.props;
 		let originalSelectAirport = this.props.actions.selectAirport;
 		
-		// Focus next autocomplete field after selecting the airport.
+		// Focus arrival autocomplete field after selecting the departure airport.
 		const selectAirport = (airport, autocompleteType) => {
 			originalSelectAirport(airport, autocompleteType);
 			

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
+import classnames from 'classnames';
 
 export default class Datepicker extends Component {
 	constructor(props) {
@@ -52,17 +53,24 @@ export default class Datepicker extends Component {
 	 * @returns {XML}
 	 */
 	renderCustomInput() {
-		const { inputProps, date, isActive, toggleDatePicker } = this.props;
+		const { inputProps, date, isActive, toggleDatePicker, getRef:getRefProp } = this.props;
 		let formattedDate = '',
-			className = 'form-control nemo-widget-form__date';
-		
-		if (!isActive) {
-			className += ' nemo-widget-form__date_disabled';
-		}
+			className = classnames(
+				'form-control nemo-widget-form__date',
+				{ 'nemo-widget-form__date_disabled': !isActive }
+			);
 		
 		if (date) {
 			formattedDate = date.format(Datepicker.dateFormat);
 		}
+		
+		const getRef = (input) => {
+			this.inputField = input;
+			
+			if (getRefProp) {
+				getRefProp(input);
+			}
+		};
 		
 		return <div className="nemo-widget-form__input__wrapper">
 			<input 
@@ -71,7 +79,7 @@ export default class Datepicker extends Component {
 				readOnly={true} 
 				spellCheck={false} 
 				value={formattedDate} 
-				ref={input => this.inputField = input}
+				ref={getRef}
 				{...inputProps}
 			/>
 			

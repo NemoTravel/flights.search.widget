@@ -6,11 +6,29 @@ import DepartureDatepicker from 'components/VerticalForm/Block/Search/Datepicker
 import ReturnDatepicker from 'components/VerticalForm/Block/Search/Datepicker/Return';
 
 class DatesContainer extends Component {
+	constructor(props) {
+		super(props);
+		this.getReturnRef = this.getReturnRef.bind(this);
+	}
+	
+	getReturnRef(input) {
+		this.returnInput = input;
+	}
+	
 	render() {
 		const { departureDatepicker, returnDatepicker, locale } = this.props;
-		const { datepickerChange, toggleDatePicker } = this.props.actions;
+		const { datepickerChange:originalDatepickerChange, toggleDatePicker } = this.props.actions;
 		const hightlightedDatesForDeparture = returnDatepicker.date ? [returnDatepicker.date] : [];
 		const hightlightedDatesForReturn = departureDatepicker.date ? [departureDatepicker.date] : [];
+		
+		// Open return datepicker after selecting the departure date.
+		const datepickerChange = (date, dateType) => {
+			originalDatepickerChange(date, dateType);
+			
+			if (dateType === 'departure') {
+				this.returnInput.focus();
+			}
+		};
 		
 		return <div className="form-group row">
 			<DepartureDatepicker
@@ -28,6 +46,7 @@ class DatesContainer extends Component {
 				datepickerChange={datepickerChange}
 				toggleDatePicker={toggleDatePicker}
 				highlightDates={hightlightedDatesForReturn}
+				getRef={this.getReturnRef}
 			/>
 		</div>;
 	}
