@@ -3410,6 +3410,14 @@
   border-bottom-color: #bbb;
 }
 
+.nemo-widget .nemo-ui-datepicker__specialDay,
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day--selected {
+  color: #fff !important;
+  background: #3fa9f5 !important;
+  border-radius: 0 !important;
+  font-weight: 400 !important;
+}
+
 .nemo-widget .nemo-ui-datepicker .react-datepicker__triangle {
   display: none;
 }
@@ -3457,7 +3465,7 @@
   width: 2.3rem;
   height: 2rem;
   line-height: 2rem;
-  margin: 1px;
+  margin: 0;
 }
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day-name {
@@ -3471,13 +3479,7 @@
   width: 2.3rem;
   height: 2rem;
   line-height: 2rem;
-  margin: 1px;
-}
-
-.nemo-widget .nemo-ui-datepicker .react-datepicker__day:hover {
-  color: #fff;
-  background: rgba(63, 169, 245, 0.6);
-  border-radius: 0;
+  margin: 0;
 }
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day--today,
@@ -3487,27 +3489,21 @@
   background: #fff;
 }
 
-.nemo-widget .nemo-ui-datepicker .react-datepicker__day--selected,
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day--outside-month {
+  color: #ccc;
+}
+
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day--highlighted {
   color: #fff;
-  background: #3FA9F5;
+  background: rgba(63, 169, 245, 0.5);
   border-radius: 0;
   font-weight: 400;
 }
 
-.nemo-widget .nemo-ui-datepicker .react-datepicker__day--selected:after,
-.nemo-widget .nemo-ui-datepicker .react-datepicker__day--highlighted:after {
-  content: "";
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 6px 0 6px 6px;
-  border-color: transparent transparent transparent #fff;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translate(0, -50%);
-  transition: opacity, 450ms, ease;
+.nemo-widget .nemo-ui-datepicker .react-datepicker__day:hover {
+  color: #fff;
+  background: #3fa9f5;
+  border-radius: 0;
 }
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day--disabled {
@@ -3517,10 +3513,6 @@
 .nemo-widget .nemo-ui-datepicker .react-datepicker__day--disabled:hover {
   color: #ccc;
   background: #fff;
-}
-
-.nemo-widget .nemo-ui-datepicker .react-datepicker__day--outside-month {
-  color: #ccc;
 }
 
 .nemo-widget .nemo-ui-dropdown__content_hidden {

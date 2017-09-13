@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as datesActions from 'actions/dates';
 import DepartureDatepicker from 'components/VerticalForm/Block/Search/Datepicker/Departure';
 import ReturnDatepicker from 'components/VerticalForm/Block/Search/Datepicker/Return';
+import { getDatesBetweenDepartureAndReturn } from 'selectors';
 
 class DatesContainer extends Component {
 	constructor(props) {
@@ -18,8 +19,6 @@ class DatesContainer extends Component {
 	render() {
 		const { departureDatepicker, returnDatepicker, locale } = this.props;
 		const { datepickerChange:originalDatepickerChange, toggleDatePicker } = this.props.actions;
-		const hightlightedDatesForDeparture = returnDatepicker.date ? [returnDatepicker.date] : [];
-		const hightlightedDatesForReturn = departureDatepicker.date ? [departureDatepicker.date] : [];
 		
 		// Open return datepicker after selecting the departure date.
 		const datepickerChange = (date, dateType) => {
@@ -36,7 +35,8 @@ class DatesContainer extends Component {
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}
 				datepickerChange={datepickerChange}
-				highlightDates={hightlightedDatesForDeparture}
+				highlightDates={this.props.datesBetweenDepartureAndReturn}
+				specialDate={returnDatepicker.date}
 			/>
 			
 			<ReturnDatepicker
@@ -45,8 +45,9 @@ class DatesContainer extends Component {
 				isActive={returnDatepicker.isActive}
 				datepickerChange={datepickerChange}
 				toggleDatePicker={toggleDatePicker}
-				highlightDates={hightlightedDatesForReturn}
+				highlightDates={this.props.datesBetweenDepartureAndReturn}
 				getRef={this.getReturnRef}
+				specialDate={departureDatepicker.date}
 			/>
 		</div>;
 	}
@@ -56,7 +57,8 @@ function mapStateToProps(state) {
 	return {
 		locale: state.system.locale,
 		departureDatepicker: state.form.dates.departure,
-		returnDatepicker: state.form.dates.return
+		returnDatepicker: state.form.dates.return,
+		datesBetweenDepartureAndReturn: getDatesBetweenDepartureAndReturn(state)
 	};
 }
 

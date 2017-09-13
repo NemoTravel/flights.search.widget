@@ -94,13 +94,18 @@ export default class Datepicker extends Component {
 	}
 	
 	render() {
-		const { date, locale, isActive } = this.props;
+		const { date, locale, isActive, specialDate } = this.props;
+		
+		const specialDayClassName = (date) => {
+			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'nemo-ui-datepicker__specialDay' : '';
+		};
 		
 		return <DatePicker
 			disabled={!isActive}
 			locale={locale}
-			dropdownMode="scroll"
-			showMonthDropdown={false}
+			dayClassName={specialDayClassName}
+			// dropdownMode="scroll"
+			// showMonthDropdown={false}
 			customInput={this.renderCustomInput()}
 			calendarClassName="nemo-ui-datepicker" 
 			dateFormat={Datepicker.dateFormat}

@@ -8,12 +8,17 @@ import { createSelector } from 'reselect';
  * and do not worry about how many times needed data has been calculated.
  */
 
-function getPassengersConfig(state) {
-	return state.form.passengers;
-}
-
 function getConfig(state) {
 	return state.system;
+}
+
+/**
+ * --------------------------------------------------------------------------------------------------------
+ * PASSENGERS ---------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------
+ */
+function getPassengersConfig(state) {
+	return state.form.passengers;
 }
 
 export const getPassengersArray = createSelector(
@@ -35,11 +40,17 @@ export const getPassengersArray = createSelector(
 	}
 );
 
+/**
+ * Total count of selected passengers on the search form.
+ */
 export const getTotalPassengersCount = createSelector(
 	[ getPassengersArray ],
 	(passengersArray = []) => passengersArray.reduce((result, passenger) => result + parseInt(passenger.count), 0)
 );
 
+/**
+ * Dynamic title for passengers dropdown on the search form.
+ */
 export const getPassengersTitle = createSelector(
 	[ getTotalPassengersCount ],
 	(totalCount = 0) => {
@@ -55,6 +66,50 @@ export const getPassengersTitle = createSelector(
 			result = totalCount + ' Пассажира';
 		}
 
+		return result;
+	}
+);
+
+/**
+ * --------------------------------------------------------------------------------------------------------
+ * DATES --------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------
+ */
+function getDepartureDate(state) {
+	return state.form.dates.departure.date;
+}
+
+function getReturnDate(state) {
+	return state.form.dates.return.date;
+}
+
+/**
+ * Get an array of MomentJS dates between the departure and the return date.
+ */
+export const getDatesBetweenDepartureAndReturn = createSelector(
+	[getDepartureDate, getReturnDate],
+	(departureDate, returnDate) => {
+		let result = [];
+		
+		if (departureDate && returnDate) {
+			let startDate = departureDate.clone();
+			let endDate = returnDate.clone();
+
+			result.push(departureDate);
+			
+			while (startDate.add(1, 'days').diff(endDate) < 0) {
+				result.push(startDate.clone());
+			}
+
+			result.push(returnDate);
+		}
+		else if (departureDate) {
+			result.push(departureDate);
+		}
+		else if (returnDate) {
+			result.push(returnDate);
+		}
+		
 		return result;
 	}
 );

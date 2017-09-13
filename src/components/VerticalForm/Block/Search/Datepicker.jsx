@@ -29,6 +29,7 @@ export default class Datepicker extends Component {
 			locale,
 			date,
 			isActive,
+		  	specialDate,
 		  	minDate:minDateProp, 
 		  	maxDate:maxDateProp, 
 		  	highlightDates = [] 
@@ -51,6 +52,7 @@ export default class Datepicker extends Component {
 				toggleDatePicker={toggleDatePicker}
 				datepickerChange={datepickerChange}
 				popperPlacement={this.popperPlacement}
+				specialDate={specialDate}
 				inputProps={{ placeholder: this.placeholder }}
 			/>
 		</div>;
