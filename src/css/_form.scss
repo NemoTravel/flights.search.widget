@@ -178,6 +178,10 @@
 						background: rgba(0, 76, 186, 0.07);
 					}
 					
+					&--highlighted {
+						background: rgba(0, 76, 186, 0.07);
+					}
+					
 					&:not(:last-of-type) {
 						border-bottom: 1px solid #e6e6e6;
 					}

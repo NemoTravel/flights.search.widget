@@ -68,6 +68,17 @@ export default class Autocomplete extends Component {
 	}
 
 	/**
+	 * Select all text in input when focused.
+	 * 
+	 * @param {Object} event
+	 */
+	onFocusHandler(event) {
+		if (event.target && event.target.value) {
+			event.target.setSelectionRange(0, event.target.value.length);
+		}
+	}
+
+	/**
 	 * Render element from suggestions (autocomplete) list.
 	 * 
 	 * @param {Object} item
@@ -160,6 +171,7 @@ export default class Autocomplete extends Component {
 				getSuggestionValue={(item) => item.name}
 				renderSuggestion={this.renderSuggestion}
 				onSuggestionSelected={this.selectSuggestion}
+				highlightFirstSuggestion={true}
 				focusInputOnSuggestionClick={false}
 				shouldRenderSuggestions={(value) => {
 					return config.routingGrid || (value && value.length > 1);
@@ -171,7 +183,8 @@ export default class Autocomplete extends Component {
 					readOnly: config.readOnlyAutocomplete,
 					placeholder: this.placeholder,
 					value: state.inputValue,
-					onChange: this.onChangeHandler
+					onChange: this.onChangeHandler,
+					onFocus: this.onFocusHandler
 				}}
 			/>
 			
