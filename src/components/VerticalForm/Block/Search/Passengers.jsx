@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NemoDropdown from 'components/UI/Dropdown';
+import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/VerticalForm/Block/Search/Passengers/Counter';
 import * as passengersActions from 'actions/passengers';
 import { getPassengersTitle, getPassengersArray } from 'selectors';
@@ -52,7 +53,9 @@ class Passengers extends Component {
 	
 	render() {
 		return <div className="form-group nemo-widget-form-passengers">
-			<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
+			<Tooltip message="test" isActive={false}>
+				<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
+			</Tooltip>
 		</div>;
 	}
 }

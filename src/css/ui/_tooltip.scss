@@ -1,0 +1,41 @@
+@import "../variables";
+
+.nemo-ui-tooltip {
+	position: relative;
+	
+	&__pop {
+		display: none;
+		position: absolute;
+		top: -100%;
+		z-index: 2;
+		
+		margin: 5px;
+		padding: 7px 10px 8px;
+
+		border-radius: 3px;
+		background: #4D4D4D;
+		color: #fff;
+		font-size: 12px;
+		line-height: 14px;
+		font-weight: 400;
+		
+		&_visible {
+			display: block;
+		}
+		
+		&:after {
+			position: absolute;
+			top: 100%;
+			left: 20px;
+			height: 0;
+			width: 0;
+
+			margin-left: -6px;
+			
+			pointer-events: none;
+			content: " ";
+			border: 6px solid rgba(0, 0, 0, 0);
+			border-top-color: #4D4D4D;
+		}
+	}
+}
