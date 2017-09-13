@@ -1,9 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
-import { switchAirports } from 'middlewares';
 
-let middlewares = [thunk, switchAirports];
+let middlewares = [thunk];
 
 // Include redux-logger in development mode.
 if (process.env.NODE_ENV !== 'production') {

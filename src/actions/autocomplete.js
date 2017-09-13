@@ -8,9 +8,27 @@ import {
 	AIRPORT_SELECTED
 } from 'actions';
 
+/**
+ * Change the departure and the arrival airports.
+ */
 export function switchAirports() {
-	return {
-		type: SWITCH_AIRPORTS
+	return (dispatch, getState) => {
+		const
+			state = getState(),
+			departureAirport = state.form.autocomplete.departure.airport,
+			arrivalAirport = state.form.autocomplete.arrival.airport;
+
+		if (departureAirport || arrivalAirport) {
+			const
+				departureInputValue = state.form.autocomplete.departure.inputValue,
+				arrivalInputValue = state.form.autocomplete.arrival.inputValue;
+
+			dispatch(selectAirport(departureAirport, 'arrival'));
+			dispatch(selectAirport(arrivalAirport, 'departure'));
+
+			dispatch(changeAutocompleteInputValue(departureInputValue, 'arrival'));
+			dispatch(changeAutocompleteInputValue(arrivalInputValue, 'departure'));
+		}
 	};
 }
 
