@@ -53,7 +53,7 @@ export default class Datepicker extends Component {
 	 * @returns {XML}
 	 */
 	renderCustomInput() {
-		const { inputProps, date, isActive, toggleDatePicker, getRef:getRefProp } = this.props;
+		const { inputProps, date, isActive, toggleDatePicker, getRef } = this.props;
 		let formattedDate = '',
 			className = classnames(
 				'form-control nemo-widget-form__date',
@@ -64,13 +64,9 @@ export default class Datepicker extends Component {
 			formattedDate = date.format(Datepicker.dateFormat);
 		}
 		
-		const getRef = (input) => {
-			this.inputField = input;
-			
-			if (getRefProp) {
-				getRefProp(input);
-			}
-		};
+		if (getRef) {
+			inputProps.ref = getRef;
+		}
 		
 		return <div className="nemo-widget-form__input__wrapper">
 			<input 
@@ -79,7 +75,6 @@ export default class Datepicker extends Component {
 				readOnly={true} 
 				spellCheck={false} 
 				value={formattedDate} 
-				ref={getRef}
 				{...inputProps}
 			/>
 			
@@ -89,7 +84,7 @@ export default class Datepicker extends Component {
 					: null
 			}
 			
-			<div className="nemo-ui-icon nemo-widget-form__input__calendar" onClick={() => this.inputField.focus()}/>
+			<div className="nemo-ui-icon nemo-widget-form__input__calendar"/>
 		</div>;
 	}
 	

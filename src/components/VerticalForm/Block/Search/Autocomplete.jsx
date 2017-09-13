@@ -116,7 +116,7 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderArrow() {
-		return this.props.system.routingGrid ? <div className="nemo-ui-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/> : null;
+		return this.props.system.routingGrid ? <div className="nemo-ui-icon nemo-widget-form__input__arrow"/> : null;
 	}
 
 	/**
@@ -126,15 +126,11 @@ export default class Autocomplete extends Component {
 	 * @returns {XML}
 	 */
 	renderInputField(inputProps) {
-		const getRef = (input) => {
-			this.inputField = input;
-			
-			if (this.props.getRef) {
-				this.props.getRef(input);
-			}
-		};
+		if (this.props.getRef) {
+			inputProps.ref = this.props.getRef;
+		}
 		
-		return <input type="text" {...inputProps} ref={getRef} />
+		return <input type="text" {...inputProps}/>
 	}
 
 	/**
