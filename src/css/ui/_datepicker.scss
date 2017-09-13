@@ -7,6 +7,7 @@
 	background: #fff;
 	border: 1px solid #ccc;
 	border-bottom-color: #bbb;
+	font-size: 0.9rem;
 
 	&__specialDay {
 		color: #fff !important;
@@ -23,15 +24,15 @@
 		&__header {
 			background-color: #fff;
 			border-bottom: none;
-			padding-top: 13px;
+			padding-top: 18px;
 		}
 		
 		&__navigation {
 			top: 10px;
 			
 			&--previous, &--next {
-				height: 22px;
-				width: 22px;
+				height: 30px;
+				width: 30px;
 				border: none;
 				border-radius: 50%;
 				background: url('/images/form/circleNext.svg') no-repeat center;

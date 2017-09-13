@@ -51,10 +51,10 @@
 	&__icon {
 		border: 1px solid #F2F2F2;
 		border-radius: 50%;
-		width: 20px;
-		height: 20px;
+		width: 25px;
+		height: 25px;
 		color: #1B75BC;
-		font-size: 9px;
+		font-size: 11px;
 		cursor: pointer;
 
 		&:after {
@@ -83,16 +83,16 @@
 
 	&__minus {
 		&:after {
-			width: 18px;
-			height: 19px;
+			width: 23px;
+			height: 24px;
 			content: "\e903";
 		}
 	}
 
 	&__plus {
 		&:after {
-			width: 19px;
-			height: 19px;
+			width: 24px;
+			height: 24px;
 			content: "\e902";
 		}
 	}

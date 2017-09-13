@@ -3408,6 +3408,7 @@
   background: #fff;
   border: 1px solid #ccc;
   border-bottom-color: #bbb;
+  font-size: 0.9rem;
 }
 
 .nemo-widget .nemo-ui-datepicker__specialDay,
@@ -3425,7 +3426,7 @@
 .nemo-widget .nemo-ui-datepicker .react-datepicker__header {
   background-color: #fff;
   border-bottom: none;
-  padding-top: 13px;
+  padding-top: 18px;
 }
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__navigation {
@@ -3434,8 +3435,8 @@
 
 .nemo-widget .nemo-ui-datepicker .react-datepicker__navigation--previous,
 .nemo-widget .nemo-ui-datepicker .react-datepicker__navigation--next {
-  height: 22px;
-  width: 22px;
+  height: 30px;
+  width: 30px;
   border: none;
   border-radius: 50%;
   background: url("/images/form/circleNext.svg") no-repeat center;
@@ -3616,10 +3617,10 @@
 .nemo-widget-form-passengers__icon {
   border: 1px solid #F2F2F2;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   color: #1B75BC;
-  font-size: 9px;
+  font-size: 11px;
   cursor: pointer;
 }
 
@@ -3646,14 +3647,14 @@
 }
 
 .nemo-widget-form-passengers__minus:after {
-  width: 18px;
-  height: 19px;
+  width: 23px;
+  height: 24px;
   content: "\E903";
 }
 
 .nemo-widget-form-passengers__plus:after {
-  width: 19px;
-  height: 19px;
+  width: 24px;
+  height: 24px;
   content: "\E902";
 }
 
