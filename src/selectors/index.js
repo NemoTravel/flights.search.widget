@@ -113,3 +113,42 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
 		return result;
 	}
 );
+
+/**
+ * --------------------------------------------------------------------------------------------------------
+ * FORM ---------------------------------------------------------------------------------------------------
+ * --------------------------------------------------------------------------------------------------------
+ */
+function getForm(state) {
+	return state.form;
+}
+
+/**
+ * Check if search form data is valid and ready for further operations.
+ * 
+ * Checking for:
+ * - valid departure and arrival airports
+ * - valid departure date
+ * - valid number of selected passengers
+ */
+export const formIsValid = createSelector(
+	[ getForm, getTotalPassengersCount ],
+	(form, totalPassengersCount) => {
+		let isValid = true;
+		
+		if (totalPassengersCount <= 0) {
+			isValid = false;
+		}
+		else if (!form.dates.departure.date) {
+			isValid = false;
+		}
+		else if (!form.autocomplete.departure.airport) {
+			isValid = false;
+		}
+		else if (!form.autocomplete.arrival.airport) {
+			isValid = false;
+		}
+		
+		return isValid;
+	}
+);

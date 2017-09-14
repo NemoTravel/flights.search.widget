@@ -5,12 +5,18 @@ import blockVisibility from 'reducers/form/blockVisibility';
 import passengers from 'reducers/form/passengers';
 import autocomplete from 'reducers/form/autocomplete';
 import dates from 'reducers/form/dates';
+import showErrors from 'reducers/form/showErrors';
 
-export default combineReducers({
-	registration,
-	bookings,
-	blockVisibility,
-	dates,
-	autocomplete,
-	passengers
-});
+export default function formReducer(state, action) {
+	// Some `form` action handlers goes there.
+	
+	return combineReducers({
+		showErrors,
+		registration,
+		bookings,
+		blockVisibility,
+		dates,
+		autocomplete,
+		passengers
+	})(state, action);
+}

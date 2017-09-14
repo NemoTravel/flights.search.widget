@@ -5,4 +5,6 @@ export default class Departure extends Datepicker {
 	get type() { return 'departure'; }
 	get placeholder() { return 'Вылет туда'; }
 	get popperPlacement() { return 'top-start'; }
+	get tooltipText() { return 'Выберите дату вылета'; }
+	get showErrors() { return true; }
 }

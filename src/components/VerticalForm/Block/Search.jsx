@@ -10,6 +10,8 @@ export default class Search extends Block {
 	}
 	
 	render() {
+		const { startSearch } = this.props.actions;
+		
 		return <div className="nemo-widget-form__block nemo-widget-form__block_search">
 			<div className={this.getHeaderClass()} onClick={this.toggleHandler}>
 				Купить авиабилеты
@@ -28,7 +30,7 @@ export default class Search extends Block {
 					<a href="#" className="nemo-ui-pseudoLink">Оплата милями</a>
 				</div>
 
-				<button className="btn btn-primary nemo-widget-form__searchButton">Найти</button>
+				<button className="btn btn-primary nemo-widget-form__searchButton" onClick={startSearch}>Найти</button>
 			</div>
 		</div>;
 	}

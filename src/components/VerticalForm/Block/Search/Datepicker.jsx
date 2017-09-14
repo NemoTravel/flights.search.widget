@@ -6,6 +6,8 @@ export default class Datepicker extends Component {
 	get type() { return null; }
 	get placeholder() { return ''; }
 	get popperPlacement() { return null; }
+	get tooltipText() { return ''; }
+	get showErrors() { return false; }
 	
 	constructor(props) {
 		super(props);
@@ -29,6 +31,7 @@ export default class Datepicker extends Component {
 			locale,
 			date,
 			isActive,
+		  	showErrors,
 		  	specialDate,
 		  	minDate:minDateProp, 
 		  	maxDate:maxDateProp, 
@@ -53,6 +56,8 @@ export default class Datepicker extends Component {
 				datepickerChange={datepickerChange}
 				popperPlacement={this.popperPlacement}
 				specialDate={specialDate}
+				tooltipIsActive={!date && this.showErrors && showErrors}
+				tooltipText={this.tooltipText}
 				inputProps={{ placeholder: this.placeholder }}
 			/>
 		</div>;

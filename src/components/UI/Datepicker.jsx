@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import classnames from 'classnames';
+import Tooltip from 'components/UI/Tooltip';
 
 export default class Datepicker extends Component {
 	constructor(props) {
@@ -53,7 +54,7 @@ export default class Datepicker extends Component {
 	 * @returns {XML}
 	 */
 	renderCustomInput() {
-		const { inputProps, date, isActive, toggleDatePicker, getRef } = this.props;
+		const { inputProps, date, isActive, toggleDatePicker, getRef, tooltipIsActive, tooltipText } = this.props;
 		let formattedDate = '',
 			className = classnames(
 				'form-control nemo-widget-form__date',
@@ -67,23 +68,25 @@ export default class Datepicker extends Component {
 		if (getRef) {
 			inputProps.ref = getRef;
 		}
-		
+
 		return <div className="nemo-widget-form__input__wrapper">
-			<input 
-				type="text" 
-				className={className} 
-				readOnly={true} 
-				spellCheck={false} 
-				value={formattedDate} 
-				{...inputProps}
-			/>
-			
+			<Tooltip message={tooltipText} isActive={tooltipIsActive}>
+				<input
+					type="text"
+					className={className}
+					readOnly={true}
+					spellCheck={false}
+					value={formattedDate}
+					{...inputProps}
+				/>
+			</Tooltip>
+
 			{
 				toggleDatePicker && isActive ?
 					<div className="nemo-ui-icon nemo-widget-form__input__closer" onClick={this.disable}/>
 					: null
 			}
-			
+
 			<div className="nemo-ui-icon nemo-widget-form__input__calendar"/>
 		</div>;
 	}

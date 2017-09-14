@@ -17,7 +17,7 @@ class DatesContainer extends Component {
 	}
 	
 	render() {
-		const { departureDatepicker, returnDatepicker, locale } = this.props;
+		const { departureDatepicker, returnDatepicker, locale, showErrors } = this.props;
 		const { datepickerChange:originalDatepickerChange, toggleDatePicker } = this.props.actions;
 		
 		// Open return datepicker after selecting the departure date.
@@ -31,6 +31,7 @@ class DatesContainer extends Component {
 		
 		return <div className="form-group row">
 			<DepartureDatepicker
+				showErrors={showErrors}
 				locale={locale}
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}
@@ -58,6 +59,7 @@ function mapStateToProps(state) {
 		locale: state.system.locale,
 		departureDatepicker: state.form.dates.departure,
 		returnDatepicker: state.form.dates.return,
+		showErrors: state.form.showErrors,
 		datesBetweenDepartureAndReturn: getDatesBetweenDepartureAndReturn(state)
 	};
 }
