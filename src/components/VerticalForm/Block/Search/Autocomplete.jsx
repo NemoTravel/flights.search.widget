@@ -146,7 +146,7 @@ export default class Autocomplete extends Component {
 			inputProps.ref = this.props.getRef;
 		}
 		
-		return <Tooltip isActive={!airport && showErrors} message={this.tooltipText}>
+		return <Tooltip isActive={!airport && showErrors} isCentered={true} message={this.tooltipText}>
 			<input type="text" {...inputProps}/>
 		</Tooltip>;
 	}

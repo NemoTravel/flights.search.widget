@@ -3548,10 +3548,6 @@
   white-space: nowrap;
 }
 
-.nemo-widget .nemo-ui-tooltip__pop_visible {
-  display: block;
-}
-
 .nemo-widget .nemo-ui-tooltip__pop:after {
   position: absolute;
   top: 100%;
@@ -3563,6 +3559,21 @@
   content: " ";
   border: 6px solid transparent;
   border-top-color: #4D4D4D;
+}
+
+.nemo-widget .nemo-ui-tooltip__pop_visible {
+  display: block;
+}
+
+.nemo-widget .nemo-ui-tooltip__pop_centered {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nemo-widget .nemo-ui-tooltip__pop_centered:after {
+  left: 50%;
+  margin-left: 0;
+  transform: translateX(-50%);
 }
 
 .nemo-widget-form-passengers {
@@ -3782,17 +3793,6 @@
 
 .nemo-widget-form .nemo-widget-form__input__wrapper {
   position: relative;
-}
-
-.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__container .nemo-ui-tooltip__pop {
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__container .nemo-ui-tooltip__pop:after {
-  left: 50%;
-  transform: translateX(-50%);
-  margin-left: 0;
 }
 
 .nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__suggestions-container {

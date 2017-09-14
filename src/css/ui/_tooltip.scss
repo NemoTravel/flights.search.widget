@@ -20,10 +20,6 @@
 		font-weight: 400;
 		white-space: nowrap;
 		
-		&_visible {
-			display: block;
-		}
-		
 		&:after {
 			position: absolute;
 			top: 100%;
@@ -37,6 +33,21 @@
 			content: " ";
 			border: 6px solid rgba(0, 0, 0, 0);
 			border-top-color: #4D4D4D;
+		}
+
+		&_visible {
+			display: block;
+		}
+
+		&_centered {
+			left: 50%;
+			transform: translateX(-50%);
+
+			&:after {
+				left: 50%;
+				margin-left: 0;
+				transform: translateX(-50%);
+			}
 		}
 	}
 }
