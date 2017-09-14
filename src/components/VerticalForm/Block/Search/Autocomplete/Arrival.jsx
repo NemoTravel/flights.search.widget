@@ -5,6 +5,7 @@ import classnames from 'classnames';
 export default class Arrival extends Autocomplete {
 	get type() { return 'arrival'; }
 	get placeholder() { return 'Куда'; }
+	get tooltipText() { return 'Выберите аэропорт прилёта'; }
 
 	renderSwitcher() {
 		let className = classnames(

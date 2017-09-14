@@ -17,14 +17,14 @@ class AutocompleteContainer extends Component {
 	}
 	
 	render() {
-		const { departureAutocomplete, arrivalAutocomplete, system } = this.props;
+		const { departureAutocomplete, arrivalAutocomplete, system, showErrors } = this.props;
 		let originalSelectAirport = this.props.actions.selectAirport;
 		
 		// Focus arrival autocomplete field after selecting the departure airport.
 		const selectAirport = (airport, autocompleteType) => {
 			originalSelectAirport(airport, autocompleteType);
 			
-			if (autocompleteType === 'departure') {
+			if (autocompleteType === 'departure' && !arrivalAutocomplete.airport) {
 				this.arrivalInput.focus();
 			}
 		};
@@ -32,8 +32,8 @@ class AutocompleteContainer extends Component {
 		const actions = { ...this.props.actions, selectAirport };
 		
 		return <div className="form-group">
-			<DepartureAutocomplete state={departureAutocomplete} system={system} {...actions}/>
-			<ArrivalAutocomplete state={arrivalAutocomplete} system={system} {...actions} getRef={this.getArrivalRef}/>
+			<DepartureAutocomplete showErrors={showErrors} state={departureAutocomplete} system={system} {...actions}/>
+			<ArrivalAutocomplete showErrors={showErrors} state={arrivalAutocomplete} system={system} {...actions} getRef={this.getArrivalRef}/>
 		</div>
 	}
 }
@@ -42,6 +42,7 @@ function mapStateToProps(state) {
 	return {
 		departureAutocomplete: state.form.autocomplete.departure,
 		arrivalAutocomplete: state.form.autocomplete.arrival,
+		showErrors: state.form.showErrors,
 		system: state.system
 	};
 }

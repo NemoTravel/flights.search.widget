@@ -3784,6 +3784,17 @@
   position: relative;
 }
 
+.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__container .nemo-ui-tooltip__pop {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__container .nemo-ui-tooltip__pop:after {
+  left: 50%;
+  transform: translateX(-50%);
+  margin-left: 0;
+}
+
 .nemo-widget-form .nemo-widget-form__input__wrapper .react-autosuggest__suggestions-container {
   position: absolute;
   z-index: 12;

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import classnames from 'classnames';
+import Tooltip from 'components/UI/Tooltip';
 
 export default class Autocomplete extends Component {
 	get type() { return null; }
 	get placeholder() { return ''; }
+	get tooltipText() { return ''; }
 	
 	constructor(props) {
 		super(props);
@@ -137,11 +139,16 @@ export default class Autocomplete extends Component {
 	 * @returns {XML}
 	 */
 	renderInputField(inputProps) {
+		const { showErrors } = this.props;
+		const { airport } = this.props.state;
+		
 		if (this.props.getRef) {
 			inputProps.ref = this.props.getRef;
 		}
 		
-		return <input type="text" {...inputProps}/>
+		return <Tooltip isActive={!airport && showErrors} message={this.tooltipText}>
+			<input type="text" {...inputProps}/>
+		</Tooltip>;
 	}
 
 	/**

@@ -137,6 +137,19 @@
 			position: relative;
 
 			.react-autosuggest {
+				&__container {
+					.nemo-ui-tooltip__pop {
+						left: 50%;
+						transform: translateX(-50%);
+						
+						&:after {
+							left: 50%;
+							transform: translateX(-50%);
+							margin-left: 0;
+						}
+					}
+				}
+				
 				&__suggestions {
 					&-container {
 						position: absolute;
