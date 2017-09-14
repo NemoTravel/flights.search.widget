@@ -166,7 +166,7 @@ export default class Autocomplete extends Component {
 		let inputClassName = classnames(
 			`form-control nemo-widget-form__${this.type} nemo-widget-form__input`,
 			{ 'nemo-widget-form__input_loading': state.isLoading },
-			{ 'nemo-widget-form__input_pointer': config.readOnlyAutocomplete }
+			{ 'nemo-widget-form__input_pointer': config.readOnlyAutocomplete && config.routingGrid }
 		);
 		
 		return <div className="nemo-widget-form__input__wrapper">
@@ -187,7 +187,7 @@ export default class Autocomplete extends Component {
 				inputProps={{
 					className: inputClassName,
 					spellCheck: false,
-					readOnly: config.readOnlyAutocomplete,
+					readOnly: config.readOnlyAutocomplete && config.routingGrid,
 					placeholder: this.placeholder,
 					value: state.inputValue,
 					onChange: this.onChangeHandler,
