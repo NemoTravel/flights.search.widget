@@ -1,5 +1,5 @@
 import React from 'react';
-import Autocomplete from 'components/VerticalForm/Block/Search/Autocomplete';
+import Autocomplete from 'components/VerticalForm/Search/Autocomplete';
 import classnames from 'classnames';
 
 export default class Arrival extends Autocomplete {

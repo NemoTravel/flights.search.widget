@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NemoDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
-import Counter from 'components/VerticalForm/Block/Search/Passengers/Counter';
+import Counter from 'components/VerticalForm/Search/Passengers/Counter';
 
 export default class Selector extends Component {
 	constructor(props) {

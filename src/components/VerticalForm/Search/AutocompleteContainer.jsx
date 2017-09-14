@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as autocompleteActions from 'actions/autocomplete';
-import DepartureAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Departure';
-import ArrivalAutocomplete from 'components/VerticalForm/Block/Search/Autocomplete/Arrival';
+import DepartureAutocomplete from 'components/VerticalForm/Search/Autocomplete/Departure';
+import ArrivalAutocomplete from 'components/VerticalForm/Search/Autocomplete/Arrival';
 
 class AutocompleteContainer extends Component {
 	constructor(props) {

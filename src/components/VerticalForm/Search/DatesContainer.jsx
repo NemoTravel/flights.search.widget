@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as datesActions from 'actions/dates';
-import DepartureDatepicker from 'components/VerticalForm/Block/Search/Datepicker/Departure';
-import ReturnDatepicker from 'components/VerticalForm/Block/Search/Datepicker/Return';
+import DepartureDatepicker from 'components/VerticalForm/Search/Datepicker/Departure';
+import ReturnDatepicker from 'components/VerticalForm/Search/Datepicker/Return';
 import { getDatesBetweenDepartureAndReturn } from 'selectors';
 
 class DatesContainer extends Component {

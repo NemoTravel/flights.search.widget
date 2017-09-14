@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as passengersActions from 'actions/passengers';
 import { getPassengersTitle, getPassengersArray, getTotalPassengersCount } from 'selectors';
-import Selector from 'components/VerticalForm/Block/Search/Passengers/Selector';
+import Selector from 'components/VerticalForm/Search/Passengers/Selector';
 
 class PassengersContainer extends Component {
 	render() {

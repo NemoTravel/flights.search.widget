@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import SearchBlock from 'components/VerticalForm/Block/Search';
-import RegistrationBlock from 'components/VerticalForm/Block/Registration';
-import BookingsBlock from 'components/VerticalForm/Block/Bookings';
+import SearchBlock from 'components/VerticalForm/Search';
+import RegistrationBlock from 'components/VerticalForm/Registration';
+import BookingsBlock from 'components/VerticalForm/Bookings';
 
 export default class VerticalForm extends Component {
 	render() {

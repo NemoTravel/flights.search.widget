@@ -1,8 +1,8 @@
 import React from 'react';
 import Block from 'components/VerticalForm/Block';
-import DatesContainer from 'components/VerticalForm/Block/Search/DatesContainer';
-import AutocompleteContainer from 'components/VerticalForm/Block/Search/AutocompleteContainer';
-import PassengersContainer from 'components/VerticalForm/Block/Search/PassengersContainer';
+import DatesContainer from 'components/VerticalForm/Search/DatesContainer';
+import AutocompleteContainer from 'components/VerticalForm/Search/AutocompleteContainer';
+import PassengersContainer from 'components/VerticalForm/Search/PassengersContainer';
 
 export default class Search extends Block {
 	get type() {
