@@ -2,7 +2,7 @@ import React from 'react';
 import Block from 'components/VerticalForm/Block';
 import DatesContainer from 'components/VerticalForm/Block/Search/DatesContainer';
 import AutocompleteContainer from 'components/VerticalForm/Block/Search/AutocompleteContainer';
-import Passengers from 'components/VerticalForm/Block/Search/Passengers';
+import PassengersContainer from 'components/VerticalForm/Block/Search/PassengersContainer';
 
 export default class Search extends Block {
 	get type() {
@@ -18,7 +18,7 @@ export default class Search extends Block {
 			<div className={this.getBodyClass()}>
 				<AutocompleteContainer/>
 				<DatesContainer/>
-				<Passengers/>
+				<PassengersContainer/>
 
 				<div className="form-group nemo-widget-form__pseudoBlocks">
 					<a href="#" className="nemo-ui-pseudoLink">У меня есть купон на скидку</a>

@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import NemoDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/VerticalForm/Block/Search/Passengers/Counter';
-import * as passengersActions from 'actions/passengers';
-import { getPassengersTitle, getPassengersArray, getTotalPassengersCount } from 'selectors';
 
-class Passengers extends Component {
+export default class Selector extends Component {
 	constructor(props) {
 		super(props);
 		
@@ -21,10 +17,9 @@ class Passengers extends Component {
 	 * @returns {Array}
 	 */
 	renderCounters() {
-		const { array, totalCount } = this.props;
-		const { addPassenger, removePassenger } = this.props.actions;
+		const { passengers, totalPassengersCount, addPassenger, removePassenger } = this.props;
 		
-		return array.map((passenger, i) => {
+		return passengers.map((passenger, i) => {
 			return <Counter
 				key={i}
 				addPassenger={addPassenger}
@@ -32,7 +27,7 @@ class Passengers extends Component {
 				title={passenger.title}
 				code={passenger.code}
 				count={passenger.count}
-				canAddPassenger={totalCount < this.maxTotalPassengersCount}
+				canAddPassenger={totalPassengersCount < this.maxTotalPassengersCount}
 				canRemovePassenger={passenger.count > this.minTotalPassengersCount}
 			/>;
 		});
@@ -45,7 +40,7 @@ class Passengers extends Component {
 	 */
 	renderDropdownTrigger() {
 		return <div className="nemo-widget-form-passengers__trigger nemo-widget-form__input__wrapper">
-			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false} ref={input => this.inputField = input}/>
+			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false}/>
 			<div className="nemo-ui-icon nemo-widget-form__input__arrow"/>
 		</div>;
 	}
@@ -60,28 +55,12 @@ class Passengers extends Component {
 	}
 	
 	render() {
-		const { totalCount } = this.props;
+		const { totalPassengersCount } = this.props;
 		
 		return <div className="form-group nemo-widget-form-passengers">
-			<Tooltip message="Выберите хотя бы одного пассажира" isActive={totalCount <= 0}>
+			<Tooltip message="Выберите хотя бы одного пассажира" isActive={totalPassengersCount <= 0}>
 				<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
 			</Tooltip>
 		</div>;
 	}
 }
-
-function mapStateToProps(state) {
-	return {
-		array: getPassengersArray(state),
-		title: getPassengersTitle(state),
-		totalCount: getTotalPassengersCount(state)
-	};
-}
-
-function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators(passengersActions, dispatch)
-	};
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(Passengers);
