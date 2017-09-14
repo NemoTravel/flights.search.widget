@@ -5,9 +5,15 @@ import NemoDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/VerticalForm/Block/Search/Passengers/Counter';
 import * as passengersActions from 'actions/passengers';
-import { getPassengersTitle, getPassengersArray } from 'selectors';
+import { getPassengersTitle, getPassengersArray, getTotalPassengersCount } from 'selectors';
 
 class Passengers extends Component {
+	constructor(props) {
+		super(props);
+		
+		this.maxTotalPassengersCount = 6;
+		this.minTotalPassengersCount = 0;
+	}
 
 	/**
 	 * Render passengers counters;
@@ -15,7 +21,7 @@ class Passengers extends Component {
 	 * @returns {Array}
 	 */
 	renderCounters() {
-		const { array } = this.props;
+		const { array, totalCount } = this.props;
 		const { addPassenger, removePassenger } = this.props.actions;
 		
 		return array.map((passenger, i) => {
@@ -26,6 +32,8 @@ class Passengers extends Component {
 				title={passenger.title}
 				code={passenger.code}
 				count={passenger.count}
+				canAddPassenger={totalCount < this.maxTotalPassengersCount}
+				canRemovePassenger={passenger.count > this.minTotalPassengersCount}
 			/>;
 		});
 	}
@@ -38,7 +46,7 @@ class Passengers extends Component {
 	renderDropdownTrigger() {
 		return <div className="nemo-widget-form-passengers__trigger nemo-widget-form__input__wrapper">
 			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false} ref={input => this.inputField = input}/>
-			<div className="nemo-ui-icon nemo-widget-form__input__arrow" onClick={() => this.inputField.focus()}/>
+			<div className="nemo-ui-icon nemo-widget-form__input__arrow"/>
 		</div>;
 	}
 
@@ -52,8 +60,10 @@ class Passengers extends Component {
 	}
 	
 	render() {
+		const { totalCount } = this.props;
+		
 		return <div className="form-group nemo-widget-form-passengers">
-			<Tooltip message="test" isActive={false}>
+			<Tooltip message="Выберите хотя бы одного пассажира" isActive={totalCount <= 0}>
 				<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
 			</Tooltip>
 		</div>;
@@ -63,7 +73,8 @@ class Passengers extends Component {
 function mapStateToProps(state) {
 	return {
 		array: getPassengersArray(state),
-		title: getPassengersTitle(state)
+		title: getPassengersTitle(state),
+		totalCount: getTotalPassengersCount(state)
 	};
 }
 
