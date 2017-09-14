@@ -1,8 +1,9 @@
 import React from 'react';
 import Autocomplete from 'components/VerticalForm/Search/Autocomplete';
+import { i18n } from 'utils';
 
 export default class Departure extends Autocomplete {
 	get type() { return 'departure'; }
-	get placeholder() { return 'Откуда'; }
-	get tooltipText() { return 'Выберите аэропорт вылета'; }
+	get placeholder() { return i18n('form', 'from'); }
+	get tooltipText() { return i18n('form', 'departureError'); }
 }

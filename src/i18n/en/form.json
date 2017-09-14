@@ -1,0 +1,13 @@
+{
+	"ticketsTitle": "Buy Tickets",
+	"discountTitle": "I Have Discount Coupon",
+	"loyaltyCardTitle": "Loyalty Card",
+	"search": "Search",
+	"from": "From",
+	"to": "To",
+	"departureError": "Select departure airport",
+	"arrivalError": "Select arrival airport",
+	"dateToError": "Select departure date",
+	"dateTo": "Date to",
+	"dateBack": "Date back"
+}
