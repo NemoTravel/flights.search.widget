@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NemoDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/VerticalForm/Search/Passengers/Counter';
+import { i18n } from 'utils';
 
 export default class Selector extends Component {
 	constructor(props) {
@@ -58,7 +59,7 @@ export default class Selector extends Component {
 		const { totalPassengersCount } = this.props;
 		
 		return <div className="form-group nemo-widget-form-passengers">
-			<Tooltip message="Выберите хотя бы одного пассажира" isCentered={true} isActive={totalPassengersCount <= this.minTotalPassengersCount}>
+			<Tooltip message={i18n('form', 'passengersError')} isCentered={true} isActive={totalPassengersCount <= this.minTotalPassengersCount}>
 				<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
 			</Tooltip>
 		</div>;

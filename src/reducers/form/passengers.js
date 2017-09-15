@@ -1,23 +1,24 @@
 import { ADD_PASSENGER, REMOVE_PASSENGER } from 'actions';
+import { i18n } from 'utils';
 
 const initialState = {
 	ADT: {
-		title: 'Взрослые (12+)',
+		title: i18n('form', 'passenger_ADT'),
 		code: 'ADT',
 		count: 1
 	},
 	CLD: {
-		title: 'Дети (2-11)',
+		title: i18n('form', 'passenger_CLD'),
 		code: 'CLD',
 		count: 0
 	},
 	INF: {
-		title: 'Младенцы (0-2)',
+		title: i18n('form', 'passenger_INF'),
 		code: 'INF',
 		count: 0
 	},
 	INS: {
-		title: 'Младенцы с местом (0-2)',
+		title: i18n('form', 'passenger_INS'),
 		code: 'INS',
 		count: 0
 	}

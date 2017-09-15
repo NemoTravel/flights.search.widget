@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { i18n } from 'utils';
 
 /**
  * Selectors are like `computed` objects in KnockoutJS.
@@ -57,13 +58,13 @@ export const getPassengersTitle = createSelector(
 		let result = '';
 
 		if (totalCount === 0 || totalCount > 4) {
-			result = totalCount + ' Пассажиров';
+			result = `${totalCount} ${i18n('form', 'passengers_1')}`;
 		}
 		else if (totalCount === 1) {
-			result = totalCount + ' Пассажир';
+			result = `${totalCount} ${i18n('form', 'passengers_2')}`;
 		}
 		else {
-			result = totalCount + ' Пассажира';
+			result = `${totalCount} ${i18n('form', 'passengers_3')}`;
 		}
 
 		return result;

@@ -1,5 +1,7 @@
 {
 	"ticketsTitle": "Купить авиабилеты",
+	"registrationTitle": "Регистрация на рейс",
+	"bookingsTitle": "Бронирования",
 	"discountTitle": "У меня есть купон на скидку",
 	"loyaltyCardTitle": "У меня есть купон на скидку",
 	"search": "Найти",
@@ -9,5 +11,13 @@
 	"arrivalError": "Выберите аэропорт прилёта",
 	"dateToError": "Выберите дату вылета",
 	"dateTo": "Вылет туда",
-	"dateBack": "Вылет обратно"
+	"dateBack": "Вылет обратно",
+	"passengers_1": "Пассажиров",
+	"passengers_2": "Пассажир",
+	"passengers_3": "Пассажира",
+	"passengersError": "Выберите хотя бы одного пассажира",
+	"passenger_ADT": "Взрослые (12+)",
+	"passenger_CLD": "Дети (2-11)",
+	"passenger_INF": "Младенцы (0-2)",
+	"passenger_INS": "Младенцы с местом (0-2)"
 }

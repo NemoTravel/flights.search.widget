@@ -3546,6 +3546,7 @@
   line-height: 14px;
   font-weight: 400;
   white-space: nowrap;
+  user-select: none;
 }
 
 .nemo-widget .nemo-ui-tooltip__pop:after {
