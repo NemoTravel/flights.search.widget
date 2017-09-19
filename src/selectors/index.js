@@ -6,7 +6,7 @@ import { i18n } from 'utils';
  * They recalculate some data only if the corresponding part of the state tree has been changed.
  * 
  * This allows us to compose some data from different parts of state tree 
- * and do not worry about how many times needed data has been calculated.
+ * and not to worry about how many times needed data has been calculated.
  */
 
 function getConfig(state) {
@@ -71,6 +71,22 @@ export const getPassengersTitle = createSelector(
 	}
 );
 
+/**
+ * Check if passenger counter can be increased or decreased.
+ * 
+ * Return example:
+ * {
+ *   ADT: {
+ *     canIncrease: true,
+ *     canDecrease: false
+ *   },
+ *   INF: {
+ *     canIncrease: false,
+ *     canDecrease: false
+ *   },
+ *   ...
+ * }
+ */
 export const getPassengersCounterAvailability = createSelector(
 	[ getPassengersConfig, getTotalPassengersCount ],
 	(passengersConfig = {}, totalCount = 0) => {
@@ -79,15 +95,15 @@ export const getPassengersCounterAvailability = createSelector(
 		for (let passType in passengersConfig) {
 			if (passengersConfig.hasOwnProperty(passType)) {
 				let currentPassConfig = passengersConfig[passType];
-				let canAdd = true;
-				let canRemove = true;
+				let canIncrease = true;
+				let canDecrease = true;
 				
 				if (totalCount >= 6) {
-					canAdd = false;
+					canIncrease = false;
 				}
 				
 				if (totalCount <= 0 || currentPassConfig.count <= 0) {
-					canRemove = false;
+					canDecrease = false;
 				}
 
 				switch (passType) {
@@ -97,27 +113,27 @@ export const getPassengersCounterAvailability = createSelector(
 							currentPassConfig.count <= passengersConfig.INS.count ||
 							passengersConfig.CLD.count
 						) {
-							canRemove = false;
+							canDecrease = false;
 						}
 						break;
 						
 					case 'CLD':
 						if (passengersConfig.ADT.count <= 0) {
-							canAdd = false;
+							canIncrease = false;
 						}
 						break;
 
 					case 'INF':
 					case 'INS':
 						if (currentPassConfig.count >= passengersConfig.ADT.count) {
-							canAdd = false;
+							canIncrease = false;
 						}
 						break;
 				}
 				
 				result[passType] = {
-					canAdd,
-					canRemove
+					canIncrease,
+					canDecrease
 				};
 			}
 		}

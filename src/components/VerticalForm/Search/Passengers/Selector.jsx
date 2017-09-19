@@ -15,6 +15,14 @@ export default class Selector extends Component {
 		const { passengers, addPassenger, removePassenger, counterAvailability } = this.props;
 		
 		return passengers.map((passenger, i) => {
+			let canIncrease = true;
+			let canDecrease = true;
+			
+			if (counterAvailability[passenger.code]) {
+				canIncrease = counterAvailability[passenger.code].canIncrease;
+				canDecrease = counterAvailability[passenger.code].canDecrease;
+			}
+			
 			return <Counter
 				key={i}
 				addPassenger={addPassenger}
@@ -22,8 +30,8 @@ export default class Selector extends Component {
 				title={passenger.title}
 				code={passenger.code}
 				count={passenger.count}
-				canAddPassenger={counterAvailability[passenger.code].canAdd}
-				canRemovePassenger={counterAvailability[passenger.code].canRemove}
+				canAddPassenger={canIncrease}
+				canRemovePassenger={canDecrease}
 			/>;
 		});
 	}
