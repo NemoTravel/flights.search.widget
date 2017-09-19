@@ -5,12 +5,6 @@ import Counter from 'components/VerticalForm/Search/Passengers/Counter';
 import { i18n } from 'utils';
 
 export default class Selector extends Component {
-	constructor(props) {
-		super(props);
-		
-		this.maxTotalPassengersCount = 6;
-		this.minTotalPassengersCount = 0;
-	}
 
 	/**
 	 * Render passengers counters;
@@ -18,7 +12,7 @@ export default class Selector extends Component {
 	 * @returns {Array}
 	 */
 	renderCounters() {
-		const { passengers, totalPassengersCount, addPassenger, removePassenger } = this.props;
+		const { passengers, addPassenger, removePassenger, counterAvailability } = this.props;
 		
 		return passengers.map((passenger, i) => {
 			return <Counter
@@ -28,8 +22,8 @@ export default class Selector extends Component {
 				title={passenger.title}
 				code={passenger.code}
 				count={passenger.count}
-				canAddPassenger={totalPassengersCount < this.maxTotalPassengersCount}
-				canRemovePassenger={passenger.count > this.minTotalPassengersCount}
+				canAddPassenger={counterAvailability[passenger.code].canAdd}
+				canRemovePassenger={counterAvailability[passenger.code].canRemove}
 			/>;
 		});
 	}

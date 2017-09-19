@@ -71,6 +71,61 @@ export const getPassengersTitle = createSelector(
 	}
 );
 
+export const getPassengersCounterAvailability = createSelector(
+	[ getPassengersConfig, getTotalPassengersCount ],
+	(passengersConfig = {}, totalCount = 0) => {
+		let result = {};
+		
+		for (let passType in passengersConfig) {
+			if (passengersConfig.hasOwnProperty(passType)) {
+				let currentPassConfig = passengersConfig[passType];
+				let canAdd = true;
+				let canRemove = true;
+				
+				if (totalCount >= 6) {
+					canAdd = false;
+				}
+				
+				if (totalCount <= 0 || currentPassConfig.count <= 0) {
+					canRemove = false;
+				}
+
+				switch (passType) {
+					case 'ADT':
+						if (
+							currentPassConfig.count <= passengersConfig.INF.count || 
+							currentPassConfig.count <= passengersConfig.INS.count ||
+							passengersConfig.CLD.count
+						) {
+							canRemove = false;
+						}
+						break;
+						
+					case 'CLD':
+						if (passengersConfig.ADT.count <= 0) {
+							canAdd = false;
+						}
+						break;
+
+					case 'INF':
+					case 'INS':
+						if (currentPassConfig.count >= passengersConfig.ADT.count) {
+							canAdd = false;
+						}
+						break;
+				}
+				
+				result[passType] = {
+					canAdd,
+					canRemove
+				};
+			}
+		}
+		
+		return result;
+	}
+);
+
 /**
  * --------------------------------------------------------------------------------------------------------
  * DATES --------------------------------------------------------------------------------------------------
