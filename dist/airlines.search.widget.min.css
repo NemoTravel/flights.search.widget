@@ -3364,11 +3364,6 @@
   z-index: 10;
 }
 
-.nemo-widget .form-control:focus:not([disabled]) {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  background-color: transparent;
-}
-
 .nemo-widget .react-datepicker-popper {
   z-index: 15;
 }
@@ -4006,4 +4001,9 @@
 
 .nemo-widget-form__pseudoBlocks {
   text-align: center;
+}
+
+.nemo-widget-form__autocomplete:focus {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
 }

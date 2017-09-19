@@ -82,6 +82,17 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 		dispatch(startAutocompleteLoading(autocompleteType));
 
 		let url = `${state.system.API_URL}/guide/autocomplete/iata/${searchText}`;
+		
+		if (autocompleteType === 'departure') {
+			if (state.form.autocomplete.arrival.airport) {
+				url += `/arr/${state.form.autocomplete.arrival.airport.IATA}`;
+			}
+		}
+		else {
+			if (state.form.autocomplete.departure.airport) {
+				url += `/dep/${state.form.autocomplete.departure.airport.IATA}`;
+			}
+		}
 
 		if (state.system.routingGrid) {
 			url += `?airlineIATA=${state.system.routingGrid}&apilang=${state.system.locale}`;

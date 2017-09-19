@@ -59,11 +59,6 @@
 	&:focus {
 		border-color: #ccc;
 		z-index: 10;
-		
-		&:not([disabled]) {
-			box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-			background-color: transparent;
-		}
 	}
 }
 

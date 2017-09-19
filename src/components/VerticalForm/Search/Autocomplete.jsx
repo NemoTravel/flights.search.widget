@@ -164,7 +164,7 @@ export default class Autocomplete extends Component {
 	render() {
 		const { state, system:config } = this.props;
 		let inputClassName = classnames(
-			`form-control nemo-widget-form__${this.type} nemo-widget-form__input`,
+			`form-control nemo-widget-form__${this.type} nemo-widget-form__input nemo-widget-form__autocomplete`,
 			{ 'nemo-widget-form__input_loading': state.isLoading },
 			{ 'nemo-widget-form__input_pointer': config.readOnlyAutocomplete && config.routingGrid }
 		);
