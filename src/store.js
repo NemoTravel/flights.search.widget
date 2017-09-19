@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
+import { cache } from 'utils';
 
 let middlewares = [thunk];
 
@@ -8,6 +9,24 @@ let middlewares = [thunk];
 if (process.env.NODE_ENV !== 'production') {
 	const logger = require('redux-logger').default;
 	middlewares.push(logger);
+}
+
+const STORE_CACHE_KEY = 'cached_store';
+
+/**
+ * Get cached state object.
+ */
+export function getPreloadedState() {
+	return cache(STORE_CACHE_KEY);
+}
+
+/**
+ * Caching current state.
+ * 
+ * @param state
+ */
+export function setPreloadedState(state) {
+	cache(STORE_CACHE_KEY, state);
 }
 
 /**

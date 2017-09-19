@@ -1,4 +1,4 @@
-import { ADD_PASSENGER, REMOVE_PASSENGER } from 'actions';
+import { ADD_PASSENGER, REMOVE_PASSENGER, SET_PASSENGER_COUNTER } from 'actions';
 
 export function addPassenger(passengerType) {
 	return {
@@ -12,4 +12,12 @@ export function removePassenger(passengerType) {
 		type: REMOVE_PASSENGER,
 		passengerType
 	};
+}
+
+export function setCounter(count, passengerType) {
+	return {
+		type: SET_PASSENGER_COUNTER,
+		passengerType,
+		payload: count
+	}
 }

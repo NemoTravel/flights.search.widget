@@ -1,4 +1,4 @@
-import { ADD_PASSENGER, REMOVE_PASSENGER } from 'actions';
+import { ADD_PASSENGER, REMOVE_PASSENGER, SET_PASSENGER_COUNTER } from 'actions';
 import { i18n } from 'utils';
 
 const initialState = {
@@ -24,13 +24,16 @@ const initialState = {
 	}
 };
 
-function passenger(state, { type }) {
+function passenger(state, { type, payload }) {
 	switch (type) {
 		case ADD_PASSENGER:
 			return { ...state, count: state.count + 1 };
 
 		case REMOVE_PASSENGER:
 			return { ...state, count: state.count - 1 };
+
+		case SET_PASSENGER_COUNTER:
+			return { ...state, count: payload };
 	}
 
 	return state;

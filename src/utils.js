@@ -1,5 +1,18 @@
 import Cookie from 'js-cookie';
 
+const decode = (string) => {
+	try {
+		return JSON.parse(string);
+	}
+	catch (e) {
+		return string;
+	}
+};
+
+const encode = (object) => {
+	return typeof object === 'string' ? object : JSON.stringify(object);
+};
+
 /**
  * Caching function.
  * 
@@ -11,18 +24,18 @@ import Cookie from 'js-cookie';
 export const cache = (key, value = null) => {
 	if (typeof localStorage !== 'undefined') {
 		if (value) {
-			localStorage.setItem(key, value);
+			localStorage.setItem(key, encode(value));
 		}
 		else {
-			return localStorage.getItem(key);
+			return decode(localStorage.getItem(key));
 		}
 	}
 	else {
 		if (value) {
-			Cookie.set(key, value);
+			Cookie.set(key, encode(value));
 		}
 		else {
-			return Cookie.get(key);
+			return decode(Cookie.get(key));
 		}
 	}
 };
