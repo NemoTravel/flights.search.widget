@@ -61,7 +61,7 @@ export default class Selector extends Component {
 		const { totalPassengersCount } = this.props;
 		
 		return <div className="form-group nemo-widget-form-passengers">
-			<Tooltip message={i18n('form', 'passengersError')} isCentered={true} isActive={totalPassengersCount <= this.minTotalPassengersCount}>
+			<Tooltip message={i18n('form', 'passengersError')} isCentered={true} isActive={totalPassengersCount <= 0}>
 				<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
 			</Tooltip>
 		</div>;
