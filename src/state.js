@@ -1,6 +1,8 @@
 import { autocompleteInputValueReducer, autocompleteAirportReducer } from 'reducers/form/autocomplete';
 import { selectDateReducer, toggleDatepickerReducer } from 'reducers/form/dates';
+import { setPassengersCounterReducer } from 'reducers/form/passengers';
 import moment from 'moment';
+import { i18n } from 'utils';
 
 export const systemState = {
 	rootElement: null,
@@ -44,10 +46,34 @@ export const datesState = {
 	}
 };
 
+export const passengersState = {
+	ADT: {
+		title: i18n('form', 'passenger_ADT'),
+		code: 'ADT',
+		count: 1
+	},
+	CLD: {
+		title: i18n('form', 'passenger_CLD'),
+		code: 'CLD',
+		count: 0
+	},
+	INF: {
+		title: i18n('form', 'passenger_INF'),
+		code: 'INF',
+		count: 0
+	},
+	INS: {
+		title: i18n('form', 'passenger_INS'),
+		code: 'INS',
+		count: 0
+	}
+};
+
 export const initialState = {
 	system: systemState,
 	form: {
 		dates: datesState,
+		passengers: passengersState,
 		autocomplete: autocompleteState
 	}
 };
@@ -103,6 +129,15 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				if (cachedReturnDate && cachedReturnDate.date) {
 					state.form.dates.return = toggleDatepickerReducer(cachedReturnDate, true);
 					state.form.dates.return = selectDateReducer(cachedReturnDate, moment(cachedReturnDate.date));
+				}
+			}
+
+			if (stateFromCache.form.passengers) {
+				for (const passType in stateFromCache.form.passengers) {
+					if (stateFromCache.form.passengers.hasOwnProperty(passType)) {
+						const counter = stateFromCache.form.passengers[passType].count;
+						state.form.passengers[passType] = setPassengersCounterReducer(stateFromCache.form.passengers[passType], counter);
+					}
 				}
 			}
 		}
