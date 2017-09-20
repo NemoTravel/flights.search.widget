@@ -2,6 +2,8 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
 import { cache } from 'utils';
+import { initialState } from 'state';
+import { processConfig } from 'reducers/system';
 
 let middlewares = [thunk];
 
@@ -34,12 +36,17 @@ export function setPreloadedState(state) {
  *
  * @returns {Store}
  */
-export function getStore() {
+export function getStore(config = {}) {
 	// Thunk middleware allows us to create functions instead of plain objects in action-creators (for async purposes).
 	// @see https://github.com/gaearon/redux-thunk#motivation
+	let preloadedState = {
+		...initialState,
+		system: processConfig(initialState, config)
+	};
 
 	return createStore(
 		rootReducer,
+		preloadedState,
 		applyMiddleware(...middlewares)
 	);
 }

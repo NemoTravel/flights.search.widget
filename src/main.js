@@ -14,11 +14,8 @@ export function init(config = {}) {
 	if (!config.rootElement) { throw Error('Please specify `rootElement` parameter in the configuration object.'); }
 	if (!config.API_URL) { throw Error('Please specify `API_URL` parameter in the configuration object.'); }
 	
-	const store = getStore();
+	const store = getStore(config);
 	const preloadedState = getPreloadedState();
-	
-	// Load initial config.
-	store.dispatch(loadConfig(config));
 
 	ReactDOM.render(
 		<Provider store={store}>

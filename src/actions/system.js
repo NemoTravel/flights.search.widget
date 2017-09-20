@@ -20,7 +20,6 @@ export function processInitialState(oldState) {
 			const canBeProcessed = oldState.system.locale === currentState.system.locale;
 			
 			if (oldState.form.dates.departure.date) {
-				dispatch(toggleDatePicker(true, 'departure'));
 				dispatch(selectDate(moment(oldState.form.dates.departure.date), 'departure'));
 			}
 
