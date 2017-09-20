@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from 'components/Main';
 import { Provider } from 'react-redux';
-import { getStore, setPreloadedState } from 'store';
+import { getStore, cacheState } from 'store';
 import './css/main.scss';
 
 /**
@@ -22,5 +22,5 @@ export function init(config = {}) {
 	);
 
 	// Subscribe to new state updates and cache new state.
-	store.subscribe(() => setPreloadedState(store.getState()));
+	store.subscribe(() => cacheState(store.getState()));
 }

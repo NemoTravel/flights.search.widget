@@ -1,36 +1,34 @@
 import { TOGGLE_DATEPICKER, SELECT_DATE } from 'actions';
+import { datesState } from 'state';
 
 export const DEPARTURE_DATE_TYPE = 'departure';
 export const RETURN_DATE_TYPE = 'return';
 
-const initialState = {
-	[DEPARTURE_DATE_TYPE]: {
-		isActive: true,
-		date: null
-	},
-	[RETURN_DATE_TYPE]: {
-		isActive: false,
-		date: null
-	}
-};
+export function selectDateReducer(state, date) {
+	return { ...state, date};
+}
 
-function date(state, { type, payload }) {
+export function toggleDatepickerReducer(state, isActive) {
+	return { ...state, isActive };
+}
+
+function datesReducer(state, { type, payload }) {
 	switch (type) {
 		case TOGGLE_DATEPICKER:
-			return { ...state, isActive: payload.isActive };
+			return toggleDatepickerReducer(state, payload.isActive);
 
 		case SELECT_DATE:
-			return { ...state, date: payload.date };
+			return selectDateReducer(state, payload.date);
 	}
 
 	return state;
 }
 
-export default function datesReducer(state = initialState, action) {
+export default function(state = datesState, action) {
 	if (action.dateType) {
 		return {
 			...state,
-			[action.dateType]: date(state[action.dateType], action)
+			[action.dateType]: datesReducer(state[action.dateType], action)
 		};
 	}
 
