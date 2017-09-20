@@ -8,6 +8,15 @@ export const systemState = {
 	enableInfantsWithSeats: false
 };
 
+export const blockVisibilityState = {
+	search: true,
+	registration: false,
+	bookings: false
+};
+
 export const initialState = {
-	system: systemState
+	system: systemState,
+	form: {
+		blockVisibility: blockVisibilityState
+	}
 };

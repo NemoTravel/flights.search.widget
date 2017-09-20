@@ -33,6 +33,8 @@ export function setPreloadedState(state) {
 
 /**
  * Create Redux-store.
+ * 
+ * @param {Object} config - system configuration object.
  *
  * @returns {Store}
  */

@@ -1,12 +1,7 @@
 import { TOGGLE_BLOCK } from 'actions';
+import { blockVisibilityState } from 'state';
 
-const initialState = {
-	search: true,
-	registration: false,
-	bookings: false
-};
-
-export default function blockVisibilityReducer(state = initialState, action) {
+export default function blockVisibilityReducer(state = blockVisibilityState, action) {
 	switch (action.type) {
 		case TOGGLE_BLOCK:
 			return { ...state, [action.payload]: !state[action.payload] };
