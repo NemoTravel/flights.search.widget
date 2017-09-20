@@ -1,4 +1,4 @@
-export const system = {
+export const systemState = {
 	rootElement: null,
 	API_URL: '',
 	routingGrid: null,
@@ -9,5 +9,5 @@ export const system = {
 };
 
 export const initialState = {
-	system
+	system: systemState
 };

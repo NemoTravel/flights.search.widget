@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
 import { cache } from 'utils';
 import { initialState } from 'state';
-import { processConfig } from 'reducers/system';
+import { configReducer } from 'reducers/system';
 
 let middlewares = [thunk];
 
@@ -41,7 +41,7 @@ export function getStore(config = {}) {
 	// @see https://github.com/gaearon/redux-thunk#motivation
 	let preloadedState = {
 		...initialState,
-		system: processConfig(initialState, config)
+		system: configReducer(initialState, config)
 	};
 
 	return createStore(

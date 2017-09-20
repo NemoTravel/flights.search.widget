@@ -1,9 +1,9 @@
 import { LOAD_CONFIG } from 'actions';
 import { cache } from 'utils';
-import { system } from 'state';
+import { systemState } from 'state';
 
-export function processConfig(state, config) {
-	let resultState = { ...state, ...config };
+export function configReducer(state, newConfig) {
+	let resultState = { ...state, ...newConfig };
 
 	// Store current language code in the cache.
 	cache('locale', resultState.locale);
@@ -11,10 +11,10 @@ export function processConfig(state, config) {
 	return resultState;
 }
 
-export default function(state = system, action) {
+export default function(state = systemState, action) {
 	switch (action.type) {
 		case LOAD_CONFIG:
-			return processConfig(state, action.payload);
+			return configReducer(state, action.payload);
 
 		default:
 			return state;
