@@ -1,3 +1,4 @@
+import { autocompleteState } from 'state';
 import {
 	AUTOCOMPLETE_LOADING_STARTED,
 	AUTOCOMPLETE_LOADING_FINISHED,
@@ -6,22 +7,15 @@ import {
 	AIRPORT_SELECTED
 } from 'actions';
 
-const initialState = {
-	departure: {
-		isLoading: false,
-		suggestions: [],
-		inputValue: '',
-		airport: null
-	},
-	arrival: {
-		isLoading: false,
-		suggestions: [],
-		inputValue: '',
-		airport: null
-	}
-};
+export function autocompleteInputValueReducer(state, inputValue) {
+	return { ...state, inputValue };
+}
 
-function autocomplete(state, { type, payload }) {
+export function autocompleteAirportReducer(state, airport) {
+	return { ...state, airport };
+}
+
+export function autocompleteReducer(state, { type, payload }) {
 	switch (type) {
 		case AUTOCOMPLETE_LOADING_STARTED:
 			return { ...state, isLoading: true };
@@ -33,20 +27,20 @@ function autocomplete(state, { type, payload }) {
 			return { ...state, suggestions: payload.suggestions };
 
 		case AUTOCOMPLETE_INPUT_VALUE_CHANGED:
-			return { ...state, inputValue: payload.value };
+			return autocompleteInputValueReducer(state, payload.value);
 
 		case AIRPORT_SELECTED:
-			return { ...state, airport: payload.airport };
+			return autocompleteAirportReducer(state, payload.airport);
 	}
 
 	return state;
 }
 
-export default function autocompleteReducer(state = initialState, action) {
+export default function(state = autocompleteState, action) {
 	if (action.autocompleteType) {
 		return {
 			...state,
-			[action.autocompleteType]: autocomplete(state[action.autocompleteType], action)
+			[action.autocompleteType]: autocompleteReducer(state[action.autocompleteType], action)
 		};
 	}
 
