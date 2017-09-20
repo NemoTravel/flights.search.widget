@@ -1,4 +1,5 @@
 import Cookie from 'js-cookie';
+import moment from 'moment';
 
 const decode = (string) => {
 	try {
@@ -58,4 +59,32 @@ export const i18n = (moduleName, label) => {
 		console.warn(e);
 		return '';
 	}
+};
+
+/**
+ * Get an array of MomentJS dates between two given dates.
+ * 
+ * @param firstDate
+ * @param secondDate
+ * @param withBoundaryDates
+ * @returns {Array}
+ */
+export const getIntermediateDates = (firstDate, secondDate = moment(), withBoundaryDates = false) => {
+	let result = [];
+	
+	if (firstDate && secondDate) {
+		let startDate = firstDate.clone();
+		let endDate = secondDate.clone();
+
+		while (startDate.add(1, 'days').diff(endDate) < 0) {
+			result.push(startDate.clone());
+		}
+		
+		if (withBoundaryDates) {
+			result.unshift(firstDate);
+			result.push(secondDate);
+		}
+	}
+	
+	return result;
 };

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { i18n } from 'utils';
+import { i18n, getIntermediateDates } from 'utils';
 
 /**
  * Selectors are like `computed` objects in KnockoutJS.
@@ -164,16 +164,7 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
 		let result = [];
 		
 		if (departureDate && returnDate) {
-			let startDate = departureDate.clone();
-			let endDate = returnDate.clone();
-
-			result.push(departureDate);
-			
-			while (startDate.add(1, 'days').diff(endDate) < 0) {
-				result.push(startDate.clone());
-			}
-
-			result.push(returnDate);
+			result = getIntermediateDates(departureDate, returnDate, true);
 		}
 		else if (departureDate) {
 			result.push(departureDate);
