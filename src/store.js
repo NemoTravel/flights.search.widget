@@ -1,3 +1,4 @@
+import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
@@ -10,7 +11,10 @@ let middlewares = [thunk];
 // Include redux-logger in development mode.
 if (process.env.NODE_ENV !== 'production') {
 	const logger = require('redux-logger').default;
+	const { whyDidYouUpdate } = require('why-did-you-update');
+	
 	middlewares.push(logger);
+	whyDidYouUpdate(React)
 }
 
 const STORE_CACHE_KEY = 'cached_store';

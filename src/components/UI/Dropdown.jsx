@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import onClickOutside from 'react-onclickoutside';
 
-class Dropdown extends Component {
+class Dropdown extends PureComponent {
 	constructor(props) {
 		super(props);
 

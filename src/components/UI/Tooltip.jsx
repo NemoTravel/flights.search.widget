@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classnames from 'classnames';
 
-export default class Tooltip extends Component {
+export default class Tooltip extends PureComponent {
 	render() {
 		const { 
 			children:innerComponent, 

@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 
-export default class Block extends React.Component {
+export default class Block extends React.PureComponent {
 	constructor(props) {
 		super(props);
 		this.toggleHandler = this.toggleHandler.bind(this);

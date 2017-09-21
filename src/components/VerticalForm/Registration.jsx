@@ -6,6 +6,10 @@ export default class Registration extends Block {
 	get type() {
 		return 'registration';
 	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return false;
+	}
 	
 	render() {
 		return <div className="nemo-widget-form__block nemo-widget-form__block_registration">

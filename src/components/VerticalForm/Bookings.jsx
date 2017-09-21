@@ -6,6 +6,10 @@ export default class Bookings extends Block {
 	get type() {
 		return 'bookings';
 	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return false;
+	}
 	
 	render() {
 		return <div className="nemo-widget-form__block nemo-widget-form__block_bookings">

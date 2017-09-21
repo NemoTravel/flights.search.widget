@@ -22,6 +22,15 @@ export default class Datepicker extends Component {
 	onChangeHandler(date) {
 		this.props.datepickerChange(date, this.type);
 	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		const { isActive, date, highlightDates, specialDate } = this.props;
+		
+		return isActive !== nextProps.isActive || 
+			date !== nextProps.date ||
+			specialDate !== nextProps.specialDate || 
+			highlightDates !== nextProps.highlightDates;
+	}
 	
 	render() {
 		const { 
