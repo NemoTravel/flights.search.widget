@@ -49,13 +49,13 @@
     "why-did-you-update": "0.0.8"
   },
   "dependencies": {
-    "axios": "^0.16.2",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "bootstrap": "^4.0.0-beta",
     "classnames": "^2.2.5",
     "js-cookie": "^2.1.4",
     "moment": "^2.18.1",
+    "promise-polyfill": "^6.0.2",
     "react": "^15.6.1",
     "react-autosuggest": "^9.3.2",
     "react-datepicker": "^0.54.0",
@@ -64,6 +64,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "whatwg-fetch": "^2.0.3"
   }
 }

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { 
 	AUTOCOMPLETE_LOADING_STARTED, 
 	AUTOCOMPLETE_LOADING_FINISHED,
@@ -101,10 +100,11 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 			url += `?apilang=${state.system.locale}`;
 		}
 
-		axios.get(url)
-			.then((response) => {
-				const data = response.data;
-	
+		fetch(url)
+			.then(response => response.json())
+			.then(response => {
+				const data = response;
+				
 				// Some basic parser.
 				if (data && data.guide.autocomplete.iata instanceof Array) {
 					const { airports } = data.guide;

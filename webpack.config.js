@@ -18,7 +18,7 @@ let config = {
 	context: __dirname,
 	
 	// Entry file.
-	entry: './src/main',
+	entry: ['whatwg-fetch', './src/main'],
 
 	// Watch for changes in file.
 	watch: isDevMode,

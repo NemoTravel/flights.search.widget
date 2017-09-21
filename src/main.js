@@ -4,6 +4,7 @@ import Main from 'components/Main';
 import { Provider } from 'react-redux';
 import { getStore, cacheState } from 'store';
 import './css/main.scss';
+import 'whatwg-fetch';
 
 /**
  * This will be exported to the global scope as `AirlinesSearchWidget.init`.
