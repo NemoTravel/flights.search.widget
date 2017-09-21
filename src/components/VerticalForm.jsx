@@ -9,23 +9,24 @@ import BookingsBlock from 'components/VerticalForm/Bookings';
 
 class VerticalForm extends Component {
 	render() {
-		const { blockVisibility } = this.props;
-		const { toggleBlock } = this.props.actions;
+		const { blockVisibility, toggleBlock, showErrors, startSearch } = this.props;
 		
 		return <section className="nemo-widget-form nemo-widget-form_vertical">
 			<SearchBlock 
 				isActive={blockVisibility.search}
-				actions={this.props.actions}
+				showErrors={showErrors}
+				toggleBlock={toggleBlock}
+				startSearch={startSearch}
 			/>
 			
 			<RegistrationBlock
 				isActive={blockVisibility.registration}
-				actions={{toggleBlock}}
+				toggleBlock={toggleBlock}
 			/>
 			
 			<BookingsBlock
 				isActive={blockVisibility.bookings}
-				actions={{toggleBlock}}
+				toggleBlock={toggleBlock}
 			/>
 		</section>;
 	}
@@ -38,9 +39,7 @@ function mapStateToProps(state) {
 }
 
 function mapActionsToProps(dispatch) {
-	return {
-		actions: bindActionCreators(formActions, dispatch)
-	};
+	return bindActionCreators(formActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(VerticalForm);

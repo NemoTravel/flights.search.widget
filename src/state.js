@@ -134,8 +134,7 @@ export const fillStateFromCache = (state, stateFromCache) => {
 			if (stateFromCache.form.passengers) {
 				for (const passType in stateFromCache.form.passengers) {
 					if (stateFromCache.form.passengers.hasOwnProperty(passType)) {
-						const counter = stateFromCache.form.passengers[passType].count;
-						state.form.passengers[passType].count = counter;
+						state.form.passengers[passType].count = stateFromCache.form.passengers[passType].count;
 					}
 				}
 			}

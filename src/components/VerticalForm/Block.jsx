@@ -12,7 +12,7 @@ export default class Block extends React.PureComponent {
 	}
 
 	toggleHandler() {
-		return this.props.actions.toggleBlock(this.type);
+		return this.props.toggleBlock(this.type);
 	}
 	
 	getHeaderClass() {

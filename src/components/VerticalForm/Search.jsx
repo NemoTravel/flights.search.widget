@@ -11,7 +11,7 @@ export default class Search extends Block {
 	}
 	
 	render() {
-		const { startSearch } = this.props.actions;
+		const { startSearch } = this.props;
 		
 		return <div className="nemo-widget-form__block nemo-widget-form__block_search">
 			<div className={this.getHeaderClass()} onClick={this.toggleHandler}>
