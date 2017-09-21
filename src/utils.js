@@ -50,7 +50,8 @@ export const cache = (key, value = null) => {
  */
 export const i18n = (moduleName, label) => {
 	try {
-		const locale = cache('locale');
+		let locale = cache('locale');
+		locale = locale ? locale : 'en';
 		const module = require('i18n/' + locale + '/' + moduleName);
 		
 		return module[label];

@@ -24,11 +24,12 @@ export default class Datepicker extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		const { isActive, date, highlightDates, specialDate } = this.props;
+		const { isActive, date, highlightDates, specialDate, showErrors } = this.props;
 		
 		return isActive !== nextProps.isActive || 
 			date !== nextProps.date ||
-			specialDate !== nextProps.specialDate || 
+			specialDate !== nextProps.specialDate ||
+			showErrors !== nextProps.showErrors || 
 			highlightDates !== nextProps.highlightDates;
 	}
 	

@@ -11,10 +11,10 @@ let middlewares = [thunk];
 // Include redux-logger in development mode.
 if (process.env.NODE_ENV !== 'production') {
 	const logger = require('redux-logger').default;
-	const { whyDidYouUpdate } = require('why-did-you-update');
+	// const { whyDidYouUpdate } = require('why-did-you-update');
 	
 	middlewares.push(logger);
-	whyDidYouUpdate(React)
+	// whyDidYouUpdate(React);
 }
 
 const STORE_CACHE_KEY = 'cached_store';

@@ -1,7 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 
-export default class Tooltip extends PureComponent {
+export default class Tooltip extends Component {
+	shouldComponentUpdate(nextProps) {
+		const { isActive, message, children } = this.props;
+		return isActive !== nextProps.isActive || message !== nextProps.message || children !== nextProps.children;
+	}
+	
 	render() {
 		const { 
 			children:innerComponent, 

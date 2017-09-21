@@ -9,6 +9,10 @@ export default class Counter extends Component {
 		this.addPassenger = this.addPassenger.bind(this);
 	}
 	
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.props.count !== nextProps.count;
+	}
+	
 	removePassenger() {
 		const { canRemovePassenger, code } = this.props;
 		

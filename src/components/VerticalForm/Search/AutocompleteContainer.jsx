@@ -32,8 +32,20 @@ class AutocompleteContainer extends Component {
 		const actions = { ...this.props.actions, selectAirport };
 		
 		return <div className="form-group">
-			<DepartureAutocomplete showErrors={showErrors} state={departureAutocomplete} system={system} {...actions}/>
-			<ArrivalAutocomplete showErrors={showErrors} state={arrivalAutocomplete} system={system} {...actions} getRef={this.getArrivalRef}/>
+			<DepartureAutocomplete
+				system={system}
+				showErrors={showErrors} 
+				{...departureAutocomplete}
+				{...actions}
+			/>
+			
+			<ArrivalAutocomplete
+				system={system}
+				showErrors={showErrors} 
+				{...actions} 
+				{...arrivalAutocomplete}
+				getRef={this.getArrivalRef}
+			/>
 		</div>
 	}
 }

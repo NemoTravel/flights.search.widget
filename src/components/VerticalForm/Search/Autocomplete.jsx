@@ -101,7 +101,7 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderAirportCode() {
-		const { isLoading, airport } = this.props.state;
+		const { isLoading, airport } = this.props;
 		const isActive = this.props.system.showAirportIATA && !isLoading && airport;
 		let className = classnames(
 			'nemo-widget-form__input__airportCode',
@@ -139,8 +139,7 @@ export default class Autocomplete extends Component {
 	 * @returns {XML}
 	 */
 	renderInputField(inputProps) {
-		const { showErrors } = this.props;
-		const { airport } = this.props.state;
+		const { showErrors, airport } = this.props;
 		
 		if (this.props.getRef) {
 			inputProps.ref = this.props.getRef;
@@ -161,18 +160,28 @@ export default class Autocomplete extends Component {
 		this.props.selectAirport(airport, this.type);
 	}
 	
+	shouldComponentUpdate(nextProps, nextState) {
+		const { showErrors, suggestions, isLoading, inputValue, airport } = this.props;
+		
+		return showErrors !== nextProps.showErrors ||
+			suggestions !== nextProps.suggestions ||
+			inputValue !== nextProps.inputValue ||
+			airport !== nextProps.airport ||
+			isLoading !== nextProps.isLoading;
+	}
+	
 	render() {
-		const { state, system:config } = this.props;
+		const { suggestions, isLoading, inputValue, system:config } = this.props;
 		let inputClassName = classnames(
 			`form-control nemo-widget-form__${this.type} nemo-widget-form__input nemo-widget-form__autocomplete`,
-			{ 'nemo-widget-form__input_loading': state.isLoading },
+			{ 'nemo-widget-form__input_loading': isLoading },
 			{ 'nemo-widget-form__input_pointer': config.readOnlyAutocomplete && config.routingGrid }
 		);
 		
 		return <div className="nemo-widget-form__input__wrapper">
 			<Autosuggest
 				id={this.type}
-				suggestions={state.suggestions}
+				suggestions={suggestions}
 				onSuggestionsFetchRequested={this.fetchSuggestions}
 				onSuggestionsClearRequested={this.clearSuggestions}
 				getSuggestionValue={(item) => item.name}
@@ -189,7 +198,7 @@ export default class Autocomplete extends Component {
 					spellCheck: false,
 					readOnly: config.readOnlyAutocomplete && config.routingGrid,
 					placeholder: this.placeholder,
-					value: state.inputValue,
+					value: inputValue,
 					onChange: this.onChangeHandler,
 					onFocus: this.onFocusHandler
 				}}

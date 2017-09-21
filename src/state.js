@@ -1,6 +1,5 @@
 import { autocompleteInputValueReducer, autocompleteAirportReducer } from 'reducers/form/autocomplete';
 import { selectDateReducer, toggleDatepickerReducer } from 'reducers/form/dates';
-import { setPassengersCounterReducer } from 'reducers/form/passengers';
 import moment from 'moment';
 import { i18n } from 'utils';
 
@@ -136,7 +135,7 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				for (const passType in stateFromCache.form.passengers) {
 					if (stateFromCache.form.passengers.hasOwnProperty(passType)) {
 						const counter = stateFromCache.form.passengers[passType].count;
-						state.form.passengers[passType] = setPassengersCounterReducer(stateFromCache.form.passengers[passType], counter);
+						state.form.passengers[passType].count = counter;
 					}
 				}
 			}
