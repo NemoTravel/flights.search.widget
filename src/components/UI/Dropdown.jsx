@@ -39,9 +39,9 @@ class Dropdown extends PureComponent {
 			[triggerType]: this.toggleContent
 		};
 		
-		return <div className="nemo-ui-dropdown">
-			<div className="nemo-ui-dropdown__trigger" {...triggerProps}>{triggerElement}</div>
-			<div className={`nemo-ui-dropdown__content${isVisible ? '' : ' nemo-ui-dropdown__content_hidden'}`}>{contentElement}</div>
+		return <div className="widget-ui-dropdown">
+			<div className="widget-ui-dropdown__trigger" {...triggerProps}>{triggerElement}</div>
+			<div className={`widget-ui-dropdown__content${isVisible ? '' : ' widget-ui-dropdown__content_hidden'}`}>{contentElement}</div>
 		</div>;
 	}
 }

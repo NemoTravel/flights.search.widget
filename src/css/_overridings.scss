@@ -48,9 +48,11 @@
 	font-weight: 600;
 	font-size: 15px;
 	position: relative;
-	padding: 0.65rem 0.75rem;
+	padding: 11px 13px;
 	line-height: normal;
 	z-index: 2;
+	overflow: hidden;
+	text-overflow: ellipsis;
 
 	&[readonly] {
 		background-color: inherit;
@@ -69,4 +71,8 @@
  */
 .react-datepicker-popper {
 	z-index: 15;
+}
+
+.react-datepicker-wrapper, .react-datepicker__input-container {
+	display: block;
 }

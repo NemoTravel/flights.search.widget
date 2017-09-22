@@ -32,25 +32,25 @@ export default class Counter extends Component {
 	render() {
 		const { title, count, canAddPassenger, canRemovePassenger } = this.props;
 		const itemClassName = classnames(
-			'nemo-widget-form-passengers__item',
-			{ 'nemo-widget-form-passengers__item_disabled': !count }
+			'widget-form-passengers__item',
+			{ 'widget-form-passengers__item_disabled': !count }
 		);
 		
 		const minusClassName = classnames(
-			'nemo-ui-icon nemo-widget-form-passengers__icon nemo-widget-form-passengers__minus',
-			{ 'nemo-widget-form-passengers__icon_disabled': !canRemovePassenger }
+			'widget-ui-icon widget-form-passengers__icon widget-form-passengers__minus',
+			{ 'widget-form-passengers__icon_disabled': !canRemovePassenger }
 		);
 		
 		const plusClassName = classnames(
-			'nemo-ui-icon nemo-widget-form-passengers__icon nemo-widget-form-passengers__plus',
-			{ 'nemo-widget-form-passengers__icon_disabled': !canAddPassenger }
+			'widget-ui-icon widget-form-passengers__icon widget-form-passengers__plus',
+			{ 'widget-form-passengers__icon_disabled': !canAddPassenger }
 		);
 
 		return <div className={itemClassName}>
-			<div className="nemo-widget-form-passengers__title">{title}</div>
-			<div className="nemo-widget-form-passengers__counter">
+			<div className="widget-form-passengers__title">{title}</div>
+			<div className="widget-form-passengers__counter">
 				<div className={minusClassName} onClick={this.removePassenger}/>
-				<div className="nemo-widget-form-passengers__number">{count}</div>
+				<div className="widget-form-passengers__number">{count}</div>
 				<div className={plusClassName} onClick={this.addPassenger}/>
 			</div>
 		</div>;

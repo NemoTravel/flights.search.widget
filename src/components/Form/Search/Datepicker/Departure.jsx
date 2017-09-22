@@ -1,5 +1,5 @@
 import React from 'react';
-import Datepicker from 'components/VerticalForm/Search/Datepicker';
+import Datepicker from 'components/Form/Search/Datepicker';
 import { i18n } from 'utils';
 
 export default class Departure extends Datepicker {

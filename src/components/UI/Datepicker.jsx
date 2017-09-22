@@ -9,6 +9,7 @@ export default class Datepicker extends Component {
 		
 		this.enable = this.enable.bind(this);
 		this.disable = this.disable.bind(this);
+		this.renderCloser = this.renderCloser.bind(this);
 	}
 	
 	/**
@@ -44,8 +45,13 @@ export default class Datepicker extends Component {
 	disable() {
 		if (this.props.toggleDatePicker && this.props.isActive) {
 			this.props.toggleDatePicker(false, this.props.type);
-			this.props.datepickerChange(null, this.props.type);
+			this.props.selectDate(null, this.props.type);
 		}
+	}
+	
+	renderCloser() {
+		const { isActive, toggleDatePicker } = this.props;
+		return toggleDatePicker && isActive ? <div className="widget-ui-icon widget-ui-datepicker__closer" onClick={this.disable}/> : null;
 	}
 
 	/**
@@ -54,26 +60,18 @@ export default class Datepicker extends Component {
 	 * @returns {XML}
 	 */
 	renderCustomInput() {
-		const { inputProps, date, isActive, toggleDatePicker, getRef, tooltipIsActive, tooltipText } = this.props;
-		let formattedDate = '',
-			className = classnames(
-				'form-control nemo-widget-form__date',
-				{ 'nemo-widget-form__date_disabled': !isActive }
-			);
-		
-		if (date) {
-			formattedDate = date.format(Datepicker.dateFormat);
-		}
+		const { inputProps, date, isActive, getRef, tooltipIsActive, tooltipText } = this.props;
+		const formattedDate = date ? date.format(Datepicker.dateFormat) : '';
 		
 		if (getRef) {
 			inputProps.ref = getRef;
 		}
 
-		return <div className="nemo-widget-form__input__wrapper">
+		return <div className="widget-ui-input__wrapper">
 			<Tooltip message={tooltipText} isActive={tooltipIsActive}>
 				<input
 					type="text"
-					className={className}
+					className={classnames('form-control widget-ui-input', { 'widget-ui-input_disabled': !isActive })}
 					readOnly={true}
 					spellCheck={false}
 					value={formattedDate}
@@ -81,13 +79,9 @@ export default class Datepicker extends Component {
 				/>
 			</Tooltip>
 
-			{
-				toggleDatePicker && isActive ?
-					<div className="nemo-ui-icon nemo-widget-form__input__closer" onClick={this.disable}/>
-					: null
-			}
+			{this.renderCloser()}
 
-			<div className="nemo-ui-icon nemo-widget-form__input__calendar"/>
+			<div className="widget-ui-icon widget-ui-datepicker__calendar"/>
 		</div>;
 	}
 	
@@ -95,7 +89,7 @@ export default class Datepicker extends Component {
 		const { date, locale, isActive, specialDate } = this.props;
 		
 		const specialDayClassName = (date) => {
-			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'nemo-ui-datepicker__specialDay' : '';
+			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'widget-ui-datepicker__specialDay' : '';
 		};
 		
 		return <DatePicker
@@ -105,7 +99,7 @@ export default class Datepicker extends Component {
 			// dropdownMode="scroll"
 			// showMonthDropdown={false}
 			customInput={this.renderCustomInput()}
-			calendarClassName="nemo-ui-datepicker" 
+			calendarClassName="widget-ui-datepicker" 
 			dateFormat={Datepicker.dateFormat}
 			dateFormatCalendar={Datepicker.dateFormatCalendar}
 			selected={date}

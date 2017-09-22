@@ -1,0 +1,49 @@
+@import "../variables";
+
+.widget-ui-input {
+	&__wrapper {
+		position: relative;
+	}
+
+	&__arrow {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 11;
+		width: 35px;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		font-size: 5px;
+		color: #999;
+		cursor: pointer;
+		pointer-events: none;
+
+		&:after {
+			content: "\e90a";
+		}
+	}
+
+	&_loading {
+		background: url('/images/form/spinner.svg') no-repeat 90% center;
+		background-size: 20px;
+	}
+
+	&_pointer {
+		cursor: pointer;
+	}
+
+	&_disabled {
+		background: #F2F2F2 !important;
+		border-color: #F2F2F2 !important;
+		transition: background 0.2s $transition-function !important;
+
+		&:hover {
+			background: #E6E6E6 !important;
+			border-color: #E6E6E6 !important;
+		}
+	}
+}

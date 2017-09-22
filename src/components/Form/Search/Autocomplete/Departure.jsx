@@ -1,5 +1,5 @@
 import React from 'react';
-import Autocomplete from 'components/VerticalForm/Search/Autocomplete';
+import Autocomplete from 'components/Form/Search/Autocomplete';
 import { i18n } from 'utils';
 
 export default class Departure extends Autocomplete {

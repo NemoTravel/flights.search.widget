@@ -1,371 +1,76 @@
 @import "variables";
 
 &-form {
-	@import "form/passengers";
+	@import "form/search";
 	
-	&__block {
-		border-bottom: 1px solid #E6E6E6;
+	//&__block {
+		//border-bottom: 1px solid #E6E6E6;
 
-		&__header {
-			position: relative;
-			padding: 0.9rem;
-			font-weight: 600;
-			color: $headers-font-color;
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			user-select: none;
+		//&__header {
+		//	position: relative;
+		//	padding: 0.9rem;
+		//	font-weight: 600;
+		//	color: $headers-font-color;
+		//	cursor: pointer;
+		//	display: flex;
+		//	align-items: center;
+		//	user-select: none;
+		//
+		//	&:before {
+		//		position: relative;
+		//		width: 1.2rem;
+		//		top: -1px;
+		//		font-family: "OpenSkyIcons", sans-serif;
+		//		font-weight: normal;
+		//		color: $headers-font-color;
+		//		margin-right: 0.8rem;
+		//	}
+		//
+		//	&:after {
+		//		content: "\e90e";
+		//		position: absolute;
+		//		top: 50%;
+		//		margin-top: 5px;
+		//		right: 1.2rem;
+		//		font-family: "OpenSkyIcons", sans-serif;
+		//		color: $headers-font-color;
+		//		transform: translate(0, -50%) rotate(90deg);
+		//	}
+		//
+		//	&_active {
+		//		&:after {
+		//			margin-top: 0;
+		//			transform: translate(0, -50%) rotate(-90deg);
+		//		}
+		//	}
+		//}
 
-			&:before {
-				position: relative;
-				width: 1.2rem;
-				top: -1px;
-				font-family: "OpenSkyIcons", sans-serif;
-				font-weight: normal;
-				color: $headers-font-color;
-				margin-right: 0.8rem;
-			}
-
-			&:after {
-				content: "\e90e";
-				position: absolute;
-				top: 50%;
-				margin-top: 5px;
-				right: 1.2rem;
-				font-family: "OpenSkyIcons", sans-serif;
-				color: $headers-font-color;
-				transform: translate(0, -50%) rotate(90deg);
-			}
-
-			&_active {
-				&:after {
-					margin-top: 0;
-					transform: translate(0, -50%) rotate(-90deg);
-				}
-			}
-		}
-
-		&__body {
-			padding: 0.9rem;
-			display: none;
+		//&__body {
+		//	padding: 0.9rem;
+			//display: none;
 			
-			&_active {
-				display: block;
-			}
-		}
+			//&_active {
+			//	display: block;
+			//}
+		//}
 		
-		&_search &__header:before {
-			content: "\e90b";
-			font-size: 18px;
-		}
-		
-		&_registration &__header:before {
-			content: "\e900";
-			font-size: 15px;
-		}
-		
-		&_bookings &__header:before {
-			content: "\e909";
-			font-size: 16px;
-		}
-	}
-
-	& &__searchButton {
-		width: 100%;
-		padding: 0.7rem;
-	}
-
-	& &__departure {
-		padding-right: 4.5rem;
-		
-		&__date {
-			&__col {
-				position: static;
-				padding-right: 0.5rem;
-				
-				input {
-					cursor: pointer;
-				}
-
-				.react-datepicker__day--highlighted {
-					&:after {
-						transform: translate(0, -50%) rotate(180deg);
-						right: 0;
-						left: auto;
-					}
-				}
-			}
-		}
-	}
-
-	& &__arrival {
-		border-top: none;
-		padding-right: 4.5rem;
-	}
-
-	& &__return {
-		&__date {
-			&__col {
-				position: static;
-				padding-left: 0.5rem;
-
-				input {
-					cursor: pointer;
-				}
-
-				.react-datepicker__day--selected, .react-datepicker__day:hover {
-					&:after {
-						transform: translate(0, -50%) rotate(180deg);
-						right: 0;
-						left: auto;
-					}
-				}
-
-				.react-datepicker__day--highlighted {
-					&:after {
-						transform: translate(0, -50%) rotate(0deg);
-						right: auto;
-						left: 0;
-					}
-				}
-			}
-		}
-	}
-
-	& &__input {
-		&__wrapper {
-			position: relative;
-
-			.react-autosuggest {
-				&__suggestions {
-					&-container {
-						position: absolute;
-						z-index: 12;
-						left: 0;
-						right: 0;
-						border: 1px solid #e6e6e6;
-						max-height: 370px;
-						box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-						transition: opacity, 450ms, ease;
-						overflow: auto;
-						display: none;
-						background-color: #ffffff;
-						
-						&--open {
-							display: block;
-						}
-					}
-					
-					&-list {
-						margin-bottom: 0;
-					}
-				}
-				
-				&__suggestion {
-					list-style-type: none;
-					background: #fff;
-					transition: background, .4s, ease;
-					display: block;
-					padding: 10px 90px 10px 20px;
-					color: #666;
-					font-size: 15px;
-					line-height: 16px;
-					position: relative;
-					font-weight: 400;
-					cursor: pointer;
-					
-					&:hover {
-						background: rgba(0, 76, 186, 0.07);
-					}
-					
-					&--highlighted {
-						background: rgba(0, 76, 186, 0.07);
-					}
-					
-					&:not(:last-of-type) {
-						border-bottom: 1px solid #e6e6e6;
-					}
-				}
-			}
-		}
-		
-		&__suggestion {
-			&__code {
-				position: absolute;
-				right: 2rem;
-				top: 50%;
-
-				margin-top: -1px;
-
-				font-weight: 400;
-				font-size: 15px;
-				line-height: 16px;
-				color: #B3B3B3;
-				text-transform: uppercase;
-				transform: translateY(-50%);
-				pointer-events: none;
-			}
-		}
-		
-		&__arrow {
-			position: absolute;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			z-index: 11;
-			width: 2rem;
-			
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			font-size: 5px;
-			color: #999;
-			cursor: pointer;
-			pointer-events: none;
-			
-			&:after {
-				content: "\e90a";
-			}
-		}
-		
-		&__calendar {
-			position: absolute;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			z-index: 2;
-			width: 2rem;
-
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			
-			font-size: 13px;
-			color: #B3B3B3;
-			cursor: pointer;
-			pointer-events: none;
-			
-			&:after {
-				content: "\e90d";
-			}
-		}
-		
-		&__closer {
-			width: 20px;
-			height: 20px;
-			color: #fff;
-			background: #1B75BC;
-			z-index: 11;
-			border: 1px solid #1B75BC;
-			border-radius: 50%;
-			position: absolute;
-			top: -10px;
-			right: -10px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 10px;
-			cursor: pointer;
-			
-			&:hover {
-				background: #1B75BC;
-				border-color: #1B75BC;
-				color: #fff;
-			}
-
-			&:after {
-				content: "\E902";
-				margin-left: 0;
-				margin-top: 0;
-				transform: rotate(45deg);
-			}
-		}
-		
-		&__airportCode {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			display: flex;
-			align-items: center;
-			color: #B3B3B3;
-			font-weight: 400;
-			font-size: 15px;
-			line-height: 16px;
-			right: 1rem;
-			z-index: 1;
-			
-			&_withArrow {
-				right: 2rem;
-			}
-		}
-		
-		&__switcher {
-			width: 24px;
-			height: 24px;
-			transform: rotate(90deg);
-			color: #ccc;
-			background: #fff;
-			z-index: 11;
-			border: 1px solid #ccc;
-			border-radius: 50%;
-			position: absolute;
-			top: -12px;
-			right: 1rem;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 12px;
-			cursor: pointer;
-			
-			&:hover {
-				background: #1B75BC;
-				border-color: #1B75BC;
-				color: #fff;
-			}
-			
-			&:after {
-				content: "\e901";
-			}
-
-			&_withArrow {
-				right: 2rem;
-			}
-		}
-		
-		&_loading {
-			background: url('/images/form/spinner.svg') no-repeat 90% center;
-			background-size: 20px;
-		}
-		
-		&_pointer {
-			cursor: pointer;
-		}
-	}
-
-	&__date {
-		-webkit-appearance: none;
-		
-		&_disabled {
-			background: #F2F2F2 !important;
-			border-color: #F2F2F2 !important;
-			transition: background 0.2s $transition-function !important;
-			
-			&:hover {
-				background: #E6E6E6 !important;
-				border-color: #E6E6E6 !important;
-			}
-		}
-	}
+	//	&_search &__header:before {
+	//		content: "\e90b";
+	//		font-size: 18px;
+	//	}
+	//	
+	//	&_registration &__header:before {
+	//		content: "\e900";
+	//		font-size: 15px;
+	//	}
+	//	
+	//	&_bookings &__header:before {
+	//		content: "\e909";
+	//		font-size: 16px;
+	//	}
+	//}
 	
 	&__pseudoBlocks {
 		text-align: center;
-	}
-	
-	&__autocomplete {
-		&:focus {
-			box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-			background-color: transparent;
-		}
 	}
 }

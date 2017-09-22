@@ -13,11 +13,11 @@ export const systemState = {
 	enableInfantsWithSeats: false
 };
 
-export const blockVisibilityState = {
-	search: true,
-	registration: false,
-	bookings: false
-};
+// export const blockVisibilityState = {
+// 	search: true,
+// 	registration: false,
+// 	bookings: false
+// };
 
 export const autocompleteState = {
 	departure: {

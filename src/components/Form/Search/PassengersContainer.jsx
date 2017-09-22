@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as passengersActions from 'actions/passengers';
 import { getPassengersTitle, getPassengersArray, getTotalPassengersCount, getPassengersCounterAvailability } from 'selectors';
-import Selector from 'components/VerticalForm/Search/Passengers/Selector';
+import Selector from 'components/Form/Search/Passengers/Selector';
 
 class PassengersContainer extends Component {
 	render() {
@@ -20,17 +20,14 @@ class PassengersContainer extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		counterAvailability: getPassengersCounterAvailability(state),
-		passengers: getPassengersArray(state),
-		title: getPassengersTitle(state),
-		totalPassengersCount: getTotalPassengersCount(state)
-	};
-}
-
-function mapActionsToProps(dispatch) {
-	return bindActionCreators(passengersActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(PassengersContainer);
+export default connect(
+	state => {
+		return {
+			counterAvailability: getPassengersCounterAvailability(state),
+			passengers: getPassengersArray(state),
+			title: getPassengersTitle(state),
+			totalPassengersCount: getTotalPassengersCount(state)
+		};
+	}, 
+	dispatch => bindActionCreators(passengersActions, dispatch)
+)(PassengersContainer);

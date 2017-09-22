@@ -23,8 +23,14 @@
 			background-color: #333333;
 		}
 		
+		.container {
+			width: 1024px;
+			margin: 0 auto;
+			padding-top: 50px;
+		}
+		
 		.nemo-widget-testWrapper {
-			width: 350px;
+			width: 100%;
 		}
 
 		@media screen and (max-width: 540px) {
@@ -37,7 +43,11 @@
 	<link rel="stylesheet" href="airlines.search.widget.min.css">
 </head>
 <body>
-<div id="root" class="nemo-widget-testWrapper"></div>
+
+<div class="container">
+	<div id="root" class="nemo-widget-testWrapper"></div>
+</div>
+
 <script src="airlines.search.widget.min.js"></script>
 <script>
 	AirlinesSearchWidget.init({

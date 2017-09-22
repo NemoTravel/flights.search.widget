@@ -14,7 +14,7 @@ export default function formReducer(state, action) {
 		showErrors,
 		registration,
 		bookings,
-		blockVisibility,
+		// blockVisibility,
 		dates,
 		autocomplete,
 		passengers

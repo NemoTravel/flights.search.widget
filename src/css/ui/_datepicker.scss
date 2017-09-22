@@ -1,6 +1,6 @@
 @import "../variables";
 
-.nemo-ui-datepicker {
+.widget-ui-datepicker {
 	border-radius: 0;
 	box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
 	color: #333;
@@ -112,7 +112,7 @@
 			}
 
 			&--selected {
-				@extend .nemo-ui-datepicker__specialDay;
+				@extend .widget-ui-datepicker__specialDay;
 			}
 
 			&--disabled {
@@ -123,6 +123,61 @@
 					background: #fff;
 				}
 			}
+		}
+	}
+
+	&__calendar {
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 2;
+		width: 35px;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		font-size: 17px;
+		color: #B3B3B3;
+		cursor: pointer;
+		pointer-events: none;
+
+		&:after {
+			content: "\e90d";
+		}
+	}
+
+	&__closer {
+		position: absolute;
+		top: -10px;
+		right: -10px;
+		z-index: 11;
+		width: 20px;
+		height: 20px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		font-size: 10px;
+		color: #fff;
+		cursor: pointer;
+		background: #1B75BC;
+		border: 1px solid #1B75BC;
+		border-radius: 50%;
+
+		&:hover {
+			background: #1B75BC;
+			border-color: #1B75BC;
+			color: #fff;
+		}
+
+		&:after {
+			content: "\E902";
+			margin-left: 0;
+			margin-top: 0;
+			transform: rotate(45deg);
 		}
 	}
 }

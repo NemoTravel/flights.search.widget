@@ -89,9 +89,9 @@ export default class Autocomplete extends Component {
 	renderSuggestion(item) {
 		const { name: airportName, IATA: airportIATA } = item;
 		
-		return <div className="nemo-widget-form__input__suggestion">
-			<span className="nemo-widget-form__input__suggestion__title">{airportName}</span>
-			<span className="nemo-widget-form__input__suggestion__code">{airportIATA}</span>
+		return <div className="widget-form-airports__suggestion">
+			<span className="widget-form-airports__suggestion__title">{airportName}</span>
+			<span className="widget-form-airports__suggestion__code">{airportIATA}</span>
 		</div>;
 	}
 
@@ -104,8 +104,8 @@ export default class Autocomplete extends Component {
 		const { isLoading, airport } = this.props;
 		const isActive = this.props.system.showAirportIATA && !isLoading && airport;
 		let className = classnames(
-			'nemo-widget-form__input__airportCode',
-			{ 'nemo-widget-form__input__airportCode_withArrow': this.props.system.routingGrid }
+			'widget-form-airports__airportCode',
+			{ 'widget-form-airports__airportCode_withArrow': this.props.system.routingGrid }
 		);
 		
 		return isActive ? <span className={className}>{airport.IATA}</span> : null;
@@ -129,7 +129,7 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderArrow() {
-		return this.props.system.routingGrid ? <div className="nemo-ui-icon nemo-widget-form__input__arrow"/> : null;
+		return this.props.system.routingGrid ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null;
 	}
 
 	/**
@@ -173,40 +173,42 @@ export default class Autocomplete extends Component {
 	render() {
 		const { suggestions, isLoading, inputValue, system:config } = this.props;
 		let inputClassName = classnames(
-			`form-control nemo-widget-form__${this.type} nemo-widget-form__input nemo-widget-form__autocomplete`,
-			{ 'nemo-widget-form__input_loading': isLoading },
-			{ 'nemo-widget-form__input_pointer': config.readOnlyAutocomplete && config.routingGrid }
+			`form-control widget-ui-input`,
+			{ 'widget-ui-input_loading': isLoading },
+			{ 'widget-ui-input_pointer': config.readOnlyAutocomplete && config.routingGrid }
 		);
 		
-		return <div className="nemo-widget-form__input__wrapper">
-			<Autosuggest
-				id={this.type}
-				suggestions={suggestions}
-				onSuggestionsFetchRequested={this.fetchSuggestions}
-				onSuggestionsClearRequested={this.clearSuggestions}
-				getSuggestionValue={(item) => item.name}
-				renderSuggestion={this.renderSuggestion}
-				onSuggestionSelected={this.selectSuggestion}
-				highlightFirstSuggestion={true}
-				focusInputOnSuggestionClick={false}
-				shouldRenderSuggestions={(value) => {
-					return config.routingGrid || (value && value.length > 1);
-				}}
-				renderInputComponent={this.renderInputField}
-				inputProps={{
-					className: inputClassName,
-					spellCheck: false,
-					readOnly: config.readOnlyAutocomplete && config.routingGrid,
-					placeholder: this.placeholder,
-					value: inputValue,
-					onChange: this.onChangeHandler,
-					onFocus: this.onFocusHandler
-				}}
-			/>
-			
-			{this.renderAirportCode()}
-			{this.renderSwitcher()}
-			{this.renderArrow()}
+		return <div className="col widget-form-airports__col">
+			<div className="widget-ui-input__wrapper">
+				<Autosuggest
+					id={this.type}
+					suggestions={suggestions}
+					onSuggestionsFetchRequested={this.fetchSuggestions}
+					onSuggestionsClearRequested={this.clearSuggestions}
+					getSuggestionValue={(item) => item.name}
+					renderSuggestion={this.renderSuggestion}
+					onSuggestionSelected={this.selectSuggestion}
+					highlightFirstSuggestion={true}
+					focusInputOnSuggestionClick={false}
+					shouldRenderSuggestions={(value) => {
+						return config.routingGrid || (value && value.length > 1);
+					}}
+					renderInputComponent={this.renderInputField}
+					inputProps={{
+						className: inputClassName,
+						spellCheck: false,
+						readOnly: config.readOnlyAutocomplete && config.routingGrid,
+						placeholder: this.placeholder,
+						value: inputValue,
+						onChange: this.onChangeHandler,
+						onFocus: this.onFocusHandler
+					}}
+				/>
+				
+				{this.renderAirportCode()}
+				{this.renderSwitcher()}
+				{this.renderArrow()}
+			</div>
 		</div>;
 	}
 }

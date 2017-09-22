@@ -20,7 +20,7 @@ export default class Datepicker extends Component {
 	 * @param {Moment} date
 	 */
 	onChangeHandler(date) {
-		this.props.datepickerChange(date, this.type);
+		this.props.selectDate(date, this.type);
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
@@ -36,7 +36,7 @@ export default class Datepicker extends Component {
 	render() {
 		const { 
 		  	toggleDatePicker,
-		  	datepickerChange,
+		  	selectDate,
 		  	getRef,
 			locale,
 			date,
@@ -51,7 +51,7 @@ export default class Datepicker extends Component {
 		let minDate = minDateProp ? minDateProp : moment();
 		let maxDate = maxDateProp ? maxDateProp : moment().add(1, 'years');
 
-		return <div className={`col nemo-widget-form__${this.type}__date__col`}>
+		return <div className={`col widget-form-dates__col`}>
 			<NemoDatepicker 
 				type={this.type}
 				isActive={isActive} 
@@ -63,7 +63,7 @@ export default class Datepicker extends Component {
 				getRef={getRef}
 				highlightDates={highlightDates}
 				toggleDatePicker={toggleDatePicker}
-				datepickerChange={datepickerChange}
+				selectDate={selectDate}
 				popperPlacement={this.popperPlacement}
 				specialDate={specialDate}
 				tooltipIsActive={!date && this.showErrors && showErrors}
