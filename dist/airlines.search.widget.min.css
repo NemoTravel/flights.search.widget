@@ -3976,6 +3976,9 @@
   font-weight: 600;
   max-width: 70%;
   overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .widget-form-passengers__counter {
@@ -4096,4 +4099,95 @@
 
 .widget-form__pseudoBlocks {
   text-align: center;
+}
+
+.widget-form_vertical .widget-form-search__wrapper {
+  padding-right: 0;
+}
+
+.widget-form_vertical .widget-form-search__wrapper .form-group:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.widget-form_vertical .widget-form-search__footer {
+  position: static;
+  margin-top: 0;
+}
+
+.widget-form_vertical .widget-form-search__startButton {
+  position: static;
+  width: 100%;
+}
+
+.widget-form_vertical .widget-form-airports.row {
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.widget-form_vertical .widget-form-airports__col.col {
+  padding: 0;
+}
+
+.widget-form_vertical .widget-form-airports__col.col:first-of-type .widget-ui-input__arrow {
+  right: 0;
+}
+
+.widget-form_vertical .widget-form-airports__col.col:first-of-type .widget-form-airports__airportCode_withArrow {
+  right: 35px;
+}
+
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-ui-input {
+  padding-left: 11px;
+  border-top: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.widget-form_vertical .widget-form-airports__switcher {
+  right: 75px;
+  left: auto;
+  transform: rotate(90deg);
+  top: -12px;
+}
+
+.widget-form_vertical .widget-form-passengers__trigger {
+  display: block;
+}
+
+.widget-form_vertical .widget-form-passengers__content {
+  border: 1px solid #e6e6e6;
+  border-top: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  position: absolute;
+}
+
+.widget-form_vertical .widget-form-passengers__content .col:first-of-type {
+  padding: 0;
+}
+
+.widget-form_vertical .widget-form-passengers__content .col:last-of-type {
+  padding: 0;
+}
+
+.widget-form_vertical .widget-form-passengers__content .row {
+  display: block;
+  margin: 0;
+}
+
+.widget-form_vertical .widget-form-passengers__content .row:last-of-type {
+  margin-bottom: 0;
+}
+
+.widget-form_vertical .widget-form-passengers .widget-ui-dropdown__content_hidden {
+  display: none;
+}
+
+.widget-form_vertical .widget-form-passengers__item {
+  padding: 10px 20px;
+  border: none;
+  border-top: 1px solid #e6e6e6;
+}
+
+.widget-form_vertical .widget-form-passengers__counter {
+  border-left: none;
 }

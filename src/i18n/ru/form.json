@@ -10,7 +10,7 @@
 	"departureError": "Выберите аэропорт вылета",
 	"arrivalError": "Выберите аэропорт прилёта",
 	"dateToError": "Выберите дату вылета",
-	"dateTo": "Вылет туда",
+	"dateTo": "Туда",
 	"dateBack": "Обратно",
 	"passengers_1": "Пассажиров",
 	"passengers_2": "Пассажир",

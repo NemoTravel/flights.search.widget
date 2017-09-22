@@ -14,13 +14,13 @@ export default class Search extends Component {
 				<DatesContainer/>
 				<PassengersContainer/>
 	
-				<div className="form-group widget-form__pseudoBlocks">
-					<a href="#" className="widget-ui-pseudoLink">{i18n('form', 'discountTitle')}</a>
-				</div>
-	
-				<div className="form-group widget-form__pseudoBlocks">
-					<a href="#" className="widget-ui-pseudoLink">{i18n('form', 'loyaltyCardTitle')}</a>
-				</div>
+				{/*<div className="form-group widget-form__pseudoBlocks">*/}
+					{/*<a href="#" className="widget-ui-pseudoLink">{i18n('form', 'discountTitle')}</a>*/}
+				{/*</div>*/}
+				
+				{/*<div className="form-group widget-form__pseudoBlocks">*/}
+					{/*<a href="#" className="widget-ui-pseudoLink">{i18n('form', 'loyaltyCardTitle')}</a>*/}
+				{/*</div>*/}
 			</div>
 			
 			<div className="widget-form-search__footer">

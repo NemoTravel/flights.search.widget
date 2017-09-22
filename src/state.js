@@ -8,6 +8,7 @@ export const systemState = {
 	API_URL: '',
 	routingGrid: null,
 	locale: 'en',
+	verticalForm: false,
 	showAirportIATA: false,
 	readOnlyAutocomplete: false
 };

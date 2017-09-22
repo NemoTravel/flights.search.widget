@@ -88,6 +88,9 @@ $breakPoint: 650px;
 		font-weight: 600;
 		max-width: 70%;
 		overflow: hidden;
+		display: inline-block;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 
 	&__counter {

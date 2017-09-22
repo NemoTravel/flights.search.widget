@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as formActions from 'actions/form';
+import classnames from 'classnames';
 
 import Search from 'components/Form/Search';
 
 class Form extends Component {
 	render() {
-		const { showErrors, startSearch } = this.props;
+		const { showErrors, startSearch, verticalForm } = this.props;
 		
-		return <section className="widget-form">
+		return <section className={classnames('widget-form', { 'widget-form_vertical': verticalForm })}>
 			<Search showErrors={showErrors} startSearch={startSearch} />
 		</section>;
 	}
@@ -17,7 +18,7 @@ class Form extends Component {
 
 function mapStateToProps(state) {
 	return {
-		// blockVisibility: state.form.blockVisibility
+		verticalForm: state.system.verticalForm
 	}
 }
 
