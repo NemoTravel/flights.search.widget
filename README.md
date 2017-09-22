@@ -20,7 +20,6 @@
         API_URL: 'http://widget.mlsd.ru/api',
         rootElement: document.getElementById('root'),
         showAirportIATA: true,
-        enableInfantsWithSeats: true,
         locale: 'ru'
     });
 </script>
@@ -36,7 +35,6 @@
 | :- | :- | :- | :- | :- |
 | **API_URL** | **да** | `string` | - | Адрес для API запросов |
 | **rootElement** | **да** | `HTMLElement` | - | DOM-элемент в который будет встраиваться виджет |
-| enableInfantsWithSeats | - | `boolean` | `false` | Позволять выбирать на форме поиска младенцев с местом в качестве пассажиров |
 | locale | - | `string` | `"en"` | Язык интерфейса |
 | readOnlyAutocomplete | - | `boolean` | `false` | Запретить ввод текста в поля автокомплита аэропортов (активируется только если указан параметр `routingGrid`) |
 | routingGrid | - | `string` | `null` | Двухбуквенный IATA-код авиакомпании. Если указан, автокомплит аэропортов переключается в режим поиска по маршрутной сетке авиакомпании. Также, при клике в поле автокомплита, отображаются все возможные пункты назначений авиакомпании. |

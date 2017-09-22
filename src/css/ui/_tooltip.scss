@@ -6,7 +6,7 @@
 	&__pop {
 		display: none;
 		position: absolute;
-		top: -100%;
+		transform: translateY(-40px);
 		z-index: 10;
 		
 		margin: 5px;
@@ -42,7 +42,7 @@
 
 		&_centered {
 			left: 50%;
-			transform: translateX(-50%);
+			transform: translateX(-50%) translateY(-40px);
 
 			&:after {
 				left: 50%;

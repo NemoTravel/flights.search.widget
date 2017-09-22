@@ -9,8 +9,7 @@ export const systemState = {
 	routingGrid: null,
 	locale: 'en',
 	showAirportIATA: false,
-	readOnlyAutocomplete: false,
-	enableInfantsWithSeats: false
+	readOnlyAutocomplete: false
 };
 
 // export const blockVisibilityState = {

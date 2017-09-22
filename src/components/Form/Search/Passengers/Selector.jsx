@@ -13,11 +13,12 @@ export default class Selector extends Component {
 	 */
 	renderCounters() {
 		const { passengers, addPassenger, removePassenger, counterAvailability } = this.props;
+		let result = [];
 		
-		return passengers.map((passenger, i) => {
+		const renderCounter = (passenger, i) => {
 			let canIncrease = true;
 			let canDecrease = true;
-			
+
 			if (counterAvailability[passenger.code]) {
 				canIncrease = counterAvailability[passenger.code].canIncrease;
 				canDecrease = counterAvailability[passenger.code].canDecrease;
@@ -33,7 +34,12 @@ export default class Selector extends Component {
 				canAddPassenger={canIncrease}
 				canRemovePassenger={canDecrease}
 			/>;
-		});
+		};
+
+		result.push(<div className="row form-group">{passengers.slice(0, 2).map(renderCounter)}</div>);
+		result.push(<div className="row form-group">{passengers.slice(2, 4).map(renderCounter)}</div>);
+		
+		return result;
 	}
 
 	/**
@@ -61,7 +67,7 @@ export default class Selector extends Component {
 		const { totalPassengersCount } = this.props;
 		
 		return <div className="form-group widget-form-passengers">
-			<Tooltip message={i18n('form', 'passengersError')} isCentered={true} isActive={totalPassengersCount <= 0}>
+			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
 				<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
 			</Tooltip>
 		</div>;

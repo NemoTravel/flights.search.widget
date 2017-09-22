@@ -3579,7 +3579,7 @@
   top: 0;
   bottom: 0;
   z-index: 2;
-  width: 35px;
+  width: 39px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3635,7 +3635,7 @@
 .widget .widget-ui-tooltip__pop {
   display: none;
   position: absolute;
-  top: -100%;
+  transform: translateY(-40px);
   z-index: 10;
   margin: 5px;
   padding: 7px 10px 8px;
@@ -3668,7 +3668,7 @@
 
 .widget .widget-ui-tooltip__pop_centered {
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-40px);
 }
 
 .widget .widget-ui-tooltip__pop_centered:after {
@@ -3829,6 +3829,14 @@
   position: static;
 }
 
+.widget-form-dates__col:first-of-type {
+  padding-right: 0.5rem;
+}
+
+.widget-form-dates__col:last-of-type {
+  padding-left: 0.5rem;
+}
+
 .widget-form-passengers {
   position: relative;
 }
@@ -3836,6 +3844,12 @@
 .widget-form-passengers__trigger,
 .widget-form-passengers__trigger input {
   cursor: pointer;
+}
+
+@media (min-width: 700px) {
+  .widget-form-passengers__trigger {
+    display: none;
+  }
 }
 
 .widget-form-passengers__content {
@@ -3852,11 +3866,35 @@
   font-weight: 400;
 }
 
+.widget-form-passengers__content .col:first-of-type {
+  padding-right: 0.5rem;
+}
+
+.widget-form-passengers__content .col:last-of-type {
+  padding-left: 0.5rem;
+}
+
+@media (min-width: 700px) {
+  .widget-form-passengers__content {
+    position: static;
+    box-shadow: none;
+    border: none;
+  }
+}
+
+@media (min-width: 700px) {
+  .widget-form-passengers .widget-ui-dropdown__content_hidden {
+    display: block;
+  }
+}
+
 .widget-form-passengers__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  height: 40px;
+  line-height: 40px;
 }
 
 .widget-form-passengers__item:not(:last-of-type) {
@@ -3865,6 +3903,13 @@
 
 .widget-form-passengers__item_disabled {
   color: #B3B3B3;
+}
+
+@media (min-width: 700px) {
+  .widget-form-passengers__item {
+    border: 1px solid #e6e6e6;
+    padding: 0 11px;
+  }
 }
 
 .widget-form-passengers__title {
@@ -3877,6 +3922,8 @@
   display: flex;
   align-items: center;
   font-weight: 600;
+  padding-left: 11px;
+  border-left: 1px solid #e6e6e6;
 }
 
 .widget-form-passengers__icon {

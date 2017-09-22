@@ -6,5 +6,13 @@
 	
 	&__col {
 		position: static;
+		
+		&:first-of-type {
+			padding-right: 0.5rem;
+		}
+		
+		&:last-of-type {
+			padding-left: 0.5rem;
+		}
 	}
 }
