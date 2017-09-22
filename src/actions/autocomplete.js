@@ -110,7 +110,7 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 					const { airports } = data.guide;
 					const { iata } = data.guide.autocomplete;
 					// Trying to match suggested airports by IATA.
-					const suggestions = iata.filter(({ IATA }) => IATA in airports).map(({ IATA }) => airports[IATA]);
+					const suggestions = iata.filter(({ IATA }) => IATA in airports && airports[IATA].name).map(({ IATA }) => airports[IATA]);
 	
 					// Clear previous suggestions first (to avoid rendering collisions).
 					dispatch(changeAutocompleteSuggestions([], autocompleteType));

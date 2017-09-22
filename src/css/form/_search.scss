@@ -4,4 +4,28 @@
 
 &-search {
 	padding: 15px;
+	position: relative;
+	
+	&__wrapper {
+		padding-right: 180px;
+		
+		.form-group {
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+	}
+	
+	&__footer {
+		position: absolute;
+		margin-top: -40px;
+		left: 15px;
+		right: 15px;
+	}
+	
+	& &__startButton {
+		padding: 0 43px;
+		position: absolute;
+		right: 0;
+	}
 }

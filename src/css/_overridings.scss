@@ -11,6 +11,8 @@
 	border: none;
 	font-weight: 700;
 	font-size: 14px;
+	height: 40px;
+	line-height: 40px;
 	
 	&:active {
 		border: none;
@@ -49,10 +51,11 @@
 	font-size: 15px;
 	position: relative;
 	padding: 11px 13px;
-	line-height: normal;
 	z-index: 2;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	height: 40px;
+	line-height: 40px;
 
 	&[readonly] {
 		background-color: inherit;
