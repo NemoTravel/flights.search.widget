@@ -1,4 +1,14 @@
+$breakPoint: 650px;
+
 &-airports {
+	&.row {
+		@media (max-width: $breakPoint - 1) {
+			display: block;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+	
 	.widget-ui-input {
 		padding-right: 120px;
 		
@@ -98,12 +108,16 @@
 		}
 	}
 	
-	&__col {
+	&__col.col {
 		&:first-of-type {
 			padding-right: 0;
 			
 			.widget-ui-input__arrow {
 				right: 12px;
+
+				@media (max-width: $breakPoint - 1) {
+					right: 0;
+				}
 			}
 			
 			.widget-form-airports__airportCode {
@@ -111,6 +125,10 @@
 
 				&_withArrow {
 					right: 47px;
+
+					@media (max-width: $breakPoint - 1) {
+						right: 35px;
+					}
 				}
 			}
 		}
@@ -119,9 +137,19 @@
 			padding-left: 0;
 
 			.widget-ui-input {
-				border-left: none;
-				padding-left: 20px;
+				@media (min-width: $breakPoint) {
+					padding-left: 20px;
+					border-left: none;
+				}
+
+				@media (max-width: $breakPoint - 1) {
+					border-top: none;
+				}
 			}
+		}
+
+		@media (max-width: $breakPoint - 1) {
+			padding: 0;
 		}
 	}
 
@@ -154,6 +182,13 @@
 
 		&:after {
 			content: "\e901";
+		}
+
+		@media (max-width: $breakPoint - 1) {
+			right: 75px;
+			left: auto;
+			transform: rotate(90deg);
+			top: -12px;
 		}
 	}
 }

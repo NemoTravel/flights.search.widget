@@ -2,6 +2,8 @@
 @import "dates";
 @import "passengers";
 
+$breakPoint: 650px;
+
 &-search {
 	padding: 15px;
 	position: relative;
@@ -11,8 +13,14 @@
 		
 		.form-group {
 			&:last-of-type {
-				margin-bottom: 0;
+				@media (min-width: 750px) {
+					margin-bottom: 0;
+				}
 			}
+		}
+
+		@media (max-width: 749px) {
+			padding-right: 0;
 		}
 	}
 	
@@ -21,11 +29,25 @@
 		margin-top: -40px;
 		left: 15px;
 		right: 15px;
+		text-align: right;
+		
+		@media (max-width: 749px) {
+			position: static;
+			margin-top: 0;
+		}
 	}
 	
 	& &__startButton {
 		padding: 0 43px;
 		position: absolute;
 		right: 0;
+		
+		@media (max-width: 749px) {
+			position: static;
+		}
+
+		@media (max-width: $breakPoint - 1) {
+			width: 100%;
+		}
 	}
 }
