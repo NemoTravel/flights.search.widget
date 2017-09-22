@@ -1,4 +1,4 @@
-$breakPoint: 700px;
+$breakPoint: 850px;
 
 &-passengers {
 	position: relative;
@@ -20,6 +20,7 @@ $breakPoint: 700px;
 		left: 0;
 		right: 0;
 		border: 1px solid #e6e6e6;
+		border-top: none;
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 		background-color: #fff;
 		font-size: 15px;
@@ -29,10 +30,25 @@ $breakPoint: 700px;
 		.col {
 			&:first-of-type {
 				padding-right: 0.5rem;
+
+				@media (max-width: $breakPoint - 1) {
+					padding: 0;
+				}
 			}
 
 			&:last-of-type {
 				padding-left: 0.5rem;
+
+				@media (max-width: $breakPoint - 1) {
+					padding: 0;
+				}
+			}
+		}
+		
+		.row {
+			@media (max-width: $breakPoint - 1) {
+				display: block;
+				margin: 0;
 			}
 		}
 
@@ -56,10 +72,7 @@ $breakPoint: 700px;
 		padding: 10px 20px;
 		height: 40px;
 		line-height: 40px;
-
-		&:not(:last-of-type) {
-			border-bottom: 1px solid #e6e6e6;
-		}
+		border-top: 1px solid #e6e6e6;
 
 		&_disabled {
 			color: #B3B3B3;
@@ -82,7 +95,10 @@ $breakPoint: 700px;
 		align-items: center;
 		font-weight: 600;
 		padding-left: 11px;
-		border-left: 1px solid #e6e6e6;
+
+		@media (min-width: $breakPoint) {
+			border-left: 1px solid #e6e6e6;
+		}
 	}
 
 	&__icon {
