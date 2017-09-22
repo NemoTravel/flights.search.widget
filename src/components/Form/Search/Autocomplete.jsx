@@ -102,7 +102,7 @@ export default class Autocomplete extends Component {
 	 */
 	renderAirportCode() {
 		const { isLoading, airport } = this.props;
-		const isActive = this.props.system.showAirportIATA && !isLoading && airport;
+		const isActive = !isLoading && airport;
 		let className = classnames(
 			'widget-form-airports__airportCode',
 			{ 'widget-form-airports__airportCode_withArrow': this.props.system.routingGrid }

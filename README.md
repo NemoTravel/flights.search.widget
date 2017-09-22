@@ -19,7 +19,6 @@
     AirlinesSearchWidget.init({
         API_URL: 'http://widget.mlsd.ru/api',
         rootElement: document.getElementById('root'),
-        showAirportIATA: true,
         locale: 'ru'
     });
 </script>
@@ -38,7 +37,7 @@
 | locale | - | `string` | `"en"` | Язык интерфейса |
 | readOnlyAutocomplete | - | `boolean` | `false` | Запретить ввод текста в поля автокомплита аэропортов (активируется только если указан параметр `routingGrid`) |
 | routingGrid | - | `string` | `null` | Двухбуквенный IATA-код авиакомпании. Если указан, автокомплит аэропортов переключается в режим поиска по маршрутной сетке авиакомпании. Также, при клике в поле автокомплита, отображаются все возможные пункты назначений авиакомпании. |
-| showAirportIATA | - | `boolean` | `false` | Отображать в поле автокомплита IATA-код выбранного аэропорта |
+| verticalForm | - | `boolean` | `false` | Отображать ли принудительно вертикальную форму поиска, вместо горизонтальной. |
 
 ## Команды для разработки
 

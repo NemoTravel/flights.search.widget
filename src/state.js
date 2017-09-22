@@ -9,7 +9,6 @@ export const systemState = {
 	routingGrid: null,
 	locale: 'en',
 	verticalForm: false,
-	showAirportIATA: false,
 	readOnlyAutocomplete: false
 };
 
