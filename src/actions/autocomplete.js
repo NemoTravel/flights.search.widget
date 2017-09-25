@@ -18,8 +18,8 @@ export function switchAirports() {
 
 		if (departureAirport || arrivalAirport) {
 			const
-				departureInputValue = state.form.autocomplete.departure.inputValue,
-				arrivalInputValue = state.form.autocomplete.arrival.inputValue;
+				departureInputValue = departureAirport ? departureAirport.name : state.form.autocomplete.departure.inputValue,
+				arrivalInputValue = arrivalAirport ? arrivalAirport.name : state.form.autocomplete.arrival.inputValue;
 
 			dispatch(selectAirport(departureAirport, 'arrival'));
 			dispatch(selectAirport(arrivalAirport, 'departure'));

@@ -94,7 +94,7 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				if (canBeProcessed && cachedDepartureAutocomplete && cachedDepartureAutocomplete.airport) {
 					state.form.autocomplete.departure = autocompleteInputValueReducer(
 						state.form.autocomplete.departure,
-						cachedDepartureAutocomplete.inputValue
+						cachedDepartureAutocomplete.airport.name
 					);
 
 					state.form.autocomplete.departure = autocompleteAirportReducer(
@@ -106,7 +106,7 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				if (canBeProcessed && cachedArrivalAutocomplete && cachedArrivalAutocomplete.airport) {
 					state.form.autocomplete.arrival = autocompleteInputValueReducer(
 						state.form.autocomplete.arrival,
-						cachedArrivalAutocomplete.inputValue
+						cachedArrivalAutocomplete.airport.name
 					);
 
 					state.form.autocomplete.arrival = autocompleteAirportReducer(
