@@ -42,13 +42,17 @@ export default class Autocomplete extends Component {
 	/**
 	 * Load autocomplete suggestions by given search string.
 	 * 
-	 * @param value
+	 * @param {String} value
+	 * @param {String} reason - why the method has been called
 	 */
-	fetchSuggestions({ value }) {
+	fetchSuggestions({ value, reason }) {
 		const { sendAutocompleteRequest, system } = this.props;
 		const searchText = value;
 		
-		if (searchText || system.routingGrid) {
+		if (reason === 'input-focused') {
+			sendAutocompleteRequest('', this.type);
+		}
+		else if (searchText || system.routingGrid) {
 			// We don't want to harass servers too much.
 			clearTimeout(this.autocompleteTimeout);
 			
