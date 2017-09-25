@@ -86,7 +86,11 @@ export default class Datepicker extends Component {
 	}
 	
 	render() {
-		const { date, locale, isActive, specialDate } = this.props;
+		const { date, locale, isActive, specialDate, type, disableTrigger } = this.props;
+		
+		if (disableTrigger) {
+			disableTrigger(this.disable);
+		}
 		
 		const specialDayClassName = (date) => {
 			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'widget-ui-datepicker__specialDay' : '';
@@ -99,12 +103,15 @@ export default class Datepicker extends Component {
 			// dropdownMode="scroll"
 			// showMonthDropdown={false}
 			customInput={this.renderCustomInput()}
-			calendarClassName="widget-ui-datepicker" 
+			calendarClassName={`widget-ui-datepicker widget-ui-datepicker_${type}`} 
 			dateFormat={Datepicker.dateFormat}
 			dateFormatCalendar={Datepicker.dateFormatCalendar}
 			selected={date}
+			monthsShown={2}
 			onFocus={this.enable}
 			{...this.props}
-		/>;
+		>
+			{this.props.children}
+		</DatePicker>;
 	}
 }

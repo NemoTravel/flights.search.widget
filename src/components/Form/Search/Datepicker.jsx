@@ -33,6 +33,10 @@ export default class Datepicker extends Component {
 			highlightDates !== nextProps.highlightDates;
 	}
 	
+	renderInner() {
+		return <div className={`widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`}>{this.placeholder}</div>;
+	}
+	
 	render() {
 		const { 
 		  	toggleDatePicker,
@@ -69,7 +73,10 @@ export default class Datepicker extends Component {
 				tooltipIsActive={!date && this.showErrors && showErrors}
 				tooltipText={this.tooltipText}
 				inputProps={{ placeholder: this.placeholder }}
-			/>
+				disableTrigger={this.disableTrigger}
+			>
+				{this.renderInner()}
+			</NemoDatepicker>
 		</div>;
 	}
 }

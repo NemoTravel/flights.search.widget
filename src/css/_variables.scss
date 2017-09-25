@@ -4,3 +4,18 @@ $main-button-color: #FFDA00;
 $main-button-color_hover: #FFCE00;
 
 $transition-function: cubic-bezier(.27, .67, .28, .87);
+
+$screen-size-phone: 650px;
+$screen-size-tablet: 750px;
+
+@mixin adaptivity($media) {
+	@if $media == phone {
+		@media only screen and (max-width: $screen-size-phone) { @content; }
+	}
+	@else if $media == tablet {
+		@media only screen and (max-width: $screen-size-tablet) { @content; }
+	}
+	@else if $media == desktop {
+		@media only screen and (min-width: $screen-size-tablet + 1) { @content; }
+	}
+}
