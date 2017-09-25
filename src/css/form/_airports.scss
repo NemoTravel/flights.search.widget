@@ -25,16 +25,23 @@ $breakPoint: 650px;
 						z-index: 12;
 						left: 0;
 						right: 0;
-						border: 1px solid #e6e6e6;
 						max-height: 370px;
-						box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-						transition: opacity, 450ms, ease;
+						
 						overflow: auto;
-						display: none;
+						visibility: hidden;
+						opacity: 0;
+						filter: alpha(opacity = 0);
+						
+						border: 1px solid #e6e6e6;
+						box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 						background-color: #ffffff;
+						
+						transition: 250ms ease;
 
 						&--open {
-							display: block;
+							visibility: visible;
+							opacity: 1;
+							filter: alpha(opacity = 100);
 						}
 					}
 
