@@ -3479,7 +3479,6 @@
   background: #fff;
   border: 1px solid #ccc;
   border-bottom-color: #bbb;
-  font-size: 0.9rem;
   padding-top: 30px;
 }
 
@@ -3659,6 +3658,7 @@
 }
 
 .widget .widget-ui-datepicker .react-datepicker__navigation--previous {
+  left: 35px;
   transform: rotate(180deg);
 }
 

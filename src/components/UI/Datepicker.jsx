@@ -77,6 +77,9 @@ export default class Datepicker extends Component {
 					spellCheck={false}
 					value={formattedDate}
 					{...inputProps}
+					onFocus={(e) => {
+						e.target.blur();
+					}}
 				/>
 			</Tooltip>
 
@@ -90,7 +93,7 @@ export default class Datepicker extends Component {
 		const { date, locale, isActive, specialDate, type } = this.props;
 		
 		const specialDayClassName = (date) => {
-			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'widget-ui-datepicker__specialDay' : '';
+			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'widget-ui-datepicker__specialDay' : null;
 		};
 		
 		return <DatePicker

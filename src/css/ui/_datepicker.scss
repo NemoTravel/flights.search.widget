@@ -31,7 +31,6 @@ $breakPoint: 650px;
 	background: #fff;
 	border: 1px solid #ccc;
 	border-bottom-color: #bbb;
-	font-size: 0.9rem;
 	padding-top: 30px;
 
 	@include adaptivity(phone) {
@@ -193,6 +192,7 @@ $breakPoint: 650px;
 			}
 
 			&--previous {
+				left: 35px;
 				transform: rotate(180deg);
 
 				@include adaptivity(phone) {
