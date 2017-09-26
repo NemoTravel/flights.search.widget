@@ -10,6 +10,7 @@ export default class Datepicker extends Component {
 		this.enable = this.enable.bind(this);
 		this.disable = this.disable.bind(this);
 		this.renderCloser = this.renderCloser.bind(this);
+		this.calendar = null;
 	}
 	
 	/**
@@ -86,17 +87,14 @@ export default class Datepicker extends Component {
 	}
 	
 	render() {
-		const { date, locale, isActive, specialDate, type, disableTrigger } = this.props;
-		
-		if (disableTrigger) {
-			disableTrigger(this.disable);
-		}
+		const { date, locale, isActive, specialDate, type } = this.props;
 		
 		const specialDayClassName = (date) => {
 			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'widget-ui-datepicker__specialDay' : '';
 		};
 		
 		return <DatePicker
+			ref={calendar => this.calendar = calendar}
 			disabled={!isActive}
 			locale={locale}
 			dayClassName={specialDayClassName}

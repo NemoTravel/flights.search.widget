@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NemoDatepicker from 'components/UI/Datepicker';
 import moment from 'moment';
+import { i18n } from 'utils';
 
 export default class Datepicker extends Component {
 	get type() { return null; }
@@ -12,6 +13,8 @@ export default class Datepicker extends Component {
 	constructor(props) {
 		super(props);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
+		this.renderInner = this.renderInner.bind(this);
+		this.nemoDatepicker = null;
 	}
 
 	/**
@@ -34,7 +37,17 @@ export default class Datepicker extends Component {
 	}
 	
 	renderInner() {
-		return <div className={`widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`}>{this.placeholder}</div>;
+		return <div className={`widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`}>
+			<div className="widget-ui-datepicker__header__closer" onClick={() => {
+				if (this.nemoDatepicker && this.nemoDatepicker.calendar) {
+					this.nemoDatepicker.calendar.setOpen(false);
+				}
+			}}>
+				{i18n('common', 'close')}
+			</div>
+			
+			{this.placeholder}
+		</div>;
 	}
 	
 	render() {
@@ -57,6 +70,7 @@ export default class Datepicker extends Component {
 
 		return <div className={`col widget-form-dates__col`}>
 			<NemoDatepicker 
+				ref={calendar => this.nemoDatepicker = calendar}
 				type={this.type}
 				isActive={isActive} 
 				onChange={this.onChangeHandler} 
@@ -73,7 +87,6 @@ export default class Datepicker extends Component {
 				tooltipIsActive={!date && this.showErrors && showErrors}
 				tooltipText={this.tooltipText}
 				inputProps={{ placeholder: this.placeholder }}
-				disableTrigger={this.disableTrigger}
 			>
 				{this.renderInner()}
 			</NemoDatepicker>

@@ -73,6 +73,21 @@ $breakPoint: 650px;
 
 			@include adaptivity(phone) {
 				margin-top: -7px;
+				display: none;
+			}
+		}
+		
+		&__closer {
+			display: none;
+
+			@include adaptivity(phone) {
+				display: block;
+				position: absolute;
+				right: 15px;
+				color: #666;
+				font-weight: normal;
+				font-size: 16px;
+				cursor: pointer;
 			}
 		}
 		
@@ -88,10 +103,13 @@ $breakPoint: 650px;
 		}
 
 		@include adaptivity(phone) {
-			background: #3fa9f5;
-			color: #fff;
-			padding-bottom: 20px;
+			background: #fff;
 			position: fixed;
+			border-bottom: 1px solid #ccc;
+			padding: 0;
+			height: 50px;
+			line-height: 50px;
+			font-size: 19px;
 		}
 	}
 	
@@ -116,12 +134,14 @@ $breakPoint: 650px;
 			color: #3fa9f5;
 			background: #fff;
 
+			&:hover {
+				background: #3fa9f5;
+				color: #fff;
+			}
+
 			@include adaptivity(phone) {
 				font-size: 17px;
 				padding: 14px 20px;
-			}
-			
-			&:hover {
 				background: #3fa9f5;
 				color: #fff;
 			}
@@ -155,8 +175,9 @@ $breakPoint: 650px;
 			top: 52px;
 
 			@include adaptivity(phone) {
-				top: 13px;
 				position: fixed;
+				top: 50%;
+				margin-top: -15px;
 			}
 			
 			&--previous, &--next {
@@ -166,22 +187,25 @@ $breakPoint: 650px;
 				border-radius: 50%;
 				background: url('/images/form/circleNext.svg') no-repeat center;
 
-				@include adaptivity(phone) {
-					background: #3fa9f5 url('/images/form/circleNext-hover.svg') no-repeat center;
-				}
-				
 				&:hover {
 					background: #3fa9f5 url('/images/form/circleNext-hover.svg') no-repeat center;
 				}
 			}
 
 			&--previous {
-				left: 35px;
 				transform: rotate(180deg);
+
+				@include adaptivity(phone) {
+					left: 15px;
+				}
 			}
 
 			&--next {
 				right: 35px;
+
+				@include adaptivity(phone) {
+					right: 15px;
+				}
 			}
 		}
 		
@@ -195,7 +219,7 @@ $breakPoint: 650px;
 					width: 100%;
 					float: none;
 					display: block;
-					padding-bottom: 0;
+					padding: 20px 20px 0;
 				}
 			}
 		}

@@ -9,11 +9,7 @@ export default class Return extends Datepicker {
 	
 	constructor(props) {
 		super(props);
-		this.disableTrigger = this.disableTrigger.bind(this);
-	}
-
-	disableTrigger(disableFunction) {
-		this.onButtonClick = disableFunction;
+		this.renderInner = this.renderInner.bind(this);
 	}
 
 	renderInner() {
@@ -21,7 +17,11 @@ export default class Return extends Datepicker {
 			{super.renderInner()}
 			
 			<div className="widget-ui-datepicker__footer">
-				<div className="widget-ui-datepicker__footer__button" onClick={this.onButtonClick}>
+				<div className="widget-ui-datepicker__footer__button" onClick={() => {
+					if (this.nemoDatepicker) {
+						this.nemoDatepicker.disable();
+					}
+				}}>
 					{i18n('form', 'noBackTicket')}
 				</div>
 			</div>

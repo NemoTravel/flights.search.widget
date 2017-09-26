@@ -3527,6 +3527,23 @@
 @media only screen and (max-width: 650px) {
   .widget .widget-ui-datepicker__header:before {
     margin-top: -7px;
+    display: none;
+  }
+}
+
+.widget .widget-ui-datepicker__header__closer {
+  display: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker__header__closer {
+    display: block;
+    position: absolute;
+    right: 15px;
+    color: #666;
+    font-weight: normal;
+    font-size: 16px;
+    cursor: pointer;
   }
 }
 
@@ -3543,10 +3560,13 @@
 
 @media only screen and (max-width: 650px) {
   .widget .widget-ui-datepicker__header {
-    background: #3fa9f5;
-    color: #fff;
-    padding-bottom: 20px;
+    background: #fff;
     position: fixed;
+    border-bottom: 1px solid #ccc;
+    padding: 0;
+    height: 50px;
+    line-height: 50px;
+    font-size: 19px;
   }
 }
 
@@ -3575,16 +3595,18 @@
   background: #fff;
 }
 
+.widget .widget-ui-datepicker__footer__button:hover {
+  background: #3fa9f5;
+  color: #fff;
+}
+
 @media only screen and (max-width: 650px) {
   .widget .widget-ui-datepicker__footer__button {
     font-size: 17px;
     padding: 14px 20px;
+    background: #3fa9f5;
+    color: #fff;
   }
-}
-
-.widget .widget-ui-datepicker__footer__button:hover {
-  background: #3fa9f5;
-  color: #fff;
 }
 
 .widget .widget-ui-datepicker__footer__button:active {
@@ -3616,8 +3638,9 @@
 
 @media only screen and (max-width: 650px) {
   .widget .widget-ui-datepicker .react-datepicker__navigation {
-    top: 13px;
     position: fixed;
+    top: 50%;
+    margin-top: -15px;
   }
 }
 
@@ -3630,25 +3653,29 @@
   background: url("/images/form/circleNext.svg") no-repeat center;
 }
 
-@media only screen and (max-width: 650px) {
-  .widget .widget-ui-datepicker .react-datepicker__navigation--previous,
-  .widget .widget-ui-datepicker .react-datepicker__navigation--next {
-    background: #3fa9f5 url("/images/form/circleNext-hover.svg") no-repeat center;
-  }
-}
-
 .widget .widget-ui-datepicker .react-datepicker__navigation--previous:hover,
 .widget .widget-ui-datepicker .react-datepicker__navigation--next:hover {
   background: #3fa9f5 url("/images/form/circleNext-hover.svg") no-repeat center;
 }
 
 .widget .widget-ui-datepicker .react-datepicker__navigation--previous {
-  left: 35px;
   transform: rotate(180deg);
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker .react-datepicker__navigation--previous {
+    left: 15px;
+  }
 }
 
 .widget .widget-ui-datepicker .react-datepicker__navigation--next {
   right: 35px;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker .react-datepicker__navigation--next {
+    right: 15px;
+  }
 }
 
 .widget .widget-ui-datepicker .react-datepicker__month {
@@ -3664,7 +3691,7 @@
     width: 100%;
     float: none;
     display: block;
-    padding-bottom: 0;
+    padding: 20px 20px 0;
   }
 }
 
