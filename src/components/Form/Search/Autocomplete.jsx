@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
+import { i18n } from 'utils';
 
 export default class Autocomplete extends Component {
 	get type() { return null; }
@@ -10,11 +11,16 @@ export default class Autocomplete extends Component {
 	
 	constructor(props) {
 		super(props);
+		this.input = null;
 		this.autocompleteTimeout = null;
 		this.autocompleteWaitTime = 200;
+		this.state = { isFocused: false };
 
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
+		this.onBlurHandler = this.onBlurHandler.bind(this);
+		this.onFocusHandler = this.onFocusHandler.bind(this);
+		this.onKeyDownHandler = this.onKeyDownHandler.bind(this);
 		this.clearSuggestions = this.clearSuggestions.bind(this);
 		this.clearAirport = this.clearAirport.bind(this);
 		this.renderSuggestion = this.renderSuggestion.bind(this);
@@ -82,6 +88,25 @@ export default class Autocomplete extends Component {
 		if (event.target && event.target.value) {
 			event.target.setSelectionRange(0, event.target.value.length);
 		}
+		
+		this.setState({ isFocused: true });
+	}
+
+	/**
+	 * @param {Object} event
+	 */
+	onBlurHandler(event) {
+		this.setState({ isFocused: false });
+	}
+
+	/**
+	 * @param {Object} event
+	 */
+	onKeyDownHandler(event) {
+		if (event.keyCode === 13 && this.input) {
+			this.input.blur();
+			this.onBlurHandler(event);
+		}
 	}
 
 	/**
@@ -145,9 +170,13 @@ export default class Autocomplete extends Component {
 	renderInputField(inputProps) {
 		const { showErrors, airport } = this.props;
 		
-		if (this.props.getRef) {
-			inputProps.ref = this.props.getRef;
-		}
+		inputProps.ref = (input) => {
+			this.input = input;
+
+			if (this.props.getRef) {
+				this.props.getRef(input);
+			}
+		};
 		
 		return <Tooltip isActive={!airport && showErrors} isCentered={true} message={this.tooltipText}>
 			<input type="text" {...inputProps}/>
@@ -167,7 +196,8 @@ export default class Autocomplete extends Component {
 	shouldComponentUpdate(nextProps, nextState) {
 		const { showErrors, suggestions, isLoading, inputValue, airport } = this.props;
 		
-		return showErrors !== nextProps.showErrors ||
+		return this.state.isFocused !== nextState.isFocused || 
+			showErrors !== nextProps.showErrors ||
 			suggestions !== nextProps.suggestions ||
 			inputValue !== nextProps.inputValue ||
 			airport !== nextProps.airport ||
@@ -183,6 +213,16 @@ export default class Autocomplete extends Component {
 		);
 		
 		return <div className="col widget-form-airports__col">
+			<div className={classnames('widget-form-airports__header', { 'widget-form-airports__header_visible': this.state.isFocused })}>
+				<div className="widget-form-airports__header__closer">
+					{i18n('common', 'close')}
+				</div>
+
+				{this.placeholder}
+
+				<div className="widget-form-airports__underlay"/>
+			</div>
+
 			<div className="widget-ui-input__wrapper">
 				<Autosuggest
 					id={this.type}
@@ -205,10 +245,12 @@ export default class Autocomplete extends Component {
 						placeholder: this.placeholder,
 						value: inputValue,
 						onChange: this.onChangeHandler,
-						onFocus: this.onFocusHandler
+						onFocus: this.onFocusHandler,
+						onBlur: this.onBlurHandler,
+						onKeyDown: this.onKeyDownHandler
 					}}
 				/>
-				
+
 				{this.renderAirportCode()}
 				{this.renderSwitcher()}
 				{this.renderArrow()}
