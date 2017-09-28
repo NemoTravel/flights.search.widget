@@ -14,7 +14,17 @@ export default class Return extends Datepicker {
 
 	renderInner() {
 		return <div>
-			{super.renderInner()}
+			<div className={`widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`}>
+				<div className="widget-ui-datepicker__header__closer" onClick={() => {
+					if (this.nemoDatepicker) {
+						this.nemoDatepicker.disable();
+					}
+				}}>
+					{i18n('common', 'close')}
+				</div>
+
+				{this.placeholder}
+			</div>
 			
 			<div className="widget-ui-datepicker__footer">
 				<div className="widget-ui-datepicker__footer__button" onClick={() => {
