@@ -41,6 +41,7 @@ $breakPoint: 650px;
 	@include adaptivity(phone) {
 		overflow: auto;
 		padding: 50px 0 75px 0;
+		font-size: 1rem;
 	}
 	
 	&__header {
@@ -80,11 +81,21 @@ $breakPoint: 650px;
 		&__closer {
 			display: none;
 			position: absolute;
-			right: 15px;
-			color: #666;
+			color: #fff;
 			font-weight: normal;
-			font-size: 15px;
+			font-size: 11px;
 			cursor: pointer;
+
+			left: 15px;
+			height: 40px;
+			line-height: 40px;
+			
+			&:after {
+				content: "\E923";
+				transform: rotate(180deg);
+				position: absolute;
+				top: -1px;
+			}
 
 			@include adaptivity(phone) {
 				display: block;
@@ -103,9 +114,9 @@ $breakPoint: 650px;
 		}
 
 		@include adaptivity(phone) {
-			background: #fff;
+			background: #3fa9f5;
+			color: #fff;
 			position: fixed;
-			border-bottom: 1px solid #ccc;
 			padding: 0;
 			height: 40px;
 			line-height: 40px;
@@ -175,8 +186,7 @@ $breakPoint: 650px;
 
 			@include adaptivity(phone) {
 				position: fixed;
-				top: 50%;
-				margin-top: -15px;
+				top: 65px;
 			}
 			
 			&--previous, &--next {
@@ -222,12 +232,18 @@ $breakPoint: 650px;
 
 			&-container {
 				padding: 30px;
+
+				&:nth-of-type(3) {
+					@include adaptivity(phone) {
+						display: none;
+					}
+				}
 				
 				@include adaptivity(phone) {
 					width: 100%;
 					float: none;
 					display: block;
-					padding: 20px 20px 0;
+					padding: 20px 0 0;
 				}
 			}
 		}
@@ -245,6 +261,7 @@ $breakPoint: 650px;
 		
 		&__week {
 			margin-bottom: 2px;
+			white-space: nowrap;
 		}
 		
 		&__day {
@@ -255,6 +272,16 @@ $breakPoint: 650px;
 			line-height: 2rem;
 			margin: 0;
 			transition: background 0.2s $transition-function;
+			
+			@include adaptivity(phone) {
+				width: 2.8rem;
+				height: 2.5rem;
+				line-height: 2.5rem;
+			}
+			
+			&-names {
+				white-space: nowrap;
+			}
 			
 			&-name {
 				color: #ccc;
@@ -268,6 +295,10 @@ $breakPoint: 650px;
 				height: 2rem;
 				line-height: 2rem;
 				margin: 0;
+
+				@include adaptivity(phone) {
+					width: 2.8rem;
+				}
 			}
 
 			&--today, &--keyboard-selected {
@@ -277,7 +308,8 @@ $breakPoint: 650px;
 			}
 
 			&--outside-month {
-				color: #ccc;
+				opacity: 0;
+				pointer-events: none;
 			}
 
 			&:hover {
