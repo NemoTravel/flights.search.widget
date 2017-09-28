@@ -3652,9 +3652,18 @@
   background: url("/images/form/circleNext.svg") no-repeat center;
 }
 
-.widget .widget-ui-datepicker .react-datepicker__navigation--previous:hover,
-.widget .widget-ui-datepicker .react-datepicker__navigation--next:hover {
-  background: #3fa9f5 url("/images/form/circleNext-hover.svg") no-repeat center;
+@media only screen and (min-width: 751px) {
+  .widget .widget-ui-datepicker .react-datepicker__navigation--previous:hover,
+  .widget .widget-ui-datepicker .react-datepicker__navigation--next:hover {
+    background: #3fa9f5 url("/images/form/circleNext-hover.svg") no-repeat center;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker .react-datepicker__navigation--previous:active,
+  .widget .widget-ui-datepicker .react-datepicker__navigation--next:active {
+    background: #3fa9f5 url("/images/form/circleNext-hover.svg") no-repeat center;
+  }
 }
 
 .widget .widget-ui-datepicker .react-datepicker__navigation--previous {

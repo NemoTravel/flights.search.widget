@@ -187,7 +187,15 @@ $breakPoint: 650px;
 				background: url('/images/form/circleNext.svg') no-repeat center;
 
 				&:hover {
-					background: #3fa9f5 url('/images/form/circleNext-hover.svg') no-repeat center;
+					@include adaptivity(not-phone) {
+						background: #3fa9f5 url('/images/form/circleNext-hover.svg') no-repeat center;
+					}
+				}
+
+				&:active {
+					@include adaptivity(phone) {
+						background: #3fa9f5 url('/images/form/circleNext-hover.svg') no-repeat center;
+					}
 				}
 			}
 
