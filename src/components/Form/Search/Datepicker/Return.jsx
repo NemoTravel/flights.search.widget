@@ -17,7 +17,12 @@ export default class Return extends Datepicker {
 			<div className={`widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`}>
 				<div className="widget-ui-datepicker__header__closer" onClick={() => {
 					if (this.nemoDatepicker) {
-						this.nemoDatepicker.disable();
+						if (this.props.date) {
+							this.nemoDatepicker.calendar.setOpen(false);
+						}
+						else {
+							this.nemoDatepicker.disable();
+						}
 					}
 				}}>
 					{i18n('common', 'close')}
