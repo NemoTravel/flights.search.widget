@@ -45,14 +45,7 @@ $breakPoint: 650px;
 	}
 	
 	&__header {
-		color: #3fa9f5;
-		font-weight: 600;
-		font-size: 17px;
-		position: absolute;
-		text-align: center;
-		width: 100%;
-		padding-top: 20px;
-		top: 0;
+		display: block;
 		
 		&:before {
 			content: "\E90B";
@@ -78,30 +71,6 @@ $breakPoint: 650px;
 			}
 		}
 		
-		&__closer {
-			display: none;
-			position: absolute;
-			color: #fff;
-			font-weight: normal;
-			font-size: 11px;
-			cursor: pointer;
-
-			left: 15px;
-			height: 40px;
-			line-height: 40px;
-			
-			&:after {
-				content: "\E923";
-				transform: rotate(180deg);
-				position: absolute;
-				top: -1px;
-			}
-
-			@include adaptivity(phone) {
-				display: block;
-			}
-		}
-		
 		&_return {
 			&:before {
 				transform: translate(0, -25%) rotate(135deg);
@@ -111,15 +80,6 @@ $breakPoint: 650px;
 					margin-top: -5px;
 				}
 			}
-		}
-
-		@include adaptivity(phone) {
-			background: #3fa9f5;
-			color: #fff;
-			position: fixed;
-			padding: 0;
-			height: 40px;
-			line-height: 40px;
 		}
 	}
 	

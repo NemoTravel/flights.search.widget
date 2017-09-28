@@ -1,0 +1,54 @@
+@import "../variables";
+
+.widget-ui-mobile {
+	&__header {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		padding-top: 20px;
+		
+		color: #3fa9f5;
+		font-weight: 600;
+		font-size: 17px;
+		text-align: center;
+
+		&__closer {
+			display: none;
+			position: absolute;
+			color: #fff;
+			font-weight: normal;
+			font-size: 11px;
+			cursor: pointer;
+
+			left: 15px;
+			height: 40px;
+			line-height: 40px;
+
+			&:after {
+				content: "\E923";
+				transform: rotate(180deg);
+				position: absolute;
+				top: -1px;
+			}
+
+			@include adaptivity(phone) {
+				display: block;
+			}
+		}
+		
+		&_visible {
+			display: block;
+		}
+
+		@include adaptivity(phone) {
+			background: #3fa9f5;
+			color: #fff;
+			position: fixed;
+			padding: 0;
+			height: 40px;
+			line-height: 40px;
+		}
+	}
+}

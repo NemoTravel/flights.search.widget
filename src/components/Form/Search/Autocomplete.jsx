@@ -213,10 +213,8 @@ export default class Autocomplete extends Component {
 		);
 		
 		return <div className="col widget-form-airports__col">
-			<div className={classnames('widget-form-airports__header', { 'widget-form-airports__header_visible': this.state.isFocused })}>
-				<div className="widget-form-airports__header__closer">
-					{i18n('common', 'close')}
-				</div>
+			<div className={classnames('widget-ui-mobile__header widget-form-airports__header', { 'widget-ui-mobile__header_visible': this.state.isFocused })}>
+				<div className="widget-ui-icon widget-ui-mobile__header__closer"/>
 
 				{this.placeholder}
 
