@@ -3483,15 +3483,15 @@
   font-family: "Open Sans", sans-serif !important;
 }
 
-@media only screen and (max-width: 650px) {
-  .widget .widget-ui-datepicker {
-    padding-top: 50px;
-    overflow: auto;
-  }
-}
-
 .widget .widget-ui-datepicker_return {
   padding-bottom: 35px;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker {
+    overflow: auto;
+    padding: 50px 0 75px 0;
+  }
 }
 
 .widget .widget-ui-datepicker__header {

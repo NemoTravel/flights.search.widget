@@ -33,14 +33,14 @@ $breakPoint: 650px;
 	border-bottom-color: #bbb;
 	padding-top: 30px;
 	font-family: "Open Sans", sans-serif !important;
-	
-	@include adaptivity(phone) {
-		padding-top: 50px;
-		overflow: auto;
-	}
-	
+
 	&_return {
 		padding-bottom: 35px;
+	}
+	
+	@include adaptivity(phone) {
+		overflow: auto;
+		padding: 50px 0 75px 0;
 	}
 	
 	&__header {
