@@ -62,7 +62,7 @@ export default class Datepicker extends Component {
 	 */
 	renderCustomInput() {
 		const { inputProps, date, isActive, getRef, tooltipIsActive, tooltipText } = this.props;
-		const formattedDate = date ? date.format(Datepicker.dateFormat) : '';
+		const formattedDate = date ? date.format('D MMMM, dd') : '';
 		
 		if (getRef) {
 			inputProps.ref = getRef;

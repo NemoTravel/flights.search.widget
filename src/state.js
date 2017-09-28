@@ -121,12 +121,12 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				const cachedReturnDate = stateFromCache.form.dates.return;
 
 				if (cachedDepartureDate && cachedDepartureDate.date) {
-					state.form.dates.departure = selectDateReducer(cachedDepartureDate, moment(cachedDepartureDate.date));
+					state.form.dates.departure = selectDateReducer(cachedDepartureDate, moment(cachedDepartureDate.date).locale(state.system.locale));
 				}
 
 				if (cachedReturnDate && cachedReturnDate.date) {
 					state.form.dates.return = toggleDatepickerReducer(cachedReturnDate, true);
-					state.form.dates.return = selectDateReducer(cachedReturnDate, moment(cachedReturnDate.date));
+					state.form.dates.return = selectDateReducer(cachedReturnDate, moment(cachedReturnDate.date).locale(state.system.locale));
 				}
 			}
 
