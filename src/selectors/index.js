@@ -107,7 +107,7 @@ export const getPassengersCounterAvailability = createSelector(
 						if (
 							currentPassConfig.count <= passengersConfig.INF.count || 
 							currentPassConfig.count <= passengersConfig.INS.count ||
-							passengersConfig.CLD.count
+							currentPassConfig.count <= 1
 						) {
 							canDecrease = false;
 						}
