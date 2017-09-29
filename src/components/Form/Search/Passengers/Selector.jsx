@@ -60,7 +60,20 @@ export default class Selector extends Component {
 	 * @returns {XML}
 	 */
 	renderDropdownContent() {
-		return <div className="widget-form-passengers__content">{this.renderCounters()}</div>;
+		return <div className="widget-form-passengers__content">
+			<div className="widget-form-passengers__content__wrapper">
+				{this.renderCounters()}
+			</div>
+		</div>;
+	}
+
+	renderDropdownHeader() {
+		return <div>
+			<div className="widget-ui-dropdown__content__header__closer">
+				{i18n('common', 'close')}
+			</div>
+			{i18n('form', 'passengersSelectHeader')}
+		</div>
 	}
 	
 	render() {
@@ -68,7 +81,11 @@ export default class Selector extends Component {
 		
 		return <div className="form-group widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
-				<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
+				<NemoDropdown
+					triggerElement={this.renderDropdownTrigger()}
+					contentElement={this.renderDropdownContent()}
+					headerElement={this.renderDropdownHeader()}
+				/>
 			</Tooltip>
 		</div>;
 	}

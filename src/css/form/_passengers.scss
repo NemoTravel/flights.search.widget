@@ -1,3 +1,4 @@
+@import "../variables";
 $breakPoint: 650px;
 
 &-passengers {
@@ -49,6 +50,19 @@ $breakPoint: 650px;
 			@media (max-width: $breakPoint - 1) {
 				display: block;
 				margin: 0;
+			}
+		}
+
+		&__wrapper {
+			@include adaptivity(phone) {
+				position: fixed;
+				top: 39px;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				z-index: 12;
+				background: #fff;
+				max-height: none;
 			}
 		}
 

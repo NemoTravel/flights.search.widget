@@ -32,7 +32,7 @@ class Dropdown extends PureComponent {
 	}
 	
 	render() {
-		const { triggerElement, contentElement, triggerType = 'onClick' } = this.props;
+		const { triggerElement, contentElement, headerElement = null, triggerType = 'onClick' } = this.props;
 		const { isVisible } = this.state;
 		
 		let triggerProps = {
@@ -41,7 +41,14 @@ class Dropdown extends PureComponent {
 		
 		return <div className="widget-ui-dropdown">
 			<div className="widget-ui-dropdown__trigger" {...triggerProps}>{triggerElement}</div>
-			<div className={`widget-ui-dropdown__content${isVisible ? '' : ' widget-ui-dropdown__content_hidden'}`}>{contentElement}</div>
+			<div className={`widget-ui-dropdown__content${isVisible ? '' : ' widget-ui-dropdown__content_hidden'}`}>
+				{headerElement &&
+					<div className="widget-ui-dropdown__content__header" {...triggerProps}>
+						{headerElement}
+					</div>
+				}
+				{contentElement}
+			</div>
 		</div>;
 	}
 }
