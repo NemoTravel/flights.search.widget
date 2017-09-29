@@ -232,9 +232,19 @@
 		align-items: center;
 
 		&:hover {
-			background: #1B75BC;
-			border-color: #1B75BC;
-			color: #fff;
+			@include adaptivity(not-phone) {
+				background: #1B75BC;
+				border-color: #1B75BC;
+				color: #fff;
+			}
+		}
+
+		&:active {
+			@include adaptivity(phone) {
+				background: #1B75BC;
+				border-color: #1B75BC;
+				color: #fff;
+			}
 		}
 
 		&:after {

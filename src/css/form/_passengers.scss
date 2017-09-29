@@ -1,3 +1,4 @@
+@import "../variables";
 $breakPoint: 650px;
 
 &-passengers {
@@ -105,7 +106,6 @@ $breakPoint: 650px;
 	}
 
 	&__icon {
-		border: 1px solid #F2F2F2;
 		border-radius: 50%;
 		width: 25px;
 		height: 25px;
@@ -122,9 +122,19 @@ $breakPoint: 650px;
 		}
 
 		&:hover {
-			background-color: #1B75BC;
-			border-color: #1B75BC;
-			color: #fff;
+			@include adaptivity(not-phone) {
+				background-color: #1B75BC;
+				border-color: #1B75BC;
+				color: #fff;
+			}
+		}
+
+		&:active {
+			@include adaptivity(phone) {
+				background-color: #1B75BC;
+				border-color: #1B75BC;
+				color: #fff;
+			}
 		}
 		
 		&_disabled {
@@ -139,16 +149,16 @@ $breakPoint: 650px;
 
 	&__minus {
 		&:after {
-			width: 23px;
-			height: 24px;
+			width: 25px;
+			height: 25px;
 			content: "\e903";
 		}
 	}
 
 	&__plus {
 		&:after {
-			width: 24px;
-			height: 24px;
+			width: 25px;
+			height: 25px;
 			content: "\e902";
 		}
 	}
