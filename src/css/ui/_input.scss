@@ -1,6 +1,8 @@
 @import "../variables";
 
 .widget-ui-input {
+	-webkit-appearance: none;
+	
 	&__wrapper {
 		position: relative;
 	}
@@ -30,10 +32,6 @@
 	&_loading {
 		background: url('/images/form/spinner.svg') no-repeat 90% center;
 		background-size: 20px;
-	}
-
-	&_pointer {
-		cursor: pointer;
 	}
 
 	&_disabled {

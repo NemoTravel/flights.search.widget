@@ -3441,6 +3441,10 @@
   }
 }
 
+.widget .widget-ui-input {
+  -webkit-appearance: none;
+}
+
 .widget .widget-ui-input__wrapper {
   position: relative;
 }
@@ -3468,10 +3472,6 @@
 .widget .widget-ui-input_loading {
   background: url("/images/form/spinner.svg") no-repeat 90% center;
   background-size: 20px;
-}
-
-.widget .widget-ui-input_pointer {
-  cursor: pointer;
 }
 
 .widget .widget-ui-input_disabled {
@@ -3936,7 +3936,7 @@
 
 .widget-form-airports .widget-ui-input {
   padding-right: 120px;
-  -webkit-appearance: none;
+  cursor: pointer;
 }
 
 .widget-form-airports .widget-ui-input:focus {
