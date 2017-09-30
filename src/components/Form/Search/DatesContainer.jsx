@@ -11,33 +11,33 @@ class DatesContainer extends Component {
 		super(props);
 		
 		this.getReturnRef = this.getReturnRef.bind(this);
-		this.selectDateWrapper = this.selectDateWrapper.bind(this);
+		// this.selectDateWrapper = this.selectDateWrapper.bind(this);
 	}
 	
 	getReturnRef(input) {
 		this.returnInput = input;
 	}
 
-	/**
-	 * Open return datepicker after selecting the departure date.
-	 * 
-	 * @returns {Function}
-	 */
-	selectDateWrapper() {
-		const originalSelectDate = this.props.actions.datepickerChange;
-		
-		return (date, dateType) => {
-			originalSelectDate(date, dateType);
-
-			if (dateType === 'departure') {
-				this.returnInput.focus();
-			}
-		};
-	}
+	// /**
+	//  * Open return datepicker after selecting the departure date.
+	//  * 
+	//  * @returns {Function}
+	//  */
+	// selectDateWrapper() {
+	// 	const originalSelectDate = this.props.actions.datepickerChange;
+	//
+	// 	return (date, dateType) => {
+	// 		originalSelectDate(date, dateType);
+	//
+	// 		if (dateType === 'departure') {
+	// 			this.returnInput.focus();
+	// 		}
+	// 	};
+	// }
 	
 	render() {
 		const { departureDatepicker, returnDatepicker, locale, showErrors } = this.props;
-		const { toggleDatePicker } = this.props.actions;
+		const { toggleDatePicker, datepickerChange } = this.props.actions;
 		
 		return <div className="form-group row widget-form-dates">
 			<DepartureDatepicker
@@ -45,7 +45,7 @@ class DatesContainer extends Component {
 				locale={locale}
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}
-				selectDate={this.selectDateWrapper()}
+				selectDate={datepickerChange}
 				highlightDates={this.props.datesBetweenDepartureAndReturn}
 				specialDate={returnDatepicker.date}
 			/>
@@ -54,7 +54,7 @@ class DatesContainer extends Component {
 				locale={locale}
 				date={returnDatepicker.date}
 				isActive={returnDatepicker.isActive}
-				selectDate={this.selectDateWrapper()}
+				selectDate={datepickerChange}
 				toggleDatePicker={toggleDatePicker}
 				highlightDates={this.props.datesBetweenDepartureAndReturn}
 				getRef={this.getReturnRef}
