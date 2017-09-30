@@ -7,6 +7,8 @@
 	"search": "Search",
 	"from": "From",
 	"to": "To",
+	"from_full": "Enter the departure airport or city",
+	"to_full": "Enter the arrival airport or city",
 	"departureError": "Select departure airport",
 	"arrivalError": "Select arrival airport",
 	"dateToError": "Select departure date",

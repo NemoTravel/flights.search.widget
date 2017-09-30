@@ -1,6 +1,8 @@
 @import "../variables";
 
 &-airports {
+	$mobile-input-height: 50px;
+	
 	&.row {
 		@include adaptivity(phone) {
 			display: block;
@@ -18,19 +20,21 @@
 			background-color: transparent;
 			
 			@include adaptivity(phone) {
-				height: 60px;
-				line-height: 60px;
 				position: fixed;
-				top: 40px;
-				background-color: #fff;
-				z-index: 12;
+				top: $mobile-header-height;
 				left: 0;
 				right: 0;
+				z-index: 12;
+
+				padding: 10px 20px;
+				height: $mobile-input-height;
+				line-height: $mobile-input-height;
+				
+				background-color: #fff;
+				background-size: 30px; // spinning loader size
 				box-shadow: none;
 				border-top: none;
 				font-size: 25px;
-				padding: 11px 20px;
-				background-size: 30px;
 			}
 		}
 		
@@ -63,11 +67,12 @@
 
 						@include adaptivity(phone) {
 							position: fixed;
-							top: 99px;
+							top: $mobile-input-height + $mobile-header-height;
 							left: 0;
 							bottom: 0;
 							right: 0;
 							z-index: 12;
+							
 							background: #fff;
 							max-height: none;
 						}
@@ -79,15 +84,17 @@
 				}
 
 				&__suggestion {
-					list-style-type: none;
-					background: #fff;
 					transition: background, .4s, ease;
 					display: block;
-					padding: 10px 90px 10px 20px;
-					color: #666;
-					font-size: 15px;
-					line-height: 16px;
 					position: relative;
+
+					padding: 10px 90px 10px 20px;
+					line-height: 16px;
+					
+					list-style-type: none;
+					background: #fff;
+					color: $font-color;
+					font-size: 15px;
 					font-weight: 400;
 					cursor: pointer;
 
@@ -108,15 +115,22 @@
 	}
 	
 	&__header {
+		@extend .widget-ui-mobile__header;
+		display: none;
+		
+		&_visible {
+			display: block;
+		}
+
 		@include adaptivity(not-phone) {
-			display: none !important;
+			display: none;
 		}
 	}
 	
 	&__underlay {
 		display: none;
 		position: fixed;
-		top: 99px;
+		top: $mobile-input-height + $mobile-header-height;
 		left: 0;
 		bottom: 0;
 		right: 0;
@@ -152,13 +166,15 @@
 		position: absolute;
 		top: 0;
 		bottom: 0;
+		right: 17px;
+		z-index: 1;
+
+		line-height: 16px;
 		align-items: center;
+		
 		color: #B3B3B3;
 		font-weight: 400;
 		font-size: 15px;
-		line-height: 16px;
-		right: 17px;
-		z-index: 1;
 
 		&_withArrow {
 			right: 35px;

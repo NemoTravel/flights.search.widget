@@ -14,8 +14,8 @@ export default class Return extends Datepicker {
 
 	renderInner() {
 		return <div>
-			<div className={`widget-ui-mobile__header widget-ui-mobile__header_visible widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`}>
-				<div className="widget-ui-icon widget-ui-mobile__header__closer" onClick={() => {
+			<div className={`widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`}>
+				<div className="widget-ui-icon widget-ui-mobile__back" onClick={() => {
 					if (this.nemoDatepicker) {
 						if (this.props.date) {
 							this.nemoDatepicker.calendar.setOpen(false);

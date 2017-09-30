@@ -2,53 +2,47 @@
 
 .widget-ui-mobile {
 	&__header {
-		display: none;
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
-		padding-top: 20px;
+		z-index: 12;
 		
-		color: #3fa9f5;
+		color: $title-color;
 		font-weight: 600;
 		font-size: 17px;
 		text-align: center;
 
-		&__closer {
-			display: none;
-			position: absolute;
+		@include adaptivity(phone) {
+			background: $title-color;
 			color: #fff;
-			font-weight: normal;
-			font-size: 11px;
-			cursor: pointer;
-
-			left: 15px;
-			height: 40px;
-			line-height: 40px;
-
-			&:after {
-				content: "\E923";
-				transform: rotate(180deg);
-				position: absolute;
-				top: -1px;
-			}
-
-			@include adaptivity(phone) {
-				display: block;
-			}
+			position: fixed;
+			height: $mobile-header-height;
+			line-height: $mobile-header-height;
 		}
-		
-		&_visible {
-			display: block;
+	}
+
+	&__back {
+		display: none;
+		position: absolute;
+		color: #fff;
+		font-weight: normal;
+		font-size: 11px;
+		cursor: pointer;
+
+		left: $main-padding-size;
+		height: $mobile-header-height;
+		line-height: $mobile-header-height;
+
+		&:after {
+			content: "\E923";
+			transform: rotate(180deg);
+			position: absolute;
+			top: -1px;
 		}
 
 		@include adaptivity(phone) {
-			background: #3fa9f5;
-			color: #fff;
-			position: fixed;
-			padding: 0;
-			height: 40px;
-			line-height: 40px;
+			display: block;
 		}
 	}
 }

@@ -45,7 +45,9 @@ $breakPoint: 650px;
 	}
 	
 	&__header {
+		@extend .widget-ui-mobile__header;
 		display: block;
+		padding-top: 20px;
 		
 		&:before {
 			content: "\E90B";
@@ -80,6 +82,10 @@ $breakPoint: 650px;
 					margin-top: -5px;
 				}
 			}
+		}
+
+		@include adaptivity(phone) {
+			padding: 0;
 		}
 	}
 	
@@ -225,7 +231,7 @@ $breakPoint: 650px;
 		}
 		
 		&__day {
-			color: #666;
+			color: $font-color;
 			position: relative;
 			width: 2.3rem;
 			height: 2rem;

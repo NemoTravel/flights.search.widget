@@ -3388,20 +3388,33 @@
   line-height: 1;
 }
 
-.widget .widget-ui-mobile__header {
-  display: none;
+.widget .widget-ui-mobile__header,
+.widget .widget-ui-datepicker__header,
+.widget .widget-form-airports__header {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  padding-top: 20px;
+  z-index: 12;
   color: #3fa9f5;
   font-weight: 600;
   font-size: 17px;
   text-align: center;
 }
 
-.widget .widget-ui-mobile__header__closer {
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-mobile__header,
+  .widget .widget-ui-datepicker__header,
+  .widget .widget-form-airports__header {
+    background: #3fa9f5;
+    color: #fff;
+    position: fixed;
+    height: 40px;
+    line-height: 40px;
+  }
+}
+
+.widget .widget-ui-mobile__back {
   display: none;
   position: absolute;
   color: #fff;
@@ -3413,7 +3426,7 @@
   line-height: 40px;
 }
 
-.widget .widget-ui-mobile__header__closer:after {
+.widget .widget-ui-mobile__back:after {
   content: "\E923";
   transform: rotate(180deg);
   position: absolute;
@@ -3421,23 +3434,8 @@
 }
 
 @media only screen and (max-width: 650px) {
-  .widget .widget-ui-mobile__header__closer {
+  .widget .widget-ui-mobile__back {
     display: block;
-  }
-}
-
-.widget .widget-ui-mobile__header_visible {
-  display: block;
-}
-
-@media only screen and (max-width: 650px) {
-  .widget .widget-ui-mobile__header {
-    background: #3fa9f5;
-    color: #fff;
-    position: fixed;
-    padding: 0;
-    height: 40px;
-    line-height: 40px;
   }
 }
 
@@ -3487,8 +3485,8 @@
 
 .widget .widget-ui-pseudoLink {
   display: inline-block;
-  border-bottom: 1px dotted #1B75BC;
-  color: #1B75BC;
+  border-bottom: 1px dotted #3fa9f5;
+  color: #3fa9f5;
   font-size: 13px;
   font-weight: 600;
   vertical-align: middle;
@@ -3500,7 +3498,7 @@
   text-decoration: none;
   background: none;
   border-bottom-color: transparent;
-  color: #1B75BC;
+  color: #3fa9f5;
 }
 
 @media only screen and (max-width: 650px) {
@@ -3550,6 +3548,7 @@
 
 .widget .widget-ui-datepicker__header {
   display: block;
+  padding-top: 20px;
 }
 
 .widget .widget-ui-datepicker__header:before {
@@ -3586,6 +3585,12 @@
 @media only screen and (max-width: 650px) {
   .widget .widget-ui-datepicker__header_return:before {
     margin-top: -5px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker__header {
+    padding: 0;
   }
 }
 
@@ -3744,7 +3749,7 @@
 }
 
 .widget .widget-ui-datepicker .react-datepicker__day {
-  color: #666;
+  color: #666666;
   position: relative;
   width: 2.3rem;
   height: 2rem;
@@ -3946,19 +3951,19 @@
 
 @media only screen and (max-width: 650px) {
   .widget-form-airports .widget-ui-input:focus {
-    height: 60px;
-    line-height: 60px;
     position: fixed;
     top: 40px;
-    background-color: #fff;
-    z-index: 12;
     left: 0;
     right: 0;
+    z-index: 12;
+    padding: 10px 20px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #fff;
+    background-size: 30px;
     box-shadow: none;
     border-top: none;
     font-size: 25px;
-    padding: 11px 20px;
-    background-size: 30px;
   }
 }
 
@@ -3987,7 +3992,7 @@
 @media only screen and (max-width: 650px) {
   .widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestions-container {
     position: fixed;
-    top: 99px;
+    top: 90px;
     left: 0;
     bottom: 0;
     right: 0;
@@ -4002,15 +4007,15 @@
 }
 
 .widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestion {
-  list-style-type: none;
-  background: #fff;
   transition: background, .4s, ease;
   display: block;
-  padding: 10px 90px 10px 20px;
-  color: #666;
-  font-size: 15px;
-  line-height: 16px;
   position: relative;
+  padding: 10px 90px 10px 20px;
+  line-height: 16px;
+  list-style-type: none;
+  background: #fff;
+  color: #666666;
+  font-size: 15px;
   font-weight: 400;
   cursor: pointer;
 }
@@ -4027,16 +4032,24 @@
   border-bottom: 1px solid #e6e6e6;
 }
 
+.widget-form-airports__header {
+  display: none;
+}
+
+.widget-form-airports__header_visible {
+  display: block;
+}
+
 @media only screen and (min-width: 751px) {
   .widget-form-airports__header {
-    display: none !important;
+    display: none;
   }
 }
 
 .widget-form-airports__underlay {
   display: none;
   position: fixed;
-  top: 99px;
+  top: 90px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -4069,13 +4082,13 @@
   position: absolute;
   top: 0;
   bottom: 0;
+  right: 17px;
+  z-index: 1;
+  line-height: 16px;
   align-items: center;
   color: #B3B3B3;
   font-weight: 400;
   font-size: 15px;
-  line-height: 16px;
-  right: 17px;
-  z-index: 1;
 }
 
 .widget-form-airports__airportCode_withArrow {
