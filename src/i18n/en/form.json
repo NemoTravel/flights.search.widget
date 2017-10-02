@@ -8,8 +8,8 @@
 	"search": "Search",
 	"from": "From",
 	"to": "To",
-	"from_full": "Enter the departure airport or city",
-	"to_full": "Enter the arrival airport or city",
+	"from_full": "Departure airport or city",
+	"to_full": "Arrival airport or city",
 	"departureError": "Select departure airport",
 	"arrivalError": "Select arrival airport",
 	"dateToError": "Select departure date",
@@ -20,8 +20,12 @@
 	"passengers_2": "Passenger",
 	"passengers_3": "Passengers",
 	"passengersError": "Select at least one passenger",
-	"passenger_ADT": "Adults (12+)",
-	"passenger_CLD": "Children (2-11)",
-	"passenger_INF": "Infants (0-2)",
-	"passenger_INS": "Infants with a seat (0-2)"
+	"passenger_ADT": "Adults",
+	"passenger_ADT_age": "from 12 years old",
+	"passenger_CLD": "Children",
+	"passenger_CLD_age": "from 2 to 11 years old",
+	"passenger_INF": "Infants",
+	"passenger_INF_age": "under 2 years old",
+	"passenger_INS": "Infants with a seat",
+	"passenger_INS_age": "under 2 years old"
 }

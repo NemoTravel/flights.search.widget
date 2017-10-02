@@ -4292,6 +4292,12 @@
   text-overflow: ellipsis;
 }
 
+.widget-form-passengers__title__age {
+  color: #ccc;
+  font-size: 13px;
+  padding-left: 10px;
+}
+
 .widget-form-passengers__counter {
   display: flex;
   align-items: center;

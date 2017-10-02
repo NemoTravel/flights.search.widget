@@ -49,21 +49,25 @@ export const datesState = {
 export const passengersState = {
 	ADT: {
 		title: i18n('form', 'passenger_ADT'),
+		ageTitle: i18n('form', 'passenger_ADT_age'),
 		code: 'ADT',
 		count: 1
 	},
 	CLD: {
 		title: i18n('form', 'passenger_CLD'),
+		ageTitle: i18n('form', 'passenger_CLD_age'),
 		code: 'CLD',
 		count: 0
 	},
 	INF: {
 		title: i18n('form', 'passenger_INF'),
+		ageTitle: i18n('form', 'passenger_INF_age'),
 		code: 'INF',
 		count: 0
 	},
 	INS: {
 		title: i18n('form', 'passenger_INS'),
+		ageTitle: i18n('form', 'passenger_INS_age'),
 		code: 'INS',
 		count: 0
 	}

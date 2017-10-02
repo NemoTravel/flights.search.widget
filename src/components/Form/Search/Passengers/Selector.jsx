@@ -28,6 +28,7 @@ export default class Selector extends Component {
 				addPassenger={addPassenger}
 				removePassenger={removePassenger}
 				title={passenger.title}
+				ageTitle={passenger.ageTitle}
 				code={passenger.code}
 				count={passenger.count}
 				canAddPassenger={canIncrease}

@@ -51,6 +51,12 @@
 		display: inline-block;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+		
+		&__age {
+			color: #ccc;
+			font-size: 13px;
+			padding-left: 10px;
+		}
 	}
 
 	&__counter {

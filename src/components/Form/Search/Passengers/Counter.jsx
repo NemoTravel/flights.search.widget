@@ -32,7 +32,7 @@ export default class Counter extends Component {
 	}
 	
 	render() {
-		const { title, count, canAddPassenger, canRemovePassenger } = this.props;
+		const { title, ageTitle, count, canAddPassenger, canRemovePassenger } = this.props;
 		const itemClassName = classnames(
 			'widget-form-passengers__item',
 			{ 'widget-form-passengers__item_disabled': !count }
@@ -49,7 +49,14 @@ export default class Counter extends Component {
 		);
 
 		return <div className={itemClassName}>
-			<div className="widget-form-passengers__title">{title}</div>
+			<div className="widget-form-passengers__title">
+				{title}
+				
+				<span className="widget-form-passengers__title__age">
+					{ageTitle}
+				</span>
+			</div>
+			
 			<div className="widget-form-passengers__counter">
 				<div className={minusClassName} onClick={this.removePassenger}/>
 				<div className="widget-form-passengers__number">{count}</div>
