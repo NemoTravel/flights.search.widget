@@ -21,5 +21,6 @@ export default class Departure extends Datepicker {
 		this.placeholder = i18n('form', 'dateTo');
 		this.popperPlacement = 'top-start';
 		this.tooltipText = i18n('form', 'dateToError');
+		this.showErrors = true;
 	}
 }
