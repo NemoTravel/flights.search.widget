@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 export default class Counter extends Component {
+	static propTypes = {
+		addPassenger: PropTypes.func.isRequired,
+		removePassenger: PropTypes.func.isRequired,
+		title: PropTypes.string.isRequired,
+		ageTitle: PropTypes.string.isRequired,
+		code: PropTypes.string.isRequired,
+		count: PropTypes.number.isRequired,
+		canAddPassenger: PropTypes.bool.isRequired,
+		canRemovePassenger: PropTypes.bool.isRequired,
+	};
+	
 	constructor(props) {
 		super(props);
 		

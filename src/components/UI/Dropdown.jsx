@@ -1,7 +1,14 @@
 import React, { PureComponent } from 'react';
 import onClickOutside from 'react-onclickoutside';
+import PropTypes from 'prop-types';
 
 class Dropdown extends PureComponent {
+	static propTypes = {
+		triggerElement: PropTypes.element.isRequired,
+		contentElement: PropTypes.element.isRequired,
+		triggerType: PropTypes.string
+	};
+	
 	constructor(props) {
 		super(props);
 

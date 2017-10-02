@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NemoDropdown from 'components/UI/Dropdown';
+import UIDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/Form/Search/Passengers/Counter';
 import { i18n } from 'utils';
@@ -63,7 +63,7 @@ export default class Selector extends Component {
 		
 		return <div className="form-group widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
-				<NemoDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
+				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
 			</Tooltip>
 		</div>;
 	}

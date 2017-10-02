@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 export default class Tooltip extends Component {
+	static propTypes = {
+		isActive: PropTypes.bool,
+		isCentered: PropTypes.bool,
+		message: PropTypes.string.isRequired
+	};
+	
 	shouldComponentUpdate(nextProps) {
-		const { isActive, message, children } = this.props;
+		const { isActive = false, message, children } = this.props;
 		return isActive !== nextProps.isActive || message !== nextProps.message || children !== nextProps.children;
 	}
 	
@@ -11,8 +18,8 @@ export default class Tooltip extends Component {
 		const { 
 			children:innerComponent, 
 		  	message, 
-		  	isActive, 
-		  	isCentered 
+		  	isActive = false, 
+		  	isCentered = false
 		} = this.props;
 		
 		return <div className="widget-ui-tooltip">
