@@ -10,7 +10,8 @@ export const systemState = {
 	locale: 'en',
 	verticalForm: false,
 	readOnlyAutocomplete: false,
-	autoFocusArrivalAirport: false
+	autoFocusArrivalAirport: false,
+	autoFocusReturnDate: false
 };
 
 // export const blockVisibilityState = {

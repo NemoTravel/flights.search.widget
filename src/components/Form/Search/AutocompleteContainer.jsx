@@ -31,7 +31,7 @@ class AutocompleteContainer extends Component {
 				selectAirport={(airport, autocompleteType) => {
 					selectAirport(airport, autocompleteType);
 
-					if (system.autoFocusArrivalAirport) {
+					if (system.autoFocusArrivalAirport && this.arrivalInput) {
 						this.arrivalInput.focus();
 					}
 				}}
