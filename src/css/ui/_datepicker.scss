@@ -105,20 +105,20 @@ $breakPoint: 650px;
 			font-weight: 400;
 			padding: 10px 15px;
 			display: inline-block;
-			border: 1px solid rgba(#3fa9f5, 0.2);
+			border: 1px solid rgba($title-color, 0.2);
 			cursor: pointer;
-			color: #3fa9f5;
+			color: $title-color;
 			background: #fff;
 
 			&:hover {
-				background: #3fa9f5;
+				background: $title-color;
 				color: #fff;
 			}
 
 			@include adaptivity(phone) {
 				font-size: 17px;
 				padding: 14px 20px;
-				background: #3fa9f5;
+				background: $title-color;
 				color: #fff;
 			}
 			
@@ -164,13 +164,13 @@ $breakPoint: 650px;
 
 				&:hover {
 					@include adaptivity(not-phone) {
-						background: #3fa9f5 url('/images/form/circleNext-hover.svg') no-repeat center;
+						background: $title-color url('/images/form/circleNext-hover.svg') no-repeat center;
 					}
 				}
 
 				&:active {
 					@include adaptivity(phone) {
-						background: #3fa9f5 url('/images/form/circleNext-hover.svg') no-repeat center;
+						background: $title-color url('/images/form/circleNext-hover.svg') no-repeat center;
 					}
 				}
 			}
@@ -310,6 +310,8 @@ $breakPoint: 650px;
 	}
 
 	&__calendar {
+		@extend .widget-ui-icon;
+		
 		position: absolute;
 		right: 0;
 		top: 0;

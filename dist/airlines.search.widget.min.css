@@ -3378,7 +3378,9 @@
   display: block;
 }
 
-.widget .widget-ui-icon {
+.widget .widget-ui-icon,
+.widget .widget-ui-input__closer,
+.widget .widget-ui-datepicker__calendar {
   font-family: "OpenSkyIcons", sans-serif !important;
   speak: none;
   font-style: normal;
@@ -3396,7 +3398,7 @@
   left: 0;
   right: 0;
   z-index: 12;
-  color: #3fa9f5;
+  color: #1B75BC;
   font-weight: 600;
   font-size: 17px;
   text-align: center;
@@ -3406,7 +3408,7 @@
   .widget .widget-ui-mobile__header,
   .widget .widget-ui-datepicker__header,
   .widget .widget-form-airports__header {
-    background: #3fa9f5;
+    background: #1B75BC;
     color: #fff;
     position: fixed;
     height: 40px;
@@ -3467,6 +3469,31 @@
   content: "\E90A";
 }
 
+.widget .widget-ui-input__closer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #1B75BC;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-input__closer {
+    top: 2px;
+  }
+}
+
+.widget .widget-ui-input__closer:before {
+  content: '\E908';
+}
+
 .widget .widget-ui-input_loading {
   background: url("/images/form/spinner.svg") no-repeat 90% center;
   background-size: 20px;
@@ -3485,8 +3512,8 @@
 
 .widget .widget-ui-pseudoLink {
   display: inline-block;
-  border-bottom: 1px dotted #3fa9f5;
-  color: #3fa9f5;
+  border-bottom: 1px dotted #1B75BC;
+  color: #1B75BC;
   font-size: 13px;
   font-weight: 600;
   vertical-align: middle;
@@ -3498,7 +3525,7 @@
   text-decoration: none;
   background: none;
   border-bottom-color: transparent;
-  color: #3fa9f5;
+  color: #1B75BC;
 }
 
 @media only screen and (max-width: 650px) {
@@ -3613,14 +3640,14 @@
   font-weight: 400;
   padding: 10px 15px;
   display: inline-block;
-  border: 1px solid rgba(63, 169, 245, 0.2);
+  border: 1px solid rgba(27, 117, 188, 0.2);
   cursor: pointer;
-  color: #3fa9f5;
+  color: #1B75BC;
   background: #fff;
 }
 
 .widget .widget-ui-datepicker__footer__button:hover {
-  background: #3fa9f5;
+  background: #1B75BC;
   color: #fff;
 }
 
@@ -3628,7 +3655,7 @@
   .widget .widget-ui-datepicker__footer__button {
     font-size: 17px;
     padding: 14px 20px;
-    background: #3fa9f5;
+    background: #1B75BC;
     color: #fff;
   }
 }
@@ -3679,14 +3706,14 @@
 @media only screen and (min-width: 751px) {
   .widget .widget-ui-datepicker .react-datepicker__navigation--previous:hover,
   .widget .widget-ui-datepicker .react-datepicker__navigation--next:hover {
-    background: #3fa9f5 url("/images/form/circleNext-hover.svg") no-repeat center;
+    background: #1B75BC url("/images/form/circleNext-hover.svg") no-repeat center;
   }
 }
 
 @media only screen and (max-width: 650px) {
   .widget .widget-ui-datepicker .react-datepicker__navigation--previous:active,
   .widget .widget-ui-datepicker .react-datepicker__navigation--next:active {
-    background: #3fa9f5 url("/images/form/circleNext-hover.svg") no-repeat center;
+    background: #1B75BC url("/images/form/circleNext-hover.svg") no-repeat center;
   }
 }
 

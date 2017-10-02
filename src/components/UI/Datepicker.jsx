@@ -52,7 +52,7 @@ export default class Datepicker extends Component {
 	
 	renderCloser() {
 		const { isActive, toggleDatePicker } = this.props;
-		return toggleDatePicker && isActive ? <div className="widget-ui-icon widget-ui-datepicker__closer" onClick={this.disable}/> : null;
+		return toggleDatePicker && isActive ? <div className="widget-ui-input__closer" onClick={this.disable}/> : null;
 	}
 
 	/**
@@ -61,7 +61,7 @@ export default class Datepicker extends Component {
 	 * @returns {XML}
 	 */
 	renderCustomInput() {
-		const { inputProps, date, isActive, getRef, tooltipIsActive, tooltipText } = this.props;
+		const { inputProps, date, isActive, getRef, tooltipIsActive, tooltipText, toggleDatePicker } = this.props;
 		const formattedDate = date ? date.format('D MMMM, dd') : '';
 		
 		if (getRef) {
@@ -77,15 +77,13 @@ export default class Datepicker extends Component {
 					spellCheck={false}
 					value={formattedDate}
 					{...inputProps}
-					onFocus={(e) => {
-						e.target.blur();
-					}}
+					onFocus={event => event.target.blur()}
 				/>
 			</Tooltip>
 
 			{this.renderCloser()}
 
-			<div className="widget-ui-icon widget-ui-datepicker__calendar"/>
+			{!toggleDatePicker || !isActive ? <div className="widget-ui-datepicker__calendar"/> : null}
 		</div>;
 	}
 	

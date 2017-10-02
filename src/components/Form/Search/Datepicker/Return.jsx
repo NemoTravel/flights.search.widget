@@ -11,6 +11,7 @@ export default class Return extends Datepicker {
 		selectDate: PropTypes.func.isRequired,
 		getRef: PropTypes.func.isRequired,
 		highlightDates: PropTypes.array,
+		toggleDatePicker: PropTypes.func.isRequired,
 		specialDate: PropTypes.object
 	};
 	
