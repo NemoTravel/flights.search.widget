@@ -81,16 +81,9 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 		dispatch(startAutocompleteLoading(autocompleteType));
 
 		let url = `${state.system.API_URL}/guide/autocomplete/iata/${searchText}`;
-		
-		if (autocompleteType === 'departure') {
-			if (state.form.autocomplete.arrival.airport) {
-				url += `/arr/${state.form.autocomplete.arrival.airport.IATA}`;
-			}
-		}
-		else {
-			if (state.form.autocomplete.departure.airport) {
-				url += `/dep/${state.form.autocomplete.departure.airport.IATA}`;
-			}
+
+		if (autocompleteType === 'arrival' && state.form.autocomplete.departure.airport) {
+			url += `/dep/${state.form.autocomplete.departure.airport.IATA}`;
 		}
 
 		if (state.system.routingGrid) {
@@ -107,10 +100,19 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 				
 				// Some basic parser.
 				if (data && data.guide.autocomplete.iata instanceof Array) {
-					const { airports } = data.guide;
+					const { airports, countries } = data.guide;
 					const { iata } = data.guide.autocomplete;
+					
 					// Trying to match suggested airports by IATA.
-					const suggestions = iata.filter(({ IATA }) => IATA in airports && airports[IATA].name).map(({ IATA }) => airports[IATA]);
+					const suggestions = iata
+						.filter(({ IATA }) => IATA in airports && airports[IATA].name)
+						.map(({ IATA, directFlight }) => {
+							return { 
+								airport: airports[IATA], 
+								country: countries[airports[IATA].countryCode],
+								isDirect: directFlight
+							};
+						});
 	
 					// Clear previous suggestions first (to avoid rendering collisions).
 					dispatch(changeAutocompleteSuggestions([], autocompleteType));

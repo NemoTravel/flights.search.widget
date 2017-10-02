@@ -159,6 +159,18 @@
 			transform: translateY(-50%);
 			pointer-events: none;
 		}
+		
+		&__title {
+			&_bold {
+				font-weight: 600;
+			}
+		}
+		
+		&__countryName {
+			color: #b3b3b3;
+			font-size: 13px;
+			padding-left: 10px;
+		}
 	}
 	
 	&__airportCode {

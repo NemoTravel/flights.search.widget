@@ -117,11 +117,18 @@ export default class Autocomplete extends Component {
 	 * @returns {XML}
 	 */
 	renderSuggestion(item) {
-		const { name: airportName, IATA: airportIATA } = item;
+		const { airport, country, isDirect } = item;
 		
 		return <div className="widget-form-airports__suggestion">
-			<span className="widget-form-airports__suggestion__title">{airportName}</span>
-			<span className="widget-form-airports__suggestion__code">{airportIATA}</span>
+			<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': isDirect })}>
+				{airport.name}
+			</span>
+			
+			{country ? <span className="widget-form-airports__suggestion__countryName">{country.name}</span> : null}
+			
+			<span className="widget-form-airports__suggestion__code">
+				{airport.IATA}
+			</span>
 		</div>;
 	}
 
@@ -171,16 +178,17 @@ export default class Autocomplete extends Component {
 	renderInputField(inputProps) {
 		const { showErrors, airport } = this.props;
 		
-		inputProps.ref = (input) => {
-			this.input = input;
-
-			if (this.props.getRef) {
-				this.props.getRef(input);
-			}
-		};
-		
 		return <Tooltip isActive={!airport && showErrors} isCentered={true} message={this.tooltipText}>
-			<input type="text" {...inputProps}/>
+			<input 
+				type="text" {...inputProps}
+				ref={input => {
+					this.input = input;
+
+					if (this.props.getRef) {
+						this.props.getRef(input);
+					}
+				}}
+			/>
 		</Tooltip>;
 	}
 
@@ -188,10 +196,10 @@ export default class Autocomplete extends Component {
 	 * Set selected airport to the state.
 	 * 
 	 * @param {Object} event
-	 * @param {Object} airport
+	 * @param {Object} suggesting
 	 */
-	selectSuggestion(event, { suggestion: airport }) {
-		this.props.selectAirport(airport, this.type);
+	selectSuggestion(event, { suggestion }) {
+		this.props.selectAirport(suggestion.airport, this.type);
 	}
 	
 	shouldComponentUpdate(nextProps, nextState) {
@@ -228,7 +236,7 @@ export default class Autocomplete extends Component {
 					suggestions={suggestions}
 					onSuggestionsFetchRequested={this.fetchSuggestions}
 					onSuggestionsClearRequested={this.clearSuggestions}
-					getSuggestionValue={(item) => item.name}
+					getSuggestionValue={(item) => item.airport.name}
 					renderSuggestion={this.renderSuggestion}
 					onSuggestionSelected={this.selectSuggestion}
 					highlightFirstSuggestion={true}

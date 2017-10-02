@@ -4104,6 +4104,16 @@
   pointer-events: none;
 }
 
+.widget-form-airports__suggestion__title_bold {
+  font-weight: 600;
+}
+
+.widget-form-airports__suggestion__countryName {
+  color: #b3b3b3;
+  font-size: 13px;
+  padding-left: 10px;
+}
+
 .widget-form-airports__airportCode {
   display: flex;
   position: absolute;
