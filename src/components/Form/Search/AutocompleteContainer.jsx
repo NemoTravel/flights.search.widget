@@ -6,53 +6,54 @@ import DepartureAutocomplete from 'components/Form/Search/Autocomplete/Departure
 import ArrivalAutocomplete from 'components/Form/Search/Autocomplete/Arrival';
 
 class AutocompleteContainer extends Component {
-	constructor(props) {
-		super(props);
-		
-		this.getArrivalRef = this.getArrivalRef.bind(this);
-		this.selectAirportWrapper = this.selectAirportWrapper.bind(this);
-	}
-	
-	getArrivalRef(input) { 
-		this.arrivalInput = input; 
-	}
-
-	/**
-	 * Focus arrival autocomplete field after selecting the departure airport.
-	 * 
-	 * @returns {Function}
-	 */
-	selectAirportWrapper() {
-		const originalSelectAirport = this.props.actions.selectAirport;
-		
-		return (airport, autocompleteType) => {
-			originalSelectAirport(airport, autocompleteType);
-
-			if (autocompleteType === 'departure') {
-				this.arrivalInput.focus();
-			}
-		}
-	}
-	
 	render() {
 		const { departureAutocomplete, arrivalAutocomplete, system, showErrors } = this.props;
+		const {
+			swapAirports,
+			changeAutocompleteSuggestions,
+			changeAutocompleteInputValue,
+			sendAutocompleteRequest,
+			selectAirport 
+		} = this.props.actions;
 		
 		return <div className="form-group row widget-form-airports">
 			<DepartureAutocomplete
 				system={system}
-				showErrors={showErrors} 
-				{...departureAutocomplete}
-				{...this.props.actions}
-				selectAirport={this.selectAirportWrapper()}
+				showErrors={showErrors}
+				isLoading={departureAutocomplete.isLoading}
+				suggestions={departureAutocomplete.suggestions}
+				inputValue={departureAutocomplete.inputValue}
+				airport={departureAutocomplete.airport}
+				swapAirports={swapAirports}
+				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
+				changeAutocompleteInputValue={changeAutocompleteInputValue}
+				sendAutocompleteRequest={sendAutocompleteRequest}
+				selectAirport={() => {
+					const originalSelectAirport = selectAirport;
+
+					return (airport, autocompleteType) => {
+						originalSelectAirport(airport, autocompleteType);
+
+						if (autocompleteType === 'departure') {
+							this.arrivalInput.focus();
+						}
+					}
+				}}
 			/>
 			
 			<ArrivalAutocomplete
 				system={system}
 				showErrors={showErrors}
-				{...arrivalAutocomplete}
-				{...this.props.actions} 
-				selectAirport={this.selectAirportWrapper()}
-				getRef={this.getArrivalRef}
+				isLoading={arrivalAutocomplete.isLoading}
+				suggestions={arrivalAutocomplete.suggestions}
+				inputValue={arrivalAutocomplete.inputValue}
+				airport={arrivalAutocomplete.airport}
+				swapAirports={swapAirports}
+				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
+				changeAutocompleteInputValue={changeAutocompleteInputValue}
+				sendAutocompleteRequest={sendAutocompleteRequest}
+				selectAirport={selectAirport}
+				getRef={(input) => this.arrivalInput = input}
 			/>
 		</div>
 	}

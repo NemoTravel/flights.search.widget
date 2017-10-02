@@ -57,6 +57,7 @@
     "js-cookie": "^2.1.4",
     "moment": "^2.18.1",
     "promise-polyfill": "^6.0.2",
+    "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-autosuggest": "^9.3.2",
     "react-datepicker": "^0.54.0",
