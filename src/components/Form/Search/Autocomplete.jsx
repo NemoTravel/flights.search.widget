@@ -142,7 +142,7 @@ export default class Autocomplete extends Component {
 	}
 
 	/**
-	 * Render airport switcher.
+	 * Render airport swapper.
 	 * 
 	 * @returns {*}
 	 */

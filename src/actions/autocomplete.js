@@ -9,7 +9,7 @@ import {
 /**
  * Change the departure and the arrival airports.
  */
-export function switchAirports() {
+export function swapAirports() {
 	return (dispatch, getState) => {
 		const
 			state = getState(),

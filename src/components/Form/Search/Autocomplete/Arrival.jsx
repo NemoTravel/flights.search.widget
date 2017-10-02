@@ -9,6 +9,6 @@ export default class Arrival extends Autocomplete {
 	get tooltipText() { return i18n('form', 'arrivalError'); }
 
 	renderSwitcher() {
-		return <div className={'widget-ui-icon widget-form-airports__switcher'} onClick={this.props.switchAirports}/>;
+		return <div className={'widget-ui-icon widget-form-airports__swap'} title={i18n('form', 'swapAirports')} onClick={this.props.swapAirports}/>;
 	}
 }

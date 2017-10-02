@@ -4146,7 +4146,7 @@
   }
 }
 
-.widget-form-airports__switcher {
+.widget-form-airports__swap {
   width: 24px;
   height: 24px;
   position: absolute;
@@ -4166,7 +4166,7 @@
 }
 
 @media only screen and (min-width: 751px) {
-  .widget-form-airports__switcher:hover {
+  .widget-form-airports__swap:hover {
     background: #1B75BC;
     border-color: #1B75BC;
     color: #fff;
@@ -4174,19 +4174,19 @@
 }
 
 @media only screen and (max-width: 650px) {
-  .widget-form-airports__switcher:active {
+  .widget-form-airports__swap:active {
     background: #1B75BC;
     border-color: #1B75BC;
     color: #fff;
   }
 }
 
-.widget-form-airports__switcher:after {
+.widget-form-airports__swap:after {
   content: "\E901";
 }
 
 @media only screen and (max-width: 650px) {
-  .widget-form-airports__switcher {
+  .widget-form-airports__swap {
     right: 75px;
     left: auto;
     transform: rotate(90deg);
@@ -4482,7 +4482,7 @@
   border-left: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.widget-form_vertical .widget-form-airports__switcher {
+.widget-form_vertical .widget-form-airports__swap {
   right: 75px;
   left: auto;
   transform: rotate(90deg);
