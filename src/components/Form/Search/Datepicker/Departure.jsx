@@ -1,11 +1,25 @@
 import React from 'react';
 import Datepicker from 'components/Form/Search/Datepicker';
 import { i18n } from 'utils';
+import PropTypes from 'prop-types';
 
 export default class Departure extends Datepicker {
-	get type() { return 'departure'; }
-	get placeholder() { return i18n('form', 'dateTo'); }
-	get popperPlacement() { return 'top-start'; }
-	get tooltipText() { return i18n('form', 'dateToError'); }
-	get showErrors() { return true; }
+	static propTypes = {
+		showErrors: PropTypes.bool.isRequired,
+		locale: PropTypes.string.isRequired,
+		date: PropTypes.object,
+		isActive: PropTypes.bool,
+		selectDate: PropTypes.func.isRequired,
+		highlightDates: PropTypes.array,
+		specialDate: PropTypes.object
+	};
+
+	constructor(props) {
+		super(props);
+
+		this.type = 'departure';
+		this.placeholder = i18n('form', 'dateTo');
+		this.popperPlacement = 'top-start';
+		this.tooltipText = i18n('form', 'dateToError');
+	}
 }

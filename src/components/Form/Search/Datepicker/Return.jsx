@@ -1,15 +1,26 @@
 import React from 'react';
 import Datepicker from 'components/Form/Search/Datepicker';
 import { i18n } from 'utils';
+import PropTypes from 'prop-types';
 
 export default class Return extends Datepicker {
-	get type() { return 'return'; }
-	get placeholder() { return i18n('form', 'dateBack'); }
-	get popperPlacement() { return 'top-end'; }
+	static propTypes = {
+		locale: PropTypes.string.isRequired,
+		date: PropTypes.object,
+		isActive: PropTypes.bool,
+		selectDate: PropTypes.func.isRequired,
+		getRef: PropTypes.func.isRequired,
+		highlightDates: PropTypes.array,
+		specialDate: PropTypes.object
+	};
 	
 	constructor(props) {
 		super(props);
 		this.renderInner = this.renderInner.bind(this);
+
+		this.type = 'return';
+		this.placeholder = i18n('form', 'dateBack');
+		this.popperPlacement = 'top-end';
 	}
 
 	renderInner() {

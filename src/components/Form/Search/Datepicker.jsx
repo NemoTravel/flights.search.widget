@@ -3,17 +3,17 @@ import UIDatepicker from 'components/UI/Datepicker';
 import moment from 'moment';
 
 export default class Datepicker extends Component {
-	get type() { return null; }
-	get placeholder() { return ''; }
-	get popperPlacement() { return null; }
-	get tooltipText() { return ''; }
-	get showErrors() { return false; }
-	
 	constructor(props) {
 		super(props);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.renderInner = this.renderInner.bind(this);
 		this.nemoDatepicker = null;
+
+		this.type = null;
+		this.placeholder = '';
+		this.popperPlacement = null;
+		this.tooltipText = '';
+		this.showErrors = false;
 	}
 
 	/**
