@@ -19,11 +19,15 @@ export default class Arrival extends Autocomplete {
 		getRef: PropTypes.func.isRequired
 	};
 	
-	get type() { return 'arrival'; }
-	get placeholder() { return i18n('form', 'to_full'); }
-	get mobileTitle() { return i18n('form', 'to'); }
-	get tooltipText() { return i18n('form', 'arrivalError'); }
+	constructor(props) {
+		super(props);
 
+		this.type = 'arrival';
+		this.placeholder = i18n('form', 'to_full');
+		this.mobileTitle = i18n('form', 'to');
+		this.tooltipText = i18n('form', 'arrivalError');
+	}
+	
 	renderSwitcher() {
 		return <div className={'widget-ui-icon widget-form-airports__swap'} title={i18n('form', 'swapAirports')} onClick={this.props.swapAirports}/>;
 	}

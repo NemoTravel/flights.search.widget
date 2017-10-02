@@ -5,17 +5,17 @@ import Tooltip from 'components/UI/Tooltip';
 import { i18n } from 'utils';
 
 export default class Autocomplete extends Component {
-	get type() { return null; }
-	get placeholder() { return ''; }
-	get mobileTitle() { return ''; }
-	get tooltipText() { return ''; }
-	
 	constructor(props) {
 		super(props);
+		
 		this.input = null;
 		this.autocompleteTimeout = null;
 		this.autocompleteWaitTime = 200;
 		this.state = { isFocused: false };
+		this.type = null;
+		this.placeholder = '';
+		this.mobileTitle = '';
+		this.tooltipText = '';
 
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -233,9 +233,7 @@ export default class Autocomplete extends Component {
 					onSuggestionSelected={this.selectSuggestion}
 					highlightFirstSuggestion={true}
 					focusInputOnSuggestionClick={false}
-					shouldRenderSuggestions={(value) => {
-						return config.routingGrid || (value && value.length > 1);
-					}}
+					shouldRenderSuggestions={value => config.routingGrid || (value && value.length > 1)}
 					renderInputComponent={this.renderInputField}
 					inputProps={{
 						className: inputClassName,

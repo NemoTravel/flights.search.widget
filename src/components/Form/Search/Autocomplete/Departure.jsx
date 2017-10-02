@@ -16,9 +16,13 @@ export default class Departure extends Autocomplete {
 		sendAutocompleteRequest: PropTypes.func.isRequired,
 		selectAirport: PropTypes.func.isRequired
 	};
-	
-	get type() { return 'departure'; }
-	get placeholder() { return i18n('form', 'from_full'); }
-	get mobileTitle() { return i18n('form', 'from'); }
-	get tooltipText() { return i18n('form', 'departureError'); }
+
+	constructor(props) {
+		super(props);
+
+		this.type = 'departure';
+		this.placeholder = i18n('form', 'from_full');
+		this.mobileTitle = i18n('form', 'from');
+		this.tooltipText = i18n('form', 'departureError');
+	}
 }
