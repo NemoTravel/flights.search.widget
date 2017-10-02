@@ -28,15 +28,11 @@ class AutocompleteContainer extends Component {
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 				changeAutocompleteInputValue={changeAutocompleteInputValue}
 				sendAutocompleteRequest={sendAutocompleteRequest}
-				selectAirport={() => {
-					const originalSelectAirport = selectAirport;
+				selectAirport={(airport, autocompleteType) => {
+					selectAirport(airport, autocompleteType);
 
-					return (airport, autocompleteType) => {
-						originalSelectAirport(airport, autocompleteType);
-
-						if (autocompleteType === 'departure') {
-							this.arrivalInput.focus();
-						}
+					if (system.autoFocusArrivalAirport) {
+						this.arrivalInput.focus();
 					}
 				}}
 			/>

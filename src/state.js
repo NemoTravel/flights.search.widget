@@ -9,7 +9,8 @@ export const systemState = {
 	routingGrid: null,
 	locale: 'en',
 	verticalForm: false,
-	readOnlyAutocomplete: false
+	readOnlyAutocomplete: false,
+	autoFocusArrivalAirport: false
 };
 
 // export const blockVisibilityState = {
