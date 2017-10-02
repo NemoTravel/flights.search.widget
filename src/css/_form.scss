@@ -78,20 +78,20 @@
 		.widget-form {
 			&-search {
 				&__wrapper {
-					padding-right: 0;
-
 					.form-group:last-of-type {
 						margin-bottom: 1rem;
 					}
 				}
 
 				&__footer {
-					position: static;
-					margin-top: 0;
+					.col {
+						flex: 100%;
+						padding-right: 15px;
+						padding-left: 15px;
+					}
 				}
 
 				&__startButton {
-					position: static;
 					width: 100%;
 				}
 			}
@@ -132,52 +132,6 @@
 					left: auto;
 					transform: rotate(90deg);
 					top: -12px;
-				}
-			}
-
-			&-passengers {
-				&__trigger {
-					display: block;
-				}
-
-				&__content {
-					border: 1px solid #e6e6e6;
-					border-top: none;
-					box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-					position: absolute;
-					
-					.col {
-						&:first-of-type {
-							padding: 0;
-						}
-
-						&:last-of-type {
-							padding: 0;
-						}
-					}
-
-					.row {
-						display: block;
-						margin: 0;
-						
-						&:last-of-type {
-							margin-bottom: 0;
-						}
-					}
-				}
-
-				.widget-ui-dropdown__content_hidden {
-					display: none;
-				}
-
-				&__item {
-					padding: 10px 20px;
-					border: none;
-					border-top: 1px solid #e6e6e6;
-				}
-
-				&__counter {
-					border-left: none;
 				}
 			}
 		}

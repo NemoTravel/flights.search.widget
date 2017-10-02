@@ -12,7 +12,18 @@ export default class Search extends Component {
 			<div className="widget-form-search__wrapper">
 				<AutocompleteContainer/>
 				<DatesContainer/>
-				<PassengersContainer/>
+				
+				<div className="row widget-form-search__footer">
+					<div className="col">
+						<PassengersContainer/>
+					</div>
+					
+					<div className="col">
+						<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>
+							{i18n('form', 'search')}
+						</button>
+					</div>
+				</div>
 	
 				{/*<div className="form-group widget-form__pseudoBlocks">*/}
 					{/*<a href="#" className="widget-ui-pseudoLink">{i18n('form', 'discountTitle')}</a>*/}
@@ -21,10 +32,6 @@ export default class Search extends Component {
 				{/*<div className="form-group widget-form__pseudoBlocks">*/}
 					{/*<a href="#" className="widget-ui-pseudoLink">{i18n('form', 'loyaltyCardTitle')}</a>*/}
 				{/*</div>*/}
-			</div>
-			
-			<div className="widget-form-search__footer">
-				<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>{i18n('form', 'search')}</button>
 			</div>
 		</div>;
 	}

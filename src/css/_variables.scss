@@ -15,7 +15,7 @@ $screen-size-tablet: 750px;
 		@media only screen and (max-width: $screen-size-phone) { @content; }
 	}
 	@else if $media == not-phone {
-		@media only screen and (min-width: $screen-size-tablet + 1) { @content; }
+		@media only screen and (min-width: $screen-size-phone + 1) { @content; }
 	}
 	@else if $media == tablet {
 		@media only screen and (max-width: $screen-size-tablet) { @content; }

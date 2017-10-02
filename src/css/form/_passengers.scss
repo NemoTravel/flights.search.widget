@@ -1,16 +1,17 @@
 @import "../variables";
-$breakPoint: 650px;
 
 &-passengers {
 	position: relative;
+	
+	&.form-group {
+		@include adaptivity(not-phone) {
+			margin-bottom: 0;
+		}
+	}
 
 	&__trigger {
 		&, input {
 			cursor: pointer;
-		}
-		
-		@media (min-width: $breakPoint) {
-			display: none;
 		}
 	}
 
@@ -27,61 +28,19 @@ $breakPoint: 650px;
 		font-size: 15px;
 		line-height: 16px;
 		font-weight: 400;
-		
-		.col {
-			&:first-of-type {
-				padding-right: 0.5rem;
-
-				@media (max-width: $breakPoint - 1) {
-					padding: 0;
-				}
-			}
-
-			&:last-of-type {
-				padding-left: 0.5rem;
-
-				@media (max-width: $breakPoint - 1) {
-					padding: 0;
-				}
-			}
-		}
-		
-		.row {
-			@media (max-width: $breakPoint - 1) {
-				display: block;
-				margin: 0;
-			}
-		}
-
-		@media (min-width: $breakPoint) {
-			position: static;
-			box-shadow: none;
-			border: none;
-		}
-	}
-	
-	.widget-ui-dropdown__content_hidden {
-		@media (min-width: $breakPoint) {
-			display: block;
-		}
 	}
 
 	&__item {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 10px 20px;
+		padding: 0 11px;
 		height: 40px;
 		line-height: 40px;
 		border-top: 1px solid #e6e6e6;
 
 		&_disabled {
 			color: #B3B3B3;
-		}
-
-		@media (min-width: $breakPoint) {
-			border: 1px solid #e6e6e6;
-			padding: 0 11px;
 		}
 	}
 
@@ -99,10 +58,6 @@ $breakPoint: 650px;
 		align-items: center;
 		font-weight: 600;
 		padding-left: 11px;
-
-		@media (min-width: $breakPoint) {
-			border-left: 1px solid #e6e6e6;
-		}
 	}
 
 	&__icon {

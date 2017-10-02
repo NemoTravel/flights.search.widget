@@ -3703,7 +3703,7 @@
   background: url("/images/form/circleNext.svg") no-repeat center;
 }
 
-@media only screen and (min-width: 751px) {
+@media only screen and (min-width: 651px) {
   .widget .widget-ui-datepicker .react-datepicker__navigation--previous:hover,
   .widget .widget-ui-datepicker .react-datepicker__navigation--next:hover {
     background: #1B75BC url("/images/form/circleNext-hover.svg") no-repeat center;
@@ -4067,7 +4067,7 @@
   display: block;
 }
 
-@media only screen and (min-width: 751px) {
+@media only screen and (min-width: 651px) {
   .widget-form-airports__header {
     display: none;
   }
@@ -4154,7 +4154,7 @@
   padding-left: 0;
 }
 
-@media only screen and (min-width: 751px) {
+@media only screen and (min-width: 651px) {
   .widget-form-airports__col.col:last-of-type .widget-ui-input {
     padding-left: 20px;
     border-left: none;
@@ -4192,7 +4192,7 @@
   align-items: center;
 }
 
-@media only screen and (min-width: 751px) {
+@media only screen and (min-width: 651px) {
   .widget-form-airports__swap:hover {
     background: #1B75BC;
     border-color: #1B75BC;
@@ -4223,6 +4223,7 @@
 
 .widget-form-dates .widget-ui-input {
   cursor: pointer;
+  padding-right: 35px;
   -webkit-appearance: none;
 }
 
@@ -4242,15 +4243,15 @@
   position: relative;
 }
 
+@media only screen and (min-width: 651px) {
+  .widget-form-passengers.form-group {
+    margin-bottom: 0;
+  }
+}
+
 .widget-form-passengers__trigger,
 .widget-form-passengers__trigger input {
   cursor: pointer;
-}
-
-@media (min-width: 650px) {
-  .widget-form-passengers__trigger {
-    display: none;
-  }
 }
 
 .widget-form-passengers__content {
@@ -4268,52 +4269,11 @@
   font-weight: 400;
 }
 
-.widget-form-passengers__content .col:first-of-type {
-  padding-right: 0.5rem;
-}
-
-@media (max-width: 649px) {
-  .widget-form-passengers__content .col:first-of-type {
-    padding: 0;
-  }
-}
-
-.widget-form-passengers__content .col:last-of-type {
-  padding-left: 0.5rem;
-}
-
-@media (max-width: 649px) {
-  .widget-form-passengers__content .col:last-of-type {
-    padding: 0;
-  }
-}
-
-@media (max-width: 649px) {
-  .widget-form-passengers__content .row {
-    display: block;
-    margin: 0;
-  }
-}
-
-@media (min-width: 650px) {
-  .widget-form-passengers__content {
-    position: static;
-    box-shadow: none;
-    border: none;
-  }
-}
-
-@media (min-width: 650px) {
-  .widget-form-passengers .widget-ui-dropdown__content_hidden {
-    display: block;
-  }
-}
-
 .widget-form-passengers__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 0 11px;
   height: 40px;
   line-height: 40px;
   border-top: 1px solid #e6e6e6;
@@ -4321,13 +4281,6 @@
 
 .widget-form-passengers__item_disabled {
   color: #B3B3B3;
-}
-
-@media (min-width: 650px) {
-  .widget-form-passengers__item {
-    border: 1px solid #e6e6e6;
-    padding: 0 11px;
-  }
 }
 
 .widget-form-passengers__title {
@@ -4344,12 +4297,6 @@
   align-items: center;
   font-weight: 600;
   padding-left: 11px;
-}
-
-@media (min-width: 650px) {
-  .widget-form-passengers__counter {
-    border-left: 1px solid #e6e6e6;
-  }
 }
 
 .widget-form-passengers__icon {
@@ -4369,7 +4316,7 @@
   justify-content: center;
 }
 
-@media only screen and (min-width: 751px) {
+@media only screen and (min-width: 651px) {
   .widget-form-passengers__icon:hover {
     background-color: #1B75BC;
     border-color: #1B75BC;
@@ -4414,51 +4361,31 @@
   padding: 15px;
 }
 
-.widget-form-search__wrapper {
-  padding-right: 180px;
-}
-
-@media (min-width: 750px) {
-  .widget-form-search__wrapper .form-group:last-of-type {
-    margin-bottom: 0;
+@media only screen and (min-width: 651px) {
+  .widget-form-search__footer .col:first-of-type {
+    padding-right: 0.5rem;
   }
 }
 
-@media (max-width: 749px) {
-  .widget-form-search__wrapper {
-    padding-right: 0;
+@media only screen and (min-width: 651px) {
+  .widget-form-search__footer .col:last-of-type {
+    padding-left: 0.5rem;
+    text-align: right;
   }
 }
 
-.widget-form-search__footer {
-  position: absolute;
-  margin-top: -40px;
-  left: 15px;
-  right: 15px;
-  text-align: right;
-}
-
-@media (max-width: 749px) {
-  .widget-form-search__footer {
-    position: static;
-    margin-top: 0;
+@media only screen and (max-width: 650px) {
+  .widget-form-search__footer .col {
+    flex: 100%;
   }
 }
 
-.widget-form-search .widget-form-search__startButton {
+.widget-form-search__startButton.btn-primary {
   padding: 0 43px;
-  position: absolute;
-  right: 0;
 }
 
-@media (max-width: 749px) {
-  .widget-form-search .widget-form-search__startButton {
-    position: static;
-  }
-}
-
-@media (max-width: 649px) {
-  .widget-form-search .widget-form-search__startButton {
+@media only screen and (max-width: 650px) {
+  .widget-form-search__startButton.btn-primary {
     width: 100%;
   }
 }
@@ -4467,21 +4394,17 @@
   text-align: center;
 }
 
-.widget-form_vertical .widget-form-search__wrapper {
-  padding-right: 0;
-}
-
 .widget-form_vertical .widget-form-search__wrapper .form-group:last-of-type {
   margin-bottom: 1rem;
 }
 
-.widget-form_vertical .widget-form-search__footer {
-  position: static;
-  margin-top: 0;
+.widget-form_vertical .widget-form-search__footer .col {
+  flex: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .widget-form_vertical .widget-form-search__startButton {
-  position: static;
   width: 100%;
 }
 
@@ -4514,46 +4437,4 @@
   left: auto;
   transform: rotate(90deg);
   top: -12px;
-}
-
-.widget-form_vertical .widget-form-passengers__trigger {
-  display: block;
-}
-
-.widget-form_vertical .widget-form-passengers__content {
-  border: 1px solid #e6e6e6;
-  border-top: none;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  position: absolute;
-}
-
-.widget-form_vertical .widget-form-passengers__content .col:first-of-type {
-  padding: 0;
-}
-
-.widget-form_vertical .widget-form-passengers__content .col:last-of-type {
-  padding: 0;
-}
-
-.widget-form_vertical .widget-form-passengers__content .row {
-  display: block;
-  margin: 0;
-}
-
-.widget-form_vertical .widget-form-passengers__content .row:last-of-type {
-  margin-bottom: 0;
-}
-
-.widget-form_vertical .widget-form-passengers .widget-ui-dropdown__content_hidden {
-  display: none;
-}
-
-.widget-form_vertical .widget-form-passengers__item {
-  padding: 10px 20px;
-  border: none;
-  border-top: 1px solid #e6e6e6;
-}
-
-.widget-form_vertical .widget-form-passengers__counter {
-  border-left: none;
 }

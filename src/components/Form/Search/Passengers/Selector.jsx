@@ -13,9 +13,8 @@ export default class Selector extends Component {
 	 */
 	renderCounters() {
 		const { passengers, addPassenger, removePassenger, counterAvailability } = this.props;
-		let result = [];
-		
-		const renderCounter = (passenger, i) => {
+
+		return passengers.map((passenger, i) => {
 			let canIncrease = true;
 			let canDecrease = true;
 
@@ -34,12 +33,7 @@ export default class Selector extends Component {
 				canAddPassenger={canIncrease}
 				canRemovePassenger={canDecrease}
 			/>;
-		};
-
-		result.push(<div className="row form-group">{passengers.slice(0, 2).map(renderCounter)}</div>);
-		result.push(<div className="row form-group">{passengers.slice(2, 4).map(renderCounter)}</div>);
-		
-		return result;
+		});
 	}
 
 	/**

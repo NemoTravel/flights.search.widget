@@ -48,14 +48,12 @@ export default class Counter extends Component {
 			{ 'widget-form-passengers__icon_disabled': !canAddPassenger }
 		);
 
-		return <div className="col">
-			<div className={itemClassName}>
-				<div className="widget-form-passengers__title">{title}</div>
-				<div className="widget-form-passengers__counter">
-					<div className={minusClassName} onClick={this.removePassenger}/>
-					<div className="widget-form-passengers__number">{count}</div>
-					<div className={plusClassName} onClick={this.addPassenger}/>
-				</div>
+		return <div className={itemClassName}>
+			<div className="widget-form-passengers__title">{title}</div>
+			<div className="widget-form-passengers__counter">
+				<div className={minusClassName} onClick={this.removePassenger}/>
+				<div className="widget-form-passengers__number">{count}</div>
+				<div className={plusClassName} onClick={this.addPassenger}/>
 			</div>
 		</div>;
 	}
