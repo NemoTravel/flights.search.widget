@@ -6,6 +6,12 @@ import { i18n } from 'utils';
 
 export default class Selector extends Component {
 
+	constructor (props) {
+		super(props);
+		
+		this.closePassengersSelect = this.closePassengersSelect.bind(this);
+	}
+
 	/**
 	 * Render passengers counters;
 	 * 
@@ -54,26 +60,29 @@ export default class Selector extends Component {
 		</div>;
 	}
 
+	closePassengersSelect() {
+		this.dropdown.instanceRef.handleClickOutside();
+	}
+
 	/**
 	 * Render dropdown block with passengers counters.
 	 * 
 	 * @returns {XML}
 	 */
 	renderDropdownContent() {
-		return <div className="widget-form-passengers__content">
-			<div className="widget-form-passengers__content__wrapper">
-				{this.renderCounters()}
+		return  <div>
+			<div className="widget-form-passengers__content__header">
+				<div className="widget-form-passengers__content__header__closer" onClick={this.closePassengersSelect}>
+					{i18n('common', 'close')}
+				</div>
+				{i18n('form', 'passengersSelectHeader')}
+			</div>
+			<div className="widget-form-passengers__content">
+				<div className="widget-form-passengers__content__wrapper">
+					{this.renderCounters()}
+				</div>
 			</div>
 		</div>;
-	}
-
-	renderDropdownHeader() {
-		return <div>
-			<div className="widget-ui-dropdown__content__header__closer">
-				{i18n('common', 'close')}
-			</div>
-			{i18n('form', 'passengersSelectHeader')}
-		</div>
 	}
 	
 	render() {
@@ -84,7 +93,7 @@ export default class Selector extends Component {
 				<NemoDropdown
 					triggerElement={this.renderDropdownTrigger()}
 					contentElement={this.renderDropdownContent()}
-					headerElement={this.renderDropdownHeader()}
+					ref={ref => (this.dropdown = ref)}
 				/>
 			</Tooltip>
 		</div>;

@@ -66,6 +66,41 @@ $breakPoint: 650px;
 			}
 		}
 
+		&__header {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 12;
+
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+			padding: 0;
+
+			background: #fff;
+			border-bottom: 1px solid #ccc;
+			color: #3fa9f5;
+			font-size: 17px;
+			font-weight: 600;
+			text-align: center;
+
+			&__closer {
+				display: block;
+				position: absolute;
+				right: 15px;
+
+				color: #666;
+				font-weight: normal;
+				font-size: 15px;
+				cursor: pointer;
+			}
+
+			@include adaptivity(phone) {
+				display: block;
+			}
+		}
+
 		@media (min-width: $breakPoint) {
 			position: static;
 			box-shadow: none;
