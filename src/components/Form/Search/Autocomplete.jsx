@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Autosuggest from 'react-autosuggest';
+import Autosuggest from 'components/Form/Search/Autocomplete/Autosuggest/src';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
-import { i18n } from 'utils';
 
 export default class Autocomplete extends Component {
 	constructor(props) {
@@ -216,22 +215,23 @@ export default class Autocomplete extends Component {
 	render() {
 		const { suggestions, isLoading, inputValue, system:config } = this.props;
 		let inputClassName = classnames(
-			`form-control widget-ui-input`,
-			{ 'widget-ui-input_loading': isLoading },
-			{ 'widget-ui-input_pointer': config.readOnlyAutocomplete && config.routingGrid }
+			`form-control widget-form-airports__input`,
+			{ 'widget-form-airports__input_focused': this.state.isFocused },
+			{ 'widget-form-airports__input_loading': isLoading },
+			{ 'widget-form-airports__input_pointer': config.readOnlyAutocomplete && config.routingGrid }
 		);
 		
 		return <div className="col widget-form-airports__col">
 			<div className={classnames('widget-form-airports__header', { 'widget-form-airports__header_visible': this.state.isFocused })}>
-				<div className="widget-ui-icon widget-ui-mobile__back"/>
-
+				<div className="widget-ui-icon widget-ui-mobile__back" onClick={() => {
+				}}/>
 				{this.mobileTitle}
-
 				<div className="widget-form-airports__underlay"/>
 			</div>
 
-			<div className="widget-ui-input__wrapper">
+			<div className="widget-form-airports__input__wrapper">
 				<Autosuggest
+					ref={component => this.autosuggest = component}
 					id={this.type}
 					suggestions={suggestions}
 					onSuggestionsFetchRequested={this.fetchSuggestions}

@@ -11,25 +11,32 @@
 		}
 	}
 	
-	.widget-ui-input {
+	& &__input {
+		@extend .widget-ui-input;
+		
 		padding-right: 120px;
 		cursor: pointer;
+
+		&_loading {
+			background: url('/images/form/spinner.svg') no-repeat 90% center;
+			background-size: 20px;
+		}
 		
-		&:focus {
+		&_focused {
 			box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 			background-color: transparent;
-			
+
 			@include adaptivity(phone) {
 				position: fixed;
 				top: $mobile-header-height;
 				left: 0;
 				right: 0;
-				z-index: 12;
+				z-index: 12 !important;
 
 				padding: 10px 20px;
 				height: $mobile-input-height;
 				line-height: $mobile-input-height;
-				
+
 				background-color: #fff;
 				background-size: 30px; // spinning loader size
 				box-shadow: none;
@@ -39,6 +46,8 @@
 		}
 		
 		&__wrapper {
+			position: relative;
+			
 			.react-autosuggest {
 				&__suggestions {
 					&-container {

@@ -3442,7 +3442,6 @@
   content: "\E923";
   transform: rotate(180deg);
   position: absolute;
-  top: -1px;
 }
 
 @media only screen and (max-width: 650px) {
@@ -3451,7 +3450,9 @@
   }
 }
 
-.widget .widget-ui-input {
+.widget .widget-ui-input,
+.widget .widget-form-airports .widget-form-airports__input,
+.widget-form-airports .widget .widget-form-airports__input {
   -webkit-appearance: none;
 }
 
@@ -3801,9 +3802,9 @@
 .widget .widget-ui-datepicker .react-datepicker__day {
   color: #666666;
   position: relative;
-  width: 2rem;
-  height: 2rem;
-  line-height: 2rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  line-height: 2.3rem;
   margin: 0;
   transition: background 0.2s cubic-bezier(0.27, 0.67, 0.28, 0.87);
 }
@@ -3962,23 +3963,28 @@
   }
 }
 
-.widget-form-airports .widget-ui-input {
+.widget-form-airports .widget-form-airports__input {
   padding-right: 120px;
   cursor: pointer;
 }
 
-.widget-form-airports .widget-ui-input:focus {
+.widget-form-airports .widget-form-airports__input_loading {
+  background: url("/images/form/spinner.svg") no-repeat 90% center;
+  background-size: 20px;
+}
+
+.widget-form-airports .widget-form-airports__input_focused {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   background-color: transparent;
 }
 
 @media only screen and (max-width: 650px) {
-  .widget-form-airports .widget-ui-input:focus {
+  .widget-form-airports .widget-form-airports__input_focused {
     position: fixed;
     top: 40px;
     left: 0;
     right: 0;
-    z-index: 12;
+    z-index: 12 !important;
     padding: 10px 20px;
     height: 50px;
     line-height: 50px;
@@ -3990,7 +3996,11 @@
   }
 }
 
-.widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestions-container {
+.widget-form-airports .widget-form-airports__input__wrapper {
+  position: relative;
+}
+
+.widget-form-airports .widget-form-airports__input__wrapper .react-autosuggest__suggestions-container {
   position: absolute;
   z-index: 12;
   left: 0;
@@ -4006,14 +4016,14 @@
   transition: 250ms ease;
 }
 
-.widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestions-container--open {
+.widget-form-airports .widget-form-airports__input__wrapper .react-autosuggest__suggestions-container--open {
   visibility: visible;
   opacity: 1;
   filter: alpha(opacity=100);
 }
 
 @media only screen and (max-width: 650px) {
-  .widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestions-container {
+  .widget-form-airports .widget-form-airports__input__wrapper .react-autosuggest__suggestions-container {
     position: fixed;
     top: 90px;
     left: 0;
@@ -4025,11 +4035,11 @@
   }
 }
 
-.widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestions-list {
+.widget-form-airports .widget-form-airports__input__wrapper .react-autosuggest__suggestions-list {
   margin-bottom: 0;
 }
 
-.widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestion {
+.widget-form-airports .widget-form-airports__input__wrapper .react-autosuggest__suggestion {
   transition: background, .4s, ease;
   display: block;
   position: relative;
@@ -4043,15 +4053,15 @@
   cursor: pointer;
 }
 
-.widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestion:hover {
+.widget-form-airports .widget-form-airports__input__wrapper .react-autosuggest__suggestion:hover {
   background: rgba(0, 76, 186, 0.07);
 }
 
-.widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestion--highlighted {
+.widget-form-airports .widget-form-airports__input__wrapper .react-autosuggest__suggestion--highlighted {
   background: rgba(0, 76, 186, 0.07);
 }
 
-.widget-form-airports .widget-ui-input__wrapper .react-autosuggest__suggestion:not(:last-of-type) {
+.widget-form-airports .widget-form-airports__input__wrapper .react-autosuggest__suggestion:not(:last-of-type) {
   border-bottom: 1px solid #e6e6e6;
 }
 
@@ -4161,14 +4171,18 @@
 }
 
 @media only screen and (min-width: 651px) {
-  .widget-form-airports__col.col:last-of-type .widget-ui-input {
+  .widget-form-airports__col.col:last-of-type .widget-ui-input,
+  .widget-form-airports__col.col:last-of-type .widget-form-airports .widget-form-airports__input,
+  .widget-form-airports .widget-form-airports__col.col:last-of-type .widget-form-airports__input {
     padding-left: 20px;
     border-left: none;
   }
 }
 
 @media only screen and (max-width: 650px) {
-  .widget-form-airports__col.col:last-of-type .widget-ui-input {
+  .widget-form-airports__col.col:last-of-type .widget-ui-input,
+  .widget-form-airports__col.col:last-of-type .widget-form-airports .widget-form-airports__input,
+  .widget-form-airports .widget-form-airports__col.col:last-of-type .widget-form-airports__input {
     border-top: none;
   }
 }
@@ -4227,7 +4241,9 @@
   }
 }
 
-.widget-form-dates .widget-ui-input {
+.widget-form-dates .widget-ui-input,
+.widget-form-dates .widget-form-airports .widget-form-airports__input,
+.widget-form-airports .widget-form-dates .widget-form-airports__input {
   cursor: pointer;
   padding-right: 35px;
   -webkit-appearance: none;
@@ -4496,7 +4512,9 @@
   right: 35px;
 }
 
-.widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-ui-input {
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-ui-input,
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-form-airports .widget-form-airports__input,
+.widget-form-airports .widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-form-airports__input {
   padding-left: 11px;
   border-top: none;
   border-left: 1px solid rgba(0, 0, 0, 0.15);

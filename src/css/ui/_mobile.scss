@@ -38,7 +38,6 @@
 			content: $icon-arrow;
 			transform: rotate(180deg);
 			position: absolute;
-			top: -1px;
 		}
 
 		@include adaptivity(phone) {
