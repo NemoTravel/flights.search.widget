@@ -2,8 +2,8 @@
 
 .widget-ui-pseudoLink {
 	display: inline-block;
-	border-bottom: 1px dotted $headers-font-color;
-	color: $headers-font-color;
+	border-bottom: 1px dotted $title-color;
+	color: $title-color;
 	font-size: 13px;
 	font-weight: 600;
 	vertical-align: middle;
@@ -14,6 +14,6 @@
 		text-decoration: none;
 		background: none;
 		border-bottom-color: rgba(0, 0, 0, 0);
-		color: $headers-font-color;
+		color: $title-color;
 	}
 }

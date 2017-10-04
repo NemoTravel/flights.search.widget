@@ -33,25 +33,21 @@ $breakPoint: 650px;
 	border-bottom-color: #bbb;
 	padding-top: 30px;
 	font-family: "Open Sans", sans-serif !important;
-	
-	@include adaptivity(phone) {
-		padding-top: 50px;
-		overflow: auto;
-	}
-	
+
 	&_return {
 		padding-bottom: 35px;
 	}
 	
+	@include adaptivity(phone) {
+		overflow: auto;
+		padding: 50px 0 75px 0;
+		font-size: 1rem;
+	}
+	
 	&__header {
-		color: #3fa9f5;
-		font-weight: 600;
-		font-size: 17px;
-		position: absolute;
-		text-align: center;
-		width: 100%;
+		@extend .widget-ui-mobile__header;
+		display: block;
 		padding-top: 20px;
-		top: 0;
 		
 		&:before {
 			content: "\E90B";
@@ -77,20 +73,6 @@ $breakPoint: 650px;
 			}
 		}
 		
-		&__closer {
-			display: none;
-			position: absolute;
-			right: 15px;
-			color: #666;
-			font-weight: normal;
-			font-size: 15px;
-			cursor: pointer;
-
-			@include adaptivity(phone) {
-				display: block;
-			}
-		}
-		
 		&_return {
 			&:before {
 				transform: translate(0, -25%) rotate(135deg);
@@ -103,12 +85,7 @@ $breakPoint: 650px;
 		}
 
 		@include adaptivity(phone) {
-			background: #fff;
-			position: fixed;
-			border-bottom: 1px solid #ccc;
 			padding: 0;
-			height: 40px;
-			line-height: 40px;
 		}
 	}
 	
@@ -128,20 +105,20 @@ $breakPoint: 650px;
 			font-weight: 400;
 			padding: 10px 15px;
 			display: inline-block;
-			border: 1px solid rgba(#3fa9f5, 0.2);
+			border: 1px solid rgba($title-color, 0.2);
 			cursor: pointer;
-			color: #3fa9f5;
+			color: $title-color;
 			background: #fff;
 
 			&:hover {
-				background: #3fa9f5;
+				background: $title-color;
 				color: #fff;
 			}
 
 			@include adaptivity(phone) {
 				font-size: 17px;
 				padding: 14px 20px;
-				background: #3fa9f5;
+				background: $title-color;
 				color: #fff;
 			}
 			
@@ -175,8 +152,7 @@ $breakPoint: 650px;
 
 			@include adaptivity(phone) {
 				position: fixed;
-				top: 50%;
-				margin-top: -15px;
+				top: 65px;
 			}
 			
 			&--previous, &--next {
@@ -187,7 +163,15 @@ $breakPoint: 650px;
 				background: url('/images/form/circleNext.svg') no-repeat center;
 
 				&:hover {
-					background: #3fa9f5 url('/images/form/circleNext-hover.svg') no-repeat center;
+					@include adaptivity(not-phone) {
+						background: $title-color url('/images/form/circleNext-hover.svg') no-repeat center;
+					}
+				}
+
+				&:active {
+					@include adaptivity(phone) {
+						background: $title-color url('/images/form/circleNext-hover.svg') no-repeat center;
+					}
 				}
 			}
 
@@ -214,12 +198,18 @@ $breakPoint: 650px;
 
 			&-container {
 				padding: 30px;
+
+				&:nth-of-type(3) {
+					@include adaptivity(phone) {
+						display: none;
+					}
+				}
 				
 				@include adaptivity(phone) {
 					width: 100%;
 					float: none;
 					display: block;
-					padding: 20px 20px 0;
+					padding: 20px 0 0;
 				}
 			}
 		}
@@ -237,16 +227,27 @@ $breakPoint: 650px;
 		
 		&__week {
 			margin-bottom: 2px;
+			white-space: nowrap;
 		}
 		
 		&__day {
-			color: #666;
+			color: $font-color;
 			position: relative;
 			width: 2.3rem;
 			height: 2rem;
 			line-height: 2rem;
 			margin: 0;
 			transition: background 0.2s $transition-function;
+			
+			@include adaptivity(phone) {
+				width: 2.8rem;
+				height: 2.5rem;
+				line-height: 2.5rem;
+			}
+			
+			&-names {
+				white-space: nowrap;
+			}
 			
 			&-name {
 				color: #ccc;
@@ -260,6 +261,10 @@ $breakPoint: 650px;
 				height: 2rem;
 				line-height: 2rem;
 				margin: 0;
+
+				@include adaptivity(phone) {
+					width: 2.8rem;
+				}
 			}
 
 			&--today, &--keyboard-selected {
@@ -269,7 +274,8 @@ $breakPoint: 650px;
 			}
 
 			&--outside-month {
-				color: #ccc;
+				opacity: 0;
+				pointer-events: none;
 			}
 
 			&:hover {
@@ -304,6 +310,8 @@ $breakPoint: 650px;
 	}
 
 	&__calendar {
+		@extend .widget-ui-icon;
+		
 		position: absolute;
 		right: 0;
 		top: 0;

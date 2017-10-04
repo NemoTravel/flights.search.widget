@@ -25,11 +25,11 @@
 
 .btn-primary {
 	background-color: $main-button-color;
-	color: $common-font-color;
+	color: $font-color;
 	
 	&:hover {
 		background-color: $main-button-color_hover;
-		color: $common-font-color;
+		color: $font-color;
 	}
 	
 	&:active {
@@ -45,7 +45,7 @@
 .form-control {
 	border-radius: 0;
 	border-color: #ccc;
-	color: $common-font-color;
+	color: $font-color;
 	background-color: transparent;
 	font-weight: 600;
 	font-size: 15px;

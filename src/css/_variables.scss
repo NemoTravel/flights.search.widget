@@ -1,10 +1,12 @@
-$headers-font-color: #1B75BC;
-$common-font-color: #666666;
+$title-color: #1B75BC;
+$font-color: #666666;
 $main-button-color: #FFDA00;
 $main-button-color_hover: #FFCE00;
 
 $transition-function: cubic-bezier(.27, .67, .28, .87);
 
+$mobile-header-height: 40px;
+$main-padding-size: 15px;
 $screen-size-phone: 650px;
 $screen-size-tablet: 750px;
 
@@ -13,7 +15,7 @@ $screen-size-tablet: 750px;
 		@media only screen and (max-width: $screen-size-phone) { @content; }
 	}
 	@else if $media == not-phone {
-		@media only screen and (min-width: $screen-size-tablet + 1) { @content; }
+		@media only screen and (min-width: $screen-size-phone + 1) { @content; }
 	}
 	@else if $media == tablet {
 		@media only screen and (max-width: $screen-size-tablet) { @content; }

@@ -10,10 +10,10 @@ let middlewares = [thunk];
 
 // Include redux-logger in development mode.
 if (process.env.NODE_ENV !== 'production') {
-	const logger = require('redux-logger').default;
+	// const logger = require('redux-logger').default;
+	// middlewares.push(logger);
+
 	// const { whyDidYouUpdate } = require('why-did-you-update');
-	
-	middlewares.push(logger);
 	// whyDidYouUpdate(React);
 }
 

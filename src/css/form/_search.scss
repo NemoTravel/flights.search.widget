@@ -1,51 +1,36 @@
+@import "../variables";
 @import "airports";
 @import "dates";
 @import "passengers";
 
-$breakPoint: 650px;
-
 &-search {
 	padding: 15px;
 	
-	&__wrapper {
-		padding-right: 180px;
-		
-		.form-group {
-			&:last-of-type {
-				@media (min-width: 750px) {
-					margin-bottom: 0;
+	&__footer {
+		.col {
+			&:first-of-type {
+				@include adaptivity(not-phone) {
+					padding-right: 0.5rem;
 				}
 			}
-		}
 
-		@media (max-width: 749px) {
-			padding-right: 0;
+			&:last-of-type {
+				@include adaptivity(not-phone) {
+					padding-left: 0.5rem;
+					text-align: right;
+				}
+			}
+			
+			@include adaptivity(phone) {
+				flex: 100%;
+			}
 		}
 	}
 	
-	&__footer {
-		position: absolute;
-		margin-top: -40px;
-		left: 15px;
-		right: 15px;
-		text-align: right;
-		
-		@media (max-width: 749px) {
-			position: static;
-			margin-top: 0;
-		}
-	}
-	
-	& &__startButton {
+	&__startButton.btn-primary {
 		padding: 0 43px;
-		position: absolute;
-		right: 0;
 		
-		@media (max-width: 749px) {
-			position: static;
-		}
-
-		@media (max-width: $breakPoint - 1) {
+		@include adaptivity(phone) {
 			width: 100%;
 		}
 	}

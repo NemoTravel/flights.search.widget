@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import NemoDropdown from 'components/UI/Dropdown';
+import UIDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/Form/Search/Passengers/Counter';
 import { i18n } from 'utils';
 
 export default class Selector extends Component {
-
-	constructor (props) {
-		super(props);
-		
-		this.closePassengersSelect = this.closePassengersSelect.bind(this);
-	}
 
 	/**
 	 * Render passengers counters;
@@ -19,9 +13,8 @@ export default class Selector extends Component {
 	 */
 	renderCounters() {
 		const { passengers, addPassenger, removePassenger, counterAvailability } = this.props;
-		let result = [];
-		
-		const renderCounter = (passenger, i) => {
+
+		return passengers.map((passenger, i) => {
 			let canIncrease = true;
 			let canDecrease = true;
 
@@ -35,17 +28,13 @@ export default class Selector extends Component {
 				addPassenger={addPassenger}
 				removePassenger={removePassenger}
 				title={passenger.title}
+				ageTitle={passenger.ageTitle}
 				code={passenger.code}
 				count={passenger.count}
 				canAddPassenger={canIncrease}
 				canRemovePassenger={canDecrease}
 			/>;
-		};
-
-		result.push(<div className="row form-group">{passengers.slice(0, 2).map(renderCounter)}</div>);
-		result.push(<div className="row form-group">{passengers.slice(2, 4).map(renderCounter)}</div>);
-		
-		return result;
+		});
 	}
 
 	/**
@@ -55,13 +44,9 @@ export default class Selector extends Component {
 	 */
 	renderDropdownTrigger() {
 		return <div className="widget-form-passengers__trigger widget-ui-input__wrapper">
-			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false}/>
+			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false} onFocus={event => event.target.blur()}/>
 			<div className="widget-ui-icon widget-ui-input__arrow"/>
 		</div>;
-	}
-
-	closePassengersSelect() {
-		this.dropdown.instanceRef.handleClickOutside();
 	}
 
 	/**
@@ -70,17 +55,14 @@ export default class Selector extends Component {
 	 * @returns {XML}
 	 */
 	renderDropdownContent() {
-		return  <div>
-			<div className="widget-form-passengers__content__header">
-				<div className="widget-form-passengers__content__header__closer" onClick={this.closePassengersSelect}>
-					{i18n('common', 'close')}
-				</div>
+		return <div className="widget-form-passengers__content">
+			<div className="widget-form-passengers__header">
+				<div className="widget-ui-icon widget-ui-mobile__back" onClick={() => this.dropdown.instanceRef.handleClickOutside()}/>
 				{i18n('form', 'passengersSelectHeader')}
 			</div>
-			<div className="widget-form-passengers__content">
-				<div className="widget-form-passengers__content__wrapper">
-					{this.renderCounters()}
-				</div>
+
+			<div className="widget-form-passengers__content__wrapper">
+				{this.renderCounters()}
 			</div>
 		</div>;
 	}
@@ -90,11 +72,7 @@ export default class Selector extends Component {
 		
 		return <div className="form-group widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
-				<NemoDropdown
-					triggerElement={this.renderDropdownTrigger()}
-					contentElement={this.renderDropdownContent()}
-					ref={ref => (this.dropdown = ref)}
-				/>
+				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}ref={ref => (this.dropdown = ref)}/>
 			</Tooltip>
 		</div>;
 	}

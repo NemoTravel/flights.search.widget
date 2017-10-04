@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import NemoDatepicker from 'components/UI/Datepicker';
+import UIDatepicker from 'components/UI/Datepicker';
 import moment from 'moment';
-import { i18n } from 'utils';
 
 export default class Datepicker extends Component {
-	get type() { return null; }
-	get placeholder() { return ''; }
-	get popperPlacement() { return null; }
-	get tooltipText() { return ''; }
-	get showErrors() { return false; }
-	
 	constructor(props) {
 		super(props);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.renderInner = this.renderInner.bind(this);
 		this.nemoDatepicker = null;
+
+		this.type = null;
+		this.placeholder = '';
+		this.popperPlacement = null;
+		this.tooltipText = '';
+		this.showErrors = false;
 	}
 
 	/**
@@ -38,12 +37,11 @@ export default class Datepicker extends Component {
 	
 	renderInner() {
 		return <div className={`widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`}>
-			<div className="widget-ui-datepicker__header__closer" onClick={() => {
+			<div className="widget-ui-icon widget-ui-mobile__back" onClick={() => {
 				if (this.nemoDatepicker && this.nemoDatepicker.calendar) {
 					this.nemoDatepicker.calendar.setOpen(false);
 				}
 			}}>
-				{i18n('common', 'close')}
 			</div>
 			
 			{this.placeholder}
@@ -69,7 +67,7 @@ export default class Datepicker extends Component {
 		let maxDate = maxDateProp ? maxDateProp : moment().add(1, 'years');
 
 		return <div className={`col widget-form-dates__col`}>
-			<NemoDatepicker 
+			<UIDatepicker 
 				ref={calendar => this.nemoDatepicker = calendar}
 				type={this.type}
 				isActive={isActive} 
@@ -89,7 +87,7 @@ export default class Datepicker extends Component {
 				inputProps={{ placeholder: this.placeholder }}
 			>
 				{this.renderInner()}
-			</NemoDatepicker>
+			</UIDatepicker>
 		</div>;
 	}
 }
