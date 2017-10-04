@@ -48,7 +48,9 @@ class Dropdown extends PureComponent {
 		
 		return <div className="widget-ui-dropdown">
 			<div className="widget-ui-dropdown__trigger" {...triggerProps}>{triggerElement}</div>
-			<div className={`widget-ui-dropdown__content${isVisible ? '' : ' widget-ui-dropdown__content_hidden'}`}>{contentElement}</div>
+			<div className={`widget-ui-dropdown__content${isVisible ? '' : ' widget-ui-dropdown__content_hidden'}`}>
+				{contentElement}
+			</div>
 		</div>;
 	}
 }

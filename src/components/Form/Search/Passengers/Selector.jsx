@@ -44,7 +44,7 @@ export default class Selector extends Component {
 	 */
 	renderDropdownTrigger() {
 		return <div className="widget-form-passengers__trigger widget-ui-input__wrapper">
-			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false}/>
+			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false} onFocus={event => event.target.blur()}/>
 			<div className="widget-ui-icon widget-ui-input__arrow"/>
 		</div>;
 	}
@@ -55,7 +55,16 @@ export default class Selector extends Component {
 	 * @returns {XML}
 	 */
 	renderDropdownContent() {
-		return <div className="widget-form-passengers__content">{this.renderCounters()}</div>;
+		return <div className="widget-form-passengers__content">
+			<div className="widget-form-passengers__header">
+				<div className="widget-ui-icon widget-ui-mobile__back" onClick={() => this.dropdown.instanceRef.handleClickOutside()}/>
+				{i18n('form', 'passengersSelectHeader')}
+			</div>
+
+			<div className="widget-form-passengers__content__wrapper">
+				{this.renderCounters()}
+			</div>
+		</div>;
 	}
 	
 	render() {
@@ -63,7 +72,7 @@ export default class Selector extends Component {
 		
 		return <div className="form-group widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
-				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}/>
+				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}ref={ref => (this.dropdown = ref)}/>
 			</Tooltip>
 		</div>;
 	}

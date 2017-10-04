@@ -14,20 +14,39 @@
 			cursor: pointer;
 		}
 	}
+	
+	&__header {
+		@extend .widget-ui-mobile__header;
+		display: none;
+		
+		@include adaptivity(phone) {
+			display: block;
+		}
+	}
 
 	&__content {
 		position: absolute;
-		z-index: 12;
-		margin-top: -1px;
 		left: 0;
 		right: 0;
+		z-index: 12;
+		
+		margin-top: -1px;
+		font-size: 15px;
+		line-height: 16px;
+		
 		border: 1px solid #e6e6e6;
 		border-top: none;
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 		background-color: #fff;
-		font-size: 15px;
-		line-height: 16px;
 		font-weight: 400;
+		
+		@include adaptivity(phone) {
+			position: fixed;
+			top: $mobile-header-height;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
 	}
 
 	&__item {
@@ -41,6 +60,12 @@
 
 		&_disabled {
 			color: #B3B3B3;
+		}
+		
+		@include adaptivity(phone) {
+			&:last-of-type {
+				border-bottom: 1px solid #e6e6e6;
+			}
 		}
 	}
 
