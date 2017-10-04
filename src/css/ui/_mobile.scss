@@ -35,7 +35,7 @@
 		line-height: $mobile-header-height;
 
 		&:after {
-			content: "\E923";
+			content: $icon-arrow;
 			transform: rotate(180deg);
 			position: absolute;
 			top: -1px;

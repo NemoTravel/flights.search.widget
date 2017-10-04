@@ -1,7 +1,5 @@
 @import "../variables";
 
-$breakPoint: 650px;
-
 .react-datepicker {
 	@include adaptivity(phone) {
 		top: 0;
@@ -50,7 +48,7 @@ $breakPoint: 650px;
 		padding-top: 20px;
 		
 		&:before {
-			content: "\E90B";
+			content: $icon-plane;
 			position: absolute;
 			font-family: 'OpenSkyIcons', sans-serif;
 			speak: none;
@@ -123,17 +121,16 @@ $breakPoint: 650px;
 			}
 			
 			&:active {
-				background-color: #1b75bc;
+				background-color: $title-color;
 				color: #fff;
 			}
 		}
 	}
 
 	&__specialDay {
-		color: #fff !important;
-		background: rgba(63, 169, 245, 1) !important;
-		border-radius: 0 !important;
-		font-weight: 400 !important;
+		@extend .react-datepicker__day--highlighted;
+		font-weight: 700 !important;
+		background: rgba($title-color, 0.2) !important;
 	}
 	
 	.react-datepicker {
@@ -156,21 +153,38 @@ $breakPoint: 650px;
 			}
 			
 			&--previous, &--next {
+				@extend .widget-ui-icon;
+
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				
 				height: 30px;
 				width: 30px;
-				border: none;
+				border: 1px solid #bbb;
 				border-radius: 50%;
-				background: url('/images/form/circleNext.svg') no-repeat center;
+				color: #bbb !important;
+				font-size: 12px;
+				
+				&:before {
+					content: $icon-short-arrow;
+					position: relative;
+					right: -1px;
+				}
 
 				&:hover {
 					@include adaptivity(not-phone) {
-						background: $title-color url('/images/form/circleNext-hover.svg') no-repeat center;
+						background-color: $title-color;
+						color: #fff !important;
+						border-color: $title-color;
 					}
 				}
 
 				&:active {
 					@include adaptivity(phone) {
-						background: $title-color url('/images/form/circleNext-hover.svg') no-repeat center;
+						background-color: $title-color;
+						color: #fff !important;
+						border-color: $title-color;
 					}
 				}
 			}
@@ -233,7 +247,7 @@ $breakPoint: 650px;
 		&__day {
 			color: $font-color;
 			position: relative;
-			width: 2.3rem;
+			width: 2rem;
 			height: 2rem;
 			line-height: 2rem;
 			margin: 0;
@@ -268,7 +282,7 @@ $breakPoint: 650px;
 			}
 
 			&--today, &--keyboard-selected {
-				color: #3FA9F5;
+				color: $title-color;
 				font-weight: 700;
 				background: #fff;
 			}
@@ -279,18 +293,18 @@ $breakPoint: 650px;
 			}
 
 			&:hover {
-				background: rgba(63, 169, 245, 0.3);
+				background: rgba($title-color, 0.2);
 				border-radius: 0;
 			}
 
 			&--highlighted {
-				color: rgba(63, 169, 245, 1);
-				background: rgba(63, 169, 245, 0.2);
+				color: $title-color;
+				background: rgba($title-color, 0.1);
 				border-radius: 0;
 				font-weight: 400;
 
 				&:hover {
-					background: rgba(63, 169, 245, 0.4);
+					background: rgba($title-color, 0.2);
 				}
 			}
 
@@ -329,40 +343,7 @@ $breakPoint: 650px;
 		pointer-events: none;
 
 		&:after {
-			content: "\e90d";
-		}
-	}
-
-	&__closer {
-		position: absolute;
-		top: -10px;
-		right: -10px;
-		z-index: 11;
-		width: 20px;
-		height: 20px;
-
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
-		font-size: 10px;
-		color: #fff;
-		cursor: pointer;
-		background: #1B75BC;
-		border: 1px solid #1B75BC;
-		border-radius: 50%;
-
-		&:hover {
-			background: #1B75BC;
-			border-color: #1B75BC;
-			color: #fff;
-		}
-
-		&:after {
-			content: "\E902";
-			margin-left: 0;
-			margin-top: 0;
-			transform: rotate(45deg);
+			content: $icon-calendar;
 		}
 	}
 }

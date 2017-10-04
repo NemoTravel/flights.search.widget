@@ -261,22 +261,22 @@
 
 		&:hover {
 			@include adaptivity(not-phone) {
-				background: #1B75BC;
-				border-color: #1B75BC;
+				background: $title-color;
+				border-color: $title-color;
 				color: #fff;
 			}
 		}
 
 		&:active {
 			@include adaptivity(phone) {
-				background: #1B75BC;
-				border-color: #1B75BC;
+				background: $title-color;
+				border-color: $title-color;
 				color: #fff;
 			}
 		}
 
 		&:after {
-			content: "\e901";
+			content: $icon-swap;
 		}
 
 		@include adaptivity(phone) {

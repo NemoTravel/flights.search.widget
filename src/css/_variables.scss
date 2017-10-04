@@ -10,6 +10,17 @@ $main-padding-size: 15px;
 $screen-size-phone: 650px;
 $screen-size-tablet: 750px;
 
+$icon-calendar: "\E90D";
+$icon-cross: "\E908";
+$icon-plane: "\E90B";
+$icon-swap: "\E901";
+$icon-arrow: "\E923";
+$icon-dropdown-arrow: "\E90A";
+$icon-short-arrow: "\E90E";
+$icon-short-arrow_bold: "\E92A";
+$icon-plus: "\E902";
+$icon-minus: "\E903";
+
 @mixin adaptivity($media) {
 	@if $media == phone {
 		@media only screen and (max-width: $screen-size-phone) { @content; }

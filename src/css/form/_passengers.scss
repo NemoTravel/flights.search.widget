@@ -46,6 +46,7 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
+			font-size: 17px;
 		}
 	}
 
@@ -63,6 +64,9 @@
 		}
 		
 		@include adaptivity(phone) {
+			height: 50px;
+			line-height: 50px;
+			
 			&:last-of-type {
 				border-bottom: 1px solid #e6e6e6;
 			}
@@ -81,6 +85,10 @@
 			color: #ccc;
 			font-size: 13px;
 			padding-left: 10px;
+
+			@include adaptivity(phone) {
+				font-size: 15px;
+			}
 		}
 	}
 
@@ -95,7 +103,7 @@
 		border-radius: 50%;
 		width: 25px;
 		height: 25px;
-		color: #1B75BC;
+		color: $title-color;
 		font-size: 11px;
 		cursor: pointer;
 
@@ -105,20 +113,28 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+
+			width: 25px;
+			height: 25px;
+
+			@include adaptivity(phone) {
+				width: 30px;
+				height: 30px;
+			}
 		}
 
 		&:hover {
 			@include adaptivity(not-phone) {
-				background-color: #1B75BC;
-				border-color: #1B75BC;
+				background-color: $title-color;
+				border-color: $title-color;
 				color: #fff;
 			}
 		}
 
 		&:active {
 			@include adaptivity(phone) {
-				background-color: #1B75BC;
-				border-color: #1B75BC;
+				background-color: $title-color;
+				border-color: $title-color;
 				color: #fff;
 			}
 		}
@@ -131,26 +147,33 @@
 				cursor: not-allowed;
 			}
 		}
+
+		@include adaptivity(phone) {
+			width: 30px;
+			height: 30px;
+			font-size: 13px;
+		}
 	}
 
 	&__minus {
 		&:after {
-			width: 25px;
-			height: 25px;
-			content: "\e903";
+			content: $icon-minus;
 		}
 	}
 
 	&__plus {
 		&:after {
-			width: 25px;
-			height: 25px;
-			content: "\e902";
+			content: $icon-plus;
 		}
 	}
 
 	&__number {
 		font-size: 14px;
 		padding: 0 7px;
+
+		@include adaptivity(phone) {
+			font-size: 16px;
+			padding: 0 10px;
+		}
 	}
 }

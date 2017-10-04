@@ -25,7 +25,7 @@
 		pointer-events: none;
 
 		&:after {
-			content: "\e90a";
+			content: $icon-dropdown-arrow;
 		}
 	}
 	
@@ -44,7 +44,7 @@
 		justify-content: center;
 
 		font-size: 11px;
-		color: #1B75BC;
+		color: $title-color;
 		cursor: pointer;
 		
 		@include adaptivity(phone) {
@@ -52,7 +52,7 @@
 		}
 		
 		&:before {
-			content: '\e908';
+			content: $icon-cross;
 		}
 	}
 
