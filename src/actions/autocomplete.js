@@ -107,10 +107,13 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 					const suggestions = iata
 						.filter(({ IATA }) => IATA in airports && airports[IATA].name)
 						.map(({ IATA, directFlight }) => {
-							return { 
-								airport: airports[IATA], 
-								country: countries[airports[IATA].countryCode],
-								isDirect: directFlight
+							return {
+								value: {
+									airport: airports[IATA],
+									country: countries[airports[IATA].countryCode],
+									isDirect: directFlight
+								},
+								label: airports[IATA].name
 							};
 						});
 	

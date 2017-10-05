@@ -1,0 +1,29 @@
+&__suggestion {
+	&__code {
+		position: absolute;
+		right: 2rem;
+		top: 50%;
+
+		margin-top: -1px;
+
+		font-weight: 400;
+		font-size: 15px;
+		line-height: 16px;
+		color: #B3B3B3;
+		text-transform: uppercase;
+		transform: translateY(-50%);
+		pointer-events: none;
+	}
+
+	&__title {
+		&_bold {
+			font-weight: 600;
+		}
+	}
+
+	&__countryName {
+		color: #b3b3b3;
+		font-size: 13px;
+		padding-left: 10px;
+	}
+}
