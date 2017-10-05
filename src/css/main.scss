@@ -2,10 +2,7 @@
 
 .widget {
 	@import "variables";
-	@import "bootstrap";
-	@import "reactDatepicker";
-	@import "reactSelect";
-	@import "overridings";
+	@import "libs";
 	@import "ui";
 	@import "form";
 	
