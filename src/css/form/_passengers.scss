@@ -16,7 +16,6 @@
 	}
 	
 	&__header {
-		@extend .widget-ui-mobile__header;
 		display: none;
 		
 		@include adaptivity(phone) {

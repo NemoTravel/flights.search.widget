@@ -1,6 +1,6 @@
 import React from 'react';
 import Datepicker from 'components/Form/Search/Datepicker';
-import MobileHeader from 'components/Form/Search/Datepicker/MobileHeader';
+import MobileHeader from 'components/UI/MobileHeader';
 import { i18n } from 'utils';
 import PropTypes from 'prop-types';
 
@@ -38,8 +38,10 @@ export default class Return extends Datepicker {
 	}
 
 	renderInner() {
+		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`;
+		
 		return <div>
-			<MobileHeader title={this.placeholder} type={this.type} onClose={this.closeDatepicker}/>
+			<MobileHeader className={mobileHeaderClassName} title={this.placeholder} onClose={this.closeDatepicker}/>
 			
 			<div className="widget-ui-datepicker__footer">
 				<div className="widget-ui-datepicker__footer__button" onClick={() => {

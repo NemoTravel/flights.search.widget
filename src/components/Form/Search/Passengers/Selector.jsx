@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import UIDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/Form/Search/Passengers/Counter';
-import MobileHeader from 'components/Form/Search/Passengers/MobileHeader';
+import MobileHeader from 'components/UI/MobileHeader';
 import { i18n } from 'utils';
 
 export default class Selector extends Component {
@@ -57,7 +57,11 @@ export default class Selector extends Component {
 	 */
 	renderDropdownContent() {
 		return <div className="widget-form-passengers__content">
-			<MobileHeader title={i18n('form', 'passengersSelectHeader')} onClose={() => this.dropdown.instanceRef.handleClickOutside()}/>
+			<MobileHeader 
+				className="widget-form-passengers__header" 
+				title={i18n('form', 'passengersSelectHeader')} 
+				onClose={() => this.dropdown.instanceRef.handleClickOutside()}
+			/>
 
 			<div className="widget-form-passengers__content__wrapper">
 				{this.renderCounters()}

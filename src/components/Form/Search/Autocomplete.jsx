@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MobileHeader from 'components/Form/Search/Autocomplete/MobileHeader';
+import MobileHeader from 'components/UI/MobileHeader';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 import Select from 'react-select';
@@ -124,9 +124,16 @@ export default class Autocomplete extends Component {
 			value: airport
 		} : null;
 		
+		const mobileHeaderClassName = classnames(
+			'widget-form-airports__header',
+			{ 'widget-form-airports__header_visible': this.state.isFocused }
+		);
+		
 		return <div className="col widget-form-airports__col">
-			<MobileHeader isActive={this.state.isFocused} title={this.mobileTitle}/>
-
+			<MobileHeader title={this.mobileTitle} className={mobileHeaderClassName}>
+				<div className="widget-form-airports__underlay"/>
+			</MobileHeader>
+			
 			<div className="widget-form-airports__select__wrapper">
 				<Tooltip isActive={!airport && showErrors} isCentered={true} message={this.tooltipText}/>
 				

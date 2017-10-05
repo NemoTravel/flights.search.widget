@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UIDatepicker from 'components/UI/Datepicker';
-import MobileHeader from 'components/Form/Search/Datepicker/MobileHeader';
+import MobileHeader from 'components/UI/MobileHeader';
 import moment from 'moment';
 
 export default class Datepicker extends Component {
@@ -44,7 +44,8 @@ export default class Datepicker extends Component {
 	}
 	
 	renderInner() {
-		return <MobileHeader type={this.type} title={this.placeholder} onClose={this.closeDatepicker}/>;
+		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`;
+		return <MobileHeader className={mobileHeaderClassName} title={this.placeholder} onClose={this.closeDatepicker}/>;
 	}
 	
 	render() {
