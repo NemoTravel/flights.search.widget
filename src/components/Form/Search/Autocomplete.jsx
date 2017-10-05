@@ -141,7 +141,7 @@ export default class Autocomplete extends Component {
 	}
 	
 	render() {
-		const { suggestions, isLoading, system:config, airport } = this.props;
+		const { suggestions, isLoading, system:config, airport, showErrors } = this.props;
 		
 		const selectedValue = airport ? {
 			label: airport.name,
@@ -156,6 +156,8 @@ export default class Autocomplete extends Component {
 			</div>
 
 			<div className="widget-form-airports__select__wrapper">
+				<Tooltip isActive={!airport && showErrors} isCentered={true} message={this.tooltipText}/>
+				
 				<Select
 					clearable={false}
 					autoBlur={true}
