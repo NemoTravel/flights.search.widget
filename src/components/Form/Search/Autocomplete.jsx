@@ -81,8 +81,8 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderAirportCode() {
-		const { airport } = this.props;
-		return airport 
+		const { airport, isLoading } = this.props;
+		return airport && !isLoading
 			? <span className="widget-form-airports__airportCode widget-form-airports__airportCode_withArrow">{airport.IATA}</span> 
 			: null;
 	}
@@ -125,13 +125,16 @@ export default class Autocomplete extends Component {
 	 * @param {Object} option
 	 */
 	selectOption(option) {
-		this.props.selectAirport(option.value.airport, this.type);
+		if (option && option.value && option.value.airport) {
+			this.props.selectAirport(option.value.airport, this.type);
+		}
 	}
 	
 	shouldComponentUpdate(nextProps, nextState) {
 		const { showErrors, suggestions, isLoading, airport } = this.props;
 		
-		return showErrors !== nextProps.showErrors ||
+		return this.state.isFocused !== nextState.isFocused ||
+			showErrors !== nextProps.showErrors ||
 			suggestions !== nextProps.suggestions ||
 			airport !== nextProps.airport ||
 			isLoading !== nextProps.isLoading;
@@ -146,11 +149,11 @@ export default class Autocomplete extends Component {
 		} : null;
 		
 		return <div className="col widget-form-airports__col">
-			{/*<div className={classnames('widget-form-airports__header', { 'widget-form-airports__header_visible': this.state.isFocused })}>*/}
-				{/*<div className="widget-ui-icon widget-ui-mobile__back" />*/}
-				{/*{this.mobileTitle}*/}
-				{/*<div className="widget-form-airports__underlay"/>*/}
-			{/*</div>*/}
+			<div className={classnames('widget-form-airports__header', { 'widget-form-airports__header_visible': this.state.isFocused })}>
+				<div className="widget-ui-icon widget-ui-mobile__back" />
+				{this.mobileTitle}
+				<div className="widget-form-airports__underlay"/>
+			</div>
 
 			<div className="widget-form-airports__select__wrapper">
 				<Select
@@ -159,13 +162,19 @@ export default class Autocomplete extends Component {
 					autosize={false}
 					noResultsText={null}
 					openOnFocus={true}
-					className={classnames('widget-form-airports__select', { 'widget-form-airports__select_loading': isLoading })}
+					backspaceRemoves={false}
+					className={classnames('widget-form-airports__select')}
 					value={selectedValue}
 					options={suggestions}
+					isLoading={isLoading}
 					onInputChange={this.onChangeHandler}
 					placeholder={this.placeholder}
 					onChange={this.selectOption}
-					onFocus={() => this.fetchSuggestions('')}
+					onFocus={() => {
+						this.setState({ isFocused: true });
+						this.fetchSuggestions('');
+					}}
+					onBlur={() => this.setState({ isFocused: false })}
 					optionRenderer={this.renderOption}
 					arrowRenderer={() => <div className="widget-ui-icon widget-ui-input__arrow"/>}
 					inputProps={{

@@ -15,6 +15,19 @@
 		// React-select plugin has a shitty CSS styling, 
 		// so we have to do a lot of dirty overwriting.
 		.Select {
+			&-loading {
+				border-right-color: #888;
+				
+				&-zone {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					display: flex;
+					right: 50px;
+					align-items: center;
+				}
+			}
+			
 			&-control {
 				cursor: pointer;
 				border-radius: 0;
@@ -81,7 +94,7 @@
 				display: block;
 				position: relative;
 
-				padding: 10px 90px 10px 20px;
+				padding: 10px 90px 10px 13px;
 				line-height: 16px;
 
 				list-style-type: none;
@@ -103,8 +116,9 @@
 		
 		&.Select--single {
 			& > .Select-control .Select-value {
-				line-height: 38px;
 				padding-left: 13px;
+				display: flex;
+				align-items: center;
 			}
 		}
 		
@@ -112,14 +126,6 @@
 			.Select {
 				&-control {
 					border-color: #ccc;
-				}
-				
-				&-menu {
-					&-outer {
-						visibility: visible;
-						opacity: 1;
-						filter: alpha(opacity = 100);
-					}
 				}
 			}
 		}
@@ -129,6 +135,44 @@
 				&-control {
 					box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 					background-color: transparent;
+					
+					@include adaptivity(phone) {
+						position: fixed;
+						top: $mobile-header-height;
+						left: 0;
+						right: 0;
+						z-index: 13;
+						
+						.Select-input:not(input), .Select-placeholder {
+							height: $mobile-input-height;
+							display: flex;
+							align-items: center;
+						}
+						
+						background-color: #fff;
+						box-shadow: none;
+						border-top: none;
+						border-left: none;
+						border-right: none;
+					}
+				}
+
+				&-menu {
+					&-outer {
+						@include adaptivity(phone) {
+							position: fixed;
+							top: $mobile-header-height + $mobile-input-height;
+							left: 0;
+							right: 0;
+							bottom: 0;
+
+							max-height: none;
+							border-left: none;
+							border-right: none;
+							border-bottom: none;
+							box-shadow: none;
+						}
+					}
 				}
 			}
 		}
@@ -278,7 +322,9 @@
 				@include adaptivity(not-phone) {
 					border-left: none;
 					
-					.Select-placeholder, .Select-input, .Select-value {
+					.Select-placeholder, 
+					.Select-input:not(input), 
+					.Select-value {
 						padding-left: 20px !important;
 					}
 				}

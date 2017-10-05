@@ -32,12 +32,14 @@
 
 		left: $main-padding-size;
 		height: $mobile-header-height;
+		width: 50px;
 		line-height: $mobile-header-height;
 
 		&:after {
 			content: $icon-arrow;
 			transform: rotate(180deg);
 			position: absolute;
+			left: 0;
 		}
 
 		@include adaptivity(phone) {

@@ -3855,8 +3855,8 @@
     background: #1B75BC;
     color: #fff;
     position: fixed;
-    height: 40px;
-    line-height: 40px;
+    height: 50px;
+    line-height: 50px;
   }
 }
 
@@ -3868,14 +3868,16 @@
   font-size: 11px;
   cursor: pointer;
   left: 15px;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
 }
 
 .widget .widget-ui-mobile__back:after {
   content: "\E923";
   transform: rotate(180deg);
   position: absolute;
+  left: 0;
 }
 
 @media only screen and (max-width: 650px) {
@@ -4395,6 +4397,19 @@
   }
 }
 
+.widget-form-airports__select .Select-loading {
+  border-right-color: #888;
+}
+
+.widget-form-airports__select .Select-loading-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  right: 50px;
+  align-items: center;
+}
+
 .widget-form-airports__select .Select-control {
   cursor: pointer;
   border-radius: 0;
@@ -4452,7 +4467,7 @@
   transition: background, .4s, ease;
   display: block;
   position: relative;
-  padding: 10px 90px 10px 20px;
+  padding: 10px 90px 10px 13px;
   line-height: 16px;
   list-style-type: none;
   background: #fff;
@@ -4472,23 +4487,55 @@
 }
 
 .widget-form-airports__select.Select--single > .Select-control .Select-value {
-  line-height: 38px;
   padding-left: 13px;
+  display: flex;
+  align-items: center;
 }
 
 .widget-form-airports__select.is-open .Select-control {
   border-color: #ccc;
 }
 
-.widget-form-airports__select.is-open .Select-menu-outer {
-  visibility: visible;
-  opacity: 1;
-  filter: alpha(opacity=100);
-}
-
 .widget-form-airports__select.is-focused .Select-control {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   background-color: transparent;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-airports__select.is-focused .Select-control {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    z-index: 13;
+    background-color: #fff;
+    box-shadow: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .widget-form-airports__select.is-focused .Select-control .Select-input:not(input),
+  .widget-form-airports__select.is-focused .Select-control .Select-placeholder {
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-airports__select.is-focused .Select-menu-outer {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    box-shadow: none;
+  }
 }
 
 .widget-form-airports__select_loading {
@@ -4522,7 +4569,7 @@
 .widget-form-airports__underlay {
   display: none;
   position: fixed;
-  top: 90px;
+  top: 100px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -4617,7 +4664,7 @@
   }
 
   .widget-form-airports__col.col:last-of-type .Select-control .Select-placeholder,
-  .widget-form-airports__col.col:last-of-type .Select-control .Select-input,
+  .widget-form-airports__col.col:last-of-type .Select-control .Select-input:not(input),
   .widget-form-airports__col.col:last-of-type .Select-control .Select-value {
     padding-left: 20px !important;
   }
@@ -4744,7 +4791,7 @@
 @media only screen and (max-width: 650px) {
   .widget-form-passengers__content {
     position: fixed;
-    top: 40px;
+    top: 50px;
     bottom: 0;
     left: 0;
     right: 0;
