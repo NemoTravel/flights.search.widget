@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Autosuggest from 'components/Form/Search/Autocomplete/Autosuggest/src';
+import MobileHeader from 'components/Form/Search/Autocomplete/MobileHeader';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 import Select from 'react-select';
@@ -20,7 +20,6 @@ export default class Autocomplete extends Component {
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
 		this.renderOption = this.renderOption.bind(this);
-		this.renderInputField = this.renderInputField.bind(this);
 		this.selectOption = this.selectOption.bind(this);
 	}
 
@@ -97,29 +96,6 @@ export default class Autocomplete extends Component {
 	}
 
 	/**
-	 * Render autocomplete input field.
-	 * 
-	 * @param {Object} inputProps
-	 * @returns {XML}
-	 */
-	renderInputField(inputProps) {
-		const { showErrors, airport } = this.props;
-		
-		return <Tooltip isActive={!airport && showErrors} isCentered={true} message={this.tooltipText}>
-			<input 
-				type="text" {...inputProps}
-				ref={input => {
-					this.input = input;
-
-					if (this.props.getRef) {
-						this.props.getRef(input);
-					}
-				}}
-			/>
-		</Tooltip>;
-	}
-
-	/**
 	 * Set selected airport to the state.
 	 * 
 	 * @param {Object} option
@@ -149,11 +125,7 @@ export default class Autocomplete extends Component {
 		} : null;
 		
 		return <div className="col widget-form-airports__col">
-			<div className={classnames('widget-form-airports__header', { 'widget-form-airports__header_visible': this.state.isFocused })}>
-				<div className="widget-ui-icon widget-ui-mobile__back" />
-				{this.mobileTitle}
-				<div className="widget-form-airports__underlay"/>
-			</div>
+			<MobileHeader isActive={this.state.isFocused} title={this.mobileTitle}/>
 
 			<div className="widget-form-airports__select__wrapper">
 				<Tooltip isActive={!airport && showErrors} isCentered={true} message={this.tooltipText}/>
