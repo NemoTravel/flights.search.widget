@@ -2,7 +2,6 @@ import {
 	AUTOCOMPLETE_LOADING_STARTED, 
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
-	AUTOCOMPLETE_INPUT_VALUE_CHANGED,
 	AIRPORT_SELECTED
 } from 'actions';
 
@@ -17,15 +16,8 @@ export function swapAirports() {
 			arrivalAirport = state.form.autocomplete.arrival.airport;
 
 		if (departureAirport || arrivalAirport) {
-			const
-				departureInputValue = departureAirport ? departureAirport.name : state.form.autocomplete.departure.inputValue,
-				arrivalInputValue = arrivalAirport ? arrivalAirport.name : state.form.autocomplete.arrival.inputValue;
-
 			dispatch(selectAirport(departureAirport, 'arrival'));
 			dispatch(selectAirport(arrivalAirport, 'departure'));
-
-			dispatch(changeAutocompleteInputValue(departureInputValue, 'arrival'));
-			dispatch(changeAutocompleteInputValue(arrivalInputValue, 'departure'));
 		}
 	};
 }
@@ -50,16 +42,6 @@ export function changeAutocompleteSuggestions(suggestions, autocompleteType) {
 		autocompleteType,
 		payload: {
 			suggestions
-		}
-	};
-}
-
-export function changeAutocompleteInputValue(value, autocompleteType) {
-	return {
-		type: AUTOCOMPLETE_INPUT_VALUE_CHANGED,
-		autocompleteType,
-		payload: {
-			value
 		}
 	};
 }

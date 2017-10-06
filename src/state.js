@@ -1,4 +1,4 @@
-import { autocompleteInputValueReducer, autocompleteAirportReducer } from 'reducers/form/autocomplete';
+import { autocompleteAirportReducer } from 'reducers/form/autocomplete';
 import { selectDateReducer, toggleDatepickerReducer } from 'reducers/form/dates';
 import moment from 'moment';
 import { i18n } from 'utils';
@@ -24,13 +24,11 @@ export const autocompleteState = {
 	departure: {
 		isLoading: false,
 		suggestions: [],
-		inputValue: '',
 		airport: null
 	},
 	arrival: {
 		isLoading: false,
 		suggestions: [],
-		inputValue: '',
 		airport: null
 	}
 };
@@ -98,11 +96,6 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				const cachedArrivalAutocomplete = stateFromCache.form.autocomplete.arrival;
 
 				if (canBeProcessed && cachedDepartureAutocomplete && cachedDepartureAutocomplete.airport) {
-					state.form.autocomplete.departure = autocompleteInputValueReducer(
-						state.form.autocomplete.departure,
-						cachedDepartureAutocomplete.airport.name
-					);
-
 					state.form.autocomplete.departure = autocompleteAirportReducer(
 						state.form.autocomplete.departure,
 						cachedDepartureAutocomplete.airport
@@ -110,11 +103,6 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				}
 
 				if (canBeProcessed && cachedArrivalAutocomplete && cachedArrivalAutocomplete.airport) {
-					state.form.autocomplete.arrival = autocompleteInputValueReducer(
-						state.form.autocomplete.arrival,
-						cachedArrivalAutocomplete.airport.name
-					);
-
 					state.form.autocomplete.arrival = autocompleteAirportReducer(
 						state.form.autocomplete.arrival,
 						cachedArrivalAutocomplete.airport

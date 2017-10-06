@@ -11,7 +11,6 @@ class AutocompleteContainer extends Component {
 		const {
 			swapAirports,
 			changeAutocompleteSuggestions,
-			changeAutocompleteInputValue,
 			sendAutocompleteRequest,
 			selectAirport 
 		} = this.props.actions;
@@ -22,11 +21,9 @@ class AutocompleteContainer extends Component {
 				showErrors={showErrors}
 				isLoading={departureAutocomplete.isLoading}
 				suggestions={departureAutocomplete.suggestions}
-				inputValue={departureAutocomplete.inputValue}
 				airport={departureAutocomplete.airport}
 				swapAirports={swapAirports}
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
-				changeAutocompleteInputValue={changeAutocompleteInputValue}
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				selectAirport={(airport, autocompleteType) => {
 					selectAirport(airport, autocompleteType);
@@ -42,11 +39,9 @@ class AutocompleteContainer extends Component {
 				showErrors={showErrors}
 				isLoading={arrivalAutocomplete.isLoading}
 				suggestions={arrivalAutocomplete.suggestions}
-				inputValue={arrivalAutocomplete.inputValue}
 				airport={arrivalAutocomplete.airport}
 				swapAirports={swapAirports}
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
-				changeAutocompleteInputValue={changeAutocompleteInputValue}
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				selectAirport={selectAirport}
 				getRef={(input) => this.arrivalInput = input}
