@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DatePicker from 'react-datepicker';
+import DatePicker from 'components/UI/react-datepicker-master/src/datepicker';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 
