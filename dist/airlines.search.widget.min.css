@@ -4995,10 +4995,19 @@
   right: 35px;
 }
 
-.widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-ui-input {
-  padding-left: 11px;
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .Select-control {
+  padding-left: 13px;
   border-top: none;
   border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .Select-value,
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .Select-placeholder {
+  padding-left: 13px !important;
+}
+
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .Select-input:not(input) {
+  padding-left: 0 !important;
 }
 
 .widget-form_vertical .widget-form-airports__swap {

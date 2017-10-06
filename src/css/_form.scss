@@ -117,10 +117,19 @@
 					}
 
 					&:last-of-type {
-						.widget-ui-input {
-							padding-left: 11px;
+						.Select-control {
+							padding-left: 13px;
 							border-top: none;
 							border-left: 1px solid rgba(0, 0, 0, 0.15);
+						}
+						
+						.Select-value,
+						.Select-placeholder {
+							padding-left: 13px !important;
+						}
+
+						.Select-input:not(input) {
+							padding-left: 0 !important;
 						}
 					}
 
