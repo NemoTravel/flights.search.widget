@@ -113,7 +113,7 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 									country: countries[airports[IATA].countryCode],
 									isDirect: directFlight
 								},
-								label: airports[IATA].name
+								label: airports[IATA].name + airports[IATA].nameEn + airports[IATA].IATA
 							};
 						});
 	
