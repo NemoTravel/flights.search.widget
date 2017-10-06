@@ -152,10 +152,13 @@ export default class Autocomplete extends Component {
 					placeholder={this.placeholder}
 					onChange={this.selectOption}
 					onFocus={() => {
+						this.props.changeAutocompleteSuggestions([], this.type);
 						this.setState({ isFocused: true });
 						this.fetchSuggestions('');
 					}}
-					onBlur={() => this.setState({ isFocused: false })}
+					onBlur={() => {
+						this.setState({ isFocused: false });
+					}}
 					optionRenderer={this.renderOption}
 					arrowRenderer={() => <div className="widget-ui-icon widget-ui-input__arrow"/>}
 					inputProps={{
