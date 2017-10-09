@@ -107,6 +107,7 @@ export default class Datepicker extends Component {
 			dateFormatCalendar={Datepicker.dateFormatCalendar}
 			selected={date}
 			monthsShown={2}
+			onClickOutside={event => date ? null : this.disable()}
 			onFocus={this.enable}
 			{...this.props}
 		>
