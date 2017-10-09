@@ -3,15 +3,19 @@ import { selectDateReducer, toggleDatepickerReducer } from 'reducers/form/dates'
 import moment from 'moment';
 import { i18n } from 'utils';
 
+export const MODE_NEMO = 'NEMO';
+export const MODE_WEBSKY = 'WEBSKY';
+
 export const systemState = {
 	rootElement: null,
-	API_URL: '',
+	baseURL: '',
 	routingGrid: null,
 	locale: 'en',
 	verticalForm: false,
 	readOnlyAutocomplete: false,
 	autoFocusArrivalAirport: false,
-	autoFocusReturnDate: false
+	autoFocusReturnDate: false,
+	mode: MODE_NEMO
 };
 
 // export const blockVisibilityState = {

@@ -64,7 +64,7 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 
 		dispatch(startAutocompleteLoading(autocompleteType));
 		
-		let requestURL = `${state.system.API_URL}/guide/autocomplete/iata/${searchText}`;
+		let requestURL = `${state.system.baseURL}/api/guide/autocomplete/iata/${searchText}`;
 		let requestParams = {
 			apilang: state.system.locale
 		};

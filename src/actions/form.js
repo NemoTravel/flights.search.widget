@@ -1,5 +1,7 @@
 import { TOGGLE_BLOCK, SHOW_ERRORS } from 'actions';
 import { formIsValid } from 'selectors';
+import { MODE_NEMO } from 'state';
+import { URL, clearURL } from 'utils';
 
 /**
  * Show/hide dropdown blocks on the search form.
@@ -21,6 +23,41 @@ export function showErrors(showErrors) {
 	};
 }
 
+function runNemoSearch(state) {
+	let requestURL = clearURL(state.system.baseURL) + '/results/';
+
+	// Departure airport info.
+	requestURL += state.form.autocomplete.departure.airport.isCity ? 'c' : 'a';
+	requestURL += state.form.autocomplete.departure.airport.IATA;
+
+	// Arrival airport info.
+	requestURL += state.form.autocomplete.arrival.airport.isCity ? 'c' : 'a';
+	requestURL += state.form.autocomplete.arrival.airport.IATA;
+
+	// Departure date info.
+	requestURL += state.form.dates.departure.date.format('YYYYMMDD');
+
+	// Return date info.
+	if (state.form.dates.return.date) {
+		requestURL += state.form.dates.return.date.format('YYYYMMDD');
+	}
+
+	// Passengers info.
+	for (const passType in state.form.passengers) {
+		if (state.form.passengers.hasOwnProperty(passType) && state.form.passengers[passType].count) {
+			const passConfig = state.form.passengers[passType];
+			requestURL += passConfig.code + passConfig.count;
+		}
+	}
+
+	// Class info.
+	requestURL += '-class=Economy';
+
+	document.location = URL(requestURL, {
+		changelang: state.system.locale
+	});
+}
+
 /**
  * Starting search:
  * - run validation
@@ -34,7 +71,9 @@ export function startSearch() {
 		const state = getState();
 		
 		if (formIsValid(state)) {
-			alert('ALL IS FINE');
+			if (state.system.mode === MODE_NEMO) {
+				runNemoSearch(state);
+			}
 		}
 		else {
 			dispatch(showErrors(true));

@@ -14,6 +14,8 @@ const encode = (object) => {
 	return typeof object === 'string' ? object : JSON.stringify(object);
 };
 
+export const clearURL = url => url.trim().replace(/^\/|\/$/g, '');
+
 /**
  * Create URL string with params.
  * 
@@ -22,7 +24,7 @@ const encode = (object) => {
  * @returns {String}
  */
 export const URL = (root, params = {}) => {
-	let result = root.trim().replace(/^\/|\/$/g, ''),
+	let result = clearURL(root),
 		numOfParams = Object.keys(params).length,
 		i = 1;
 	
