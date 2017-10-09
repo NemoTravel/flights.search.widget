@@ -1,5 +1,11 @@
 @import "variables";
 
+#webskyHiddenForm {
+	display: none;
+	visibility: hidden;
+	opacity: 0;
+}
+
 &-form {
 	@import "form/search";
 	
@@ -123,7 +129,7 @@
 							border-left: 1px solid rgba(0, 0, 0, 0.15);
 						}
 						
-						.Select-value,
+						.widget-form-airports__select__value,
 						.Select-placeholder {
 							padding-left: 13px !important;
 						}

@@ -2,6 +2,7 @@ import { TOGGLE_BLOCK, SHOW_ERRORS } from 'actions';
 import { formIsValid } from 'selectors';
 import { MODE_NEMO } from 'state';
 import { URL, clearURL } from 'utils';
+import { MODE_WEBSKY } from 'state';
 
 /**
  * Show/hide dropdown blocks on the search form.
@@ -58,6 +59,14 @@ function runNemoSearch(state) {
 	});
 }
 
+function runWebskySearch(state) {
+	const form = document.getElementById('webskyHiddenForm');
+
+	if (form) {
+		form.submit();
+	}
+}
+
 /**
  * Starting search:
  * - run validation
@@ -73,6 +82,9 @@ export function startSearch() {
 		if (formIsValid(state)) {
 			if (state.system.mode === MODE_NEMO) {
 				runNemoSearch(state);
+			}
+			else if (state.system.mode === MODE_WEBSKY) {
+				runWebskySearch(state);
 			}
 		}
 		else {
