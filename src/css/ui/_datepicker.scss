@@ -89,24 +89,27 @@
 	
 	&__footer {
 		position: absolute;
-		bottom: 15px;
+		bottom: $main-padding-size;
+		left: $main-padding-size;
+		right: $main-padding-size;
 		text-align: center;
-		width: 100%;
 
 		@include adaptivity(phone) {
 			position: fixed;
 		}
 		
 		&__button {
-			font-size: 13px;
-			line-height: 14px;
-			font-weight: 400;
-			padding: 10px 15px;
 			display: inline-block;
+			line-height: 14px;
+			padding: 10px $main-padding-size;
+			
+			font-size: 13px;
+			font-weight: 400;
+			
 			border: 1px solid rgba($title-color, 0.2);
-			cursor: pointer;
-			color: $title-color;
 			background: #fff;
+			color: $title-color;
+			cursor: pointer;
 
 			&:hover {
 				background: $title-color;
@@ -114,8 +117,10 @@
 			}
 
 			@include adaptivity(phone) {
+				padding: 14px 0;
+				width: 100%;
+				
 				font-size: 17px;
-				padding: 14px 20px;
 				background: $title-color;
 				color: #fff;
 			}

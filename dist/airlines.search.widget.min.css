@@ -4062,46 +4062,54 @@
   }
 }
 
-.widget .widget-ui-datepicker__footer {
+.widget .widget-ui-datepicker__footer,
+.widget .widget-form-passengers__footer {
   position: absolute;
   bottom: 15px;
+  left: 15px;
+  right: 15px;
   text-align: center;
-  width: 100%;
 }
 
 @media only screen and (max-width: 650px) {
-  .widget .widget-ui-datepicker__footer {
+  .widget .widget-ui-datepicker__footer,
+  .widget .widget-form-passengers__footer {
     position: fixed;
   }
 }
 
-.widget .widget-ui-datepicker__footer__button {
-  font-size: 13px;
-  line-height: 14px;
-  font-weight: 400;
-  padding: 10px 15px;
+.widget .widget-ui-datepicker__footer__button,
+.widget .widget-form-passengers__footer__button {
   display: inline-block;
+  line-height: 14px;
+  padding: 10px 15px;
+  font-size: 13px;
+  font-weight: 400;
   border: 1px solid rgba(27, 117, 188, 0.2);
-  cursor: pointer;
-  color: #1B75BC;
   background: #fff;
+  color: #1B75BC;
+  cursor: pointer;
 }
 
-.widget .widget-ui-datepicker__footer__button:hover {
+.widget .widget-ui-datepicker__footer__button:hover,
+.widget .widget-form-passengers__footer__button:hover {
   background: #1B75BC;
   color: #fff;
 }
 
 @media only screen and (max-width: 650px) {
-  .widget .widget-ui-datepicker__footer__button {
+  .widget .widget-ui-datepicker__footer__button,
+  .widget .widget-form-passengers__footer__button {
+    padding: 14px 0;
+    width: 100%;
     font-size: 17px;
-    padding: 14px 20px;
     background: #1B75BC;
     color: #fff;
   }
 }
 
-.widget .widget-ui-datepicker__footer__button:active {
+.widget .widget-ui-datepicker__footer__button:active,
+.widget .widget-form-passengers__footer__button:active {
   background-color: #1B75BC;
   color: #fff;
 }
@@ -4923,6 +4931,16 @@
   .widget-form-passengers__number {
     font-size: 16px;
     padding: 0 10px;
+  }
+}
+
+.widget-form-passengers__footer {
+  display: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-passengers__footer {
+    display: block;
   }
 }
 

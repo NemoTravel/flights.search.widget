@@ -56,15 +56,21 @@ export default class Selector extends Component {
 	 * @returns {XML}
 	 */
 	renderDropdownContent() {
+		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
+		
 		return <div className="widget-form-passengers__content">
 			<MobileHeader 
 				className="widget-form-passengers__header" 
 				title={i18n('form', 'passengersSelectHeader')} 
-				onClose={() => this.dropdown.instanceRef.handleClickOutside()}
+				onClose={closeBlock}
 			/>
 
-			<div className="widget-form-passengers__content__wrapper">
-				{this.renderCounters()}
+			{this.renderCounters()}
+
+			<div className="widget-form-passengers__footer">
+				<div className="widget-form-passengers__footer__button" onClick={closeBlock}>
+					{i18n('form', 'passengers_done')}
+				</div>
 			</div>
 		</div>;
 	}
@@ -74,7 +80,7 @@ export default class Selector extends Component {
 		
 		return <div className="form-group widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
-				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()}ref={ref => (this.dropdown = ref)}/>
+				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()} ref={ref => (this.dropdown = ref)}/>
 			</Tooltip>
 		</div>;
 	}

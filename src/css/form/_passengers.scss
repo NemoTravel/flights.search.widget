@@ -175,4 +175,17 @@
 			padding: 0 10px;
 		}
 	}
+	
+	&__footer {
+		@extend .widget-ui-datepicker__footer;
+		display: none;
+		
+		@include adaptivity(phone) {
+			display: block;
+		}
+		
+		&__button {
+			@extend .widget-ui-datepicker__footer__button;
+		}
+	}
 }

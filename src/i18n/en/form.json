@@ -28,5 +28,6 @@
 	"passenger_INF": "Infants",
 	"passenger_INF_age": "under 2 years old",
 	"passenger_INS": "Infants with a seat",
-	"passenger_INS_age": "under 2 years old"
+	"passenger_INS_age": "under 2 years old",
+	"passengers_done": "Done"
 }
