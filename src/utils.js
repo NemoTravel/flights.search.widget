@@ -15,6 +15,37 @@ const encode = (object) => {
 };
 
 /**
+ * Create URL string with params.
+ * 
+ * @param {String} root
+ * @param {Object} params
+ * @returns {String}
+ */
+export const URL = (root, params = {}) => {
+	let result = root.trim().replace(/^\/|\/$/g, ''),
+		numOfParams = Object.keys(params).length,
+		i = 1;
+	
+	if (numOfParams) {
+		result += '?';
+		
+		for (const paramName in params) {
+			if (params.hasOwnProperty(paramName)) {
+				result += `${paramName}=${params[paramName]}`;
+				
+				if (i !== numOfParams) {
+					result += '&';
+				}
+
+				i++;
+			}
+		}
+	}
+	
+	return result;
+};
+
+/**
  * Caching function.
  * 
  * Uses `localStorage` if available, or uses cookies instead.

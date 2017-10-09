@@ -4,6 +4,8 @@ import {
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED
 } from 'actions';
+import { parseAutocompleteOptions } from 'parsers';
+import { URL } from 'utils';
 
 /**
  * Change the departure and the arrival airports.
@@ -61,52 +63,33 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 		const state = getState();
 
 		dispatch(startAutocompleteLoading(autocompleteType));
-
-		let url = `${state.system.API_URL}/guide/autocomplete/iata/${searchText}`;
+		
+		let requestURL = `${state.system.API_URL}/guide/autocomplete/iata/${searchText}`;
+		let requestParams = {
+			apilang: state.system.locale
+		};
 
 		if (autocompleteType === 'arrival' && state.form.autocomplete.departure.airport) {
-			url += `/dep/${state.form.autocomplete.departure.airport.IATA}`;
+			requestURL += `/dep/${state.form.autocomplete.departure.airport.IATA}`;
 		}
 
 		if (state.system.routingGrid) {
-			url += `?airlineIATA=${state.system.routingGrid}&apilang=${state.system.locale}`;
-		}
-		else {
-			url += `?apilang=${state.system.locale}`;
+			requestParams.airlineIATA = state.system.routingGrid;
 		}
 
-		fetch(url)
+		fetch(URL(requestURL, requestParams))
 			.then(response => response.json())
 			.then(response => {
-				const data = response;
+				const options = parseAutocompleteOptions(response);
+
+				// Clear previous options first (to avoid rendering collisions).
+				dispatch(changeAutocompleteSuggestions([], autocompleteType));
 				
-				// Some basic parser.
-				if (data && data.guide.autocomplete.iata instanceof Array) {
-					const { airports, countries } = data.guide;
-					const { iata } = data.guide.autocomplete;
-					
-					// Trying to match suggested airports by IATA.
-					const suggestions = iata
-						.filter(({ IATA }) => IATA in airports && airports[IATA].name)
-						.map(({ IATA, directFlight }) => {
-							return {
-								value: {
-									airport: airports[IATA],
-									country: countries[airports[IATA].countryCode],
-									isDirect: directFlight
-								},
-								label: airports[IATA].name + airports[IATA].nameEn + airports[IATA].IATA
-							};
-						});
-	
-					// Clear previous suggestions first (to avoid rendering collisions).
-					dispatch(changeAutocompleteSuggestions([], autocompleteType));
-					dispatch(changeAutocompleteSuggestions(suggestions, autocompleteType));
-					dispatch(finishAutocompleteLoading(autocompleteType));
+				if (options) {
+					dispatch(changeAutocompleteSuggestions(options, autocompleteType));
 				}
-				else {
-					dispatch(finishAutocompleteLoading(autocompleteType));
-				}
+				
+				dispatch(finishAutocompleteLoading(autocompleteType));
 			})
 			.catch(() => {
 				dispatch(changeAutocompleteSuggestions([], autocompleteType));
