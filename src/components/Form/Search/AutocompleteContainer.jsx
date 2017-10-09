@@ -4,10 +4,19 @@ import { bindActionCreators } from 'redux';
 import * as autocompleteActions from 'actions/autocomplete';
 import DepartureAutocomplete from 'components/Form/Search/Autocomplete/Departure';
 import ArrivalAutocomplete from 'components/Form/Search/Autocomplete/Arrival';
+import { getDepartureOptions, getArrivalOptions } from 'selectors';
 
 class AutocompleteContainer extends Component {
 	render() {
-		const { departureAutocomplete, arrivalAutocomplete, system, showErrors } = this.props;
+		const { 
+			departureAutocomplete, 
+		  	arrivalAutocomplete, 
+		  	system, 
+		  	showErrors, 
+		  	departureOptions, 
+		  	arrivalOptions 
+		} = this.props;
+		
 		const {
 			swapAirports,
 			changeAutocompleteSuggestions,
@@ -20,7 +29,7 @@ class AutocompleteContainer extends Component {
 				system={system}
 				showErrors={showErrors}
 				isLoading={departureAutocomplete.isLoading}
-				suggestions={departureAutocomplete.suggestions}
+				suggestions={departureOptions}
 				airport={departureAutocomplete.airport}
 				swapAirports={swapAirports}
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
@@ -38,7 +47,7 @@ class AutocompleteContainer extends Component {
 				system={system}
 				showErrors={showErrors}
 				isLoading={arrivalAutocomplete.isLoading}
-				suggestions={arrivalAutocomplete.suggestions}
+				suggestions={arrivalOptions}
 				airport={arrivalAutocomplete.airport}
 				swapAirports={swapAirports}
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
@@ -55,6 +64,8 @@ export default connect(
 		return {
 			departureAutocomplete: state.form.autocomplete.departure,
 			arrivalAutocomplete: state.form.autocomplete.arrival,
+			departureOptions: getDepartureOptions(state),
+			arrivalOptions: getArrivalOptions(state),
 			showErrors: state.form.showErrors,
 			system: state.system
 		};

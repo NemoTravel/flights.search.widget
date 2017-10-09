@@ -9,10 +9,6 @@ import { i18n, getIntermediateDates } from 'utils';
  * and not to worry about how many times needed data has been calculated.
  */
 
-function getConfig(state) {
-	return state.system;
-}
-
 /**
  * --------------------------------------------------------------------------------------------------------
  * PASSENGERS ---------------------------------------------------------------------------------------------
@@ -23,8 +19,8 @@ function getPassengersConfig(state) {
 }
 
 export const getPassengersArray = createSelector(
-	[ getPassengersConfig, getConfig ],
-	(passengersConfig = {}, systemConfig = {}) => {
+	[ getPassengersConfig ],
+	(passengersConfig = {}) => {
 		let result = [];
 		
 		for (let passType in passengersConfig) {
@@ -211,3 +207,26 @@ export const formIsValid = createSelector(
 		return isValid;
 	}
 );
+
+function getDepartureOptionsFromState(state) {
+	return state.form.autocomplete.departure.suggestions;
+}
+
+function getArrivalOptionsFromState(state) {
+	return state.form.autocomplete.arrival.suggestions;
+}
+
+function mapOptions(options) {
+	return options.map(option => {
+		return {
+			value: option,
+			label: option.airport.name + option.airport.nameEn + option.airport.IATA
+		}
+	});
+}
+
+/**
+ * Create autocomplete options list for arrival and departure.
+ */
+export const getDepartureOptions = createSelector(getDepartureOptionsFromState, mapOptions);
+export const getArrivalOptions = createSelector(getArrivalOptionsFromState, mapOptions);
