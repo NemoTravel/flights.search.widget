@@ -4417,12 +4417,6 @@
   box-shadow: none;
 }
 
-.widget-form-airports__select .Select-value-label {
-  font-weight: 600;
-  font-size: 15px;
-  color: #666 !important;
-}
-
 .widget-form-airports__select .Select-input {
   padding-left: 13px;
   height: 38px;
@@ -4480,12 +4474,6 @@
 
 .widget-form-airports__select .Select-option:not(:last-of-type) {
   border-bottom: 1px solid #e6e6e6;
-}
-
-.widget-form-airports__select.Select--single > .Select-control .Select-value {
-  padding-left: 13px;
-  display: flex;
-  align-items: center;
 }
 
 .widget-form-airports__select.is-open .Select-control {
@@ -4546,6 +4534,30 @@
 
 .widget-form-airports__select__wrapper {
   position: relative;
+}
+
+.widget-form-airports__select__value {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 13px;
+}
+
+.widget-form-airports__select__value__airportName,
+.widget-form-airports__select__value__comma {
+  font-weight: 600;
+  font-size: 15px;
+  color: #666;
+}
+
+.widget-form-airports__select__value__countryName {
+  font-weight: 600;
+  font-size: 15px;
+  color: #b3b3b3;
 }
 
 .widget-form-airports__swap {
@@ -4717,7 +4729,7 @@
 
   .widget-form-airports__col.col:last-of-type .Select-control .Select-placeholder,
   .widget-form-airports__col.col:last-of-type .Select-control .Select-input:not(input),
-  .widget-form-airports__col.col:last-of-type .Select-control .Select-value {
+  .widget-form-airports__col.col:last-of-type .Select-control .widget-form-airports__select__value {
     padding-left: 20px !important;
   }
 }

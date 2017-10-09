@@ -9,9 +9,10 @@ export const parseAutocompleteOptions = (response) => {
 			// Ignore options without information about airport.
 			.filter(({ IATA }) => IATA in airports && airports[IATA].name)
 			.map(({ IATA, directFlight }) => {
+				airports[IATA].country = countries[airports[IATA].countryCode];
+				
 				return {
 					airport: airports[IATA],
-					country: countries[airports[IATA].countryCode],
 					isDirect: directFlight
 				};
 			});

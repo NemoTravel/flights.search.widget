@@ -82,9 +82,6 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 			.then(response => {
 				const options = parseAutocompleteOptions(response);
 
-				// Clear previous options first (to avoid rendering collisions).
-				dispatch(changeAutocompleteSuggestions([], autocompleteType));
-				
 				if (options) {
 					dispatch(changeAutocompleteSuggestions(options, autocompleteType));
 				}

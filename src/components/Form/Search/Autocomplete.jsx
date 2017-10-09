@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import MobileHeader from 'components/UI/MobileHeader';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
+import Option from 'components/Form/Search/Autocomplete/Option';
+import Value from 'components/Form/Search/Autocomplete/Value';
 import Select from 'react-select';
 
 export default class Autocomplete extends Component {
@@ -19,7 +21,6 @@ export default class Autocomplete extends Component {
 
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
-		this.renderOption = this.renderOption.bind(this);
 		this.selectOption = this.selectOption.bind(this);
 	}
 
@@ -28,7 +29,7 @@ export default class Autocomplete extends Component {
 	 * 
 	 * @param {String} searchText
 	 */
-	fetchSuggestions(searchText) {
+	fetchSuggestions(searchText = '') {
 		const { sendAutocompleteRequest, system } = this.props;
 		
 		if (searchText || system.routingGrid) {
@@ -50,28 +51,6 @@ export default class Autocomplete extends Component {
 	onChangeHandler(searchString) {
 		this.fetchSuggestions(searchString);
 		return searchString;
-	}
-
-	/**
-	 * Render option element.
-	 * 
-	 * @param {Object} option
-	 * @returns {XML}
-	 */
-	renderOption(option) {
-		const { airport, country, isDirect } = option.value;
-		
-		return <div className="widget-form-airports__suggestion">
-			<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': isDirect })}>
-				{airport.name}
-			</span>
-
-			{country ? <span className="widget-form-airports__suggestion__countryName">{country.name}</span> : null}
-
-			<span className="widget-form-airports__suggestion__code">
-				{airport.IATA}
-			</span>
-		</div>;
 	}
 
 	/**
@@ -152,14 +131,15 @@ export default class Autocomplete extends Component {
 					placeholder={this.placeholder}
 					onChange={this.selectOption}
 					onFocus={() => {
-						this.props.changeAutocompleteSuggestions([], this.type);
 						this.setState({ isFocused: true });
-						this.fetchSuggestions('');
+						this.fetchSuggestions();
 					}}
 					onBlur={() => {
+						this.props.changeAutocompleteSuggestions([], this.type);
 						this.setState({ isFocused: false });
 					}}
-					optionRenderer={this.renderOption}
+					optionRenderer={option => <Option option={option}/>}
+					valueComponent={Value}
 					arrowRenderer={() => <div className="widget-ui-icon widget-ui-input__arrow"/>}
 					inputProps={{
 						spellCheck: false,
