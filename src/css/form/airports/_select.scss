@@ -169,11 +169,12 @@
 		left: 0;
 		top: 0;
 		bottom: 0;
-		right: 0;
+		right: 100px;
 
 		display: flex;
 		align-items: center;
 		padding-left: 13px;
+		white-space: nowrap;
 		
 		&__airportName, &__comma {
 			font-weight: 600;
@@ -185,6 +186,9 @@
 			font-weight: 600;
 			font-size: 15px;
 			color: #b3b3b3;
+
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 }
