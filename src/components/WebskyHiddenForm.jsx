@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
+/**
+ * Websky engine requires real HTML-form submittion.
+ */
 class WebskyHiddenForm extends Component {
 	render() {
 		const { form, system } = this.props;
