@@ -63,7 +63,7 @@ let config = {
 						'transform-runtime',
 						'transform-react-remove-prop-types',
 						'transform-react-constant-elements',
-						'transform-react-inline-elements'
+						// 'transform-react-inline-elements'
 					],
 					presets: ['es2015', 'stage-0', 'react']
 				},

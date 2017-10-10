@@ -11,6 +11,16 @@ class DatesContainer extends Component {
 		const { departureDatepicker, returnDatepicker, system, showErrors } = this.props;
 		const { toggleDatePicker, datepickerChange } = this.props.actions;
 		
+		let returnInitialDate = departureDatepicker.date;
+		
+		if (
+			departureDatepicker.date && 
+			returnDatepicker.date &&
+			Math.round(returnDatepicker.date.diff(departureDatepicker.date, 'months', true)) > 1
+		) {
+			returnInitialDate = returnDatepicker.date;
+		}
+		
 		return <div className="form-group row widget-form-dates">
 			<DepartureDatepicker
 				showErrors={showErrors}
@@ -32,6 +42,7 @@ class DatesContainer extends Component {
 				locale={system.locale}
 				date={returnDatepicker.date}
 				isActive={returnDatepicker.isActive}
+				openToDate={returnInitialDate}
 				selectDate={datepickerChange}
 				toggleDatePicker={toggleDatePicker}
 				highlightDates={this.props.datesBetweenDepartureAndReturn}

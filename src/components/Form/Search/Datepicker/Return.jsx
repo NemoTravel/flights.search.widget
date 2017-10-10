@@ -8,6 +8,7 @@ export default class Return extends Datepicker {
 	static propTypes = {
 		locale: PropTypes.string.isRequired,
 		date: PropTypes.object,
+		openToDate: PropTypes.object,
 		isActive: PropTypes.bool,
 		selectDate: PropTypes.func.isRequired,
 		getRef: PropTypes.func.isRequired,

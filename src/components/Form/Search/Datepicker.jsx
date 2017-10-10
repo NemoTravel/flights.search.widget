@@ -58,6 +58,7 @@ export default class Datepicker extends Component {
 			isActive,
 		  	showErrors,
 		  	specialDate,
+		  	openToDate,
 		  	minDate:minDateProp, 
 		  	maxDate:maxDateProp, 
 		  	highlightDates = [] 
@@ -74,6 +75,7 @@ export default class Datepicker extends Component {
 				onChange={this.onChangeHandler} 
 				locale={locale}
 				date={date}
+				openToDate={openToDate} 
 				minDate={minDate} 
 				maxDate={maxDate}
 				getRef={getRef}

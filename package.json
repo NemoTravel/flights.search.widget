@@ -49,7 +49,6 @@
     "why-did-you-update": "0.0.8"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "bootstrap": "^4.0.0-beta",
     "classnames": "^2.2.5",
