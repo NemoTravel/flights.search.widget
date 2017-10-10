@@ -109,6 +109,7 @@ export const getPassengersCounterAvailability = createSelector(
 						}
 						break;
 						
+					case 'INS':
 					case 'CLD':
 						if (passengersConfig.ADT.count <= 0) {
 							canIncrease = false;
@@ -116,7 +117,6 @@ export const getPassengersCounterAvailability = createSelector(
 						break;
 
 					case 'INF':
-					case 'INS':
 						if (currentPassConfig.count >= passengersConfig.ADT.count) {
 							canIncrease = false;
 						}
