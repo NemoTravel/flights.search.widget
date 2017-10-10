@@ -21,6 +21,6 @@ export default class Departure extends Autocomplete {
 		this.type = 'departure';
 		this.placeholder = i18n('form', 'from_full');
 		this.mobileTitle = i18n('form', 'from');
-		this.tooltipText = i18n('form', 'departureError');
+		this.defaultErrorText = i18n('form', 'departureError');
 	}
 }

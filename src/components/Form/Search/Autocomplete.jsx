@@ -5,6 +5,7 @@ import Tooltip from 'components/UI/Tooltip';
 import Option from 'components/Form/Search/Autocomplete/Option';
 import Value from 'components/Form/Search/Autocomplete/Value';
 import Select from 'react-select';
+import { i18n } from 'utils';
 
 export default class Autocomplete extends Component {
 	constructor(props) {
@@ -17,7 +18,8 @@ export default class Autocomplete extends Component {
 		this.type = null;
 		this.placeholder = '';
 		this.mobileTitle = '';
-		this.tooltipText = '';
+		this.defaultErrorText = '';
+		this.sameAirportsErrorText = i18n('form', 'sameAirportsError');
 
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -86,17 +88,18 @@ export default class Autocomplete extends Component {
 	}
 	
 	shouldComponentUpdate(nextProps, nextState) {
-		const { showErrors, suggestions, isLoading, airport } = this.props;
+		const { showErrors, suggestions, isLoading, airport, sameAirportsError } = this.props;
 		
 		return this.state.isFocused !== nextState.isFocused ||
 			showErrors !== nextProps.showErrors ||
+			sameAirportsError !== nextProps.sameAirportsError ||
 			suggestions !== nextProps.suggestions ||
 			airport !== nextProps.airport ||
 			isLoading !== nextProps.isLoading;
 	}
 	
 	render() {
-		const { suggestions, isLoading, system:config, airport, showErrors } = this.props;
+		const { suggestions, isLoading, system:config, airport, showErrors, sameAirportsError } = this.props;
 		
 		const selectedValue = airport ? {
 			label: airport.name,
@@ -108,13 +111,15 @@ export default class Autocomplete extends Component {
 			{ 'widget-form-airports__header_visible': this.state.isFocused }
 		);
 		
+		const errorText = sameAirportsError ? this.sameAirportsErrorText : this.defaultErrorText;
+		
 		return <div className="col widget-form-airports__col">
 			<MobileHeader title={this.mobileTitle} className={mobileHeaderClassName}>
 				<div className="widget-form-airports__underlay"/>
 			</MobileHeader>
 			
 			<div className="widget-form-airports__select__wrapper">
-				<Tooltip isActive={!airport && showErrors} isCentered={true} message={this.tooltipText}/>
+				<Tooltip isActive={(!airport || sameAirportsError) && showErrors} isCentered={true} message={errorText}/>
 				
 				<Select
 					clearable={false}

@@ -23,7 +23,7 @@ export default class Arrival extends Autocomplete {
 		this.type = 'arrival';
 		this.placeholder = i18n('form', 'to_full');
 		this.mobileTitle = i18n('form', 'to');
-		this.tooltipText = i18n('form', 'arrivalError');
+		this.defaultErrorText = i18n('form', 'arrivalError');
 	}
 	
 	renderSwitcher() {

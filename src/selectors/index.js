@@ -203,6 +203,9 @@ export const formIsValid = createSelector(
 		else if (!form.autocomplete.arrival.airport) {
 			isValid = false;
 		}
+		else if (form.autocomplete.departure.airport.IATA === form.autocomplete.arrival.airport.IATA) {
+			isValid = false;
+		}
 		
 		return isValid;
 	}

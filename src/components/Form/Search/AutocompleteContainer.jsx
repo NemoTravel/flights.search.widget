@@ -8,6 +8,8 @@ import { getDepartureOptions, getArrivalOptions } from 'selectors';
 
 class AutocompleteContainer extends Component {
 	render() {
+		let sameAirportsError = false;
+		
 		const { 
 			departureAutocomplete, 
 		  	arrivalAutocomplete, 
@@ -24,10 +26,18 @@ class AutocompleteContainer extends Component {
 			selectAirport 
 		} = this.props.actions;
 		
+		if (
+			departureAutocomplete.airport && arrivalAutocomplete.airport &&
+			departureAutocomplete.airport.IATA === arrivalAutocomplete.airport.IATA
+		) {
+			sameAirportsError = true;
+		}
+		
 		return <div className="form-group row widget-form-airports">
 			<DepartureAutocomplete
 				system={system}
 				showErrors={showErrors}
+				sameAirportsError={sameAirportsError}
 				isLoading={departureAutocomplete.isLoading}
 				suggestions={departureOptions}
 				airport={departureAutocomplete.airport}
@@ -46,6 +56,7 @@ class AutocompleteContainer extends Component {
 			<ArrivalAutocomplete
 				system={system}
 				showErrors={showErrors}
+				sameAirportsError={sameAirportsError}
 				isLoading={arrivalAutocomplete.isLoading}
 				suggestions={arrivalOptions}
 				airport={arrivalAutocomplete.airport}

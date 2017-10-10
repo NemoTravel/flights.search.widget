@@ -12,6 +12,7 @@
 	"to_full": "Аэропорт прилёта",
 	"departureError": "Выберите аэропорт вылета",
 	"arrivalError": "Выберите аэропорт прилёта",
+	"sameAirportsError": "Выберите разные аэропорты",
 	"dateToError": "Выберите дату вылета",
 	"dateTo": "Туда",
 	"dateBack": "Обратно",

@@ -12,6 +12,7 @@
 	"to_full": "Arrival airport or city",
 	"departureError": "Select departure airport",
 	"arrivalError": "Select arrival airport",
+	"sameAirportsError": "Choose different airports",
 	"dateToError": "Select departure date",
 	"dateTo": "Date to",
 	"dateBack": "Date back",
