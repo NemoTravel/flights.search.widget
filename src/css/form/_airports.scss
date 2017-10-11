@@ -77,6 +77,10 @@
 			.widget-form-airports__airportCode {
 				right: 29px;
 
+				@include adaptivity(phone) {
+					right: 17px;
+				}
+
 				&_withArrow {
 					right: 47px;
 

@@ -4720,6 +4720,12 @@
   right: 29px;
 }
 
+@media only screen and (max-width: 650px) {
+  .widget-form-airports__col.col:first-of-type .widget-form-airports__airportCode {
+    right: 17px;
+  }
+}
+
 .widget-form-airports__col.col:first-of-type .widget-form-airports__airportCode_withArrow {
   right: 47px;
 }

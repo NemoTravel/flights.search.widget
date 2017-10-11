@@ -61,10 +61,14 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderAirportCode() {
-		const { airport, isLoading } = this.props;
-		return airport && !isLoading
-			? <span className="widget-form-airports__airportCode widget-form-airports__airportCode_withArrow">{airport.IATA}</span> 
-			: null;
+		const { airport, isLoading, system } = this.props;
+		
+		const className = classnames(
+			'widget-form-airports__airportCode',
+			{ 'widget-form-airports__airportCode_withArrow': system.routingGrid }
+		);
+		
+		return airport && !isLoading ? <span className={className}>{airport.IATA}</span> : null;
 	}
 
 	/**
@@ -145,7 +149,7 @@ export default class Autocomplete extends Component {
 					}}
 					optionRenderer={option => <Option option={option}/>}
 					valueComponent={Value}
-					arrowRenderer={() => <div className="widget-ui-icon widget-ui-input__arrow"/>}
+					arrowRenderer={() => config.routingGrid ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,
 						readOnly: config.readOnlyAutocomplete && config.routingGrid,
