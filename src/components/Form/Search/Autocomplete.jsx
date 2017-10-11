@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 import Option from 'components/Form/Search/Autocomplete/Option';
 import Value from 'components/Form/Search/Autocomplete/Value';
-import Select from 'react-select';
+import Select from 'components/Form/Search/Autocomplete/react-select-master/src/Select';
 import { i18n } from 'utils';
 
 export default class Autocomplete extends Component {
