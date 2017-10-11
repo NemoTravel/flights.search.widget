@@ -1,6 +1,13 @@
 import { ADD_PASSENGER, REMOVE_PASSENGER, SET_PASSENGER_COUNTER } from 'actions';
 import { passengersState } from 'state';
 
+export const nemoToWebskyPassTypes = {
+	ADT: 'aaa',
+	CLD: 'rbg',
+	INF: 'rmg',
+	INS: 'rvg'
+};
+
 export function setPassengersCounterReducer(state, count) {
 	return { ...state, count };
 }
