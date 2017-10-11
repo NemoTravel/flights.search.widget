@@ -228,6 +228,25 @@
 					}
 				}
 			}
+			
+			&-noresults {
+				@include adaptivity(not-phone) {
+					display: none;
+				}
+
+				display: block;
+				position: relative;
+
+				padding: 10px 15px;
+				line-height: 16px;
+				text-align: center;
+
+				background: #fff;
+				border-bottom: 1px solid #e6e6e6;
+				color: #b3b3b3;
+				font-size: 15px;
+				font-weight: 600;
+			}
 		}
 	}
 }

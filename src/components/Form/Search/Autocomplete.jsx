@@ -129,10 +129,10 @@ export default class Autocomplete extends Component {
 					clearable={false}
 					autoBlur={true}
 					autosize={false}
-					noResultsText={null}
+					noResultsText={i18n('form', 'noResults')}
 					openOnFocus={true}
 					backspaceRemoves={false}
-					className={classnames('widget-form-airports__select')}
+					className="widget-form-airports__select"
 					value={selectedValue}
 					options={suggestions}
 					isLoading={isLoading}

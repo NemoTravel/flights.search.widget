@@ -4615,6 +4615,25 @@
   }
 }
 
+.widget-form-airports__select.is-focused .Select-noresults {
+  display: block;
+  position: relative;
+  padding: 10px 15px;
+  line-height: 16px;
+  text-align: center;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  color: #b3b3b3;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 651px) {
+  .widget-form-airports__select.is-focused .Select-noresults {
+    display: none;
+  }
+}
+
 .widget-form-airports__swap {
   width: 24px;
   height: 24px;
