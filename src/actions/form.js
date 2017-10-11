@@ -1,5 +1,5 @@
 import { TOGGLE_BLOCK, SHOW_ERRORS } from 'actions';
-import { formIsValid } from 'selectors';
+import { formIsValid } from 'selectors/form';
 import { MODE_NEMO } from 'state';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';

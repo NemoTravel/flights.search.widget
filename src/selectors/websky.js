@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getPassengersArray } from 'selectors';
+import { getPassengersArray } from 'selectors/passengers';
 import { nemoToWebskyPassTypes } from 'reducers/form/passengers';
 
 export const webskyPassengers = createSelector(

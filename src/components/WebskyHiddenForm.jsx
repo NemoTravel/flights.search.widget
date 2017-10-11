@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { nemoToWebskyPassTypes } from 'reducers/form/passengers';
 import { webskyPassengers } from 'selectors/websky';
 
 /**

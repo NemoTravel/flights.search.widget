@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as passengersActions from 'actions/passengers';
-import { getPassengersTitle, getPassengersArray, getTotalPassengersCount, getPassengersCounterAvailability } from 'selectors';
+import { 
+	getPassengersTitle, 
+	getPassengersArray, 
+	getTotalPassengersCount, 
+	getPassengersCounterAvailability 
+} from 'selectors/passengers';
 import Selector from 'components/Form/Search/Passengers/Selector';
 
 class PassengersContainer extends Component {

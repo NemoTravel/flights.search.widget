@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as autocompleteActions from 'actions/autocomplete';
 import DepartureAutocomplete from 'components/Form/Search/Autocomplete/Departure';
 import ArrivalAutocomplete from 'components/Form/Search/Autocomplete/Arrival';
-import { getDepartureOptions, getArrivalOptions } from 'selectors';
+import { getDepartureOptions, getArrivalOptions } from 'selectors/form';
 
 class AutocompleteContainer extends Component {
 	render() {
