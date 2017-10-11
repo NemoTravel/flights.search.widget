@@ -62,10 +62,14 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderAirportCode() {
-		const { airport, isLoading } = this.props;
-		return airport && !isLoading
-			? <span className="widget-form-airports__airportCode widget-form-airports__airportCode_withArrow">{airport.IATA}</span> 
-			: null;
+		const { airport, isLoading, system } = this.props;
+		
+		const className = classnames(
+			'widget-form-airports__airportCode',
+			{ 'widget-form-airports__airportCode_withArrow': system.routingGrid }
+		);
+		
+		return airport && !isLoading ? <span className={className}>{airport.IATA}</span> : null;
 	}
 
 	/**
@@ -126,10 +130,10 @@ export default class Autocomplete extends Component {
 					clearable={false}
 					autoBlur={true}
 					autosize={false}
-					noResultsText={null}
+					noResultsText={i18n('form', 'noResults')}
 					openOnFocus={true}
 					backspaceRemoves={false}
-					className={classnames('widget-form-airports__select')}
+					className="widget-form-airports__select"
 					value={selectedValue}
 					options={suggestions}
 					isLoading={isLoading}
@@ -145,8 +149,8 @@ export default class Autocomplete extends Component {
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={option => <Option option={option}/>}
-					valueComponent={Value}
-					arrowRenderer={() => <div className="widget-ui-icon widget-ui-input__arrow"/>}
+					valueRenderer={value => <Value value={value} placeholder={this.placeholder}/>}
+					arrowRenderer={() => config.routingGrid ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,
 						readOnly: config.readOnlyAutocomplete && config.routingGrid,

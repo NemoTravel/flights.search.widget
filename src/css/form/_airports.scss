@@ -28,7 +28,7 @@
 	&__underlay {
 		display: none;
 		position: fixed;
-		top: $mobile-input-height + $mobile-header-height;
+		top: $mobile-header-height;
 		left: 0;
 		bottom: 0;
 		right: 0;
@@ -76,6 +76,10 @@
 			
 			.widget-form-airports__airportCode {
 				right: 29px;
+
+				@include adaptivity(phone) {
+					right: 17px;
+				}
 
 				&_withArrow {
 					right: 47px;

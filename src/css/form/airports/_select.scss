@@ -106,53 +106,6 @@
 		}
 	}
 
-	&.is-focused {
-		.Select {
-			&-control {
-				box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-				background-color: transparent;
-
-				@include adaptivity(phone) {
-					position: fixed;
-					top: $mobile-header-height;
-					left: 0;
-					right: 0;
-					z-index: 13;
-
-					.Select-input:not(input), .Select-placeholder {
-						height: $mobile-input-height;
-						display: flex;
-						align-items: center;
-					}
-
-					background-color: #fff;
-					box-shadow: none;
-					border-top: none;
-					border-left: none;
-					border-right: none;
-				}
-			}
-
-			&-menu {
-				&-outer {
-					@include adaptivity(phone) {
-						position: fixed;
-						top: $mobile-header-height + $mobile-input-height;
-						left: 0;
-						right: 0;
-						bottom: 0;
-
-						max-height: none;
-						border-left: none;
-						border-right: none;
-						border-bottom: none;
-						box-shadow: none;
-					}
-				}
-			}
-		}
-	}
-
 	&_loading {
 		background: url('/images/form/spinner.svg') no-repeat 90% center;
 		background-size: 20px;
@@ -172,7 +125,7 @@
 		left: 0;
 		top: 0;
 		bottom: 0;
-		right: 100px;
+		right: 70px;
 
 		display: flex;
 		align-items: center;
@@ -192,6 +145,108 @@
 
 			overflow: hidden;
 			text-overflow: ellipsis;
+		}
+		
+		&__placeholder {
+			@extend .Select-placeholder;
+			display: none;
+		}
+	}
+
+	&.is-focused {
+		.Select {
+			&-control {
+				box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+				background-color: transparent;
+
+				.widget-form-airports__select__value {
+					&__airportName, &__countryName {
+						display: none;
+					}
+
+					&__placeholder {
+						display: block;
+					}
+				}
+
+				@include adaptivity(phone) {
+					position: fixed;
+					top: 8px;
+					left: 50px;
+					right: 15px;
+					z-index: 13;
+					width: auto;
+					flex: 1;
+					display: flex;
+					height: $mobile-input-height;
+					line-height: normal;
+					
+					.Select-multi-value-wrapper {
+						width: 100%;
+					}
+
+					.widget-form-airports__select__value {
+						right: 0;
+					}
+					
+					.Select-arrow-zone {
+						display: none;
+					}
+
+					.Select-input:not(input), .Select-placeholder {
+						height: $mobile-input-height;
+						display: flex;
+						align-items: center;
+					}
+					
+					input {
+						line-height: normal;
+					}
+
+					background-color: #fff;
+					box-shadow: none;
+					border-top: none;
+					border-left: none;
+					border-right: none;
+				}
+			}
+
+			&-menu {
+				&-outer {
+					@include adaptivity(phone) {
+						position: fixed;
+						top: $mobile-header-height;
+						left: 0;
+						right: 0;
+						bottom: 0;
+
+						max-height: none;
+						border-left: none;
+						border-right: none;
+						border-bottom: none;
+						box-shadow: none;
+					}
+				}
+			}
+			
+			&-noresults {
+				@include adaptivity(not-phone) {
+					display: none;
+				}
+
+				display: block;
+				position: relative;
+
+				padding: 10px 15px;
+				line-height: 16px;
+				text-align: center;
+
+				background: #fff;
+				border-bottom: 1px solid #e6e6e6;
+				color: #b3b3b3;
+				font-size: 15px;
+				font-weight: 600;
+			}
 		}
 	}
 }

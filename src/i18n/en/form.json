@@ -6,6 +6,7 @@
 	"discountTitle": "I Have Discount Coupon",
 	"loyaltyCardTitle": "Redeem Miles",
 	"search": "Search",
+	"noResults": "Enter city or airport name",
 	"from": "From",
 	"to": "To",
 	"from_full": "Departure airport or city",

@@ -23,6 +23,7 @@ export function datepickerChange(date, dateType) {
 			
 			if (anotherDate && anotherDate.isBefore(date)) {
 				dispatch(selectDate(null, RETURN_DATE_TYPE));
+				dispatch(toggleDatePicker(false, RETURN_DATE_TYPE));
 			}
 		}
 		// Do the same thing if the selected departure date is `smaller` than the new return date.

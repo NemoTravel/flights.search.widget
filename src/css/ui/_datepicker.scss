@@ -350,5 +350,9 @@
 		&:after {
 			content: $icon-calendar;
 		}
+		
+		@include adaptivity(phone) {
+			font-size: 15px;
+		}
 	}
 }
