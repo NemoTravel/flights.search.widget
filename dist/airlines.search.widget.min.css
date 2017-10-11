@@ -4340,6 +4340,12 @@
   content: "\E90D";
 }
 
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker__calendar {
+    font-size: 15px;
+  }
+}
+
 .widget .widget-ui-dropdown__content_hidden {
   display: none;
 }
@@ -4768,6 +4774,12 @@
   cursor: pointer;
   padding-right: 35px;
   -webkit-appearance: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-dates .widget-ui-input {
+    padding-right: 30px;
+  }
 }
 
 .widget-form-dates__col.col {

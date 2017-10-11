@@ -1,8 +1,14 @@
+@import "../variables";
+
 &-dates {
 	.widget-ui-input {
 		cursor: pointer;
 		padding-right: 35px;
 		-webkit-appearance: none;
+		
+		@include adaptivity(phone) {
+			padding-right: 30px;
+		}
 	}
 	
 	&__col.col {
