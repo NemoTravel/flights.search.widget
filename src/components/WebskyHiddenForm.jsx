@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { nemoToWebskyPassTypes } from 'reducers/form/passengers';
-import { getPassengersArray } from 'selectors';
+import { webskyPassengers } from 'selectors/websky';
 
 /**
  * Websky engine requires real HTML-form submittion.
@@ -42,7 +42,7 @@ class WebskyHiddenForm extends Component {
 				<input 
 					key={index} 
 					type="hidden" 
-					name={`count-${nemoToWebskyPassTypes[passConfig.code]}`} 
+					name={`count-${passConfig.code}`} 
 					value={passConfig.count}
 				/>)
 			}
@@ -54,7 +54,7 @@ export default connect(
 	state => {
 		return {
 			...state,
-			passengersArray: getPassengersArray(state)
+			passengersArray: webskyPassengers(state)
 		};
 	}
 )(WebskyHiddenForm);
