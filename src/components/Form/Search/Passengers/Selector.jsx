@@ -28,8 +28,8 @@ export default class Selector extends Component {
 				key={i}
 				addPassenger={addPassenger}
 				removePassenger={removePassenger}
-				title={passenger.title}
-				ageTitle={passenger.ageTitle}
+				title={i18n('form', passenger.title)}
+				ageTitle={i18n('form', passenger.ageTitle)}
 				code={passenger.code}
 				count={passenger.count}
 				canAddPassenger={canIncrease}
@@ -64,8 +64,10 @@ export default class Selector extends Component {
 				title={i18n('form', 'passengersSelectHeader')} 
 				onClose={closeBlock}
 			/>
-
-			{this.renderCounters()}
+			
+			<div className="widget-form-passengers__items">
+				{this.renderCounters()}
+			</div>
 
 			<div className="widget-form-passengers__footer">
 				<div className="widget-form-passengers__footer__button" onClick={closeBlock}>

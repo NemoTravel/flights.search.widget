@@ -9,8 +9,7 @@ export default class MobileHeader extends Component {
 	};
 
 	shouldComponentUpdate(nextProps, nextState) {
-		const { title, onClose, className } = this.props;
-		return title !== nextProps.title || onClose !== nextProps.onClose || className !== nextProps.className;
+		return this.props.title !== nextProps.title || this.props.className !== nextProps.className;
 	}
 
 	render() {

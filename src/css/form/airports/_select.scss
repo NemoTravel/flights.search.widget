@@ -80,6 +80,7 @@
 
 			list-style-type: none;
 			background: #fff;
+			border-bottom: 1px solid #e6e6e6;
 			color: $font-color;
 			font-size: 15px;
 			font-weight: 400;
@@ -88,9 +89,11 @@
 			&:hover, &.is-focused {
 				background: rgba(0, 76, 186, 0.07);
 			}
-
-			&:not(:last-of-type) {
-				border-bottom: 1px solid #e6e6e6;
+			
+			&:last-of-type {
+				@include adaptivity(not-phone) {
+					border-bottom: none;
+				}
 			}
 		}
 	}
