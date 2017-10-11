@@ -3,6 +3,10 @@
 &-passengers {
 	position: relative;
 	
+	input {
+		text-transform: lowercase;
+	}
+	
 	&.form-group {
 		@include adaptivity(not-phone) {
 			margin-bottom: 0;
@@ -53,9 +57,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 0 11px;
-		height: 40px;
-		line-height: 40px;
+		padding: 7px 11px;
 		border-top: 1px solid #e6e6e6;
 
 		&_disabled {
@@ -63,9 +65,8 @@
 		}
 		
 		@include adaptivity(phone) {
-			height: 50px;
-			line-height: 50px;
-			
+			padding: 10px 15px;
+
 			&:last-of-type {
 				border-bottom: 1px solid #e6e6e6;
 			}
@@ -74,7 +75,6 @@
 
 	&__title {
 		font-weight: 600;
-		max-width: 70%;
 		overflow: hidden;
 		display: inline-block;
 		white-space: nowrap;
@@ -86,7 +86,9 @@
 			padding-left: 10px;
 
 			@include adaptivity(phone) {
-				font-size: 15px;
+				padding-left: 0;
+				display: block;
+				margin-top: 4px;
 			}
 		}
 	}
@@ -95,7 +97,6 @@
 		display: flex;
 		align-items: center;
 		font-weight: 600;
-		padding-left: 11px;
 	}
 
 	&__icon {
