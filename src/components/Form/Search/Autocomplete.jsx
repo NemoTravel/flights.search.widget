@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 import Option from 'components/Form/Search/Autocomplete/Option';
 import Value from 'components/Form/Search/Autocomplete/Value';
-import Select from 'components/Form/Search/Autocomplete/react-select-master/src/Select';
+import Select from 'react-select';
 import { i18n } from 'utils';
 
 export default class Autocomplete extends Component {
@@ -148,7 +148,7 @@ export default class Autocomplete extends Component {
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={option => <Option option={option}/>}
-					valueComponent={Value}
+					valueRenderer={value => <Value value={value} placeholder={this.placeholder}/>}
 					arrowRenderer={() => config.routingGrid ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,
