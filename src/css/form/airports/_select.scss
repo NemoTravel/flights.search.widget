@@ -106,7 +106,64 @@
 		}
 	}
 
+	&_loading {
+		background: url('/images/form/spinner.svg') no-repeat 90% center;
+		background-size: 20px;
+	}
+
+	&_focused {
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+		background-color: transparent;
+	}
+
+	&__wrapper {
+		position: relative;
+	}
+	
+	&__value {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 70px;
+
+		display: flex;
+		align-items: center;
+		padding-left: 13px;
+		white-space: nowrap;
+		
+		&__airportName, &__comma {
+			font-weight: 600;
+			font-size: 15px;
+			color: #666;
+		}
+		
+		&__countryName {
+			font-weight: 600;
+			font-size: 15px;
+			color: #b3b3b3;
+
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		
+		&__placeholder {
+			@extend .Select-placeholder;
+			display: none;
+		}
+	}
+
 	&.is-focused {
+		.widget-form-airports__select__value {
+			&__airportName, &__countryName {
+				display: none;
+			}
+			
+			&__placeholder {
+				display: block;
+			}
+		}
+		
 		.Select {
 			&-control {
 				box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
@@ -150,48 +207,6 @@
 					}
 				}
 			}
-		}
-	}
-
-	&_loading {
-		background: url('/images/form/spinner.svg') no-repeat 90% center;
-		background-size: 20px;
-	}
-
-	&_focused {
-		box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-		background-color: transparent;
-	}
-
-	&__wrapper {
-		position: relative;
-	}
-	
-	&__value {
-		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		right: 70px;
-
-		display: flex;
-		align-items: center;
-		padding-left: 13px;
-		white-space: nowrap;
-		
-		&__airportName, &__comma {
-			font-weight: 600;
-			font-size: 15px;
-			color: #666;
-		}
-		
-		&__countryName {
-			font-weight: 600;
-			font-size: 15px;
-			color: #b3b3b3;
-
-			overflow: hidden;
-			text-overflow: ellipsis;
 		}
 	}
 }

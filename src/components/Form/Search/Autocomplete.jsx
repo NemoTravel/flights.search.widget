@@ -148,7 +148,7 @@ export default class Autocomplete extends Component {
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={option => <Option option={option}/>}
-					valueComponent={Value}
+					valueRenderer={value => <Value value={value} placeholder={this.placeholder}/>}
 					arrowRenderer={() => config.routingGrid ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,

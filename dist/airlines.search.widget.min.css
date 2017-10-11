@@ -3415,6 +3415,7 @@
 }
 
 .widget .Select-placeholder,
+.widget .widget-form-airports__select__value__placeholder,
 .widget .Select--single > .Select-control .Select-value {
   bottom: 0;
   color: #aaa;
@@ -4444,7 +4445,8 @@
   color: #666 !important;
 }
 
-.widget-form-airports__select .Select-placeholder {
+.widget-form-airports__select .Select-placeholder,
+.widget-form-airports__select .widget-form-airports__select__value__placeholder {
   line-height: 38px;
   font-weight: 600;
   font-size: 15px;
@@ -4495,48 +4497,6 @@
   border-color: #ccc;
 }
 
-.widget-form-airports__select.is-focused .Select-control {
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  background-color: transparent;
-}
-
-@media only screen and (max-width: 650px) {
-  .widget-form-airports__select.is-focused .Select-control {
-    position: fixed;
-    top: 50px;
-    left: 0;
-    right: 0;
-    z-index: 13;
-    background-color: #fff;
-    box-shadow: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-  }
-
-  .widget-form-airports__select.is-focused .Select-control .Select-input:not(input),
-  .widget-form-airports__select.is-focused .Select-control .Select-placeholder {
-    height: 50px;
-    display: flex;
-    align-items: center;
-  }
-}
-
-@media only screen and (max-width: 650px) {
-  .widget-form-airports__select.is-focused .Select-menu-outer {
-    position: fixed;
-    top: 100px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    max-height: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
-    box-shadow: none;
-  }
-}
-
 .widget-form-airports__select_loading {
   background: url("/images/form/spinner.svg") no-repeat 90% center;
   background-size: 20px;
@@ -4576,6 +4536,62 @@
   color: #b3b3b3;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.widget-form-airports__select__value__placeholder {
+  display: none;
+}
+
+.widget-form-airports__select.is-focused .widget-form-airports__select__value__airportName,
+.widget-form-airports__select.is-focused .widget-form-airports__select__value__countryName {
+  display: none;
+}
+
+.widget-form-airports__select.is-focused .widget-form-airports__select__value__placeholder {
+  display: block;
+}
+
+.widget-form-airports__select.is-focused .Select-control {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-airports__select.is-focused .Select-control {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    z-index: 13;
+    background-color: #fff;
+    box-shadow: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+
+  .widget-form-airports__select.is-focused .Select-control .Select-input:not(input),
+  .widget-form-airports__select.is-focused .Select-control .Select-placeholder,
+  .widget-form-airports__select.is-focused .Select-control .widget-form-airports__select__value__placeholder {
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-airports__select.is-focused .Select-menu-outer {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    box-shadow: none;
+  }
 }
 
 .widget-form-airports__swap {
@@ -4752,6 +4768,7 @@
   }
 
   .widget-form-airports__col.col:last-of-type .Select-control .Select-placeholder,
+  .widget-form-airports__col.col:last-of-type .Select-control .widget-form-airports__select__value__placeholder,
   .widget-form-airports__col.col:last-of-type .Select-control .Select-input:not(input),
   .widget-form-airports__col.col:last-of-type .Select-control .widget-form-airports__select__value {
     padding-left: 20px !important;
@@ -5063,7 +5080,8 @@
 }
 
 .widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-form-airports__select__value,
-.widget-form_vertical .widget-form-airports__col.col:last-of-type .Select-placeholder {
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .Select-placeholder,
+.widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-form-airports__select__value__placeholder {
   padding-left: 13px !important;
 }
 
