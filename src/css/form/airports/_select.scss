@@ -154,32 +154,53 @@
 	}
 
 	&.is-focused {
-		.widget-form-airports__select__value {
-			&__airportName, &__countryName {
-				display: none;
-			}
-			
-			&__placeholder {
-				display: block;
-			}
-		}
-		
 		.Select {
 			&-control {
 				box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 				background-color: transparent;
 
+				.widget-form-airports__select__value {
+					&__airportName, &__countryName {
+						display: none;
+					}
+
+					&__placeholder {
+						display: block;
+					}
+				}
+
 				@include adaptivity(phone) {
 					position: fixed;
-					top: $mobile-header-height;
-					left: 0;
-					right: 0;
+					top: 8px;
+					left: 50px;
+					right: 15px;
 					z-index: 13;
+					width: auto;
+					flex: 1;
+					display: flex;
+					height: $mobile-input-height;
+					line-height: normal;
+					
+					.Select-multi-value-wrapper {
+						width: 100%;
+					}
+
+					.widget-form-airports__select__value {
+						right: 0;
+					}
+					
+					.Select-arrow-zone {
+						display: none;
+					}
 
 					.Select-input:not(input), .Select-placeholder {
 						height: $mobile-input-height;
 						display: flex;
 						align-items: center;
+					}
+					
+					input {
+						line-height: normal;
 					}
 
 					background-color: #fff;
@@ -194,7 +215,7 @@
 				&-outer {
 					@include adaptivity(phone) {
 						position: fixed;
-						top: $mobile-header-height + $mobile-input-height;
+						top: $mobile-header-height;
 						left: 0;
 						right: 0;
 						bottom: 0;

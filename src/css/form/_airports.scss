@@ -28,7 +28,7 @@
 	&__underlay {
 		display: none;
 		position: fixed;
-		top: $mobile-input-height + $mobile-header-height;
+		top: $mobile-header-height;
 		left: 0;
 		bottom: 0;
 		right: 0;
