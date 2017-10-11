@@ -6,6 +6,7 @@ import Option from 'components/Form/Search/Autocomplete/Option';
 import Value from 'components/Form/Search/Autocomplete/Value';
 import Select from 'react-select';
 import { i18n } from 'utils';
+import { MODE_WEBSKY } from 'state';
 
 export default class Autocomplete extends Component {
 	constructor(props) {
@@ -34,7 +35,7 @@ export default class Autocomplete extends Component {
 	fetchSuggestions(searchText = '') {
 		const { sendAutocompleteRequest, system } = this.props;
 		
-		if (searchText || system.routingGrid) {
+		if (searchText || system.routingGrid || system.mode === MODE_WEBSKY) {
 			// We don't want to harass servers too much.
 			clearTimeout(this.autocompleteTimeout);
 			
