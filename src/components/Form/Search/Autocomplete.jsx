@@ -17,6 +17,7 @@ export default class Autocomplete extends Component {
 		this.autocompleteWaitTime = 200;
 		this.state = { isFocused: false };
 		this.type = null;
+		this.isGridMode = props.system.routingGrid || props.system.mode === MODE_WEBSKY;
 		this.placeholder = '';
 		this.mobileTitle = '';
 		this.defaultErrorText = '';
@@ -24,6 +25,7 @@ export default class Autocomplete extends Component {
 
 		this.fetchSuggestions = this.fetchSuggestions.bind(this);
 		this.onChangeHandler = this.onChangeHandler.bind(this);
+		this.onFocusHandler = this.onFocusHandler.bind(this);
 		this.selectOption = this.selectOption.bind(this);
 	}
 
@@ -33,9 +35,9 @@ export default class Autocomplete extends Component {
 	 * @param {String} searchText
 	 */
 	fetchSuggestions(searchText = '') {
-		const { sendAutocompleteRequest, system } = this.props;
+		const { sendAutocompleteRequest } = this.props;
 		
-		if (searchText || system.routingGrid || system.mode === MODE_WEBSKY) {
+		if (searchText || this.isGridMode) {
 			// We don't want to harass servers too much.
 			clearTimeout(this.autocompleteTimeout);
 			
@@ -52,8 +54,16 @@ export default class Autocomplete extends Component {
 	 * @param {String} searchString
 	 */
 	onChangeHandler(searchString) {
-		this.fetchSuggestions(searchString);
+		if (!this.isGridMode) {
+			this.fetchSuggestions(searchString);
+		}
+		
 		return searchString;
+	}
+	
+	onFocusHandler() {
+		this.setState({ isFocused: true });
+		this.fetchSuggestions();
 	}
 
 	/**
@@ -62,11 +72,11 @@ export default class Autocomplete extends Component {
 	 * @returns {*}
 	 */
 	renderAirportCode() {
-		const { airport, isLoading, system } = this.props;
+		const { airport, isLoading } = this.props;
 		
 		const className = classnames(
 			'widget-form-airports__airportCode',
-			{ 'widget-form-airports__airportCode_withArrow': system.routingGrid }
+			{ 'widget-form-airports__airportCode_withArrow': this.isGridMode }
 		);
 		
 		return airport && !isLoading ? <span className={className}>{airport.IATA}</span> : null;
@@ -140,20 +150,17 @@ export default class Autocomplete extends Component {
 					onInputChange={this.onChangeHandler}
 					placeholder={this.placeholder}
 					onChange={this.selectOption}
-					onFocus={() => {
-						this.setState({ isFocused: true });
-						this.fetchSuggestions();
-					}}
+					onFocus={this.onFocusHandler}
 					onBlur={() => {
 						this.props.changeAutocompleteSuggestions([], this.type);
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={option => <Option option={option}/>}
 					valueRenderer={value => <Value value={value} placeholder={this.placeholder}/>}
-					arrowRenderer={() => config.routingGrid ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
+					arrowRenderer={() => this.isGridMode ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,
-						readOnly: config.readOnlyAutocomplete && config.routingGrid,
+						readOnly: config.readOnlyAutocomplete && this.isGridMode,
 					}}
 				/>
 
