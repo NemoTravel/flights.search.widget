@@ -7,7 +7,7 @@ import { getStore, cacheState } from 'store';
 import './css/main.scss';
 import 'whatwg-fetch';
 
-export const Widget = WidgetComponent;
+export default WidgetComponent;
 
 /**
  * This will be exported to the global scope as `AirlinesSearchWidget.init`.
