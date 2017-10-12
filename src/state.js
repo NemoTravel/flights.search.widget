@@ -1,7 +1,6 @@
 import { autocompleteAirportReducer } from 'reducers/form/autocomplete';
 import { selectDateReducer, toggleDatepickerReducer } from 'reducers/form/dates';
 import moment from 'moment';
-import { i18n } from 'utils';
 
 export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';

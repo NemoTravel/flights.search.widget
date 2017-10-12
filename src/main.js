@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from 'components/Main';
+import WidgetComponent from 'components/Widget';
 import { Provider } from 'react-redux';
 import { getStore, cacheState } from 'store';
 import './css/main.scss';
 import 'whatwg-fetch';
+
+export const Widget = WidgetComponent;
 
 /**
  * This will be exported to the global scope as `AirlinesSearchWidget.init`.

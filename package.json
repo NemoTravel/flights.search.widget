@@ -2,7 +2,7 @@
   "name": "airlines-search-widget",
   "version": "0.0.1",
   "description": "Search form for searching tickets",
-  "main": "index.js",
+  "main": "dist/airlines.search.widget.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.js",
