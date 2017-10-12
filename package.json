@@ -49,6 +49,7 @@
     "why-did-you-update": "0.0.8"
   },
   "dependencies": {
+    "@nemo.travel/react-datepicker": "^0.55.1",
     "babel-runtime": "^6.26.0",
     "bootstrap": "^4.0.0-beta",
     "classnames": "^2.2.5",

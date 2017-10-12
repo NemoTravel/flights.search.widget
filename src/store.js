@@ -8,13 +8,33 @@ import { configReducer } from 'reducers/system';
 
 let middlewares = [thunk];
 
-// Include redux-logger in development mode.
-if (process.env.NODE_ENV !== 'production') {
-	// const logger = require('redux-logger').default;
-	// middlewares.push(logger);
+function enableProfiler(isEnabled = false) {
+	if (isEnabled) {
+		/* eslint-disable-next-line no-unused-vars,react/no-deprecated */
+		let createClass = React.createClass;
 
-	// const { whyDidYouUpdate } = require('why-did-you-update');
-	// whyDidYouUpdate(React);
+		Object.defineProperty(React, 'createClass', {
+			set: (nextCreateClass) => {
+				createClass = nextCreateClass;
+			},
+		});
+
+		/* eslint-disable no-unused-vars */
+		const {whyDidYouUpdate} = require('why-did-you-update');
+		whyDidYouUpdate(React);
+	}
+}
+
+function enableReduxLogger(isEnabled = false) {
+	if (isEnabled) {
+		const logger = require('redux-logger').default;
+		middlewares.push(logger);
+	}
+}
+
+if (process.env.NODE_ENV !== 'production') {
+	enableReduxLogger(false);
+	enableProfiler(false);
 }
 
 const STORE_CACHE_KEY = 'cached_store';
