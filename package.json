@@ -1,14 +1,15 @@
 {
-  "name": "airlines-search-widget",
-  "version": "0.0.1",
+  "name": "@nemo.travel/search-widget",
+  "version": "0.1.2",
   "description": "Search form for searching tickets",
-  "main": "index.js",
+  "main": "dist/airlines.search.widget.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.js",
     "build": "NODE_ENV=production webpack",
     "build-dev": "NODE_ENV=dev webpack",
-    "dev": "run-p build-dev server"
+    "dev": "run-p build-dev server",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
     "why-did-you-update": "0.0.8"
   },
   "dependencies": {
+    "@nemo.travel/react-datepicker": "^0.55.1",
     "babel-runtime": "^6.26.0",
     "bootstrap": "^4.0.0-beta",
     "classnames": "^2.2.5",
