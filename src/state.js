@@ -8,6 +8,7 @@ export const MODE_WEBSKY = 'WEBSKY';
 export const systemState = {
 	rootElement: null,
 	baseURL: '',
+	nemoURL: '',
 	routingGrid: null,
 	locale: 'en',
 	verticalForm: false,

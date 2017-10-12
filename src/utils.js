@@ -16,6 +16,28 @@ const encode = (object) => {
 
 export const clearURL = url => url.trim().replace(/^\/|\/$/g, '');
 
+export const encodeURLParams = (params) => {
+	let result = '',
+		numOfParams = Object.keys(params).length,
+		i = 1;
+
+	if (numOfParams) {
+		for (const paramName in params) {
+			if (params.hasOwnProperty(paramName)) {
+				result += `${paramName}=${params[paramName]}`;
+
+				if (i !== numOfParams) {
+					result += '&';
+				}
+
+				i++;
+			}
+		}
+	}
+	
+	return result;
+};
+
 /**
  * Create URL string with params.
  * 
@@ -25,23 +47,10 @@ export const clearURL = url => url.trim().replace(/^\/|\/$/g, '');
  */
 export const URL = (root, params = {}) => {
 	let result = clearURL(root),
-		numOfParams = Object.keys(params).length,
-		i = 1;
+		encodedParams = encodeURLParams(params);
 	
-	if (numOfParams) {
-		result += '?';
-		
-		for (const paramName in params) {
-			if (params.hasOwnProperty(paramName)) {
-				result += `${paramName}=${params[paramName]}`;
-				
-				if (i !== numOfParams) {
-					result += '&';
-				}
-
-				i++;
-			}
-		}
+	if (encodedParams) {
+		result += '?' + encodedParams;
 	}
 	
 	return result;
