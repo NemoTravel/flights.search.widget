@@ -11,18 +11,18 @@ class WebskyHiddenForm extends Component {
 		
 		const renderOWBlock = () => {
 			return [
-				<input key={1} type="hidden" name="origin-city-code[0]" value={form.autocomplete.departure.airport.IATA} />,
-				<input key={2} type="hidden" name="destination-city-code[0]" value={form.autocomplete.arrival.airport.IATA} />,
-				<input key={3} type="hidden" name="date[0]" value={form.dates.departure.date.format('DD.MM.YYYY')} />
+				<input key={1} type="hidden" name="origin-city-code[0]" value={form.autocomplete.departure.airport ? form.autocomplete.departure.airport.IATA : ''} />,
+				<input key={2} type="hidden" name="destination-city-code[0]" value={form.autocomplete.arrival.airport ? form.autocomplete.arrival.airport.IATA : ''} />,
+				<input key={3} type="hidden" name="date[0]" value={form.dates.departure.date ? form.dates.departure.date.format('DD.MM.YYYY') : ''} />
 			];
 		};
 		
 		const renderRTBlock = () => {
 			if (form.dates.return.date) {
 				return [
-					<input key={1} type="hidden" name="origin-city-code[1]" value={form.autocomplete.arrival.airport.IATA}/>,
-					<input key={2} type="hidden" name="destination-city-code[1]" value={form.autocomplete.departure.airport.IATA}/>,
-					<input key={3} type="hidden" name="date[1]" value={form.dates.return.date.format('DD.MM.YYYY')}/>
+					<input key={1} type="hidden" name="origin-city-code[1]" value={form.autocomplete.arrival.airport ? form.autocomplete.arrival.airport.IATA : ''}/>,
+					<input key={2} type="hidden" name="destination-city-code[1]" value={form.autocomplete.departure.airport ? form.autocomplete.departure.airport.IATA : ''}/>,
+					<input key={3} type="hidden" name="date[1]" value={form.dates.return.date ? form.dates.return.date.format('DD.MM.YYYY') : ''}/>
 				];
 			}
 			else {

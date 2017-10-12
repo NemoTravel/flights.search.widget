@@ -59,29 +59,23 @@ export function selectAirport(airport, autocompleteType) {
 	};
 }
 
-function runWebskyAutocomplete(dispatch, getState, IATA, autocompleteType) {
-	const state = getState();
-	
+/**
+ * Running autocomplete request itself.
+ * 
+ * @param {String} requestURL
+ * @param {Function} dispatch
+ * @param {String} autocompleteType
+ * @param {String} mode
+ */
+function runAutocomplete({ requestURL, dispatch, autocompleteType, mode }) {
 	dispatch(startAutocompleteLoading(autocompleteType));
 	
-	const searchType = autocompleteType === 'arrival' ? 'destination' : 'origin';
-	let requestURL = `/json/dependence-cities`;
-
-	fetch(requestURL, 
-		{
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'	
-			},
-			body: encodeURLParams({
-				returnPoints: searchType,
-				isBooking: true,
-				cityCode: IATA
-			})
-		})
+	fetch(requestURL)
 		.then(response => response.json())
 		.then(response => {
-			const options = parseWebskyAutocompleteOptions(response, searchType, state.system.locale);
+			const options = mode === MODE_WEBSKY ? 
+				parseWebskyAutocompleteOptions(response) :
+				parseNemoAutocompleteOptions(response);
 	
 			if (options) {
 				dispatch(changeAutocompleteSuggestions(options, autocompleteType));
@@ -95,10 +89,42 @@ function runWebskyAutocomplete(dispatch, getState, IATA, autocompleteType) {
 		});
 }
 
+/**
+ * Preparing request for Websky environment.
+ * 
+ * @param {Function} dispatch
+ * @param {Function} getState
+ * @param {String} IATA
+ * @param {String} autocompleteType
+ */
+function runWebskyAutocomplete(dispatch, getState, IATA, autocompleteType) {
+	const state = getState();
+	const searchType = autocompleteType === 'arrival' ? 'arr' : 'dep';
+	
+	let requestURL = `${clearURL(state.system.nemoURL)}/api/proxy/websky/cities/${IATA}/${searchType}`;
+	let requestParams = {
+		apilang: state.system.locale,
+		webskyURL: encodeURIComponent(state.system.baseURL)
+	};
+
+	runAutocomplete({
+		requestURL: URL(requestURL, requestParams),
+		dispatch,
+		autocompleteType,
+		mode: state.system.mode
+	});
+}
+
+/**
+ * Preparing request for Nemo environment.
+ * 
+ * @param {Function} dispatch
+ * @param {Function} getState
+ * @param {String} searchText
+ * @param {String} autocompleteType
+ */
 function runNemoAutocomplete(dispatch, getState, searchText, autocompleteType) {
 	const state = getState();
-	
-	dispatch(startAutocompleteLoading(autocompleteType));
 
 	let requestURL = `${clearURL(state.system.baseURL)}/api/guide/autocomplete/iata/${searchText}`;
 	let requestParams = {
@@ -113,23 +139,21 @@ function runNemoAutocomplete(dispatch, getState, searchText, autocompleteType) {
 		requestParams.airlineIATA = state.system.routingGrid;
 	}
 
-	fetch(URL(requestURL, requestParams))
-		.then(response => response.json())
-		.then(response => {
-			const options = parseNemoAutocompleteOptions(response);
-	
-			if (options) {
-				dispatch(changeAutocompleteSuggestions(options, autocompleteType));
-			}
-	
-			dispatch(finishAutocompleteLoading(autocompleteType));
-		})
-		.catch(() => {
-			dispatch(changeAutocompleteSuggestions([], autocompleteType));
-			dispatch(finishAutocompleteLoading(autocompleteType));
-		});
+	runAutocomplete({
+		requestURL: URL(requestURL, requestParams),
+		dispatch,
+		autocompleteType,
+		mode: state.system.mode
+	});
 }
 
+/**
+ * Send request for getting autocomplete options.
+ * 
+ * @param {String} searchText
+ * @param {String} autocompleteType
+ * @returns {Function}
+ */
 export function sendAutocompleteRequest(searchText, autocompleteType) {
 	return (dispatch, getState) => getState().system.mode === MODE_WEBSKY ? 
 		runWebskyAutocomplete(dispatch, getState, searchText, autocompleteType) : 
