@@ -1,4 +1,6 @@
-<div style="text-align: center"><img width="200" src="http://mjolnir.com.ua/kcfinder/upload/images/logo.jpg"></div>
+<p align="center">
+    <img width="200" src="http://mjolnir.com.ua/kcfinder/upload/images/logo.jpg">
+</p>
 
 # Airlines Search Widget
 
