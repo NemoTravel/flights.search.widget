@@ -171,7 +171,7 @@
 
 				@include adaptivity(phone) {
 					position: fixed;
-					top: 8px;
+					top: ($mobile-header-height - $mobile-input-height) / 2;
 					left: 50px;
 					right: 15px;
 					z-index: 13;
@@ -213,6 +213,8 @@
 
 			&-menu {
 				&-outer {
+					margin-top: 0;
+					
 					@include adaptivity(phone) {
 						position: fixed;
 						top: $mobile-header-height;

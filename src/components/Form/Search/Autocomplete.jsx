@@ -6,7 +6,6 @@ import Option from 'components/Form/Search/Autocomplete/Option';
 import Value from 'components/Form/Search/Autocomplete/Value';
 import Select from 'react-select';
 import { i18n } from 'utils';
-import { MODE_WEBSKY } from 'state';
 
 export default class Autocomplete extends Component {
 	constructor(props) {
@@ -17,7 +16,7 @@ export default class Autocomplete extends Component {
 		this.autocompleteWaitTime = 200;
 		this.state = { isFocused: false };
 		this.type = null;
-		this.isGridMode = props.system.routingGrid || props.system.mode === MODE_WEBSKY;
+		this.isGridMode = props.isGridMode;
 		this.placeholder = '';
 		this.mobileTitle = '';
 		this.defaultErrorText = '';
@@ -114,7 +113,7 @@ export default class Autocomplete extends Component {
 	}
 	
 	render() {
-		const { suggestions, isLoading, system:config, airport, showErrors, sameAirportsError } = this.props;
+		const { suggestions, isLoading, airport, showErrors, sameAirportsError, readOnly } = this.props;
 		
 		const selectedValue = airport ? {
 			label: airport.name,
@@ -160,7 +159,7 @@ export default class Autocomplete extends Component {
 					arrowRenderer={() => this.isGridMode ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,
-						readOnly: config.readOnlyAutocomplete && this.isGridMode,
+						readOnly: readOnly && this.isGridMode,
 					}}
 				/>
 

@@ -7,8 +7,10 @@ export default class Departure extends Autocomplete {
 	static propTypes = {
 		isLoading: PropTypes.bool,
 		suggestions: PropTypes.array,
+		sameAirportsError: PropTypes.bool,
 		airport: PropTypes.object,
-		system: PropTypes.object.isRequired,
+		readOnly: PropTypes.bool,
+		isGridMode: PropTypes.bool,
 		showErrors: PropTypes.bool.isRequired,
 		changeAutocompleteSuggestions: PropTypes.func.isRequired,
 		sendAutocompleteRequest: PropTypes.func.isRequired,

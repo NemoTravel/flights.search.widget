@@ -28,10 +28,11 @@ export default class Datepicker extends Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		const { isActive, date, highlightDates, specialDate, showErrors } = this.props;
+		const { isActive, date, highlightDates, specialDate, showErrors, locale } = this.props;
 		
 		return isActive !== nextProps.isActive || 
 			date !== nextProps.date ||
+			locale !== nextProps.locale ||
 			specialDate !== nextProps.specialDate ||
 			showErrors !== nextProps.showErrors || 
 			highlightDates !== nextProps.highlightDates;

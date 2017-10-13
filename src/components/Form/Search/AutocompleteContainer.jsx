@@ -5,6 +5,7 @@ import * as autocompleteActions from 'actions/autocomplete';
 import DepartureAutocomplete from 'components/Form/Search/Autocomplete/Departure';
 import ArrivalAutocomplete from 'components/Form/Search/Autocomplete/Arrival';
 import { getDepartureOptions, getArrivalOptions } from 'selectors/form';
+import { MODE_WEBSKY } from 'state';
 
 class AutocompleteContainer extends Component {
 	render() {
@@ -35,7 +36,6 @@ class AutocompleteContainer extends Component {
 		
 		return <div className="form-group row widget-form-airports">
 			<DepartureAutocomplete
-				system={system}
 				showErrors={showErrors}
 				sameAirportsError={sameAirportsError}
 				isLoading={departureAutocomplete.isLoading}
@@ -44,6 +44,8 @@ class AutocompleteContainer extends Component {
 				swapAirports={swapAirports}
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 				sendAutocompleteRequest={sendAutocompleteRequest}
+				isGridMode={system.routingGrid || system.mode === MODE_WEBSKY}
+				readOnly={system.readOnlyAutocomplete}
 				selectAirport={(airport, autocompleteType) => {
 					selectAirport(airport, autocompleteType);
 
@@ -54,7 +56,6 @@ class AutocompleteContainer extends Component {
 			/>
 			
 			<ArrivalAutocomplete
-				system={system}
 				showErrors={showErrors}
 				sameAirportsError={sameAirportsError}
 				isLoading={arrivalAutocomplete.isLoading}
@@ -64,6 +65,8 @@ class AutocompleteContainer extends Component {
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				selectAirport={selectAirport}
+				isGridMode={system.routingGrid || system.mode === MODE_WEBSKY}
+				readOnly={system.readOnlyAutocomplete}
 				getRef={(input) => this.arrivalInput = input}
 			/>
 		</div>
