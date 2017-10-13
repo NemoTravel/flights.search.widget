@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.js",
-    "build": "NODE_ENV=production webpack",
-    "build-dev": "NODE_ENV=dev webpack",
+    "build": "cross-env NODE_ENV=production webpack",
+    "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
     "prepublish": "npm run build"
   },
@@ -33,6 +33,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "compression": "^1.7.0",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
