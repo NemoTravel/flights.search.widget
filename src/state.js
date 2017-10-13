@@ -117,14 +117,23 @@ export const fillStateFromCache = (state, stateFromCache) => {
 			if (stateFromCache.form.dates) {
 				const cachedDepartureDate = stateFromCache.form.dates.departure;
 				const cachedReturnDate = stateFromCache.form.dates.return;
+				const today = moment().startOf('day');
 
 				if (cachedDepartureDate && cachedDepartureDate.date) {
-					state.form.dates.departure = selectDateReducer(cachedDepartureDate, moment(cachedDepartureDate.date).locale(state.system.locale));
+					const newDepartureDate = moment(cachedDepartureDate.date).locale(state.system.locale);
+					
+					if (newDepartureDate.isSameOrAfter(today)) {
+						state.form.dates.departure = selectDateReducer(cachedDepartureDate, newDepartureDate);
+					}
 				}
 
 				if (cachedReturnDate && cachedReturnDate.date) {
-					state.form.dates.return = toggleDatepickerReducer(cachedReturnDate, true);
-					state.form.dates.return = selectDateReducer(cachedReturnDate, moment(cachedReturnDate.date).locale(state.system.locale));
+					const newReturnDate = moment(cachedReturnDate.date).locale(state.system.locale);
+					
+					if (newReturnDate.isSameOrAfter(today)) {
+						state.form.dates.return = toggleDatepickerReducer(cachedReturnDate, true);
+						state.form.dates.return = selectDateReducer(cachedReturnDate, newReturnDate);
+					}
 				}
 			}
 
