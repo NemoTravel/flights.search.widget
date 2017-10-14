@@ -16,7 +16,6 @@ export default class Autocomplete extends Component {
 		this.autocompleteWaitTime = 200;
 		this.state = { isFocused: false };
 		this.type = null;
-		this.isGridMode = props.isGridMode;
 		this.placeholder = '';
 		this.mobileTitle = '';
 		this.defaultErrorText = '';
@@ -36,7 +35,7 @@ export default class Autocomplete extends Component {
 	fetchSuggestions(searchText = '') {
 		const { sendAutocompleteRequest } = this.props;
 		
-		if (searchText || this.isGridMode) {
+		if (searchText || this.props.isGridMode) {
 			// We don't want to harass servers too much.
 			clearTimeout(this.autocompleteTimeout);
 			
@@ -53,7 +52,7 @@ export default class Autocomplete extends Component {
 	 * @param {String} searchString
 	 */
 	onChangeHandler(searchString) {
-		if (!this.isGridMode) {
+		if (!this.props.isGridMode) {
 			this.fetchSuggestions(searchString);
 		}
 		
@@ -75,7 +74,7 @@ export default class Autocomplete extends Component {
 		
 		const className = classnames(
 			'widget-form-airports__airportCode',
-			{ 'widget-form-airports__airportCode_withArrow': this.isGridMode }
+			{ 'widget-form-airports__airportCode_withArrow': this.props.isGridMode }
 		);
 		
 		return airport && !isLoading ? <span className={className}>{airport.IATA}</span> : null;
@@ -102,11 +101,13 @@ export default class Autocomplete extends Component {
 	}
 	
 	shouldComponentUpdate(nextProps, nextState) {
-		const { showErrors, suggestions, isLoading, airport, sameAirportsError } = this.props;
+		const { showErrors, suggestions, isLoading, airport, sameAirportsError, isGridMode, readOnly } = this.props;
 		
 		return this.state.isFocused !== nextState.isFocused ||
 			showErrors !== nextProps.showErrors ||
 			sameAirportsError !== nextProps.sameAirportsError ||
+			isGridMode !== nextProps.isGridMode ||
+			readOnly !== nextProps.readOnly ||
 			suggestions !== nextProps.suggestions ||
 			airport !== nextProps.airport ||
 			isLoading !== nextProps.isLoading;
@@ -142,7 +143,7 @@ export default class Autocomplete extends Component {
 					noResultsText={i18n('form', 'noResults')}
 					openOnFocus={true}
 					backspaceRemoves={false}
-					className="widget-form-airports__select"
+					className={classnames('widget-form-airports__select', { 'widget-form-airports__select_readOnly': readOnly && this.props.isGridMode })}
 					value={selectedValue}
 					options={suggestions}
 					isLoading={isLoading}
@@ -156,10 +157,10 @@ export default class Autocomplete extends Component {
 					}}
 					optionRenderer={option => <Option option={option}/>}
 					valueRenderer={value => <Value value={value} placeholder={this.placeholder}/>}
-					arrowRenderer={() => this.isGridMode ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
+					arrowRenderer={() => this.props.isGridMode ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,
-						readOnly: readOnly && this.isGridMode,
+						readOnly: readOnly && this.props.isGridMode,
 					}}
 				/>
 

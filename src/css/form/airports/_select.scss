@@ -41,6 +41,10 @@
 				font-weight: 600;
 				font-size: 15px;
 				color: #666 !important;
+				
+				&[readonly] {
+					cursor: pointer;
+				}
 			}
 		}
 
@@ -249,6 +253,12 @@
 				font-size: 15px;
 				font-weight: 600;
 			}
+		}
+	}
+	
+	&_readOnly {
+		.Select-placeholder {
+			cursor: pointer;
 		}
 	}
 }

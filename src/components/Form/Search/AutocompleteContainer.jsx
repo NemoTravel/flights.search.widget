@@ -44,7 +44,7 @@ class AutocompleteContainer extends Component {
 				swapAirports={swapAirports}
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 				sendAutocompleteRequest={sendAutocompleteRequest}
-				isGridMode={system.routingGrid || system.mode === MODE_WEBSKY}
+				isGridMode={!!system.routingGrid || system.mode === MODE_WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
 				selectAirport={(airport, autocompleteType) => {
 					selectAirport(airport, autocompleteType);
@@ -65,7 +65,7 @@ class AutocompleteContainer extends Component {
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				selectAirport={selectAirport}
-				isGridMode={system.routingGrid || system.mode === MODE_WEBSKY}
+				isGridMode={!!system.routingGrid || system.mode === MODE_WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
 				getRef={(input) => this.arrivalInput = input}
 			/>
