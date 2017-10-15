@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import onClickOutside from 'react-onclickoutside';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
 
 class Dropdown extends PureComponent {
 	static propTypes = {
@@ -13,9 +14,6 @@ class Dropdown extends PureComponent {
 		super(props);
 
 		this.state = { isVisible: false };
-
-		this.toggleContent = this.toggleContent.bind(this);
-		this.handleClickOutside = this.handleClickOutside.bind(this);
 	}
 
 	/**
@@ -23,6 +21,7 @@ class Dropdown extends PureComponent {
 	 * 
 	 * @see https://github.com/Pomax/react-onclickoutside
 	 */
+	@autobind
 	handleClickOutside() {
 		this.setState({
 			isVisible: false
@@ -32,6 +31,7 @@ class Dropdown extends PureComponent {
 	/**
 	 * Hide/show dropdown content.
 	 */
+	@autobind
 	toggleContent() {
 		this.setState({
 			isVisible: !this.state.isVisible

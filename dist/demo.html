@@ -3,32 +3,48 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>Search form</title>
+	<title>Demo</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" href="airlines.search.widget.min.css">
 	<style>
 		* {
 			padding: 0;
 			margin: 0;
 		}
-		
+
 		html, body {
 			width: 100%;
 			height: 100%;
 		}
-		
+
 		html {
 			font-size: 16px;
 		}
-		
+
 		body {
 			background-color: #333333;
 		}
 		
+		.nemo-widget-demo {
+			background: #f2f2f2;
+			padding: 15px;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.nemo-widget-demo h3 {
+			margin-bottom: 20px;
+		}
+		
+		.nemo-widget-demo label {
+			display: block;
+		}
+
 		.container {
 			width: 100%;
 			margin: 0 auto;
 			padding-top: 50px;
 		}
-		
+
 		.nemo-widget-testWrapper {
 			width: 100%;
 		}
@@ -40,7 +56,6 @@
 		}
 	</style>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=cyrillic" rel="stylesheet">
-	<link rel="stylesheet" href="airlines.search.widget.min.css">
 </head>
 <body>
 
@@ -50,18 +65,7 @@
 
 <script src="airlines.search.widget.min.js"></script>
 <script>
-	AirlinesSearchWidget.init({
-		rootElement: document.getElementById('root'),
-		nemoURL: 'http://widget.mlsd.ru',
-//		baseURL: 'http://demo.websky.aero/gru',
-//		nemoURL: 'http://widget.mlsd.ru',
-		readOnlyAutocomplete: false,
-		locale: 'ru',
-		verticalForm: false,
-//		mode: 'WEBSKY',
-		mode: 'NEMO',
-//		routingGrid: 'SU'
-	});
+	AirlinesSearchWidget.initDemo();
 </script>
 </body>
 </html>

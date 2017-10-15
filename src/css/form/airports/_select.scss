@@ -41,6 +41,10 @@
 				font-weight: 600;
 				font-size: 15px;
 				color: #666 !important;
+				
+				&[readonly] {
+					cursor: pointer;
+				}
 			}
 		}
 
@@ -167,6 +171,17 @@
 					&__placeholder {
 						display: block;
 					}
+					
+					&_readOnly {
+						.widget-form-airports__select__value__placeholder {
+							display: none;
+						}
+						
+						.widget-form-airports__select__value__airportName,
+						.widget-form-airports__select__value__countryName {
+							display: block;
+						}
+					}
 				}
 
 				@include adaptivity(phone) {
@@ -249,6 +264,12 @@
 				font-size: 15px;
 				font-weight: 600;
 			}
+		}
+	}
+	
+	&_readOnly {
+		.Select-placeholder {
+			cursor: pointer;
 		}
 	}
 }

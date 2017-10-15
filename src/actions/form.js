@@ -25,7 +25,7 @@ export function showErrors(showErrors) {
 }
 
 function runNemoSearch(state) {
-	let requestURL = clearURL(state.system.baseURL) + '/results/';
+	let requestURL = clearURL(state.system.nemoURL) + '/results/';
 
 	// Departure airport info.
 	requestURL += state.form.autocomplete.departure.airport.isCity ? 'c' : 'a';

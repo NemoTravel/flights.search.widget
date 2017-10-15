@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from 'components/Main';
+import DemoForm from 'components/Demo';
 import { Provider } from 'react-redux';
 import { getStore, cacheState } from 'store';
 import './css/main.scss';
@@ -11,7 +12,7 @@ import 'whatwg-fetch';
  */
 export function init(config = {}) {
 	if (!config.rootElement) { throw Error('Please specify `rootElement` parameter in the configuration object.'); }
-	if (!config.baseURL) { throw Error('Please specify `baseURL` parameter in the configuration object.'); }
+	if (!config.nemoURL) { throw Error('Please specify `nemoURL` parameter in the configuration object.'); }
 	
 	const store = getStore(config);
 
@@ -24,4 +25,11 @@ export function init(config = {}) {
 
 	// Subscribe to new state updates and cache new state.
 	store.subscribe(() => cacheState(store.getState()));
+}
+
+export function initDemo() {
+	ReactDOM.render(
+		<DemoForm/>,
+		document.getElementById('root')
+	);
 }

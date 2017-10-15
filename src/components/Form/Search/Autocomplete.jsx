@@ -6,6 +6,7 @@ import Option from 'components/Form/Search/Autocomplete/Option';
 import Value from 'components/Form/Search/Autocomplete/Value';
 import Select from 'react-select';
 import { i18n } from 'utils';
+import autobind from 'autobind-decorator';
 
 export default class Autocomplete extends Component {
 	constructor(props) {
@@ -16,16 +17,10 @@ export default class Autocomplete extends Component {
 		this.autocompleteWaitTime = 200;
 		this.state = { isFocused: false };
 		this.type = null;
-		this.isGridMode = props.isGridMode;
 		this.placeholder = '';
 		this.mobileTitle = '';
 		this.defaultErrorText = '';
 		this.sameAirportsErrorText = i18n('form', 'sameAirportsError');
-
-		this.fetchSuggestions = this.fetchSuggestions.bind(this);
-		this.onChangeHandler = this.onChangeHandler.bind(this);
-		this.onFocusHandler = this.onFocusHandler.bind(this);
-		this.selectOption = this.selectOption.bind(this);
 	}
 
 	/**
@@ -33,10 +28,11 @@ export default class Autocomplete extends Component {
 	 * 
 	 * @param {String} searchText
 	 */
+	@autobind
 	fetchSuggestions(searchText = '') {
 		const { sendAutocompleteRequest } = this.props;
 		
-		if (searchText || this.isGridMode) {
+		if (searchText || this.props.isGridMode) {
 			// We don't want to harass servers too much.
 			clearTimeout(this.autocompleteTimeout);
 			
@@ -52,14 +48,16 @@ export default class Autocomplete extends Component {
 	 * 
 	 * @param {String} searchString
 	 */
+	@autobind
 	onChangeHandler(searchString) {
-		if (!this.isGridMode) {
+		if (!this.props.isGridMode) {
 			this.fetchSuggestions(searchString);
 		}
 		
 		return searchString;
 	}
-	
+
+	@autobind
 	onFocusHandler() {
 		this.setState({ isFocused: true });
 		this.fetchSuggestions();
@@ -75,7 +73,7 @@ export default class Autocomplete extends Component {
 		
 		const className = classnames(
 			'widget-form-airports__airportCode',
-			{ 'widget-form-airports__airportCode_withArrow': this.isGridMode }
+			{ 'widget-form-airports__airportCode_withArrow': this.props.isGridMode }
 		);
 		
 		return airport && !isLoading ? <span className={className}>{airport.IATA}</span> : null;
@@ -95,6 +93,7 @@ export default class Autocomplete extends Component {
 	 * 
 	 * @param {Object} option
 	 */
+	@autobind
 	selectOption(option) {
 		if (option && option.value && option.value.airport) {
 			this.props.selectAirport(option.value.airport, this.type);
@@ -102,11 +101,13 @@ export default class Autocomplete extends Component {
 	}
 	
 	shouldComponentUpdate(nextProps, nextState) {
-		const { showErrors, suggestions, isLoading, airport, sameAirportsError } = this.props;
+		const { showErrors, suggestions, isLoading, airport, sameAirportsError, isGridMode, readOnly } = this.props;
 		
 		return this.state.isFocused !== nextState.isFocused ||
 			showErrors !== nextProps.showErrors ||
 			sameAirportsError !== nextProps.sameAirportsError ||
+			isGridMode !== nextProps.isGridMode ||
+			readOnly !== nextProps.readOnly ||
 			suggestions !== nextProps.suggestions ||
 			airport !== nextProps.airport ||
 			isLoading !== nextProps.isLoading;
@@ -142,7 +143,7 @@ export default class Autocomplete extends Component {
 					noResultsText={i18n('form', 'noResults')}
 					openOnFocus={true}
 					backspaceRemoves={false}
-					className="widget-form-airports__select"
+					className={classnames('widget-form-airports__select', { 'widget-form-airports__select_readOnly': readOnly && this.props.isGridMode })}
 					value={selectedValue}
 					options={suggestions}
 					isLoading={isLoading}
@@ -155,11 +156,11 @@ export default class Autocomplete extends Component {
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={option => <Option option={option}/>}
-					valueRenderer={value => <Value value={value} placeholder={this.placeholder}/>}
-					arrowRenderer={() => this.isGridMode ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
+					valueRenderer={value => <Value value={value} placeholder={this.placeholder} readOnly={readOnly && this.props.isGridMode}/>}
+					arrowRenderer={() => this.props.isGridMode ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,
-						readOnly: readOnly && this.isGridMode,
+						readOnly: readOnly && this.props.isGridMode,
 					}}
 				/>
 
