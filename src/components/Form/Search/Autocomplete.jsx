@@ -156,7 +156,7 @@ export default class Autocomplete extends Component {
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={option => <Option option={option}/>}
-					valueRenderer={value => <Value value={value} placeholder={this.placeholder}/>}
+					valueRenderer={value => <Value value={value} placeholder={this.placeholder} readOnly={readOnly && this.props.isGridMode}/>}
 					arrowRenderer={() => this.props.isGridMode ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,

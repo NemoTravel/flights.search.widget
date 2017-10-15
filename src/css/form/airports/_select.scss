@@ -171,6 +171,17 @@
 					&__placeholder {
 						display: block;
 					}
+					
+					&_readOnly {
+						.widget-form-airports__select__value__placeholder {
+							display: none;
+						}
+						
+						.widget-form-airports__select__value__airportName,
+						.widget-form-airports__select__value__countryName {
+							display: block;
+						}
+					}
 				}
 
 				@include adaptivity(phone) {

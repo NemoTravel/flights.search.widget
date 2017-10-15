@@ -25,6 +25,8 @@ export default class Demo extends React.Component {
 			webskyURL: defaultWebskyURL,
 			nemoURL: defaultNemoURL
 		};
+		
+		this.processConfig();
 
 		cache('locale', defaultLang);
 	}
