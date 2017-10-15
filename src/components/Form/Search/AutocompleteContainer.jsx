@@ -67,7 +67,7 @@ class AutocompleteContainer extends Component {
 				selectAirport={selectAirport}
 				isGridMode={!!system.routingGrid || system.mode === MODE_WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
-				getRef={(input) => this.arrivalInput = input}
+				getRef={reactSelect => reactSelect ? this.arrivalInput = reactSelect.input : null}
 			/>
 		</div>
 	}

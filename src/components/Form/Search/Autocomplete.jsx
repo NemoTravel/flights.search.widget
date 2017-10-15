@@ -114,7 +114,7 @@ export default class Autocomplete extends Component {
 	}
 	
 	render() {
-		const { suggestions, isLoading, airport, showErrors, sameAirportsError, readOnly } = this.props;
+		const { suggestions, isLoading, airport, showErrors, sameAirportsError, readOnly, getRef } = this.props;
 		
 		const selectedValue = airport ? {
 			label: airport.name,
@@ -137,6 +137,7 @@ export default class Autocomplete extends Component {
 				<Tooltip isActive={(!airport || sameAirportsError) && showErrors} isCentered={true} message={errorText}/>
 				
 				<Select
+					ref={getRef}
 					clearable={false}
 					autoBlur={true}
 					autosize={false}
@@ -160,7 +161,7 @@ export default class Autocomplete extends Component {
 					arrowRenderer={() => this.props.isGridMode ? <div className="widget-ui-icon widget-ui-input__arrow"/> : null}
 					inputProps={{
 						spellCheck: false,
-						readOnly: readOnly && this.props.isGridMode,
+						readOnly: readOnly && this.props.isGridMode
 					}}
 				/>
 

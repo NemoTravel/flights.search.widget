@@ -33,7 +33,7 @@ function enableReduxLogger(isEnabled = false) {
 }
 
 if (process.env.NODE_ENV !== 'production') {
-	enableReduxLogger(false);
+	enableReduxLogger(true);
 	enableProfiler(false);
 }
 
