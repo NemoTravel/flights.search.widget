@@ -110,7 +110,7 @@ function runWebskyAutocomplete(dispatch, getState, autocompleteType) {
 	let requestURL = `${clearURL(state.system.nemoURL)}/api/proxy/websky/cities/${departureIATA}/${searchType}`;
 	let requestParams = {
 		apilang: state.system.locale,
-		webskyURL: encodeURIComponent(state.system.baseURL)
+		webskyURL: encodeURIComponent(state.system.webskyURL)
 	};
 
 	runAutocomplete({
@@ -132,7 +132,7 @@ function runWebskyAutocomplete(dispatch, getState, autocompleteType) {
 function runNemoAutocomplete(dispatch, getState, searchText, autocompleteType) {
 	const state = getState();
 
-	let requestURL = `${clearURL(state.system.baseURL)}/api/guide/autocomplete/iata/${searchText}`;
+	let requestURL = `${clearURL(state.system.nemoURL)}/api/guide/autocomplete/iata/${searchText}`;
 	let requestParams = {
 		apilang: state.system.locale
 	};

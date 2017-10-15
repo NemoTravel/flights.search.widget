@@ -21,7 +21,8 @@
 <script src="airlines.search.widget.min.js"></script>
 <script>
     AirlinesSearchWidget.init({
-        baseURL: 'http://widget.mlsd.ru',
+        webskyURL: 'http://demo.websky.aero/gru',
+        nemoURL: 'http://widget.mlsd.ru',
         rootElement: document.getElementById('root'),
         locale: 'ru'
     });
@@ -36,9 +37,9 @@
 
 | Название параметра | Обязательный параметр | Тип значения | Значение по умолчанию | Описание |
 | :- | :- | :- | :- | :- |
-| **baseURL** | **да** | `string` | - | URL системы бронирования (необходим для редиректа на страницу поиска) |
-| **nemoURL** | **да** | `string` | - | URL системы бронирования `Nemo.travel` (необходим для утилитарных запросов) |
+| **nemoURL** | **да** | `string` | - | URL системы бронирования `Nemo.travel` |
 | **rootElement** | **да** | `HTMLElement` | - | DOM-элемент в который будет встраиваться виджет |
+| **webskyURL** | **да** (в режиме `WEBSKY`) | `string` | - | URL системы бронирования `Websky` |
 | autoFocusArrivalAirport | - | `boolean` | `false` | Автоматически фокусироваться на поле выбора аэропорта прилета, после выбора аэропорта вылета. |
 | autoFocusReturnDate | - | `boolean` | `false` | Автоматически фокусироваться на поле выбора обратной даты, после выбора даты вылета. |
 | locale | - | `string` | `"en"` | Язык интерфейса |

@@ -30,7 +30,7 @@ class WebskyHiddenForm extends Component {
 			}
 		};
 		
-		return <form id="webskyHiddenForm" action={`${system.baseURL}/search`} method="POST">
+		return <form id="webskyHiddenForm" action={`${system.webskyURL}/search`} method="POST">
 			<input type="hidden" name="segmentsCount" value={form.dates.return.date ? 2 : 1}/>
 			<input type="hidden" name="lang" value={system.locale}/>
 
