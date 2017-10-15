@@ -3,6 +3,7 @@ import Datepicker from 'components/Form/Search/Datepicker';
 import MobileHeader from 'components/UI/MobileHeader';
 import { i18n } from 'utils';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
 
 export default class Return extends Datepicker {
 	static propTypes = {
@@ -19,14 +20,13 @@ export default class Return extends Datepicker {
 	
 	constructor(props) {
 		super(props);
-		this.renderInner = this.renderInner.bind(this);
-		this.closeDatepicker = this.closeDatepicker.bind(this);
 
 		this.type = 'return';
 		this.placeholder = i18n('form', 'dateBack');
 		this.popperPlacement = 'top-end';
 	}
 	
+	@autobind
 	closeDatepicker() {
 		if (this.nemoDatepicker) {
 			if (this.props.date) {
@@ -38,6 +38,7 @@ export default class Return extends Datepicker {
 		}
 	}
 
+	@autobind
 	renderInner() {
 		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`;
 		

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import autobind from 'autobind-decorator';
 
 export default class Counter extends Component {
 	static propTypes = {
@@ -14,19 +15,13 @@ export default class Counter extends Component {
 		canRemovePassenger: PropTypes.bool.isRequired,
 	};
 	
-	constructor(props) {
-		super(props);
-		
-		this.removePassenger = this.removePassenger.bind(this);
-		this.addPassenger = this.addPassenger.bind(this);
-	}
-	
 	shouldComponentUpdate(nextProps, nextState) {
 		const { count, canAddPassenger, canRemovePassenger } = this.props;
 		
 		return count !== nextProps.count || canAddPassenger !== nextProps.canAddPassenger || canRemovePassenger !== nextProps.canRemovePassenger;
 	}
 	
+	@autobind
 	removePassenger() {
 		const { canRemovePassenger, code } = this.props;
 		
@@ -35,6 +30,7 @@ export default class Counter extends Component {
 		}
 	}
 
+	@autobind
 	addPassenger() {
 		const { canAddPassenger, code } = this.props;
 

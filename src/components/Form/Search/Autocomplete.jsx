@@ -6,6 +6,7 @@ import Option from 'components/Form/Search/Autocomplete/Option';
 import Value from 'components/Form/Search/Autocomplete/Value';
 import Select from 'react-select';
 import { i18n } from 'utils';
+import autobind from 'autobind-decorator';
 
 export default class Autocomplete extends Component {
 	constructor(props) {
@@ -20,11 +21,6 @@ export default class Autocomplete extends Component {
 		this.mobileTitle = '';
 		this.defaultErrorText = '';
 		this.sameAirportsErrorText = i18n('form', 'sameAirportsError');
-
-		this.fetchSuggestions = this.fetchSuggestions.bind(this);
-		this.onChangeHandler = this.onChangeHandler.bind(this);
-		this.onFocusHandler = this.onFocusHandler.bind(this);
-		this.selectOption = this.selectOption.bind(this);
 	}
 
 	/**
@@ -32,6 +28,7 @@ export default class Autocomplete extends Component {
 	 * 
 	 * @param {String} searchText
 	 */
+	@autobind
 	fetchSuggestions(searchText = '') {
 		const { sendAutocompleteRequest } = this.props;
 		
@@ -51,6 +48,7 @@ export default class Autocomplete extends Component {
 	 * 
 	 * @param {String} searchString
 	 */
+	@autobind
 	onChangeHandler(searchString) {
 		if (!this.props.isGridMode) {
 			this.fetchSuggestions(searchString);
@@ -58,7 +56,8 @@ export default class Autocomplete extends Component {
 		
 		return searchString;
 	}
-	
+
+	@autobind
 	onFocusHandler() {
 		this.setState({ isFocused: true });
 		this.fetchSuggestions();
@@ -94,6 +93,7 @@ export default class Autocomplete extends Component {
 	 * 
 	 * @param {Object} option
 	 */
+	@autobind
 	selectOption(option) {
 		if (option && option.value && option.value.airport) {
 			this.props.selectAirport(option.value.airport, this.type);

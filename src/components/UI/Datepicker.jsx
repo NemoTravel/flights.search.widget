@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import DatePicker from '@nemo.travel/react-datepicker';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
+import autobind from 'autobind-decorator';
 
 export default class Datepicker extends Component {
 	constructor(props) {
 		super(props);
 		
-		this.enable = this.enable.bind(this);
-		this.disable = this.disable.bind(this);
-		this.renderCloser = this.renderCloser.bind(this);
 		this.calendar = null;
 	}
 	
@@ -34,6 +32,7 @@ export default class Datepicker extends Component {
 	/**
 	 * Activate datepicker on focus.
 	 */
+	@autobind
 	enable() {
 		if (this.props.toggleDatePicker && !this.props.isActive) {
 			this.props.toggleDatePicker(true, this.props.type);
@@ -43,6 +42,7 @@ export default class Datepicker extends Component {
 	/**
 	 * Deactivate datepicker.
 	 */
+	@autobind
 	disable() {
 		if (this.props.toggleDatePicker && this.props.isActive) {
 			this.props.toggleDatePicker(false, this.props.type);
@@ -50,6 +50,7 @@ export default class Datepicker extends Component {
 		}
 	}
 	
+	@autobind
 	renderCloser() {
 		const { isActive, toggleDatePicker } = this.props;
 		return toggleDatePicker && isActive ? <div className="widget-ui-input__closer" onClick={this.disable}/> : null;

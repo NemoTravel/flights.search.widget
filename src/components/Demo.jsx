@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { getStore } from 'store';
 import { systemState } from 'state';
 import { cache } from 'utils';
+import autobind from 'autobind-decorator';
 
 export default class Demo extends React.Component {
 	constructor(props) {
@@ -26,10 +27,9 @@ export default class Demo extends React.Component {
 		};
 
 		cache('locale', defaultLang);
-		
-		this.processConfig = this.processConfig.bind(this);
 	}
 
+	@autobind
 	processConfig() {
 		this.store.dispatch({
 			type: 'LOAD_CONFIG',

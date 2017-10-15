@@ -61,6 +61,7 @@ let config = {
 				options: {
 					plugins: [
 						'transform-runtime',
+						'transform-decorators-legacy',
 						'transform-react-remove-prop-types',
 						'transform-react-constant-elements',
 						// 'transform-react-inline-elements'

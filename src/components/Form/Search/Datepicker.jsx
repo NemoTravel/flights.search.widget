@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import UIDatepicker from 'components/UI/Datepicker';
 import MobileHeader from 'components/UI/MobileHeader';
 import moment from 'moment';
+import autobind from 'autobind-decorator';
 
 export default class Datepicker extends Component {
 	constructor(props) {
 		super(props);
-		this.onChangeHandler = this.onChangeHandler.bind(this);
-		this.closeDatepicker = this.closeDatepicker.bind(this);
-		this.renderInner = this.renderInner.bind(this);
 		this.nemoDatepicker = null;
 
 		this.type = null;
@@ -23,6 +21,7 @@ export default class Datepicker extends Component {
 	 * 
 	 * @param {Moment} date
 	 */
+	@autobind
 	onChangeHandler(date) {
 		this.props.selectDate(date, this.type);
 	}
@@ -38,12 +37,14 @@ export default class Datepicker extends Component {
 			highlightDates !== nextProps.highlightDates;
 	}
 
+	@autobind
 	closeDatepicker() {
 		if (this.nemoDatepicker && this.nemoDatepicker.calendar) {
 			this.nemoDatepicker.calendar.setOpen(false);
 		}
 	}
-	
+
+	@autobind
 	renderInner() {
 		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`;
 		return <MobileHeader className={mobileHeaderClassName} title={this.placeholder} onClose={this.closeDatepicker}/>;
