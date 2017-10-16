@@ -1,3 +1,16 @@
+export const parseAirportFromGuide = (response, IATA) => {
+	let airport = null;
+	
+	if (response && IATA in response.guide.airports) {
+		const { airports, countries } = response.guide;
+
+		airport = airports[IATA];
+		airport.country = countries[airport.countryCode];
+	}
+	
+	return airport;
+};
+
 export const parseAutocompleteOptions = response => {
 	let options = [];
 

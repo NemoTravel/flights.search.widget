@@ -5,6 +5,7 @@ import rootReducer from 'reducers';
 import { cache } from 'utils';
 import { initialState, systemState, fillStateFromCache } from 'state';
 import { configReducer } from 'reducers/system';
+import { loadAirportForAutocomplete } from 'actions/autocomplete';
 
 let middlewares = [thunk];
 
@@ -77,9 +78,18 @@ export function getStore(config = {}) {
 	
 	// Thunk middleware allows us to create functions instead of plain objects in action-creators (for async purposes).
 	// @see https://github.com/gaearon/redux-thunk#motivation
-	return createStore(
+	const store = createStore(
 		rootReducer,
 		preloadedState,
 		applyMiddleware(...middlewares)
 	);
+	
+	const state = store.getState();
+	
+	// Pre-loading departure airport by specified IATA.
+	if (!state.form.autocomplete.departure.airport && state.system.defaultDepartureAirport) {
+		store.dispatch(loadAirportForAutocomplete(state.system.defaultDepartureAirport, 'departure'));
+	}
+	
+	return store;
 }
