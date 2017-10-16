@@ -5,6 +5,7 @@ import { getStore } from 'store';
 import { systemState } from 'state';
 import { cache } from 'utils';
 import autobind from 'autobind-decorator';
+import CodeBlock from 'components/UI/CodeBlock';
 
 export default class Demo extends React.Component {
 	constructor(props) {
@@ -40,14 +41,17 @@ export default class Demo extends React.Component {
 	}
 	
 	render() {
-		return <div className="form">
-			<div className="nemo-widget-demo">
+		return <div className="widget-demo">
+			<div className="form widget-demo-config">
 				<h3>Параметры виджета</h3>
 
-				<div className="row">
+				<div className="row widget-demo-config__inputBlock">
 					<div className="col form-group">
 						<label>
-							webskyURL
+							<div className="widget-demo-config__description">
+								<CodeBlock>webskyURL</CodeBlock>: URL системы Websky
+							</div>
+							
 							<input type="text" className="form-control" value={this.state.webskyURL} placeholder="http://demo.websky.aero/gru" onChange={e => {
 								this.config.webskyURL = e.target.value;
 								this.setState({
@@ -57,10 +61,15 @@ export default class Demo extends React.Component {
 							}}/>
 						</label>
 					</div>
-
+				</div>
+				
+				<div className="row widget-demo-config__inputBlock">
 					<div className="col form-group">
 						<label>
-							nemoURL
+							<div className="widget-demo-config__description">
+								<CodeBlock>nemoURL</CodeBlock>: URL системы Nemo
+							</div>
+							
 							<input type="text" className="form-control" value={this.state.nemoURL} placeholder="http://widget.mlsd.ru" onChange={e => {
 								this.config.nemoURL = e.target.value;
 								this.setState({
@@ -72,20 +81,28 @@ export default class Demo extends React.Component {
 					</div>
 				</div>
 
-				<div className="row">
+				<div className="row widget-demo-config__inputBlock">
 					<div className="col form-group">
 						<label>
-							routingGrid
+							<div className="widget-demo-config__description">
+								<CodeBlock>routingGrid</CodeBlock>: авиакомпания для получения маршрутной сетки (только для режима Nemo)
+							</div>
+							
 							<input type="text" className="form-control" placeholder="IATA-код авиакомпании" onChange={e => {
 								this.config.routingGrid = e.target.value;
 								this.processConfig();
 							}}/>
 						</label>
 					</div>
-
+				</div>
+				
+				<div className="row widget-demo-config__inputBlock">
 					<div className="col form-group">
 						<label>
-							mode
+							<div className="widget-demo-config__description">
+								<CodeBlock>mode</CodeBlock>: режим работы виджета
+							</div>
+							
 							<select className="form-control" onChange={e => {
 								this.config.mode = e.target.value;
 								this.processConfig();
@@ -103,16 +120,20 @@ export default class Demo extends React.Component {
 							<input type="checkbox" className="form-check-input" onChange={e => {
 								this.config.verticalForm = e.target.checked;
 								this.processConfig();
-							}}/> verticalForm
+							}}/>
+							<CodeBlock>verticalForm</CodeBlock>: режим вертикальной формы
 						</label>
 					</div>
-
+				</div>
+				
+				<div className="row">
 					<div className="col form-check">
 						<label className="form-check-label">
 							<input type="checkbox" className="form-check-input" onChange={e => {
 								this.config.readOnlyAutocomplete = e.target.checked;
 								this.processConfig();
-							}}/> readOnlyAutocomplete
+							}}/>
+							<CodeBlock>readOnlyAutocomplete</CodeBlock>: выбор аэропорта из списка; для режима Websky, или Nemo + указанный параметр <CodeBlock>routingGrid</CodeBlock>
 						</label>
 					</div>
 				</div>
@@ -123,24 +144,30 @@ export default class Demo extends React.Component {
 							<input type="checkbox" className="form-check-input" onChange={e => {
 								this.config.autoFocusArrivalAirport = e.target.checked;
 								this.processConfig();
-							}}/> autoFocusArrivalAirport
+							}}/>
+							<CodeBlock>autoFocusArrivalAirport</CodeBlock>: автоматически фокусироваться на поле выбора пункта прилета, после выбора пункта вылета
 						</label>
 					</div>
-
+				</div>
+				
+				<div className="row">
 					<div className="col form-check">
 						<label className="form-check-label">
 							<input type="checkbox" className="form-check-input" onChange={e => {
 								this.config.autoFocusReturnDate = e.target.checked;
 								this.processConfig();
-							}}/> autoFocusReturnDate
+							}}/>
+							<CodeBlock>autoFocusReturnDate</CodeBlock>: автоматически фокусироваться на поле выбора обратной даты вылета, после выбора даты вылета
 						</label>
 					</div>
 				</div>
 			</div>
 
-			<Provider store={this.store}>
-				<Main/>
-			</Provider>
+			<div className="widget-demo-content">
+				<Provider store={this.store}>
+					<Main/>
+				</Provider>
+			</div>
 		</div>;
 	}
 }

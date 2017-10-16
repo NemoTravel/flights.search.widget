@@ -4,8 +4,8 @@ import {
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED
 } from 'actions';
-import { parseNemoAutocompleteOptions, parseWebskyAutocompleteOptions } from 'parsers';
-import { URL, clearURL, encodeURLParams } from 'utils';
+import { parseAutocompleteOptions } from 'parsers';
+import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
 
 /**
@@ -65,17 +65,14 @@ export function selectAirport(airport, autocompleteType) {
  * @param {String} requestURL
  * @param {Function} dispatch
  * @param {String} autocompleteType
- * @param {String} mode
  */
-function runAutocomplete({ requestURL, dispatch, autocompleteType, mode }) {
+function runAutocomplete({ requestURL, dispatch, autocompleteType }) {
 	dispatch(startAutocompleteLoading(autocompleteType));
 	
 	fetch(requestURL)
 		.then(response => response.json())
 		.then(response => {
-			const options = mode === MODE_WEBSKY ? 
-				parseWebskyAutocompleteOptions(response) :
-				parseNemoAutocompleteOptions(response);
+			const options = parseAutocompleteOptions(response);
 	
 			if (options) {
 				dispatch(changeAutocompleteSuggestions(options, autocompleteType));
@@ -116,8 +113,7 @@ function runWebskyAutocomplete(dispatch, getState, autocompleteType) {
 	runAutocomplete({
 		requestURL: URL(requestURL, requestParams),
 		dispatch,
-		autocompleteType,
-		mode: state.system.mode
+		autocompleteType
 	});
 }
 
@@ -150,8 +146,7 @@ function runNemoAutocomplete(dispatch, getState, searchText, autocompleteType) {
 	runAutocomplete({
 		requestURL: URL(requestURL, requestParams),
 		dispatch,
-		autocompleteType,
-		mode: state.system.mode
+		autocompleteType
 	});
 }
 
