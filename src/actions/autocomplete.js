@@ -4,7 +4,7 @@ import {
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED
 } from 'actions';
-import { parseAutocompleteOptions } from 'parsers';
+import { parseAutocompleteOptions, parseAirportFromGuide } from 'parsers';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
 
@@ -161,4 +161,12 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 	return (dispatch, getState) => getState().system.mode === MODE_WEBSKY ? 
 		runWebskyAutocomplete(dispatch, getState, autocompleteType) : 
 		runNemoAutocomplete(dispatch, getState, searchText, autocompleteType);
+}
+
+export function loadAirportForAutocomplete(IATA, autocompleteType) {
+	return (dispatch, getState) => {
+		fetch(`${getState().system.nemoURL}/api/guide/airports/${IATA}`)
+			.then(response => response.json())
+			.then(response => dispatch(selectAirport(parseAirportFromGuide(response, IATA), autocompleteType)))
+	};
 }
