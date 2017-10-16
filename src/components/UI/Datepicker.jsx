@@ -79,6 +79,7 @@ export default class Datepicker extends Component {
 					value={formattedDate}
 					{...inputProps}
 					onFocus={event => event.target.blur()}
+					onClick={this.enable}
 				/>
 			</Tooltip>
 

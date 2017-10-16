@@ -55,7 +55,7 @@
 	font-weight: 600;
 	font-size: 15px;
 	position: relative;
-	padding: 11px 13px;
+	padding: 0 13px;
 	z-index: 2;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -63,7 +63,7 @@
 	line-height: 40px;
 
 	&[readonly] {
-		background-color: inherit;
+		background-color: #fff;
 	}
 	
 	&:focus {

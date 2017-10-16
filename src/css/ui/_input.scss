@@ -71,4 +71,8 @@
 			border-color: #E6E6E6 !important;
 		}
 	}
+
+	&[readonly] {
+		background-color: #fff;
+	}
 }
