@@ -16,7 +16,8 @@ export const systemState = {
 	autoFocusArrivalAirport: false,
 	autoFocusReturnDate: false,
 	mode: MODE_NEMO,
-	defaultDepartureAirport: null
+	defaultDepartureAirport: null,
+	useNearestAirport: false
 };
 
 // export const blockVisibilityState = {

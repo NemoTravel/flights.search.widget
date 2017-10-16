@@ -4,7 +4,7 @@ import {
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED
 } from 'actions';
-import { parseAutocompleteOptions, parseAirportFromGuide } from 'parsers';
+import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'parsers';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
 
@@ -163,10 +163,31 @@ export function sendAutocompleteRequest(searchText, autocompleteType) {
 		runNemoAutocomplete(dispatch, getState, searchText, autocompleteType);
 }
 
+/**
+ * Load airport by IATA code and set it as the default airport for departure or arrival.
+ * 
+ * @param {String} IATA
+ * @param {String} autocompleteType
+ * @returns {Function}
+ */
 export function loadAirportForAutocomplete(IATA, autocompleteType) {
 	return (dispatch, getState) => {
 		fetch(`${getState().system.nemoURL}/api/guide/airports/${IATA}`)
 			.then(response => response.json())
 			.then(response => dispatch(selectAirport(parseAirportFromGuide(response, IATA), autocompleteType)))
+	};
+}
+
+/**
+ * Load nearest airport and set it as the default airport for departure or arrival.
+ *
+ * @param {String} autocompleteType
+ * @returns {Function}
+ */
+export function loadNearestAirportForAutocomplete(autocompleteType) {
+	return (dispatch, getState) => {
+		fetch(`${getState().system.nemoURL}/api/guide/airports/nearest`)
+			.then(response => response.json())
+			.then(response => dispatch(selectAirport(parseNearestAirport(response), autocompleteType)))
 	};
 }

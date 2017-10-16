@@ -32,3 +32,13 @@ export const parseAutocompleteOptions = response => {
 
 	return options;
 };
+
+export const parseNearestAirport = response => {
+	let airport = null;
+	
+	if (response && response.guide.nearestAirport) {
+		airport = parseAirportFromGuide(response, response.guide.nearestAirport);
+	}
+
+	return airport;
+};
