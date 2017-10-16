@@ -9,7 +9,7 @@
 		
 		width: 400px;
 		padding: 15px;
-		overflow: auto;
+		overflow-y: scroll;
 		
 		background: #f7f7f7;
 		border-right: 1px solid #ccc;
@@ -43,10 +43,22 @@
 				margin-bottom: 0;
 			}
 		}
+		
+		&__information {
+			border-bottom: 1px solid #ddd;
+			margin-bottom: 1rem;
+			text-align: justify;
+		}
+		
+		&__generator {
+			border-top: 1px solid #ddd;
+			padding-top: 1rem;
+		}
 	}
 	
 	&-content {
 		padding-left: 400px;
+		padding-top: 100px;
 
 		@include adaptivity(phone) {
 			padding-left: 0;

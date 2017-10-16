@@ -17,7 +17,8 @@ export default class Demo extends React.Component {
 		
 		this.state = {
 			webskyURL: defaultWebskyURL,
-			nemoURL: defaultNemoURL
+			nemoURL: defaultNemoURL,
+			generatedConfig: ''
 		};
 		
 		this.config = {
@@ -26,10 +27,18 @@ export default class Demo extends React.Component {
 			webskyURL: defaultWebskyURL,
 			nemoURL: defaultNemoURL
 		};
-		
-		this.processConfig();
 
 		cache('locale', defaultLang);
+	}
+	
+	componentDidMount() {
+		this.store.subscribe(() => {
+			this.setState({
+				generatedConfig: JSON.stringify(this.config)
+			});
+		});
+
+		this.processConfig();
 	}
 
 	@autobind
@@ -44,6 +53,28 @@ export default class Demo extends React.Component {
 		return <div className="widget-demo">
 			<div className="form widget-demo-config">
 				<h3>Параметры виджета</h3>
+				
+				<div className="widget-demo-config__information row">
+					<div className="col">
+						<p>Ниже представлены элементы управления, позволяющие в режиме реального времени изменять конфигурацию виджета.</p>
+						<p>
+							Полный перечень параметров конфигурации представлен в описании к репозиторию виджета: 
+							<a href="https://github.com/NemoTravel/Airlines-Search-Widget#Конфигурация"> https://github.com/NemoTravel/Airlines-Search-Widget#Конфигурация</a>
+						</p>
+					</div>
+				</div>
+
+				<div className="row widget-demo-config__inputBlock">
+					<div className="col form-group">
+						<label>
+							<div className="widget-demo-config__description">
+								Конфиг виджета для инициализации: <CodeBlock>AirlinesSearchWidget.init(...конфиг)</CodeBlock>
+							</div>
+
+							<textarea className="form-control" rows="10" value={this.state.generatedConfig} onClick={event => event.target.select()}/>
+						</label>
+					</div>
+				</div>
 
 				<div className="row widget-demo-config__inputBlock">
 					<div className="col form-group">
@@ -133,7 +164,7 @@ export default class Demo extends React.Component {
 								this.config.readOnlyAutocomplete = e.target.checked;
 								this.processConfig();
 							}}/>
-							<CodeBlock>readOnlyAutocomplete</CodeBlock>: выбор аэропорта из списка; для режима Websky, или Nemo + указанный параметр <CodeBlock>routingGrid</CodeBlock>
+							<CodeBlock>readOnlyAutocomplete</CodeBlock>: выбор аэропорта из списка, без возможности ручного ввода; для режима Websky, или Nemo + указанный параметр <CodeBlock>routingGrid</CodeBlock>
 						</label>
 					</div>
 				</div>
