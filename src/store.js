@@ -5,7 +5,7 @@ import rootReducer from 'reducers';
 import { cache } from 'utils';
 import { initialState, systemState, fillStateFromCache } from 'state';
 import { configReducer } from 'reducers/system';
-import { loadAirportForAutocomplete } from 'actions/autocomplete';
+import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete } from 'actions/autocomplete';
 
 let middlewares = [thunk];
 
@@ -86,9 +86,15 @@ export function getStore(config = {}) {
 	
 	const state = store.getState();
 	
-	// Pre-loading departure airport by specified IATA.
-	if (!state.form.autocomplete.departure.airport && state.system.defaultDepartureAirport) {
-		store.dispatch(loadAirportForAutocomplete(state.system.defaultDepartureAirport, 'departure'));
+	if (!state.form.autocomplete.departure.airport) {
+		// Pre-loading departure airport by specified IATA.
+		if (state.system.defaultDepartureAirport) {
+			store.dispatch(loadAirportForAutocomplete(state.system.defaultDepartureAirport, 'departure'));
+		}
+		// Pre-loading nearest airport (loaded by IP-address) as the departure airport.
+		else if (state.system.useNearestAirport) {
+			store.dispatch(loadNearestAirportForAutocomplete('departure'));
+		}
 	}
 	
 	return store;
