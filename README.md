@@ -3,6 +3,7 @@
 </p>
 
 # Airlines Search Widget
+[![npm version](https://badge.fury.io/js/%40nemo.travel%2Fsearch-widget.svg)](https://badge.fury.io/js/%40nemo.travel%2Fsearch-widget)
 
 ## Установка виджета
 
