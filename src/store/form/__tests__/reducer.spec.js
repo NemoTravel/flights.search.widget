@@ -11,8 +11,11 @@ describe('store/form/reducer', () => {
 		Reducer(showErrorsReducer).expect({ type: 'WRONG_TYPE' }).toReturnState(false);
 	});
 
-	it('should store new config', () => {
-		Reducer(showErrorsReducer).expect(showErrors(true)).toReturnState(true);
+	it('should hide errors', () => {
 		Reducer(showErrorsReducer).expect(showErrors(false)).toReturnState(false);
+	});
+
+	it('should show errors', () => {
+		Reducer(showErrorsReducer).expect(showErrors(true)).toReturnState(true);
 	});
 });

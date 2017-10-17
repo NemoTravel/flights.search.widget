@@ -13,16 +13,12 @@ describe('store/system/reducer', () => {
 	});
 	
 	it('should store new config', () => {
-		const newConfig = {
-			locale: 'zh',
-			verticalForm: false
-		};
-		
+		const newConfig = { locale: 'zh' };
 		const action = {
 			type: LOAD_CONFIG,
 			payload: newConfig
 		};
 		
-		Reducer(systemReducer).expect(action).toReturnState({ ...systemState, ...newConfig });
+		Reducer(systemReducer).expect(action).toChangeInState(newConfig);
 	});
 });
