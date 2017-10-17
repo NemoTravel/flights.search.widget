@@ -1,4 +1,4 @@
-import { TOGGLE_DATEPICKER, SELECT_DATE } from 'actions';
+import { TOGGLE_DATEPICKER, SELECT_DATE } from 'store/actions';
 import { datesState } from 'state';
 
 export function selectDateReducer(state, date) {

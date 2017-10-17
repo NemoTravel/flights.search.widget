@@ -1,4 +1,4 @@
-import { SHOW_ERRORS } from 'actions';
+import { SHOW_ERRORS } from 'store/actions';
 import { formIsValid } from 'selectors/form';
 import { MODE_NEMO } from 'state';
 import { URL, clearURL } from 'utils';

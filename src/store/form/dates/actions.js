@@ -1,4 +1,4 @@
-import { SELECT_DATE, TOGGLE_DATEPICKER } from 'actions';
+import { SELECT_DATE, TOGGLE_DATEPICKER } from 'store/actions';
 
 function getDateByType(state, dateType) {
 	return state.form.dates[dateType].date;

@@ -1,4 +1,4 @@
-import { SHOW_ERRORS } from 'actions';
+import { SHOW_ERRORS } from 'store/actions';
 import { combineReducers } from 'redux';
 import passengers from 'store/form/passengers/reducer';
 import autocomplete from 'store/form/autocomplete/reducer';

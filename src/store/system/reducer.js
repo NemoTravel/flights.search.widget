@@ -1,4 +1,4 @@
-import { LOAD_CONFIG } from 'actions';
+import { LOAD_CONFIG } from 'store/actions';
 import { cache } from 'utils';
 import { systemState } from 'state';
 

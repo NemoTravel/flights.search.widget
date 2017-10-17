@@ -3,7 +3,7 @@ import {
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED
-} from 'actions';
+} from 'store/actions';
 import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'parsers';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
