@@ -5,7 +5,7 @@ import rootReducer from 'store/reducer';
 import { cache } from 'utils';
 import { initialState, systemState, fillStateFromCache } from 'state';
 import { configReducer } from 'store/system/reducer';
-import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete } from 'actions/autocomplete';
+import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete } from 'store/form/autocomplete/actions';
 
 let middlewares = [thunk];
 
