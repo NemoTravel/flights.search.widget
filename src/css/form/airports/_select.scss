@@ -67,7 +67,7 @@
 				//opacity: 0;
 				//filter: alpha(opacity = 0);
 
-				border: 1px solid #e6e6e6;
+				border: 1px solid #ccc;
 				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 				background-color: #ffffff;
 				//transition: 250ms ease;
@@ -228,7 +228,7 @@
 
 			&-menu {
 				&-outer {
-					margin-top: 0;
+					margin-top: -1px;
 					
 					@include adaptivity(phone) {
 						position: fixed;
@@ -248,10 +248,9 @@
 			
 			&-noresults {
 				@include adaptivity(not-phone) {
-					display: none;
+					text-align: left;
 				}
 
-				display: block;
 				position: relative;
 
 				padding: 10px 15px;

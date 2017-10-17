@@ -9,73 +9,6 @@
 &-form {
 	@import "form/search";
 	
-	//&__block {
-		//border-bottom: 1px solid #E6E6E6;
-
-		//&__header {
-		//	position: relative;
-		//	padding: 0.9rem;
-		//	font-weight: 600;
-		//	color: $headers-font-color;
-		//	cursor: pointer;
-		//	display: flex;
-		//	align-items: center;
-		//	user-select: none;
-		//
-		//	&:before {
-		//		position: relative;
-		//		width: 1.2rem;
-		//		top: -1px;
-		//		font-family: "OpenSkyIcons", sans-serif;
-		//		font-weight: normal;
-		//		color: $headers-font-color;
-		//		margin-right: 0.8rem;
-		//	}
-		//
-		//	&:after {
-		//		content: "\e90e";
-		//		position: absolute;
-		//		top: 50%;
-		//		margin-top: 5px;
-		//		right: 1.2rem;
-		//		font-family: "OpenSkyIcons", sans-serif;
-		//		color: $headers-font-color;
-		//		transform: translate(0, -50%) rotate(90deg);
-		//	}
-		//
-		//	&_active {
-		//		&:after {
-		//			margin-top: 0;
-		//			transform: translate(0, -50%) rotate(-90deg);
-		//		}
-		//	}
-		//}
-
-		//&__body {
-		//	padding: 0.9rem;
-			//display: none;
-			
-			//&_active {
-			//	display: block;
-			//}
-		//}
-		
-	//	&_search &__header:before {
-	//		content: "\e90b";
-	//		font-size: 18px;
-	//	}
-	//	
-	//	&_registration &__header:before {
-	//		content: "\e900";
-	//		font-size: 15px;
-	//	}
-	//	
-	//	&_bookings &__header:before {
-	//		content: "\e909";
-	//		font-size: 16px;
-	//	}
-	//}
-	
 	&__pseudoBlocks {
 		text-align: center;
 	}
@@ -116,6 +49,8 @@
 						}
 
 						.widget-form-airports__airportCode {
+							right: 17px;
+							
 							&_withArrow {
 								right: 35px;
 							}

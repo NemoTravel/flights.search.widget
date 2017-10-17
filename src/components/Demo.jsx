@@ -13,7 +13,10 @@ export default class Demo extends React.Component {
 		const defaultLang = 'ru';
 		const defaultWebskyURL = 'http://demo.websky.aero/gru';
 		const defaultNemoURL = 'http://widget.mlsd.ru';
-		this.store = getStore();
+		
+		this.store = getStore({
+			locale: defaultLang
+		});
 		
 		this.state = {
 			webskyURL: defaultWebskyURL,
