@@ -4,12 +4,12 @@
   "description": "Search form for searching tickets",
   "main": "dist/airlines.search.widget.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server.js",
     "build": "cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+  	"test": "jest"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,9 @@
   "devDependencies": {
     "autoprefixer": "^7.1.3",
     "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-react-constant-elements": "^6.23.0",
     "babel-plugin-transform-react-inline-elements": "^6.22.0",
@@ -39,6 +41,7 @@
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
+    "jest": "^21.2.0",
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.1",
     "opn": "^5.1.0",
@@ -71,5 +74,13 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
     "whatwg-fetch": "^2.0.3"
+  },
+  "jest": {
+    "modulePaths": [
+      "/src"
+    ],
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules"],
+    "moduleNameMapper": {}
   }
 }
