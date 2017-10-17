@@ -1,4 +1,4 @@
-import { ADD_PASSENGER, REMOVE_PASSENGER, SET_PASSENGER_COUNTER } from 'actions';
+import { ADD_PASSENGER, REMOVE_PASSENGER, SET_PASSENGER_COUNTER } from 'store/actions';
 import { passengersState } from 'state';
 
 export const nemoToWebskyPassTypes = {

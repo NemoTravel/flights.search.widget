@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as passengersActions from 'actions/passengers';
+import * as passengersActions from 'store/form/passengers/actions';
 import { 
 	getPassengersTitle, 
 	getPassengersArray, 

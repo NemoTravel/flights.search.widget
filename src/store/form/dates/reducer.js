@@ -1,8 +1,5 @@
-import { TOGGLE_DATEPICKER, SELECT_DATE } from 'actions';
+import { TOGGLE_DATEPICKER, SELECT_DATE } from 'store/actions';
 import { datesState } from 'state';
-
-export const DEPARTURE_DATE_TYPE = 'departure';
-export const RETURN_DATE_TYPE = 'return';
 
 export function selectDateReducer(state, date) {
 	return { ...state, date};

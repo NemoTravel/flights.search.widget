@@ -1,10 +1,10 @@
-import { 
-	AUTOCOMPLETE_LOADING_STARTED, 
+import {
+	AUTOCOMPLETE_LOADING_STARTED,
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED
-} from 'actions';
-import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'parsers';
+} from 'store/actions';
+import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'services/parsers';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
 

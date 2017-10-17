@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as autocompleteActions from 'actions/autocomplete';
+import * as autocompleteActions from 'store/form/autocomplete/actions';
 import DepartureAutocomplete from 'components/Form/Search/Autocomplete/Departure';
 import ArrivalAutocomplete from 'components/Form/Search/Autocomplete/Arrival';
 import { getDepartureOptions, getArrivalOptions } from 'selectors/form';

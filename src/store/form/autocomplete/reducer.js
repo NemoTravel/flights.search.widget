@@ -4,7 +4,7 @@ import {
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED
-} from 'actions';
+} from 'store/actions';
 
 export function autocompleteAirportReducer(state, airport) {
 	return { ...state, airport };
