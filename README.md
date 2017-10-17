@@ -4,6 +4,7 @@
 
 # Airlines Search Widget
 [![npm version](https://badge.fury.io/js/%40nemo.travel%2Fsearch-widget.svg)](https://badge.fury.io/js/%40nemo.travel%2Fsearch-widget)
+[![Build Status](https://travis-ci.org/NemoTravel/Airlines-Search-Widget.svg?branch=master)](https://travis-ci.org/NemoTravel/Airlines-Search-Widget)
 
 ## Установка виджета
 
