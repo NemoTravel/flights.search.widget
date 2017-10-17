@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getTotalPassengersCount } from 'selectors/passengers';
+import { getTotalPassengersCount } from 'store/form/passengers/selectors';
 
 function getForm(state) {
 	return state.form;

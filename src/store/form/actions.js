@@ -1,5 +1,5 @@
 import { SHOW_ERRORS } from 'store/actions';
-import { formIsValid } from 'selectors/form';
+import { formIsValid } from 'store/form/selectors';
 import { MODE_NEMO } from 'state';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';

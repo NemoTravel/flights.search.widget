@@ -7,7 +7,7 @@ import {
 	getPassengersArray, 
 	getTotalPassengersCount, 
 	getPassengersCounterAvailability 
-} from 'selectors/passengers';
+} from 'store/form/passengers/selectors';
 import Selector from 'components/Form/Search/Passengers/Selector';
 
 class PassengersContainer extends Component {

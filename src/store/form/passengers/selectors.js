@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { i18n } from 'utils';
+import { nemoToWebskyPassTypes } from 'store/form/passengers/reducer';
 
 function getPassengersConfig(state) {
 	return state.form.passengers;
@@ -119,4 +120,13 @@ export const getPassengersCounterAvailability = createSelector(
 
 		return result;
 	}
+);
+
+export const webskyPassengers = createSelector(
+	[ getPassengersArray ],
+	passengers => passengers
+	.filter(passenger => passenger.count)
+	.map(passenger => {
+		return { ...passenger, code: nemoToWebskyPassTypes[passenger.code] };
+	})
 );

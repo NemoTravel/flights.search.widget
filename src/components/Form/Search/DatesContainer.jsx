@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as datesActions from 'store/form/dates/actions';
 import DepartureDatepicker from 'components/Form/Search/Datepicker/Departure';
 import ReturnDatepicker from 'components/Form/Search/Datepicker/Return';
-import { getDatesBetweenDepartureAndReturn } from 'selectors/dates';
+import { getDatesBetweenDepartureAndReturn } from 'store/form/dates/selectors';
 
 class DatesContainer extends Component {
 	render() {

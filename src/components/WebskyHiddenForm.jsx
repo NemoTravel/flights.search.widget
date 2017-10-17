@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { webskyPassengers } from 'selectors/websky';
+import { webskyPassengers } from 'store/form/passengers/selectors';
 
 /**
  * Websky engine requires real HTML-form submittion.
