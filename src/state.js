@@ -1,5 +1,5 @@
-import { autocompleteAirportReducer } from 'reducers/form/autocomplete';
-import { selectDateReducer, toggleDatepickerReducer } from 'reducers/form/dates';
+import { autocompleteAirportReducer } from 'store/form/autocomplete/reducer';
+import { selectDateReducer, toggleDatepickerReducer } from 'store/form/dates/reducer';
 import moment from 'moment';
 
 export const MODE_NEMO = 'NEMO';

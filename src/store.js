@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from 'reducers';
+import rootReducer from 'store/reducer';
 import { cache } from 'utils';
 import { initialState, systemState, fillStateFromCache } from 'state';
-import { configReducer } from 'reducers/system';
+import { configReducer } from 'store/system/reducer';
 import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete } from 'actions/autocomplete';
 
 let middlewares = [thunk];
