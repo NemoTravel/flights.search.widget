@@ -1,21 +1,8 @@
-import { TOGGLE_BLOCK, SHOW_ERRORS } from 'actions';
+import { SHOW_ERRORS } from 'actions';
 import { formIsValid } from 'selectors/form';
 import { MODE_NEMO } from 'state';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
-
-/**
- * Show/hide dropdown blocks on the search form.
- * 
- * @param blockName
- * @returns {Object}
- */
-export function toggleBlock(blockName) {
-	return {
-		type: TOGGLE_BLOCK,
-		payload: blockName
-	}
-}
 
 export function showErrors(showErrors) {
 	return {

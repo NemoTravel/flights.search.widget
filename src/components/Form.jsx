@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as formActions from 'actions/form';
+import * as formActions from 'store/form/actions';
 import classnames from 'classnames';
 import Search from 'components/Form/Search';
 import WebskyHiddenForm from 'components/WebskyHiddenForm';
