@@ -28,7 +28,7 @@ export function autocompleteReducer(state, { type, payload }) {
 	return state;
 }
 
-export default function(state = autocompleteState, action) {
+export default function(state = autocompleteState, action = {}) {
 	if (action.autocompleteType) {
 		return {
 			...state,
