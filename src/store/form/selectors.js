@@ -47,12 +47,14 @@ function getArrivalOptionsFromState(state) {
 }
 
 function mapOptions(options) {
-	return options.map(option => {
-		return {
-			value: option,
-			label: option.airport.name + option.airport.nameEn + option.airport.IATA
-		}
-	});
+	return options
+		.filter(option => option && option.airport && option.airport.name && option.airport.nameEn && option.airport.IATA)
+		.map(option => {
+			return {
+				value: option,
+				label: option.airport.name + option.airport.nameEn + option.airport.IATA
+			}
+		});
 }
 
 /**
