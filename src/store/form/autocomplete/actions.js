@@ -4,7 +4,7 @@ import {
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED
 } from 'store/actions';
-import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'parsers';
+import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'services/parsers';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
 
