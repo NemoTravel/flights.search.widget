@@ -21,7 +21,7 @@ function datesReducer(state, { type, payload }) {
 	return state;
 }
 
-export default function(state = datesState, action) {
+export default function(state = datesState, action = {}) {
 	if (action.dateType) {
 		return {
 			...state,
