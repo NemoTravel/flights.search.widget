@@ -1,6 +1,6 @@
 {
   "name": "@nemo.travel/search-widget",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Search form for searching tickets",
   "main": "dist/airlines.search.widget.min.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
     "prepublish": "npm run build",
-  	"test": "jest"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -79,8 +79,13 @@
     "modulePaths": [
       "/src"
     ],
-    "moduleFileExtensions": ["js", "jsx"],
-    "moduleDirectories": ["node_modules"],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
     "moduleNameMapper": {}
   }
 }
