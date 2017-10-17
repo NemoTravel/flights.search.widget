@@ -11,7 +11,7 @@ export function configReducer(state, newConfig) {
 	return resultState;
 }
 
-export default function(state = systemState, action) {
+export default function(state = systemState, action = {}) {
 	switch (action.type) {
 		case LOAD_CONFIG:
 			return configReducer(state, action.payload);
