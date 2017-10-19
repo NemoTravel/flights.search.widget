@@ -3,6 +3,7 @@ import DatePicker from '@nemo.travel/react-datepicker';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 import autobind from 'autobind-decorator';
+import { isIE } from 'utils';
 
 export default class Datepicker extends Component {
 	constructor(props) {
@@ -98,7 +99,7 @@ export default class Datepicker extends Component {
 		
 		return <DatePicker
 			ref={calendar => this.calendar = calendar}
-			disabled={!isActive}
+			disabled={isIE() ? false : !isActive}
 			locale={locale}
 			dayClassName={specialDayClassName}
 			// dropdownMode="scroll"

@@ -49,6 +49,7 @@ export default class Return extends Datepicker {
 				<div className="widget-ui-datepicker__footer__button" onClick={() => {
 					if (this.nemoDatepicker) {
 						this.nemoDatepicker.disable();
+						this.nemoDatepicker.calendar.setOpen(false);
 					}
 				}}>
 					{i18n('form', 'noBackTicket')}
