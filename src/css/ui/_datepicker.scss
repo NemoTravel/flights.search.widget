@@ -47,37 +47,40 @@
 		display: block;
 		padding-top: 20px;
 		
-		&:before {
-			content: $icon-plane;
-			position: absolute;
-			font-family: 'OpenSkyIcons', sans-serif;
-			speak: none;
-			font-style: normal;
-			font-weight: normal;
-			font-variant: normal;
-			text-transform: none;
-			line-height: 1;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-			font-size: 20px;
-			transform: translate(0, -25%) rotate(-45deg);
-			top: 50%;
-			margin-left: -32px;
-			margin-top: 3px;
+		.widget-ui-mobile__title {
+			&:before {
+				content: $icon-plane;
+				position: absolute;
+				font-family: 'OpenSkyIcons', sans-serif;
+				speak: none;
+				font-style: normal;
+				font-weight: normal;
+				font-variant: normal;
+				text-transform: none;
+				line-height: 1;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				font-size: 20px;
+				transform: translate(0, -25%) rotate(-45deg);
+				top: 50%;
+				margin-left: -32px;
+				margin-top: 4px;
 
-			@include adaptivity(phone) {
-				margin-top: -7px;
-				display: none;
+				@include adaptivity(phone) {
+					display: none;
+				}
 			}
 		}
 		
 		&_return {
-			&:before {
-				transform: translate(0, -25%) rotate(135deg);
-				margin-top: 4px;
+			.widget-ui-mobile__title {
+				&:before {
+					transform: translate(0, -25%) rotate(135deg);
+					margin-top: 4px;
 
-				@include adaptivity(phone) {
-					margin-top: -5px;
+					@include adaptivity(phone) {
+						display: none;
+					}
 				}
 			}
 		}

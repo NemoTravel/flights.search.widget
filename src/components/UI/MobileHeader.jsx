@@ -17,7 +17,7 @@ export default class MobileHeader extends Component {
 		
 		return <div className={`widget-ui-mobile__header ${className}`}>
 			<div className="widget-ui-icon widget-ui-mobile__back" onClick={onClose}/>
-			{title}
+			<div className="widget-ui-mobile__title">{title}</div>
 			{children}
 		</div>
 	}
