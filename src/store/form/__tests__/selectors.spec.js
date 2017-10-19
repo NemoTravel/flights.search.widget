@@ -6,6 +6,7 @@ import { changeAutocompleteSuggestions } from '../autocomplete/actions';
 import rootReducer from 'store/reducer';
 import { selectAirport } from '../autocomplete/actions';
 import { selectDate } from '../dates/actions';
+import { getAltLayout } from '../../../utils';
 
 const getStore = () => {
 	return createStore(rootReducer, initialState);
@@ -50,7 +51,7 @@ describe('store/form/selectors', () => {
 			store.dispatch(changeAutocompleteSuggestions(options, 'departure'));
 			
 			Selector(getDepartureOptions).expect(store.getState()).toReturn([{
-				label: 'МоскваMoscowMOW',
+				label: 'МоскваMoscowMOW' + getAltLayout('Москва'),
 				value: { airport: correctAirport }
 			}]);
 		});
@@ -77,7 +78,7 @@ describe('store/form/selectors', () => {
 			store.dispatch(changeAutocompleteSuggestions(options, 'arrival'));
 			
 			Selector(getArrivalOptions).expect(store.getState()).toReturn([{
-				label: 'МоскваMoscowMOW',
+				label: 'МоскваMoscowMOW' + getAltLayout('Москва'),
 				value: { airport: correctAirport }
 			}]);
 		});
