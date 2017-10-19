@@ -3,9 +3,9 @@ import * as Cache from 'cache';
 
 export const clearURL = url => url.trim().replace(/^\/|\/$/g, '');
 
-export const encodeURLParams = (params) => {
+export const encodeURLParams = (params = {}) => {
 	let result = '',
-		numOfParams = Object.keys(params).length,
+		numOfParams = typeof params === 'object' ? Object.keys(params).length : 0,
 		i = 1;
 
 	if (numOfParams) {
