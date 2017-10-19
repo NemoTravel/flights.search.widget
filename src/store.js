@@ -2,7 +2,7 @@ import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'store/reducer';
-import { cache } from 'utils';
+import * as Cache from 'cache';
 import { initialState, systemState, fillStateFromCache } from 'state';
 import { configReducer } from 'store/system/reducer';
 import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete } from 'store/form/autocomplete/actions';
@@ -44,7 +44,7 @@ const STORE_CACHE_KEY = 'cached_store';
  * Get cached state object.
  */
 export function getCachedState() {
-	const cachedState = cache(STORE_CACHE_KEY);
+	const cachedState = Cache.get(STORE_CACHE_KEY);
 	return cachedState ? cachedState : {};
 }
 
@@ -54,7 +54,7 @@ export function getCachedState() {
  * @param state
  */
 export function cacheState(state) {
-	cache(STORE_CACHE_KEY, state);
+	Cache.set(STORE_CACHE_KEY, state);
 }
 
 /**

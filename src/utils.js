@@ -1,18 +1,5 @@
-import Cookie from 'js-cookie';
 import moment from 'moment';
-
-const decode = (string) => {
-	try {
-		return JSON.parse(string);
-	}
-	catch (e) {
-		return string;
-	}
-};
-
-const encode = (object) => {
-	return typeof object === 'string' ? object : JSON.stringify(object);
-};
+import * as Cache from 'cache';
 
 export const clearURL = url => url.trim().replace(/^\/|\/$/g, '');
 
@@ -57,33 +44,6 @@ export const URL = (root, params = {}) => {
 };
 
 /**
- * Caching function.
- * 
- * Uses `localStorage` if available, or uses cookies instead.
- * 
- * @param key
- * @param value
- */
-export const cache = (key, value = null) => {
-	if (typeof localStorage !== 'undefined') {
-		if (value) {
-			localStorage.setItem(key, encode(value));
-		}
-		else {
-			return decode(localStorage.getItem(key));
-		}
-	}
-	else {
-		if (value) {
-			Cookie.set(key, encode(value));
-		}
-		else {
-			return decode(Cookie.get(key));
-		}
-	}
-};
-
-/**
  * Internationalization module.
  * 
  * @param moduleName
@@ -92,7 +52,7 @@ export const cache = (key, value = null) => {
  */
 export const i18n = (moduleName, label) => {
 	try {
-		let locale = cache('locale');
+		let locale = Cache.get(Cache.KEY_LOCALE);
 		locale = locale ? locale : 'en';
 		const module = require('i18n/' + locale + '/' + moduleName);
 		
