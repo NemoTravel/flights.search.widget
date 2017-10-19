@@ -15,18 +15,42 @@ export const parseAutocompleteOptions = response => {
 	let options = [];
 
 	if (response && response.guide.autocomplete.iata instanceof Array) {
-		const { airports, countries } = response.guide;
+		const { airports, countries, cities } = response.guide;
+		const iataMap = {};
 		
-		options = response.guide.autocomplete.iata
-			.filter(({ IATA }) => IATA in airports && airports[IATA].name) // Ignore options without information about airport.
-			.map(({ IATA, directFlight, isCity }) => {
-				airports[IATA].country = countries[airports[IATA].countryCode];
-				airports[IATA].isCity = isCity;
-	
-				return {
-					airport: airports[IATA],
-					isDirect: directFlight
-				};
+		// Sometimes, city has it's own list of airports (ex: Moscow (MOW)), so we have to process them too.
+		const cityHasAirports = responseAirport => {
+			if (
+				responseAirport.isCity &&
+				cities.hasOwnProperty(responseAirport.cityId) &&
+				cities[responseAirport.cityId].airports instanceof Array
+			) {
+				return cities[responseAirport.cityId].airports;
+			}
+			else {
+				return [];
+			}
+		};
+		
+		const processAirport = ({ IATA, directFlight, isCity }) => {
+			const airport = airports[IATA];
+			airport.country = countries[airport.countryCode];
+			airport.isCity = !!isCity;
+
+			// Remember all processed IATA codes.
+			iataMap[IATA] = true;
+
+			return { airport, isDirect: !!directFlight };
+		};
+		
+		response.guide.autocomplete.iata
+			.filter(({ IATA }) => !iataMap.hasOwnProperty(IATA) && airports.hasOwnProperty(IATA) && airports[IATA].name)
+			.map(responseAirport => {
+				options.push(processAirport(responseAirport));
+				
+				cityHasAirports(responseAirport)
+					.filter(({ IATA }) => !iataMap.hasOwnProperty(IATA) && airports.hasOwnProperty(IATA) && airports[IATA].name)
+					.map(cityResponseAirport => options.push(processAirport(cityResponseAirport)));
 			});
 	}
 
