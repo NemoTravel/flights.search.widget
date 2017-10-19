@@ -3,7 +3,7 @@ import Main from 'components/Main';
 import { Provider } from 'react-redux';
 import { getStore } from 'store';
 import { systemState } from 'state';
-import { cache } from 'utils';
+import * as Cache from 'cache';
 import autobind from 'autobind-decorator';
 import CodeBlock from 'components/UI/CodeBlock';
 
@@ -31,7 +31,7 @@ export default class Demo extends React.Component {
 			nemoURL: defaultNemoURL
 		};
 
-		cache('locale', defaultLang);
+		Cache.set(Cache.KEY_LOCALE, defaultLang);
 	}
 	
 	componentDidMount() {

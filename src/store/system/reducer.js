@@ -1,12 +1,12 @@
 import { LOAD_CONFIG } from 'store/actions';
-import { cache } from 'utils';
+import * as Cache from 'cache';
 import { systemState } from 'state';
 
 export function configReducer(state, newConfig) {
 	let resultState = { ...state, ...newConfig };
 
 	// Store current language code in the cache.
-	cache('locale', resultState.locale);
+	Cache.set(Cache.KEY_LOCALE, resultState.locale);
 
 	return resultState;
 }

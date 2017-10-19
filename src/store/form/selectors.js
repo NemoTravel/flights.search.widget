@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { getTotalPassengersCount } from 'store/form/passengers/selectors';
+import { getAltLayout } from 'utils';
 
 function getForm(state) {
 	return state.form;
@@ -52,7 +53,7 @@ function mapOptions(options) {
 		.map(option => {
 			return {
 				value: option,
-				label: option.airport.name + option.airport.nameEn + option.airport.IATA
+				label: option.airport.name + option.airport.nameEn + option.airport.IATA + getAltLayout(option.airport.name)
 			}
 		});
 }
