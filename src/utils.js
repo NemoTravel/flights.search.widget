@@ -97,3 +97,33 @@ export const isIE = () => {
 		!!(navigator.userAgent.match(/Trident/) || 
 		navigator.userAgent.match(/rv:11/));
 };
+
+const getAltLayoutCache = {};
+
+export const getAltLayout = string => {
+	if (getAltLayoutCache[string]) {
+		return getAltLayoutCache[string];
+	}
+	
+	const eng = " `qwertyuiop[]asdfghjkl;'zxcvbnm,./~QWERTYUIOP{}ASDFGHJKLZXCVBNM<>?".split('');
+	const rus = " ёйцукенгшщзхъфывапролджэячсмитьбю.ЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЯЧСМИТЬБЮ,".split('');
+	const map = {};
+	let result = '';
+	
+	if (/[a-zA-Z]+/.test(string)) {
+		eng.map((engChar, index) => map[engChar] = rus[index]);
+	}
+	else {
+		rus.map((rusChar, index) => map[rusChar] = eng[index]);
+	}
+
+	for (let i = 0, max = string.length; i < max; i++) {
+		result += map[string[i]];
+	}
+	
+	if (result) {
+		getAltLayoutCache[string] = result;
+	}
+	
+	return result;
+};
