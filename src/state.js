@@ -42,11 +42,13 @@ export const autocompleteState = {
 export const datesState = {
 	'departure': {
 		isActive: true,
-		date: null
+		date: null,
+		availableDates: []
 	},
 	'return': {
 		isActive: false,
-		date: null
+		date: null,
+		availableDates: []
 	}
 };
 
