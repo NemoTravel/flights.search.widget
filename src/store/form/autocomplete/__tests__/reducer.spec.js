@@ -1,7 +1,7 @@
 import { autocompleteState } from 'state';
 import autocompleteReducer from '../reducer';
 import { AIRPORT_SELECTED } from '../../../actions';
-import { startAutocompleteLoading, finishAutocompleteLoading, selectAirport, changeAutocompleteSuggestions } from '../actions';
+import { startAutocompleteLoading, finishAutocompleteLoading, setSelectedAirport, changeAutocompleteSuggestions } from '../actions';
 import { Reducer } from 'redux-testkit';
 
 describe('store/form/autocomplete', () => {
@@ -28,7 +28,7 @@ describe('store/form/autocomplete', () => {
 		
 		it('should handle `AIRPORT_SELECTED`', () => {
 			const airport = { name: 'Domodedovo', IATA: 'MOW' };
-			Reducer(autocompleteReducer).expect(selectAirport(airport, 'departure')).toChangeInState({ departure: { airport: airport } });
+			Reducer(autocompleteReducer).expect(setSelectedAirport(airport, 'departure')).toChangeInState({ departure: { airport: airport } });
 		});
 		
 		it('should handle `AUTOCOMPLETE_SUGGESTIONS_CHANGED`', () => {
@@ -48,7 +48,7 @@ describe('store/form/autocomplete', () => {
 		
 		it('should handle `AIRPORT_SELECTED`', () => {
 			const airport = { name: 'Domodedovo', IATA: 'MOW' };
-			Reducer(autocompleteReducer).expect(selectAirport(airport, 'arrival')).toChangeInState({ arrival: { airport: airport } });
+			Reducer(autocompleteReducer).expect(setSelectedAirport(airport, 'arrival')).toChangeInState({ arrival: { airport: airport } });
 		});
 		
 		it('should handle `AUTOCOMPLETE_SUGGESTIONS_CHANGED`', () => {

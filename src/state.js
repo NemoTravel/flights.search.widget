@@ -17,7 +17,8 @@ export const systemState = {
 	autoFocusReturnDate: false,
 	mode: MODE_NEMO,
 	defaultDepartureAirport: null,
-	useNearestAirport: false
+	useNearestAirport: false,
+	highlightAvailableDates: false
 };
 
 // export const blockVisibilityState = {
@@ -42,11 +43,13 @@ export const autocompleteState = {
 export const datesState = {
 	'departure': {
 		isActive: true,
-		date: null
+		date: null,
+		availableDates: []
 	},
 	'return': {
 		isActive: false,
-		date: null
+		date: null,
+		availableDates: []
 	}
 };
 

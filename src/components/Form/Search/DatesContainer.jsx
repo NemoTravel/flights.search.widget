@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as datesActions from 'store/form/dates/actions';
 import DepartureDatepicker from 'components/Form/Search/Datepicker/Departure';
 import ReturnDatepicker from 'components/Form/Search/Datepicker/Return';
-import { getDatesBetweenDepartureAndReturn } from 'store/form/dates/selectors';
+import { getDepartureHighlightedDates, getReturnHighlightedDates } from 'store/form/dates/selectors';
 
 class DatesContainer extends Component {
 	render() {
@@ -34,7 +34,7 @@ class DatesContainer extends Component {
 						this.returnInput.focus();
 					}
 				}}
-				highlightDates={this.props.datesBetweenDepartureAndReturn}
+				highlightDates={this.props.getDepartureHighlightedDates}
 				specialDate={returnDatepicker.date}
 			/>
 			
@@ -45,7 +45,7 @@ class DatesContainer extends Component {
 				openToDate={returnInitialDate}
 				selectDate={datepickerChange}
 				toggleDatePicker={toggleDatePicker}
-				highlightDates={this.props.datesBetweenDepartureAndReturn}
+				highlightDates={this.props.getReturnHighlightedDates}
 				getRef={input => this.returnInput = input}
 				specialDate={departureDatepicker.date}
 			/>
@@ -60,7 +60,8 @@ export default connect(
 			departureDatepicker: state.form.dates.departure,
 			returnDatepicker: state.form.dates.return,
 			showErrors: state.form.showErrors,
-			datesBetweenDepartureAndReturn: getDatesBetweenDepartureAndReturn(state)
+			getDepartureHighlightedDates: getDepartureHighlightedDates(state),
+			getReturnHighlightedDates: getReturnHighlightedDates(state)
 		};
 	},
 	dispatch => {

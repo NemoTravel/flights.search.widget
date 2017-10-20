@@ -305,6 +305,13 @@
 				border-radius: 0;
 			}
 
+			&--hasFlight {
+				color: #666666;
+				background: rgba(#FFDA00, 0.2);
+				border-radius: 0;
+				font-weight: 400;
+			}
+
 			&--highlighted {
 				color: $title-color;
 				background: rgba($title-color, 0.1);

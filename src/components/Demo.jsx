@@ -195,6 +195,18 @@ export default class Demo extends React.Component {
 						</label>
 					</div>
 				</div>
+				
+				<div className="row">
+					<div className="col form-check">
+						<label className="form-check-label">
+							<input type="checkbox" className="form-check-input" onChange={e => {
+								this.config.highlightAvailableDates = e.target.checked;
+								this.processConfig();
+							}}/>
+							<CodeBlock>highlightAvailableDates</CodeBlock>: подсвечивать в календаре даты с доступными рейсами (для режима Websky)
+						</label>
+					</div>
+				</div>
 			</div>
 
 			<div className="widget-demo-content">
