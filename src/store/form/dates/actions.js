@@ -1,4 +1,4 @@
-import { SELECT_DATE, TOGGLE_DATEPICKER } from 'store/actions';
+import { SELECT_DATE, TOGGLE_DATEPICKER, SET_AVAILABLE_DATES } from 'store/actions';
 
 function getDateByType(state, dateType) {
 	return state.form.dates[dateType].date;
@@ -55,6 +55,16 @@ export function toggleDatePicker(isActive, dateType) {
 		dateType,
 		payload: {
 			isActive
+		}
+	};
+}
+
+export function setAvailableDates(dates, dateType) {
+	return {
+		type: SET_AVAILABLE_DATES,
+		dateType,
+		payload: {
+			dates
 		}
 	};
 }
