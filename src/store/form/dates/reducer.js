@@ -1,4 +1,4 @@
-import { TOGGLE_DATEPICKER, SELECT_DATE } from 'store/actions';
+import { TOGGLE_DATEPICKER, SELECT_DATE, SET_AVAILABLE_DATES } from 'store/actions';
 import { datesState } from 'state';
 
 export function selectDateReducer(state, date) {
@@ -9,6 +9,10 @@ export function toggleDatepickerReducer(state, isActive) {
 	return { ...state, isActive };
 }
 
+export function setAvailableDatesReducer(state, availableDates) {
+	return { ...state, availableDates };
+}
+
 function datesReducer(state, { type, payload }) {
 	switch (type) {
 		case TOGGLE_DATEPICKER:
@@ -16,6 +20,9 @@ function datesReducer(state, { type, payload }) {
 
 		case SELECT_DATE:
 			return selectDateReducer(state, payload.date);
+
+		case SET_AVAILABLE_DATES:
+			return setAvailableDatesReducer(state, payload.availableDates);
 	}
 
 	return state;

@@ -59,12 +59,12 @@ export function toggleDatePicker(isActive, dateType) {
 	};
 }
 
-export function setAvailableDates(dates, dateType) {
+export function setAvailableDates(availableDates, dateType) {
 	return {
 		type: SET_AVAILABLE_DATES,
 		dateType,
 		payload: {
-			dates
+			availableDates
 		}
 	};
 }
