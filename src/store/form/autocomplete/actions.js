@@ -5,6 +5,7 @@ import {
 	AIRPORT_SELECTED
 } from 'store/actions';
 import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'services/parsers';
+import { parseDatesAvailability } from 'services/parsers/datesAvailability';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
 
@@ -50,6 +51,45 @@ export function changeAutocompleteSuggestions(suggestions, autocompleteType) {
 }
 
 export function selectAirport(airport, autocompleteType) {
+	return (dispatch, getState) => {
+		dispatch(setSelectedAirport(airport, autocompleteType));
+		
+		const state = getState();
+		
+		if (
+			state.system.mode === MODE_WEBSKY && 
+			state.system.highlightAvailableDates &&
+			state.form.autocomplete.departure.airport &&
+			state.form.autocomplete.arrival.airport
+		) {
+			const depIATA = state.form.autocomplete.departure.airport.IATA;
+			const arrIATA = state.form.autocomplete.arrival.airport.IATA;
+			
+			let requestURL = `${clearURL(state.system.nemoURL)}/api/proxy/websky/availability/dep/${depIATA}/arr/${arrIATA}`;
+			let requestParams = {
+				webskyURL: encodeURIComponent(state.system.webskyURL)
+			};
+			
+			fetch(URL(requestURL, requestParams))
+				.then(response => response.json())
+				.then(response => {
+					const dates = parseDatesAvailability(response);
+	
+					if (dates) {
+						console.log(dates);
+					}
+	
+					// dispatch(finishAutocompleteLoading(autocompleteType));
+				})
+				.catch(() => {
+					// dispatch(changeAutocompleteSuggestions([], autocompleteType));
+					// dispatch(finishAutocompleteLoading(autocompleteType));
+				});
+		}
+	};
+}
+
+export function setSelectedAirport(airport, autocompleteType) {
 	return {
 		type: AIRPORT_SELECTED,
 		autocompleteType,
@@ -174,7 +214,7 @@ export function loadAirportForAutocomplete(IATA, autocompleteType) {
 	return (dispatch, getState) => {
 		fetch(`${getState().system.nemoURL}/api/guide/airports/${IATA}`)
 			.then(response => response.json())
-			.then(response => dispatch(selectAirport(parseAirportFromGuide(response, IATA), autocompleteType)))
+			.then(response => dispatch(setSelectedAirport(parseAirportFromGuide(response, IATA), autocompleteType)))
 	};
 }
 
@@ -188,6 +228,6 @@ export function loadNearestAirportForAutocomplete(autocompleteType) {
 	return (dispatch, getState) => {
 		fetch(`${getState().system.nemoURL}/api/guide/airports/nearest`)
 			.then(response => response.json())
-			.then(response => dispatch(selectAirport(parseNearestAirport(response), autocompleteType)))
+			.then(response => dispatch(setSelectedAirport(parseNearestAirport(response), autocompleteType)))
 	};
 }

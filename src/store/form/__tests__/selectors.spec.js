@@ -4,7 +4,7 @@ import { Selector } from 'redux-testkit';
 import { createStore } from 'redux';
 import { changeAutocompleteSuggestions } from '../autocomplete/actions';
 import rootReducer from 'store/reducer';
-import { selectAirport } from '../autocomplete/actions';
+import { setSelectedAirport } from '../autocomplete/actions';
 import { selectDate } from '../dates/actions';
 import { getAltLayout } from '../../../utils';
 
@@ -23,8 +23,8 @@ describe('store/form/selectors', () => {
 	
 	it('should return `true` when form is filled out', () => {
 		const store = getStore();
-		store.dispatch(selectAirport(correctAirport, 'departure'));
-		store.dispatch(selectAirport(anotherCorrectAirport, 'arrival'));
+		store.dispatch(setSelectedAirport(correctAirport, 'departure'));
+		store.dispatch(setSelectedAirport(anotherCorrectAirport, 'arrival'));
 		store.dispatch(selectDate({}, 'departure'));
 
 		Selector(formIsValid).expect(store.getState()).toReturn(true);
