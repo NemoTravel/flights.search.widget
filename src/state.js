@@ -1,5 +1,5 @@
 import { autocompleteAirportReducer } from 'store/form/autocomplete/reducer';
-import { selectDateReducer, toggleDatepickerReducer } from 'store/form/dates/reducer';
+import { selectDateReducer, toggleDatepickerReducer, setAvailableDatesReducer } from 'store/form/dates/reducer';
 import moment from 'moment';
 
 export const MODE_NEMO = 'NEMO';
@@ -124,20 +124,32 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				const cachedReturnDate = stateFromCache.form.dates.return;
 				const today = moment().startOf('day');
 
-				if (cachedDepartureDate && cachedDepartureDate.date) {
-					const newDepartureDate = moment(cachedDepartureDate.date).locale(state.system.locale);
-					
-					if (newDepartureDate.isSameOrAfter(today)) {
-						state.form.dates.departure = selectDateReducer(cachedDepartureDate, newDepartureDate);
+				if (cachedDepartureDate) {
+					if (cachedDepartureDate.date) {
+						const newDepartureDate = moment(cachedDepartureDate.date).locale(state.system.locale);
+
+						if (newDepartureDate.isSameOrAfter(today)) {
+							state.form.dates.departure = selectDateReducer(cachedDepartureDate, newDepartureDate);
+						}
+					}
+
+					if (cachedDepartureDate.availableDates instanceof Array && cachedDepartureDate.availableDates.length) {
+						state.form.dates.departure = setAvailableDatesReducer(cachedDepartureDate, cachedDepartureDate.availableDates);
 					}
 				}
 
-				if (cachedReturnDate && cachedReturnDate.date) {
-					const newReturnDate = moment(cachedReturnDate.date).locale(state.system.locale);
-					
-					if (newReturnDate.isSameOrAfter(today)) {
-						state.form.dates.return = toggleDatepickerReducer(cachedReturnDate, true);
-						state.form.dates.return = selectDateReducer(cachedReturnDate, newReturnDate);
+				if (cachedReturnDate) {
+					if (cachedReturnDate.date) {
+						const newReturnDate = moment(cachedReturnDate.date).locale(state.system.locale);
+
+						if (newReturnDate.isSameOrAfter(today)) {
+							state.form.dates.return = toggleDatepickerReducer(cachedReturnDate, true);
+							state.form.dates.return = selectDateReducer(cachedReturnDate, newReturnDate);
+						}
+					}
+
+					if (cachedReturnDate.availableDates instanceof Array && cachedReturnDate.availableDates.length) {
+						state.form.dates.return = setAvailableDatesReducer(cachedReturnDate, cachedReturnDate.availableDates);
 					}
 				}
 			}
