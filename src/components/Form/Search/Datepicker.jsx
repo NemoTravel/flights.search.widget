@@ -14,6 +14,7 @@ export default class Datepicker extends Component {
 		this.popperPlacement = null;
 		this.tooltipText = '';
 		this.showErrors = false;
+		this.isDisableable = false;
 	}
 
 	/**
@@ -70,7 +71,8 @@ export default class Datepicker extends Component {
 		let maxDate = maxDateProp ? maxDateProp : moment().add(1, 'years');
 
 		return <div className="col widget-form-dates__col">
-			<UIDatepicker 
+			<UIDatepicker
+				isDisableable={this.isDisableable}
 				ref={calendar => this.nemoDatepicker = calendar}
 				type={this.type}
 				isActive={isActive} 

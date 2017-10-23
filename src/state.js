@@ -127,14 +127,14 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				if (cachedDepartureDate) {
 					if (cachedDepartureDate.date) {
 						const newDepartureDate = moment(cachedDepartureDate.date).locale(state.system.locale);
-
+						
 						if (newDepartureDate.isSameOrAfter(today)) {
 							state.form.dates.departure = selectDateReducer(cachedDepartureDate, newDepartureDate);
 						}
 					}
-
+					
 					if (cachedDepartureDate.availableDates instanceof Array && cachedDepartureDate.availableDates.length) {
-						state.form.dates.departure = setAvailableDatesReducer(cachedDepartureDate, cachedDepartureDate.availableDates);
+						state.form.dates.departure = setAvailableDatesReducer(state.form.dates.departure, cachedDepartureDate.availableDates);
 					}
 				}
 
@@ -144,12 +144,12 @@ export const fillStateFromCache = (state, stateFromCache) => {
 
 						if (newReturnDate.isSameOrAfter(today)) {
 							state.form.dates.return = toggleDatepickerReducer(cachedReturnDate, true);
-							state.form.dates.return = selectDateReducer(cachedReturnDate, newReturnDate);
+							state.form.dates.return = selectDateReducer(state.form.dates.return, newReturnDate);
 						}
 					}
 
 					if (cachedReturnDate.availableDates instanceof Array && cachedReturnDate.availableDates.length) {
-						state.form.dates.return = setAvailableDatesReducer(cachedReturnDate, cachedReturnDate.availableDates);
+						state.form.dates.return = setAvailableDatesReducer(state.form.dates.return, cachedReturnDate.availableDates);
 					}
 				}
 			}
