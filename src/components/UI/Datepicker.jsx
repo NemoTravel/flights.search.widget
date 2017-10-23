@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DatePicker from '@nemo.travel/react-datepicker/lib/datepicker';
+import DatePicker from '@nemo.travel/react-datepicker';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 import autobind from 'autobind-decorator';
