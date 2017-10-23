@@ -11,17 +11,7 @@ let middlewares = [thunk];
 
 function enableProfiler(isEnabled = false) {
 	if (isEnabled) {
-		/* eslint-disable-next-line no-unused-vars,react/no-deprecated */
-		let createClass = React.createClass;
-
-		Object.defineProperty(React, 'createClass', {
-			set: (nextCreateClass) => {
-				createClass = nextCreateClass;
-			},
-		});
-
-		/* eslint-disable no-unused-vars */
-		const {whyDidYouUpdate} = require('why-did-you-update');
+		const { whyDidYouUpdate } = require('@nemo.travel/why-did-you-update');
 		whyDidYouUpdate(React);
 	}
 }
