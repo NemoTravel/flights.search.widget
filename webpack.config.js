@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const packageJSON = require('./package.json');
 const moduleName = 'flights.search.widget';
 
 // For DEV mode prepend "NODE_ENV=dev" before "webpack" command.
@@ -148,15 +148,16 @@ if (!isDevMode) {
 		})
 	);
 
-	config.plugins.push(
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('production')
-			}
-		})
-	);
-
 	config.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
 }
+
+config.plugins.push(
+	new webpack.DefinePlugin({
+		'process.env': {
+			NODE_ENV: JSON.stringify(isDevMode ? 'development' : 'production'),
+			VERSION: JSON.stringify(packageJSON.version)
+		}
+	})
+);
 
 module.exports = config;
