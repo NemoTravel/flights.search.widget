@@ -62,7 +62,7 @@ export default class Demo extends React.Component {
 						<p>Ниже представлены элементы управления, позволяющие в режиме реального времени изменять конфигурацию виджета.</p>
 						<p>
 							Полный перечень параметров конфигурации представлен в описании к репозиторию виджета: 
-							<a href="https://github.com/NemoTravel/Airlines-Search-Widget#Конфигурация"> https://github.com/NemoTravel/Airlines-Search-Widget#Конфигурация</a>
+							<a href="https://github.com/NemoTravel/flights.search.widget#Конфигурация"> https://github.com/NemoTravel/flights.search.widget#Конфигурация</a>
 						</p>
 					</div>
 				</div>
@@ -71,7 +71,7 @@ export default class Demo extends React.Component {
 					<div className="col form-group">
 						<label>
 							<div className="widget-demo-config__description">
-								Конфиг виджета для инициализации: <CodeBlock>AirlinesSearchWidget.init(...конфиг)</CodeBlock>
+								Конфиг виджета для инициализации: <CodeBlock>FlightsSearchWidget.init(...конфиг)</CodeBlock>
 							</div>
 
 							<textarea className="form-control" rows="10" value={this.state.generatedConfig} onClick={event => event.target.select()}/>

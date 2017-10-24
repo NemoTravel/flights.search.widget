@@ -1,8 +1,8 @@
 {
   "name": "@nemo.travel/search-widget",
-  "version": "0.8.2",
-  "description": "Search form for searching tickets",
-  "main": "dist/airlines.search.widget.min.js",
+  "version": "0.8.3",
+  "description": "Lightweight form for searching airtickets",
+  "main": "dist/flights.search.widget.min.js",
   "scripts": {
     "server": "node server.js",
     "build": "cross-env NODE_ENV=production webpack",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NemoTravel/Airlines-Search-Widget.git"
+    "url": "git+https://github.com/NemoTravel/flights.search.widget.git"
   },
   "author": "Paul Naumov <p.naumov@nemo.travel>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NemoTravel/Airlines-Search-Widget/issues"
+    "url": "https://github.com/NemoTravel/flights.search.widget/issues"
   },
-  "homepage": "https://github.com/NemoTravel/Airlines-Search-Widget#readme",
+  "homepage": "https://github.com/NemoTravel/flights.search.widget#readme",
   "devDependencies": {
     "@nemo.travel/why-did-you-update": "0.0.8",
     "autoprefixer": "^7.1.3",

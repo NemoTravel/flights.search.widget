@@ -9,7 +9,7 @@ import './css/main.scss';
 import 'whatwg-fetch';
 
 /**
- * This will be exported to the global scope as `AirlinesSearchWidget.init`.
+ * This will be exported to the global scope as `FlightsSearchWidget.init`.
  */
 export function init(config = {}) {
 	if (!config.rootElement) { throw Error('Please specify `rootElement` parameter in the configuration object.'); }

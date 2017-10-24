@@ -2,27 +2,27 @@
     <img width="200" src="http://mjolnir.com.ua/kcfinder/upload/images/logo.jpg">
 </p>
 
-# Airlines Search Widget
+# Flights Search Widget
 [![npm version](https://badge.fury.io/js/%40nemo.travel%2Fsearch-widget.svg)](https://badge.fury.io/js/%40nemo.travel%2Fsearch-widget)
-[![Build Status](https://travis-ci.org/NemoTravel/Airlines-Search-Widget.svg?branch=master)](https://travis-ci.org/NemoTravel/Airlines-Search-Widget)
+[![Build Status](https://travis-ci.org/NemoTravel/flights.search.widget.svg?branch=master)](https://travis-ci.org/NemoTravel/flights.search.widget)
 
 ## Установка виджета
 
 Для работы виджета необходимо любым удобным способом подключить на страницу файлы из папки `dist`:
-* файл стилизации виджета: `airlines.search.widget.min.css`
-* файл с JavaScript-кодом виджета: `airlines.search.widget.min.js`
+* файл стилизации виджета: `flights.search.widget.min.css`
+* файл с JavaScript-кодом виджета: `flights.search.widget.min.js`
 * в той же папке, где будет расположен файл стилизации, следует разместить папку `images`, необходимую для корректного отображения изображений
 
 ## Инициализация виджета на странице
 
-При подключении файла `airlines.search.widget.min.js`, на странице становится доступен JavaScript-объект `AirlinesSearchWidget` с единственным методом `init`, запускающим инициализацию виджета:
+При подключении файла `flights.search.widget.min.js`, на странице становится доступен JavaScript-объект `FlightsSearchWidget` с единственным методом `init`, запускающим инициализацию виджета:
 
 ```html
 <div id="root"></div>
-<link rel="stylesheet" href="airlines.search.widget.min.css">
-<script src="airlines.search.widget.min.js"></script>
+<link rel="stylesheet" href="flights.search.widget.min.css">
+<script src="flights.search.widget.min.js"></script>
 <script>
-    AirlinesSearchWidget.init({
+    FlightsSearchWidget.init({
         webskyURL: 'http://demo.websky.aero/gru',
         nemoURL: 'http://widget.mlsd.ru',
         rootElement: document.getElementById('root'),

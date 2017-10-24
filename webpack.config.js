@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const moduleName = 'airlines.search.widget';
+const moduleName = 'flights.search.widget';
 
 // For DEV mode prepend "NODE_ENV=dev" before "webpack" command.
 // terminal: NODE_ENV=dev webpack
@@ -37,7 +37,7 @@ let config = {
 		publicPath: '/dist/',
 		// Output file name.
 		filename: `${moduleName}.min.js`,
-		library: 'AirlinesSearchWidget'
+		library: 'FlightsSearchWidget'
 	},
 
 	resolve: {
