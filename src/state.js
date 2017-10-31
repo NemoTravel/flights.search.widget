@@ -4,6 +4,7 @@ import moment from 'moment';
 
 export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';
+export const CLASS_TYPES = ["Econom", "Business", "First"];
 
 export const systemState = {
 	rootElement: null,
@@ -26,6 +27,8 @@ export const systemState = {
 // 	registration: false,
 // 	bookings: false
 // };
+
+export const classType = 'first';
 
 export const autocompleteState = {
 	departure: {
@@ -85,7 +88,8 @@ export const initialState = {
 	form: {
 		dates: datesState,
 		passengers: passengersState,
-		autocomplete: autocompleteState
+		autocomplete: autocompleteState,
+		classType: CLASS_TYPES[0]
 	}
 };
 

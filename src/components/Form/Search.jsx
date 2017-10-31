@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatesContainer from 'components/Form/Search/DatesContainer';
 import AutocompleteContainer from 'components/Form/Search/AutocompleteContainer';
 import PassengersContainer from 'components/Form/Search/PassengersContainer';
+import ClassType from 'components/Form/Search/ClassType';
 import { i18n } from 'utils';
 
 export default class Search extends Component {
@@ -16,6 +17,10 @@ export default class Search extends Component {
 				<div className="row widget-form-search__footer">
 					<div className="col">
 						<PassengersContainer/>
+					</div>
+
+					<div className="col">
+						<ClassType/>
 					</div>
 					
 					<div className="col">
