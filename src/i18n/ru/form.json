@@ -31,5 +31,8 @@
 	"passenger_INF_age": "до 2 лет",
 	"passenger_INS": "Младенцы с местом",
 	"passenger_INS_age": "до 2 лет",
-	"passengers_done": "Готово"
+	"passengers_done": "Готово",
+	"class_Ecomony": "Эконом",
+	"class_Business": "Бизнес",
+	"class_First": "Первый"
 }

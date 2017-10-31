@@ -1,0 +1,78 @@
+@import "../variables";
+& .nemo-ui-checkbox {
+	display: inline-block;
+	padding: 10px;
+	cursor: pointer;
+
+	&__input {
+		position: absolute;
+		left: -99999px;
+		opacity: 0.1;
+	}
+
+	&__input:checked + &__caption,
+	&__input:not(:checked) + &__caption {
+		&:before {
+			display: block;
+		}
+	}
+
+	&__input:not(:checked) + &__caption {
+		&:before {
+			content: '+';
+
+			//background-position: bottom;
+		}
+	}
+
+	&__input:checked + &__caption {
+		background: red;
+
+		&:before {
+			content: $icon-dropdown-arrow;
+			width: 40px;
+			height: 40px;
+			background: #ccc;
+		}
+	}
+
+	&__input:disabled + &__caption {
+		color: #ccc;
+		background-color: #ccc;
+
+		&:before {
+
+			//background-position: bottom;
+		}
+	}
+
+	&__caption {
+		position: relative;
+		display: inline-block;
+		font-size: 14px;
+		color: blue;
+		line-height: 0;
+		padding: 10px;
+		vertical-align: top;
+
+		&:before {
+			content: $icon-dropdown-arrow;
+			position: absolute;
+			display: none;
+			left: 0;
+			top: 0;
+			overflow: hidden;
+			width: 40px;
+			height: 40px;
+			border-radius: 4px;
+		}
+
+		&:hover {
+			color: #ccc;
+		}
+	}
+
+	&_paddingTopBottom{
+		padding: 15px 0;
+	}
+}

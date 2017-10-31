@@ -4,30 +4,28 @@ import UIDropdown from 'components/UI/Dropdown';
 import * as additionalActions from 'store/form/additional/actions';
 import { bindActionCreators } from 'redux';
 import {getClassType} from 'store/form/additional/selector';
-import initialState from 'state';
+import {CLASS_TYPES} from 'state';
 
 class ClassType extends Component {
+
+	renderOptions () {
+		let {setClassType, classOptions} = this.props;
+
+		return classOptions.map((value, index) => {
+			return <div onClick={() => setClassType(value)} key={index}>
+				{value}
+			</div>
+		});
+	}
+
 	renderContent() {
-		let {setClassType, classType} = this.props;
 
 		return <div className="widget-form-passengers__content">
 			<div className="widget-form-passengers__items">
-				<div onClick={() => setClassType('Ecomon')}>
-					Эконом
-				</div>
-				<div onClick={() => setClassType('Business')}>
-					Бизнес
-				</div>
-				<div onClick={() => setClassType('First')}>
-					Первый
-				</div>
+				{this.renderOptions()}
 			</div>
 		</div>
 
-	}
-
-	componentDidMount() {
-		console.log(this.props);
 	}
 
 	renderDropdownTrigger() {
@@ -47,7 +45,8 @@ class ClassType extends Component {
 
 function mapStateToProps(state) {
 	return {
-		classType: getClassType(state)
+		classType: getClassType(state),
+		classOptions: CLASS_TYPES
 	}
 }
 
