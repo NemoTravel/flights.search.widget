@@ -83,13 +83,18 @@ export const passengersState = {
 	}
 };
 
+export const vicinityDates = false;
+
 export const initialState = {
 	system: systemState,
 	form: {
 		dates: datesState,
 		passengers: passengersState,
 		autocomplete: autocompleteState,
-		classType: CLASS_TYPES[0]
+		classType: {
+			classType: CLASS_TYPES[0],
+			vicinityDates: vicinityDates
+		}
 	}
 };
 

@@ -3,6 +3,7 @@ import DatesContainer from 'components/Form/Search/DatesContainer';
 import AutocompleteContainer from 'components/Form/Search/AutocompleteContainer';
 import PassengersContainer from 'components/Form/Search/PassengersContainer';
 import ClassType from 'components/Form/Search/ClassType';
+import VicinityDates from 'components/Form/Search/VicinityDates';
 import { i18n } from 'utils';
 
 export default class Search extends Component {
@@ -21,6 +22,15 @@ export default class Search extends Component {
 
 					<div className="col">
 						<ClassType/>
+					</div>
+
+					<div className="col">
+						<VicinityDates/>
+					</div>
+
+					<div className="col">
+						<input type="checkbox"/>
+						Только прямые
 					</div>
 					
 					<div className="col">
