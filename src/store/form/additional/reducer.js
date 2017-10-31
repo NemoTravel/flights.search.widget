@@ -1,12 +1,12 @@
 import { SET_CLASS_TYPE, TOGGLE_VICINITY_DATES } from 'store/actions';
-import { classType, vicinityDates } from 'state';
+import { additional } from 'state';
 
-export default function(state = classType, action = {}) {
+export default function(state = additional, action = {}) {
 
-	if (action.classType) {
+	if (action.type === SET_CLASS_TYPE) {
 		return {
 			...state,
-			'classType': action.classType
+			'classType': action.value
 		}
 	}
 

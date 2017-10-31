@@ -28,8 +28,6 @@ export const systemState = {
 // 	bookings: false
 // };
 
-export const classType = 'first';
-
 export const autocompleteState = {
 	departure: {
 		isLoading: false,
@@ -85,16 +83,20 @@ export const passengersState = {
 
 export const vicinityDates = false;
 
+export const classType = 'first';
+
+export const additional = {
+	classType: CLASS_TYPES[0],
+	vicinityDates: vicinityDates
+};
+
 export const initialState = {
 	system: systemState,
 	form: {
 		dates: datesState,
 		passengers: passengersState,
 		autocomplete: autocompleteState,
-		classType: {
-			classType: CLASS_TYPES[0],
-			vicinityDates: vicinityDates
-		}
+		additional: additional
 	}
 };
 

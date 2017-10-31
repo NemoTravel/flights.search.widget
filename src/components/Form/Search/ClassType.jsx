@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UIDropdown from 'components/UI/Dropdown';
-import * as classTypeActions from 'store/form/classType/actions';
+import * as additionalActions from 'store/form/additional/actions';
 import { bindActionCreators } from 'redux';
-import {getClassType} from 'store/form/classType/selector';
+import {getClassType} from 'store/form/additional/selector';
 import initialState from 'state';
 
 class ClassType extends Component {
@@ -52,7 +52,7 @@ function mapStateToProps(state) {
 }
 
 function mapActionsToProps(dispatch) {
-	return bindActionCreators(classTypeActions, dispatch);
+	return bindActionCreators(additionalActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(ClassType);
