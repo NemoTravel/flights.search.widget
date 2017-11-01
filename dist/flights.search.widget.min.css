@@ -5240,12 +5240,17 @@
 }
 
 .widget-form-classType {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
   text-align: left;
+  position: relative;
+}
+
+.widget-form-classType .widget-form-passengers__item {
+  height: 40px;
 }
 
 .widget-form-additionalOptions {
-  margin-top: 15px;
+  margin-top: 1rem;
 }
 
 .widget-form-search {

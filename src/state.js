@@ -20,7 +20,7 @@ export const systemState = {
 	defaultDepartureAirport: null,
 	useNearestAirport: false,
 	highlightAvailableDates: false,
-	vicinityDays: 2
+	vicinityDays: 3
 };
 
 // export const blockVisibilityState = {
@@ -85,7 +85,6 @@ export const passengersState = {
 export const vicinityDates = false;
 export const directFlight = false;
 
-export const classType = 'first';
 
 export const additional = {
 	classType: CLASS_TYPES[0],

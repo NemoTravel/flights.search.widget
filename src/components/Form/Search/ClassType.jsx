@@ -52,12 +52,13 @@ class ClassType extends Component {
 
 		if (widgetMode === MODE_NEMO) {
 			return <div className="widget-form-classType">
-				<UIDropdown contentElement={this.renderContent()} triggerElement={this.renderDropdownTrigger()}
-							ref={ref => (this.dropdown = ref)}/>
+				<UIDropdown
+					contentElement={this.renderContent()}
+					triggerElement={this.renderDropdownTrigger()}
+					ref={ref => (this.dropdown = ref)}/>
 			</div>
 		}
 	}
-
 }
 
 function mapStateToProps(state) {

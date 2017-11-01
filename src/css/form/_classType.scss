@@ -1,7 +1,11 @@
 @import "../variables";
 
 &-classType {
-	margin-bottom: 15px;
+	margin-bottom: 1rem;
 	text-align: left;
+	position: relative;
 
+	.widget-form-passengers__item {
+		height: 40px;
+	}
 }
