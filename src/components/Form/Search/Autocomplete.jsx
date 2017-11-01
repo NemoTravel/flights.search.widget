@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 import Option from 'components/Form/Search/Autocomplete/Option';
 import Value from 'components/Form/Search/Autocomplete/Value';
-import Select from 'react-select';
+import Select from '@nemo.travel/react-select';
 import { i18n } from 'utils';
 import autobind from 'autobind-decorator';
 
