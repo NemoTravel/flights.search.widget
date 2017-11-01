@@ -1,5 +1,5 @@
 @import "../variables";
-& .nemo-ui-checkbox {
+.nemo-ui-checkbox {
 	display: inline-block;
 	padding: 10px;
 	cursor: pointer;
@@ -12,27 +12,42 @@
 
 	&__input:checked + &__caption,
 	&__input:not(:checked) + &__caption {
-		&:before {
+		&:after {
 			display: block;
+			content: '';
 		}
 	}
 
 	&__input:not(:checked) + &__caption {
 		&:before {
 			content: '+';
-
+			width: 20px;
+			height: 20px;
+			position: absolute;
+			background: blue;
 			//background-position: bottom;
 		}
 	}
 
-	&__input:checked + &__caption {
-		background: red;
+	&__input:checked + .nemo-ui-checkbox__caption {
+		color: #1B75BC;
 
 		&:before {
-			content: $icon-dropdown-arrow;
-			width: 40px;
-			height: 40px;
-			background: #ccc;
+			border-radius: 50%;
+			width: 25px;
+			height: 25px;
+			background: #1B75BC;
+			border: 1px solid #1B75BC;
+			color: #ffffff;
+			font-size: 16px;
+			cursor: pointer;
+			display: inline-block;
+			content: "";
+			top: 0;
+			left: 0;
+			position: absolute;
+			line-height: 25px;
+			text-align: center;
 		}
 	}
 
@@ -49,22 +64,29 @@
 	&__caption {
 		position: relative;
 		display: inline-block;
-		font-size: 14px;
-		color: blue;
+		color: #666666;
+		font-weight: 600;
+		font-size: 15px;
 		line-height: 0;
 		padding: 10px;
+		padding-left: 40px;
 		vertical-align: top;
 
 		&:before {
-			content: $icon-dropdown-arrow;
-			position: absolute;
-			display: none;
-			left: 0;
+			content: '';
+			border-radius: 50%;
+			width: 25px;
+			height: 25px;
+			background: #fff;
+			border: 1px solid rgba(0, 0, 0, 0.15);
+			font-size: 16px;
+			cursor: pointer;
+			display: inline-block;
 			top: 0;
-			overflow: hidden;
-			width: 40px;
-			height: 40px;
-			border-radius: 4px;
+			left: 0;
+			position: absolute;
+			line-height: 25px;
+			text-align: center;
 		}
 
 		&:hover {

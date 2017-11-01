@@ -4,7 +4,7 @@ import moment from 'moment';
 
 export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';
-export const CLASS_TYPES = ["Econom", "Business", "First"];
+export const CLASS_TYPES = ["Economy", "Business", "First"];
 
 export const systemState = {
 	rootElement: null,
@@ -82,12 +82,14 @@ export const passengersState = {
 };
 
 export const vicinityDates = false;
+export const directFlight = false;
 
 export const classType = 'first';
 
 export const additional = {
 	classType: CLASS_TYPES[0],
-	vicinityDates: vicinityDates
+	vicinityDates: vicinityDates,
+	directFlight: directFlight
 };
 
 export const initialState = {
@@ -106,6 +108,7 @@ export const fillStateFromCache = (state, stateFromCache) => {
 	// Disclaimer: this bullshit below can be avoided with use of `lodash` or `underscore`, 
 	// but those libraries are not lightweight enough for us.
 	if (stateFromCache) {
+		console.log(stateFromCache);
 		// Check if language has been changed since last user visit.
 		// If so, do not process cached airport information, because the cached data most likely is in the different language.
 		const canBeProcessed = !stateFromCache.system || !stateFromCache.system.locale || stateFromCache.system.locale === state.system.locale;
@@ -169,6 +172,14 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				for (const passType in stateFromCache.form.passengers) {
 					if (stateFromCache.form.passengers.hasOwnProperty(passType)) {
 						state.form.passengers[passType].count = stateFromCache.form.passengers[passType].count;
+					}
+				}
+			}
+
+			if (stateFromCache.form.additional) {
+				for (const option in stateFromCache.form.additional) {
+					if (stateFromCache.form.additional.hasOwnProperty(option)) {
+						state.form.additional[option] = stateFromCache.form.additional[option];
 					}
 				}
 			}

@@ -1,4 +1,4 @@
-import { SET_CLASS_TYPE, TOGGLE_VICINITY_DATES } from 'store/actions';
+import { SET_CLASS_TYPE, TOGGLE_VICINITY_DATES, TOGGLE_DIRECT_FLIGHT } from 'store/actions';
 import { additional } from 'state';
 
 export default function(state = additional, action = {}) {
@@ -14,6 +14,13 @@ export default function(state = additional, action = {}) {
 		return {
 			...state,
 			'vicinityDates': !state.vicinityDates
+		}
+	}
+
+	if (action.type === TOGGLE_DIRECT_FLIGHT) {
+		return {
+			...state,
+			'directFlight': !state.directFlight
 		}
 	}
 

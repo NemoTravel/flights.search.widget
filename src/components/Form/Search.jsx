@@ -29,11 +29,6 @@ export default class Search extends Component {
 					</div>
 
 					<div className="col">
-						<input type="checkbox"/>
-						Только прямые
-					</div>
-					
-					<div className="col">
 						<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>
 							{i18n('form', 'search')}
 						</button>
