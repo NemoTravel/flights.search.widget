@@ -4,28 +4,52 @@ import UIDropdown from 'components/UI/Dropdown';
 import * as additionalActions from 'store/form/additional/actions';
 import { bindActionCreators } from 'redux';
 import { vicinityDatesSelect, directFlightSelect, directFlightAction } from 'store/form/additional/selector';
+import { i18n } from 'utils';
+import { MODE_NEMO } from 'state';
 
 class VicinityDates extends Component {
-	render() {
-		const {vicinityDatesAction, vicinityDatesSelect, directFlightAction, directFlightSelect} = this.props;
+	renderVicinityDates() {
+		const {vicinityDatesAction, vicinityDatesSelect, vicinityDays} = this.props;
 
-		return <div >
-			<label className="nemo-ui-checkbox" >
+		if (vicinityDays > 0) {
+			return <label className="nemo-ui-checkbox">
 				<input className="nemo-ui-checkbox__input" type="checkbox" onChange={vicinityDatesAction} checked={vicinityDatesSelect}/>
-				<span className="nemo-ui-checkbox__caption">Искать +/- 3 дня</span>
+				<span className="nemo-ui-checkbox__caption">
+					{i18n('form', 'additional_vicinityDates').replace('[%-days-%]', vicinityDays)}
+				</span>
 			</label>
-			<label className="nemo-ui-checkbox" >
-				<input className="nemo-ui-checkbox__input" type="checkbox" onChange={directFlightAction} checked={directFlightSelect}/>
-				<span className="nemo-ui-checkbox__caption">Без пересадок</span>
-			</label>
-		</div>
+		}
+	}
+
+	renderDirect() {
+		const { directFlightAction, directFlightSelect } = this.props;
+
+		return <label className="nemo-ui-checkbox">
+			<input className="nemo-ui-checkbox__input" type="checkbox" onChange={directFlightAction} checked={directFlightSelect}/>
+			<span className="nemo-ui-checkbox__caption">
+					{i18n('form', 'additional_directFlight')}
+				</span>
+		</label>
+	}
+
+	render() {
+		const { widgetMode } = this.props;
+
+		if (widgetMode === MODE_NEMO) {
+			return <div className="widget-form-additionalOptions">
+				{this.renderVicinityDates()}
+				{this.renderDirect()}
+			</div>
+		}
 	}
 }
 
 function mapStateToProps(state) {
 	return {
 		vicinityDatesSelect: vicinityDatesSelect(state),
-		directFlightSelect: directFlightSelect(state)
+		directFlightSelect: directFlightSelect(state),
+		vicinityDays: state.system.vicinityDays,
+		widgetMode: state.system.mode
 	}
 }
 

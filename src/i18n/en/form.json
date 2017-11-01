@@ -31,5 +31,11 @@
 	"passenger_INF_age": "under 2 years old",
 	"passenger_INS": "Infants with a seat",
 	"passenger_INS_age": "under 2 years old",
-	"passengers_done": "Done"
+	"passengers_done": "Done",
+	"classSelectHeader": "Service class",
+	"class_Economy": "Economy",
+	"class_Business": "Business",
+	"class_First": "First",
+	"additional_vicinityDates": "Flexible dates",
+	"additional_directFlight": "Direct"
 }

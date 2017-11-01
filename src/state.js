@@ -19,7 +19,8 @@ export const systemState = {
 	mode: MODE_NEMO,
 	defaultDepartureAirport: null,
 	useNearestAirport: false,
-	highlightAvailableDates: false
+	highlightAvailableDates: false,
+	vicinityDays: 2
 };
 
 // export const blockVisibilityState = {
@@ -108,7 +109,6 @@ export const fillStateFromCache = (state, stateFromCache) => {
 	// Disclaimer: this bullshit below can be avoided with use of `lodash` or `underscore`, 
 	// but those libraries are not lightweight enough for us.
 	if (stateFromCache) {
-		console.log(stateFromCache);
 		// Check if language has been changed since last user visit.
 		// If so, do not process cached airport information, because the cached data most likely is in the different language.
 		const canBeProcessed = !stateFromCache.system || !stateFromCache.system.locale || stateFromCache.system.locale === state.system.locale;

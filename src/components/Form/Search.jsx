@@ -18,17 +18,11 @@ export default class Search extends Component {
 				<div className="row widget-form-search__footer">
 					<div className="col">
 						<PassengersContainer/>
-					</div>
-
-					<div className="col">
-						<ClassType/>
-					</div>
-
-					<div className="col">
 						<VicinityDates/>
 					</div>
 
 					<div className="col">
+						<ClassType/>
 						<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>
 							{i18n('form', 'search')}
 						</button>

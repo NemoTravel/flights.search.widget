@@ -43,7 +43,7 @@ function runNemoSearch(state) {
 
 	//VicinityDates
 	if (state.form.additional.vicinityDates) {
-		requestURL += '-vicinityDates';
+		requestURL += '-vicinityDates=' + state.system.vicinityDays;
 	}
 
 	//Direct flight

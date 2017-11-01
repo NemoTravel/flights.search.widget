@@ -4509,7 +4509,7 @@
 
 .widget .nemo-ui-checkbox {
   display: inline-block;
-  padding: 10px;
+  padding: 10px 0;
   cursor: pointer;
 }
 
@@ -4517,20 +4517,6 @@
   position: absolute;
   left: -99999px;
   opacity: 0.1;
-}
-
-.widget .nemo-ui-checkbox__input:checked + .widget .nemo-ui-checkbox__caption:after,
-.widget .nemo-ui-checkbox__input:not(:checked) + .widget .nemo-ui-checkbox__caption:after {
-  display: block;
-  content: '';
-}
-
-.widget .nemo-ui-checkbox__input:not(:checked) + .widget .nemo-ui-checkbox__caption:before {
-  content: '+';
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  background: blue;
 }
 
 .widget .nemo-ui-checkbox__input:checked + .nemo-ui-checkbox__caption {
@@ -4555,20 +4541,15 @@
   text-align: center;
 }
 
-.widget .nemo-ui-checkbox__input:disabled + .widget .nemo-ui-checkbox__caption {
-  color: #ccc;
-  background-color: #ccc;
-}
-
 .widget .nemo-ui-checkbox__caption {
   position: relative;
   display: inline-block;
   color: #666666;
   font-weight: 600;
   font-size: 15px;
-  line-height: 0;
-  padding: 10px;
-  padding-left: 40px;
+  height: 25px;
+  line-height: 25px;
+  padding: 0 40px;
   vertical-align: top;
 }
 
@@ -4591,10 +4572,6 @@
 
 .widget .nemo-ui-checkbox__caption:hover {
   color: #ccc;
-}
-
-.widget .nemo-ui-checkbox_paddingTopBottom {
-  padding: 15px 0;
 }
 
 .widget #webskyHiddenForm {
@@ -5260,6 +5237,15 @@
   .widget-form-passengers__footer {
     display: block;
   }
+}
+
+.widget-form-classType {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.widget-form-additionalOptions {
+  margin-top: 15px;
 }
 
 .widget-form-search {
@@ -5968,7 +5954,7 @@
 
 .widget-demo .nemo-ui-checkbox {
   display: inline-block;
-  padding: 10px;
+  padding: 10px 0;
   cursor: pointer;
 }
 
@@ -5976,20 +5962,6 @@
   position: absolute;
   left: -99999px;
   opacity: 0.1;
-}
-
-.widget-demo .nemo-ui-checkbox__input:checked + .widget-demo .nemo-ui-checkbox__caption:after,
-.widget-demo .nemo-ui-checkbox__input:not(:checked) + .widget-demo .nemo-ui-checkbox__caption:after {
-  display: block;
-  content: '';
-}
-
-.widget-demo .nemo-ui-checkbox__input:not(:checked) + .widget-demo .nemo-ui-checkbox__caption:before {
-  content: '+';
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  background: blue;
 }
 
 .widget-demo .nemo-ui-checkbox__input:checked + .nemo-ui-checkbox__caption {
@@ -6014,20 +5986,15 @@
   text-align: center;
 }
 
-.widget-demo .nemo-ui-checkbox__input:disabled + .widget-demo .nemo-ui-checkbox__caption {
-  color: #ccc;
-  background-color: #ccc;
-}
-
 .widget-demo .nemo-ui-checkbox__caption {
   position: relative;
   display: inline-block;
   color: #666666;
   font-weight: 600;
   font-size: 15px;
-  line-height: 0;
-  padding: 10px;
-  padding-left: 40px;
+  height: 25px;
+  line-height: 25px;
+  padding: 0 40px;
   vertical-align: top;
 }
 
@@ -6050,10 +6017,6 @@
 
 .widget-demo .nemo-ui-checkbox__caption:hover {
   color: #ccc;
-}
-
-.widget-demo .nemo-ui-checkbox_paddingTopBottom {
-  padding: 15px 0;
 }
 
 .widget-demo-config {

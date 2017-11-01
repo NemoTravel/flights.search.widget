@@ -32,7 +32,10 @@
 	"passenger_INS": "Младенцы с местом",
 	"passenger_INS_age": "до 2 лет",
 	"passengers_done": "Готово",
-	"class_Ecomony": "Эконом",
+	"classSelectHeader": "Класс обслуживания",
+	"class_Economy": "Эконом",
 	"class_Business": "Бизнес",
-	"class_First": "Первый"
+	"class_First": "Первый",
+	"additional_vicinityDates": "Искать ± [%-days-%] дня",
+	"additional_directFlight": "Без пересадок"
 }
