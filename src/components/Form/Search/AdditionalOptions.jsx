@@ -41,6 +41,9 @@ class AdditionalOptions extends Component {
 				{this.renderDirect()}
 			</div>
 		}
+		else {
+			return null;
+		}
 	}
 }
 

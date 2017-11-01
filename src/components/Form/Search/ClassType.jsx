@@ -58,6 +58,9 @@ class ClassType extends Component {
 					ref={ref => (this.dropdown = ref)}/>
 			</div>
 		}
+		else {
+			return null;
+		}
 	}
 }
 
