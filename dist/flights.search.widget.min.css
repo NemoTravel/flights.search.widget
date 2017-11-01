@@ -5253,6 +5253,16 @@
   margin-top: 1rem;
 }
 
+.widget-form-additionalOptions label {
+  margin-bottom: 0;
+}
+
+@media (max-width: 650px) {
+  .widget-form-additionalOptions {
+    margin-bottom: 1rem;
+  }
+}
+
 .widget-form-search {
   padding: 15px;
 }

@@ -82,14 +82,10 @@ export const passengersState = {
 	}
 };
 
-export const vicinityDates = false;
-export const directFlight = false;
-
-
 export const additional = {
 	classType: CLASS_TYPES[0],
-	vicinityDates: vicinityDates,
-	directFlight: directFlight
+	vicinityDates: false,
+	directFlight: false
 };
 
 export const initialState = {

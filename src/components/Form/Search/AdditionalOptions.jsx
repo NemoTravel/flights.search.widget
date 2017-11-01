@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import UIDropdown from 'components/UI/Dropdown';
 import * as additionalActions from 'store/form/additional/actions';
-import { bindActionCreators } from 'redux';
 import { vicinityDatesSelect, directFlightSelect, directFlightAction } from 'store/form/additional/selector';
 import { i18n } from 'utils';
 import { MODE_NEMO } from 'state';
 
-class VicinityDates extends Component {
+class AdditionalOptions extends Component {
 	renderVicinityDates() {
 		const {vicinityDatesAction, vicinityDatesSelect, vicinityDays} = this.props;
 
@@ -57,4 +57,4 @@ function mapActionsToProps(dispatch) {
 	return bindActionCreators(additionalActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(VicinityDates);
+export default connect(mapStateToProps, mapActionsToProps)(AdditionalOptions);
