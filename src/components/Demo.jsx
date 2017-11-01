@@ -12,7 +12,7 @@ export default class Demo extends React.Component {
 		super(props);
 		const defaultLang = 'ru';
 		const defaultWebskyURL = 'http://demo.websky.aero/gru';
-		const defaultNemoURL = 'http://widget.mlsd.ru';
+		const defaultNemoURL = 'http://sys.nemo.travel';
 		
 		this.store = getStore({
 			locale: defaultLang
@@ -104,7 +104,7 @@ export default class Demo extends React.Component {
 								<CodeBlock>nemoURL</CodeBlock>: URL системы Nemo
 							</div>
 							
-							<input type="text" className="form-control" value={this.state.nemoURL} placeholder="http://widget.mlsd.ru" onChange={e => {
+							<input type="text" className="form-control" value={this.state.nemoURL} placeholder="http://sys.nemo.travel" onChange={e => {
 								this.config.nemoURL = e.target.value;
 								this.setState({
 									nemoURL: e.target.value
