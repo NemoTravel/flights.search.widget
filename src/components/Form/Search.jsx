@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DatesContainer from 'components/Form/Search/DatesContainer';
 import AutocompleteContainer from 'components/Form/Search/AutocompleteContainer';
 import PassengersContainer from 'components/Form/Search/PassengersContainer';
-import ClassType from 'components/Form/Search/ClassType';
+import ClassTypeContainer from 'components/Form/Search/ClassTypeContainer';
 import AdditionalOptionsContainer from 'components/Form/Search/AdditionalOptionsContainer';
 import { i18n } from 'utils';
 
@@ -22,7 +22,7 @@ export default class Search extends Component {
 					</div>
 
 					<div className="col">
-						<ClassType/>
+						<ClassTypeContainer/>
 						<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>
 							{i18n('form', 'search')}
 						</button>

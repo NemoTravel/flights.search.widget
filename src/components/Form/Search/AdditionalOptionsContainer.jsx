@@ -10,7 +10,9 @@ import { MODE_NEMO } from 'state';
 class AdditionalOptionsContainer extends Component {
 	renderVicinityDates() {
 		const {vicinityDatesAction, vicinityDatesSelect, vicinityDays, widgetMode} = this.props;
-		let label = i18n('form', 'additional_vicinityDates').replace('[%-days-%]', vicinityDays);
+		let dayLabel = i18n('form', vicinityDays > 1 ? 'additional_vicinityDates_days' : 'additional_vicinityDates_day'),
+			   label = i18n('form', 'additional_vicinityDates').replace('[%-days-%]', vicinityDays)
+				   .replace('[%-dayLabel-%]', dayLabel);
 
 		return <Checkbox
 			id='vicinity'

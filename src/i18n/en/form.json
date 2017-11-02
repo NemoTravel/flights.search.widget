@@ -36,6 +36,8 @@
 	"class_Economy": "Economy",
 	"class_Business": "Business",
 	"class_First": "First",
-	"additional_vicinityDates": "Flexible dates",
-	"additional_directFlight": "Direct"
+	"additional_vicinityDates": "Flexible [%-days-%] [%-dayLabel-%]",
+	"additional_directFlight": "Direct",
+	"additional_vicinityDates_day": "day",
+	"additional_vicinityDates_days": "days"
 }

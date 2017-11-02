@@ -4510,7 +4510,6 @@
 .widget .nemo-ui-checkbox {
   display: inline-block;
   padding: 10px 0;
-  cursor: pointer;
 }
 
 .widget .nemo-ui-checkbox__input {
@@ -5082,16 +5081,19 @@
   padding-left: 0.5rem;
 }
 
-.widget-form-passengers {
+.widget-form-passengers,
+.widget-form-classType {
   position: relative;
 }
 
-.widget-form-passengers input {
+.widget-form-passengers input,
+.widget-form-classType input {
   text-transform: lowercase;
 }
 
 @media only screen and (min-width: 651px) {
-  .widget-form-passengers.form-group {
+  .widget-form-passengers.form-group,
+  .form-group.widget-form-classType {
     margin-bottom: 0;
   }
 }
@@ -5101,17 +5103,20 @@
   cursor: pointer;
 }
 
-.widget-form-passengers__header {
+.widget-form-passengers__header,
+.widget-form-classType__header {
   display: none;
 }
 
 @media only screen and (max-width: 650px) {
-  .widget-form-passengers__header {
+  .widget-form-passengers__header,
+  .widget-form-classType__header {
     display: block;
   }
 }
 
-.widget-form-passengers__content {
+.widget-form-passengers__content,
+.widget-form-classType__content {
   position: absolute;
   left: 0;
   right: 0;
@@ -5127,7 +5132,8 @@
 }
 
 @media only screen and (max-width: 650px) {
-  .widget-form-passengers__content {
+  .widget-form-passengers__content,
+  .widget-form-classType__content {
     position: fixed;
     top: 50px;
     bottom: 0;
@@ -5137,7 +5143,8 @@
   }
 }
 
-.widget-form-passengers__item {
+.widget-form-passengers__item,
+.widget-form-classType__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -5150,16 +5157,19 @@
 }
 
 @media only screen and (max-width: 650px) {
-  .widget-form-passengers__item {
+  .widget-form-passengers__item,
+  .widget-form-classType__item {
     padding: 10px 15px;
   }
 
-  .widget-form-passengers__item:last-of-type {
+  .widget-form-passengers__item:last-of-type,
+  .widget-form-classType__item:last-of-type {
     border-bottom: 1px solid #e6e6e6;
   }
 }
 
-.widget-form-passengers__title {
+.widget-form-passengers__title,
+.widget-form-classType__title {
   font-weight: 600;
   overflow: hidden;
   display: inline-block;
@@ -5277,12 +5287,25 @@
 
 .widget-form-classType {
   margin-bottom: 1rem;
-  text-align: left;
-  position: relative;
 }
 
-.widget-form-classType .widget-form-passengers__item {
+.widget-form-classType input {
+  text-transform: none;
+  user-select: none;
+}
+
+.widget-form-classType__trigger,
+.widget-form-classType__trigger input {
+  cursor: pointer;
+}
+
+.widget-form-classType__item {
   height: 40px;
+  cursor: pointer;
+}
+
+.widget-form-classType__item:hover {
+  background: rgba(0, 76, 186, 0.07);
 }
 
 .widget-form-additionalOptions {
@@ -6006,7 +6029,6 @@
 .widget-demo .nemo-ui-checkbox {
   display: inline-block;
   padding: 10px 0;
-  cursor: pointer;
 }
 
 .widget-demo .nemo-ui-checkbox__input {

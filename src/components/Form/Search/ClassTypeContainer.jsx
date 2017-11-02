@@ -8,14 +8,15 @@ import { getClassType } from 'store/form/additional/selector';
 import { CLASS_TYPES, MODE_NEMO } from 'state';
 import { i18n } from 'utils';
 
-class ClassType extends Component {
+class ClassTypeContainer extends Component {
 
-	renderOptions (closeBlock) {
+	renderOptions () {
+		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
 		let { setClassType, classOptions } = this.props;
 
 		return classOptions.map((value, index) => {
-			return <div className="widget-form-passengers__item" onClick={() => {setClassType(value); closeBlock()}} key={index}>
-				<div className="widget-form-passengers__title">
+			return <div className="widget-form-classType__item" onClick={() => {setClassType(value); closeBlock()}} key={index}>
+				<div className="widget-form-classType__title">
 					{i18n('form','class_'+value)}
 				</div>
 			</div>
@@ -25,15 +26,15 @@ class ClassType extends Component {
 	renderContent() {
 		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
 
-		return <div className="widget-form-passengers__content">
+		return <div className="widget-form-classType__content">
 			<MobileHeader
-				className="widget-form-passengers__header"
+				className="widget-form-classType__header"
 				title={i18n('form', 'classSelectHeader')}
 				onClose={closeBlock}
 			/>
 
-			<div className="widget-form-passengers__items">
-				{this.renderOptions(closeBlock)}
+			<div className="widget-form-classType__items">
+				{this.renderOptions()}
 			</div>
 		</div>
 	}
@@ -41,7 +42,7 @@ class ClassType extends Component {
 	renderDropdownTrigger() {
 		let { classType } = this.props;
 
-		return <div className="widget-form-passengers__trigger widget-ui-input__wrapper">
+		return <div className="widget-form-classType__trigger widget-ui-input__wrapper">
 			<input type="text" className="form-control" value={i18n('form', 'class_' + classType)} readOnly={true} spellCheck={false}/>
 			<div className="widget-ui-icon widget-ui-input__arrow"/>
 		</div>;
@@ -76,4 +77,4 @@ function mapActionsToProps(dispatch) {
 	return bindActionCreators(additionalActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(ClassType);
+export default connect(mapStateToProps, mapActionsToProps)(ClassTypeContainer);
