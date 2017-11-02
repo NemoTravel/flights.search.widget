@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UIDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/Form/Search/Passengers/Counter';
 import MobileHeader from 'components/UI/MobileHeader';
 import { i18n } from 'utils';
 
-export default class Selector extends Component {
-
+export default class Selector extends React.Component {
 	/**
 	 * Render passengers counters;
-	 * 
+	 *
 	 * @returns {Array}
 	 */
 	renderCounters() {
@@ -23,7 +22,7 @@ export default class Selector extends Component {
 				canIncrease = counterAvailability[passenger.code].canIncrease;
 				canDecrease = counterAvailability[passenger.code].canDecrease;
 			}
-			
+
 			return <Counter
 				key={i}
 				addPassenger={addPassenger}
@@ -40,7 +39,7 @@ export default class Selector extends Component {
 
 	/**
 	 * Render clickable input element.
-	 * 
+	 *
 	 * @returns {XML}
 	 */
 	renderDropdownTrigger() {
@@ -52,19 +51,19 @@ export default class Selector extends Component {
 
 	/**
 	 * Render dropdown block with passengers counters.
-	 * 
+	 *
 	 * @returns {XML}
 	 */
 	renderDropdownContent() {
 		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
-		
+
 		return <div className="widget-form-passengers__content">
-			<MobileHeader 
-				className="widget-form-passengers__header" 
-				title={i18n('form', 'passengersSelectHeader')} 
+			<MobileHeader
+				className="widget-form-passengers__header"
+				title={i18n('form', 'passengersSelectHeader')}
 				onClose={closeBlock}
 			/>
-			
+
 			<div className="widget-form-passengers__items">
 				{this.renderCounters()}
 			</div>
@@ -76,10 +75,10 @@ export default class Selector extends Component {
 			</div>
 		</div>;
 	}
-	
+
 	render() {
 		const { totalPassengersCount } = this.props;
-		
+
 		return <div className="form-group widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
 				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()} ref={ref => (this.dropdown = ref)}/>

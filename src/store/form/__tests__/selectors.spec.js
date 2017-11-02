@@ -16,20 +16,23 @@ const correctAirport = { name: 'Москва', nameEn: 'Moscow', IATA: 'MOW' };
 const anotherCorrectAirport = { name: 'Саратов', nameEn: 'Saratov', IATA: 'RTW' };
 const wrongAirport = { IATA: 'MOW' };
 
+/* global describe */
+/* global it */
 describe('store/form/selectors', () => {
 	it('should return `false` on initial state', () => {
 		Selector(formIsValid).expect(initialState).toReturn(false);
 	});
-	
+
 	it('should return `true` when form is filled out', () => {
 		const store = getStore();
+
 		store.dispatch(setSelectedAirport(correctAirport, 'departure'));
 		store.dispatch(setSelectedAirport(anotherCorrectAirport, 'arrival'));
 		store.dispatch(selectDate({}, 'departure'));
 
 		Selector(formIsValid).expect(store.getState()).toReturn(true);
 	});
-	
+
 	describe('departure', () => {
 		it('should return empty array on initial state', () => {
 			Selector(getDepartureOptions).expect(initialState).toReturn([]);
@@ -47,16 +50,16 @@ describe('store/form/selectors', () => {
 		it('should return proper array', () => {
 			const options = [{ airport: correctAirport }];
 			const store = createStore(rootReducer, initialState);
-			
+
 			store.dispatch(changeAutocompleteSuggestions(options, 'departure'));
-			
+
 			Selector(getDepartureOptions).expect(store.getState()).toReturn([{
 				label: 'МоскваMoscowMOW' + getAltLayout('Москва'),
 				value: { airport: correctAirport }
 			}]);
 		});
 	});
-	
+
 	describe('arrival', () => {
 		it('should return empty array on initial state', () => {
 			Selector(getArrivalOptions).expect(initialState).toReturn([]);
@@ -65,18 +68,18 @@ describe('store/form/selectors', () => {
 		it('should return empty array when wrong options given', () => {
 			const options = [wrongAirport];
 			const store = createStore(rootReducer, initialState);
-			
+
 			store.dispatch(changeAutocompleteSuggestions(options, 'arrival'));
-			
+
 			Selector(getArrivalOptions).expect(store.getState()).toReturn([]);
 		});
 
 		it('should return proper array', () => {
 			const options = [{ airport: correctAirport }];
 			const store = createStore(rootReducer, initialState);
-			
+
 			store.dispatch(changeAutocompleteSuggestions(options, 'arrival'));
-			
+
 			Selector(getArrivalOptions).expect(store.getState()).toReturn([{
 				label: 'МоскваMoscowMOW' + getAltLayout('Москва'),
 				value: { airport: correctAirport }

@@ -89,16 +89,18 @@ export const initialState = {
 	}
 };
 
-export const fillStateFromCache = (state, stateFromCache) => {
+export const fillStateFromCache = (currentState, stateFromCache) => {
+	const state = currentState;
+
 	// Let's fill `state` with data from `stateFromCache`.
 	// -------------------------------------------------------------------------------------
-	// Disclaimer: this bullshit below can be avoided with use of `lodash` or `underscore`, 
+	// Disclaimer: this bullshit below can be avoided with use of `lodash` or `underscore`,
 	// but those libraries are not lightweight enough for us.
 	if (stateFromCache) {
 		// Check if language has been changed since last user visit.
 		// If so, do not process cached airport information, because the cached data most likely is in the different language.
 		const canBeProcessed = !stateFromCache.system || !stateFromCache.system.locale || stateFromCache.system.locale === state.system.locale;
-		
+
 		if (stateFromCache.form) {
 			if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
@@ -118,7 +120,7 @@ export const fillStateFromCache = (state, stateFromCache) => {
 					);
 				}
 			}
-			
+
 			if (stateFromCache.form.dates) {
 				const cachedDepartureDate = stateFromCache.form.dates.departure;
 				const cachedReturnDate = stateFromCache.form.dates.return;
@@ -127,12 +129,12 @@ export const fillStateFromCache = (state, stateFromCache) => {
 				if (cachedDepartureDate) {
 					if (cachedDepartureDate.date) {
 						const newDepartureDate = moment(cachedDepartureDate.date).locale(state.system.locale);
-						
+
 						if (newDepartureDate.isSameOrAfter(today)) {
 							state.form.dates.departure = selectDateReducer(cachedDepartureDate, newDepartureDate);
 						}
 					}
-					
+
 					if (cachedDepartureDate.availableDates instanceof Array && cachedDepartureDate.availableDates.length) {
 						state.form.dates.departure = setAvailableDatesReducer(state.form.dates.departure, cachedDepartureDate.availableDates);
 					}
@@ -163,6 +165,6 @@ export const fillStateFromCache = (state, stateFromCache) => {
 			}
 		}
 	}
-	
+
 	return state;
 };

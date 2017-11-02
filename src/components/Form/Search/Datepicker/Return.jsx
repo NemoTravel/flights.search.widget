@@ -1,4 +1,3 @@
-import React from 'react';
 import Datepicker from 'components/Form/Search/Datepicker';
 import MobileHeader from 'components/UI/MobileHeader';
 import { i18n } from 'utils';
@@ -17,7 +16,7 @@ export default class Return extends Datepicker {
 		toggleDatePicker: PropTypes.func.isRequired,
 		specialDate: PropTypes.object
 	};
-	
+
 	constructor(props) {
 		super(props);
 
@@ -26,7 +25,7 @@ export default class Return extends Datepicker {
 		this.popperPlacement = 'top-end';
 		this.isDisableable = true;
 	}
-	
+
 	@autobind
 	closeDatepicker() {
 		if (this.nemoDatepicker) {
@@ -42,10 +41,10 @@ export default class Return extends Datepicker {
 	@autobind
 	renderInner() {
 		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`;
-		
+
 		return <div>
 			<MobileHeader className={mobileHeaderClassName} title={this.placeholder} onClose={this.closeDatepicker}/>
-			
+
 			<div className="widget-ui-datepicker__footer">
 				<div className="widget-ui-datepicker__footer__button" onClick={() => {
 					if (this.nemoDatepicker) {

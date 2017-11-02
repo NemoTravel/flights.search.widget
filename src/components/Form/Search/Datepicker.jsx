@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import UIDatepicker from 'components/UI/Datepicker';
 import MobileHeader from 'components/UI/MobileHeader';
 import moment from 'moment';
 import autobind from 'autobind-decorator';
 
-export default class Datepicker extends Component {
+export default class Datepicker extends React.Component {
 	constructor(props) {
 		super(props);
 		this.nemoDatepicker = null;
@@ -19,7 +19,7 @@ export default class Datepicker extends Component {
 
 	/**
 	 * Select date.
-	 * 
+	 *
 	 * @param {Moment} date
 	 */
 	@autobind
@@ -27,14 +27,14 @@ export default class Datepicker extends Component {
 		this.props.selectDate(date, this.type);
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps) {
 		const { isActive, date, highlightDates, specialDate, showErrors, locale } = this.props;
-		
-		return isActive !== nextProps.isActive || 
+
+		return isActive !== nextProps.isActive ||
 			date !== nextProps.date ||
 			locale !== nextProps.locale ||
 			specialDate !== nextProps.specialDate ||
-			showErrors !== nextProps.showErrors || 
+			showErrors !== nextProps.showErrors ||
 			highlightDates !== nextProps.highlightDates;
 	}
 
@@ -48,39 +48,41 @@ export default class Datepicker extends Component {
 	@autobind
 	renderInner() {
 		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`;
+
 		return <MobileHeader className={mobileHeaderClassName} title={this.placeholder} onClose={this.closeDatepicker}/>;
 	}
-	
+
 	render() {
-		const { 
-		  	toggleDatePicker,
-		  	selectDate,
-		  	getRef,
+		const {
+			toggleDatePicker,
+			selectDate,
+			getRef,
 			locale,
 			date,
 			isActive,
-		  	showErrors,
-		  	specialDate,
-		  	openToDate,
-		  	minDate:minDateProp, 
-		  	maxDate:maxDateProp, 
-		  	highlightDates = [] 
+			showErrors,
+			specialDate,
+			openToDate,
+			minDate: minDateProp,
+			maxDate: maxDateProp,
+			highlightDates = []
 		} = this.props;
-		
-		let minDate = minDateProp ? minDateProp : moment();
-		let maxDate = maxDateProp ? maxDateProp : moment().add(1, 'years');
+
+		const
+			minDate = minDateProp ? minDateProp : moment(),
+			maxDate = maxDateProp ? maxDateProp : moment().add(1, 'years');
 
 		return <div className="col widget-form-dates__col">
 			<UIDatepicker
 				isDisableable={this.isDisableable}
-				ref={calendar => this.nemoDatepicker = calendar}
+				ref={calendar => (this.nemoDatepicker = calendar)}
 				type={this.type}
-				isActive={isActive} 
-				onChange={this.onChangeHandler} 
+				isActive={isActive}
+				onChange={this.onChangeHandler}
 				locale={locale}
 				date={date}
-				openToDate={openToDate} 
-				minDate={minDate} 
+				openToDate={openToDate}
+				minDate={minDate}
 				maxDate={maxDate}
 				getRef={getRef}
 				highlightDates={highlightDates}

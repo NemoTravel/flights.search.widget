@@ -4,13 +4,13 @@ import passengers from 'store/form/passengers/reducer';
 import autocomplete from 'store/form/autocomplete/reducer';
 import dates from 'store/form/dates/reducer';
 
-export function showErrorsReducer(state = false, { type, payload } = {}) {
+export const showErrorsReducer = (state = false, { type, payload } = {}) => {
 	return type === SHOW_ERRORS ? payload : state;
-}
+};
 
 export default function(state, action) {
 	// Some `form` action handlers goes there.
-	
+
 	return combineReducers({
 		showErrors: showErrorsReducer,
 		dates,

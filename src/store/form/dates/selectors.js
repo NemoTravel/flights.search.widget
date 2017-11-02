@@ -12,7 +12,7 @@ const highlightAvailableDates = state => state.system.highlightAvailableDates;
  * Get an array of MomentJS dates between the departure and the return date.
  */
 export const getDatesBetweenDepartureAndReturn = createSelector(
-	[ getDepartureDate, getReturnDate ],
+	[getDepartureDate, getReturnDate],
 	(departureDate, returnDate) => {
 		let result = [];
 
@@ -34,18 +34,18 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
  * Join two arrays:
  * - dates with available flights
  * - dates between departure and arrival
- * 
+ *
  * @param {Array} availableDates
  * @param {Array} intermediateDates
  * @param {Boolean} highlightAvailableDates
  * @returns {Array}
  */
 const createHighlightedDates = (availableDates, intermediateDates, highlightAvailableDates) => {
-	let result = [];
-	
+	const result = [];
+
 	if (highlightAvailableDates && availableDates.length) {
 		result.push({
-			'react-datepicker__day--hasFlight': availableDates.map(({date}) => moment(date))
+			'react-datepicker__day--hasFlight': availableDates.map(({ date }) => moment(date))
 		});
 	}
 
@@ -54,16 +54,16 @@ const createHighlightedDates = (availableDates, intermediateDates, highlightAvai
 			'react-datepicker__day--highlighted': intermediateDates
 		});
 	}
-	
+
 	return result;
 };
 
 export const getDepartureHighlightedDates = createSelector(
-	[ getDepartureAvailableDates, getDatesBetweenDepartureAndReturn, highlightAvailableDates ],
+	[getDepartureAvailableDates, getDatesBetweenDepartureAndReturn, highlightAvailableDates],
 	createHighlightedDates
 );
 
 export const getReturnHighlightedDates = createSelector(
-	[ getReturnAvailableDates, getDatesBetweenDepartureAndReturn, highlightAvailableDates ],
+	[getReturnAvailableDates, getDatesBetweenDepartureAndReturn, highlightAvailableDates],
 	createHighlightedDates
 );

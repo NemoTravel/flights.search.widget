@@ -5,6 +5,7 @@
 		"es6": true
 	},
 	"extends": "eslint:recommended",
+	"parser": "babel-eslint",
 	"parserOptions": {
 		"ecmaFeatures": {
 			"experimentalObjectRestSpread": true,
@@ -24,6 +25,12 @@
 		"no-cond-assign": [
 			2,
 			"always"
+		],
+		"no-console": [
+			2,
+			{
+				"allow": ["warn", "error" ]
+			}
 		],
 		"no-constant-condition": 2,
 		"no-dupe-args": 2,
@@ -84,8 +91,7 @@
 		"no-proto": 2,
 		"no-redeclare": 2,
 		"no-return-assign": [
-			2,
-			"always"
+			2
 		],
 		"no-script-url": 2,
 		"no-self-compare": 2,
@@ -179,7 +185,7 @@
 		],
 		"operator-linebreak": [
 			2,
-			"before"
+			"after"
 		],
 		"padded-blocks": [
 			2,
@@ -235,7 +241,10 @@
 		"prefer-spread": 2,
 		"indent": [
 			2,
-			"tab"
+			"tab",
+			{
+				"SwitchCase": 1
+			}
 		],
 		"quotes": [
 			2,

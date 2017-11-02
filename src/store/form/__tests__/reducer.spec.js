@@ -2,6 +2,9 @@ import { Reducer } from 'redux-testkit';
 import { showErrors } from '../actions';
 import { showErrorsReducer } from '../reducer';
 
+/* global describe */
+/* global it */
+/* global expect */
 describe('store/form/reducer', () => {
 	it('should have initial state', () => {
 		expect(showErrorsReducer()).toEqual(false);
