@@ -1,4 +1,3 @@
-import React from 'react';
 import Datepicker from 'components/Form/Search/Datepicker';
 import { i18n } from 'utils';
 import PropTypes from 'prop-types';

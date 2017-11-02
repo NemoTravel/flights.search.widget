@@ -2,9 +2,7 @@ import { createSelector } from 'reselect';
 import { getTotalPassengersCount } from 'store/form/passengers/selectors';
 import { getAltLayout } from 'utils';
 
-function getForm(state) {
-	return state.form;
-}
+const getForm = state => state.form;
 
 /**
  * Check if search form data is valid and ready for further operations.
@@ -39,24 +37,18 @@ export const formIsValid = createSelector(
 	}
 );
 
-function getDepartureOptionsFromState(state) {
-	return state.form.autocomplete.departure.suggestions;
-}
-
-function getArrivalOptionsFromState(state) {
-	return state.form.autocomplete.arrival.suggestions;
-}
-
-function mapOptions(options) {
+const getDepartureOptionsFromState = state => state.form.autocomplete.departure.suggestions;
+const getArrivalOptionsFromState = state => state.form.autocomplete.arrival.suggestions;
+const mapOptions = options => {
 	return options
 		.filter(option => option && option.airport && option.airport.name && option.airport.nameEn && option.airport.IATA)
 		.map(option => {
 			return {
 				value: option,
 				label: option.airport.name + option.airport.nameEn + option.airport.IATA + getAltLayout(option.airport.name)
-			}
+			};
 		});
-}
+};
 
 /**
  * Create autocomplete options list for arrival and departure.

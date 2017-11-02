@@ -8,11 +8,11 @@ export const nemoToWebskyPassTypes = {
 	INS: 'rvg'
 };
 
-export function setPassengersCounterReducer(state, count) {
+export const setPassengersCounterReducer = (state, count) => {
 	return { ...state, count };
-}
+};
 
-export function passengersReducer(state, { type, payload }) {
+export const passengersReducer = (state, { type, payload }) => {
 	switch (type) {
 		case ADD_PASSENGER:
 			return { ...state, count: state.count + 1 };
@@ -25,9 +25,9 @@ export function passengersReducer(state, { type, payload }) {
 	}
 
 	return state;
-}
+};
 
-export default function(state = passengersState, action = {}) {
+export default (state = passengersState, action = {}) => {
 	if (action.passengerType) {
 		return {
 			...state,
@@ -36,4 +36,4 @@ export default function(state = passengersState, action = {}) {
 	}
 
 	return state;
-}
+};

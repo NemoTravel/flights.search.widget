@@ -4,6 +4,9 @@ import { addPassenger, removePassenger, setCounter } from '../actions';
 import { passengersState } from 'state';
 import { Reducer } from 'redux-testkit';
 
+/* global describe */
+/* global it */
+/* global expect */
 describe('store/passengers/reducer', () => {
 	it('should have initial state', () => {
 		expect(passengersReducer()).toEqual(passengersState);
@@ -16,7 +19,7 @@ describe('store/passengers/reducer', () => {
 	it('should not affect state if no `passengerType` provided', () => {
 		Reducer(passengersReducer).expect({ type: ADD_PASSENGER }).toReturnState(passengersState);
 	});
-	
+
 	describe('ADT', () => {
 		it('should handle `ADD_PASSENGER`', () => {
 			Reducer(passengersReducer).expect(addPassenger('ADT')).toChangeInState({ ADT: { count: 2 } });
@@ -30,7 +33,7 @@ describe('store/passengers/reducer', () => {
 			Reducer(passengersReducer).expect(setCounter(5, 'ADT')).toChangeInState({ ADT: { count: 5 } });
 		});
 	});
-	
+
 	describe('CLD', () => {
 		it('should handle `ADD_PASSENGER`', () => {
 			Reducer(passengersReducer).expect(addPassenger('CLD')).toChangeInState({ CLD: { count: 1 } });
@@ -44,7 +47,7 @@ describe('store/passengers/reducer', () => {
 			Reducer(passengersReducer).expect(setCounter(5, 'CLD')).toChangeInState({ CLD: { count: 5 } });
 		});
 	});
-	
+
 	describe('INF', () => {
 		it('should handle `ADD_PASSENGER`', () => {
 			Reducer(passengersReducer).expect(addPassenger('INF')).toChangeInState({ INF: { count: 1 } });
@@ -58,7 +61,7 @@ describe('store/passengers/reducer', () => {
 			Reducer(passengersReducer).expect(setCounter(5, 'INF')).toChangeInState({ INF: { count: 5 } });
 		});
 	});
-	
+
 	describe('INS', () => {
 		it('should handle `ADD_PASSENGER`', () => {
 			Reducer(passengersReducer).expect(addPassenger('INS')).toChangeInState({ INS: { count: 1 } });
