@@ -3,7 +3,7 @@ import DatesContainer from 'components/Form/Search/DatesContainer';
 import AutocompleteContainer from 'components/Form/Search/AutocompleteContainer';
 import PassengersContainer from 'components/Form/Search/PassengersContainer';
 import ClassType from 'components/Form/Search/ClassType';
-import AdditionalOptions from 'components/Form/Search/AdditionalOptions';
+import AdditionalOptionsContainer from 'components/Form/Search/AdditionalOptionsContainer';
 import { i18n } from 'utils';
 
 export default class Search extends Component {
@@ -18,7 +18,7 @@ export default class Search extends Component {
 				<div className="row widget-form-search__footer">
 					<div className="col">
 						<PassengersContainer/>
-						<AdditionalOptions/>
+						<AdditionalOptionsContainer/>
 					</div>
 
 					<div className="col">

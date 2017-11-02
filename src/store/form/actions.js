@@ -41,12 +41,12 @@ function runNemoSearch(state) {
 	// Class info.
 	requestURL += '-class=' + state.form.additional.classType;
 
-	//VicinityDates
+	// VicinityDates
 	if (state.form.additional.vicinityDates) {
 		requestURL += '-vicinityDates=' + state.system.vicinityDays;
 	}
 
-	//Direct flight
+	// Direct flight
 	if (state.form.additional.directFlight) {
 		requestURL += '-direct';
 	}

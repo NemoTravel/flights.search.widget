@@ -26,7 +26,7 @@
 			display: inline-block;
 			content: "";
 			top: 0;
-			left: 0;
+			left: 25px;
 			position: absolute;
 			line-height: 25px;
 			text-align: center;
@@ -41,8 +41,9 @@
 		font-size: 15px;
 		height: 25px;
 		line-height: 25px;
-		padding: 0 40px;
+		padding: 0 55px;
 		vertical-align: top;
+		cursor: pointer;
 
 		&:before {
 			content: '';
@@ -50,12 +51,13 @@
 			width: 25px;
 			height: 25px;
 			background: #fff;
-			border: 1px solid rgba(0, 0, 0, 0.15);
+			border: 1px solid #ccc;
 			font-size: 16px;
 			cursor: pointer;
 			display: inline-block;
 			top: 0;
 			left: 0;
+			transition: 0.5s;
 			position: absolute;
 			line-height: 25px;
 			text-align: center;
@@ -65,4 +67,41 @@
 			color: #ccc;
 		}
 	}
+
+	& label:before {
+		content: '';
+		width: 50px;
+		height: 25px;
+		background: #ccc;
+		position: absolute;
+		border-radius: 25px;
+	}
+
+	&__input:checked + label {
+		&:before {
+			background: #1B75BC;
+		}
+
+		.nemo-ui-checkbox__caption {
+			color: #1B75BC;
+
+			&:before {
+				border-radius: 50%;
+				border-color: #1B75BC;
+				width: 25px;
+				height: 25px;
+				color: #ffffff;
+				font-size: 16px;
+				cursor: pointer;
+				display: inline-block;
+				content: "";
+				top: 0;
+				left: 25px;
+				position: absolute;
+				line-height: 25px;
+				text-align: center;
+			}
+		}
+	}
+
 }
