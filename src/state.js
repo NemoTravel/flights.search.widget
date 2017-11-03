@@ -82,7 +82,7 @@ export const passengersState = {
 	}
 };
 
-export const additional = {
+export const additionalState = {
 	classType: CLASS_TYPES[0],
 	vicinityDates: false,
 	directFlight: false
@@ -94,7 +94,7 @@ export const initialState = {
 		dates: datesState,
 		passengers: passengersState,
 		autocomplete: autocompleteState,
-		additional: additional
+		additional: additionalState
 	}
 };
 

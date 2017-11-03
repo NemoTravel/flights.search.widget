@@ -1,7 +1,7 @@
 import { SET_CLASS_TYPE, TOGGLE_VICINITY_DATES, TOGGLE_DIRECT_FLIGHT } from 'store/actions';
-import { additional } from 'state';
+import { additionalState } from 'state';
 
-export default function(state = additional, action = {}) {
+export default function(state = additionalState, action = {}) {
 
 	if (action.type === SET_CLASS_TYPE) {
 		return {
