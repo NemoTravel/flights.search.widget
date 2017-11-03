@@ -1,11 +1,11 @@
-export function getClassType (state) {
+export const getClassType = state => {
 	return state.form.additional.classType;
-}
+};
 
-export function vicinityDatesSelect (state) {
+export const vicinityDatesSelect = state => {
 	return state.form.additional.vicinityDates;
-}
+};
 
-export function directFlightSelect (state) {
+export const directFlightSelect = state => {
 	return state.form.additional.directFlight;
-}
+};
