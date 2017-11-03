@@ -6,11 +6,11 @@ import {
 	AIRPORT_SELECTED
 } from 'store/actions';
 
-export function autocompleteAirportReducer(state, airport) {
+export const autocompleteAirportReducer = (state, airport) => {
 	return { ...state, airport };
-}
+};
 
-export function autocompleteReducer(state, { type, payload }) {
+export const autocompleteReducer = (state, { type, payload }) => {
 	switch (type) {
 		case AUTOCOMPLETE_LOADING_STARTED:
 			return { ...state, isLoading: true };
@@ -26,9 +26,9 @@ export function autocompleteReducer(state, { type, payload }) {
 	}
 
 	return state;
-}
+};
 
-export default function(state = autocompleteState, action = {}) {
+export default (state = autocompleteState, action = {}) => {
 	if (action.autocompleteType) {
 		return {
 			...state,
@@ -37,4 +37,4 @@ export default function(state = autocompleteState, action = {}) {
 	}
 
 	return state;
-}
+};

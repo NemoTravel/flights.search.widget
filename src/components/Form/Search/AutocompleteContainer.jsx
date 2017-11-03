@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as autocompleteActions from 'store/form/autocomplete/actions';
@@ -7,33 +7,33 @@ import ArrivalAutocomplete from 'components/Form/Search/Autocomplete/Arrival';
 import { getDepartureOptions, getArrivalOptions } from 'store/form/selectors';
 import { MODE_WEBSKY } from 'state';
 
-class AutocompleteContainer extends Component {
+class AutocompleteContainer extends React.Component {
 	render() {
 		let sameAirportsError = false;
-		
-		const { 
-			departureAutocomplete, 
-		  	arrivalAutocomplete, 
-		  	system, 
-		  	showErrors, 
-		  	departureOptions, 
-		  	arrivalOptions 
+
+		const {
+			departureAutocomplete,
+			arrivalAutocomplete,
+			system,
+			showErrors,
+			departureOptions,
+			arrivalOptions
 		} = this.props;
-		
+
 		const {
 			swapAirports,
 			changeAutocompleteSuggestions,
 			sendAutocompleteRequest,
-			selectAirport 
+			selectAirport
 		} = this.props.actions;
-		
+
 		if (
 			departureAutocomplete.airport && arrivalAutocomplete.airport &&
 			departureAutocomplete.airport.IATA === arrivalAutocomplete.airport.IATA
 		) {
 			sameAirportsError = true;
 		}
-		
+
 		return <div className="form-group row widget-form-airports">
 			<DepartureAutocomplete
 				showErrors={showErrors}
@@ -54,7 +54,7 @@ class AutocompleteContainer extends Component {
 					}
 				}}
 			/>
-			
+
 			<ArrivalAutocomplete
 				showErrors={showErrors}
 				sameAirportsError={sameAirportsError}
@@ -67,9 +67,9 @@ class AutocompleteContainer extends Component {
 				selectAirport={selectAirport}
 				isGridMode={!!system.routingGrid || system.mode === MODE_WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
-				getRef={reactSelect => reactSelect ? this.arrivalInput = reactSelect.input : null}
+				getRef={reactSelect => reactSelect ? (this.arrivalInput = reactSelect.input) : null}
 			/>
-		</div>
+		</div>;
 	}
 }
 
@@ -83,7 +83,7 @@ export default connect(
 			showErrors: state.form.showErrors,
 			system: state.system
 		};
-	}, 
+	},
 	dispatch => {
 		return {
 			actions: bindActionCreators(autocompleteActions, dispatch)

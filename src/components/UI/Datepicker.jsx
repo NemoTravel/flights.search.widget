@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DatePicker from '@nemo.travel/react-datepicker';
 import classnames from 'classnames';
 import Tooltip from 'components/UI/Tooltip';
 import autobind from 'autobind-decorator';
 import { isIE } from 'utils';
 
-export default class Datepicker extends Component {
+export default class Datepicker extends React.Component {
 	constructor(props) {
 		super(props);
-		
+
 		this.calendar = null;
 		this.state = {
 			isActive: !!props.date || !props.isDisableable
@@ -17,7 +17,7 @@ export default class Datepicker extends Component {
 
 	/**
 	 * Prepare internal state.
-	 * 
+	 *
 	 * @param nextProps
 	 */
 	componentWillReceiveProps(nextProps) {
@@ -25,10 +25,10 @@ export default class Datepicker extends Component {
 			isActive: !!nextProps.date || !nextProps.isDisableable
 		});
 	}
-	
+
 	/**
 	 * Global date format.
-	 * 
+	 *
 	 * @returns {string}
 	 */
 	static get dateFormat() {
@@ -37,7 +37,7 @@ export default class Datepicker extends Component {
 
 	/**
 	 * Date format for the calendar title.
-	 * 
+	 *
 	 * @returns {string}
 	 */
 	static get dateFormatCalendar() {
@@ -64,21 +64,22 @@ export default class Datepicker extends Component {
 			this.props.selectDate(null, this.props.type);
 		}
 	}
-	
+
 	@autobind
 	renderCloser() {
-		return this.state.isActive && this.props.isDisableable ? <div className="widget-ui-input__closer" onClick={this.disable}/> : null;
+		return this.state.isActive && this.props.isDisableable ?
+			<div className="widget-ui-input__closer" onClick={this.disable}/> : null;
 	}
 
 	/**
 	 * Custom input field with wrapper.
-	 * 
+	 *
 	 * @returns {XML}
 	 */
 	renderCustomInput() {
 		const { inputProps, date, isDisableable, getRef, tooltipIsActive, tooltipText } = this.props;
 		const formattedDate = date ? date.format('D MMMM, dd') : '';
-		
+
 		if (getRef) {
 			inputProps.ref = getRef;
 		}
@@ -102,26 +103,26 @@ export default class Datepicker extends Component {
 			{!isDisableable || !this.state.isActive ? <div className="widget-ui-datepicker__calendar"/> : null}
 		</div>;
 	}
-	
+
 	render() {
 		const { date, locale, specialDate, type } = this.props;
-		
-		const specialDayClassName = (date) => {
+
+		const specialDayClassName = date => {
 			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'widget-ui-datepicker__specialDay' : null;
 		};
-		
+
 		return <DatePicker
-			ref={calendar => this.calendar = calendar}
+			ref={calendar => (this.calendar = calendar)}
 			disabled={isIE() ? false : !this.state.isActive}
 			locale={locale}
 			dayClassName={specialDayClassName}
 			customInput={this.renderCustomInput()}
-			calendarClassName={`widget-ui-datepicker widget-ui-datepicker_${type}`} 
+			calendarClassName={`widget-ui-datepicker widget-ui-datepicker_${type}`}
 			dateFormat={Datepicker.dateFormat}
 			dateFormatCalendar={Datepicker.dateFormatCalendar}
 			selected={date}
 			monthsShown={2}
-			onClickOutside={event => date ? null : this.disable()}
+			onClickOutside={() => date ? null : this.disable()}
 			onFocus={this.enable}
 			{...this.props}
 		>

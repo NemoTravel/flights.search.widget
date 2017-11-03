@@ -2,16 +2,16 @@ import { createSelector } from 'reselect';
 import { i18n } from 'utils';
 import { nemoToWebskyPassTypes } from 'store/form/passengers/reducer';
 
-function getPassengersConfig(state) {
+const getPassengersConfig = state => {
 	return state.form.passengers;
-}
+};
 
 export const getPassengersArray = createSelector(
-	[ getPassengersConfig ],
+	[getPassengersConfig],
 	(passengersConfig = {}) => {
-		let result = [];
+		const result = [];
 
-		for (let passType in passengersConfig) {
+		for (const passType in passengersConfig) {
 			if (passengersConfig.hasOwnProperty(passType)) {
 				result.push(passengersConfig[passType]);
 			}
@@ -25,7 +25,7 @@ export const getPassengersArray = createSelector(
  * Total count of selected passengers on the search form.
  */
 export const getTotalPassengersCount = createSelector(
-	[ getPassengersArray ],
+	[getPassengersArray],
 	(passengersArray = []) => passengersArray.reduce((result, passenger) => result + parseInt(passenger.count), 0)
 );
 
@@ -33,7 +33,7 @@ export const getTotalPassengersCount = createSelector(
  * Dynamic title for passengers dropdown on the search form.
  */
 export const getPassengersTitle = createSelector(
-	[ getTotalPassengersCount ],
+	[getTotalPassengersCount],
 	(totalCount = 0) => {
 		let result = '';
 
@@ -68,13 +68,13 @@ export const getPassengersTitle = createSelector(
  * }
  */
 export const getPassengersCounterAvailability = createSelector(
-	[ getPassengersConfig, getTotalPassengersCount ],
+	[getPassengersConfig, getTotalPassengersCount],
 	(passengersConfig = {}, totalCount = 0) => {
-		let result = {};
+		const result = {};
 
-		for (let passType in passengersConfig) {
+		for (const passType in passengersConfig) {
 			if (passengersConfig.hasOwnProperty(passType)) {
-				let currentPassConfig = passengersConfig[passType];
+				const currentPassConfig = passengersConfig[passType];
 				let canIncrease = true;
 				let canDecrease = true;
 
@@ -123,10 +123,10 @@ export const getPassengersCounterAvailability = createSelector(
 );
 
 export const webskyPassengers = createSelector(
-	[ getPassengersArray ],
+	[getPassengersArray],
 	passengers => passengers
-	.filter(passenger => passenger.count)
-	.map(passenger => {
-		return { ...passenger, code: nemoToWebskyPassTypes[passenger.code] };
-	})
+		.filter(passenger => passenger.count)
+		.map(passenger => {
+			return { ...passenger, code: nemoToWebskyPassTypes[passenger.code] };
+		})
 );

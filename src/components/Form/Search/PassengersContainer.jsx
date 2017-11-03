@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as passengersActions from 'store/form/passengers/actions';
-import { 
-	getPassengersTitle, 
-	getPassengersArray, 
-	getTotalPassengersCount, 
-	getPassengersCounterAvailability 
+import {
+	getPassengersTitle,
+	getPassengersArray,
+	getTotalPassengersCount,
+	getPassengersCounterAvailability
 } from 'store/form/passengers/selectors';
 import Selector from 'components/Form/Search/Passengers/Selector';
 
-class PassengersContainer extends Component {
+class PassengersContainer extends React.Component {
 	render() {
 		const { passengers, counterAvailability, title, totalPassengersCount, addPassenger, removePassenger } = this.props;
-		
-		return <Selector 
-			passengers={passengers} 
+
+		return <Selector
+			passengers={passengers}
 			title={title}
 			counterAvailability={counterAvailability}
 			totalPassengersCount={totalPassengersCount}
@@ -33,6 +33,6 @@ export default connect(
 			title: getPassengersTitle(state),
 			totalPassengersCount: getTotalPassengersCount(state)
 		};
-	}, 
+	},
 	dispatch => bindActionCreators(passengersActions, dispatch)
 )(PassengersContainer);

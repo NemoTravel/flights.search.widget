@@ -24,7 +24,7 @@
 <script>
     FlightsSearchWidget.init({
         webskyURL: 'http://demo.websky.aero/gru',
-        nemoURL: 'http://widget.mlsd.ru',
+        nemoURL: 'http://sys.nemo.travel',
         rootElement: document.getElementById('root'),
         locale: 'ru'
     });

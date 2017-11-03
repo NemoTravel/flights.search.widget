@@ -4,14 +4,14 @@ import { MODE_NEMO } from 'state';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
 
-export function showErrors(showErrors) {
+export const showErrors = shouldShowErrors => {
 	return {
 		type: SHOW_ERRORS,
-		payload: showErrors
+		payload: shouldShowErrors
 	};
-}
+};
 
-function runNemoSearch(state) {
+const runNemoSearch = state => {
 	let requestURL = clearURL(state.system.nemoURL) + '/results/';
 
 	// Departure airport info.
@@ -34,6 +34,7 @@ function runNemoSearch(state) {
 	for (const passType in state.form.passengers) {
 		if (state.form.passengers.hasOwnProperty(passType) && state.form.passengers[passType].count) {
 			const passConfig = state.form.passengers[passType];
+
 			requestURL += passConfig.code + passConfig.count;
 		}
 	}
@@ -54,28 +55,28 @@ function runNemoSearch(state) {
 	document.location = URL(requestURL, {
 		changelang: state.system.locale
 	});
-}
+};
 
-function runWebskySearch(state) {
+const runWebskySearch = () => {
 	const form = document.getElementById('webskyHiddenForm');
 
 	if (form) {
 		form.submit();
 	}
-}
+};
 
 /**
  * Starting search:
  * - run validation
  * - do some optional checks
  * - run search itself
- * 
+ *
  * @returns {Object}
  */
-export function startSearch() {
+export const startSearch = () => {
 	return (dispatch, getState) => {
 		const state = getState();
-		
+
 		if (formIsValid(state)) {
 			if (state.system.mode === MODE_NEMO) {
 				runNemoSearch(state);
@@ -88,4 +89,4 @@ export function startSearch() {
 			dispatch(showErrors(true));
 		}
 	};
-}
+};

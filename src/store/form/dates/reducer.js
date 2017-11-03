@@ -2,7 +2,7 @@ import { TOGGLE_DATEPICKER, SELECT_DATE, SET_AVAILABLE_DATES } from 'store/actio
 import { datesState } from 'state';
 
 export const selectDateReducer = (state, date) => {
-	return { ...state, date};
+	return { ...state, date };
 };
 
 export const toggleDatepickerReducer = (state, isActive) => {
