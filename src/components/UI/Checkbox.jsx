@@ -17,10 +17,10 @@ export class Checkbox extends Component {
 	render() {
 		const {id, label, trigger, checked, isVisible} = this.props;
 
-		return isVisible ? <div className="nemo-ui-checkbox">
-			<input className="nemo-ui-checkbox__input" type="checkbox" id={id} onChange={trigger} checked={checked}/>
+		return isVisible ? <div className="widget-ui-checkbox">
+			<input className="widget-ui-checkbox__input" type="checkbox" id={id} onChange={trigger} checked={checked}/>
 			<label htmlFor={id}>
-					<span className="nemo-ui-checkbox__caption">
+					<span className="widget-ui-checkbox__caption">
 						{label}
 					</span>
 			</label>
