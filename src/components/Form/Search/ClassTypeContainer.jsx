@@ -14,7 +14,8 @@ class ClassTypeContainer extends Component {
 			setClassType={setClassType}
 			classOptions={classOptions}
 			classType={selectedClass}
-			widgetMode={widgetMode}/>;
+			widgetMode={widgetMode}
+		/>;
 	}
 }
 

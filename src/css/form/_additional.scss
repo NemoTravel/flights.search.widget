@@ -7,7 +7,7 @@
 		margin-bottom: 0;
 	}
 
-	@media (max-width: $screen-size-phone) {
+	@include adaptivity(phone) {
 		margin-bottom: 1rem;
 	}
 }
