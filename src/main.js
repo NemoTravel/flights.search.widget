@@ -1,4 +1,5 @@
 import 'ponyfills';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from 'components/Main';
 import DemoForm from 'components/Demo';
