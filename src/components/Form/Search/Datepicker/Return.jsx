@@ -1,3 +1,4 @@
+import React from 'react';
 import Datepicker from 'components/Form/Search/Datepicker';
 import MobileHeader from 'components/UI/MobileHeader';
 import { i18n } from 'utils';

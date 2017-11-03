@@ -17,6 +17,7 @@
 		"react"
 	],
 	"rules": {
+		"react/jsx-uses-react": "error",
 		"react/jsx-uses-vars": "error",
 		"comma-dangle": [
 			2,
