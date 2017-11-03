@@ -4,7 +4,7 @@
   "description": "Lightweight form for searching airtickets",
   "main": "dist/flights.search.widget.min.js",
   "scripts": {
-    "eslint": "eslint ./src",
+    "eslint": "eslint . --ext .jsx,.jsx",
     "server": "node server.js",
     "build": "npm run eslint && cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=dev webpack",

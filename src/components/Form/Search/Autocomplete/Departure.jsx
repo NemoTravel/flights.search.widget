@@ -1,4 +1,3 @@
-import React from 'react';
 import Autocomplete from 'components/Form/Search/Autocomplete';
 import { i18n } from 'utils';
 import PropTypes from 'prop-types';

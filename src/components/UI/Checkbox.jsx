@@ -15,15 +15,15 @@ export class Checkbox extends Component {
 	};
 
 	render() {
-		const {id, label, trigger, checked, isVisible} = this.props;
+		const { id, label, trigger, checked, isVisible } = this.props;
 
 		return isVisible ? <div className="widget-ui-checkbox">
 			<input className="widget-ui-checkbox__input" type="checkbox" id={id} onChange={trigger} checked={checked}/>
 			<label htmlFor={id}>
-					<span className="widget-ui-checkbox__caption">
-						{label}
-					</span>
+				<span className="widget-ui-checkbox__caption">
+					{label}
+				</span>
 			</label>
-		</div> : null
+		</div> : null;
 	}
 }

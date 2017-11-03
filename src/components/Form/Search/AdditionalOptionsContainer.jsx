@@ -9,10 +9,11 @@ import { MODE_NEMO } from 'state';
 
 class AdditionalOptionsContainer extends Component {
 	renderVicinityDates() {
-		const {vicinityDatesAction, vicinityDatesSelect, vicinityDays, widgetMode} = this.props;
-		let dayLabel = i18n('form', vicinityDays > 1 ? 'additional_vicinityDates_days' : 'additional_vicinityDates_day'),
-			   label = i18n('form', 'additional_vicinityDates').replace('[%-days-%]', vicinityDays)
-				   .replace('[%-dayLabel-%]', dayLabel);
+		const { vicinityDatesAction, vicinityDatesSelect, vicinityDays, widgetMode } = this.props;
+
+		const
+			dayLabel = i18n('form', vicinityDays > 1 ? 'additional_vicinityDates_days' : 'additional_vicinityDates_day'),
+			label = i18n('form', 'additional_vicinityDates').replace('[%-days-%]', vicinityDays).replace('[%-dayLabel-%]', dayLabel);
 
 		return <Checkbox
 			id='vicinity'
@@ -20,12 +21,12 @@ class AdditionalOptionsContainer extends Component {
 			trigger={vicinityDatesAction}
 			checked={vicinityDatesSelect}
 			isVisible={vicinityDays > 0 && widgetMode === MODE_NEMO}
-		/>
+		/>;
 	}
 
 	renderDirect() {
 		const { directFlightAction, directFlightSelect, widgetMode } = this.props;
-		let label = i18n('form', 'additional_directFlight');
+		const label = i18n('form', 'additional_directFlight');
 
 		return <Checkbox
 			id='directCheckbox'
@@ -33,28 +34,25 @@ class AdditionalOptionsContainer extends Component {
 			trigger={directFlightAction}
 			checked={directFlightSelect}
 			isVisible={widgetMode === MODE_NEMO}
-		/>
+		/>;
 	}
 
 	render() {
 		return <div className="widget-form-additionalOptions">
 			{this.renderVicinityDates()}
 			{this.renderDirect()}
-		</div>
+		</div>;
 	}
 }
 
-function mapStateToProps(state) {
-	return {
-		vicinityDatesSelect: vicinityDatesSelect(state),
-		directFlightSelect: directFlightSelect(state),
-		vicinityDays: state.system.vicinityDays,
-		widgetMode: state.system.mode
-	}
-}
-
-function mapActionsToProps(dispatch) {
-	return bindActionCreators(additionalActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(AdditionalOptionsContainer);
+export default connect(
+	state => {
+		return {
+			vicinityDatesSelect: vicinityDatesSelect(state),
+			directFlightSelect: directFlightSelect(state),
+			vicinityDays: state.system.vicinityDays,
+			widgetMode: state.system.mode
+		};
+	},
+	dispatch => bindActionCreators(additionalActions, dispatch)
+)(AdditionalOptionsContainer);
