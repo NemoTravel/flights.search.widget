@@ -7,6 +7,7 @@ import Value from 'components/Form/Search/Autocomplete/Value';
 import Select from '@nemo.travel/react-select';
 import { i18n } from 'utils';
 import autobind from 'autobind-decorator';
+import { autoCompleteSuggestionsFromCache } from 'state';
 
 export default class Autocomplete extends React.Component {
 	constructor(props) {
@@ -96,6 +97,19 @@ export default class Autocomplete extends React.Component {
 	@autobind
 	selectOption(option) {
 		if (option && option.value && option.value.airport) {
+			localStorage.setItem('autocomplete' + option.value.airport.IATA, JSON.stringify(option.value));
+			let allowed = localStorage.getItem('autocompleteAllow');
+
+			if (allowed) {
+				allowed = JSON.parse(allowed);
+			}
+			else {
+				allowed = [];
+			}
+
+			allowed.push(option.value.airport.IATA);
+
+			localStorage.setItem('autocompleteAllow', JSON.stringify(allowed));
 			this.props.selectAirport(option.value.airport, this.type);
 		}
 	}
@@ -135,7 +149,6 @@ export default class Autocomplete extends React.Component {
 
 			<div className="widget-form-airports__select__wrapper">
 				<Tooltip isActive={(!airport || sameAirportsError) && showErrors} isCentered={true} message={errorText}/>
-
 				<Select
 					ref={getRef}
 					clearable={false}
@@ -153,7 +166,7 @@ export default class Autocomplete extends React.Component {
 					onChange={this.selectOption}
 					onFocus={this.onFocusHandler}
 					onBlur={() => {
-						this.props.changeAutocompleteSuggestions([], this.type);
+						this.props.changeAutocompleteSuggestions(autoCompleteSuggestionsFromCache, this.type);
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={option => <Option option={option}/>}

@@ -3,6 +3,10 @@ import classnames from 'classnames';
 
 export default ({ option }) => {
 	return <div className="widget-form-airports__suggestion">
+		{option.value.airport.fromCache ? <div className="widget-form-airports__suggestion__recently">
+			Вы искали ранее
+		</div> : null}
+
 		<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': option.value.isDirect })}>
 			{option.value.airport.name}
 		</span>

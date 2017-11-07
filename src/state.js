@@ -27,15 +27,17 @@ export const systemState = {
 // 	bookings: false
 // };
 
+export const autoCompleteSuggestionsFromCache = getAutocompleteSuggestions();
+
 export const autocompleteState = {
 	departure: {
 		isLoading: false,
-		suggestions: [],
+		suggestions: autoCompleteSuggestionsFromCache,
 		airport: null
 	},
 	arrival: {
 		isLoading: false,
-		suggestions: [],
+		suggestions: autoCompleteSuggestionsFromCache,
 		airport: null
 	}
 };
@@ -87,6 +89,45 @@ export const initialState = {
 		passengers: passengersState,
 		autocomplete: autocompleteState
 	}
+};
+
+function getAutocompleteSuggestions () {
+	let allowedAutoComplete = localStorage.getItem('autocompleteAllow'),
+		suggestionsFromCache = [];
+
+	if (allowedAutoComplete) {
+		allowedAutoComplete = JSON.parse(allowedAutoComplete);
+
+		allowedAutoComplete.map(iata => {
+			let airport = localStorage.getItem('autocomplete' + iata);
+
+			if (airport) {
+				airport = JSON.parse(airport);
+				airport.airport.fromCache = true;
+				suggestionsFromCache.push(airport);
+			}
+		});
+	}
+
+	return suggestionsFromCache;
+
+	return [
+		{
+			airport: {
+				IATA: "RTW",
+				airportRating: "29053",
+				cityId: 58194,
+				country: null,
+				countryCode: "RU",
+				isAggregation: false,
+				name: "Саратов",
+				nameEn: "Saratov",
+				properName: null,
+				properNameEn: null,
+				fromCache: true
+			}
+		}
+	]
 };
 
 export const fillStateFromCache = (currentState, stateFromCache) => {
