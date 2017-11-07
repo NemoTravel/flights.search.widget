@@ -8,10 +8,7 @@
 	}
 
 	.widget-ui-checkbox {
-		padding: 10px 0;
-	}
-
-	@include adaptivity(phone) {
-		margin-bottom: 1rem;
+		padding-bottom: 1rem;
+		padding-top: 0;
 	}
 }

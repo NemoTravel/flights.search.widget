@@ -11,12 +11,11 @@ class ClassTypeContainer extends Component {
 	render() {
 		const { setClassType, classOptions, selectedClass, widgetMode } = this.props;
 
-		return <ClassType
+		return widgetMode === MODE_NEMO ? <ClassType
 			setClassType={setClassType}
 			classOptions={classOptions}
 			classType={selectedClass}
-			isVisible={widgetMode === MODE_NEMO}
-		/>;
+		/> : null;
 	}
 }
 

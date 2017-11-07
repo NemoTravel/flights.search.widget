@@ -8,8 +8,7 @@ export default class ClassType extends React.Component {
 	static propTypes = {
 		setClassType: PropTypes.func.isRequired,
 		classOptions: PropTypes.array.isRequired,
-		classType: PropTypes.string.isRequired,
-		isVisible: PropTypes.string.isRequired
+		classType: PropTypes.string.isRequired
 	};
 
 	constructor(props) {
@@ -60,13 +59,11 @@ export default class ClassType extends React.Component {
 	}
 
 	render() {
-		const { isVisible } = this.props;
-
-		return isVisible ? <div className="widget-form-classType">
+		return <div className="widget-form-classType">
 			<UIDropdown
 				contentElement={this.renderContent()}
 				triggerElement={this.renderDropdownTrigger()}
 				ref={ref => (this.dropdown = ref)}/>
-		</div> : null;
+		</div>;
 	}
 }
