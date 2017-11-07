@@ -1,6 +1,5 @@
 .widget-ui-checkbox {
 	display: inline-block;
-	padding: 10px 0;
 	margin-right: 40px;
 
 	&__input {
@@ -15,17 +14,18 @@
 		color: #666666;
 		font-weight: 600;
 		font-size: 15px;
-		height: 25px;
-		line-height: 25px;
-		padding-left: 60px;
+		height: 20px;
+		padding-left: 50px;
+		line-height: 19px;
 		vertical-align: top;
 		cursor: pointer;
+		user-select: none;
 
 		&:before {
 			content: '';
 			border-radius: 50%;
-			width: 25px;
-			height: 25px;
+			width: 20px;
+			height: 20px;
 			background: #fff;
 			border: 2px solid #b3b3b3;
 			font-size: 16px;
@@ -33,7 +33,7 @@
 			display: inline-block;
 			top: 0;
 			left: 0;
-			transition: 0.5s;
+			transition: transform 0.2s ease-out;
 			position: absolute;
 			line-height: 25px;
 			text-align: center;
@@ -42,12 +42,12 @@
 
 	& label:before {
 		content: '';
-		width: 50px;
-		height: 25px;
-		transition: 0.5s;
+		width: 40px;
+		height: 20px;
+		transition: background 0.2s;
 		background: #b3b3b3;
 		position: absolute;
-		border-radius: 25px;
+		border-radius: 20px;
 	}
 
 	&__input:checked + label {
@@ -60,7 +60,7 @@
 
 			&:before {
 				border-color: #1B75BC;
-				left: 25px;
+				transform: translateX(20px);
 			}
 		}
 	}

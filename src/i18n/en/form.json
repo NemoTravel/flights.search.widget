@@ -39,5 +39,6 @@
 	"additional_vicinityDates": "Flexible [%-days-%] [%-dayLabel-%]",
 	"additional_directFlight": "Direct only",
 	"additional_vicinityDates_day": "day",
-	"additional_vicinityDates_days": "days"
+	"additional_vicinityDates_days": "days",
+	"additional_vicinityDates_days_5": "days"
 }

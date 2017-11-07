@@ -3,14 +3,13 @@ import UIDropdown from 'components/UI/Dropdown';
 import MobileHeader from 'components/UI/MobileHeader';
 import PropTypes from 'prop-types';
 import { i18n } from 'utils';
-import { MODE_NEMO } from 'state';
 
 export default class ClassType extends React.Component {
 	static propTypes = {
 		setClassType: PropTypes.func.isRequired,
 		classOptions: PropTypes.array.isRequired,
 		classType: PropTypes.string.isRequired,
-		widgetMode: PropTypes.string.isRequired
+		isVisible: PropTypes.string.isRequired
 	};
 
 	constructor(props) {
@@ -61,9 +60,9 @@ export default class ClassType extends React.Component {
 	}
 
 	render() {
-		const { widgetMode } = this.props;
+		const { isVisible } = this.props;
 
-		return (widgetMode === MODE_NEMO) ? <div className="widget-form-classType">
+		return isVisible ? <div className="widget-form-classType">
 			<UIDropdown
 				contentElement={this.renderContent()}
 				triggerElement={this.renderDropdownTrigger()}

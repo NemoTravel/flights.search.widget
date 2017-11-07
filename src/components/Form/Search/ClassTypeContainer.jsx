@@ -5,6 +5,7 @@ import ClassType from 'components/Form/Search/ClassType';
 import * as additionalActions from 'store/form/additional/actions';
 import { getClassType } from 'store/form/additional/selector';
 import { CLASS_TYPES } from 'state';
+import { MODE_NEMO } from 'state';
 
 class ClassTypeContainer extends Component {
 	render() {
@@ -14,7 +15,7 @@ class ClassTypeContainer extends Component {
 			setClassType={setClassType}
 			classOptions={classOptions}
 			classType={selectedClass}
-			widgetMode={widgetMode}
+			isVisible={widgetMode === MODE_NEMO}
 		/>;
 	}
 }

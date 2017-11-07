@@ -9,23 +9,28 @@ import { MODE_NEMO } from 'state';
 
 class AdditionalOptionsContainer extends Component {
 	renderVicinityDates() {
-		const { vicinityDatesAction, vicinityDatesSelect, vicinityDays, widgetMode } = this.props;
+		const { vicinityDatesAction, vicinityDatesSelect, vicinityDays } = this.props;
+		let dayLabel, label = '';
 
-		const
-			dayLabel = i18n('form', vicinityDays > 1 ? 'additional_vicinityDates_days' : 'additional_vicinityDates_day'),
-			label = i18n('form', 'additional_vicinityDates').replace('[%-days-%]', vicinityDays).replace('[%-dayLabel-%]', dayLabel);
+		if (vicinityDays > 1) {
+			dayLabel = i18n('form', (vicinityDays < 5 ? 'additional_vicinityDates_days' : 'additional_vicinityDates_days_5'));
+		}
+		else {
+			dayLabel = i18n('form', 'additional_vicinityDates_day');
+		}
+
+		label = i18n('form', 'additional_vicinityDates').replace('[%-days-%]', vicinityDays).replace('[%-dayLabel-%]', dayLabel);
 
 		return <Checkbox
 			id='vicinity'
 			label={label}
 			trigger={vicinityDatesAction}
 			checked={vicinityDatesSelect}
-			isVisible={vicinityDays > 0 && widgetMode === MODE_NEMO}
 		/>;
 	}
 
 	renderDirect() {
-		const { directFlightAction, directFlightSelect, widgetMode } = this.props;
+		const { directFlightAction, directFlightSelect } = this.props;
 		const label = i18n('form', 'additional_directFlight');
 
 		return <Checkbox
@@ -33,15 +38,16 @@ class AdditionalOptionsContainer extends Component {
 			label={label}
 			trigger={directFlightAction}
 			checked={directFlightSelect}
-			isVisible={widgetMode === MODE_NEMO}
 		/>;
 	}
 
 	render() {
-		return <div className="widget-form-additionalOptions">
+		const { widgetMode } = this.props;
+
+		return widgetMode === MODE_NEMO ? <div className="widget-form-additionalOptions">
 			{this.renderVicinityDates()}
 			{this.renderDirect()}
-		</div>;
+		</div> : null;
 	}
 }
 
@@ -50,6 +56,7 @@ export default connect(
 		return {
 			vicinityDatesSelect: vicinityDatesSelect(state),
 			directFlightSelect: directFlightSelect(state),
+			directFlightAction: directFlightAction(state),
 			vicinityDays: state.system.vicinityDays,
 			widgetMode: state.system.mode
 		};
