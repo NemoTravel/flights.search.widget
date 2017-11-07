@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Checkbox } from 'components/UI/Checkbox';
 import * as additionalActions from 'store/form/additional/actions';
-import { vicinityDatesSelect, directFlightSelect, directFlightAction } from 'store/form/additional/selector';
+import { vicinityDatesSelect, directFlightSelect } from 'store/form/additional/selector';
 import { i18n } from 'utils';
 import { MODE_NEMO } from 'state';
 
@@ -56,7 +56,6 @@ export default connect(
 		return {
 			vicinityDatesSelect: vicinityDatesSelect(state),
 			directFlightSelect: directFlightSelect(state),
-			directFlightAction: directFlightAction(state),
 			vicinityDays: state.system.vicinityDays,
 			widgetMode: state.system.mode
 		};

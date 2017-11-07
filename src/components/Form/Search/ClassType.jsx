@@ -54,7 +54,7 @@ export default class ClassType extends React.Component {
 		const { classType } = this.props;
 
 		return <div className="widget-form-classType__trigger widget-ui-input__wrapper">
-			<input type="text" className="form-control" value={i18n('form', 'class_' + classType)} readOnly={true} spellCheck={false}/>
+			<input type="text" className="form-control" value={i18n('form', 'class_' + classType)} readOnly={true} spellCheck={false} onFocus={event => event.target.blur()}/>
 			<div className="widget-ui-icon widget-ui-input__arrow"/>
 		</div>;
 	}
