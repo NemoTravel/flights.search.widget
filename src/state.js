@@ -27,7 +27,7 @@ export const systemState = {
 // 	bookings: false
 // };
 
-export const autoCompleteSuggestionsFromCache = getAutocompleteSuggestions();
+export let autoCompleteSuggestionsFromCache = [];
 
 export const autocompleteState = {
 	departure: {
@@ -89,45 +89,6 @@ export const initialState = {
 		passengers: passengersState,
 		autocomplete: autocompleteState
 	}
-};
-
-function getAutocompleteSuggestions () {
-	let allowedAutoComplete = localStorage.getItem('autocompleteAllow'),
-		suggestionsFromCache = [];
-
-	if (allowedAutoComplete) {
-		allowedAutoComplete = JSON.parse(allowedAutoComplete);
-
-		allowedAutoComplete.map(iata => {
-			let airport = localStorage.getItem('autocomplete' + iata);
-
-			if (airport) {
-				airport = JSON.parse(airport);
-				airport.airport.fromCache = true;
-				suggestionsFromCache.push(airport);
-			}
-		});
-	}
-
-	return suggestionsFromCache;
-
-	return [
-		{
-			airport: {
-				IATA: "RTW",
-				airportRating: "29053",
-				cityId: 58194,
-				country: null,
-				countryCode: "RU",
-				isAggregation: false,
-				name: "Саратов",
-				nameEn: "Saratov",
-				properName: null,
-				properNameEn: null,
-				fromCache: true
-			}
-		}
-	]
 };
 
 export const fillStateFromCache = (currentState, stateFromCache) => {
@@ -205,6 +166,26 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 				}
 			}
 		}
+	}
+
+	// Filling autocomplete suggestions from cache
+	let cachedAirportsCodesList = localStorage.getItem('autocompleteAirportsCodes');
+
+	if (cachedAirportsCodesList) {
+		cachedAirportsCodesList = JSON.parse(cachedAirportsCodesList);
+
+		cachedAirportsCodesList.map(iata => {
+			let airport = localStorage.getItem('autocomplete' + iata + '-' + state.system.locale);
+
+			if (airport) {
+				airport = JSON.parse(airport);
+				airport.fromCache = true;
+
+				autoCompleteSuggestionsFromCache.push({airport: airport});
+			}
+		});
+
+		state.form.autocomplete.departure.suggestions = state.form.autocomplete.arrival.suggestions = autoCompleteSuggestionsFromCache;
 	}
 
 	return state;

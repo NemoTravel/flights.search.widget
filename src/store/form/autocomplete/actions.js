@@ -141,7 +141,20 @@ export const selectAirport = (airport, autocompleteType) => {
 	return (dispatch, getState) => {
 		dispatch(setSelectedAirport(airport, autocompleteType));
 		getDatesAvailability(dispatch, getState);
+		pushAiprortInCache(airport, getState);
 	};
+};
+
+const pushAiprortInCache = (airport, getState) => {
+	const state = getState();
+	let codes = JSON.parse(localStorage.getItem('autocompleteAirportsCodes')) || [];
+
+	if (codes.indexOf(airport.IATA) === -1) {
+		codes.push(airport.IATA);
+
+		localStorage.setItem('autocomplete' + airport.IATA + '-' + state.system.locale, JSON.stringify(airport));
+		localStorage.setItem('autocompleteAirportsCodes', JSON.stringify(codes));
+	}
 };
 
 /**

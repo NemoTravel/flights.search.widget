@@ -97,19 +97,6 @@ export default class Autocomplete extends React.Component {
 	@autobind
 	selectOption(option) {
 		if (option && option.value && option.value.airport) {
-			localStorage.setItem('autocomplete' + option.value.airport.IATA, JSON.stringify(option.value));
-			let allowed = localStorage.getItem('autocompleteAllow');
-
-			if (allowed) {
-				allowed = JSON.parse(allowed);
-			}
-			else {
-				allowed = [];
-			}
-
-			allowed.push(option.value.airport.IATA);
-
-			localStorage.setItem('autocompleteAllow', JSON.stringify(allowed));
 			this.props.selectAirport(option.value.airport, this.type);
 		}
 	}
