@@ -147,14 +147,16 @@ export default class Autocomplete extends React.Component {
 					className={classnames('widget-form-airports__select', { 'widget-form-airports__select_readOnly': readOnly && this.props.isGridMode })}
 					value={selectedValue}
 					options={suggestions}
+					defaultOptions={autoCompleteSuggestionsFromCache}
+					defaultOptionsHint={i18n('form', 'noResults')}
 					isLoading={isLoading}
 					onInputChange={this.onChangeHandler}
 					placeholder={this.placeholder}
 					onChange={this.selectOption}
 					onFocus={this.onFocusHandler}
 					onBlur={() => {
-						this.props.changeAutocompleteSuggestions(autoCompleteSuggestionsFromCache, this.type);
-						this.setState({ isFocused: false });
+						this.props.changeAutocompleteSuggestions([], this.type);
+						this.setState({ isFocused: true });
 					}}
 					optionRenderer={option => <Option option={option}/>}
 					valueRenderer={value =>

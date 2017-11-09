@@ -4057,7 +4057,8 @@
   cursor: default;
 }
 
-.widget .Select-noresults {
+.widget .Select-noresults,
+.widget .Select-defaultOptions-hint {
   box-sizing: border-box;
   color: #999999;
   cursor: default;
@@ -5078,7 +5079,8 @@
   }
 }
 
-.widget-form-airports__select.is-focused .Select-noresults {
+.widget-form-airports__select.is-focused .Select-noresults,
+.widget-form-airports__select.is-focused .Select-defaultOptions-hint {
   position: relative;
   padding: 10px 15px;
   line-height: 16px;
@@ -5091,8 +5093,19 @@
 }
 
 @media only screen and (min-width: 651px) {
-  .widget-form-airports__select.is-focused .Select-noresults {
+  .widget-form-airports__select.is-focused .Select-noresults,
+  .widget-form-airports__select.is-focused .Select-defaultOptions-hint {
     text-align: left;
+  }
+}
+
+.widget-form-airports__select.is-focused .Select-defaultOptions {
+  display: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-airports__select.is-focused .Select-defaultOptions {
+    display: block;
   }
 }
 

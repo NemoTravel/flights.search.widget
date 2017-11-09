@@ -1,10 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
+import { i18n } from 'utils';
 
 export default ({ option }) => {
 	return <div className="widget-form-airports__suggestion">
 		{option.value.airport.fromCache ? <div className="widget-form-airports__suggestion__recently">
-			Вы искали ранее
+			{i18n('form', 'autocompleteRecently')}
 		</div> : null}
 
 		<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': option.value.isDirect })}>

@@ -181,11 +181,9 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 				airport = JSON.parse(airport);
 				airport.fromCache = true;
 
-				autoCompleteSuggestionsFromCache.push({airport: airport});
+				autoCompleteSuggestionsFromCache.push({value: {airport: airport}});
 			}
 		});
-
-		state.form.autocomplete.departure.suggestions = state.form.autocomplete.arrival.suggestions = autoCompleteSuggestionsFromCache;
 	}
 
 	return state;
