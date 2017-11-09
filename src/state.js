@@ -32,12 +32,12 @@ export let autoCompleteSuggestionsFromCache = [];
 export const autocompleteState = {
 	departure: {
 		isLoading: false,
-		suggestions: autoCompleteSuggestionsFromCache,
+		suggestions: [],
 		airport: null
 	},
 	arrival: {
 		isLoading: false,
-		suggestions: autoCompleteSuggestionsFromCache,
+		suggestions: [],
 		airport: null
 	}
 };
