@@ -270,6 +270,12 @@
 				@include adaptivity(phone) {
 					display: block;
 				}
+
+				.Select-option:not(:first-child) {
+					.widget-form-airports__suggestion__recently {
+						display: none;
+					}
+				}
 			}
 		}
 	}

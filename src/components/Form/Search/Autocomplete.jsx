@@ -156,7 +156,7 @@ export default class Autocomplete extends React.Component {
 					onFocus={this.onFocusHandler}
 					onBlur={() => {
 						this.props.changeAutocompleteSuggestions([], this.type);
-						this.setState({ isFocused: true });
+						this.setState({ isFocused: false });
 					}}
 					optionRenderer={option => <Option option={option}/>}
 					valueRenderer={value =>
