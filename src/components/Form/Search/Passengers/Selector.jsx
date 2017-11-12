@@ -3,7 +3,9 @@ import UIDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/Form/Search/Passengers/Counter';
 import MobileHeader from 'components/UI/MobileHeader';
+import ClassType from 'components/Form/Search/Passengers/ClassType';
 import { i18n } from 'utils';
+import { MODE_NEMO } from 'state';
 
 export default class Selector extends React.Component {
 	/**
@@ -56,6 +58,7 @@ export default class Selector extends React.Component {
 	 */
 	renderDropdownContent() {
 		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
+		const { setClassType, classOptions, selectedClass, widgetMode } = this.props;
 
 		return <div className="widget-form-passengers__content">
 			<MobileHeader
@@ -66,6 +69,12 @@ export default class Selector extends React.Component {
 
 			<div className="widget-form-passengers__items">
 				{this.renderCounters()}
+
+				{widgetMode === MODE_NEMO ? <ClassType
+					setClassType={setClassType}
+					classOptions={classOptions}
+					classType={selectedClass}
+				/> : null}
 			</div>
 
 			<div className="widget-form-passengers__footer">

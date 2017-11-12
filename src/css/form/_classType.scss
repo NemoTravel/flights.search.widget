@@ -17,6 +17,34 @@
 		}
 	}
 
+	&__inner {
+		border-top: 1px solid #e6e6e6;
+		padding: 15px 0;
+		text-align: center;
+
+		&__button {
+			display: inline-block;
+			line-height: 14px;
+			padding: 10px 15px;
+			font-size: 13px;
+			font-weight: 400;
+			border: 1px solid rgba(27, 117, 188, 0.2);
+			background: #fff;
+			color: #1B75BC;
+			cursor: pointer;
+			margin-right: 15px;
+
+			&__selected {
+				background: #1B75BC;
+				color: #fff;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
 	&__header {
 		@extend .widget-form-passengers__header;
 	}
