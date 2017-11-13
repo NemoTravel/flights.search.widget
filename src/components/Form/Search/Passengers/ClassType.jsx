@@ -12,8 +12,6 @@ export default class ClassType extends React.Component {
 
 	constructor(props) {
 		super(props);
-
-		this.classSelectHeader = i18n('form', 'classSelectHeader');
 	}
 
 	renderOptions() {
@@ -29,8 +27,10 @@ export default class ClassType extends React.Component {
 	}
 
 	render() {
-		return <div className="widget-form-classType__inner">
-			{this.renderOptions()}
+		return <div className="widget-form-classType">
+			<div className="widget-form-classType__inner">
+				{this.renderOptions()}
+			</div>
 		</div>;
 	}
 }
