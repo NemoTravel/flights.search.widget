@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as autocompleteActions from 'store/form/autocomplete/actions';
 import DepartureAutocomplete from 'components/Form/Search/Autocomplete/Departure';
 import ArrivalAutocomplete from 'components/Form/Search/Autocomplete/Arrival';
-import { getDepartureOptions, getArrivalOptions, getDefaulsOptionsGroup } from 'store/form/selectors';
+import { getDepartureOptions, getArrivalOptions, getDefaultOptionsGroup } from 'store/form/selectors';
 import { MODE_WEBSKY } from 'state';
 
 class AutocompleteContainer extends React.Component {
@@ -83,7 +83,7 @@ export default connect(
 			arrivalAutocomplete: state.form.autocomplete.arrival,
 			departureOptions: getDepartureOptions(state),
 			arrivalOptions: getArrivalOptions(state),
-			defaultOptionsGroup: getDefaulsOptionsGroup(state),
+			defaultOptionsGroup: getDefaultOptionsGroup(state),
 			showErrors: state.form.showErrors,
 			system: state.system
 		};
