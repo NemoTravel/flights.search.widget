@@ -7,7 +7,7 @@
 	"loyaltyCardTitle": "Оплата милями",
 	"search": "Найти билеты",
 	"noResults": "Введите название города или аэропорта",
-	"autocompleteRecently": "Вы искали ранее",
+	"previousSearches": "Вы искали ранее",
 	"from": "Откуда",
 	"to": "Куда",
 	"from_full": "Город или аэропорт вылета",

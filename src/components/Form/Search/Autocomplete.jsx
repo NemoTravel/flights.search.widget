@@ -115,7 +115,7 @@ export default class Autocomplete extends React.Component {
 	}
 
 	render() {
-		const { suggestions, isLoading, airport, showErrors, sameAirportsError, readOnly, getRef } = this.props;
+		const { suggestions, isLoading, optionsGroup, airport, showErrors, sameAirportsError, readOnly, getRef } = this.props;
 
 		const selectedValue = airport ? {
 			label: airport.name,
@@ -147,8 +147,7 @@ export default class Autocomplete extends React.Component {
 					className={classnames('widget-form-airports__select', { 'widget-form-airports__select_readOnly': readOnly && this.props.isGridMode })}
 					value={selectedValue}
 					options={suggestions}
-					defaultOptions={autoCompleteSuggestionsFromCache}
-					defaultOptionsHint={i18n('form', 'noResults')}
+					optionsGroup={optionsGroup}
 					isLoading={isLoading}
 					onInputChange={this.onChangeHandler}
 					placeholder={this.placeholder}

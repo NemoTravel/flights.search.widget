@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as autocompleteActions from 'store/form/autocomplete/actions';
 import DepartureAutocomplete from 'components/Form/Search/Autocomplete/Departure';
 import ArrivalAutocomplete from 'components/Form/Search/Autocomplete/Arrival';
-import { getDepartureOptions, getArrivalOptions } from 'store/form/selectors';
+import { getDepartureOptions, getArrivalOptions, getDefaulsOptionsGroup } from 'store/form/selectors';
 import { MODE_WEBSKY } from 'state';
 
 class AutocompleteContainer extends React.Component {
@@ -13,6 +13,7 @@ class AutocompleteContainer extends React.Component {
 
 		const {
 			departureAutocomplete,
+			defaultOptionsGroup,
 			arrivalAutocomplete,
 			system,
 			showErrors,
@@ -40,6 +41,7 @@ class AutocompleteContainer extends React.Component {
 				sameAirportsError={sameAirportsError}
 				isLoading={departureAutocomplete.isLoading}
 				suggestions={departureOptions}
+				optionsGroup={defaultOptionsGroup}
 				airport={departureAutocomplete.airport}
 				swapAirports={swapAirports}
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
@@ -60,6 +62,7 @@ class AutocompleteContainer extends React.Component {
 				sameAirportsError={sameAirportsError}
 				isLoading={arrivalAutocomplete.isLoading}
 				suggestions={arrivalOptions}
+				optionsGroup={defaultOptionsGroup}
 				airport={arrivalAutocomplete.airport}
 				swapAirports={swapAirports}
 				changeAutocompleteSuggestions={changeAutocompleteSuggestions}
@@ -80,6 +83,7 @@ export default connect(
 			arrivalAutocomplete: state.form.autocomplete.arrival,
 			departureOptions: getDepartureOptions(state),
 			arrivalOptions: getArrivalOptions(state),
+			defaultOptionsGroup: getDefaulsOptionsGroup(state),
 			showErrors: state.form.showErrors,
 			system: state.system
 		};

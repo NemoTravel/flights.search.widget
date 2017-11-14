@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { getTotalPassengersCount } from 'store/form/passengers/selectors';
-import { getAltLayout } from 'utils';
+import { getAltLayout, i18n } from 'utils';
+import { autoCompleteSuggestionsFromCache } from 'state';
 
 const getForm = state => state.form;
 
@@ -39,6 +40,7 @@ export const formIsValid = createSelector(
 
 const getDepartureOptionsFromState = state => state.form.autocomplete.departure.suggestions;
 const getArrivalOptionsFromState = state => state.form.autocomplete.arrival.suggestions;
+const getDefauiltOptionsFromState = state => state.form.autocomplete.defaultGroups;
 const mapOptions = options => {
 	return options
 		.filter(option => option && option.airport && option.airport.name && option.airport.nameEn && option.airport.IATA)
@@ -50,8 +52,30 @@ const mapOptions = options => {
 		});
 };
 
+const mapGroupOptions = groups => {
+	let groupsArray = [];
+
+	for (let group in groups) {
+		if (groups.hasOwnProperty(group)) {
+			let optionsArray = [],
+				options = groups[group].options;
+
+			for (let option in options) {
+				if (options.hasOwnProperty(option)) {
+					optionsArray.push({ label: options[option].name, value: { airport: options[option] } });
+				}
+			}
+
+			groupsArray.push({ label: i18n('form', groups[group].name), options: optionsArray, className: groups[group].className });
+		}
+	}
+
+	return groupsArray;
+};
+
 /**
  * Create autocomplete options list for arrival and departure.
  */
 export const getDepartureOptions = createSelector(getDepartureOptionsFromState, mapOptions);
 export const getArrivalOptions = createSelector(getArrivalOptionsFromState, mapOptions);
+export const getDefaulsOptionsGroup = createSelector(getDefauiltOptionsFromState, mapGroupOptions);

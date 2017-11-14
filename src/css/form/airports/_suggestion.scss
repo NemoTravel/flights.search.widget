@@ -30,5 +30,13 @@
 	&__recently {
 		color: #b3b3b3;
 		font-size: 13px;
+
+		&__group {
+			display: none;
+
+			@include adaptivity(phone) {
+				display: block;
+			}
+		}
 	}
 }

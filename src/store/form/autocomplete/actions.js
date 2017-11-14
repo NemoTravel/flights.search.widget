@@ -2,7 +2,8 @@ import {
 	AUTOCOMPLETE_LOADING_STARTED,
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
-	AIRPORT_SELECTED
+	AIRPORT_SELECTED,
+	AUTOCOMPLETE_PUSH_TO_PREVIOUS
 } from 'store/actions';
 import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'services/parsers';
 import { parseDatesAvailability } from 'services/parsers/datesAvailability';
@@ -141,8 +142,35 @@ export const selectAirport = (airport, autocompleteType) => {
 	return (dispatch, getState) => {
 		dispatch(setSelectedAirport(airport, autocompleteType));
 		getDatesAvailability(dispatch, getState);
-		pushAiprortInCache(airport, getState);
+		//pushAiprortInCache(airport, getState);
+		pushAiprortInCache1(dispatch, getState, airport);
 	};
+};
+
+const push = (airport, autocompleteType) => {
+	return {
+		type: AUTOCOMPLETE_PUSH_TO_PREVIOUS,
+		autocompleteType,
+		payload: {
+			airport
+		}
+	}
+};
+
+const pushAiprortInCache1 = (dispatch, getState, airport) => {
+	const state = getState();
+
+	dispatch(push(airport, 'defaultGroups'));
+	return;
+
+	let codes = JSON.parse(localStorage.getItem('autocompleteAirportsCodes')) || [];
+
+	if (codes.indexOf(airport.IATA) === -1) {
+		codes.push(airport.IATA);
+
+		localStorage.setItem('autocomplete' + airport.IATA + '-' + state.system.locale, JSON.stringify(airport));
+		localStorage.setItem('autocompleteAirportsCodes', JSON.stringify(codes));
+	}
 };
 
 const pushAiprortInCache = (airport, getState) => {
