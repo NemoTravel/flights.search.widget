@@ -1,13 +1,18 @@
 @import "../variables";
 
 &-additionalOptions {
-	margin-top: 1rem;
+	text-align: left;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
 
 	label {
 		margin-bottom: 0;
 	}
 
-	.widget-ui-checkbox {
+
+
+	/*.widget-ui-checkbox {
 		&:first-child {
 			padding-bottom: 0.5rem;
 		}
@@ -15,9 +20,11 @@
 		&:last-child {
 			padding-top: 0.5rem;
 		}
-	}
+	}*/
 
 	@include adaptivity(phone) {
+		display: inline-block;
+
 		.widget-ui-checkbox {
 			&:first-child {
 				padding-bottom: 1rem;

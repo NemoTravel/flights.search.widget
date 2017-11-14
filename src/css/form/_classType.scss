@@ -33,15 +33,6 @@
 			&:last-child {
 				margin-right: 0;
 			}
-
-			@include adaptivity(phone) {
-				flex-basis: 100%;
-				margin-right: 0;
-			}
-		}
-
-		@include adaptivity(phone) {
-			flex-wrap: wrap;
 		}
 	}
 }

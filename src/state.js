@@ -4,7 +4,7 @@ import moment from 'moment';
 
 export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';
-export const CLASS_TYPES = ['Economy', 'Business', 'First'];
+export const CLASS_TYPES = ['Economy', 'Business'];
 
 export const systemState = {
 	rootElement: null,

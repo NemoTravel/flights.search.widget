@@ -44,7 +44,7 @@ class AdditionalOptionsContainer extends Component {
 	render() {
 		const { widgetMode } = this.props;
 
-		return widgetMode === MODE_NEMO ? <div className="widget-form-additionalOptions">
+		return widgetMode === MODE_NEMO ? <div className="form-group widget-form-additionalOptions">
 			{this.renderVicinityDates()}
 			{this.renderDirect()}
 		</div> : null;

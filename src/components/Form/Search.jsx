@@ -17,10 +17,11 @@ export default class Search extends React.Component {
 				<div className="row widget-form-search__footer">
 					<div className="col">
 						<PassengersContainer/>
-						<AdditionalOptionsContainer/>
 					</div>
 
 					<div className="col">
+						<AdditionalOptionsContainer/>
+
 						<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>
 							{i18n('form', 'search')}
 						</button>
