@@ -7,7 +7,7 @@
 	"loyaltyCardTitle": "Redeem Miles",
 	"search": "Search",
 	"noResults": "Enter city or airport name",
-	"autocompleteRecently": "Recently viewed",
+	"previousSearches": "Recently viewed",
 	"from": "From",
 	"to": "To",
 	"from_full": "Departure airport or city",

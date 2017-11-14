@@ -29,7 +29,7 @@ export const systemState = {
 
 export const previousSearchesGroup = {
 	options: {},
-	cssName: '',
+	className: 'widget-form-airports__suggestion__recently',
 	name: 'previousSearches'
 };
 

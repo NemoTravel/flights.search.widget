@@ -65,8 +65,13 @@ const mapGroupOptions = groups => {
 					optionsArray.push({ label: options[option].name, value: { airport: options[option] } });
 				}
 			}
-
-			groupsArray.push({ label: i18n('form', groups[group].name), options: optionsArray, className: groups[group].className });
+			if (optionsArray.length) {
+				groupsArray.push({
+					label: i18n('form', groups[group].name),
+					options: optionsArray,
+					className: groups[group].className
+				});
+			}
 		}
 	}
 

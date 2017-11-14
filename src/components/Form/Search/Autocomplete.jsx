@@ -7,7 +7,6 @@ import Value from 'components/Form/Search/Autocomplete/Value';
 import Select from '@nemo.travel/react-select';
 import { i18n } from 'utils';
 import autobind from 'autobind-decorator';
-import { autoCompleteSuggestionsFromCache } from 'state';
 
 export default class Autocomplete extends React.Component {
 	constructor(props) {

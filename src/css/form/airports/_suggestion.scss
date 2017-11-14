@@ -28,15 +28,10 @@
 	}
 
 	&__recently {
-		color: #b3b3b3;
-		font-size: 13px;
+		display: none;
 
-		&__group {
-			display: none;
-
-			@include adaptivity(phone) {
-				display: block;
-			}
+		@include adaptivity(phone) {
+			display: block;
 		}
 	}
 }
