@@ -1,41 +1,43 @@
 @import "../variables";
 
 &-classType {
-	@extend .widget-form-passengers;
+	border-top: 1px solid rgba($font-color, 0.2);
+	padding-top: 15px;
+	text-align: center;
 
-	margin-bottom: 1rem;
-
-	& input {
-		text-transform: none;
-		user-select: none;
+	&__inner {
 		display: flex;
-	}
+		justify-content: center;
+		margin-right: 15px;
+		margin-left: 15px;
 
-	&__trigger {
-		&, input {
+		&__button {
+			display: inline-block;
+			line-height: 14px;
+			padding: 10px 15px;
+			font-size: 13px;
+			font-weight: 400;
+			border: 1px solid rgba($title-color, 0.2);
+			background: #fff;
+			color: $title-color;
 			cursor: pointer;
+			margin-right: 15px;
+			margin-bottom: 15px;
+			user-select: none;
+
+			&_selected {
+				background: $title-color;
+				color: #fff;
+			}
+
+			&:hover {
+				background: $title-color;
+				color: #fff;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
-	}
-
-	&__header {
-		@extend .widget-form-passengers__header;
-	}
-
-	&__content {
-		@extend .widget-form-passengers__content;
-	}
-
-	&__item {
-		@extend .widget-form-passengers__item;
-		height: 40px;
-		cursor: pointer;
-
-		&:hover {
-			background: rgba(0, 76, 186, 0.07);
-		}
-	}
-
-	&__title {
-		@extend .widget-form-passengers__title;
 	}
 }

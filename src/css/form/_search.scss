@@ -20,6 +20,7 @@
 				@include adaptivity(not-phone) {
 					padding-left: 0.5rem;
 					text-align: right;
+					min-width: 0;
 				}
 			}
 			

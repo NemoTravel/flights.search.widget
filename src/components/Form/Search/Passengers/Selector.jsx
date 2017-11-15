@@ -3,6 +3,7 @@ import UIDropdown from 'components/UI/Dropdown';
 import Tooltip from 'components/UI/Tooltip';
 import Counter from 'components/Form/Search/Passengers/Counter';
 import MobileHeader from 'components/UI/MobileHeader';
+import ClassType from 'components/Form/Search/Passengers/ClassType';
 import { i18n } from 'utils';
 
 export default class Selector extends React.Component {
@@ -43,8 +44,18 @@ export default class Selector extends React.Component {
 	 * @returns {XML}
 	 */
 	renderDropdownTrigger() {
+		const { selectedClass, title, isModeNemo } = this.props;
+
 		return <div className="widget-form-passengers__trigger widget-ui-input__wrapper">
-			<input type="text" className="form-control" value={this.props.title} readOnly={true} spellCheck={false} onFocus={event => event.target.blur()}/>
+			<span className="form-control widget-form-passengers__trigger__title" onFocus={event => event.target.blur()}>
+				{title}
+				{isModeNemo ?
+					<span className="widget-form-passengers__class">
+						<span className="widget-form-passengers__class__comma">, </span>
+						{i18n('form', 'class_' + selectedClass + '_short')}
+					</span> : null
+				}
+			</span>
 			<div className="widget-ui-icon widget-ui-input__arrow"/>
 		</div>;
 	}
@@ -56,6 +67,7 @@ export default class Selector extends React.Component {
 	 */
 	renderDropdownContent() {
 		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
+		const { setClassType, classOptions, selectedClass, isModeNemo } = this.props;
 
 		return <div className="widget-form-passengers__content">
 			<MobileHeader
@@ -66,6 +78,12 @@ export default class Selector extends React.Component {
 
 			<div className="widget-form-passengers__items">
 				{this.renderCounters()}
+
+				{isModeNemo ? <ClassType
+					setClassType={setClassType}
+					classOptions={classOptions}
+					classType={selectedClass}
+				/> : null}
 			</div>
 
 			<div className="widget-form-passengers__footer">
