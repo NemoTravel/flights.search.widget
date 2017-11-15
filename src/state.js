@@ -1,4 +1,4 @@
-import { autocompleteAirportReducer } from 'store/form/autocomplete/reducer';
+import { autocompleteAirportReducer, autocompleteGroupsReducer } from 'store/form/autocomplete/reducer';
 import { selectDateReducer, toggleDatepickerReducer, setAvailableDatesReducer } from 'store/form/dates/reducer';
 import moment from 'moment';
 
@@ -29,6 +29,12 @@ export const systemState = {
 // 	bookings: false
 // };
 
+export const previousSearchesGroup = {
+	options: {},
+	className: 'widget-form-airports__suggestion__recently',
+	name: 'previousSearches'
+};
+
 export const autocompleteState = {
 	departure: {
 		isLoading: false,
@@ -39,6 +45,9 @@ export const autocompleteState = {
 		isLoading: false,
 		suggestions: [],
 		airport: null
+	},
+	defaultGroups: {
+		previousSearches: previousSearchesGroup
 	}
 };
 
@@ -114,6 +123,7 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 			if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
 				const cachedArrivalAutocomplete = stateFromCache.form.autocomplete.arrival;
+				const cachedAutocompleteGroups = stateFromCache.form.autocomplete.defaultGroups;
 
 				if (canBeProcessed && cachedDepartureAutocomplete && cachedDepartureAutocomplete.airport) {
 					state.form.autocomplete.departure = autocompleteAirportReducer(
@@ -126,6 +136,13 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 					state.form.autocomplete.arrival = autocompleteAirportReducer(
 						state.form.autocomplete.arrival,
 						cachedArrivalAutocomplete.airport
+					);
+				}
+
+				if (canBeProcessed && cachedAutocompleteGroups && cachedAutocompleteGroups.previousSearches) {
+					state.form.autocomplete.defaultGroups = autocompleteGroupsReducer(
+						state.form.autocomplete.defaultGroups,
+						cachedAutocompleteGroups.previousSearches
 					);
 				}
 			}

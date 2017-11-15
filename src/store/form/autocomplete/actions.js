@@ -2,7 +2,8 @@ import {
 	AUTOCOMPLETE_LOADING_STARTED,
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
-	AIRPORT_SELECTED
+	AIRPORT_SELECTED,
+	AUTOCOMPLETE_PUSH_TO_PREVIOUS
 } from 'store/actions';
 import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'services/parsers';
 import { parseDatesAvailability } from 'services/parsers/datesAvailability';
@@ -141,7 +142,22 @@ export const selectAirport = (airport, autocompleteType) => {
 	return (dispatch, getState) => {
 		dispatch(setSelectedAirport(airport, autocompleteType));
 		getDatesAvailability(dispatch, getState);
+		pushAiprortInCache(dispatch, getState, airport);
 	};
+};
+
+export const setAirportInPreviousSearchGroup = (airport, autocompleteType) => {
+	return {
+		type: AUTOCOMPLETE_PUSH_TO_PREVIOUS,
+		autocompleteType,
+		payload: {
+			airport
+		}
+	}
+};
+
+const pushAiprortInCache = (dispatch, getState, airport) => {
+	dispatch(setAirportInPreviousSearchGroup(airport, 'defaultGroups'));
 };
 
 /**

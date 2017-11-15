@@ -16,6 +16,7 @@ class Departure extends Autocomplete {
 Departure.propTypes = {
 	isLoading: PropTypes.bool,
 	suggestions: PropTypes.array,
+	optionsGroup: PropTypes.array,
 	sameAirportsError: PropTypes.bool,
 	airport: PropTypes.object,
 	readOnly: PropTypes.bool,
