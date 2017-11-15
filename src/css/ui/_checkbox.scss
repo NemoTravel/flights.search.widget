@@ -20,6 +20,9 @@
 		vertical-align: top;
 		cursor: pointer;
 		user-select: none;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		max-width: 100%;
 
 		&:before {
 			content: '';
