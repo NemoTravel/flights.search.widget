@@ -2,7 +2,7 @@
 
 &-passengers {
 	position: relative;
-	
+
 	&.form-group {
 		@include adaptivity(not-phone) {
 			margin-bottom: 0;
@@ -14,10 +14,10 @@
 			cursor: pointer;
 		}
 	}
-	
+
 	&__header {
 		display: none;
-		
+
 		@include adaptivity(phone) {
 			display: block;
 		}
@@ -28,17 +28,17 @@
 		left: 0;
 		right: 0;
 		z-index: 12;
-		
+
 		margin-top: -1px;
 		font-size: 15px;
 		line-height: 16px;
-		
+
 		border: 1px solid #e6e6e6;
 		border-top: none;
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 		background-color: #fff;
 		font-weight: 400;
-		
+
 		@include adaptivity(phone) {
 			position: fixed;
 			top: $mobile-header-height;
@@ -59,7 +59,7 @@
 		&_disabled {
 			color: #B3B3B3;
 		}
-		
+
 		@include adaptivity(phone) {
 			padding: 10px 15px;
 
@@ -74,6 +74,8 @@
 			text-transform: lowercase;
 			white-space: nowrap;
 			user-select: none;
+
+			line-height: 38px !important;
 		}
 	}
 
@@ -83,7 +85,7 @@
 		display: inline-block;
 		white-space: nowrap;
 		text-overflow: ellipsis;
-		
+
 		&__age {
 			color: #ccc;
 			font-size: 13px;
@@ -150,7 +152,7 @@
 				color: #fff;
 			}
 		}
-		
+
 		&_disabled {
 			&, &:hover {
 				background-color: #fff;
@@ -188,15 +190,15 @@
 			padding: 0 10px;
 		}
 	}
-	
+
 	&__footer {
 		@extend .widget-ui-datepicker__footer;
 		display: none;
-		
+
 		@include adaptivity(phone) {
 			display: block;
 		}
-		
+
 		&__button {
 			@extend .widget-ui-datepicker__footer__button;
 		}
