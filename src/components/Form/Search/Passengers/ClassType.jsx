@@ -18,7 +18,7 @@ export default class ClassType extends React.Component {
 		const { setClassType, classOptions, classType } = this.props;
 
 		return classOptions.map((value, index) => {
-			return <div className={classnames('widget-form-classType__inner__button', { 'widget-form-classType__inner__button__selected': classType === value })} onClick={() => {
+			return <div className={classnames('widget-form-classType__inner__button', { 'widget-form-classType__inner__button_selected': classType === value })} onClick={() => {
 				setClassType(value);
 			}} key={index}>
 				{i18n('form', 'class_' + value)}

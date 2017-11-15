@@ -3,10 +3,6 @@
 &-passengers {
 	position: relative;
 	
-	input {
-		text-transform: lowercase;
-	}
-	
 	&.form-group {
 		@include adaptivity(not-phone) {
 			margin-bottom: 0;
@@ -73,6 +69,14 @@
 		}
 	}
 
+	&__trigger {
+		&__title {
+			text-transform: lowercase;
+			white-space: nowrap;
+			user-select: none;
+		}
+	}
+
 	&__title {
 		font-weight: 600;
 		overflow: hidden;
@@ -90,6 +94,14 @@
 				display: block;
 				margin-top: 4px;
 			}
+		}
+	}
+
+	&__class {
+		color: #b3b3b3;
+
+		&__comma {
+			color: #666666;
 		}
 	}
 

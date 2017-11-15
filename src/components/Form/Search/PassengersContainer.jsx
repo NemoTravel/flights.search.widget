@@ -11,7 +11,7 @@ import {
 import Selector from 'components/Form/Search/Passengers/Selector';
 import * as classTypeActions from 'store/form/additional/actions';
 import { getClassType } from 'store/form/additional/selector';
-import { CLASS_TYPES } from 'state';
+import { CLASS_TYPES, MODE_NEMO } from 'state';
 
 class PassengersContainer extends React.Component {
 	render() {
@@ -27,7 +27,7 @@ class PassengersContainer extends React.Component {
 			setClassType={setClassType}
 			classOptions={classOptions}
 			selectedClass={selectedClass}
-			widgetMode={widgetMode}
+			isModeNemo={widgetMode === MODE_NEMO}
 		/>;
 	}
 }

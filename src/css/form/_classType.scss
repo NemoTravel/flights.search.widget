@@ -1,7 +1,7 @@
 @import "../variables";
 
 &-classType {
-	border-top: 1px solid #e6e6e6;
+	border-top: 1px solid rgba($font-color, 0.2);
 	padding-top: 15px;
 	text-align: center;
 
@@ -17,16 +17,21 @@
 			padding: 10px 15px;
 			font-size: 13px;
 			font-weight: 400;
-			border: 1px solid rgba(27, 117, 188, 0.2);
+			border: 1px solid rgba($title-color, 0.2);
 			background: #fff;
-			color: #1B75BC;
+			color: $title-color;
 			cursor: pointer;
 			margin-right: 15px;
 			margin-bottom: 15px;
 			user-select: none;
 
-			&__selected {
-				background: #1B75BC;
+			&_selected {
+				background: $title-color;
+				color: #fff;
+			}
+
+			&:hover {
+				background: $title-color;
 				color: #fff;
 			}
 
