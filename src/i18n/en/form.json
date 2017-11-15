@@ -31,5 +31,13 @@
 	"passenger_INF_age": "under 2 years old",
 	"passenger_INS": "Infants with a seat",
 	"passenger_INS_age": "under 2 years old",
-	"passengers_done": "Done"
+	"passengers_done": "Done",
+	"couponNumberError": "Enter a number consisting only of digits",
+	"couponDummy": "I have a discount coupon",
+	"couponPlaceholder": "Enter coupon number",
+	"mileCardNumberError": "Enter a number consisting only of digits",
+	"mileCardPasswordError": "Enter the password",
+	"mileCardDummy": "Payment by miles",
+	"mileCardNumberPlaceholder": "Card number",
+	"mileCardPasswordPlaceholder": "Password"
 }

@@ -18,7 +18,8 @@ export const systemState = {
 	mode: MODE_NEMO,
 	defaultDepartureAirport: null,
 	useNearestAirport: false,
-	highlightAvailableDates: false
+	highlightAvailableDates: false,
+	bonusFields: false
 };
 
 // export const blockVisibilityState = {
@@ -80,12 +81,25 @@ export const passengersState = {
 	}
 };
 
+export const couponState = {
+	isActive: false,
+	number: null
+};
+
+export const mileCardState = {
+	isActive: false,
+	number: null,
+	password: null
+};
+	
 export const initialState = {
 	system: systemState,
 	form: {
 		dates: datesState,
 		passengers: passengersState,
-		autocomplete: autocompleteState
+		autocomplete: autocompleteState,
+		coupon: couponState,
+		mileCard: mileCardState
 	}
 };
 
@@ -161,6 +175,32 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 					if (stateFromCache.form.passengers.hasOwnProperty(passType)) {
 						state.form.passengers[passType].count = stateFromCache.form.passengers[passType].count;
 					}
+				}
+			}
+			
+			if (stateFromCache.form.coupon) {
+				const cachedCouponIsActive = stateFromCache.form.coupon.isActive;
+				const cachedCouponNumber = stateFromCache.form.coupon.number;
+				if (cachedCouponIsActive) {
+					state.form.coupon.isActive = cachedCouponIsActive;
+				}
+				if (cachedCouponNumber) {
+					state.form.coupon.number = cachedCouponNumber;
+				}
+			}
+			
+			if (stateFromCache.form.mileCard) {
+				const cachedMileCardIsActive = stateFromCache.form.mileCard.isActive;
+				const cachedMileCardNumber = stateFromCache.form.mileCard.number;
+				const cachedMileCardPassword = stateFromCache.form.mileCard.password;
+				if (cachedMileCardIsActive) {
+					state.form.mileCard.isActive = cachedMileCardIsActive;
+				}
+				if (cachedMileCardNumber) {
+					state.form.mileCard.number = cachedMileCardNumber;
+				}
+				if (cachedMileCardPassword) {
+					state.form.mileCard.password = cachedMileCardPassword;
 				}
 			}
 		}

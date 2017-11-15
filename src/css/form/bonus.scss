@@ -1,0 +1,75 @@
+.widget-form{
+	&-mileCard, &-coupon{
+		&__dummy{
+			background: #F2F2F2;
+			padding: 0px 5px 0px 42px;
+			color: #1B75BC;
+			cursor: pointer;
+			border: 0px;
+			&:hover{
+				background: #E6E6E6;
+			}
+			&__icon:before{
+				position: absolute;
+				left: 15px;
+				top: 13px;
+			}
+			&_hidden{
+				display: none;
+			}
+		}
+		&__wrapper{
+			&__block{
+				position: relative;
+				input:focus{
+					border-color: #3FA9F5;
+					box-shadow: none;
+				}
+				&__close:before{
+					position: absolute;
+					content: "\E908";
+					right: 10px;
+					top: 14px;
+					font-size: 12px;
+					cursor: pointer;
+					z-index: 11;
+				}
+				&:first-of-type input{
+					padding-right: 30px;
+				}
+			}
+			&_hidden{
+				display: none;
+			}
+		}
+	}
+	&-coupon{
+		&__dummy__icon:before{
+			content: "\e904";
+		}
+	}
+	&-mileCard{
+		&__dummy__icon:before{
+			content: "\e917";
+		}
+		&__wrapper__block{
+			@include adaptivity(not-phone){
+				display: inline-block;
+				width: 49%;
+			}
+			&:first-of-type{
+				@include adaptivity(not-phone){
+					margin-right: 1%;
+				}
+				@include adaptivity(phone){
+					margin-bottom: 1rem;
+				}
+			}
+			&:last-of-type{
+				@include adaptivity(not-phone){
+					margin-left: 1%;
+				}
+			}
+		}
+	}
+}

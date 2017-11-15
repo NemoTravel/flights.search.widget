@@ -29,6 +29,25 @@ class WebskyHiddenForm extends React.Component {
 			return null;
 		};
 
+		const renderCouponBlock = () => {
+			if (form.coupon.isActive && form.coupon.number && form.coupon.number.match(/^[\d]+$/g)) {
+				return <input type="hidden" name="promoCode" value={form.coupon.number}/>;
+			}
+
+			return null;
+		};
+
+		const renderMileCardBlock = () => {
+			if (form.mileCard.isActive && form.mileCard.number && form.mileCard.password && form.mileCard.number.match(/^[\d]+$/g)) {
+				return [
+					<input key={1} type="hidden" name="cardNumber" value={form.mileCard.number}/>,
+					<input key={2} type="hidden" name="cardPassword" value={form.mileCard.password}/>
+				];
+			}
+
+			return null;
+		};
+
 		return <form id="webskyHiddenForm" action={`${system.webskyURL}/search`} method="POST">
 			<input type="hidden" name="segmentsCount" value={form.dates.return.date ? 2 : 1}/>
 			<input type="hidden" name="lang" value={system.locale}/>
@@ -44,6 +63,9 @@ class WebskyHiddenForm extends React.Component {
 					value={passConfig.count}
 				/>)
 			}
+
+			{renderCouponBlock()}
+			{renderMileCardBlock()}
 		</form>;
 	}
 }

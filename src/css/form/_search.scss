@@ -2,11 +2,12 @@
 @import "airports";
 @import "dates";
 @import "passengers";
+@import "bonus";
 
 &-search {
 	padding: 15px;
 	
-	&__footer {
+	&__footer, &__bonus {
 		.col {
 			&:first-of-type {
 				@include adaptivity(not-phone) {
@@ -17,13 +18,18 @@
 			&:last-of-type {
 				@include adaptivity(not-phone) {
 					padding-left: 0.5rem;
-					text-align: right;
 				}
 			}
 			
 			@include adaptivity(phone) {
 				flex: 100%;
 			}
+		}
+	}
+	
+	&__footer .col:last-of-type{
+		@include adaptivity(not-phone) {
+			text-align: right;
 		}
 	}
 	

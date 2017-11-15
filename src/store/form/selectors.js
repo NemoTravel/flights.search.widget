@@ -32,6 +32,12 @@ export const formIsValid = createSelector(
 		else if (form.autocomplete.departure.airport.IATA === form.autocomplete.arrival.airport.IATA) {
 			isValid = false;
 		}
+		else if (form.coupon.isActive && !(form.coupon.number && form.coupon.number.match(/^[\d]+$/g))) {
+			isValid = false;
+		}
+		else if (form.mileCard.isActive && !(form.mileCard.number && form.mileCard.password && form.mileCard.number.match(/^[\d]+$/g))) {
+			isValid = false;
+		}
 
 		return isValid;
 	}
