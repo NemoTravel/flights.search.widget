@@ -68,7 +68,7 @@ const mapGroupOptions = groups => {
 			if (optionsArray.length) {
 				groupsArray.push({
 					label: i18n('form', groups[group].name),
-					options: optionsArray,
+					options: optionsArray.reverse().splice(0, 9),
 					className: groups[group].className
 				});
 			}
