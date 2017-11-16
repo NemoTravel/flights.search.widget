@@ -48,9 +48,10 @@ describe('store/form/autocomplete', () => {
 		});
 
 		it('should handle `AUTOCOMPLETE_PUSH_TO_PREVIOUS`', () => {
-			const airport = { name: 'Domodedovo', IATA: 'MOW' };
+			const airport = { name: 'Domodedovo', IATA: 'MOW' },
+				pool = { MOW: airport };
 
-			Reducer(autocompleteReducer).expect(setAirportInPreviousSearchGroup(airport, 'defaultGroups')).toChangeInState({
+			Reducer(autocompleteReducer).expect(setAirportInPreviousSearchGroup(pool, 'defaultGroups')).toChangeInState({
 				defaultGroups: {
 					previousSearches: {
 						options: {
