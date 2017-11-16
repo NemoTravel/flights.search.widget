@@ -32,7 +32,7 @@ export const autocompleteReducer = (state, { type, payload }) => {
 		case AUTOCOMPLETE_PUSH_TO_PREVIOUS:
 			return { ...state, previousSearches: {
 				...state.previousSearches,
-				options: { ...state.previousSearches.options, [payload.airport.IATA]: payload.airport }
+				options: payload.pool
 			}};
 	}
 

@@ -146,18 +146,39 @@ export const selectAirport = (airport, autocompleteType) => {
 	};
 };
 
-export const setAirportInPreviousSearchGroup = (airport, autocompleteType) => {
+export const setAirportInPreviousSearchGroup = (pool, autocompleteType) => {
 	return {
 		type: AUTOCOMPLETE_PUSH_TO_PREVIOUS,
 		autocompleteType,
 		payload: {
-			airport
+			pool
 		}
 	}
 };
 
 const pushAiprortInCache = (dispatch, getState, airport) => {
-	dispatch(setAirportInPreviousSearchGroup(airport, 'defaultGroups'));
+	let state = getState().form.autocomplete.defaultGroups.previousSearches.options,
+		newPool = {},
+		counter = 0;
+
+	newPool[airport.IATA] = airport;
+
+	for (let airport in state) {
+		if (state.hasOwnProperty(airport)) {
+			if (!newPool[state[airport].IATA]) {
+				counter++;
+			}
+
+			newPool[state[airport].IATA] = state[airport];
+
+		}
+
+		if (counter >= 9) {
+			break;
+		}
+	}
+
+	dispatch(setAirportInPreviousSearchGroup(newPool, 'defaultGroups'));
 };
 
 /**
