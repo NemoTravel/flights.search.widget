@@ -1,9 +1,10 @@
-import { autocompleteAirportReducer } from 'store/form/autocomplete/reducer';
+import { autocompleteAirportReducer, autocompleteGroupsReducer } from 'store/form/autocomplete/reducer';
 import { selectDateReducer, toggleDatepickerReducer, setAvailableDatesReducer } from 'store/form/dates/reducer';
 import moment from 'moment';
 
 export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';
+export const CLASS_TYPES = ['Economy', 'Business'];
 
 export const systemState = {
 	rootElement: null,
@@ -18,7 +19,8 @@ export const systemState = {
 	mode: MODE_NEMO,
 	defaultDepartureAirport: null,
 	useNearestAirport: false,
-	highlightAvailableDates: false
+	highlightAvailableDates: false,
+	vicinityDays: 3
 };
 
 // export const blockVisibilityState = {
@@ -26,6 +28,12 @@ export const systemState = {
 // 	registration: false,
 // 	bookings: false
 // };
+
+export const previousSearchesGroup = {
+	options: {},
+	className: 'widget-form-airports__suggestion__recently',
+	name: 'previousSearches'
+};
 
 export const autocompleteState = {
 	departure: {
@@ -37,6 +45,9 @@ export const autocompleteState = {
 		isLoading: false,
 		suggestions: [],
 		airport: null
+	},
+	defaultGroups: {
+		previousSearches: previousSearchesGroup
 	}
 };
 
@@ -80,12 +91,19 @@ export const passengersState = {
 	}
 };
 
+export const additionalState = {
+	classType: CLASS_TYPES[0],
+	vicinityDates: false,
+	directFlight: false
+};
+
 export const initialState = {
 	system: systemState,
 	form: {
 		dates: datesState,
 		passengers: passengersState,
-		autocomplete: autocompleteState
+		autocomplete: autocompleteState,
+		additional: additionalState
 	}
 };
 
@@ -105,6 +123,7 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 			if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
 				const cachedArrivalAutocomplete = stateFromCache.form.autocomplete.arrival;
+				const cachedAutocompleteGroups = stateFromCache.form.autocomplete.defaultGroups;
 
 				if (canBeProcessed && cachedDepartureAutocomplete && cachedDepartureAutocomplete.airport) {
 					state.form.autocomplete.departure = autocompleteAirportReducer(
@@ -117,6 +136,13 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 					state.form.autocomplete.arrival = autocompleteAirportReducer(
 						state.form.autocomplete.arrival,
 						cachedArrivalAutocomplete.airport
+					);
+				}
+
+				if (canBeProcessed && cachedAutocompleteGroups && cachedAutocompleteGroups.previousSearches) {
+					state.form.autocomplete.defaultGroups = autocompleteGroupsReducer(
+						state.form.autocomplete.defaultGroups,
+						cachedAutocompleteGroups.previousSearches
 					);
 				}
 			}
@@ -160,6 +186,14 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 				for (const passType in stateFromCache.form.passengers) {
 					if (stateFromCache.form.passengers.hasOwnProperty(passType)) {
 						state.form.passengers[passType].count = stateFromCache.form.passengers[passType].count;
+					}
+				}
+			}
+
+			if (stateFromCache.form.additional) {
+				for (const option in stateFromCache.form.additional) {
+					if (stateFromCache.form.additional.hasOwnProperty(option)) {
+						state.form.additional[option] = stateFromCache.form.additional[option];
 					}
 				}
 			}

@@ -246,7 +246,7 @@
 				}
 			}
 			
-			&-noresults {
+			&-noresults, &-defaultOptions-hint {
 				@include adaptivity(not-phone) {
 					text-align: left;
 				}
@@ -262,6 +262,20 @@
 				color: #b3b3b3;
 				font-size: 15px;
 				font-weight: 600;
+			}
+
+			&-defaultOptions {
+				display: none;
+
+				@include adaptivity(phone) {
+					display: block;
+				}
+
+				.Select-option:not(:first-child) {
+					.widget-form-airports__suggestion__recently {
+						display: none;
+					}
+				}
 			}
 		}
 	}

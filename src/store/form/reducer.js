@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import passengers from 'store/form/passengers/reducer';
 import autocomplete from 'store/form/autocomplete/reducer';
 import dates from 'store/form/dates/reducer';
+import additional from 'store/form/additional/reducer';
 
 export const showErrorsReducer = (state = false, { type, payload } = {}) => {
 	return type === SHOW_ERRORS ? payload : state;
@@ -15,6 +16,7 @@ export default function(state, action) {
 		showErrors: showErrorsReducer,
 		dates,
 		autocomplete,
-		passengers
+		passengers,
+		additional
 	})(state, action);
 }

@@ -2,7 +2,8 @@ import {
 	AUTOCOMPLETE_LOADING_STARTED,
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
-	AIRPORT_SELECTED
+	AIRPORT_SELECTED,
+	AUTOCOMPLETE_PUSH_TO_PREVIOUS
 } from 'store/actions';
 import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'services/parsers';
 import { parseDatesAvailability } from 'services/parsers/datesAvailability';
@@ -141,7 +142,43 @@ export const selectAirport = (airport, autocompleteType) => {
 	return (dispatch, getState) => {
 		dispatch(setSelectedAirport(airport, autocompleteType));
 		getDatesAvailability(dispatch, getState);
+		pushAiprortInCache(dispatch, getState, airport);
 	};
+};
+
+export const setAirportInPreviousSearchGroup = (pool, autocompleteType) => {
+	return {
+		type: AUTOCOMPLETE_PUSH_TO_PREVIOUS,
+		autocompleteType,
+		payload: {
+			pool
+		}
+	}
+};
+
+const pushAiprortInCache = (dispatch, getState, airport) => {
+	let state = getState().form.autocomplete.defaultGroups.previousSearches.options,
+		newPool = {},
+		counter = 0;
+
+	newPool[airport.IATA] = airport;
+
+	for (let airport in state) {
+		if (state.hasOwnProperty(airport)) {
+			if (!newPool[state[airport].IATA]) {
+				counter++;
+			}
+
+			newPool[state[airport].IATA] = state[airport];
+
+		}
+
+		if (counter >= 9) {
+			break;
+		}
+	}
+
+	dispatch(setAirportInPreviousSearchGroup(newPool, 'defaultGroups'));
 };
 
 /**

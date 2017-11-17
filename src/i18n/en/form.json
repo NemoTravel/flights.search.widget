@@ -7,6 +7,7 @@
 	"loyaltyCardTitle": "Redeem Miles",
 	"search": "Search",
 	"noResults": "Enter city or airport name",
+	"previousSearches": "Recently viewed",
 	"from": "From",
 	"to": "To",
 	"from_full": "Departure airport or city",
@@ -31,5 +32,14 @@
 	"passenger_INF_age": "under 2 years old",
 	"passenger_INS": "Infants with a seat",
 	"passenger_INS_age": "under 2 years old",
-	"passengers_done": "Done"
+	"passengers_done": "Done",
+	"class_Economy": "Economy",
+	"class_Business": "Business",
+	"class_Economy_short": "economy",
+	"class_Business_short": "business",
+	"additional_vicinityDates": "Flexible [%-days-%] [%-dayLabel-%]",
+	"additional_directFlight": "Direct only",
+	"additional_vicinityDates_day": "day",
+	"additional_vicinityDates_days": "days",
+	"additional_vicinityDates_days_5": "days"
 }

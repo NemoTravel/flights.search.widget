@@ -7,6 +7,7 @@
 	"loyaltyCardTitle": "Оплата милями",
 	"search": "Найти билеты",
 	"noResults": "Введите название города или аэропорта",
+	"previousSearches": "Вы искали ранее",
 	"from": "Откуда",
 	"to": "Куда",
 	"from_full": "Город или аэропорт вылета",
@@ -31,5 +32,14 @@
 	"passenger_INF_age": "до 2 лет",
 	"passenger_INS": "Младенцы с местом",
 	"passenger_INS_age": "до 2 лет",
-	"passengers_done": "Готово"
+	"passengers_done": "Готово",
+	"class_Economy": "Эконом класс",
+	"class_Business": "Бизнес класс",
+	"class_Economy_short": "эконом",
+	"class_Business_short": "бизнес",
+	"additional_vicinityDates": "Искать ± [%-days-%] [%-dayLabel-%]",
+	"additional_directFlight": "Без пересадок",
+	"additional_vicinityDates_day": "день",
+	"additional_vicinityDates_days": "дня",
+	"additional_vicinityDates_days_5": "дней"
 }

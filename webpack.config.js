@@ -94,10 +94,10 @@ let config = {
 						},
 						// Resolving relative URL in CSS code.
 						'resolve-url-loader',
-						// Compiles Sass to CSS.
-						'sass-loader',
 						// Using autoprefixe plugin.
-						'postcss-loader'
+						'postcss-loader',
+						// Compiles Sass to CSS.
+						'sass-loader'
 					],
 					fallback: 'style-loader',
 					publicPath: path.resolve(__dirname, 'dist')
