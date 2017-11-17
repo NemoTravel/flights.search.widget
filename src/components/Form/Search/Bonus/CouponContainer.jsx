@@ -3,57 +3,52 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { TOGGLE_COUPON } from 'store/actions';
 import * as couponActions from 'store/form/coupon/actions';
+import { toggleBonusField } from 'store/form/actions';
 import { isCouponActive, getCouponNumber } from 'store/form/coupon/selectors';
-import classnames from 'classnames';
-import autobind from 'autobind-decorator';
 import Tooltip from 'components/UI/Tooltip';
 import { i18n } from 'utils';
 
 class CouponContainer extends React.Component {
-	@autobind
-	toggleBonusField() {
-		this.props.toggleBonusField(TOGGLE_COUPON); // from BonusContainer
-	}
-
-	@autobind
-	toggleCoupon() {
-		this.props.toggleCoupon(); // from couponActions
-	}
-
-	@autobind
-	changeCouponNumber(e) {
-		this.props.changeCouponNumber(e.target.value); // from couponActions
-	}
-
 	render() {
 		const { isActive, number, showErrors } = this.props;
 
-		const dummyClassName = classnames(
-			'form-control widget-form-coupon__dummy',
-			{ 'widget-form-coupon__dummy_hidden': isActive }
-		);
+		const toggleBonusField = () => {
+			this.props.toggleBonusField(TOGGLE_COUPON); // from BonusContainer
+		};
 
-		const wrapperClassName = classnames(
-			'widget-form-coupon__wrapper',
-			{ 'widget-form-coupon__wrapper_hidden': !isActive }
-		);
+		const toggleCoupon = () => {
+			this.props.toggleCoupon(); // from couponActions
+		};
 
-		const currentNumber = number ? number : '';
+		const changeCouponNumber = e => {
+			this.props.changeCouponNumber(e.target.value); // from couponActions
+		};
 
-		return <div className="form-group widget-form-coupon">
-			<div className={dummyClassName} onClick={this.toggleBonusField}>
+		const renderDummy = () => {
+			return <div className="form-control widget-form-coupon__dummy" onClick={toggleBonusField}>
 				{i18n('form', 'couponDummy')}
 				<i className="widget-ui-icon widget-form-coupon__dummy__icon"/>
-			</div>
-			<div className={wrapperClassName}>
+			</div>;
+		};
+
+		const renderWrapper = () => {
+			const currentNumber = number ? number : '';
+			const showTooltip = showErrors && isActive && !(number && number.match(/^[\d]+$/g));
+
+			return <div className="widget-form-coupon__wrapper">
 				<div className="widget-form-coupon__wrapper__block">
-					<Tooltip message={i18n('form', 'couponNumberError')} isActive={showErrors && isActive && !(number && number.match(/^[\d]+$/g))}>
+					<Tooltip message={i18n('form', 'couponNumberError')} isActive={showTooltip}>
 						<input className="form-control" ref={input => input && input.focus()} value={currentNumber}
-							onChange={this.changeCouponNumber} placeholder={i18n('form', 'couponPlaceholder')}/>
+							onChange={changeCouponNumber} placeholder={i18n('form', 'couponPlaceholder')}/>
 					</Tooltip>
-					<div className="widget-ui-icon widget-form-coupon__wrapper__block__close" onClick={this.toggleCoupon}/>
+					<div className="widget-ui-input__closer" onClick={toggleCoupon}/>
 				</div>
-			</div>
+			</div>;
+		};
+
+		return <div className="form-group widget-form-coupon">
+			{!isActive ? renderDummy() : null}
+			{isActive ? renderWrapper() : null}
 		</div>;
 	}
 }
@@ -66,5 +61,5 @@ export default connect(
 			showErrors: state.form.showErrors
 		};
 	},
-	dispatch => bindActionCreators(couponActions, dispatch)
+	dispatch => bindActionCreators(Object.assign({}, couponActions, { toggleBonusField }), dispatch)
 )(CouponContainer);

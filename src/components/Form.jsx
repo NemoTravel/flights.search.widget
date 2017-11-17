@@ -9,10 +9,10 @@ import { MODE_WEBSKY } from 'state';
 
 class Form extends React.Component {
 	render() {
-		const { showErrors, startSearch, verticalForm, isWebsky, isBonusFields } = this.props;
+		const { showErrors, startSearch, verticalForm, isWebsky, isRenderCoupon, isRenderMileCard } = this.props;
 
 		return <section className={classnames('widget-form', { 'widget-form_vertical': verticalForm })}>
-			<Search showErrors={showErrors} startSearch={startSearch} isWebsky={isWebsky} isBonusFields={isBonusFields} />
+			<Search showErrors={showErrors} startSearch={startSearch} isWebsky={isWebsky} isRenderCoupon={isRenderCoupon} isRenderMileCard={isRenderMileCard} />
 			{isWebsky ? <WebskyHiddenForm/> : null}
 		</section>;
 	}
@@ -23,7 +23,8 @@ export default connect(
 		return {
 			verticalForm: state.system.verticalForm,
 			isWebsky: state.system.mode === MODE_WEBSKY,
-			isBonusFields: state.system.bonusFields
+			isRenderCoupon: state.system.renderCoupon,
+			isRenderMileCard: state.system.renderMileCard
 		};
 	},
 	dispatch => bindActionCreators(formActions, dispatch)

@@ -7,29 +7,31 @@
 &-search {
 	padding: 15px;
 	
-	&__footer, &__bonus {
+	&__footer {
 		.col {
-			&:first-of-type {
+			flex-basis: 50%;
+			
+			&:nth-of-type(2n+1) {
 				@include adaptivity(not-phone) {
 					padding-right: 0.5rem;
 				}
 			}
 
-			&:last-of-type {
+			&:nth-of-type(2n) {
 				@include adaptivity(not-phone) {
 					padding-left: 0.5rem;
+				}
+			}
+			
+			&:last-of-type {
+				@include adaptivity(not-phone) {
+					text-align: right;
 				}
 			}
 			
 			@include adaptivity(phone) {
 				flex: 100%;
 			}
-		}
-	}
-	
-	&__footer .col:last-of-type{
-		@include adaptivity(not-phone) {
-			text-align: right;
 		}
 	}
 	

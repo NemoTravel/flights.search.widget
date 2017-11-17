@@ -19,7 +19,8 @@ export const systemState = {
 	defaultDepartureAirport: null,
 	useNearestAirport: false,
 	highlightAvailableDates: false,
-	bonusFields: false
+	renderCoupon: false,
+	renderMileCard: false
 };
 
 // export const blockVisibilityState = {
