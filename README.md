@@ -44,6 +44,10 @@
 | **webskyURL** | **да** (в режиме `WEBSKY`) | `string` | - | URL системы бронирования `Websky` |
 | autoFocusArrivalAirport | - | `boolean` | `false` | Автоматически фокусироваться на поле выбора аэропорта прилета, после выбора аэропорта вылета. |
 | autoFocusReturnDate | - | `boolean` | `false` | Автоматически фокусироваться на поле выбора обратной даты, после выбора даты вылета. |
+| defaultAdditionalOptions | - | `object` |  | [Дополнительные параметры](#additional-options) поиска. |
+| defaultArrivalAirport | - | `string` | `null` | Трехбуквенный IATA-код аэропорта или города, который будет выбран по умолчанию в качестве аэропорта прилета. |
+| defaultArrivalAirport | - | `object` | `null` | Объект [Airport](#airport) |
+| defaultDates | - | `object` | `null` | Даты вылета и прилета в формате (YYYY-MM-DD). Например, `departure: '2018-01-01, return: '2018-01-05'` |
 | defaultDepartureAirport | - | `string` | `null` | Трехбуквенный IATA-код аэропорта или города, который будет выбран по умолчанию в качестве аэропорта вылета. |
 | defaultDepartureAirport | - | `object` | `null` | Объект [Airport](#airport) |
 | highlightAvailableDates | - | `boolean` | `false` | Активирует в календаре подсветку дат, на которые есть доступные рейсы (только для `WEBSKY`) |
@@ -54,6 +58,14 @@
 | useNearestAirport | - | `boolean` | `false` | Выбирать в качестве пункта вылета ближайший аэропорт, полученный на основе IP-адреса пользователя (только если не указан параметр `defaultDepartureAirport`) |
 | verticalForm | - | `boolean` | `false` | Отображать ли принудительно вертикальную форму поиска, вместо горизонтальной |
 | vicinityDays | - | `integer` | `3` | Количество дней для "Искать ±3 дня" (только для `NEMO`) |
+
+## Команды для разработки
+
+* `npm run build` — генерирует минифицированные CSS и JavaScript пакеты в папку `/dist/`
+* `npm run build-dev` — генерирует полноразмерные CSS и JavaScript пакеты, и Webpack начинает отслеживать изменения в файлах (`watch: true`)
+* `npm run server` — запускает Express-сервер в корне проекта и сразу же открывает браузер на `http://localhost:5555`
+* `npm run dev` — **использовать для разработки**: запускает Express-сервер, открывает браузер и запускает Webpack в `dev` режиме (аналогично `npm run server && npm run build-dev`)
+
 
 ## Airport
 | Название параметра | Обязательный параметр | Тип значения | Описание |
@@ -72,9 +84,11 @@
 | name | да | `string` | Название страны |
 | nameEn | да | `string` | Название страны на английском языке |
 
-## Команды для разработки
+## Additional Options
+Дополнительные параметры для поиска. Доступны в режиме `NEMO`.
 
-* `npm run build` — генерирует минифицированные CSS и JavaScript пакеты в папку `/dist/`
-* `npm run build-dev` — генерирует полноразмерные CSS и JavaScript пакеты, и Webpack начинает отслеживать изменения в файлах (`watch: true`)
-* `npm run server` — запускает Express-сервер в корне проекта и сразу же открывает браузер на `http://localhost:5555`
-* `npm run dev` — **использовать для разработки**: запускает Express-сервер, открывает браузер и запускает Webpack в `dev` режиме (аналогично `npm run server && npm run build-dev`)
+| Название параметра | Тип значения | Значение по умолчанию | Описание |
+| :- | :- | :- | :- |
+| classType | `string` | `Economy` | Класс обслуживания (`Economy` или `Business`) |
+| vicinityDatesMode | `bool` | `false` | Искать перелеты в заданной границе дат |
+| directOnly | `bool` | `false` | Искать только прямые рейсы |
