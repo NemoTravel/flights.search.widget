@@ -58,7 +58,21 @@
 		verticalForm: false,
 		mode: 'NEMO',
 		useNearestAirport: true,
-		highlightAvailableDates: true
+		highlightAvailableDates: true,
+		defaultDepartureAirport: {IATA:"MOW",cityId:58165,"isAggregation":true,airportRating:"3537272",properNameEn:null,properName:null,name:"Москва",nameEn:"Moscow",countryCode:"RU",country:{code:"RU",name:"Россия",nameEn:"Russia"},isCity:true},
+		defaultArrivalAirport: 'RTW',
+		defaultAdditionalOptions: {
+			classType: "Business",
+			vicinityDates: true
+		},
+		defaultDates: {
+			departure: "2017-12-01",
+			'return': "2018-01-01"
+		},
+		defaultPassengers: {
+			ADT: 2,
+			CLD: 1
+		}
 	});
 </script>
 </body>

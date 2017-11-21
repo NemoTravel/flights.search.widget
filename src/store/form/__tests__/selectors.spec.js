@@ -3,6 +3,7 @@ import { initialState } from '../../../state';
 import { Selector } from 'redux-testkit';
 import { createStore } from 'redux';
 import { changeAutocompleteSuggestions } from '../autocomplete/actions';
+import { setCounter } from '../passengers/actions';
 import rootReducer from 'store/reducer';
 import { setSelectedAirport } from '../autocomplete/actions';
 import { selectDate } from '../dates/actions';
@@ -14,6 +15,7 @@ const getStore = () => {
 
 const correctAirport = { name: 'Москва', nameEn: 'Moscow', IATA: 'MOW' };
 const anotherCorrectAirport = { name: 'Саратов', nameEn: 'Saratov', IATA: 'RTW' };
+const correctPassengers = { ADT: 1 };
 const wrongAirport = { IATA: 'MOW' };
 
 /* global describe */
@@ -29,6 +31,7 @@ describe('store/form/selectors', () => {
 		store.dispatch(setSelectedAirport(correctAirport, 'departure'));
 		store.dispatch(setSelectedAirport(anotherCorrectAirport, 'arrival'));
 		store.dispatch(selectDate({}, 'departure'));
+		store.dispatch(setCounter('ADT', correctPassengers.ADT));
 
 		Selector(formIsValid).expect(store.getState()).toReturn(true);
 	});

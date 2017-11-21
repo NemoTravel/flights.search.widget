@@ -18,6 +18,19 @@ export const systemState = {
 	autoFocusReturnDate: false,
 	mode: MODE_NEMO,
 	defaultDepartureAirport: null,
+	defaultArrivalAirport: null,
+	defaultDates: {
+		departure: null,
+		'return': null
+	},
+	defaultAdditionalOptions: {
+		classType: 'Economy',
+		isDirect: false,
+		vicinityDates: false
+	},
+	defaultPassengers: {
+		ADT: 1
+	},
 	useNearestAirport: false,
 	highlightAvailableDates: false,
 	vicinityDays: 3
@@ -69,7 +82,7 @@ export const passengersState = {
 		title: 'passenger_ADT',
 		ageTitle: 'passenger_ADT_age',
 		code: 'ADT',
-		count: 1
+		count: 0
 	},
 	CLD: {
 		title: 'passenger_CLD',
@@ -92,9 +105,9 @@ export const passengersState = {
 };
 
 export const additionalState = {
-	classType: CLASS_TYPES[0],
-	vicinityDates: false,
-	directFlight: false
+	classType: null,
+	vicinityDates: null,
+	directFlight: null
 };
 
 export const initialState = {
