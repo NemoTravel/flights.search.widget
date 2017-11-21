@@ -47,9 +47,10 @@
 | defaultAdditionalOptions | - | `object` |  | [Дополнительные параметры](#additional-options) поиска. |
 | defaultArrivalAirport | - | `string` | `null` | Трехбуквенный IATA-код аэропорта или города, который будет выбран по умолчанию в качестве аэропорта прилета. |
 | defaultArrivalAirport | - | `object` | `null` | Объект [Airport](#airport) |
-| defaultDates | - | `object` | `null` | Даты вылета и прилета в формате (YYYY-MM-DD). Например, `departure: '2018-01-01, return: '2018-01-05'` |
+| defaultDates | - | `object` | `{ departure: null, return: null }` | Даты вылета и прилета в строковом формате (YYYY-MM-DD).   |
 | defaultDepartureAirport | - | `string` | `null` | Трехбуквенный IATA-код аэропорта или города, который будет выбран по умолчанию в качестве аэропорта вылета. |
 | defaultDepartureAirport | - | `object` | `null` | Объект [Airport](#airport) |
+| defaultPassengers | - | `object` | `{ ADT: 1 }` | Предуставленное кол-во пассажиров
 | highlightAvailableDates | - | `boolean` | `false` | Активирует в календаре подсветку дат, на которые есть доступные рейсы (только для `WEBSKY`) |
 | locale | - | `string` | `"en"` | Язык интерфейса |
 | mode | - | `string` | `"NEMO"` | Название системы бронирования, с которой предстоит работать (`NEMO` или `WEBSKY`) |
