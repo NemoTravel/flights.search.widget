@@ -25,8 +25,8 @@ export const systemState = {
 	},
 	defaultAdditionalOptions: {
 		classType: 'Economy',
-		isDirect: false,
-		vicinityDates: false
+		directOnly: false,
+		vicinityDatesMode: false
 	},
 	defaultPassengers: {
 		ADT: 1

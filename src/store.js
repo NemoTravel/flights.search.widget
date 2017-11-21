@@ -8,7 +8,7 @@ import { initialState, systemState, fillStateFromCache } from 'state';
 import { configReducer } from 'store/system/reducer';
 import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete, setSelectedAirport } from 'store/form/autocomplete/actions';
 import { selectDate } from 'store/form/dates/actions';
-import { setClassType, setVicinityDatesCheckbox } from 'store/form/additional/actions';
+import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from 'store/form/additional/actions';
 import { getTotalPassengersCount } from 'store/form/passengers/selectors';
 import { setCounter } from 'store/form/passengers/actions';
 
@@ -32,7 +32,7 @@ const enableReduxLogger = (isEnabled = false) => {
 
 /* global process */
 if (process.env.NODE_ENV !== 'production') {
-	enableReduxLogger(true);
+	enableReduxLogger(false);
 	enableProfiler(false);
 }
 
@@ -66,6 +66,14 @@ export const cacheState = state => {
 export const getStore = (config = {}) => {
 	// State object that has been stored in `localStorage` in the past.
 	const stateFromCache = getCachedState();
+
+	// merging with config default options from initial
+	if (config.hasOwnProperty('defaultAdditionalOptions')) {
+		let initialDefault = initialState.system.defaultAdditionalOptions;
+		let configDefault = config.defaultAdditionalOptions;
+
+		config.defaultAdditionalOptions = { ...initialDefault, ...configDefault };
+	}
 
 	// New state object that will be used as the initial state for the new redux-store.
 	let preloadedState = {
@@ -118,7 +126,11 @@ export const getStore = (config = {}) => {
 	}
 
 	if (state.form.additional.vicinityDates === null) {
-		store.dispatch(setVicinityDatesCheckbox(state.system.defaultAdditionalOptions.vicinityDates));
+		store.dispatch(setVicinityDatesCheckbox(state.system.defaultAdditionalOptions.vicinityDatesMode));
+	}
+
+	if (state.form.additional.directFlight === null) {
+		store.dispatch(setDirectFlightCheckbox(state.system.defaultAdditionalOptions.directOnly));
 	}
 
 	if (!state.form.dates.departure.date) {
