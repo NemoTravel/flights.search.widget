@@ -26,34 +26,34 @@ describe('preinit options', () => {
 	});
 
 	it('should be merge with config additional options and initial. Change Class Type', () => {
-		const config = { defaultAdditionalOptions: { classType: 'Business' } };
+		const config = { defaultServiceClass: 'Business' };
 		let expectValue = systemState;
-		expectValue.defaultAdditionalOptions.classType = 'Business';
+		expectValue.defaultServiceClass = 'Business';
 
 		expect(getStore(config).getState().system).toEqual(expectValue);
 	});
 
 	it('should be merge with config additional options and initial. Change Vicinity Mode', () => {
-		const config = { defaultAdditionalOptions: { vicinityDatesMode: true } };
+		const config = { vicinityDatesMode: true };
 		let expectValue = systemState;
-		expectValue.defaultAdditionalOptions.vicinityDatesMode = true;
+		expectValue.vicinityDatesMode = true;
 
 		expect(getStore(config).getState().system).toEqual(expectValue);
 	});
 
 	it('should be merge with config additional options and initial. Change Direct Only', () => {
-		const config = { defaultAdditionalOptions: { directOnly: true } };
+		const config = { directOnly: true };
 		let expectValue = systemState;
-		expectValue.defaultAdditionalOptions.directOnly = true;
+		expectValue.directOnly = true;
 
 		expect(getStore(config).getState().system).toEqual(expectValue);
 	});
 
 	it('should be date from config', () => {
-		const config = { defaultDates: { departure: '2018-01-01', return: '2018-01-09' } };
+		const config = { defaultDepartureDate: '2018-01-01', defaultReturnDate: '2018-01-09' };
 		let expectValue = initialState.form;
-		expectValue.dates.departure.date = moment(config.defaultDates.departure);
-		expectValue.dates.return.date = moment(config.defaultDates.return);
+		expectValue.dates.departure.date = moment(config.defaultDepartureDate);
+		expectValue.dates.return.date = moment(config.defaultReturnDate);
 
 		expect(getStore(config).getState().form.dates).toEqual(expectValue.dates);
 	});

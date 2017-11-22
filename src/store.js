@@ -67,14 +67,6 @@ export const getStore = (config = {}) => {
 	// State object that has been stored in `localStorage` in the past.
 	const stateFromCache = getCachedState();
 
-	// merging with config default options from initial
-	if (config.hasOwnProperty('defaultAdditionalOptions')) {
-		let initialDefault = initialState.system.defaultAdditionalOptions;
-		let configDefault = config.defaultAdditionalOptions;
-
-		config.defaultAdditionalOptions = { ...initialDefault, ...configDefault };
-	}
-
 	// New state object that will be used as the initial state for the new redux-store.
 	let preloadedState = {
 		...initialState,
@@ -122,28 +114,28 @@ export const getStore = (config = {}) => {
 	}
 
 	if (!state.form.additional.classType) {
-		store.dispatch(setClassType(state.system.defaultAdditionalOptions.classType));
+		store.dispatch(setClassType(state.system.defaultServiceClass));
 	}
 
 	if (state.form.additional.vicinityDates === null) {
-		store.dispatch(setVicinityDatesCheckbox(state.system.defaultAdditionalOptions.vicinityDatesMode));
+		store.dispatch(setVicinityDatesCheckbox(state.system.vicinityDatesMode));
 	}
 
 	if (state.form.additional.directFlight === null) {
-		store.dispatch(setDirectFlightCheckbox(state.system.defaultAdditionalOptions.directOnly));
+		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
 	}
 
 	if (!state.form.dates.departure.date) {
-		if (state.system.defaultDates.departure) {
-			let date = moment(state.system.defaultDates.departure).locale(state.system.locale);
+		if (state.system.defaultDepartureDate) {
+			let date = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
 			store.dispatch(selectDate(date, 'departure'));
 		}
 	}
 
 	if (!state.form.dates.return.date) {
-		if (state.system.defaultDates.return) {
-			let date = moment(state.system.defaultDates.return).locale(state.system.locale);
+		if (state.system.defaultReturnDate) {
+			let date = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
 			store.dispatch(selectDate(date, 'return'));
 		}

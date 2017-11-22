@@ -19,18 +19,14 @@ export const systemState = {
 	mode: MODE_NEMO,
 	defaultDepartureAirport: null,
 	defaultArrivalAirport: null,
-	defaultDates: {
-		departure: null,
-		'return': null
-	},
-	defaultAdditionalOptions: {
-		classType: 'Economy',
-		directOnly: false,
-		vicinityDatesMode: false
-	},
+	defaultDepartureDate: null,
+	defaultReturnDate: null,
 	defaultPassengers: {
 		ADT: 1
 	},
+	defaultServiceClass: 'Economy',
+	directOnly: false,
+	vicinityDatesMode: false,
 	useNearestAirport: false,
 	highlightAvailableDates: false,
 	vicinityDays: 3
