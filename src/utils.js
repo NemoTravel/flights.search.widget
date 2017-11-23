@@ -52,9 +52,7 @@ export const URL = (root, params = {}) => {
  */
 export const i18n = (moduleName, label) => {
 	try {
-		let locale = Cache.get(Cache.KEY_LOCALE);
-
-		locale = locale ? locale : 'en';
+		const locale = Cache.getLocale();
 		const module = require('i18n/' + locale + '/' + moduleName);
 
 		return module[label];

@@ -37,7 +37,7 @@ const STORE_CACHE_KEY = 'cached_store';
  * Get cached state object.
  */
 export const getCachedState = () => {
-	const cachedState = Cache.get(STORE_CACHE_KEY + '_' + process.env.VERSION);
+	const cachedState = Cache.get(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION);
 
 	return cachedState ? cachedState : {};
 };
@@ -48,7 +48,7 @@ export const getCachedState = () => {
  * @param state
  */
 export const cacheState = state => {
-	Cache.set(STORE_CACHE_KEY + '_' + process.env.VERSION, state);
+	Cache.set(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION, state);
 };
 
 /**
