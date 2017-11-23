@@ -53,26 +53,9 @@
 	FlightsSearchWidget.init({
 		rootElement: document.getElementById('root'),
 		nemoURL: 'http://sys.nemo.travel',
-		readOnlyAutocomplete: false,
 		locale: 'ru',
-		verticalForm: false,
 		mode: 'NEMO',
-		useNearestAirport: true,
-		highlightAvailableDates: true,
-		defaultDepartureDate: '2018-01-01',
-		defaultDepartureAirport: {
-			IATA: "MOW",
-			name: "Москва",
-			nameEn: "Moscow",
-			countryCode: "RU",
-			country: {
-				code: "RU",
-				name: "Россия",
-				nameEn: "Russia"
-			},
-			isCity:true
-		},
-		directOnly: true
+		useNearestAirport: true
 	});
 </script>
 </body>
