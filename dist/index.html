@@ -58,7 +58,21 @@
 		verticalForm: false,
 		mode: 'NEMO',
 		useNearestAirport: true,
-		highlightAvailableDates: true
+		highlightAvailableDates: true,
+		defaultDepartureDate: '2018-01-01',
+		defaultDepartureAirport: {
+			IATA: "MOW",
+			name: "Москва",
+			nameEn: "Moscow",
+			countryCode: "RU",
+			country: {
+				code: "RU",
+				name: "Россия",
+				nameEn: "Russia"
+			},
+			isCity:true
+		},
+		directOnly: true
 	});
 </script>
 </body>

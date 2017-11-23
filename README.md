@@ -44,7 +44,16 @@
 | **webskyURL** | **да** (в режиме `WEBSKY`) | `string` | - | URL системы бронирования `Websky` |
 | autoFocusArrivalAirport | - | `boolean` | `false` | Автоматически фокусироваться на поле выбора аэропорта прилета, после выбора аэропорта вылета. |
 | autoFocusReturnDate | - | `boolean` | `false` | Автоматически фокусироваться на поле выбора обратной даты, после выбора даты вылета. |
+| defaultArrivalAirport | - | `string` | `null` | Трехбуквенный IATA-код аэропорта или города, который будет выбран по умолчанию в качестве аэропорта прилета. |
+| defaultArrivalAirport | - | `object` | `null` | Объект [Airport](#airport) |
+| defaultDepartureDate | - | `string` | `null` | Дата вылета "туда" в строковом формате (YYYY-MM-DD). |
+| defaultReturnDate | - | `string` | `null` | Дата вылета "обратно" в строковом формате (YYYY-MM-DD). |
 | defaultDepartureAirport | - | `string` | `null` | Трехбуквенный IATA-код аэропорта или города, который будет выбран по умолчанию в качестве аэропорта вылета. |
+| defaultDepartureAirport | - | `object` | `null` | Объект [Airport](#airport) |
+| defaultPassengers | - | `object` | `{ ADT: 1 }` | Предуставленное кол-во пассажиров |
+| defaultServiceClass | - | `string` | `Economy` | Класс обслуживания (`Economy` или `Business`) по-умолчанию |
+| vicinityDatesMode | - | `bool` | `false` | Искать перелеты в заданной границе дат |
+| directOnly | - | `bool` | `false` | Искать только прямые рейсы |
 | highlightAvailableDates | - | `boolean` | `false` | Активирует в календаре подсветку дат, на которые есть доступные рейсы (только для `WEBSKY`) |
 | locale | - | `string` | `"en"` | Язык интерфейса |
 | mode | - | `string` | `"NEMO"` | Название системы бронирования, с которой предстоит работать (`NEMO` или `WEBSKY`) |
@@ -60,3 +69,22 @@
 * `npm run build-dev` — генерирует полноразмерные CSS и JavaScript пакеты, и Webpack начинает отслеживать изменения в файлах (`watch: true`)
 * `npm run server` — запускает Express-сервер в корне проекта и сразу же открывает браузер на `http://localhost:5555`
 * `npm run dev` — **использовать для разработки**: запускает Express-сервер, открывает браузер и запускает Webpack в `dev` режиме (аналогично `npm run server && npm run build-dev`)
+
+
+## Airport
+| Название параметра | Обязательный параметр | Тип значения | Описание |
+| :- | :- | :- | :- |
+| **IATA** | **да** | `string` | Трехбуквенный IATA-код аэропорта или города |
+| **name** | **да** | `string` | Название города или аэропорта |
+| **nameEn** | **да** | `string` | Название города или аэропорта на английском языке |
+| country | - | `object` | Объект [Country](#country) |
+| countryCode | - | `string` | Двухбуквенный код страны |
+| isCity | - | `bool` | Является ли IATA объект городом |
+
+## Country
+| Название параметра | Обязательный параметр | Тип значения | Описание |
+| :- | :- | :- | :- |
+| code | да | `string` | Двухбуквенный код страны |
+| name | да | `string` | Название страны |
+| nameEn | да | `string` | Название страны на английском языке |
+
