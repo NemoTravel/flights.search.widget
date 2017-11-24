@@ -30,15 +30,9 @@ export const systemState = {
 	useNearestAirport: false,
 	highlightAvailableDates: false,
 	vicinityDays: 3,
-	renderCoupon: false,
-	renderMileCard: false
+	enableCoupon: false,
+	enableMileCard: false
 };
-
-// export const blockVisibilityState = {
-// 	search: true,
-// 	registration: false,
-// 	bookings: false
-// };
 
 export const previousSearchesGroup = {
 	options: {},

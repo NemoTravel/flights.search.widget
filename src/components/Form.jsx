@@ -23,8 +23,8 @@ export default connect(
 		return {
 			verticalForm: state.system.verticalForm,
 			isWebsky: state.system.mode === MODE_WEBSKY,
-			isRenderCoupon: state.system.renderCoupon,
-			isRenderMileCard: state.system.renderMileCard
+			isRenderCoupon: state.system.enableCoupon,
+			isRenderMileCard: state.system.enableMileCard
 		};
 	},
 	dispatch => bindActionCreators(formActions, dispatch)

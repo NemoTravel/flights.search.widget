@@ -42,8 +42,6 @@
 | **nemoURL** | **да** | `string` | - | URL системы бронирования `Nemo.travel` |
 | **rootElement** | **да** | `HTMLElement` | - | DOM-элемент в который будет встраиваться виджет |
 | **webskyURL** | **да** (в режиме `WEBSKY`) | `string` | - | URL системы бронирования `Websky` |
-| **renderCoupon** | **нет** (в режиме `WEBSKY`) | `boolean` | `false` | Добавляет поле `У меня есть купон на скидку` для системы бронирования `Websky` |
-| **renderMileCard** | **нет** (в режиме `WEBSKY`) | `boolean` | `false` | Добавляет поле `Оплата милями` для системы бронирования `Websky` |
 | autoFocusArrivalAirport | - | `boolean` | `false` | Автоматически фокусироваться на поле выбора аэропорта прилета, после выбора аэропорта вылета. |
 | autoFocusReturnDate | - | `boolean` | `false` | Автоматически фокусироваться на поле выбора обратной даты, после выбора даты вылета. |
 | defaultArrivalAirport | - | `string` или `object`  | `null` | Трехбуквенный IATA-код аэропорта или города, или объект [Airport](#Объект-airport), который будет выбран по умолчанию в качестве аэропорта прилета. |
@@ -53,6 +51,8 @@
 | defaultPassengers | - | `object` | `{ ADT: 1 }` | Предуставленное кол-во пассажиров |
 | defaultServiceClass | - | `string` | `Economy` | Класс обслуживания (`Economy` или `Business`) по-умолчанию |
 | directOnly | - | `bool` | `false` | Искать только прямые рейсы |
+| enableCoupon | - | `boolean` | `false` | Добавляет поле `У меня есть купон на скидку` (только для `WEBSKY`) |
+| enableMileCard | - | `boolean` | `false` | Добавляет поле `Оплата милями` (только для `WEBSKY`) |
 | highlightAvailableDates | - | `boolean` | `false` | Активирует в календаре подсветку дат, на которые есть доступные рейсы (только для `WEBSKY`) |
 | locale | - | `string` | `"en"` | Язык интерфейса |
 | mode | - | `string` | `"NEMO"` | Название системы бронирования, с которой предстоит работать (`NEMO` или `WEBSKY`) |
