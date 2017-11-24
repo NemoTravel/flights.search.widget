@@ -2,6 +2,7 @@ import React from 'react';
 import DatesContainer from 'components/Form/Search/DatesContainer';
 import AutocompleteContainer from 'components/Form/Search/AutocompleteContainer';
 import PassengersContainer from 'components/Form/Search/PassengersContainer';
+import AdditionalOptionsContainer from 'components/Form/Search/AdditionalOptionsContainer';
 import CouponContainer from 'components/Form/Search/Bonus/CouponContainer';
 import MileCardContainer from 'components/Form/Search/Bonus/MileCardContainer';
 import { i18n } from 'utils';
@@ -59,6 +60,8 @@ export default class Search extends React.Component {
 					{this.renderBonuses()}
 
 					<div className="col">
+						<AdditionalOptionsContainer/>
+
 						<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>
 							{i18n('form', 'search')}
 						</button>

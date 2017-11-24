@@ -2,7 +2,8 @@ import {
 	AUTOCOMPLETE_LOADING_STARTED,
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
-	AIRPORT_SELECTED
+	AIRPORT_SELECTED,
+	AUTOCOMPLETE_PUSH_TO_PREVIOUS
 } from 'store/actions';
 import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from 'services/parsers';
 import { parseDatesAvailability } from 'services/parsers/datesAvailability';
@@ -130,6 +131,39 @@ export const setSelectedAirport = (airport, autocompleteType) => {
 	};
 };
 
+export const setAirportInPreviousSearchGroup = (pool, autocompleteType) => {
+	return {
+		type: AUTOCOMPLETE_PUSH_TO_PREVIOUS,
+		autocompleteType,
+		payload: {
+			pool
+		}
+	};
+};
+
+const pushAiprortInCache = (dispatch, getState, airport) => {
+	const state = getState().form.autocomplete.defaultGroups.previousSearches.options, newPool = {};
+	let counter = 0;
+
+	newPool[airport.IATA] = airport;
+
+	for (const airport in state) {
+		if (state.hasOwnProperty(airport)) {
+			if (!newPool[state[airport].IATA]) {
+				counter++;
+			}
+
+			newPool[state[airport].IATA] = state[airport];
+		}
+
+		if (counter >= 9) {
+			break;
+		}
+	}
+
+	dispatch(setAirportInPreviousSearchGroup(newPool, 'defaultGroups'));
+};
+
 /**
  * Store airport selected by user and run request for getting dates with available flight.
  *
@@ -141,6 +175,7 @@ export const selectAirport = (airport, autocompleteType) => {
 	return (dispatch, getState) => {
 		dispatch(setSelectedAirport(airport, autocompleteType));
 		getDatesAvailability(dispatch, getState);
+		pushAiprortInCache(dispatch, getState, airport);
 	};
 };
 
@@ -257,7 +292,9 @@ export const sendAutocompleteRequest = (searchText, autocompleteType) => {
  */
 export const loadAirportForAutocomplete = (IATA, autocompleteType) => {
 	return (dispatch, getState) => {
-		fetch(`${getState().system.nemoURL}/api/guide/airports/${IATA}`)
+		const { nemoURL, locale } = getState().system;
+
+		fetch(`${nemoURL}/api/guide/airports/${IATA}?apilang=${locale}`)
 			.then(response => response.json())
 			.then(response => dispatch(setSelectedAirport(parseAirportFromGuide(response, IATA), autocompleteType)));
 	};
@@ -271,7 +308,9 @@ export const loadAirportForAutocomplete = (IATA, autocompleteType) => {
  */
 export const loadNearestAirportForAutocomplete = autocompleteType => {
 	return (dispatch, getState) => {
-		fetch(`${getState().system.nemoURL}/api/guide/airports/nearest`)
+		const { nemoURL, locale } = getState().system;
+
+		fetch(`${nemoURL}/api/guide/airports/nearest?apilang=${locale}`)
 			.then(response => response.json())
 			.then(response => dispatch(setSelectedAirport(parseNearestAirport(response), autocompleteType)));
 	};

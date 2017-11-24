@@ -40,7 +40,17 @@ const runNemoSearch = state => {
 	}
 
 	// Class info.
-	requestURL += '-class=Economy';
+	requestURL += '-class=' + state.form.additional.classType;
+
+	// VicinityDates
+	if (state.form.additional.vicinityDates) {
+		requestURL += '-vicinityDates=' + state.system.vicinityDays;
+	}
+
+	// Direct flight
+	if (state.form.additional.directFlight) {
+		requestURL += '-direct';
+	}
 
 	document.location = URL(requestURL, {
 		changelang: state.system.locale

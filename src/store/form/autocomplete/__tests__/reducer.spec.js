@@ -5,7 +5,8 @@ import {
 	startAutocompleteLoading,
 	finishAutocompleteLoading,
 	setSelectedAirport,
-	changeAutocompleteSuggestions
+	changeAutocompleteSuggestions,
+	setAirportInPreviousSearchGroup
 } from '../actions';
 import { Reducer } from 'redux-testkit';
 
@@ -44,6 +45,21 @@ describe('store/form/autocomplete', () => {
 			const suggestions = { name: 'Domodedovo', IATA: 'MOW' };
 
 			Reducer(autocompleteReducer).expect(changeAutocompleteSuggestions(suggestions, 'departure')).toChangeInState({ departure: { suggestions: suggestions } });
+		});
+
+		it('should handle `AUTOCOMPLETE_PUSH_TO_PREVIOUS`', () => {
+			const airport = { name: 'Domodedovo', IATA: 'MOW' },
+				pool = { MOW: airport };
+
+			Reducer(autocompleteReducer).expect(setAirportInPreviousSearchGroup(pool, 'defaultGroups')).toChangeInState({
+				defaultGroups: {
+					previousSearches: {
+						options: {
+							MOW: airport
+						}
+					}
+				}
+			});
 		});
 	});
 

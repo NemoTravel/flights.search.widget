@@ -1,9 +1,10 @@
-import { autocompleteAirportReducer } from 'store/form/autocomplete/reducer';
+import { autocompleteAirportReducer, autocompleteGroupsReducer } from 'store/form/autocomplete/reducer';
 import { selectDateReducer, toggleDatepickerReducer, setAvailableDatesReducer } from 'store/form/dates/reducer';
 import moment from 'moment';
 
 export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';
+export const CLASS_TYPES = ['Economy', 'Business'];
 
 export const systemState = {
 	rootElement: null,
@@ -17,8 +18,18 @@ export const systemState = {
 	autoFocusReturnDate: false,
 	mode: MODE_NEMO,
 	defaultDepartureAirport: null,
+	defaultArrivalAirport: null,
+	defaultDepartureDate: null,
+	defaultReturnDate: null,
+	defaultPassengers: {
+		ADT: 1
+	},
+	defaultServiceClass: 'Economy',
+	directOnly: false,
+	vicinityDatesMode: false,
 	useNearestAirport: false,
 	highlightAvailableDates: false,
+	vicinityDays: 3,
 	renderCoupon: false,
 	renderMileCard: false
 };
@@ -28,6 +39,12 @@ export const systemState = {
 // 	registration: false,
 // 	bookings: false
 // };
+
+export const previousSearchesGroup = {
+	options: {},
+	className: 'widget-form-airports__suggestion__recently',
+	name: 'previousSearches'
+};
 
 export const autocompleteState = {
 	departure: {
@@ -39,6 +56,9 @@ export const autocompleteState = {
 		isLoading: false,
 		suggestions: [],
 		airport: null
+	},
+	defaultGroups: {
+		previousSearches: previousSearchesGroup
 	}
 };
 
@@ -60,7 +80,7 @@ export const passengersState = {
 		title: 'passenger_ADT',
 		ageTitle: 'passenger_ADT_age',
 		code: 'ADT',
-		count: 1
+		count: 0
 	},
 	CLD: {
 		title: 'passenger_CLD',
@@ -82,6 +102,12 @@ export const passengersState = {
 	}
 };
 
+export const additionalState = {
+	classType: null,
+	vicinityDates: null,
+	directFlight: null
+};
+
 export const couponState = {
 	isActive: false,
 	number: null
@@ -92,13 +118,14 @@ export const mileCardState = {
 	number: null,
 	password: null
 };
-	
+
 export const initialState = {
 	system: systemState,
 	form: {
 		dates: datesState,
 		passengers: passengersState,
 		autocomplete: autocompleteState,
+		additional: additionalState,
 		coupon: couponState,
 		mileCard: mileCardState
 	}
@@ -120,6 +147,7 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 			if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
 				const cachedArrivalAutocomplete = stateFromCache.form.autocomplete.arrival;
+				const cachedAutocompleteGroups = stateFromCache.form.autocomplete.defaultGroups;
 
 				if (canBeProcessed && cachedDepartureAutocomplete && cachedDepartureAutocomplete.airport) {
 					state.form.autocomplete.departure = autocompleteAirportReducer(
@@ -132,6 +160,13 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 					state.form.autocomplete.arrival = autocompleteAirportReducer(
 						state.form.autocomplete.arrival,
 						cachedArrivalAutocomplete.airport
+					);
+				}
+
+				if (canBeProcessed && cachedAutocompleteGroups && cachedAutocompleteGroups.previousSearches) {
+					state.form.autocomplete.defaultGroups = autocompleteGroupsReducer(
+						state.form.autocomplete.defaultGroups,
+						cachedAutocompleteGroups.previousSearches
 					);
 				}
 			}
@@ -178,10 +213,19 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 					}
 				}
 			}
-			
+
+			if (stateFromCache.form.additional) {
+				for (const option in stateFromCache.form.additional) {
+					if (stateFromCache.form.additional.hasOwnProperty(option)) {
+						state.form.additional[option] = stateFromCache.form.additional[option];
+					}
+				}
+			}
+
 			if (stateFromCache.form.coupon) {
 				const cachedCouponIsActive = stateFromCache.form.coupon.isActive;
 				const cachedCouponNumber = stateFromCache.form.coupon.number;
+
 				if (cachedCouponIsActive) {
 					state.form.coupon.isActive = cachedCouponIsActive;
 				}
@@ -189,17 +233,20 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 					state.form.coupon.number = cachedCouponNumber;
 				}
 			}
-			
+
 			if (stateFromCache.form.mileCard) {
 				const cachedMileCardIsActive = stateFromCache.form.mileCard.isActive;
 				const cachedMileCardNumber = stateFromCache.form.mileCard.number;
 				const cachedMileCardPassword = stateFromCache.form.mileCard.password;
+
 				if (cachedMileCardIsActive) {
 					state.form.mileCard.isActive = cachedMileCardIsActive;
 				}
+
 				if (cachedMileCardNumber) {
 					state.form.mileCard.number = cachedMileCardNumber;
 				}
+
 				if (cachedMileCardPassword) {
 					state.form.mileCard.password = cachedMileCardPassword;
 				}

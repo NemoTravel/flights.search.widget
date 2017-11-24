@@ -1,0 +1,42 @@
+@import "../variables";
+
+&-additionalOptions {
+	text-align: left;
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: center;
+	min-width: 0;
+	height: 40px;
+
+	label {
+		margin-bottom: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		position: relative;
+		text-overflow: ellipsis;
+		max-width: 100%;
+	}
+
+	.widget-ui-checkbox {
+		min-width: 0;
+		height: 20px;
+	}
+
+	@include adaptivity(phone) {
+		display: inline-block;
+		width: 100%;
+		height: auto;
+		margin-bottom: 0 !important;
+
+		.widget-ui-checkbox {
+			&:first-child {
+				margin-bottom: 1rem;
+			}
+
+			&:last-child {
+				margin-bottom: 1rem;
+				padding-top: 0;
+			}
+		}
+	}
+}

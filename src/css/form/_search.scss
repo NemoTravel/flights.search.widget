@@ -2,6 +2,8 @@
 @import "airports";
 @import "dates";
 @import "passengers";
+@import "classType";
+@import "additional";
 @import "bonus";
 
 &-search {
@@ -10,7 +12,7 @@
 	&__footer {
 		.col {
 			flex-basis: 50%;
-			
+
 			&:nth-of-type(2n+1) {
 				@include adaptivity(not-phone) {
 					padding-right: 0.5rem;
@@ -22,10 +24,11 @@
 					padding-left: 0.5rem;
 				}
 			}
-			
+
 			&:last-of-type {
 				@include adaptivity(not-phone) {
 					text-align: right;
+					min-width: 0;
 				}
 			}
 			

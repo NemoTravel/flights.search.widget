@@ -20,3 +20,9 @@ export const get = key => typeof localStorage !== 'undefined' ?
 export const set = (key, value) => typeof localStorage !== 'undefined' ?
 	localStorage.setItem(key, serialize(value)) :
 	Cookie.set(key, serialize(value));
+
+export const getLocale = () => {
+	const locale = get(KEY_LOCALE);
+
+	return locale ? locale : 'en';
+};

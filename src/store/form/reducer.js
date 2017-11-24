@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import passengers from 'store/form/passengers/reducer';
 import autocomplete from 'store/form/autocomplete/reducer';
 import dates from 'store/form/dates/reducer';
+import additional from 'store/form/additional/reducer';
 import coupon from 'store/form/coupon/reducer';
 import mileCard from 'store/form/mileCard/reducer';
 
@@ -18,6 +19,7 @@ export default function(state, action) {
 		dates,
 		autocomplete,
 		passengers,
+		additional,
 		coupon,
 		mileCard
 	})(state, action);

@@ -22,11 +22,11 @@ describe('store/passengers/reducer', () => {
 
 	describe('ADT', () => {
 		it('should handle `ADD_PASSENGER`', () => {
-			Reducer(passengersReducer).expect(addPassenger('ADT')).toChangeInState({ ADT: { count: 2 } });
+			Reducer(passengersReducer).expect(addPassenger('ADT')).toChangeInState({ ADT: { count: 1 } });
 		});
 
 		it('should handle `REMOVE_PASSENGER`', () => {
-			Reducer(passengersReducer).expect(removePassenger('ADT')).toChangeInState({ ADT: { count: 0 } });
+			Reducer(passengersReducer).expect(removePassenger('ADT')).toChangeInState({ ADT: { count: -1 } });
 		});
 
 		it('should handle `SET_PASSENGER_COUNTER`', () => {

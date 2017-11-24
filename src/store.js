@@ -3,9 +3,14 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'store/reducer';
 import * as Cache from 'cache';
+import moment from 'moment';
 import { initialState, systemState, fillStateFromCache } from 'state';
 import { configReducer } from 'store/system/reducer';
-import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete } from 'store/form/autocomplete/actions';
+import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete, setSelectedAirport } from 'store/form/autocomplete/actions';
+import { selectDate } from 'store/form/dates/actions';
+import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from 'store/form/additional/actions';
+import { getTotalPassengersCount } from 'store/form/passengers/selectors';
+import { setCounter } from 'store/form/passengers/actions';
 
 const middlewares = [thunk];
 
@@ -37,7 +42,7 @@ const STORE_CACHE_KEY = 'cached_store';
  * Get cached state object.
  */
 export const getCachedState = () => {
-	const cachedState = Cache.get(STORE_CACHE_KEY + '_' + process.env.VERSION);
+	const cachedState = Cache.get(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION);
 
 	return cachedState ? cachedState : {};
 };
@@ -48,7 +53,7 @@ export const getCachedState = () => {
  * @param state
  */
 export const cacheState = state => {
-	Cache.set(STORE_CACHE_KEY + '_' + process.env.VERSION, state);
+	Cache.set(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION, state);
 };
 
 /**
@@ -81,14 +86,68 @@ export const getStore = (config = {}) => {
 	const state = store.getState();
 
 	if (!state.form.autocomplete.departure.airport) {
-		// Pre-loading departure airport by specified IATA.
+		// Pre-loading departure airport by specified IATA or airport object.
 		if (state.system.defaultDepartureAirport) {
-			store.dispatch(loadAirportForAutocomplete(state.system.defaultDepartureAirport, 'departure'));
+			if (typeof state.system.defaultDepartureAirport === 'string') {
+				store.dispatch(loadAirportForAutocomplete(state.system.defaultDepartureAirport, 'departure'));
+			}
+			else if (typeof state.system.defaultDepartureAirport === 'object') {
+				store.dispatch(setSelectedAirport(state.system.defaultDepartureAirport, 'departure'));
+			}
 		}
 
 		// Pre-loading nearest airport (loaded by IP-address) as the departure airport.
 		else if (state.system.useNearestAirport) {
 			store.dispatch(loadNearestAirportForAutocomplete('departure'));
+		}
+	}
+
+	if (!state.form.autocomplete.arrival.airport) {
+		if (state.system.defaultArrivalAirport) {
+			if (typeof state.system.defaultArrivalAirport === 'string') {
+				store.dispatch(loadAirportForAutocomplete(state.system.defaultArrivalAirport, 'arrival'));
+			}
+			else if (typeof state.system.defaultArrivalAirport === 'object') {
+				store.dispatch(setSelectedAirport(state.system.defaultArrivalAirport, 'arrival'));
+			}
+		}
+	}
+
+	if (!state.form.additional.classType) {
+		store.dispatch(setClassType(state.system.defaultServiceClass));
+	}
+
+	if (state.form.additional.vicinityDates === null) {
+		store.dispatch(setVicinityDatesCheckbox(state.system.vicinityDatesMode));
+	}
+
+	if (state.form.additional.directFlight === null) {
+		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
+	}
+
+	if (!state.form.dates.departure.date) {
+		if (state.system.defaultDepartureDate) {
+			let date = moment(state.system.defaultDepartureDate).locale(state.system.locale);
+
+			store.dispatch(selectDate(date, 'departure'));
+		}
+	}
+
+	if (!state.form.dates.return.date) {
+		if (state.system.defaultReturnDate) {
+			let date = moment(state.system.defaultReturnDate).locale(state.system.locale);
+
+			store.dispatch(selectDate(date, 'return'));
+		}
+	}
+
+	if (getTotalPassengersCount(state) === 0) {
+		let passengers = state.system.defaultPassengers;
+
+		for (let type in passengers) {
+			if (passengers.hasOwnProperty(type)) {
+				store.dispatch(setCounter(passengers[type], type));
+			}
 		}
 	}
 

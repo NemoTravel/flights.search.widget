@@ -21,6 +21,7 @@ class Arrival extends Autocomplete {
 Arrival.propTypes = {
 	isLoading: PropTypes.bool,
 	suggestions: PropTypes.array,
+	optionsGroup: PropTypes.array,
 	sameAirportsError: PropTypes.bool,
 	airport: PropTypes.object,
 	readOnly: PropTypes.bool,

@@ -62,9 +62,8 @@ export default class Demo extends React.Component {
 						<p>Ниже представлены элементы управления, позволяющие в режиме реального времени изменять
 							конфигурацию виджета.</p>
 						<p>
-							Полный перечень параметров конфигурации представлен в описании к репозиторию виджета:
-							<a href="https://github.com/NemoTravel/flights.search.widget#Конфигурация">
-								https://github.com/NemoTravel/flights.search.widget#Конфигурация</a>
+							Полный перечень параметров конфигурации представлен в описании к репозиторию виджета:&nbsp;
+							<a href="https://github.com/NemoTravel/flights.search.widget#Конфигурация">https://github.com/NemoTravel/flights.search.widget#Конфигурация</a>
 						</p>
 					</div>
 				</div>
