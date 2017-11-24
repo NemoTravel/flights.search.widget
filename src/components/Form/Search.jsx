@@ -6,46 +6,17 @@ import AdditionalOptionsContainer from 'components/Form/Search/AdditionalOptions
 import CouponContainer from 'components/Form/Search/Bonus/CouponContainer';
 import MileCardContainer from 'components/Form/Search/Bonus/MileCardContainer';
 import { i18n } from 'utils';
-import autobind from 'autobind-decorator';
+import PropTypes from 'prop-types';
 
 export default class Search extends React.Component {
-	@autobind
-	renderCoupon() {
-		return <div key={1} className="col">
-			<CouponContainer />
-		</div>;
-	}
-
-	@autobind
-	renderMileCard() {
-		return <div key={2} className="col">
-			<MileCardContainer />
-		</div>;
-	}
-
-	@autobind
-	renderBonuses() {
-		const { isWebsky, isRenderCoupon, isRenderMileCard } = this.props;
-
-		if (isWebsky) {
-			if (isRenderCoupon && isRenderMileCard) {
-				return [
-					this.renderCoupon(),
-					this.renderMileCard()
-				];
-			}
-			else if (isRenderCoupon) {
-				return this.renderCoupon();
-			}
-			else if (isRenderMileCard) {
-				return this.renderMileCard();
-			}
-		}
-		return null;
-	}
+	propTypes = {
+		startSearch: PropTypes.func.isRequired,
+		showCouponField: PropTypes.bool.isRequired,
+		showMileCardField: PropTypes.bool.isRequired
+	};
 
 	render() {
-		const { startSearch } = this.props;
+		const { startSearch, showCouponField, showMileCardField } = this.props;
 
 		return <div className="widget-form-search">
 			<div className="widget-form-search__wrapper">
@@ -57,7 +28,8 @@ export default class Search extends React.Component {
 						<PassengersContainer/>
 					</div>
 
-					{this.renderBonuses()}
+					{showCouponField ? <div className="col"><CouponContainer /></div> : null}
+					{showMileCardField ? <div className="col"><MileCardContainer /></div> : null}
 
 					<div className="col">
 						<AdditionalOptionsContainer/>

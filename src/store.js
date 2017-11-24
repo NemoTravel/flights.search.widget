@@ -127,24 +127,24 @@ export const getStore = (config = {}) => {
 
 	if (!state.form.dates.departure.date) {
 		if (state.system.defaultDepartureDate) {
-			let date = moment(state.system.defaultDepartureDate).locale(state.system.locale);
+			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(date, 'departure'));
+			store.dispatch(selectDate(departureDate, 'departure'));
 		}
 	}
 
 	if (!state.form.dates.return.date) {
 		if (state.system.defaultReturnDate) {
-			let date = moment(state.system.defaultReturnDate).locale(state.system.locale);
+			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(date, 'return'));
+			store.dispatch(selectDate(returnDate, 'return'));
 		}
 	}
 
 	if (getTotalPassengersCount(state) === 0) {
-		let passengers = state.system.defaultPassengers;
+		const passengers = state.system.defaultPassengers;
 
-		for (let type in passengers) {
+		for (const type in passengers) {
 			if (passengers.hasOwnProperty(type)) {
 				store.dispatch(setCounter(passengers[type], type));
 			}

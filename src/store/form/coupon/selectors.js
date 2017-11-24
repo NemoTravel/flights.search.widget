@@ -1,19 +1,10 @@
 import { createSelector } from 'reselect';
 
-const getCouponConfig = state => {
+const getCoupon = state => {
 	return state.form.coupon;
 };
 
-export const isCouponActive = createSelector(
-	[getCouponConfig],
-	(couponConfig = {}) => {
-		return couponConfig.isActive;
-	}
-);
-
 export const getCouponNumber = createSelector(
-	[getCouponConfig],
-	(couponConfig = {}) => {
-		return couponConfig.number;
-	}
+	[ getCoupon ],
+	(coupon = {}) => coupon.number
 );

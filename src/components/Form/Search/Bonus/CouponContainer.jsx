@@ -2,28 +2,41 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as couponActions from 'store/form/coupon/actions';
-import { isCouponActive, getCouponNumber } from 'store/form/coupon/selectors';
+import { getCouponNumber } from 'store/form/coupon/selectors';
 import Tooltip from 'components/UI/Tooltip';
 import { i18n } from 'utils';
 import onClickOutside from 'react-onclickoutside';
 import autobind from 'autobind-decorator';
 
 class CouponContainer extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			isActive: !!this.props.number
+		};
+	}
+
 	@autobind
-	toggleCoupon() {
-		this.props.toggleCoupon(); // from couponActions
+	enableField() {
+		this.setState({ isActive: true });
+	}
+
+	@autobind
+	disableField() {
+		this.props.changeCouponNumber(null);
+		this.setState({ isActive: false });
 	}
 
 	@autobind
 	handleClickOutside() {
-		if (this.props.isActive) {
-			this.toggleCoupon();
+		if (this.state.isActive && !this.props.number) {
+			this.setState({ isActive: false });
 		}
 	}
 
-	@autobind
 	renderDummy() {
-		return <div className="form-control widget-form-coupon__dummy" onClick={this.toggleCoupon}>
+		return <div className="form-control widget-form-coupon__dummy" onClick={this.enableField}>
 			{i18n('form', 'couponDummy')}
 			<i className="widget-ui-icon widget-form-coupon__dummy__icon"/>
 		</div>;
@@ -31,43 +44,44 @@ class CouponContainer extends React.Component {
 
 	@autobind
 	changeCouponNumber(e) {
-		this.props.changeCouponNumber(e.target.value); // from couponActions
+		this.props.changeCouponNumber(e.target.value);
 	}
 
-	@autobind
-	renderWrapper() {
-		const { isActive, number, showErrors } = this.props;
-		const currentNumber = number ? number : '';
-		const showTooltip = showErrors && isActive && !(number && number.match(/^[\d]+$/g));
+	renderCoupon() {
+		const
+			{ number, showErrors } = this.props,
+			visibleNumber = number ? number : '',
+			showTooltip = showErrors && this.state.isActive && !(number && number.match(/^[\d]+$/g));
 
 		return <div className="widget-form-coupon__wrapper">
 			<div className="widget-form-coupon__wrapper__block">
 				<Tooltip message={i18n('form', 'couponNumberError')} isActive={showTooltip}>
-					<input className="form-control" ref={input => input && input.focus()} value={currentNumber}
-						spellCheck={false} onChange={this.changeCouponNumber} placeholder={i18n('form', 'couponPlaceholder')}/>
+					<input
+						className="form-control"
+						ref={input => input && input.focus()}
+						value={visibleNumber}
+						spellCheck={false}
+						onChange={this.changeCouponNumber}
+						placeholder={i18n('form', 'couponPlaceholder')}
+					/>
 				</Tooltip>
-				<div className="widget-ui-input__closer" onClick={this.toggleCoupon}/>
+
+				<div className="widget-ui-input__closer" onClick={this.disableField}/>
 			</div>
 		</div>;
 	}
 
 	render() {
-		const { isActive } = this.props;
-
 		return <div className="form-group widget-form-coupon">
-			{!isActive ? this.renderDummy() : null}
-			{isActive ? this.renderWrapper() : null}
+			{this.state.isActive ? this.renderCoupon() : this.renderDummy()}
 		</div>;
 	}
 }
 
 export default connect(
-	state => {
-		return {
-			isActive: isCouponActive(state),
-			number: getCouponNumber(state),
-			showErrors: state.form.showErrors
-		};
-	},
+	state => ({
+		number: getCouponNumber(state),
+		showErrors: state.form.showErrors
+	}),
 	dispatch => bindActionCreators(couponActions, dispatch)
 )(onClickOutside(CouponContainer));

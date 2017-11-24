@@ -5,27 +5,29 @@ import * as formActions from 'store/form/actions';
 import classnames from 'classnames';
 import Search from 'components/Form/Search';
 import WebskyHiddenForm from 'components/WebskyHiddenForm';
-import { MODE_WEBSKY } from 'state';
+import {
+	isWebsky,
+	showCouponField as showCouponFieldSelector,
+	showMileCardField as showMileCardFieldSelector
+} from 'store/form/selectors';
 
 class Form extends React.Component {
 	render() {
-		const { showErrors, startSearch, verticalForm, isWebsky, isRenderCoupon, isRenderMileCard } = this.props;
+		const { startSearch, verticalForm, isWebskyMode, showCouponField, showMileCardField } = this.props;
 
 		return <section className={classnames('widget-form', { 'widget-form_vertical': verticalForm })}>
-			<Search showErrors={showErrors} startSearch={startSearch} isWebsky={isWebsky} isRenderCoupon={isRenderCoupon} isRenderMileCard={isRenderMileCard} />
-			{isWebsky ? <WebskyHiddenForm/> : null}
+			<Search startSearch={startSearch} showCouponField={showCouponField} showMileCardField={showMileCardField} />
+			{isWebskyMode ? <WebskyHiddenForm/> : null}
 		</section>;
 	}
 }
 
 export default connect(
-	state => {
-		return {
-			verticalForm: state.system.verticalForm,
-			isWebsky: state.system.mode === MODE_WEBSKY,
-			isRenderCoupon: state.system.enableCoupon,
-			isRenderMileCard: state.system.enableMileCard
-		};
-	},
+	state => ({
+		verticalForm: state.system.verticalForm,
+		isWebskyMode: isWebsky(state),
+		showCouponField: showCouponFieldSelector(state),
+		showMileCardField: showMileCardFieldSelector(state)
+	}),
 	dispatch => bindActionCreators(formActions, dispatch)
 )(Form);
