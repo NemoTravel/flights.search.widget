@@ -1,10 +1,8 @@
-import { SHOW_ERRORS, TOGGLE_COUPON, TOGGLE_MILE_CARD } from 'store/actions';
+import { SHOW_ERRORS } from 'store/actions';
 import { formIsValid } from 'store/form/selectors';
 import { MODE_NEMO } from 'state';
 import { URL, clearURL } from 'utils';
 import { MODE_WEBSKY } from 'state';
-import { toggleCoupon } from 'store/form/coupon/actions';
-import { toggleMileCard } from 'store/form/mileCard/actions';
 
 export const showErrors = shouldShowErrors => {
 	return {
@@ -79,25 +77,6 @@ export const startSearch = () => {
 		}
 		else {
 			dispatch(showErrors(true));
-		}
-	};
-};
-
-export const toggleBonusField = (type) => {
-	return (dispatch, getState) => {
-		const state = getState();
-		const isCouponActive = state.form.coupon.isActive;
-		const isMileCardActive = state.form.mileCard.isActive;
-		
-		if (isCouponActive || isMileCardActive) {
-			dispatch(toggleCoupon());
-			dispatch(toggleMileCard());
-		}
-		else if (type == TOGGLE_COUPON) {
-			dispatch(toggleCoupon());
-		}
-		else if (type == TOGGLE_MILE_CARD) {
-			dispatch(toggleMileCard());
 		}
 	};
 };

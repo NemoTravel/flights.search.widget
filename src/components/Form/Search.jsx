@@ -5,40 +5,46 @@ import PassengersContainer from 'components/Form/Search/PassengersContainer';
 import CouponContainer from 'components/Form/Search/Bonus/CouponContainer';
 import MileCardContainer from 'components/Form/Search/Bonus/MileCardContainer';
 import { i18n } from 'utils';
+import autobind from 'autobind-decorator';
 
 export default class Search extends React.Component {
-	render() {
-		const { startSearch, isWebsky, isRenderCoupon, isRenderMileCard } = this.props;
+	@autobind
+	renderCoupon() {
+		return <div key={1} className="col">
+			<CouponContainer />
+		</div>;
+	}
 
-		const renderCoupon = () => {
-			return <div key={1} className="col">
-				<CouponContainer />
-			</div>;
-		};
+	@autobind
+	renderMileCard() {
+		return <div key={2} className="col">
+			<MileCardContainer />
+		</div>;
+	}
 
-		const renderMileCard = () => {
-			return <div key={2} className="col">
-				<MileCardContainer />
-			</div>;
-		};
+	@autobind
+	renderBonuses() {
+		const { isWebsky, isRenderCoupon, isRenderMileCard } = this.props;
 
-		const renderBonuses = () => {
-			if (isWebsky) {
-				if (isRenderCoupon && isRenderMileCard) {
-					return [
-						renderCoupon(),
-						renderMileCard()
-					];
-				}
-				else if (isRenderCoupon) {
-					return renderCoupon();
-				}
-				else if (isRenderMileCard) {
-					return renderMileCard();
-				}
+		if (isWebsky) {
+			if (isRenderCoupon && isRenderMileCard) {
+				return [
+					this.renderCoupon(),
+					this.renderMileCard()
+				];
 			}
-			return null;
-		};
+			else if (isRenderCoupon) {
+				return this.renderCoupon();
+			}
+			else if (isRenderMileCard) {
+				return this.renderMileCard();
+			}
+		}
+		return null;
+	}
+
+	render() {
+		const { startSearch } = this.props;
 
 		return <div className="widget-form-search">
 			<div className="widget-form-search__wrapper">
@@ -50,7 +56,7 @@ export default class Search extends React.Component {
 						<PassengersContainer/>
 					</div>
 
-					{renderBonuses()}
+					{this.renderBonuses()}
 
 					<div className="col">
 						<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>
