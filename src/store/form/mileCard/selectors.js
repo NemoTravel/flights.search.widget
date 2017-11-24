@@ -1,26 +1,13 @@
 import { createSelector } from 'reselect';
 
-const getMileCardConfig = state => {
-	return state.form.mileCard;
-};
-
-export const isMileCardActive = createSelector(
-	[getMileCardConfig],
-	(mileCardConfig = {}) => {
-		return mileCardConfig.isActive;
-	}
-);
+const getMileCard = state => state.form.mileCard;
 
 export const getMileCardNumber = createSelector(
-	[getMileCardConfig],
-	(mileCardConfig = {}) => {
-		return mileCardConfig.number;
-	}
+	[ getMileCard ],
+	(mileCard = {}) => mileCard.number
 );
 
 export const getMileCardPassword = createSelector(
-	[getMileCardConfig],
-	(mileCardConfig = {}) => {
-		return mileCardConfig.password;
-	}
+	[ getMileCard ],
+	(mileCard = {}) => mileCard.password
 );

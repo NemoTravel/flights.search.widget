@@ -35,6 +35,11 @@ class CouponContainer extends React.Component {
 		}
 	}
 
+	@autobind
+	changeCouponNumber(e) {
+		this.props.changeCouponNumber(e.target.value);
+	}
+
 	renderDummy() {
 		return <div className="form-control widget-form-coupon__dummy" onClick={this.enableField}>
 			{i18n('form', 'couponDummy')}
@@ -42,12 +47,7 @@ class CouponContainer extends React.Component {
 		</div>;
 	}
 
-	@autobind
-	changeCouponNumber(e) {
-		this.props.changeCouponNumber(e.target.value);
-	}
-
-	renderCoupon() {
+	renderField() {
 		const
 			{ number, showErrors } = this.props,
 			visibleNumber = number ? number : '',
@@ -73,7 +73,7 @@ class CouponContainer extends React.Component {
 
 	render() {
 		return <div className="form-group widget-form-coupon">
-			{this.state.isActive ? this.renderCoupon() : this.renderDummy()}
+			{this.state.isActive ? this.renderField() : this.renderDummy()}
 		</div>;
 	}
 }

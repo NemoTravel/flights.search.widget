@@ -30,7 +30,7 @@ class WebskyHiddenForm extends React.Component {
 		};
 
 		const renderCouponBlock = () => {
-			if (form.coupon.isActive && form.coupon.number && form.coupon.number.match(/^[\d]+$/g)) {
+			if (form.coupon.number && form.coupon.number.match(/^[\d]+$/g)) {
 				return <input type="hidden" name="promoCode" value={form.coupon.number}/>;
 			}
 
@@ -38,7 +38,7 @@ class WebskyHiddenForm extends React.Component {
 		};
 
 		const renderMileCardBlock = () => {
-			if (form.mileCard.isActive && form.mileCard.number && form.mileCard.password && form.mileCard.number.match(/^[\d]+$/g)) {
+			if (form.mileCard.number && form.mileCard.password && form.mileCard.number.match(/^[\d]+$/g)) {
 				return [
 					<input key={1} type="hidden" name="cardNumber" value={form.mileCard.number}/>,
 					<input key={2} type="hidden" name="cardPassword" value={form.mileCard.password}/>
