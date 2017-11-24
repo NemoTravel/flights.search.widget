@@ -50,10 +50,14 @@ export const formIsValid = createSelector(
 		else if (form.autocomplete.departure.airport.IATA === form.autocomplete.arrival.airport.IATA) {
 			isValid = false;
 		}
-		else if (form.coupon.isActive && !(form.coupon.number && form.coupon.number.match(/^[\d]+$/g))) {
+		else if (form.coupon.number && !form.coupon.number.match(/^[\d]+$/g)) {
 			isValid = false;
 		}
-		else if (form.mileCard.isActive && !(form.mileCard.number && form.mileCard.password && form.mileCard.number.match(/^[\d]+$/g))) {
+		else if (
+			form.mileCard.number && !form.mileCard.number.match(/^[\d]+$/g) ||
+			form.mileCard.number && !form.mileCard.password ||
+			form.mileCard.password && (!form.mileCard.number || !form.mileCard.number.match(/^[\d]+$/g))
+		) {
 			isValid = false;
 		}
 

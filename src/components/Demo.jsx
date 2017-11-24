@@ -215,6 +215,30 @@ export default class Demo extends React.Component {
 						</label>
 					</div>
 				</div>
+
+				<div className="row">
+					<div className="col form-check">
+						<label className="form-check-label">
+							<input type="checkbox" className="form-check-input" onChange={e => {
+								this.config.enableCoupon = e.target.checked;
+								this.processConfig();
+							}}/>
+							<CodeBlock>enableCoupon</CodeBlock>: Добавляет поле `У меня есть купон на скидку` (для режима Websky)
+						</label>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col form-check">
+						<label className="form-check-label">
+							<input type="checkbox" className="form-check-input" onChange={e => {
+								this.config.enableMileCard = e.target.checked;
+								this.processConfig();
+							}}/>
+							<CodeBlock>enableMileCard</CodeBlock>: Добавляет поле `Оплата милями` (для режима Websky)
+						</label>
+					</div>
+				</div>
 			</div>
 
 			<div className="widget-demo-content">
