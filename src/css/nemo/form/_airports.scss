@@ -22,6 +22,10 @@
 		display: none;
 	}
 
+	&__header {
+		background-color: $title-color !important;
+	}
+
 	&__col.col {
 		&:first-of-type {
 			padding-right: 0;
@@ -31,7 +35,6 @@
 			}
 
 			@include adaptivity(phone) {
-				padding-right: 15px;
 				padding-bottom: 1rem;
 			}
 
@@ -58,12 +61,17 @@
 					.widget-form-airports__select__value {
 						padding-left: 13px !important;
 					}
+
+					.widget-form-airports__select__value__placeholder {
+						padding-left: 13px !important;
+					}
 				}
 			}
 		}
 
 		@include adaptivity(phone) {
-			padding: 0 15px;
+			padding-right: 0;
+			padding-left: 0 !important;
 		}
 	}
 }

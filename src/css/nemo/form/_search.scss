@@ -13,6 +13,15 @@
 		flex-shrink: 4;
 		margin: 0 !important;
 		flex-basis: 100%;
+
+		@include adaptivity(phone) {
+			flex-wrap: wrap !important;
+
+			.col {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
 	}
 
 	@include adaptivity(tablet) {

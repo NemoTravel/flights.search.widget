@@ -10,11 +10,17 @@
 		}
 	}
 
+	&__header {
+		background-color: $title-color !important;
+	}
+
 	&__content {
-		min-width: 260px;
-		border-radius: 4px;
-		margin-top: 5px !important;
-		box-shadow: 0 1px 16px rgba(10,10,15,.25);
+		@include adaptivity(not-phone) {
+			min-width: 260px;
+			border-radius: 4px;
+			margin-top: 5px !important;
+			box-shadow: 0 1px 16px rgba(10, 10, 15, .25);
+		}
 	}
 
 	&__item {
@@ -66,6 +72,13 @@
 
 		&_disabled {
 			display: none;
+		}
+	}
+
+	&__footer {
+		&__button {
+			background-color: $title-color !important;
+			border: none !important;
 		}
 	}
 }

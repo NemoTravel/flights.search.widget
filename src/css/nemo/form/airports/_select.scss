@@ -49,6 +49,11 @@
 			color: rgba(100,100,100,.75);
 			font-weight: normal;
 		}
+
+		&__placeholder {
+			font-weight: normal !important;
+			font-size: 13px !important;
+		}
 	}
 
 	&.is-focused {

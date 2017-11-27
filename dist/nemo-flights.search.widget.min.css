@@ -83,12 +83,19 @@
 
 .widget .widget-ui-datepicker__header {
   display: none;
-  padding-top: 20px;
 }
 
 @media only screen and (max-width: 650px) {
   .widget .widget-ui-datepicker__header {
     display: block;
+    background-color: #64b5f6;
+    padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker {
+    padding-top: 70px;
   }
 }
 
@@ -130,12 +137,27 @@
   }
 }
 
+.widget .widget-ui-datepicker .react-datepicker__navigation--previous:hover,
+.widget .widget-ui-datepicker .react-datepicker__navigation--next:hover {
+  background: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget .widget-ui-datepicker .react-datepicker__navigation--previous,
+  .widget .widget-ui-datepicker .react-datepicker__navigation--next {
+    top: 80px;
+    color: #64b5f6 !important;
+  }
+}
+
 .widget .widget-ui-datepicker .react-datepicker__navigation--previous {
   left: 0;
+  margin-left: 10px;
 }
 
 .widget .widget-ui-datepicker .react-datepicker__navigation--next {
   right: 0;
+  margin-right: 10px;
 }
 
 .widget .widget-ui-datepicker .react-datepicker__month {
@@ -213,7 +235,7 @@
   color: #fff;
 }
 
-.widget .widget-ui-datepicker .react-datepicker__calendar {
+.widget .widget-ui-datepicker__calendar {
   position: absolute;
   line-height: 20px;
   width: 24px;
@@ -232,8 +254,16 @@
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.75) 0, rgba(255, 255, 255, 0.92) 50%, rgba(227, 229, 231, 0.92) 51%, #e3e5e7 75%);
 }
 
-.widget .widget-ui-datepicker .react-datepicker__calendar:after {
+.widget .widget-ui-datepicker__calendar:after {
   content: '31';
+  padding-bottom: 3px;
+}
+
+.widget .widget-ui-datepicker__calendar:before {
+  content: ' ';
+  width: 24px;
+  border: 1px solid #64b5f6;
+  position: absolute;
 }
 
 .widget .widget-ui-input {
@@ -266,6 +296,10 @@
 .widget .widget-ui-input__closer:before {
   color: #000;
   font-size: 9px;
+}
+
+.widget .widget-ui-input__closer:hover {
+  opacity: .8;
 }
 
 .widget-form-airports__select .Select-control {
@@ -312,6 +346,11 @@
   font-size: 13px;
   color: rgba(100, 100, 100, 0.75);
   font-weight: normal;
+}
+
+.widget-form-airports__select__value__placeholder {
+  font-weight: normal !important;
+  font-size: 13px !important;
 }
 
 .widget-form-airports__select.is-focused .Select-control {
@@ -445,6 +484,10 @@
   display: none;
 }
 
+.widget-form-airports__header {
+  background-color: #64b5f6 !important;
+}
+
 .widget-form-airports__col.col:first-of-type {
   padding-right: 0;
 }
@@ -455,7 +498,6 @@
 
 @media only screen and (max-width: 650px) {
   .widget-form-airports__col.col:first-of-type {
-    padding-right: 15px;
     padding-bottom: 1rem;
   }
 }
@@ -482,11 +524,16 @@
   .widget-form-airports__col.col:last-of-type .Select-control .widget-form-airports__select__value {
     padding-left: 13px !important;
   }
+
+  .widget-form-airports__col.col:last-of-type .Select-control .widget-form-airports__select__value__placeholder {
+    padding-left: 13px !important;
+  }
 }
 
 @media only screen and (max-width: 650px) {
   .widget-form-airports__col.col {
-    padding: 0 15px;
+    padding-right: 0;
+    padding-left: 0 !important;
   }
 }
 
@@ -556,13 +603,18 @@
 
 @media only screen and (max-width: 650px) {
   .widget-form-dates__col.col {
-    padding: 0 15px !important;
     -ms-flex-preferred-size: 100%;
     flex-basis: 100%;
   }
 
   .widget-form-dates__col.col:first-of-type {
     padding-bottom: 1rem !important;
+    padding-left: 0 !important;
+  }
+
+  .widget-form-dates__col.col:last-of-type {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
 
@@ -600,12 +652,18 @@
   min-width: 150px;
 }
 
-.widget-form-passengers__content {
-  min-width: 260px;
-  border-radius: 4px;
-  margin-top: 5px !important;
-  -webkit-box-shadow: 0 1px 16px rgba(10, 10, 15, 0.25);
-  box-shadow: 0 1px 16px rgba(10, 10, 15, 0.25);
+.widget-form-passengers__header {
+  background-color: #64b5f6 !important;
+}
+
+@media only screen and (min-width: 651px) {
+  .widget-form-passengers__content {
+    min-width: 260px;
+    border-radius: 4px;
+    margin-top: 5px !important;
+    -webkit-box-shadow: 0 1px 16px rgba(10, 10, 15, 0.25);
+    box-shadow: 0 1px 16px rgba(10, 10, 15, 0.25);
+  }
 }
 
 .widget-form-passengers__item {
@@ -658,11 +716,20 @@
   display: none;
 }
 
+.widget-form-passengers__footer__button {
+  background-color: #64b5f6 !important;
+  border: none !important;
+}
+
+.widget-form-classType {
+  border-top: 1px solid #e6e6e6;
+}
+
 .widget-form-classType__inner__button {
   color: #0a0a0f;
   height: 30px;
   line-height: 30px;
-  font-size: 100%;
+  font-size: 13px;
   background-color: #e6e6e6;
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(250, 250, 250, 0.75)), to(rgba(240, 240, 240, 0.75)));
   background-image: linear-gradient(to bottom, rgba(250, 250, 250, 0.75), rgba(240, 240, 240, 0.75));
@@ -671,21 +738,40 @@
   padding: 0 18px;
   border: none;
   border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
 }
 
 .widget-form-classType__inner__button_selected {
   background: #88c43d;
+  color: #fff;
+}
+
+.widget-form-classType__inner__button_selected:hover {
+  background: #88c43d !important;
+  color: #fff !important;
 }
 
 .widget-form-classType__inner__button:first-child {
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+  margin-left: 0;
 }
 
 .widget-form-classType__inner__button:last-child {
   margin-right: 0;
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
+}
+
+.widget-form-classType__inner__button:hover {
+  background-color: #e6e6e6;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(250, 250, 250, 0.75)), to(rgba(240, 240, 240, 0.75)));
+  background-image: linear-gradient(to bottom, rgba(250, 250, 250, 0.75), rgba(240, 240, 240, 0.75));
+  color: #0a0a0f;
 }
 
 .widget-form-additionalOptions {
@@ -704,6 +790,12 @@
   }
 }
 
+@media only screen and (max-width: 650px) {
+  .widget-form-additionalOptions {
+    height: auto;
+  }
+}
+
 .widget-form-search {
   background: #64b5f6;
 }
@@ -716,6 +808,18 @@
   margin: 0 !important;
   -ms-flex-preferred-size: 100%;
   flex-basis: 100%;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-search__footer {
+    -ms-flex-wrap: wrap !important;
+    flex-wrap: wrap !important;
+  }
+
+  .widget-form-search__footer .col {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 @media only screen and (max-width: 750px) {

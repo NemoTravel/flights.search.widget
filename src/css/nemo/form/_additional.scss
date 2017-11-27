@@ -12,4 +12,8 @@
 		top: 0;
 		left: 0;
 	}
+
+	@include adaptivity(phone) {
+		height: auto;
+	}
 }
