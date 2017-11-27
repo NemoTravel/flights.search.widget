@@ -1,0 +1,19 @@
+&__suggestion {
+	font-size: 13px;
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	&__code {
+		display: none;
+	}
+
+	&__countryName {
+		padding-left: 0 !important;
+
+		&:before {
+			content: ', ';
+		}
+	}
+}

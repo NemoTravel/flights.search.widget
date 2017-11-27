@@ -1,0 +1,67 @@
+@import "../../variables";
+
+&__select {
+	.Select {
+		&-control {
+			border: none !important;
+		}
+
+		&-input {
+			input {
+				font-size: 13px;
+			}
+		}
+
+		&-placeholder {
+			font-weight: normal;
+			font-size: 13px;
+		}
+
+		&-menu {
+			&-outer {
+				border-radius: 4px;
+				margin-top: 5px !important;
+				box-shadow: 0 1px 16px rgba(10,10,15,.25);
+				border: none!important;
+
+				.Select-option {
+					padding-right: 10px !important;
+				}
+			}
+		}
+
+		&-option {
+			font-size: 13px;
+		}
+	}
+
+	&__value {
+		width: 100%;
+
+		&__airportName, &__comma {
+			font-size: 13px;
+			color: #0a0a0f;
+			font-weight: normal;
+		}
+
+		&__countryName {
+			font-size: 13px;
+			color: rgba(100,100,100,.75);
+			font-weight: normal;
+		}
+	}
+
+	&.is-focused {
+		.Select {
+			&-control {
+				box-shadow: none;
+				background-color: #fff;
+			}
+
+			&-noresults, &-defaultOptions-hint {
+				font-weight: normal;
+				font-size: 13px;
+			}
+		}
+	}
+}

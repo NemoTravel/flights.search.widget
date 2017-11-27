@@ -1,0 +1,69 @@
+@import "../variables";
+
+&-airports {
+	@import "airports/select";
+	@import "airports/swap";
+	@import "airports/suggestion";
+
+	&.row {
+		flex-wrap: nowrap !important;
+		flex-basis: 100%;
+		flex-shrink: 2;
+		margin: 0 auto;
+
+		@include adaptivity(tablet) {
+			flex-basis: 100%;
+			flex-shrink: 1;
+			padding-bottom: 1rem;
+		}
+	}
+
+	&__airportCode {
+		display: none;
+	}
+
+	&__col.col {
+		&:first-of-type {
+			padding-right: 0;
+
+			.widget-form-airports__select__value {
+				width: 80%;
+			}
+
+			@include adaptivity(phone) {
+				padding-right: 15px;
+				padding-bottom: 1rem;
+			}
+
+		}
+
+		&:last-of-type {
+			@include adaptivity(desktop) {
+				padding-left: 0;
+
+				.widget-form-airports__select__wrapper {
+					padding-left: 15px;
+				}
+			}
+
+			@include adaptivity(tablet) {
+				padding-left: 15px;
+			}
+
+			.Select-control {
+				@include adaptivity(not-phone) {
+
+					.Select-placeholder,
+					.Select-input:not(input),
+					.widget-form-airports__select__value {
+						padding-left: 13px !important;
+					}
+				}
+			}
+		}
+
+		@include adaptivity(phone) {
+			padding: 0 15px;
+		}
+	}
+}
