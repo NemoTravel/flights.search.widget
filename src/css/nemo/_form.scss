@@ -98,6 +98,8 @@
 					}
 
 					&:last-of-type {
+						padding-left: 0;
+
 						.widget-form-airports__select__wrapper {
 							padding-left: 0 !important;
 						}
@@ -107,12 +109,13 @@
 				&__swap {
 					display: none;
 				}
+			}
 
-				&-additionalOptions {
-					position: relative;
-					top: 0;
-					left: 0;
-				}
+			&-additionalOptions {
+				position: relative;
+				height: auto;
+				top: 0;
+				left: 0;
 			}
 		}
 	}

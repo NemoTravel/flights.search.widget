@@ -966,6 +966,10 @@
   padding-bottom: 1rem;
 }
 
+.widget-form_vertical .widget-form-airports__col.col:last-of-type {
+  padding-left: 0;
+}
+
 .widget-form_vertical .widget-form-airports__col.col:last-of-type .widget-form-airports__select__wrapper {
   padding-left: 0 !important;
 }
@@ -974,8 +978,9 @@
   display: none;
 }
 
-.widget-form_vertical .widget-form-airports-additionalOptions {
+.widget-form_vertical .widget-form-additionalOptions {
   position: relative;
+  height: auto;
   top: 0;
   left: 0;
 }
