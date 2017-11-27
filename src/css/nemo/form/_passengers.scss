@@ -29,11 +29,21 @@
 		&:first-child {
 			border-top: none !important;
 		}
+
+		&_disabled {
+			.widget-form-passengers__title {
+				color: #a6a6a6;
+			}
+		}
 	}
 
 	&__trigger {
 		&__title {
 			font-size: 13px !important;
+
+			@include adaptivity(desktop) {
+				max-width: 162px;
+			}
 		}
 	}
 
@@ -45,6 +55,7 @@
 
 		&__age {
 			display: block;
+			color: #a6a6a6;
 			padding: 0;
 		}
 	}
@@ -58,16 +69,23 @@
 		width: 30px;
 		height: 30px;
 		border: 1px solid #cae0ed;
+		transition: background-color .2s;
 
 		&:after {
-			width: 30px;
+			width: 29px;
 			height: 30px;
 			line-height: 30px;
 			font-size: 9px;
+			font-weight: 600;
 		}
 
 		&:hover {
 			background-color: #e1f5ff;
+			border: 1px solid #cae0ed;
+
+			&:after {
+				color: #1B75BC;
+			}
 		}
 
 		&_disabled {
