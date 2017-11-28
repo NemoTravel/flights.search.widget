@@ -1,4 +1,6 @@
 .widget {
+	position: relative;
+
 	@import "variables";
 	@import "ui/checkbox";
 	@import "ui/datepicker";

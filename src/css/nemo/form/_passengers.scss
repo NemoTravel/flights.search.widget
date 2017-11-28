@@ -6,6 +6,7 @@
 			border: none !important;
 			font-weight: normal !important;
 			background-color: #fff !important;
+			line-height: 40px !important;
 		}
 	}
 
@@ -42,7 +43,7 @@
 			color: #0a0a0f !important;
 
 			@include adaptivity(desktop) {
-				min-width: 164px;
+				min-width: 180px;
 			}
 		}
 	}
@@ -81,7 +82,7 @@
 
 		&:hover {
 			background-color: #e1f5ff;
-			border: 1px solid #cae0ed;
+			border-color: #cae0ed;
 
 			&:after {
 				color: #1B75BC;
@@ -89,7 +90,7 @@
 		}
 
 		&_disabled {
-			display: none;
+			opacity: 0;
 		}
 	}
 
