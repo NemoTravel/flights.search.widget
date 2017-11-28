@@ -1,0 +1,122 @@
+@import "variables";
+
+&-form {
+	@import "form/search";
+
+	@include adaptivity(desktop) {
+		&:before {
+			content: '';
+			position: absolute;
+			z-index: 0;
+			background: #8bc8f9;
+			left: 0;
+			right: 0;
+			height: 50px;
+			margin-top: 70px;
+			width: 100%;
+		}
+	}
+
+	&_vertical {
+		&:before {
+			display: none;
+		}
+
+		.widget-form {
+			&-search {
+				&__wrapper {
+					flex-wrap: wrap;
+
+					.form-group:last-of-type {
+						margin-bottom: 1rem;
+					}
+				}
+
+				&__footer {
+					flex-basis: 100%;
+					padding-top: 1rem;
+					display: block;
+
+					.col {
+						flex: 100%;
+						padding: 0;
+					}
+				}
+
+				&__startButton {
+					width: 100%;
+				}
+			}
+
+			&-dates {
+				flex-basis: 100%;
+				padding-top: 1rem;
+
+				@include adaptivity(desktop) {
+					&__col {
+						&:first-child {
+							padding-right: 15px !important;
+						}
+					}
+				}
+
+				@include adaptivity(tablet) {
+					padding: 0;
+
+					&__col {
+						&:first-child {
+							padding-left: 0 !important;
+						}
+
+						&:last-child {
+							padding-right: 0 !important;
+						}
+					}
+				}
+
+				@include adaptivity(phone) {
+					&__col {
+						&:first-child {
+							padding-right: 0 !important;
+						}
+
+						&:last-child {
+							padding-left: 0 !important;
+						}
+					}
+				}
+			}
+
+			&-airports {
+				&.row {
+					flex-basis: 100%;
+				}
+
+				&__col.col {
+					&:first-of-type {
+						padding-bottom: 1rem;
+					}
+
+					&:last-of-type {
+						padding-left: 0;
+
+						.widget-form-airports__select__wrapper {
+							padding-left: 0 !important;
+						}
+					}
+				}
+
+				&__swap {
+					display: none;
+				}
+			}
+
+			&-additionalOptions {
+				position: relative;
+				height: auto;
+				top: 0;
+				left: 0;
+			}
+		}
+	}
+}

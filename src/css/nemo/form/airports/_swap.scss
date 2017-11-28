@@ -1,0 +1,62 @@
+@import "../../variables";
+
+&__swap {
+	border: none;
+	border-radius: 0;
+	background: #e6e6e6;
+	height: 100%;
+	width: 40px;
+	left: -40px;
+
+	@include adaptivity(tablet) {
+		left: -55px;
+	}
+
+	&:hover {
+		@include adaptivity(not-phone) {
+			background: #e6e6e6;
+		}
+
+		&:after {
+			transform: rotate(180deg) translateX(3px);
+		}
+
+		&:before {
+			transform: translateX(3px);
+		}
+	}
+
+	&:active {
+		@include adaptivity(phone) {
+			background: #e6e6e6;
+		}
+	}
+
+	&:after {
+		content: '';
+		width: 17px;
+		height: 7px;
+		background-image: url(images/arrow.svg);
+		position: absolute;
+		top: 21px;
+		left: 12px;
+		transform: rotate(180deg) translateX(1px);
+		transition: transform .1s ease-in-out;
+	}
+
+	&:before {
+		content: '';
+		width: 17px;
+		height: 7px;
+		background-image: url(images/arrow.svg);
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		transform: translateX(1px);
+		transition: transform .1s ease-in-out;
+	}
+
+	@include adaptivity(phone) {
+		display: none;
+	}
+}

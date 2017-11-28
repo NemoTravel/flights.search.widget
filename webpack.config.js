@@ -13,6 +13,10 @@ const extractSass = new ExtractTextPlugin({
 	filename: `${moduleName}.min.css`
 });
 
+const extractNemoSass = new ExtractTextPlugin({
+	filename: `nemo-${moduleName}.min.css`
+});
+
 let config = {
 	// Root folder for Webpack.
 	context: __dirname,
@@ -83,7 +87,37 @@ let config = {
 				include: [
 					path.resolve(__dirname, 'src/css')
 				],
+				exclude: [
+					path.resolve(__dirname, 'src/css/nemo')
+				],
 				use: extractSass.extract({
+					use: [
+						// Allows to import CSS through JavaScript.
+						{
+							loader: 'css-loader',
+							options: {
+								minimize: !isDevMode
+							}
+						},
+						// Resolving relative URL in CSS code.
+						'resolve-url-loader',
+						// Using autoprefixe plugin.
+						'postcss-loader',
+						// Compiles Sass to CSS.
+						'sass-loader'
+					],
+					fallback: 'style-loader',
+					publicPath: path.resolve(__dirname, 'dist')
+				})
+			},
+
+			// Handling ".scss" files for nemo default theme
+			{
+				test: /\.scss$/,
+				include: [
+					path.resolve(__dirname, 'src/css/nemo')
+				],
+				use: extractNemoSass.extract({
 					use: [
 						// Allows to import CSS through JavaScript.
 						{
@@ -118,22 +152,24 @@ let config = {
 			},
 			
 			{
-				// test: /\.svg$/,
-				// loader: 'url-loader',
-				// include: [
-				// 	path.resolve(__dirname, 'src/css/images')
-				// ],
-				// options: {
-				// 	publicPath: '',
-				// 	outputPath: '',
-				// 	name: '/[name].[ext]'
-				// }
+				test: /\.svg$/,
+				loader: 'url-loader',
+				include: [
+					path.resolve(__dirname, 'src/css/images'),
+					path.resolve(__dirname, 'src/css/nemo/images')
+				],
+				options: {
+					publicPath: '',
+					outputPath: '',
+					name: '/[name].[ext]'
+				}
 			}
 		]
 	},
 
 	plugins: [
 		extractSass,
+		extractNemoSass,
 		new webpack.NoEmitOnErrorsPlugin()
 	]
 };

@@ -1,0 +1,19 @@
+@import "../variables";
+
+&-additionalOptions {
+	height: 50px;
+	position: absolute;
+	top: 55px;
+	left: -300px;
+
+	@include adaptivity(tablet) {
+		position: relative;
+		height: 40px;
+		top: 0;
+		left: 0;
+	}
+
+	@include adaptivity(phone) {
+		height: auto;
+	}
+}

@@ -36,6 +36,9 @@ export default class Search extends React.Component {
 
 						<button className="btn btn-primary widget-form-search__startButton" onClick={startSearch}>
 							{i18n('form', 'search')}
+							<span className="widget-form-search__tickets">
+								{(i18n('form', 'search_tickets'))}
+							</span>
 						</button>
 					</div>
 				</div>

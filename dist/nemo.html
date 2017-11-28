@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Search form - Nemo Theme</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		html, body {
+			width: 100%;
+			height: 100%;
+		}
+
+		html {
+			font-size: 16px;
+		}
+
+		body {
+			background-color: #fff;
+		}
+
+		.container {
+			width: 100%;
+			margin: 0 auto;
+			padding-top: 50px;
+		}
+
+		.nemo-widget-testWrapper {
+			width: 100%;
+		}
+
+		@media screen and (max-width: 540px) {
+			.nemo-widget-testWrapper {
+				width: 100%;
+			}
+		}
+	</style>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=cyrillic" rel="stylesheet">
+	<link rel="stylesheet" href="flights.search.widget.min.css">
+	<link rel="stylesheet" href="nemo-flights.search.widget.min.css">
+</head>
+<body>
+
+<div class="container">
+	<div id="root" class="nemo-widget-testWrapper"></div>
+</div>
+
+<script src="flights.search.widget.min.js"></script>
+<script>
+	FlightsSearchWidget.init({
+		rootElement: document.getElementById('root'),
+		nemoURL: 'http://sys.nemo.travel',
+		readOnlyAutocomplete: false,
+		locale: 'ru',
+		verticalForm: false,
+		mode: 'NEMO',
+		useNearestAirport: true,
+		highlightAvailableDates: true
+	});
+</script>
+</body>
+</html>
