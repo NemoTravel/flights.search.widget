@@ -30,7 +30,8 @@
 
 	&__footer {
 		&__button {
-			display: none;
+			background-color: #88c43d;
+			border: none;
 		}
 	}
 
@@ -84,10 +85,10 @@
 		}
 
 		&__month {
-			margin: 5px;
+			margin: 0 15px 15px;
 			border: 1px solid #e6e6e6;
 			border-radius: 4px;
-			padding: 5px;
+			padding: 0;
 
 			@include adaptivity(phone) {
 				border: 0;
