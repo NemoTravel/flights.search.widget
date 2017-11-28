@@ -6,6 +6,7 @@ const moduleName = 'flights.search.widget';
 
 // For DEV mode prepend "NODE_ENV=dev" before "webpack" command.
 // terminal: NODE_ENV=dev webpack
+/* global process */
 const isDevMode = process.env.NODE_ENV === 'dev';
 
 // Streaming compiled styles to the separate ".css" file.
@@ -17,10 +18,10 @@ const extractNemoSass = new ExtractTextPlugin({
 	filename: `nemo-${moduleName}.min.css`
 });
 
-let config = {
+const config = {
 	// Root folder for Webpack.
 	context: __dirname,
-	
+
 	// Entry file.
 	entry: ['whatwg-fetch', './src/main'],
 
@@ -30,6 +31,7 @@ let config = {
 	watchOptions: {
 		// Do not watch for changes in "node_modules".
 		ignored: /node_modules/,
+
 		// Webpack will wait for 500ms before building bundles.
 		aggregateTimeout: 500
 	},
@@ -37,8 +39,10 @@ let config = {
 	output: {
 		// Folder to store generated files.
 		path: path.resolve(__dirname, 'dist'),
+
 		// Path for loading assets.
 		publicPath: '/dist/',
+
 		// Output file name.
 		filename: `${moduleName}.min.js`,
 		library: 'FlightsSearchWidget'
@@ -61,26 +65,27 @@ let config = {
 			{
 				test: /\.jsx?$/,
 				loader: 'babel-loader',
+
 				// Converting JSX and ES6 && ES7 to the common ES5 standart.
 				options: {
 					plugins: [
 						'transform-runtime',
 						'transform-decorators-legacy',
 						'transform-react-remove-prop-types',
-						'transform-react-constant-elements',
-						// 'transform-react-inline-elements'
+						'transform-react-constant-elements'
 					],
 					presets: ['es2015', 'stage-0', 'react']
 				},
 				include: [
 					path.resolve(__dirname, 'src')
 				],
+
 				// Do not parse these folders.
 				exclude: [
 					path.resolve(__dirname, 'node_modules')
 				]
 			},
-			
+
 			// Handling ".scss" files, converting them to ".css", appending vendor prefixes.
 			{
 				test: /\.scss$/,
@@ -99,12 +104,9 @@ let config = {
 								minimize: !isDevMode
 							}
 						},
-						// Resolving relative URL in CSS code.
-						'resolve-url-loader',
-						// Using autoprefixe plugin.
-						'postcss-loader',
-						// Compiles Sass to CSS.
-						'sass-loader'
+						'resolve-url-loader', // Resolving relative URL in CSS code.
+						'postcss-loader', // Using autoprefixe plugin.
+						'sass-loader' // Compiles Sass to CSS.
 					],
 					fallback: 'style-loader',
 					publicPath: path.resolve(__dirname, 'dist')
@@ -126,18 +128,15 @@ let config = {
 								minimize: !isDevMode
 							}
 						},
-						// Resolving relative URL in CSS code.
-						'resolve-url-loader',
-						// Using autoprefixe plugin.
-						'postcss-loader',
-						// Compiles Sass to CSS.
-						'sass-loader'
+						'resolve-url-loader', // Resolving relative URL in CSS code.
+						'postcss-loader', // Using autoprefixe plugin.
+						'sass-loader' // Compiles Sass to CSS.
 					],
 					fallback: 'style-loader',
 					publicPath: path.resolve(__dirname, 'dist')
 				})
 			},
-			
+
 			// Handling fonts and converting them to base64 format.
 			{
 				test: /\.woff$/,
@@ -150,7 +149,7 @@ let config = {
 					path.resolve(__dirname, 'src/css/fonts')
 				]
 			},
-			
+
 			{
 				test: /\.svg$/,
 				loader: 'url-loader',
@@ -179,7 +178,7 @@ if (!isDevMode) {
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false,
-				drop_console: false,
+				drop_console: false
 			}
 		})
 	);

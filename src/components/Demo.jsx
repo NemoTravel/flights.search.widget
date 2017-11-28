@@ -6,6 +6,7 @@ import { systemState } from 'state';
 import * as Cache from 'cache';
 import autobind from 'autobind-decorator';
 import CodeBlock from 'components/UI/CodeBlock';
+import 'css/nemo/main.scss';
 
 export default class Demo extends React.Component {
 	constructor(props) {
@@ -21,7 +22,8 @@ export default class Demo extends React.Component {
 		this.state = {
 			webskyURL: defaultWebskyURL,
 			nemoURL: defaultNemoURL,
-			generatedConfig: ''
+			generatedConfig: '',
+			nemoStyles: false
 		};
 
 		this.config = {
@@ -32,6 +34,13 @@ export default class Demo extends React.Component {
 		};
 
 		Cache.set(Cache.KEY_LOCALE, defaultLang);
+	}
+
+	@autobind
+	toggleNemoStyles() {
+		this.setState({
+			nemoStyles: !this.state.nemoStyles
+		});
 	}
 
 	componentDidMount() {
@@ -54,6 +63,8 @@ export default class Demo extends React.Component {
 
 	render() {
 		return <div className="widget-demo">
+			{this.state.nemoStyles ? <link rel="stylesheet" href="/nemo-flights.search.widget.min.css"/> : null}
+
 			<div className="form widget-demo-config">
 				<h3>Параметры виджета</h3>
 
@@ -236,6 +247,15 @@ export default class Demo extends React.Component {
 								this.processConfig();
 							}}/>
 							<CodeBlock>enableMileCard</CodeBlock>: Добавляет поле `Оплата милями` (для режима Websky)
+						</label>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col form-check">
+						<label className="form-check-label">
+							<input type="checkbox" className="form-check-input" onChange={this.toggleNemoStyles}/>
+							<CodeBlock>Включить стилизацию Nemo</CodeBlock>
 						</label>
 					</div>
 				</div>
