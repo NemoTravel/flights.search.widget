@@ -1,0 +1,17 @@
+@import "../variables";
+
+.widget-ui-tooltip {
+	&__pop {
+		background: #ffd321;
+		border-radius: 4px;
+		box-shadow: 0 2px 2px rgba(0,0,0,.125);
+		padding: 10px 10px;
+		color: #414042;
+		font-size: 11px;
+		margin-top: 0;
+
+		&:after {
+			display: none;
+		}
+	}
+}

@@ -3,6 +3,10 @@
 &-classType {
 	border-top: 1px solid #e6e6e6;
 
+	&__class {
+		display: none;
+	}
+
 	&__inner {
 		&__button {
 			color: #0a0a0f;

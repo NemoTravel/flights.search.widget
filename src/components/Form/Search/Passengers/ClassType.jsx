@@ -22,6 +22,9 @@ export default class ClassType extends React.Component {
 				setClassType(value);
 			}} key={index}>
 				{i18n('form', 'class_' + value)}
+				<span className="widget-form-classType__class">
+					{i18n('form', 'class')}
+				</span>
 			</div>;
 		});
 	}
