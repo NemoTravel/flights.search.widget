@@ -9,14 +9,26 @@
 	background: #64b5f6;
 
 	&__footer {
-		flex-wrap: nowrap !important;
+		flex-wrap: wrap !important;
 		flex-shrink: 4;
 		margin: 0 !important;
 		flex-basis: 100%;
 
-		@include adaptivity(phone) {
-			flex-wrap: wrap !important;
+		@include adaptivity(desktop) {
+			min-width: 300px;
+			flex-wrap: nowrap !important;
 
+			.col {
+				&:first-of-type {
+					flex-basis: 60%;
+				}
+				&:last-of-type {
+					flex-basis: 30%;
+				}
+			}
+		}
+
+		@include adaptivity(phone) {
 			.col {
 				padding-left: 0;
 				padding-right: 0;

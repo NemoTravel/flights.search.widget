@@ -30,8 +30,13 @@
 
 	&__footer {
 		&__button {
-			background-color: #88c43d;
-			border: none;
+			display: none;
+
+			@include adaptivity(phone) {
+				display: block;
+				background-color: #88c43d;
+				border: none;
+			}
 		}
 	}
 
