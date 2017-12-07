@@ -103,6 +103,11 @@
 
 						.widget-form-airports__select__wrapper {
 							padding-left: 0 !important;
+
+							.Select-input {
+								height: 40px;
+								padding-left: 0 !important;
+							}
 						}
 					}
 				}
