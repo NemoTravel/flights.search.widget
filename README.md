@@ -52,7 +52,6 @@
 | defaultServiceClass | - | `string` | `Economy` | Класс обслуживания (`Economy` или `Business`) по-умолчанию |
 | directOnly | - | `bool` | `false` | Искать только прямые рейсы |
 | enableCoupon | - | `boolean` | `false` | Добавляет поле `У меня есть купон на скидку` (только для `WEBSKY`) |
-| enableMileCard | - | `boolean` | `false` | Добавляет поле `Оплата милями` (только для `WEBSKY`) |
 | highlightAvailableDates | - | `boolean` | `false` | Активирует в календаре подсветку дат, на которые есть доступные рейсы (только для `WEBSKY`) |
 | locale | - | `string` | `"en"` | Язык интерфейса |
 | mode | - | `string` | `"NEMO"` | Название системы бронирования, с которой предстоит работать (`NEMO` или `WEBSKY`) |

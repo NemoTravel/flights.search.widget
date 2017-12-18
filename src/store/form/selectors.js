@@ -17,7 +17,7 @@ export const showCouponField = createSelector(
 
 export const showMileCardField = createSelector(
 	[ getConfig, isWebsky ],
-	(config, isWebskyMode) => isWebskyMode && config.enableMileCard
+	(config, isWebskyMode) => false && isWebskyMode && config.enableMileCard // disabled for now (feature is not implemented in Websky yet)
 );
 
 const getForm = state => state.form;

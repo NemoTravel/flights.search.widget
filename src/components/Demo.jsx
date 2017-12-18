@@ -239,7 +239,7 @@ export default class Demo extends React.Component {
 					</div>
 				</div>
 
-				<div className="row">
+				<div className="row" style={{ display: 'none' }}>
 					<div className="col form-check">
 						<label className="form-check-label">
 							<input type="checkbox" className="form-check-input" onChange={e => {
