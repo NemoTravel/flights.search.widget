@@ -29,7 +29,8 @@ export const systemState = {
 	vicinityDatesMode: false,
 	useNearestAirport: false,
 	highlightAvailableDates: false,
-	vicinityDays: 3
+	vicinityDays: 3,
+	aggregationOnly: false
 };
 
 // export const blockVisibilityState = {
