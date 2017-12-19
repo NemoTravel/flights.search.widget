@@ -186,7 +186,7 @@ export const selectAirport = (airport, autocompleteType) => {
  * @param {Function} dispatch
  * @param {String} autocompleteType
  */
-const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOnly }) => {
+const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOnly = false }) => {
 	dispatch(startAutocompleteLoading(autocompleteType));
 
 	fetch(requestURL)

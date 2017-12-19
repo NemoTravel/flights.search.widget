@@ -34,7 +34,8 @@ export const parseAutocompleteOptions = (response, aggregationOnly) => {
 		const processAirport = ({ IATA, directFlight, isCity }) => {
 			const airport = airports[IATA];
 			const cityIATA = cities.hasOwnProperty(airport.cityId) ? cities[airport.cityId].IATA : null;
-			const aggregationCity = aggregationMap.hasOwnProperty(cityIATA) && aggregationMap[cityIATA].hasOwnProperty(airport.IATA) ? aggregationMap[cityIATA] : null;
+			// aggregationMap is null for nemo autocomplete
+			const aggregationCity = aggregationMap && aggregationMap.hasOwnProperty(cityIATA) && aggregationMap[cityIATA].hasOwnProperty(airport.IATA) ? aggregationMap[cityIATA] : false;
 
 			airport.country = countries[airport.countryCode];
 			airport.isCity = !!isCity;
@@ -47,7 +48,7 @@ export const parseAutocompleteOptions = (response, aggregationOnly) => {
 			// Remember all processed IATA codes.
 			iataMap[IATA] = true;
 
-			if (!aggregationOnly ||	!aggregationCity ||	Object.keys(aggregationCity).length > 1) {
+			if (!aggregationOnly ||	!aggregationCity ||	typeof aggregationCity == "object" && Object.keys(aggregationCity).length > 1) {
 				return { airport, isDirect: !!directFlight };
 			}
 			else {
