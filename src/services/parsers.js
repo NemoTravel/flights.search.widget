@@ -11,11 +11,11 @@ export const parseAirportFromGuide = (response, IATA) => {
 	return airport;
 };
 
-export const parseAutocompleteOptions = response => {
+export const parseAutocompleteOptions = (response, aggregationOnly) => {
 	const options = [];
 
 	if (response && response.guide.autocomplete.iata instanceof Array) {
-		const { airports, countries, cities } = response.guide;
+		const { airports, countries, cities, aggregationMap } = response.guide;
 		const iataMap = {};
 
 		// Sometimes, city has it's own list of airports (ex: Moscow (MOW)), so we have to process them too.
@@ -33,14 +33,27 @@ export const parseAutocompleteOptions = response => {
 
 		const processAirport = ({ IATA, directFlight, isCity }) => {
 			const airport = airports[IATA];
+			const cityIATA = cities.hasOwnProperty(airport.cityId) ? cities[airport.cityId].IATA : null;
+			// aggregationMap is null for nemo autocomplete
+			const aggregationCity = aggregationMap && aggregationMap.hasOwnProperty(cityIATA) && aggregationMap[cityIATA].hasOwnProperty(airport.IATA) ? aggregationMap[cityIATA] : false;
 
 			airport.country = countries[airport.countryCode];
 			airport.isCity = !!isCity;
+			
+			airport.insideAggregationAirport = false;
+			if (cityIATA &&	aggregationCity) {
+				airport.insideAggregationAirport = true;
+			}
 
 			// Remember all processed IATA codes.
 			iataMap[IATA] = true;
 
-			return { airport, isDirect: !!directFlight };
+			if (!aggregationOnly ||	!aggregationCity ||	typeof aggregationCity == "object" && Object.keys(aggregationCity).length > 1) {
+				return { airport, isDirect: !!directFlight };
+			}
+			else {
+				return null;
+			}
 		};
 
 		response.guide.autocomplete.iata

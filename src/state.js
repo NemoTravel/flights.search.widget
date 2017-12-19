@@ -31,7 +31,8 @@ export const systemState = {
 	highlightAvailableDates: false,
 	vicinityDays: 3,
 	enableCoupon: false,
-	enableMileCard: false
+	enableMileCard: false,
+	aggregationOnly: false
 };
 
 export const previousSearchesGroup = {

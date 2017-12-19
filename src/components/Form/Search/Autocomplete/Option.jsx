@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 export default ({ option }) => {
 	return <div className="widget-form-airports__suggestion">
-		<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': option.value.isDirect })}>
+		<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': option.value.isDirect, 'widget-form-airports__suggestion__title_pad': option.value.airport.insideAggregationAirport })}>
 			{option.value.airport.name}
 		</span>
 

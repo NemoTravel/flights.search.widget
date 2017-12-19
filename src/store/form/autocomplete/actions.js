@@ -186,13 +186,13 @@ export const selectAirport = (airport, autocompleteType) => {
  * @param {Function} dispatch
  * @param {String} autocompleteType
  */
-const runAutocomplete = ({ requestURL, dispatch, autocompleteType }) => {
+const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOnly = false }) => {
 	dispatch(startAutocompleteLoading(autocompleteType));
 
 	fetch(requestURL)
 		.then(response => response.json())
 		.then(response => {
-			const options = parseAutocompleteOptions(response);
+			const options = parseAutocompleteOptions(response, aggregationOnly);
 
 			if (options) {
 				dispatch(changeAutocompleteSuggestions(options, autocompleteType));
@@ -217,6 +217,7 @@ const runWebskyAutocomplete = (dispatch, getState, autocompleteType) => {
 	const state = getState();
 	const searchType = autocompleteType === 'arrival' ? 'arr' : 'dep';
 	let departureIATA = '';
+	let aggregationOnly = state.system.aggregationOnly;
 
 	// For `arrival` autocomplete field, inject selected departure IATA code,
 	// for loading proper list of arrival options.
@@ -233,7 +234,8 @@ const runWebskyAutocomplete = (dispatch, getState, autocompleteType) => {
 	runAutocomplete({
 		requestURL: URL(requestURL, requestParams),
 		dispatch,
-		autocompleteType
+		autocompleteType,
+		aggregationOnly
 	});
 };
 

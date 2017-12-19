@@ -259,6 +259,20 @@ export default class Demo extends React.Component {
 						</label>
 					</div>
 				</div>
+
+				<div className="row">
+					<div className="col form-check">
+						<label className="form-check-label">
+							<input type="checkbox" className="form-check-input" onChange={e => {
+								this.config.aggregationOnly = e.target.checked;
+								this.processConfig();
+							}}/>
+							<CodeBlock>aggregationOnly</CodeBlock>: (Только для режима `WEBSKY`) Если у агрегирующего города есть только 1 аэропорт,
+							то показывать в автокомплите только агрегирующий город.
+							Пример, в случае Берлин (BER) и Тегель (TXL, относится к Берлину) в автокомплите будет отображаться только Берлин.
+						</label>
+					</div>
+				</div>
 			</div>
 
 			<div className="widget-demo-content">
