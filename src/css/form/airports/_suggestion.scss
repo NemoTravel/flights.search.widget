@@ -19,10 +19,6 @@
 		&_bold {
 			font-weight: 600;
 		}
-		
-		&_pad {
-			padding-left: 20px;
-		}
 	}
 
 	&__countryName {
@@ -42,5 +38,9 @@
 		@include adaptivity(phone) {
 			display: block;
 		}
+	}
+	
+	&_insideAggregation {
+		padding-left: 20px;
 	}
 }
