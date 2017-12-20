@@ -2,8 +2,8 @@ import React from 'react';
 import classnames from 'classnames';
 
 export default ({ option }) => {
-	return <div className="widget-form-airports__suggestion">
-		<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': option.value.isDirect, 'widget-form-airports__suggestion__title_pad': option.value.airport.insideAggregationAirport })}>
+	return <div className={classnames('widget-form-airports__suggestion', { 'widget-form-airports__suggestion_insideAggregation': option.value.airport.insideAggregationAirport })}>
+		<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': option.value.isDirect })}>
 			{option.value.airport.name}
 		</span>
 
