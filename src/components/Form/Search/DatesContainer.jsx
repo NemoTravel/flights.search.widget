@@ -31,7 +31,11 @@ class DatesContainer extends React.Component {
 					datepickerChange(date, dateType);
 
 					if (system.autoFocusReturnDate && this.returnInput) {
-						this.returnInput.focus();
+						const self = this;
+
+						setTimeout(function() {
+							self.returnInput.focus();
+						}, 20);
 					}
 				}}
 				highlightDates={this.props.getDepartureHighlightedDates}
