@@ -1,7 +1,6 @@
 @import "../variables";
 
 .widget-ui-datepicker {
-	border-radius: 4px;
 	box-shadow: 0 0 16px rgba(10, 10, 15, .25);
 	color: #333;
 	background: #fff;
@@ -61,7 +60,7 @@
 					position: relative;
 					right: -1px;
 					font-size: 20px;
-					color: #fff;
+					color: #64b5f6;
 
 					@include adaptivity(phone) {
 						color: $title-color;
@@ -92,7 +91,6 @@
 		&__month {
 			margin: 0 15px 15px;
 			border: 1px solid #e6e6e6;
-			border-radius: 4px;
 			padding: 0;
 
 			@include adaptivity(phone) {
@@ -111,9 +109,9 @@
 				font-size: 17px;
 				line-height: 18px;
 				font-weight: normal;
-				color: #fff;
+				color: #64b5f6;
 				text-transform: capitalize;
-				background: #64b5f6 !important;
+				background: #fff;
 
 				@include adaptivity(phone) {
 					background: none !important;

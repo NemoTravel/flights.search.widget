@@ -4,9 +4,11 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	padding-right: 40px;
 
 	&__code {
-		display: none;
+		color: #868e96;
+		font-size: 13px;
 	}
 
 	&__title {

@@ -41,7 +41,7 @@ export default class Datepicker extends React.Component {
 	 * @returns {string}
 	 */
 	static get dateFormatCalendar() {
-		return 'MMMM';
+		return 'MMMM, YYYY';
 	}
 
 	/**

@@ -5,6 +5,12 @@
 	@import "airports/swap";
 	@import "airports/suggestion";
 
+	.Select-menu-outer {
+		@include adaptivity(phone) {
+			margin-top: 0 !important;
+		}
+	}
+
 	&.row {
 		flex-wrap: nowrap !important;
 		flex-basis: 100%;
@@ -19,7 +25,8 @@
 	}
 
 	&__airportCode {
-		display: none;
+		color: #868e96;
+		font-size: 13px;
 	}
 
 	&__header {
@@ -32,6 +39,14 @@
 
 			.widget-form-airports__select__value {
 				width: 80%;
+			}
+
+			.widget-form-airports__airportCode {
+				right: 57px;
+
+				@include adaptivity(phone) {
+					right: 17px;
+				}
 			}
 
 			@include adaptivity(phone) {
