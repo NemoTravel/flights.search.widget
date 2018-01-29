@@ -35,7 +35,7 @@ interface PassengersConfig {
 }
 
 export interface SystemState {
-	rootElement: HTMLElement;
+	rootElement: HTMLElement | null;
 	nemoURL: string;
 	webskyURL?: string;
 	routingGrid?: string;

@@ -1,41 +1,45 @@
-import React from 'react';
-import Main from 'components/Main';
-import { Provider } from 'react-redux';
-import { getStore } from 'store';
-import { systemState } from 'state';
-import * as Cache from 'cache';
+import * as React from 'react';
 import autobind from 'autobind-decorator';
-import CodeBlock from 'components/UI/CodeBlock';
+import { Store } from 'redux';
+import { Provider } from 'react-redux';
+import Main from './Main';
+import { getStore } from '../store';
+import { ApplicationMode, SystemState, systemState } from '../state';
+import * as Cache from '../cache';
+import CodeBlock from './UI/CodeBlock';
 import 'css/nemo/main.scss';
 import { Language } from '../state';
+import { MouseEvent } from 'react';
 
-export default class Demo extends React.Component {
-	constructor(props) {
-		super(props);
-		const defaultLang = Language.Russian;
-		const defaultWebskyURL = 'http://demo.websky.aero/gru';
-		const defaultNemoURL = 'http://sys.nemo.travel';
+interface DemoFormState {
+	webskyURL: string;
+	nemoURL: string;
+	generatedConfig: string;
+	nemoStyles: boolean;
+}
 
-		this.store = getStore({
-			locale: defaultLang
-		});
+const defaultLang = Language.Russian;
+const defaultWebskyURL = 'http://demo.websky.aero/gru';
+const defaultNemoURL = 'http://sys.nemo.travel';
 
-		this.state = {
-			webskyURL: defaultWebskyURL,
-			nemoURL: defaultNemoURL,
-			generatedConfig: '',
-			nemoStyles: false
-		};
+export default class Demo extends React.Component<any, DemoFormState> {
+	public config: SystemState = {
+		...systemState,
+		locale: defaultLang,
+		webskyURL: defaultWebskyURL,
+		nemoURL: defaultNemoURL
+	};
 
-		this.config = {
-			...systemState,
-			locale: defaultLang,
-			webskyURL: defaultWebskyURL,
-			nemoURL: defaultNemoURL
-		};
+	public store: Store<SystemState> = getStore({
+		locale: defaultLang
+	});
 
-		Cache.set(Cache.KEY_LOCALE, defaultLang);
-	}
+	public state: DemoFormState = {
+		webskyURL: defaultWebskyURL,
+		nemoURL: defaultNemoURL,
+		generatedConfig: '',
+		nemoStyles: false
+	};
 
 	@autobind
 	toggleNemoStyles() {
@@ -45,6 +49,8 @@ export default class Demo extends React.Component {
 	}
 
 	componentDidMount() {
+		Cache.set(Cache.KEY_LOCALE, defaultLang);
+
 		this.store.subscribe(() => {
 			this.setState({
 				generatedConfig: JSON.stringify(this.config)
@@ -60,6 +66,13 @@ export default class Demo extends React.Component {
 			type: 'LOAD_CONFIG',
 			payload: this.config
 		});
+	}
+
+	@autobind
+	textAreaClickHandler(event: MouseEvent<HTMLTextAreaElement>) {
+		if (event.target instanceof HTMLTextAreaElement) {
+			event.target.select();
+		}
 	}
 
 	render() {
@@ -88,7 +101,7 @@ export default class Demo extends React.Component {
 								<CodeBlock>FlightsSearchWidget.init(...конфиг)</CodeBlock>
 							</div>
 
-							<textarea className="form-control" rows="10" value={this.state.generatedConfig} onClick={event => event.target.select()}/>
+							<textarea className="form-control" rows={10} value={this.state.generatedConfig} onClick={this.textAreaClickHandler}/>
 						</label>
 					</div>
 				</div>
@@ -153,7 +166,7 @@ export default class Demo extends React.Component {
 							</div>
 
 							<select className="form-control" onChange={e => {
-								this.config.mode = e.target.value;
+								this.config.mode = e.target.value as ApplicationMode;
 								this.processConfig();
 							}}>
 								<option value="NEMO">NEMO</option>
