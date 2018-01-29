@@ -23,7 +23,7 @@ const config = {
 	context: __dirname,
 
 	// Entry file.
-	entry: ['whatwg-fetch', './src/main'],
+	entry: ['whatwg-fetch', './src/main.tsx'],
 
 	// Watch for changes in file.
 	watch: isDevMode,
@@ -32,8 +32,8 @@ const config = {
 		// Do not watch for changes in "node_modules".
 		ignored: /node_modules/,
 
-		// Webpack will wait for 500ms before building bundles.
-		aggregateTimeout: 500
+		// Webpack will wait for 300ms before building bundles.
+		aggregateTimeout: 300
 	},
 
 	output: {
@@ -55,27 +55,16 @@ const config = {
 			path.resolve(__dirname, 'src'),
 			path.resolve(__dirname, 'dist')
 		],
-		extensions: ['.js', '.json', '.jsx', '.css']
+		extensions: ['.ts', '.js', '.json', '.jsx', '.tsx', '.css', '.scss']
 	},
 
 	module: {
 		// List of loaders ("handlers") for different types of files.
 		rules: [
-			// Handling ".jsx" and ".js" files in "/src" folder with Babel-Loader.
+			// Handling ".tsx" and ".ts" files in "/src" folder.
 			{
-				test: /\.jsx?$/,
-				loader: 'babel-loader',
-
-				// Converting JSX and ES6 && ES7 to the common ES5 standart.
-				options: {
-					plugins: [
-						'transform-runtime',
-						'transform-decorators-legacy',
-						'transform-react-remove-prop-types',
-						'transform-react-constant-elements'
-					],
-					presets: ['es2015', 'stage-0', 'react']
-				},
+				test: /\.tsx?$/,
+				loader: 'ts-loader',
 				include: [
 					path.resolve(__dirname, 'src')
 				],
@@ -150,6 +139,7 @@ const config = {
 				]
 			},
 
+			// Handling SVG images.
 			{
 				test: /\.svg$/,
 				loader: 'url-loader',

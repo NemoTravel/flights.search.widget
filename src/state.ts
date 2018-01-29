@@ -1,30 +1,83 @@
-import { autocompleteAirportReducer, autocompleteGroupsReducer } from 'store/form/autocomplete/reducer';
-import { selectDateReducer, toggleDatepickerReducer, setAvailableDatesReducer } from 'store/form/dates/reducer';
-import moment from 'moment';
+import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/form/autocomplete/reducer';
+import { selectDateReducer, toggleDatepickerReducer, setAvailableDatesReducer } from './store/form/dates/reducer';
+import * as moment from 'moment';
+import { Moment } from 'moment';
 
 export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';
 export const CLASS_TYPES = ['Economy', 'Business'];
 
-export const systemState = {
+export enum ApplicationMode {
+	NEMO = 'NEMO',
+	WEBSKY = 'WEBSKY'
+}
+
+export enum ServiceClass {
+	Economy = 'Economy',
+	Business = 'Business'
+}
+
+export enum Language {
+	English = 'en',
+	Russian = 'ru',
+	Romanian = 'ro'
+}
+
+export enum PassengerType {
+	Adult = 'ADT',
+	Child = 'CLD',
+	Infant = 'INF',
+	InfantWithSeat = 'INS'
+}
+
+interface PassengersConfig {
+	[passengerType: string]: number;
+}
+
+export interface SystemState {
+	rootElement: HTMLElement;
+	nemoURL: string;
+	webskyURL?: string;
+	routingGrid?: string;
+	locale?: Language;
+	verticalForm?: boolean;
+	readOnlyAutocomplete?: boolean;
+	autoFocusArrivalAirport?: boolean;
+	autoFocusReturnDate?: boolean;
+	mode?: ApplicationMode;
+	defaultDepartureAirport?: string | Object;
+	defaultArrivalAirport?: string | Object;
+	defaultDepartureDate?: string;
+	defaultReturnDate?: string;
+	defaultPassengers?: PassengersConfig;
+	defaultServiceClass?: ServiceClass;
+	directOnly?: boolean;
+	vicinityDatesMode?: boolean;
+	useNearestAirport?: boolean;
+	highlightAvailableDates?: boolean;
+	vicinityDays?: number;
+	enableCoupon?: boolean;
+	enableMileCard?: boolean;
+	aggregationOnly?: boolean;
+}
+
+export const systemState: SystemState = {
 	rootElement: null,
 	webskyURL: '',
 	nemoURL: '',
 	routingGrid: null,
-	locale: 'en',
+	locale: Language.English,
 	verticalForm: false,
 	readOnlyAutocomplete: false,
 	autoFocusArrivalAirport: false,
 	autoFocusReturnDate: false,
-	mode: MODE_NEMO,
+	mode: ApplicationMode.NEMO,
 	defaultDepartureAirport: null,
 	defaultArrivalAirport: null,
 	defaultDepartureDate: null,
 	defaultReturnDate: null,
-	defaultPassengers: {
-		ADT: 1
-	},
-	defaultServiceClass: 'Economy',
+	defaultPassengers: { ADT: 1 },
+	defaultServiceClass: ServiceClass.Economy,
 	directOnly: false,
 	vicinityDatesMode: false,
 	useNearestAirport: false,
@@ -35,13 +88,29 @@ export const systemState = {
 	aggregationOnly: false
 };
 
-export const previousSearchesGroup = {
-	options: {},
-	className: 'widget-form-airports__suggestion__recently',
-	name: 'previousSearches'
-};
+// ---------------------------------------------------------------------------------------------------------------------
 
-export const autocompleteState = {
+export interface AutocompleteGroupState {
+	options: Object;
+	className: string;
+	name: string;
+}
+
+export interface AutocompleteFieldState {
+	isLoading: boolean;
+	suggestions: Object[];
+	airport: Object;
+}
+
+export interface AutocompleteState {
+	departure: AutocompleteFieldState;
+	arrival: AutocompleteFieldState;
+	defaultGroups: {
+		[groupName: string]: AutocompleteGroupState;
+	};
+}
+
+export const autocompleteState: AutocompleteState = {
 	departure: {
 		isLoading: false,
 		suggestions: [],
@@ -53,11 +122,28 @@ export const autocompleteState = {
 		airport: null
 	},
 	defaultGroups: {
-		previousSearches: previousSearchesGroup
+		previousSearches: {
+			options: {},
+			className: 'widget-form-airports__suggestion__recently',
+			name: 'previousSearches'
+		}
 	}
 };
 
-export const datesState = {
+// ---------------------------------------------------------------------------------------------------------------------
+
+export interface DatepickerState {
+	isActive: boolean;
+	date?: string | Moment;
+	availableDates: Object[];
+}
+
+export interface DatesState {
+	departure: DatepickerState;
+	return: DatepickerState;
+}
+
+export const datesState: DatesState = {
 	'departure': {
 		isActive: true,
 		date: null,
@@ -70,51 +156,101 @@ export const datesState = {
 	}
 };
 
-export const passengersState = {
+// ---------------------------------------------------------------------------------------------------------------------
+
+export interface PassengerState {
+	title: string;
+	ageTitle: string;
+	code: PassengerType;
+	count: number;
+}
+
+export interface PassengersState {
+	[passengerType: string]: PassengerState;
+}
+
+export const passengersState: PassengersState = {
 	ADT: {
 		title: 'passenger_ADT',
 		ageTitle: 'passenger_ADT_age',
-		code: 'ADT',
+		code: PassengerType.Adult,
 		count: 0
 	},
 	CLD: {
 		title: 'passenger_CLD',
 		ageTitle: 'passenger_CLD_age',
-		code: 'CLD',
+		code: PassengerType.Child,
 		count: 0
 	},
 	INF: {
 		title: 'passenger_INF',
 		ageTitle: 'passenger_INF_age',
-		code: 'INF',
+		code: PassengerType.Infant,
 		count: 0
 	},
 	INS: {
 		title: 'passenger_INS',
 		ageTitle: 'passenger_INS_age',
-		code: 'INS',
+		code: PassengerType.InfantWithSeat,
 		count: 0
 	}
 };
 
-export const additionalState = {
-	classType: null,
-	vicinityDates: null,
-	directFlight: null
+// ---------------------------------------------------------------------------------------------------------------------
+
+export interface AdditionalState {
+	classType: ServiceClass;
+	vicinityDates: number;
+	directFlight: boolean;
+}
+
+export const additionalState: AdditionalState = {
+	classType: ServiceClass.Economy,
+	vicinityDates: 0,
+	directFlight: false
 };
 
-export const couponState = {
+// ---------------------------------------------------------------------------------------------------------------------
+
+export interface CouponState {
+	isActive: boolean;
+	number: string;
+}
+
+export const couponState: CouponState = {
 	isActive: false,
 	number: null
 };
 
-export const mileCardState = {
+// ---------------------------------------------------------------------------------------------------------------------
+
+export interface MileCardState {
+	isActive: boolean;
+	number: string;
+	password: string;
+}
+
+export const mileCardState: MileCardState = {
 	isActive: false,
 	number: null,
 	password: null
 };
 
-export const initialState = {
+// ---------------------------------------------------------------------------------------------------------------------
+
+export interface ApplicationState {
+	system: SystemState;
+	form: {
+		dates: DatesState;
+		passengers: PassengersState;
+		autocomplete: AutocompleteState;
+		additional: AdditionalState;
+		coupon: CouponState;
+		mileCard: MileCardState;
+	}
+}
+
+export const initialState: ApplicationState = {
 	system: systemState,
 	form: {
 		dates: datesState,
@@ -126,7 +262,7 @@ export const initialState = {
 	}
 };
 
-export const fillStateFromCache = (currentState, stateFromCache) => {
+export const fillStateFromCache = (currentState: ApplicationState, stateFromCache?: ApplicationState) => {
 	const state = currentState;
 
 	// Let's fill `state` with data from `stateFromCache`.
@@ -210,10 +346,16 @@ export const fillStateFromCache = (currentState, stateFromCache) => {
 			}
 
 			if (stateFromCache.form.additional) {
-				for (const option in stateFromCache.form.additional) {
-					if (stateFromCache.form.additional.hasOwnProperty(option)) {
-						state.form.additional[option] = stateFromCache.form.additional[option];
-					}
+				if (stateFromCache.form.additional.classType) {
+					state.form.additional.classType = stateFromCache.form.additional.classType;
+				}
+
+				if (stateFromCache.form.additional.vicinityDates) {
+					state.form.additional.vicinityDates = stateFromCache.form.additional.vicinityDates;
+				}
+
+				if (stateFromCache.form.additional.directFlight) {
+					state.form.additional.directFlight = stateFromCache.form.additional.directFlight;
 				}
 			}
 

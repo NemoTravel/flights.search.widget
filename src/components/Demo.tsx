@@ -7,11 +7,12 @@ import * as Cache from 'cache';
 import autobind from 'autobind-decorator';
 import CodeBlock from 'components/UI/CodeBlock';
 import 'css/nemo/main.scss';
+import { Language } from '../state';
 
 export default class Demo extends React.Component {
 	constructor(props) {
 		super(props);
-		const defaultLang = 'ru';
+		const defaultLang = Language.Russian;
 		const defaultWebskyURL = 'http://demo.websky.aero/gru';
 		const defaultNemoURL = 'http://sys.nemo.travel';
 
