@@ -1,20 +1,22 @@
-import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
+import * as React from 'react';
+import { createStore, applyMiddleware, Store } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from 'store/reducer';
-import * as Cache from 'cache';
-import moment from 'moment';
-import { initialState, systemState, fillStateFromCache } from 'state';
-import { configReducer } from 'store/system/reducer';
-import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete, setSelectedAirport } from 'store/form/autocomplete/actions';
-import { selectDate } from 'store/form/dates/actions';
-import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from 'store/form/additional/actions';
-import { getTotalPassengersCount } from 'store/form/passengers/selectors';
-import { setCounter } from 'store/form/passengers/actions';
+import * as moment from 'moment';
+
+import * as Cache from './cache';
+import rootReducer from './store/reducer';
+import { setCounter } from './store/form/passengers/actions';
+import { selectDate } from './store/form/dates/actions';
+import { configReducer } from './store/system/reducer';
+import { getTotalPassengersCount } from './store/form/passengers/selectors';
+import { initialState, systemState, fillStateFromCache, ApplicationState, SystemState } from './state';
+import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from './store/form/additional/actions';
+import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete, setSelectedAirport } from './store/form/autocomplete/actions';
 
 const middlewares = [thunk];
+const STORE_CACHE_KEY = 'cached_store';
 
-const enableProfiler = (isEnabled = false) => {
+const enableProfiler = (isEnabled: boolean = false): void => {
 	if (isEnabled) {
 		const { whyDidYouUpdate } = require('@nemo.travel/why-did-you-update');
 
@@ -22,7 +24,7 @@ const enableProfiler = (isEnabled = false) => {
 	}
 };
 
-const enableReduxLogger = (isEnabled = false) => {
+const enableReduxLogger = (isEnabled: boolean = false): void => {
 	if (isEnabled) {
 		const logger = require('redux-logger').default;
 
@@ -36,15 +38,13 @@ if (process.env.NODE_ENV !== 'production') {
 	enableProfiler(false);
 }
 
-const STORE_CACHE_KEY = 'cached_store';
-
 /**
  * Get cached state object.
  */
-export const getCachedState = () => {
+export const getCachedState = (): ApplicationState => {
 	const cachedState = Cache.get(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION);
 
-	return cachedState ? cachedState : {};
+	return cachedState ? cachedState : null;
 };
 
 /**
@@ -52,7 +52,7 @@ export const getCachedState = () => {
  *
  * @param state
  */
-export const cacheState = state => {
+export const cacheState = (state: ApplicationState): void => {
 	Cache.set(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION, state);
 };
 
@@ -63,7 +63,7 @@ export const cacheState = state => {
  *
  * @returns {Store}
  */
-export const getStore = (config = {}) => {
+export const getStore = (config: SystemState): Store<ApplicationState> => {
 	// State object that has been stored in `localStorage` in the past.
 	const stateFromCache = getCachedState();
 

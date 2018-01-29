@@ -9,7 +9,6 @@ import * as Cache from '../cache';
 import CodeBlock from './UI/CodeBlock';
 import 'css/nemo/main.scss';
 import { Language } from '../state';
-import { MouseEvent } from 'react';
 
 interface DemoFormState {
 	webskyURL: string;
@@ -42,13 +41,13 @@ export default class Demo extends React.Component<any, DemoFormState> {
 	};
 
 	@autobind
-	toggleNemoStyles() {
+	toggleNemoStyles(): void {
 		this.setState({
 			nemoStyles: !this.state.nemoStyles
 		});
 	}
 
-	componentDidMount() {
+	componentDidMount(): void {
 		Cache.set(Cache.KEY_LOCALE, defaultLang);
 
 		this.store.subscribe(() => {
@@ -61,7 +60,7 @@ export default class Demo extends React.Component<any, DemoFormState> {
 	}
 
 	@autobind
-	processConfig() {
+	processConfig(): void {
 		this.store.dispatch({
 			type: 'LOAD_CONFIG',
 			payload: this.config
@@ -69,13 +68,13 @@ export default class Demo extends React.Component<any, DemoFormState> {
 	}
 
 	@autobind
-	textAreaClickHandler(event: MouseEvent<HTMLTextAreaElement>) {
+	textAreaClickHandler(event: React.MouseEvent<HTMLTextAreaElement>): void {
 		if (event.target instanceof HTMLTextAreaElement) {
 			event.target.select();
 		}
 	}
 
-	render() {
+	render(): React.ReactNode {
 		return <div className="widget-demo">
 			{this.state.nemoStyles ? <link rel="stylesheet" href="/nemo-flights.search.widget.min.css"/> : null}
 

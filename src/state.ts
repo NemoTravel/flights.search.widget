@@ -45,8 +45,8 @@ export interface SystemState {
 	autoFocusArrivalAirport?: boolean;
 	autoFocusReturnDate?: boolean;
 	mode?: ApplicationMode;
-	defaultDepartureAirport?: string | Object;
-	defaultArrivalAirport?: string | Object;
+	defaultDepartureAirport?: string | any;
+	defaultArrivalAirport?: string | any;
 	defaultDepartureDate?: string;
 	defaultReturnDate?: string;
 	defaultPassengers?: PassengersConfig;
@@ -90,16 +90,22 @@ export const systemState: SystemState = {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+export enum AutocompleteFieldType {
+	Departure = 'departure',
+	Arrival = 'arrival',
+	DefaultGroups = 'defaultGroups'
+}
+
 export interface AutocompleteGroupState {
-	options: Object;
+	options: any;
 	className: string;
 	name: string;
 }
 
 export interface AutocompleteFieldState {
 	isLoading: boolean;
-	suggestions: Object[];
-	airport: Object;
+	suggestions: any;
+	airport: any;
 }
 
 export interface AutocompleteState {
@@ -111,12 +117,12 @@ export interface AutocompleteState {
 }
 
 export const autocompleteState: AutocompleteState = {
-	departure: {
+	[AutocompleteFieldType.Departure]: {
 		isLoading: false,
 		suggestions: [],
 		airport: null
 	},
-	arrival: {
+	[AutocompleteFieldType.Arrival]: {
 		isLoading: false,
 		suggestions: [],
 		airport: null
@@ -132,10 +138,15 @@ export const autocompleteState: AutocompleteState = {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+export enum DatepickerFieldType {
+	Departure = 'departure',
+	Return = 'return'
+}
+
 export interface DatepickerState {
 	isActive: boolean;
 	date?: string | Moment;
-	availableDates: Object[];
+	availableDates: any;
 }
 
 export interface DatesState {
@@ -144,12 +155,12 @@ export interface DatesState {
 }
 
 export const datesState: DatesState = {
-	'departure': {
+	[DatepickerFieldType.Departure]: {
 		isActive: true,
 		date: null,
 		availableDates: []
 	},
-	'return': {
+	[DatepickerFieldType.Return]: {
 		isActive: false,
 		date: null,
 		availableDates: []
