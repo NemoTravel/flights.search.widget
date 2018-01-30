@@ -5,7 +5,7 @@ export const getClassType = (state: ApplicationState): ServiceClass => {
 };
 
 export const vicinityDatesSelect = (state: ApplicationState): boolean => {
-	return !!state.form.additional.vicinityDates;
+	return state.form.additional.vicinityDates;
 };
 
 export const directFlightSelect = (state: ApplicationState): boolean => {

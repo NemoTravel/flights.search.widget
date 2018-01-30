@@ -32,6 +32,13 @@ export enum PassengerType {
 	InfantWithSeat = 'INS'
 }
 
+export enum WebskyPassengerType {
+	Adult = 'aaa',
+	Child = 'rbg',
+	Infant = 'rmg',
+	InfantWithSeat = 'rvg'
+}
+
 interface PassengersConfig {
 	[passengerType: string]: number;
 }

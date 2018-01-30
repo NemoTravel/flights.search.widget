@@ -1,15 +1,15 @@
 import { createSelector } from 'reselect';
-import { i18n } from 'utils';
-import { nemoToWebskyPassTypes } from 'store/form/passengers/reducer';
+import { i18n } from '../../../utils';
+import { ApplicationState, PassengersState, PassengerState, PassengerType, WebskyPassengerType } from '../../../state';
 
-const getPassengersConfig = state => {
+const getPassengersConfig = (state: ApplicationState): PassengersState => {
 	return state.form.passengers;
 };
 
 export const getPassengersArray = createSelector(
-	[getPassengersConfig],
-	(passengersConfig = {}) => {
-		const result = [];
+	[ getPassengersConfig ],
+	(passengersConfig: PassengersState): PassengerState[] => {
+		const result: PassengerState[] = [];
 
 		for (const passType in passengersConfig) {
 			if (passengersConfig.hasOwnProperty(passType)) {
@@ -25,16 +25,16 @@ export const getPassengersArray = createSelector(
  * Total count of selected passengers on the search form.
  */
 export const getTotalPassengersCount = createSelector(
-	[getPassengersArray],
-	(passengersArray = []) => passengersArray.reduce((result, passenger) => result + parseInt(passenger.count), 0)
+	[ getPassengersArray ],
+	(passengersArray: PassengerState[]): number => passengersArray.reduce((result: number, passenger: PassengerState) => result + passenger.count, 0)
 );
 
 /**
  * Dynamic title for passengers dropdown on the search form.
  */
 export const getPassengersTitle = createSelector(
-	[getTotalPassengersCount],
-	(totalCount = 0) => {
+	[ getTotalPassengersCount ],
+	(totalCount: number): string => {
 		let result = '';
 
 		if (totalCount === 0 || totalCount > 4) {
@@ -50,6 +50,15 @@ export const getPassengersTitle = createSelector(
 		return result;
 	}
 );
+
+interface PassengerCounterAvailability {
+	canIncrease: boolean;
+	canDecrease: boolean;
+}
+
+interface PassengersCounterAvailability {
+	[passengerType: string]: PassengerCounterAvailability;
+}
 
 /**
  * Check if passenger counter can be increased or decreased.
@@ -68,13 +77,13 @@ export const getPassengersTitle = createSelector(
  * }
  */
 export const getPassengersCounterAvailability = createSelector(
-	[getPassengersConfig, getTotalPassengersCount],
-	(passengersConfig = {}, totalCount = 0) => {
-		const result = {};
+	[ getPassengersConfig, getTotalPassengersCount ],
+	(passengersConfig: PassengersState, totalCount: number): PassengersCounterAvailability => {
+		const result: PassengersCounterAvailability = {};
 
 		for (const passType in passengersConfig) {
 			if (passengersConfig.hasOwnProperty(passType)) {
-				const currentPassConfig = passengersConfig[passType];
+				const currentPassConfig: PassengerState = passengersConfig[passType];
 				let canIncrease = true;
 				let canDecrease = true;
 
@@ -87,7 +96,7 @@ export const getPassengersCounterAvailability = createSelector(
 				}
 
 				switch (passType) {
-					case 'ADT':
+					case PassengerType.Adult:
 						if (
 							currentPassConfig.count <= passengersConfig.INF.count ||
 							currentPassConfig.count <= passengersConfig.INS.count ||
@@ -97,14 +106,14 @@ export const getPassengersCounterAvailability = createSelector(
 						}
 						break;
 
-					case 'INS':
-					case 'CLD':
+					case PassengerType.InfantWithSeat:
+					case PassengerType.Child:
 						if (passengersConfig.ADT.count <= 0) {
 							canIncrease = false;
 						}
 						break;
 
-					case 'INF':
+					case PassengerType.Infant:
 						if (currentPassConfig.count >= passengersConfig.ADT.count) {
 							canIncrease = false;
 						}
@@ -123,10 +132,12 @@ export const getPassengersCounterAvailability = createSelector(
 );
 
 export const webskyPassengers = createSelector(
-	[getPassengersArray],
-	passengers => passengers
-		.filter(passenger => passenger.count)
-		.map(passenger => {
-			return { ...passenger, code: nemoToWebskyPassTypes[passenger.code] };
-		})
+	[ getPassengersArray ],
+	(passengers: PassengerState[]) => {
+		return passengers
+			.filter(passenger => passenger.count)
+			.map(passenger => {
+				return { ...passenger, code: WebskyPassengerType[passenger.code] };
+			})
+	}
 );
