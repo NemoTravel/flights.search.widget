@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import form from 'store/form/reducer';
-import system from 'store/system/reducer';
+import form from './form/reducer';
+import system from './system/reducer';
 
 export default combineReducers({
 	form,
