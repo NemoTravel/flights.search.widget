@@ -8,11 +8,11 @@ import {
 import { ServiceClass } from '../../../state';
 import { Action } from 'redux';
 
-interface SetClassAction extends Action {
+export interface SetClassAction extends Action {
 	payload: ServiceClass;
 }
 
-interface BooleanAction extends Action {
+export interface BooleanAction extends Action {
 	payload: boolean;
 }
 
