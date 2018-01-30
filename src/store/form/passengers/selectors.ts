@@ -51,12 +51,12 @@ export const getPassengersTitle = createSelector(
 	}
 );
 
-interface PassengerCounterAvailability {
+export interface PassengerCounterAvailability {
 	canIncrease: boolean;
 	canDecrease: boolean;
 }
 
-interface PassengersCounterAvailability {
+export interface PassengersCounterAvailability {
 	[passengerType: string]: PassengerCounterAvailability;
 }
 
