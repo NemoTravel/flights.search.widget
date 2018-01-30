@@ -14,6 +14,7 @@ import {
 	ServiceClass
 } from '../../../state';
 import { PassengersAction, addPassenger, removePassenger, setCounter } from '../../../store/form/passengers/actions';
+import { SetClassAction, setClassType } from '../../../store/form/additional/actions';
 
 interface StateProps {
 	counterAvailability: PassengersCounterAvailability;
@@ -29,6 +30,7 @@ interface DispatchProps {
 	addPassenger: (passengerType: PassengerType) => PassengersAction;
 	removePassenger: (passengerType: PassengerType) => PassengersAction;
 	setCounter: (count: number, passengerType: PassengerType) => PassengersAction;
+	setClassType: (classType: ServiceClass) => SetClassAction;
 }
 
 class PassengersContainer extends React.Component<StateProps & DispatchProps> {
@@ -66,7 +68,8 @@ const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
 		addPassenger: bindActionCreators(addPassenger, dispatch),
 		removePassenger: bindActionCreators(removePassenger, dispatch),
-		setCounter: bindActionCreators(setCounter, dispatch)
+		setCounter: bindActionCreators(setCounter, dispatch),
+		setClassType: bindActionCreators(setClassType, dispatch)
 	};
 };
 
