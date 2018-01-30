@@ -1,4 +1,4 @@
-import { AnyAction, combineReducers } from 'redux';
+import { AnyAction, combineReducers, Reducer } from 'redux';
 import { SHOW_ERRORS } from '../actions';
 import passengers from './passengers/reducer';
 import autocomplete from './autocomplete/reducer';
@@ -13,10 +13,10 @@ export const showErrorsReducer = (state: boolean = false, { type, payload }: Sho
 	return type === SHOW_ERRORS ? payload : state;
 };
 
-export default (state: FormState, action: AnyAction) => {
+export default (state: FormState, action: AnyAction): FormState => {
 	// Some `form` action handlers goes there.
 
-	return combineReducers({
+	return combineReducers<FormState>({
 		showErrors: showErrorsReducer,
 		dates,
 		autocomplete,

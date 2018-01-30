@@ -98,8 +98,7 @@ export const systemState: SystemState = {
 
 export enum AutocompleteFieldType {
 	Departure = 'departure',
-	Arrival = 'arrival',
-	DefaultGroups = 'defaultGroups'
+	Arrival = 'arrival'
 }
 
 export interface AutocompleteGroupState {
@@ -230,13 +229,13 @@ export const passengersState: PassengersState = {
 
 export interface AdditionalState {
 	classType: ServiceClass;
-	vicinityDates: number;
+	vicinityDates: boolean;
 	directFlight: boolean;
 }
 
 export const additionalState: AdditionalState = {
 	classType: ServiceClass.Economy,
-	vicinityDates: 0,
+	vicinityDates: false,
 	directFlight: false
 };
 

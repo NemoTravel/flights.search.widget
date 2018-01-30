@@ -84,7 +84,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 
 	// Thunk middleware allows us to create functions instead of plain objects in action-creators (for async purposes).
 	// @see https://github.com/gaearon/redux-thunk#motivation
-	const store = createStore(
+	const store = createStore<ApplicationState>(
 		rootReducer,
 		preloadedState,
 		applyMiddleware(...middlewares)

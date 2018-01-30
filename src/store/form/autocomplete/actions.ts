@@ -21,6 +21,12 @@ export interface AutocompleteAction {
 	payload?: any;
 }
 
+export interface PreviousSearchAction {
+	type: string;
+	payload: any;
+	isPreviousSearchAction: boolean;
+}
+
 /**
  * Show autocomplete field loading spinner.
  *
@@ -153,13 +159,12 @@ export const setSelectedAirport = (airport: any, autocompleteType: AutocompleteF
  * FIXME
  *
  * @param pool
- * @param {AutocompleteFieldType} autocompleteType
  * @returns {AutocompleteAction}
  */
-export const setAirportInPreviousSearchGroup = (pool: any, autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const setAirportInPreviousSearchGroup = (pool: any): PreviousSearchAction => {
 	return {
 		type: AUTOCOMPLETE_PUSH_TO_PREVIOUS,
-		autocompleteType,
+		isPreviousSearchAction: true,
 		payload: {
 			pool
 		}
@@ -193,7 +198,7 @@ const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getState: Ge
 		}
 	}
 
-	dispatch(setAirportInPreviousSearchGroup(newPool, AutocompleteFieldType.DefaultGroups));
+	dispatch(setAirportInPreviousSearchGroup(newPool));
 };
 
 /**

@@ -2,7 +2,7 @@ import { SET_CLASS_TYPE, TOGGLE_VICINITY_DATES, TOGGLE_DIRECT_FLIGHT, SET_VICINI
 import { AdditionalState, additionalState } from '../../../state';
 import { AnyAction } from 'redux';
 
-export default function(state: AdditionalState = additionalState, action: AnyAction) {
+export default function(state: AdditionalState = additionalState, action: AnyAction): AdditionalState {
 	if (action.type === SET_CLASS_TYPE) {
 		return {
 			...state,
