@@ -1,12 +1,10 @@
-import Promise from 'promise-polyfill';
-
 (() => {
 	if (!Object.assign) {
 		Object.defineProperty(Object, 'assign', {
 			enumerable: false,
 			configurable: true,
 			writable: true,
-			value: function(target) {
+			value: function(target: any) {
 				'use strict';
 				if (target === undefined || target === null) {
 					throw new TypeError('Cannot convert first argument to object');
@@ -35,10 +33,5 @@ import Promise from 'promise-polyfill';
 				return to;
 			}
 		});
-	}
-
-	// To add to window
-	if (!window.Promise) {
-		window.Promise = Promise;
 	}
 })();

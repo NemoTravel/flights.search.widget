@@ -1,10 +1,15 @@
-import moment from 'moment';
-import * as Cache from 'cache';
+import * as moment from 'moment';
+import * as Cache from './cache';
+import { Moment } from 'moment';
 
-export const clearURL = url => url.trim().replace(/^\/|\/$/g, '');
+export const clearURL = (url: string): string => url.trim().replace(/^\/|\/$/g, '');
 
-export const encodeURLParams = (params = {}) => {
-	const numOfParams = typeof params === 'object' ? Object.keys(params).length : 0;
+interface AnyObject {
+	[paramName: string]: any
+}
+
+export const encodeURLParams = (params: AnyObject = {}): string => {
+	const numOfParams = Object.keys(params).length;
 	let result = '',
 		i = 1;
 
@@ -32,7 +37,7 @@ export const encodeURLParams = (params = {}) => {
  * @param {Object} params
  * @returns {String}
  */
-export const URL = (root, params = {}) => {
+export const URL = (root: string, params: AnyObject = {}): string => {
 	let result = clearURL(root);
 	const encodedParams = encodeURLParams(params);
 
@@ -50,7 +55,7 @@ export const URL = (root, params = {}) => {
  * @param label
  * @returns {*}
  */
-export const i18n = (moduleName, label) => {
+export const i18n = (moduleName: string, label: string): string => {
 	try {
 		const locale = Cache.getLocale();
 		const module = require('i18n/' + locale + '/' + moduleName);
@@ -71,8 +76,8 @@ export const i18n = (moduleName, label) => {
  * @param withBoundaryDates
  * @returns {Array}
  */
-export const getIntermediateDates = (firstDate, secondDate = moment(), withBoundaryDates = false) => {
-	const result = [];
+export const getIntermediateDates = (firstDate: Moment, secondDate: Moment = moment(), withBoundaryDates: boolean = false): Moment[] => {
+	const result: Moment[] = [];
 
 	if (firstDate && secondDate) {
 		const startDate = firstDate.clone();
@@ -91,22 +96,22 @@ export const getIntermediateDates = (firstDate, secondDate = moment(), withBound
 	return result;
 };
 
-export const isIE = () => {
+export const isIE = (): boolean => {
 	return navigator.appName === 'Microsoft Internet Explorer' ||
 		!!(navigator.userAgent.match(/Trident/) ||
 			navigator.userAgent.match(/rv:11/));
 };
 
-const getAltLayoutCache = {};
+const getAltLayoutCache: AnyObject = {};
 
-export const getAltLayout = string => {
+export const getAltLayout = (string: string): string => {
 	if (getAltLayoutCache[string]) {
 		return getAltLayoutCache[string];
 	}
 
 	const eng = ' `qwertyuiop[]asdfghjkl;\'zxcvbnm,./~QWERTYUIOP{}ASDFGHJKLZXCVBNM<>?'.split('');
 	const rus = ' ёйцукенгшщзхъфывапролджэячсмитьбю.ЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЯЧСМИТЬБЮ,'.split('');
-	const map = {};
+	const map: AnyObject = {};
 	let result = '';
 
 	if (/[a-zA-Z]+/.test(string)) {
