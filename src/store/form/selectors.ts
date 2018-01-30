@@ -1,26 +1,26 @@
 import { createSelector } from 'reselect';
-import { getTotalPassengersCount } from 'store/form/passengers/selectors';
-import { getAltLayout, i18n } from 'utils';
-import { MODE_WEBSKY } from '../../state';
+import { getTotalPassengersCount } from './passengers/selectors';
+import { getAltLayout, i18n } from '../../utils';
+import { ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState, FormState, SystemState } from '../../state';
 
-const getConfig = state => state.system;
+const getConfig = (state: ApplicationState): SystemState => state.system;
 
 export const isWebsky = createSelector(
 	[ getConfig ],
-	config => config.mode === MODE_WEBSKY
+	(config: SystemState): boolean => config.mode === ApplicationMode.WEBSKY
 );
 
 export const showCouponField = createSelector(
 	[ getConfig, isWebsky ],
-	(config, isWebskyMode) => isWebskyMode && config.enableCoupon
+	(config: SystemState, isWebskyMode: boolean): boolean => isWebskyMode && config.enableCoupon
 );
 
 export const showMileCardField = createSelector(
 	[ getConfig, isWebsky ],
-	(config, isWebskyMode) => false && isWebskyMode && config.enableMileCard // disabled for now (feature is not implemented in Websky yet)
+	(config: SystemState, isWebskyMode: boolean): boolean => false && isWebskyMode && config.enableMileCard // disabled for now (feature is not implemented in Websky yet)
 );
 
-const getForm = state => state.form;
+const getForm = (state: ApplicationState): FormState => state.form;
 
 /**
  * Check if search form data is valid and ready for further operations.
@@ -32,7 +32,7 @@ const getForm = state => state.form;
  */
 export const formIsValid = createSelector(
 	[ getForm, getTotalPassengersCount ],
-	(form, totalPassengersCount) => {
+	(form: FormState, totalPassengersCount: number): boolean => {
 		let isValid = true;
 
 		if (totalPassengersCount <= 0) {
@@ -65,10 +65,10 @@ export const formIsValid = createSelector(
 	}
 );
 
-const getDepartureOptionsFromState = state => state.form.autocomplete.departure.suggestions;
-const getArrivalOptionsFromState = state => state.form.autocomplete.arrival.suggestions;
-const getDefaultOptionsFromState = state => state.form.autocomplete.defaultGroups;
-const mapOptions = options => {
+const getDepartureOptionsFromState = (state: ApplicationState): any[] => state.form.autocomplete.departure.suggestions;
+const getArrivalOptionsFromState = (state: ApplicationState): any[] => state.form.autocomplete.arrival.suggestions;
+const getDefaultOptionsFromState = (state: ApplicationState): AutocompleteDefaultGroupsState => state.form.autocomplete.defaultGroups;
+const mapOptions = (options: any[]): any[] => {
 	return options
 		.filter(option => option && option.airport && option.airport.name && option.airport.nameEn && option.airport.IATA)
 		.map(option => {
@@ -79,8 +79,14 @@ const mapOptions = options => {
 		});
 };
 
-const mapGroupOptions = groups => {
-	const groupsArray = [];
+interface DefaultOptionGroup {
+	label: string;
+	options: any[];
+	className: string;
+}
+
+const mapGroupOptions = (groups: AutocompleteDefaultGroupsState): DefaultOptionGroup[] => {
+	const groupsArray: DefaultOptionGroup[] = [];
 
 	for (const group in groups) {
 		if (groups.hasOwnProperty(group)) {

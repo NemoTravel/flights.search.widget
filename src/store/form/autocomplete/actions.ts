@@ -54,7 +54,7 @@ export const finishAutocompleteLoading = (autocompleteType: AutocompleteFieldTyp
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {AutocompleteAction}
  */
-export const changeAutocompleteSuggestions = (suggestions: Object[], autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const changeAutocompleteSuggestions = (suggestions: any[], autocompleteType: AutocompleteFieldType): AutocompleteAction => {
 	return {
 		type: AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 		autocompleteType,

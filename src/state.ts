@@ -108,18 +108,20 @@ export interface AutocompleteGroupState {
 	name: string;
 }
 
+export interface AutocompleteDefaultGroupsState {
+	[groupName: string]: AutocompleteGroupState;
+}
+
 export interface AutocompleteFieldState {
 	isLoading: boolean;
-	suggestions: any;
+	suggestions: any[];
 	airport: any;
 }
 
 export interface AutocompleteState {
 	departure: AutocompleteFieldState;
 	arrival: AutocompleteFieldState;
-	defaultGroups: {
-		[groupName: string]: AutocompleteGroupState;
-	};
+	defaultGroups: AutocompleteDefaultGroupsState;
 }
 
 export const autocompleteState: AutocompleteState = {
