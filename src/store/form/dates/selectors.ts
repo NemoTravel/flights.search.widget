@@ -1,20 +1,22 @@
 import { createSelector } from 'reselect';
-import { getIntermediateDates } from 'utils';
-import moment from 'moment';
+import { getIntermediateDates } from '../../../utils';
+import * as moment from 'moment';
+import { ApplicationState } from '../../../state';
+import { Moment } from 'moment';
 
-const getDepartureDate = state => state.form.dates.departure.date;
-const getDepartureAvailableDates = state => state.form.dates.departure.availableDates;
-const getReturnDate = state => state.form.dates.return.date;
-const getReturnAvailableDates = state => state.form.dates.return.availableDates;
-const highlightAvailableDates = state => state.system.highlightAvailableDates;
+const getDepartureDate = (state: ApplicationState): Moment => state.form.dates.departure.date;
+const getDepartureAvailableDates = (state: ApplicationState): any => state.form.dates.departure.availableDates;
+const getReturnDate = (state: ApplicationState): Moment => state.form.dates.return.date;
+const getReturnAvailableDates = (state: ApplicationState): any => state.form.dates.return.availableDates;
+const highlightAvailableDates = (state: ApplicationState): boolean => state.system.highlightAvailableDates;
 
 /**
  * Get an array of MomentJS dates between the departure and the return date.
  */
 export const getDatesBetweenDepartureAndReturn = createSelector(
 	[getDepartureDate, getReturnDate],
-	(departureDate, returnDate) => {
-		let result = [];
+	(departureDate?: Moment, returnDate?: Moment): Moment[] => {
+		let result: Moment[] = [];
 
 		if (departureDate && returnDate) {
 			result = getIntermediateDates(departureDate, returnDate, true);
@@ -30,6 +32,10 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
 	}
 );
 
+interface HighlightedDatesGroup {
+	[className: string]: Moment[];
+}
+
 /**
  * Join two arrays:
  * - dates with available flights
@@ -40,8 +46,8 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
  * @param {Boolean} highlightAvailableDates
  * @returns {Array}
  */
-const createHighlightedDates = (availableDates, intermediateDates, highlightAvailableDates) => {
-	const result = [];
+const createHighlightedDates = (availableDates: any, intermediateDates: Moment[], highlightAvailableDates: boolean): HighlightedDatesGroup[] => {
+	const result: HighlightedDatesGroup[] = [];
 
 	if (highlightAvailableDates && availableDates.length) {
 		result.push({
