@@ -39,11 +39,7 @@ export const parseAutocompleteOptions = (response, aggregationOnly) => {
 
 			airport.country = countries[airport.countryCode];
 			airport.isCity = !!isCity;
-			
-			airport.insideAggregationAirport = false;
-			if (cityIATA &&	aggregationCity) {
-				airport.insideAggregationAirport = true;
-			}
+			airport.insideAggregationAirport = cityIATA &&	aggregationCity;
 
 			// Remember all processed IATA codes.
 			iataMap[IATA] = true;
