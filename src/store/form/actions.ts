@@ -1,17 +1,17 @@
-import { SHOW_ERRORS } from 'store/actions';
-import { formIsValid } from 'store/form/selectors';
-import { MODE_NEMO } from 'state';
-import { URL, clearURL } from 'utils';
-import { MODE_WEBSKY } from 'state';
+import { AnyAction, Dispatch } from 'redux';
+import { SHOW_ERRORS } from '../actions';
+import { formIsValid } from './selectors';
+import { ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction } from '../../state';
+import { URL, clearURL } from '../../utils';
 
-export const showErrors = shouldShowErrors => {
+export const showErrors = (shouldShowErrors: boolean): AnyAction => {
 	return {
 		type: SHOW_ERRORS,
 		payload: shouldShowErrors
 	};
 };
 
-const runNemoSearch = state => {
+const runNemoSearch = (state: ApplicationState): void => {
 	let requestURL = clearURL(state.system.nemoURL) + '/results/';
 
 	// Departure airport info.
@@ -52,13 +52,13 @@ const runNemoSearch = state => {
 		requestURL += '-direct';
 	}
 
-	document.location = URL(requestURL, {
+	document.location.href = URL(requestURL, {
 		changelang: state.system.locale
 	});
 };
 
-const runWebskySearch = () => {
-	const form = document.getElementById('webskyHiddenForm');
+const runWebskySearch = (): void => {
+	const form = document.getElementById('webskyHiddenForm') as HTMLFormElement;
 
 	if (form) {
 		form.submit();
@@ -70,19 +70,17 @@ const runWebskySearch = () => {
  * - run validation
  * - do some optional checks
  * - run search itself
- *
- * @returns {Object}
  */
-export const startSearch = () => {
-	return (dispatch, getState) => {
+export const startSearch = (): CommonThunkAction => {
+	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		const state = getState();
 
 		if (formIsValid(state)) {
-			if (state.system.mode === MODE_NEMO) {
+			if (state.system.mode === ApplicationMode.NEMO) {
 				runNemoSearch(state);
 			}
-			else if (state.system.mode === MODE_WEBSKY) {
-				runWebskySearch(state);
+			else if (state.system.mode === ApplicationMode.WEBSKY) {
+				runWebskySearch();
 			}
 		}
 		else {

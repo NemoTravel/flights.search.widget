@@ -4,7 +4,7 @@ import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import Main from './Main';
 import { getStore } from '../store';
-import { ApplicationMode, SystemState, systemState } from '../state';
+import { ApplicationMode, ApplicationState, SystemState, systemState } from '../state';
 import * as Cache from '../cache';
 import CodeBlock from './UI/CodeBlock';
 import 'css/nemo/main.scss';
@@ -22,18 +22,18 @@ const defaultWebskyURL = 'http://demo.websky.aero/gru';
 const defaultNemoURL = 'http://sys.nemo.travel';
 
 export default class Demo extends React.Component<any, DemoFormState> {
-	public config: SystemState = {
+	config: SystemState = {
 		...systemState,
 		locale: defaultLang,
 		webskyURL: defaultWebskyURL,
 		nemoURL: defaultNemoURL
 	};
 
-	public store: Store<SystemState> = getStore({
+	store: Store<ApplicationState> = getStore({
 		locale: defaultLang
 	});
 
-	public state: DemoFormState = {
+	state: DemoFormState = {
 		webskyURL: defaultWebskyURL,
 		nemoURL: defaultNemoURL,
 		generatedConfig: '',

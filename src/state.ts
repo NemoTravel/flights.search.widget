@@ -2,6 +2,7 @@ import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/f
 import { selectDateReducer, toggleDatepickerReducer, setAvailableDatesReducer } from './store/form/dates/reducer';
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { ThunkAction } from 'redux-thunk';
 
 export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';
@@ -34,9 +35,13 @@ interface PassengersConfig {
 	[passengerType: string]: number;
 }
 
+export type CommonThunkAction = ThunkAction<void, ApplicationState, null>;
+
+export type GetStateFunction = () => ApplicationState;
+
 export interface SystemState {
-	rootElement: HTMLElement | null;
-	nemoURL: string;
+	rootElement?: HTMLElement;
+	nemoURL?: string;
 	webskyURL?: string;
 	routingGrid?: string;
 	locale?: Language;
@@ -145,13 +150,24 @@ export enum DatepickerFieldType {
 
 export interface DatepickerState {
 	isActive: boolean;
-	date?: string | Moment;
+	date?: Moment;
+	availableDates: any;
+}
+
+export interface CachedDatepickerState {
+	isActive: boolean;
+	date?: string;
 	availableDates: any;
 }
 
 export interface DatesState {
 	departure: DatepickerState;
 	return: DatepickerState;
+}
+
+export interface CachedDatesState {
+	departure: CachedDatepickerState;
+	return: CachedDatepickerState;
 }
 
 export const datesState: DatesState = {
@@ -261,6 +277,18 @@ export interface ApplicationState {
 	}
 }
 
+export interface ApplicationCachedState {
+	system: SystemState;
+	form: {
+		dates: CachedDatesState;
+		passengers: PassengersState;
+		autocomplete: AutocompleteState;
+		additional: AdditionalState;
+		coupon: CouponState;
+		mileCard: MileCardState;
+	}
+}
+
 export const initialState: ApplicationState = {
 	system: systemState,
 	form: {
@@ -273,7 +301,7 @@ export const initialState: ApplicationState = {
 	}
 };
 
-export const fillStateFromCache = (currentState: ApplicationState, stateFromCache?: ApplicationState) => {
+export const fillStateFromCache = (currentState: ApplicationState, stateFromCache?: ApplicationCachedState) => {
 	const state = currentState;
 
 	// Let's fill `state` with data from `stateFromCache`.

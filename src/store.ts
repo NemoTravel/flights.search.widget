@@ -9,9 +9,16 @@ import { setCounter } from './store/form/passengers/actions';
 import { selectDate } from './store/form/dates/actions';
 import { configReducer } from './store/system/reducer';
 import { getTotalPassengersCount } from './store/form/passengers/selectors';
-import { initialState, systemState, fillStateFromCache, ApplicationState, SystemState } from './state';
+import {
+	initialState, systemState, fillStateFromCache, ApplicationState, SystemState,
+	AutocompleteFieldType
+} from './state';
 import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from './store/form/additional/actions';
-import { loadAirportForAutocomplete, loadNearestAirportForAutocomplete, setSelectedAirport } from './store/form/autocomplete/actions';
+import {
+	loadAirportForAutocomplete,
+	loadNearestAirportForAutocomplete,
+	setSelectedAirport
+} from './store/form/autocomplete/actions';
 
 const middlewares = [thunk];
 const STORE_CACHE_KEY = 'cached_store';
@@ -89,26 +96,26 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		// Pre-loading departure airport by specified IATA or airport object.
 		if (state.system.defaultDepartureAirport) {
 			if (typeof state.system.defaultDepartureAirport === 'string') {
-				store.dispatch(loadAirportForAutocomplete(state.system.defaultDepartureAirport, 'departure'));
+				store.dispatch(loadAirportForAutocomplete(state.system.defaultDepartureAirport, AutocompleteFieldType.Departure));
 			}
 			else if (typeof state.system.defaultDepartureAirport === 'object') {
-				store.dispatch(setSelectedAirport(state.system.defaultDepartureAirport, 'departure'));
+				store.dispatch(setSelectedAirport(state.system.defaultDepartureAirport, AutocompleteFieldType.Departure));
 			}
 		}
 
 		// Pre-loading nearest airport (loaded by IP-address) as the departure airport.
 		else if (state.system.useNearestAirport) {
-			store.dispatch(loadNearestAirportForAutocomplete('departure'));
+			store.dispatch(loadNearestAirportForAutocomplete(AutocompleteFieldType.Departure));
 		}
 	}
 
 	if (!state.form.autocomplete.arrival.airport) {
 		if (state.system.defaultArrivalAirport) {
 			if (typeof state.system.defaultArrivalAirport === 'string') {
-				store.dispatch(loadAirportForAutocomplete(state.system.defaultArrivalAirport, 'arrival'));
+				store.dispatch(loadAirportForAutocomplete(state.system.defaultArrivalAirport, AutocompleteFieldType.Arrival));
 			}
 			else if (typeof state.system.defaultArrivalAirport === 'object') {
-				store.dispatch(setSelectedAirport(state.system.defaultArrivalAirport, 'arrival'));
+				store.dispatch(setSelectedAirport(state.system.defaultArrivalAirport, AutocompleteFieldType.Arrival));
 			}
 		}
 	}
