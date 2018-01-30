@@ -7,11 +7,7 @@ import additional from './additional/reducer';
 import coupon from './coupon/reducer';
 import mileCard from './mileCard/reducer';
 import { FormState } from '../../state';
-
-interface ShowErrorsAction {
-	type: string;
-	payload: boolean;
-}
+import { ShowErrorsAction } from './actions';
 
 export const showErrorsReducer = (state: boolean = false, { type, payload }: ShowErrorsAction): boolean => {
 	return type === SHOW_ERRORS ? payload : state;

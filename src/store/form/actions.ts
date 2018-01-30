@@ -4,7 +4,12 @@ import { formIsValid } from './selectors';
 import { ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction } from '../../state';
 import { URL, clearURL } from '../../utils';
 
-export const showErrors = (shouldShowErrors: boolean): AnyAction => {
+export interface ShowErrorsAction {
+	type: string;
+	payload: boolean;
+}
+
+export const showErrors = (shouldShowErrors: boolean): ShowErrorsAction => {
 	return {
 		type: SHOW_ERRORS,
 		payload: shouldShowErrors
