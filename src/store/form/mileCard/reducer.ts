@@ -2,7 +2,7 @@ import { CHANGE_MILE_CARD_NUMBER, CHANGE_MILE_CARD_PASSWORD } from '../../action
 import { MileCardState, mileCardState } from '../../../state';
 import { MileCardAction } from './actions';
 
-export const mileCardReducer = (state, { type, newValue }: MileCardAction): MileCardState => {
+export const mileCardReducer = (state: MileCardState, { type, newValue }: MileCardAction): MileCardState => {
 	switch (type) {
 		case CHANGE_MILE_CARD_NUMBER:
 			return { ...state, number: newValue };

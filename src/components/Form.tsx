@@ -30,7 +30,7 @@ class Form extends React.Component<StateProps & DispatchProps> {
 		const { startSearch, verticalForm, isWebskyMode, showCouponField, showMileCardField } = this.props;
 
 		return <section className={classnames('widget-form', { 'widget-form_vertical': verticalForm })}>
-			<Search startSearch={startSearch} showCouponField={showCouponField} showMileCardField={showMileCardField} />
+			<Search startSearch={startSearch} showCouponField={showCouponField} showMileCardField={showMileCardField}/>
 			{isWebskyMode ? <WebskyHiddenForm/> : null}
 		</section>;
 	}

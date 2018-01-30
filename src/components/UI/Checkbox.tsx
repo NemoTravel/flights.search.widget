@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { FormEventHandler } from 'react';
 
-export class Checkbox extends Component {
-	static propTypes = {
-		label: PropTypes.string.isRequired,
-		id: PropTypes.string.isRequired,
-		trigger: PropTypes.func,
-		checked: PropTypes.bool,
-		isVisible: PropTypes.bool
-	};
+interface Props {
+	label: string;
+	id: string;
+	trigger?: FormEventHandler<HTMLInputElement>;
+	checked?: boolean;
+	isVisible?: boolean;
+}
 
-	static defaultProps = {
+export class Checkbox extends React.Component<Props> {
+	static defaultProps: Partial<Props> = {
 		isVisible: true
 	};
 
-	render() {
+	render(): React.ReactNode {
 		const { id, label, trigger, checked, isVisible } = this.props;
 
 		return isVisible ? <div className="widget-ui-checkbox">
