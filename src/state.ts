@@ -21,7 +21,8 @@ export enum ServiceClass {
 export enum Language {
 	English = 'en',
 	Russian = 'ru',
-	Romanian = 'ro'
+	Romanian = 'ro',
+	German = 'de'
 }
 
 export enum PassengerType {
@@ -265,28 +266,32 @@ export const mileCardState: MileCardState = {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+export interface FormState {
+	dates: DatesState;
+	passengers: PassengersState;
+	autocomplete: AutocompleteState;
+	additional: AdditionalState;
+	coupon: CouponState;
+	mileCard: MileCardState;
+}
+
+export interface CachedFormSate {
+	dates: CachedDatesState;
+	passengers: PassengersState;
+	autocomplete: AutocompleteState;
+	additional: AdditionalState;
+	coupon: CouponState;
+	mileCard: MileCardState;
+}
+
 export interface ApplicationState {
 	system: SystemState;
-	form: {
-		dates: DatesState;
-		passengers: PassengersState;
-		autocomplete: AutocompleteState;
-		additional: AdditionalState;
-		coupon: CouponState;
-		mileCard: MileCardState;
-	}
+	form: FormState;
 }
 
 export interface ApplicationCachedState {
 	system: SystemState;
-	form: {
-		dates: CachedDatesState;
-		passengers: PassengersState;
-		autocomplete: AutocompleteState;
-		additional: AdditionalState;
-		coupon: CouponState;
-		mileCard: MileCardState;
-	}
+	form: CachedFormSate;
 }
 
 export const initialState: ApplicationState = {
