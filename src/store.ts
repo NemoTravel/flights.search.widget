@@ -11,7 +11,7 @@ import { configReducer } from './store/system/reducer';
 import { getTotalPassengersCount } from './store/form/passengers/selectors';
 import {
 	initialState, systemState, fillStateFromCache, ApplicationState, SystemState,
-	AutocompleteFieldType
+	AutocompleteFieldType, DatepickerFieldType, ApplicationCachedState
 } from './state';
 import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from './store/form/additional/actions';
 import {
@@ -48,7 +48,7 @@ if (process.env.NODE_ENV !== 'production') {
 /**
  * Get cached state object.
  */
-export const getCachedState = (): ApplicationState => {
+export const getCachedState = (): ApplicationCachedState => {
 	const cachedState = Cache.get(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION);
 
 	return cachedState ? cachedState : null;
@@ -136,7 +136,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		if (state.system.defaultDepartureDate) {
 			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(departureDate, 'departure'));
+			store.dispatch(selectDate(departureDate, DatepickerFieldType.Departure));
 		}
 	}
 
@@ -144,7 +144,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		if (state.system.defaultReturnDate) {
 			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(returnDate, 'return'));
+			store.dispatch(selectDate(returnDate, DatepickerFieldType.Return));
 		}
 	}
 

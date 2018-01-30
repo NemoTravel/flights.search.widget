@@ -301,7 +301,7 @@ export const initialState: ApplicationState = {
 	}
 };
 
-export const fillStateFromCache = (currentState: ApplicationState, stateFromCache?: ApplicationCachedState) => {
+export const fillStateFromCache = (currentState: ApplicationState, stateFromCache?: ApplicationCachedState): ApplicationState => {
 	const state = currentState;
 
 	// Let's fill `state` with data from `stateFromCache`.
