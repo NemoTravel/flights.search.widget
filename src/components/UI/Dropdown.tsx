@@ -1,22 +1,31 @@
-import React from 'react';
-import onClickOutside from 'react-onclickoutside';
-import PropTypes from 'prop-types';
-import autobind from 'autobind-decorator';
+import * as React from 'react';
+import onClickOutside, { InjectedOnClickOutProps } from 'react-onclickoutside';
 
-class Dropdown extends React.PureComponent {
-	constructor(props) {
-		super(props);
+interface Props {
+	triggerElement: React.ReactNode;
+	contentElement: React.ReactNode;
+	triggerType?: string;
+}
 
-		this.state = { isVisible: false };
-	}
+interface State {
+	isVisible: boolean;
+}
+
+class Dropdown extends React.PureComponent<Props & InjectedOnClickOutProps, State> {
+	static defaultProps: Partial<Props> = {
+		triggerType: 'onClick'
+	};
+
+	state: State = {
+		isVisible: false
+	};
 
 	/**
 	 * Hide dropdown content if user clicked somewhere else.
 	 *
 	 * @see https://github.com/Pomax/react-onclickoutside
 	 */
-	@autobind
-	handleClickOutside() {
+	handleClickOutside(): void {
 		this.setState({
 			isVisible: false
 		});
@@ -25,15 +34,14 @@ class Dropdown extends React.PureComponent {
 	/**
 	 * Hide/show dropdown content.
 	 */
-	@autobind
-	toggleContent() {
+	toggleContent(): void {
 		this.setState({
 			isVisible: !this.state.isVisible
 		});
 	}
 
-	render() {
-		const { triggerElement, contentElement, triggerType = 'onClick' } = this.props;
+	render(): React.ReactNode {
+		const { triggerElement, contentElement, triggerType } = this.props;
 		const { isVisible } = this.state;
 
 		const triggerProps = {
@@ -49,10 +57,4 @@ class Dropdown extends React.PureComponent {
 	}
 }
 
-Dropdown.propTypes = {
-	triggerElement: PropTypes.element.isRequired,
-	contentElement: PropTypes.element.isRequired,
-	triggerType: PropTypes.string
-};
-
-export default onClickOutside(Dropdown);
+export default onClickOutside<Props>(Dropdown);

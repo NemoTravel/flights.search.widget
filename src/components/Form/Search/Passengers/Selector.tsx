@@ -9,6 +9,7 @@ import { PassengerState, PassengerType, ServiceClass } from '../../../../state';
 import { PassengersCounterAvailability } from '../../../../store/form/passengers/selectors';
 import { PassengersAction } from '../../../../store/form/passengers/actions';
 import { SetClassAction } from '../../../../store/form/additional/actions';
+import { FocusEvent } from 'react';
 
 interface Props {
 	passengers: PassengerState[];
@@ -23,9 +24,8 @@ interface Props {
 	isModeNemo: boolean;
 }
 
-export default class Selector extends React.Component<Props> {
-
-	dropdown = null;
+class Selector extends React.Component<Props> {
+	private dropdown: any = null;
 
 	/**
 	 * Render passengers counters;
@@ -56,6 +56,10 @@ export default class Selector extends React.Component<Props> {
 		});
 	}
 
+	triggerOnFocusHandler(event: FocusEvent<HTMLSpanElement>): void {
+		(event.target as HTMLSpanElement).blur();
+	}
+
 	/**
 	 * Render clickable input element.
 	 */
@@ -63,7 +67,7 @@ export default class Selector extends React.Component<Props> {
 		const { selectedClass, title, isModeNemo } = this.props;
 
 		return <div className="widget-form-passengers__trigger widget-ui-input__wrapper">
-			<span className="form-control widget-form-passengers__trigger__title" onFocus={event => event.target.blur()}>
+			<span className="form-control widget-form-passengers__trigger__title" onFocus={this.triggerOnFocusHandler}>
 				{title}
 				{isModeNemo ?
 					<span className="widget-form-passengers__class">
@@ -80,7 +84,7 @@ export default class Selector extends React.Component<Props> {
 	 * Render dropdown block with passengers counters.
 	 */
 	renderDropdownContent(): React.ReactNode {
-		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
+		const closeBlock = () => this.dropdown.handleClickOutside();
 		const { setClassType, classOptions, selectedClass, isModeNemo } = this.props;
 
 		return <div className="widget-form-passengers__content">
@@ -108,13 +112,19 @@ export default class Selector extends React.Component<Props> {
 		</div>;
 	}
 
+	getDropdownRef(ref: any): void {
+		this.dropdown = ref;
+	}
+
 	render(): React.ReactNode {
 		const { totalPassengersCount } = this.props;
 
 		return <div className="form-group widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
-				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()} ref={ref => (this.dropdown = ref)}/>
+				<UIDropdown disableOnClickOutside={true} triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()} ref={this.getDropdownRef}/>
 			</Tooltip>
 		</div>;
 	}
 }
+
+export default Selector;
