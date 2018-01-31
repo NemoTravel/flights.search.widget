@@ -28,7 +28,7 @@ class Dropdown extends React.PureComponent<Props & InjectedOnClickOutProps, Stat
 	handleClickOutside(): void {
 		this.setState({
 			isVisible: false
-		});
+		} as State);
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Dropdown extends React.PureComponent<Props & InjectedOnClickOutProps, Stat
 	toggleContent(): void {
 		this.setState({
 			isVisible: !this.state.isVisible
-		});
+		} as State);
 	}
 
 	render(): React.ReactNode {

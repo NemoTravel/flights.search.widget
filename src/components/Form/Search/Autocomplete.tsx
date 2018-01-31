@@ -1,35 +1,55 @@
-import React from 'react';
-import MobileHeader from 'components/UI/MobileHeader';
-import classnames from 'classnames';
-import Tooltip from 'components/UI/Tooltip';
-import Option from 'components/Form/Search/Autocomplete/Option';
-import Value from 'components/Form/Search/Autocomplete/Value';
+import * as React from 'react';
+import * as classnames from 'classnames';
+import MobileHeader from '../../UI/MobileHeader';
+import Tooltip from '../../UI/Tooltip';
+import Option from './Autocomplete/Option';
+import Value from './Autocomplete/Value';
 import Select from '@nemo.travel/react-select';
-import { i18n } from 'utils';
-import autobind from 'autobind-decorator';
+import { i18n } from '../../../utils';
+import { DefaultOptionGroup } from '../../../store/form/selectors';
+import { AutocompleteFieldType, CommonThunkAction } from '../../../state';
+import { AutocompleteAction } from '../../../store/form/autocomplete/actions';
 
-export default class Autocomplete extends React.Component {
-	constructor(props) {
-		super(props);
+interface Props {
+	isLoading?: boolean;
+	suggestions?: any[];
+	optionsGroup?: DefaultOptionGroup[];
+	sameAirportsError?: boolean;
+	airport?: any;
+	readOnly?: boolean;
+	isGridMode?: boolean;
+	showErrors: boolean;
 
-		this.input = null;
-		this.autocompleteTimeout = null;
-		this.autocompleteWaitTime = 200;
-		this.state = { isFocused: false };
-		this.type = null;
-		this.placeholder = '';
-		this.mobileTitle = '';
-		this.defaultErrorText = '';
-		this.sameAirportsErrorText = i18n('form', 'sameAirportsError');
-	}
+	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
+	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
+	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
+	swapAirports?: () => CommonThunkAction;
+	getRef?: (reactSelect: any) => any;
+}
+
+interface State {
+	isFocused: boolean;
+}
+
+export default class Autocomplete<T> extends React.Component<T & Props, State> {
+	protected autocompleteTimeout: number = null;
+	protected autocompleteWaitTime = 200;
+	protected type: AutocompleteFieldType = null;
+	protected placeholder = '';
+	protected mobileTitle = '';
+	protected defaultErrorText = '';
+	protected sameAirportsErrorText = i18n('form', 'sameAirportsError');
+
+	state: State = {
+		isFocused: false
+	};
 
 	/**
 	 * Load autocomplete suggestions by given search string.
 	 *
 	 * @param {String} searchText
 	 */
-	@autobind
-	fetchSuggestions(searchText = '') {
+	fetchSuggestions(searchText: string = ''): void {
 		const { sendAutocompleteRequest } = this.props;
 
 		if (searchText || this.props.isGridMode) {
@@ -37,7 +57,7 @@ export default class Autocomplete extends React.Component {
 			clearTimeout(this.autocompleteTimeout);
 
 			// So we send request only if user hasn't been typing something for a while.
-			this.autocompleteTimeout = setTimeout(() => {
+			this.autocompleteTimeout = window.setTimeout(() => {
 				sendAutocompleteRequest(searchText, this.type);
 			}, this.autocompleteWaitTime);
 		}
@@ -48,8 +68,7 @@ export default class Autocomplete extends React.Component {
 	 *
 	 * @param {String} searchString
 	 */
-	@autobind
-	onChangeHandler(searchString) {
+	onChangeHandler(searchString: string): string {
 		if (!this.props.isGridMode) {
 			this.fetchSuggestions(searchString);
 		}
@@ -57,9 +76,8 @@ export default class Autocomplete extends React.Component {
 		return searchString;
 	}
 
-	@autobind
-	onFocusHandler() {
-		this.setState({ isFocused: true });
+	onFocusHandler(): void {
+		this.setState({ isFocused: true } as State);
 		this.fetchSuggestions();
 	}
 
@@ -68,7 +86,7 @@ export default class Autocomplete extends React.Component {
 	 *
 	 * @returns {*}
 	 */
-	renderAirportCode() {
+	renderAirportCode(): React.ReactNode {
 		const { airport, isLoading } = this.props;
 
 		const className = classnames(
@@ -84,7 +102,7 @@ export default class Autocomplete extends React.Component {
 	 *
 	 * @returns {*}
 	 */
-	renderSwitcher() {
+	renderSwitcher(): React.ReactNode {
 		return null;
 	}
 
@@ -93,14 +111,13 @@ export default class Autocomplete extends React.Component {
 	 *
 	 * @param {Object} option
 	 */
-	@autobind
-	selectOption(option) {
+	selectOption(option: any): void {
 		if (option && option.value && option.value.airport) {
 			this.props.selectAirport(option.value.airport, this.type);
 		}
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate(nextProps, nextState): boolean {
 		const { showErrors, suggestions, isLoading, airport, sameAirportsError, isGridMode, readOnly } = this.props;
 
 		return this.state.isFocused !== nextState.isFocused ||
@@ -113,7 +130,7 @@ export default class Autocomplete extends React.Component {
 			isLoading !== nextProps.isLoading;
 	}
 
-	render() {
+	render(): React.ReactNode {
 		const { suggestions, isLoading, optionsGroup, airport, showErrors, sameAirportsError, readOnly, getRef } = this.props;
 
 		const selectedValue = airport ? {

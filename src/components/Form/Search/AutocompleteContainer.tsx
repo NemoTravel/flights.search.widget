@@ -36,7 +36,9 @@ interface DispatchProps {
 }
 
 class AutocompleteContainer extends React.Component<StateProps & DispatchProps> {
-	render() {
+	protected arrivalInput: HTMLInputElement = null;
+
+	render(): React.ReactNode {
 		let sameAirportsError = false;
 
 		const {
@@ -74,7 +76,7 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps> 
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				isGridMode={!!system.routingGrid || system.mode === ApplicationMode.WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
-				selectAirport={(airport, autocompleteType) => {
+				selectAirport={(airport: any, autocompleteType: AutocompleteFieldType): void => {
 					selectAirport(airport, autocompleteType);
 
 					if (system.autoFocusArrivalAirport && this.arrivalInput) {
@@ -96,7 +98,7 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps> 
 				selectAirport={selectAirport}
 				isGridMode={!!system.routingGrid || system.mode === ApplicationMode.WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
-				getRef={reactSelect => reactSelect ? (this.arrivalInput = reactSelect.input) : null}
+				getRef={(reactSelect: any): void => reactSelect ? (this.arrivalInput = reactSelect.input) : null}
 			/>
 		</div>;
 	}
