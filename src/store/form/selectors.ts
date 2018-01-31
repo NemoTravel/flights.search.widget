@@ -79,7 +79,7 @@ const mapOptions = (options: any[]): any[] => {
 		});
 };
 
-interface DefaultOptionGroup {
+export interface DefaultOptionGroup {
 	label: string;
 	options: any[];
 	className: string;

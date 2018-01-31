@@ -272,6 +272,7 @@ export const mileCardState: MileCardState = {
 // ---------------------------------------------------------------------------------------------------------------------
 
 export interface FormState {
+	showErrors: boolean;
 	dates: DatesState;
 	passengers: PassengersState;
 	autocomplete: AutocompleteState;
@@ -281,6 +282,7 @@ export interface FormState {
 }
 
 export interface CachedFormSate {
+	showErrors: boolean;
 	dates: CachedDatesState;
 	passengers: PassengersState;
 	autocomplete: AutocompleteState;
@@ -302,6 +304,7 @@ export interface ApplicationCachedState {
 export const initialState: ApplicationState = {
 	system: systemState,
 	form: {
+		showErrors: false,
 		dates: datesState,
 		passengers: passengersState,
 		autocomplete: autocompleteState,
