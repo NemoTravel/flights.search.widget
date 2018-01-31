@@ -10,12 +10,17 @@ import { DefaultOptionGroup } from '../../../store/form/selectors';
 import { AutocompleteFieldType, CommonThunkAction } from '../../../state';
 import { AutocompleteAction } from '../../../store/form/autocomplete/actions';
 
+interface Airport {
+	name: string;
+	IATA: string;
+}
+
 interface Props {
 	isLoading?: boolean;
 	suggestions?: any[];
 	optionsGroup?: DefaultOptionGroup[];
 	sameAirportsError?: boolean;
-	airport?: any;
+	airport?: Airport;
 	readOnly?: boolean;
 	isGridMode?: boolean;
 	showErrors: boolean;
@@ -31,7 +36,7 @@ interface State {
 	isFocused: boolean;
 }
 
-export default class Autocomplete<T> extends React.Component<T & Props, State> {
+export default class Autocomplete<P> extends React.Component<P & Props, State> {
 	protected autocompleteTimeout: number = null;
 	protected autocompleteWaitTime = 200;
 	protected type: AutocompleteFieldType = null;
@@ -117,7 +122,7 @@ export default class Autocomplete<T> extends React.Component<T & Props, State> {
 		}
 	}
 
-	shouldComponentUpdate(nextProps, nextState): boolean {
+	shouldComponentUpdate(nextProps: Props, nextState: State): boolean {
 		const { showErrors, suggestions, isLoading, airport, sameAirportsError, isGridMode, readOnly } = this.props;
 
 		return this.state.isFocused !== nextState.isFocused ||
@@ -135,7 +140,7 @@ export default class Autocomplete<T> extends React.Component<T & Props, State> {
 
 		const selectedValue = airport ? {
 			label: airport.name,
-			value: airport
+			value: airport as any
 		} : null;
 
 		const mobileHeaderClassName = classnames(
