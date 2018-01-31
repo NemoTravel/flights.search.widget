@@ -136,7 +136,7 @@ export const webskyPassengers = createSelector(
 	(passengers: PassengerState[]) => {
 		return passengers
 			.filter(passenger => passenger.count)
-			.map(passenger => {
+			.map((passenger: PassengerState) => {
 				return { ...passenger, code: WebskyPassengerType[passenger.code] };
 			})
 	}

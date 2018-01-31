@@ -1,18 +1,36 @@
-import React from 'react';
-import UIDropdown from 'components/UI/Dropdown';
-import Tooltip from 'components/UI/Tooltip';
-import Counter from 'components/Form/Search/Passengers/Counter';
-import MobileHeader from 'components/UI/MobileHeader';
-import ClassType from 'components/Form/Search/Passengers/ClassType';
-import { i18n } from 'utils';
+import * as React from 'react';
+import UIDropdown from '../../../UI/Dropdown';
+import Tooltip from '../../../UI/Tooltip';
+import MobileHeader from '../../../UI/MobileHeader';
+import Counter from './Counter';
+import ClassType from './ClassType';
+import { i18n } from '../../../../utils';
+import { PassengerState, PassengerType, ServiceClass } from '../../../../state';
+import { PassengersCounterAvailability } from '../../../../store/form/passengers/selectors';
+import { PassengersAction } from '../../../../store/form/passengers/actions';
+import { SetClassAction } from '../../../../store/form/additional/actions';
 
-export default class Selector extends React.Component {
+interface Props {
+	passengers: PassengerState[];
+	title: string;
+	counterAvailability: PassengersCounterAvailability;
+	totalPassengersCount: number;
+	removePassenger: (passengerType: PassengerType) => PassengersAction;
+	addPassenger: (passengerType: PassengerType) => PassengersAction;
+	setClassType: (classType: ServiceClass) => SetClassAction;
+	classOptions: string[];
+	selectedClass: ServiceClass;
+	isModeNemo: boolean;
+}
+
+export default class Selector extends React.Component<Props> {
+
+	dropdown = null;
+
 	/**
 	 * Render passengers counters;
-	 *
-	 * @returns {Array}
 	 */
-	renderCounters() {
+	renderCounters(): React.ReactNode[] {
 		const { passengers, addPassenger, removePassenger, counterAvailability } = this.props;
 
 		return passengers.map((passenger, i) => {
@@ -40,10 +58,8 @@ export default class Selector extends React.Component {
 
 	/**
 	 * Render clickable input element.
-	 *
-	 * @returns {XML}
 	 */
-	renderDropdownTrigger() {
+	renderDropdownTrigger(): React.ReactNode {
 		const { selectedClass, title, isModeNemo } = this.props;
 
 		return <div className="widget-form-passengers__trigger widget-ui-input__wrapper">
@@ -62,10 +78,8 @@ export default class Selector extends React.Component {
 
 	/**
 	 * Render dropdown block with passengers counters.
-	 *
-	 * @returns {XML}
 	 */
-	renderDropdownContent() {
+	renderDropdownContent(): React.ReactNode {
 		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
 		const { setClassType, classOptions, selectedClass, isModeNemo } = this.props;
 
@@ -94,7 +108,7 @@ export default class Selector extends React.Component {
 		</div>;
 	}
 
-	render() {
+	render(): React.ReactNode {
 		const { totalPassengersCount } = this.props;
 
 		return <div className="form-group widget-form-passengers">

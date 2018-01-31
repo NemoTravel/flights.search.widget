@@ -4,7 +4,6 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { ThunkAction } from 'redux-thunk';
 
-export const MODE_NEMO = 'NEMO';
 export const MODE_WEBSKY = 'WEBSKY';
 export const CLASS_TYPES = ['Economy', 'Business'];
 
@@ -20,9 +19,7 @@ export enum ServiceClass {
 
 export enum Language {
 	English = 'en',
-	Russian = 'ru',
-	Romanian = 'ro',
-	German = 'de'
+	Russian = 'ru'
 }
 
 export enum PassengerType {
@@ -32,12 +29,12 @@ export enum PassengerType {
 	InfantWithSeat = 'INS'
 }
 
-export enum WebskyPassengerType {
-	Adult = 'aaa',
-	Child = 'rbg',
-	Infant = 'rmg',
-	InfantWithSeat = 'rvg'
-}
+export const WebskyPassengerType = {
+	[PassengerType.Adult]: 'aaa',
+	[PassengerType.Child]: 'rbg',
+	[PassengerType.Infant]: 'rmg',
+	[PassengerType.InfantWithSeat]: 'rvg'
+};
 
 interface PassengersConfig {
 	[passengerType: string]: number;
@@ -361,10 +358,14 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 
 				if (cachedDepartureDate) {
 					if (cachedDepartureDate.date) {
-						const newDepartureDate = moment(cachedDepartureDate.date).locale(state.system.locale);
+						const newDepartureState: DatepickerState = {
+							isActive: cachedDepartureDate.isActive,
+							availableDates: cachedDepartureDate.availableDates,
+							date: moment(cachedDepartureDate.date).locale(state.system.locale)
+						};
 
-						if (newDepartureDate.isSameOrAfter(today)) {
-							state.form.dates.departure = selectDateReducer(cachedDepartureDate, newDepartureDate);
+						if (newDepartureState.date.isSameOrAfter(today)) {
+							state.form.dates.departure = newDepartureState;
 						}
 					}
 
@@ -375,11 +376,14 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 
 				if (cachedReturnDate) {
 					if (cachedReturnDate.date) {
-						const newReturnDate = moment(cachedReturnDate.date).locale(state.system.locale);
+						const newReturnState: DatepickerState = {
+							isActive: true,
+							availableDates: cachedReturnDate.availableDates,
+							date: moment(cachedReturnDate.date).locale(state.system.locale)
+						};
 
-						if (newReturnDate.isSameOrAfter(today)) {
-							state.form.dates.return = toggleDatepickerReducer(cachedReturnDate, true);
-							state.form.dates.return = selectDateReducer(state.form.dates.return, newReturnDate);
+						if (newReturnState.date.isSameOrAfter(today)) {
+							state.form.dates.return = newReturnState;
 						}
 					}
 

@@ -1,17 +1,27 @@
-import React from 'react';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
-import autobind from 'autobind-decorator';
+import * as React from 'react';
+import * as classnames from 'classnames';
+import { PassengersAction } from '../../../../store/form/passengers/actions';
+import { PassengerType } from '../../../../state';
 
-class Counter extends React.Component {
-	shouldComponentUpdate(nextProps) {
+interface Props {
+	addPassenger: (passengerType: PassengerType) => PassengersAction;
+	removePassenger: (passengerType: PassengerType) => PassengersAction;
+	title: string;
+	ageTitle: string;
+	code: PassengerType;
+	count: number;
+	canAddPassenger: boolean;
+	canRemovePassenger: boolean;
+}
+
+class Counter extends React.Component<Props> {
+	shouldComponentUpdate(nextProps: Props): boolean {
 		const { count, canAddPassenger, canRemovePassenger } = this.props;
 
 		return count !== nextProps.count || canAddPassenger !== nextProps.canAddPassenger || canRemovePassenger !== nextProps.canRemovePassenger;
 	}
 
-	@autobind
-	removePassenger() {
+	removePassenger(): void {
 		const { canRemovePassenger, code } = this.props;
 
 		if (canRemovePassenger) {
@@ -19,8 +29,7 @@ class Counter extends React.Component {
 		}
 	}
 
-	@autobind
-	addPassenger() {
+	addPassenger(): void {
 		const { canAddPassenger, code } = this.props;
 
 		if (canAddPassenger) {
@@ -28,7 +37,7 @@ class Counter extends React.Component {
 		}
 	}
 
-	render() {
+	render(): React.ReactNode {
 		const { title, ageTitle, count, canAddPassenger, canRemovePassenger } = this.props;
 		const itemClassName = classnames(
 			'widget-form-passengers__item',
@@ -62,16 +71,5 @@ class Counter extends React.Component {
 		</div>;
 	}
 }
-
-Counter.propTypes = {
-	addPassenger: PropTypes.func.isRequired,
-	removePassenger: PropTypes.func.isRequired,
-	title: PropTypes.string.isRequired,
-	ageTitle: PropTypes.string.isRequired,
-	code: PropTypes.string.isRequired,
-	count: PropTypes.number.isRequired,
-	canAddPassenger: PropTypes.bool.isRequired,
-	canRemovePassenger: PropTypes.bool.isRequired
-};
 
 export default Counter;

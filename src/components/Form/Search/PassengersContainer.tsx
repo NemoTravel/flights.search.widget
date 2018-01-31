@@ -34,7 +34,7 @@ interface DispatchProps {
 }
 
 class PassengersContainer extends React.Component<StateProps & DispatchProps> {
-	render() {
+	render(): React.ReactNode {
 		const { passengers, counterAvailability, title, totalPassengersCount, addPassenger, removePassenger, classOptions, setClassType, selectedClass, widgetMode } = this.props;
 
 		return <Selector
