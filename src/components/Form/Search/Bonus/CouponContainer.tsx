@@ -1,15 +1,35 @@
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as couponActions from 'store/form/coupon/actions';
-import { getCouponNumber } from 'store/form/coupon/selectors';
-import Tooltip from 'components/UI/Tooltip';
-import { i18n } from 'utils';
-import onClickOutside from 'react-onclickoutside';
-import autobind from 'autobind-decorator';
+import { AnyAction, bindActionCreators, Dispatch } from 'redux';
+import { changeCouponNumber, CouponAction } from '../../../../store/form/coupon/actions';
+import { getCouponNumber } from '../../../../store/form/coupon/selectors';
+import Tooltip from '../../../UI/Tooltip';
+import { i18n } from '../../../../utils';
+import onClickOutside, { InjectedOnClickOutProps } from 'react-onclickoutside';
+import { ApplicationState } from '../../../../state';
+import { FormEvent } from 'react';
 
-class CouponContainer extends React.Component {
-	constructor(props) {
+interface StateProps {
+	number: string;
+	showErrors: boolean;
+}
+
+interface DispatchProps {
+	changeCouponNumber: (newValue: string) => CouponAction;
+}
+
+interface State {
+	isActive: boolean;
+}
+
+type Props = StateProps & DispatchProps & InjectedOnClickOutProps;
+
+class CouponContainer extends React.Component<Props, State> {
+	state: State = {
+		isActive: false
+	};
+
+	constructor(props: Props) {
 		super(props);
 
 		this.state = {
@@ -17,37 +37,33 @@ class CouponContainer extends React.Component {
 		};
 	}
 
-	@autobind
-	enableField() {
+	enableField(): void {
 		this.setState({ isActive: true });
 	}
 
-	@autobind
-	disableField() {
+	disableField(): void {
 		this.props.changeCouponNumber(null);
 		this.setState({ isActive: false });
 	}
 
-	@autobind
-	handleClickOutside() {
+	handleClickOutside(): void {
 		if (this.state.isActive && !this.props.number) {
 			this.setState({ isActive: false });
 		}
 	}
 
-	@autobind
-	changeCouponNumber(e) {
-		this.props.changeCouponNumber(e.target.value);
+	changeCouponNumber(event: FormEvent<HTMLInputElement>): void {
+		this.props.changeCouponNumber((event.target as HTMLInputElement).value);
 	}
 
-	renderDummy() {
+	renderDummy(): React.ReactNode {
 		return <div className="form-control widget-form-coupon__dummy" onClick={this.enableField}>
 			{i18n('form', 'couponDummy')}
 			<i className="widget-ui-icon widget-form-coupon__dummy__icon"/>
 		</div>;
 	}
 
-	renderField() {
+	renderField(): React.ReactNode {
 		const
 			{ number, showErrors } = this.props,
 			visibleNumber = number ? number : '',
@@ -71,17 +87,24 @@ class CouponContainer extends React.Component {
 		</div>;
 	}
 
-	render() {
+	render(): React.ReactNode {
 		return <div className="form-group widget-form-coupon">
 			{this.state.isActive ? this.renderField() : this.renderDummy()}
 		</div>;
 	}
 }
 
-export default connect(
-	state => ({
+const mapStateToProps = (state: ApplicationState): StateProps => {
+	return {
 		number: getCouponNumber(state),
 		showErrors: state.form.showErrors
-	}),
-	dispatch => bindActionCreators(couponActions, dispatch)
-)(onClickOutside(CouponContainer));
+	};
+};
+
+const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
+	return {
+		changeCouponNumber: bindActionCreators(changeCouponNumber, dispatch)
+	};
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(onClickOutside(CouponContainer));
