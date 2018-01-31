@@ -1,19 +1,21 @@
-import React from 'react';
-import Tooltip from 'components/UI/Tooltip';
-import { i18n } from 'utils';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import Tooltip from '../../../../UI/Tooltip';
+import { i18n } from '../../../../../utils';
+import { FormEventHandler, MouseEventHandler } from 'react';
 
-class Input extends React.Component {
-	propTypes = {
-		number: PropTypes.number,
-		showTooltip: PropTypes.bool
-	};
+interface Props {
+	number?: string;
+	showTooltip?: boolean;
+	onClose: MouseEventHandler<HTMLDivElement>;
+	changeMileCardNumber: FormEventHandler<HTMLInputElement>;
+}
 
-	shouldComponentUpdate(nextProps) {
+class Input extends React.Component<Props> {
+	shouldComponentUpdate(nextProps): boolean {
 		return this.props.number !== nextProps.number || this.props.showTooltip !== nextProps.showTooltip;
 	}
 
-	render() {
+	render(): React.ReactNode {
 		const
 			{ number, showTooltip, onClose, changeMileCardNumber } = this.props,
 			visibleNumber = number ? number : '';
@@ -22,7 +24,7 @@ class Input extends React.Component {
 			<Tooltip message={i18n('form', 'mileCardNumberError')} isActive={showTooltip}>
 				<input
 					className="form-control"
-					ref={input => input && input.focus()}
+					ref={(input: HTMLInputElement) => input && input.focus()}
 					value={visibleNumber}
 					onChange={changeMileCardNumber}
 					placeholder={i18n('form', 'mileCardNumberPlaceholder')}

@@ -1,7 +1,7 @@
-import React from 'react';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as classnames from 'classnames';
 
-export default ({ value: option, placeholder, readOnly = false }) => {
+export default ({ value: option, placeholder, readOnly = false }: any) => {
 	const airport = option.value;
 
 	return <span className={classnames('widget-form-airports__select__value', { 'widget-form-airports__select__value_readOnly': readOnly })}>
