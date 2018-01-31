@@ -1,12 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-class MobileHeader extends React.Component {
-	shouldComponentUpdate(nextProps) {
+interface Props {
+	title: string;
+	className?: string;
+	onClose?: () => void;
+}
+
+class MobileHeader extends React.Component<Props> {
+	shouldComponentUpdate(nextProps: Props): boolean {
 		return this.props.title !== nextProps.title || this.props.className !== nextProps.className;
 	}
 
-	render() {
+	render(): React.ReactNode {
 		const { className = '', onClose = null, title, children = [] } = this.props;
 
 		return <div className={`widget-ui-mobile__header ${className}`}>
@@ -16,11 +21,5 @@ class MobileHeader extends React.Component {
 		</div>;
 	}
 }
-
-MobileHeader.propTypes = {
-	title: PropTypes.string.isRequired,
-	className: PropTypes.string,
-	onClose: PropTypes.func
-};
 
 export default MobileHeader;
