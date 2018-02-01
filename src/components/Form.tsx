@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import * as classnames from 'classnames';
 
-import { showErrors, startSearch } from '../store/form/actions';
+import { startSearch as startSearchAction } from '../store/form/actions';
 import Search from './Form/Search';
 import WebskyHiddenForm from './WebskyHiddenForm';
 import {
@@ -21,7 +21,6 @@ interface StateProps {
 }
 
 interface DispatchProps {
-	showErrors: (shouldShowErrors: boolean) => AnyAction;
 	startSearch: () => CommonThunkAction;
 }
 
@@ -47,8 +46,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 
 const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
-		showErrors: bindActionCreators(showErrors, dispatch),
-		startSearch: bindActionCreators(startSearch, dispatch)
+		startSearch: bindActionCreators(startSearchAction, dispatch)
 	};
 };
 

@@ -78,7 +78,7 @@ class Selector extends React.Component<Props> {
 				{isModeNemo ?
 					<span className="widget-form-passengers__class">
 						<span className="widget-form-passengers__class__comma">, </span>
-						{i18n('form', 'class_' + selectedClass + '_short')}
+						{i18n('form', `class_${selectedClass}_short`)}
 					</span> : null
 				}
 			</span>

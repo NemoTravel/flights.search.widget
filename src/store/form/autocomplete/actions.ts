@@ -9,8 +9,10 @@ import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } 
 import { parseDatesAvailability } from '../../../services/parsers/datesAvailability';
 import { URL, clearURL } from '../../../utils';
 import {
-	ApplicationMode, ApplicationState, AutocompleteFieldType, CommonThunkAction, DatepickerFieldType, GetStateFunction,
-	Language
+	Airport,
+	ApplicationMode, ApplicationState, AutocompleteFieldType, AutocompleteSuggestion, CommonThunkAction,
+	DatepickerFieldType, GetStateFunction,
+	Language, ResponseWithGuide
 } from '../../../state';
 import { setAvailableDates } from '../dates/actions';
 import { AnyAction, Dispatch } from 'redux';
@@ -60,7 +62,7 @@ export const finishAutocompleteLoading = (autocompleteType: AutocompleteFieldTyp
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {AutocompleteAction}
  */
-export const changeAutocompleteSuggestions = (suggestions: any[], autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const changeAutocompleteSuggestions = (suggestions: AutocompleteSuggestion[], autocompleteType: AutocompleteFieldType): AutocompleteAction => {
 	return {
 		type: AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 		autocompleteType,
@@ -103,11 +105,11 @@ const runDatesAvailability = (dispatch: Dispatch<AnyAction>, state: ApplicationS
 				dispatch(setAvailableDates(dates, type));
 			}
 			else {
-				dispatch(setAvailableDates({}, type));
+				dispatch(setAvailableDates([], type));
 			}
 		})
 		.catch(() => {
-			dispatch(setAvailableDates({}, type));
+			dispatch(setAvailableDates([], type));
 		});
 };
 
@@ -176,7 +178,8 @@ export const setAirportInPreviousSearchGroup = (pool: any): PreviousSearchAction
  * @param {Function} getState
  * @param airport
  */
-const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getState: GetStateFunction, airport: any): void => {
+const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getState: GetStateFunction, airport: Airport): void => {
+	const MAX_NUM_OF_AIRPORTS = 9;
 	const appState = getState();
 	const state = appState.form.autocomplete.defaultGroups.previousSearches.options;
 	const newPool: any = {};
@@ -193,7 +196,7 @@ const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getState: Ge
 			newPool[state[airport].IATA] = state[airport];
 		}
 
-		if (counter >= 9) {
+		if (counter >= MAX_NUM_OF_AIRPORTS) {
 			break;
 		}
 	}
@@ -267,8 +270,8 @@ interface AutocompleteRequestParams {
 const runWebskyAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFunction, autocompleteType: AutocompleteFieldType): void => {
 	const state = getState();
 	const searchType = autocompleteType === 'arrival' ? 'arr' : 'dep';
+	const aggregationOnly = state.system.aggregationOnly;
 	let departureIATA = '';
-	let aggregationOnly = state.system.aggregationOnly;
 
 	// For `arrival` autocomplete field, inject selected departure IATA code,
 	// for loading proper list of arrival options.
@@ -333,12 +336,12 @@ const runNemoAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFu
 export const sendAutocompleteRequest = (searchText: string, autocompleteType: AutocompleteFieldType): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		if (getState().system.mode === ApplicationMode.WEBSKY) {
-			runWebskyAutocomplete(dispatch, getState, autocompleteType)
+			runWebskyAutocomplete(dispatch, getState, autocompleteType);
 		}
 		else {
 			runNemoAutocomplete(dispatch, getState, searchText, autocompleteType);
 		}
-	}
+	};
 };
 
 /**
@@ -353,8 +356,8 @@ export const loadAirportForAutocomplete = (IATA: string, autocompleteType: Autoc
 		const { nemoURL, locale } = getState().system;
 
 		fetch(`${nemoURL}/api/guide/airports/${IATA}?apilang=${locale}`)
-			.then(response => response.json())
-			.then(response => dispatch(setSelectedAirport(parseAirportFromGuide(response, IATA), autocompleteType)));
+			.then((response: Response) => response.json())
+			.then((response: ResponseWithGuide) => dispatch(setSelectedAirport(parseAirportFromGuide(response, IATA), autocompleteType)));
 	};
 };
 

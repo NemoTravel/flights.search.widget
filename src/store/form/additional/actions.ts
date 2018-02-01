@@ -39,12 +39,12 @@ export const setVicinityDatesCheckbox = (checked: boolean): BooleanAction => {
 	return {
 		type: SET_VICINITY_DATES,
 		payload: checked
-	}
+	};
 };
 
 export const setDirectFlightCheckbox = (checked: boolean): BooleanAction => {
 	return {
 		type: SET_DIRECT_FLIGHT,
 		payload: checked
-	}
+	};
 };

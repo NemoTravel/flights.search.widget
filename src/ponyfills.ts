@@ -1,3 +1,4 @@
+/* tslint:disable */
 (() => {
 	if (!Object.assign) {
 		Object.defineProperty(Object, 'assign', {

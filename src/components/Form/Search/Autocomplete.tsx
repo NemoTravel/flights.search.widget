@@ -1,19 +1,14 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import Select from '@nemo.travel/react-select';
 import MobileHeader from '../../UI/MobileHeader';
 import Tooltip from '../../UI/Tooltip';
 import Option from './Autocomplete/Option';
 import Value from './Autocomplete/Value';
-import Select from '@nemo.travel/react-select';
 import { i18n } from '../../../utils';
 import { DefaultOptionGroup } from '../../../store/form/selectors';
-import { AutocompleteFieldType, CommonThunkAction } from '../../../state';
+import { Airport, AutocompleteFieldType, CommonThunkAction } from '../../../state';
 import { AutocompleteAction } from '../../../store/form/autocomplete/actions';
-
-interface Airport {
-	name: string;
-	IATA: string;
-}
 
 interface Props {
 	isLoading?: boolean;
@@ -37,6 +32,10 @@ interface State {
 }
 
 export default class Autocomplete extends React.Component<Props, State> {
+	state: State = {
+		isFocused: false
+	};
+
 	protected autocompleteTimeout: number = null;
 	protected autocompleteWaitTime = 200;
 	protected type: AutocompleteFieldType = null;
@@ -44,10 +43,6 @@ export default class Autocomplete extends React.Component<Props, State> {
 	protected mobileTitle = '';
 	protected defaultErrorText = '';
 	protected sameAirportsErrorText = i18n('form', 'sameAirportsError');
-
-	state: State = {
-		isFocused: false
-	};
 
 	constructor(props: Props) {
 		super(props);

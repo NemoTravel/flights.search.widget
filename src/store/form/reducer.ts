@@ -1,4 +1,4 @@
-import { AnyAction, combineReducers, Reducer } from 'redux';
+import { AnyAction, combineReducers } from 'redux';
 import { SHOW_ERRORS } from '../actions';
 import passengers from './passengers/reducer';
 import autocomplete from './autocomplete/reducer';
@@ -25,4 +25,4 @@ export default (state: FormState, action: AnyAction): FormState => {
 		coupon,
 		mileCard
 	})(state, action);
-}
+};
