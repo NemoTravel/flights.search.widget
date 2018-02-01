@@ -51,7 +51,7 @@ if (process.env.NODE_ENV !== 'production') {
 export const getCachedState = (): ApplicationCachedState => {
 	const cachedState = Cache.get(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION);
 
-	return cachedState ? cachedState : null;
+	return cachedState ? cachedState as ApplicationCachedState : null;
 };
 
 /**

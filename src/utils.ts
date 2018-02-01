@@ -58,12 +58,13 @@ export const URL = (root: string, params: AnyObject = {}): string => {
 export const i18n = (moduleName: string, label: string): string => {
 	try {
 		const locale = Cache.getLocale();
-		const module = require('i18n/' + locale + '/' + moduleName);
+		const module = require(`i18n/${locale}/${moduleName}`);
 
 		return module[label];
 	}
 	catch (e) {
 		console.warn(e);
+
 		return '';
 	}
 };

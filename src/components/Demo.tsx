@@ -1,5 +1,4 @@
 import * as React from 'react';
-import autobind from 'autobind-decorator';
 import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import Main from './Main';
@@ -7,7 +6,7 @@ import { getStore } from '../store';
 import { ApplicationMode, ApplicationState, SystemState, systemState } from '../state';
 import * as Cache from '../cache';
 import CodeBlock from './UI/CodeBlock';
-import 'css/nemo/main.scss';
+import '../css/nemo/main.scss';
 import { Language } from '../state';
 
 interface DemoFormState {
@@ -40,7 +39,13 @@ export default class Demo extends React.Component<any, DemoFormState> {
 		nemoStyles: false
 	};
 
-	@autobind
+	constructor(props: any) {
+		super(props);
+
+		this.textAreaClickHandler = this.textAreaClickHandler.bind(this);
+		this.toggleNemoStyles = this.toggleNemoStyles.bind(this);
+	}
+
 	toggleNemoStyles(): void {
 		this.setState({
 			nemoStyles: !this.state.nemoStyles
@@ -59,7 +64,6 @@ export default class Demo extends React.Component<any, DemoFormState> {
 		this.processConfig();
 	}
 
-	@autobind
 	processConfig(): void {
 		this.store.dispatch({
 			type: 'LOAD_CONFIG',
@@ -67,7 +71,6 @@ export default class Demo extends React.Component<any, DemoFormState> {
 		});
 	}
 
-	@autobind
 	textAreaClickHandler(event: React.MouseEvent<HTMLTextAreaElement>): void {
 		if (event.target instanceof HTMLTextAreaElement) {
 			event.target.select();
@@ -75,6 +78,8 @@ export default class Demo extends React.Component<any, DemoFormState> {
 	}
 
 	render(): React.ReactNode {
+		const numOfTextAreaRows = 10;
+
 		return <div className="widget-demo">
 			{this.state.nemoStyles ? <link rel="stylesheet" href="/nemo-flights.search.widget.min.css"/> : null}
 
@@ -100,7 +105,7 @@ export default class Demo extends React.Component<any, DemoFormState> {
 								<CodeBlock>FlightsSearchWidget.init(...конфиг)</CodeBlock>
 							</div>
 
-							<textarea className="form-control" rows={10} value={this.state.generatedConfig} onClick={this.textAreaClickHandler} spellCheck={false}/>
+							<textarea className="form-control" rows={numOfTextAreaRows} value={this.state.generatedConfig} onClick={this.textAreaClickHandler} spellCheck={false}/>
 						</label>
 					</div>
 				</div>
@@ -247,7 +252,8 @@ export default class Demo extends React.Component<any, DemoFormState> {
 								this.config.enableCoupon = e.target.checked;
 								this.processConfig();
 							}}/>
-							<CodeBlock>enableCoupon</CodeBlock>: Добавляет поле `У меня есть купон на скидку` (для режима Websky)
+							<CodeBlock>enableCoupon</CodeBlock>: Добавляет поле `У меня есть купон на скидку` (для
+							режима Websky)
 						</label>
 					</div>
 				</div>
@@ -280,9 +286,11 @@ export default class Demo extends React.Component<any, DemoFormState> {
 								this.config.aggregationOnly = e.target.checked;
 								this.processConfig();
 							}}/>
-							<CodeBlock>aggregationOnly</CodeBlock>: (Только для режима `WEBSKY`) Если у агрегирующего города есть только 1 аэропорт,
+							<CodeBlock>aggregationOnly</CodeBlock>: (Только для режима `WEBSKY`) Если у агрегирующего
+							города есть только 1 аэропорт,
 							то показывать в автокомплите только агрегирующий город.
-							Пример, в случае Берлин (BER) и Тегель (TXL, относится к Берлину) в автокомплите будет отображаться только Берлин.
+							Пример, в случае Берлин (BER) и Тегель (TXL, относится к Берлину) в автокомплите будет
+							отображаться только Берлин.
 						</label>
 					</div>
 				</div>

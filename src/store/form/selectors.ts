@@ -1,7 +1,11 @@
 import { createSelector } from 'reselect';
 import { getTotalPassengersCount } from './passengers/selectors';
 import { getAltLayout, i18n } from '../../utils';
-import { ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState, FormState, SystemState } from '../../state';
+import {
+	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState, AutocompleteOption, AutocompleteSuggestion,
+	FormState,
+	SystemState
+} from '../../state';
 
 const getConfig = (state: ApplicationState): SystemState => state.system;
 
@@ -17,7 +21,7 @@ export const showCouponField = createSelector(
 
 export const showMileCardField = createSelector(
 	[ getConfig, isWebsky ],
-	(config: SystemState, isWebskyMode: boolean): boolean => false && isWebskyMode && config.enableMileCard // disabled for now (feature is not implemented in Websky yet)
+	(config: SystemState, isWebskyMode: boolean): boolean => isWebskyMode && config.enableMileCard && false // Disabled for now (feature is not implemented in Websky yet)
 );
 
 const getForm = (state: ApplicationState): FormState => state.form;
@@ -65,13 +69,14 @@ export const formIsValid = createSelector(
 	}
 );
 
-const getDepartureOptionsFromState = (state: ApplicationState): any[] => state.form.autocomplete.departure.suggestions;
-const getArrivalOptionsFromState = (state: ApplicationState): any[] => state.form.autocomplete.arrival.suggestions;
+const getDepartureOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.autocomplete.departure.suggestions;
+const getArrivalOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.autocomplete.arrival.suggestions;
 const getDefaultOptionsFromState = (state: ApplicationState): AutocompleteDefaultGroupsState => state.form.autocomplete.defaultGroups;
-const mapOptions = (options: any[]): any[] => {
+
+const mapOptions = (options: AutocompleteSuggestion[]): AutocompleteOption[] => {
 	return options
 		.filter(option => option && option.airport && option.airport.name && option.airport.nameEn && option.airport.IATA)
-		.map(option => {
+		.map((option): AutocompleteOption => {
 			return {
 				value: option,
 				label: option.airport.name + option.airport.nameEn + option.airport.IATA + getAltLayout(option.airport.name)

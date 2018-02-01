@@ -1,11 +1,129 @@
 import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/form/autocomplete/reducer';
-import { selectDateReducer, toggleDatepickerReducer, setAvailableDatesReducer } from './store/form/dates/reducer';
+import { setAvailableDatesReducer } from './store/form/dates/reducer';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { ThunkAction } from 'redux-thunk';
 
-export const MODE_WEBSKY = 'WEBSKY';
 export const CLASS_TYPES = ['Economy', 'Business'];
+
+// ---------------------------------------------------------------------------------------------------------------------
+export interface CountryResponse {
+	code: string;
+	name: string;
+	nameEn: string;
+}
+
+export interface CityResponseAirportItem {
+	IATA: string;
+}
+
+export interface CityResponse {
+	IATA: string;
+	airports: CityResponseAirportItem[];
+	countryCode: string;
+	id: number;
+	name: string;
+	nameEn: string;
+}
+
+export interface AirportResponse {
+	IATA: string;
+	airportRating: string;
+	cityId: number;
+	countryCode: string;
+	isAggregation: boolean;
+	name: string;
+	nameEn: string;
+	properName: string;
+	properNameEn: string;
+}
+
+export interface SystemResponse {
+	info: {
+		response: {
+			responseTime: number;
+			timestamp: number;
+		};
+		user: {
+			agencyID: number;
+			userID: number;
+			isB2B: boolean;
+			status: string;
+			settings: {
+				agencyCurrency: string;
+				currentCurrency: string;
+				currentLanguage: string;
+				googleMapsApiKey: string;
+				googleMapsClientId: string;
+				showFullFlightsResults: boolean;
+			};
+		};
+	}
+}
+
+export interface AutocompleteAirportItem extends CityResponseAirportItem {
+	cityId?: number;
+	isCity?: boolean;
+	directFlight?: boolean;
+}
+
+export interface AutocompleteSuggestion {
+	airport: Airport;
+	isDirect: boolean;
+}
+
+export interface AutocompleteOption {
+	value: AutocompleteSuggestion;
+	label: string;
+}
+
+export interface AggregationMap {
+	[cityIATA: string]: {
+		[airportIATA: string]: AirportResponse;
+	};
+}
+
+export interface ResponseWithGuide {
+	guide?: {
+		airports?: {
+			[IATA: string]: AirportResponse;
+		};
+		cities?: {
+			[cityId: number]: CityResponse;
+		};
+		countries?: {
+			[IATA: string]: CountryResponse;
+		};
+		autocomplete?: {
+			iata: AutocompleteAirportItem[];
+		};
+		aggregationMap?: AggregationMap;
+		nearestAirport?: string;
+	}
+}
+
+export interface City extends CityResponse {
+
+}
+
+export interface Country extends CountryResponse {
+
+}
+
+export interface Airport {
+	IATA: string;
+	airportRating: string;
+	isAggregation: boolean;
+	name: string;
+	nameEn: string;
+	properName: string;
+	properNameEn: string;
+	city: City;
+	country: Country;
+	isCity?: boolean;
+	insideAggregationAirport?: boolean;
+}
+// ---------------------------------------------------------------------------------------------------------------------
 
 export enum ApplicationMode {
 	NEMO = 'NEMO',
@@ -117,8 +235,8 @@ export interface AutocompleteDefaultGroupsState {
 
 export interface AutocompleteFieldState {
 	isLoading: boolean;
-	suggestions: any[];
-	airport: any;
+	suggestions: AutocompleteSuggestion[];
+	airport: Airport;
 }
 
 export interface AutocompleteState {
@@ -320,7 +438,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 	// Let's fill `state` with data from `stateFromCache`.
 	// -------------------------------------------------------------------------------------
 	// Disclaimer: this bullshit below can be avoided with use of `lodash` or `underscore`,
-	// but those libraries are not lightweight enough for us.
+	// But those libraries are not lightweight enough for us.
 	if (stateFromCache) {
 		// Check if language has been changed since last user visit.
 		// If so, do not process cached airport information, because the cached data most likely is in the different language.
