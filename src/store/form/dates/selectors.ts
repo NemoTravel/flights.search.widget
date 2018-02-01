@@ -32,7 +32,7 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
 	}
 );
 
-interface HighlightedDatesGroup {
+export interface HighlightedDatesGroup {
 	[className: string]: Moment[];
 }
 
@@ -51,7 +51,7 @@ const createHighlightedDates = (availableDates: any, intermediateDates: Moment[]
 
 	if (highlightAvailableDates && availableDates.length) {
 		result.push({
-			'react-datepicker__day--hasFlight': availableDates.map(({ date }) => moment(date))
+			'react-datepicker__day--hasFlight': availableDates.map(({ date }: any) => moment(date))
 		});
 	}
 
