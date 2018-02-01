@@ -29,6 +29,8 @@ interface State {
 type DatepickerProps = Props & ReactDatePickerProps;
 
 export default class Datepicker extends React.Component<DatepickerProps, State> {
+	public static dateFormat = 'DD.MM.YYYY';
+	public static dateFormatForHeader = 'MMMM, YYYY';
 	public calendar: any = null;
 
 	state: State = {
@@ -55,24 +57,6 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 		this.setState({
 			isActive: !!nextProps.date || !nextProps.isDisableable
 		} as State);
-	}
-
-	/**
-	 * Global date format.
-	 *
-	 * @returns {string}
-	 */
-	static get dateFormat(): string {
-		return 'DD.MM.YYYY';
-	}
-
-	/**
-	 * Date format for the calendar title.
-	 *
-	 * @returns {string}
-	 */
-	static get dateFormatCalendar(): string {
-		return 'MMMM, YYYY';
 	}
 
 	/**
@@ -149,7 +133,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 			customInput={this.renderCustomInput()}
 			calendarClassName={`widget-ui-datepicker widget-ui-datepicker_${type}`}
 			dateFormat={Datepicker.dateFormat}
-			dateFormatCalendar={Datepicker.dateFormatCalendar}
+			dateFormatCalendar={Datepicker.dateFormatForHeader}
 			selected={date}
 			monthsShown={2}
 			onClickOutside={() => date ? null : this.disable()}
