@@ -1,33 +1,51 @@
-import React from 'react';
-import UIDatepicker from 'components/UI/Datepicker';
-import MobileHeader from 'components/UI/MobileHeader';
-import moment from 'moment';
-import autobind from 'autobind-decorator';
+import * as React from 'react';
+import * as moment from 'moment';
+import { Moment } from 'moment';
 
-export default class Datepicker extends React.Component {
-	constructor(props) {
-		super(props);
-		this.nemoDatepicker = null;
+import UIDatepicker from '../../UI/Datepicker';
+import MobileHeader from '../../UI/MobileHeader';
+import { CommonThunkAction, DatepickerFieldType, Language } from '../../../state';
+import { HighlightedDatesGroup } from '../../../store/form/dates/selectors';
+import { DatepickerAction } from '../../../store/form/dates/actions';
 
-		this.type = null;
-		this.placeholder = '';
-		this.popperPlacement = null;
-		this.tooltipText = '';
-		this.showErrors = false;
-		this.isDisableable = false;
-	}
+interface Props {
+	showErrors?: boolean;
+	locale: Language;
+	date: Moment;
+	isActive: boolean;
+	openToDate?: Moment;
+	highlightDates: HighlightedDatesGroup[];
+	specialDate: Moment;
+
+	selectDate: (date: Moment, dateType: DatepickerFieldType) => CommonThunkAction;
+	toggleDatePicker?: (isActive: boolean, dateType: DatepickerFieldType) => DatepickerAction;
+	getRef?: (input: any) => any;
+}
+
+export default class Datepicker<P> extends React.Component<P & Props> {
+	static defaultProps: Partial<Props> = {
+		showErrors: false,
+		highlightDates: []
+	};
+
+	protected type: DatepickerFieldType = null;
+	protected nemoDatepicker: any = null;
+	protected placeholder = '';
+	protected popperPlacement = '';
+	protected tooltipText = '';
+	protected showErrors = false;
+	protected isDisableable = false;
 
 	/**
 	 * Select date.
 	 *
 	 * @param {Moment} date
 	 */
-	@autobind
-	onChangeHandler(date) {
+	onChangeHandler(date: Moment): void {
 		this.props.selectDate(date, this.type);
 	}
 
-	shouldComponentUpdate(nextProps) {
+	shouldComponentUpdate(nextProps: Props): boolean {
 		const { isActive, date, highlightDates, specialDate, showErrors, locale } = this.props;
 
 		return isActive !== nextProps.isActive ||
@@ -38,21 +56,19 @@ export default class Datepicker extends React.Component {
 			highlightDates !== nextProps.highlightDates;
 	}
 
-	@autobind
-	closeDatepicker() {
+	closeDatepicker(): void {
 		if (this.nemoDatepicker && this.nemoDatepicker.calendar) {
 			this.nemoDatepicker.calendar.setOpen(false);
 		}
 	}
 
-	@autobind
-	renderInner() {
+	renderInner(): React.ReactNode {
 		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`;
 
 		return <MobileHeader className={mobileHeaderClassName} title={this.placeholder} onClose={this.closeDatepicker}/>;
 	}
 
-	render() {
+	render(): React.ReactNode {
 		const {
 			toggleDatePicker,
 			selectDate,
@@ -63,14 +79,12 @@ export default class Datepicker extends React.Component {
 			showErrors,
 			specialDate,
 			openToDate,
-			minDate: minDateProp,
-			maxDate: maxDateProp,
-			highlightDates = []
+			highlightDates
 		} = this.props;
 
 		const
-			minDate = minDateProp ? minDateProp : moment(),
-			maxDate = maxDateProp ? maxDateProp : moment().add(1, 'years');
+			minDate = moment(),
+			maxDate = moment().add(1, 'years');
 
 		return <div className="col widget-form-dates__col">
 			<UIDatepicker

@@ -9,7 +9,9 @@ import {
 } from '../../../store/form/dates/selectors';
 import { ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerState, SystemState } from '../../../state';
 import {
-	DatepickerAction, datepickerChange, selectDate, setAvailableDates,
+	DatepickerAction,
+	datepickerChange,
+	setAvailableDates,
 	toggleDatePicker
 } from '../../../store/form/dates/actions';
 import { Moment } from 'moment';
@@ -24,14 +26,15 @@ interface StateProps {
 }
 
 interface DispatchProps {
-	selectDate: (date: Moment, dateType: DatepickerFieldType) => DatepickerAction;
 	toggleDatePicker: (isActive: boolean, dateType: DatepickerFieldType) => DatepickerAction;
 	setAvailableDates: (availableDates: any, dateType: DatepickerFieldType) => DatepickerAction;
 	datepickerChange: (date: Moment, dateType: DatepickerFieldType) => CommonThunkAction;
 }
 
 class DatesContainer extends React.Component<StateProps & DispatchProps> {
-	render() {
+	protected returnInput: any = null;
+
+	render(): React.ReactNode {
 		const { departureDatepicker, returnDatepicker, system, showErrors, toggleDatePicker, datepickerChange } = this.props;
 
 		let returnInitialDate = departureDatepicker.date;
@@ -73,7 +76,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 				selectDate={datepickerChange}
 				toggleDatePicker={toggleDatePicker}
 				highlightDates={this.props.getReturnHighlightedDates}
-				getRef={input => (this.returnInput = input)}
+				getRef={(input: any): any => (this.returnInput = input)}
 				specialDate={departureDatepicker.date}
 			/>
 		</div>;
@@ -93,7 +96,6 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 
 const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
-		selectDate: bindActionCreators(selectDate, dispatch),
 		toggleDatePicker: bindActionCreators(toggleDatePicker, dispatch),
 		setAvailableDates: bindActionCreators(setAvailableDates, dispatch),
 		datepickerChange: bindActionCreators(datepickerChange, dispatch)
