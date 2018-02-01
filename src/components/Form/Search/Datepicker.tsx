@@ -4,7 +4,7 @@ import { Moment } from 'moment';
 
 import UIDatepicker from '../../UI/Datepicker';
 import MobileHeader from '../../UI/MobileHeader';
-import { CommonThunkAction, DatepickerFieldType, Language } from '../../../state';
+import { DatepickerFieldType, Language } from '../../../state';
 import { HighlightedDatesGroup } from '../../../store/form/dates/selectors';
 import { DatepickerAction } from '../../../store/form/dates/actions';
 
@@ -17,7 +17,7 @@ interface Props {
 	highlightDates: HighlightedDatesGroup[];
 	specialDate: Moment;
 
-	selectDate: (date: Moment, dateType: DatepickerFieldType) => CommonThunkAction;
+	selectDate: (date: Moment, dateType: DatepickerFieldType) => any;
 	toggleDatePicker?: (isActive: boolean, dateType: DatepickerFieldType) => DatepickerAction;
 	getRef?: (input: any) => any;
 }
@@ -89,7 +89,7 @@ export default class Datepicker<P> extends React.Component<P & Props> {
 		return <div className="col widget-form-dates__col">
 			<UIDatepicker
 				isDisableable={this.isDisableable}
-				ref={calendar => (this.nemoDatepicker = calendar)}
+				ref={(calendar: any) => (this.nemoDatepicker = calendar)}
 				type={this.type}
 				isActive={isActive}
 				onChange={this.onChangeHandler}
@@ -100,8 +100,8 @@ export default class Datepicker<P> extends React.Component<P & Props> {
 				maxDate={maxDate}
 				getRef={getRef}
 				highlightDates={highlightDates}
-				toggleDatePicker={toggleDatePicker}
 				selectDate={selectDate}
+				toggleDatePicker={toggleDatePicker}
 				popperPlacement={this.popperPlacement}
 				specialDate={specialDate}
 				tooltipIsActive={!date && this.showErrors && showErrors}

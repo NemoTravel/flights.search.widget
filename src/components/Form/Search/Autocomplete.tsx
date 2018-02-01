@@ -178,8 +178,8 @@ export default class Autocomplete<P> extends React.Component<P & Props, State> {
 						this.props.changeAutocompleteSuggestions([], this.type);
 						this.setState({ isFocused: false });
 					}}
-					optionRenderer={option => <Option option={option}/>}
-					valueRenderer={value =>
+					optionRenderer={(option: any) => <Option option={option}/>}
+					valueRenderer={(value: any) =>
 						<Value value={value} placeholder={this.placeholder} readOnly={readOnly && this.props.isGridMode}/>}
 					arrowRenderer={() => this.props.isGridMode ?
 						<div className="widget-ui-icon widget-ui-input__arrow"/> : null}
