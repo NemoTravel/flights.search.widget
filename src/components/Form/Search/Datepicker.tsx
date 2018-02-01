@@ -6,7 +6,6 @@ import UIDatepicker from '../../UI/Datepicker';
 import MobileHeader from '../../UI/MobileHeader';
 import { DatepickerFieldType, Language } from '../../../state';
 import { HighlightedDatesGroup } from '../../../store/form/dates/selectors';
-import { DatepickerAction } from '../../../store/form/dates/actions';
 
 interface Props {
 	showErrors?: boolean;
@@ -18,7 +17,6 @@ interface Props {
 	specialDate: Moment;
 
 	selectDate: (date: Moment, dateType: DatepickerFieldType) => any;
-	toggleDatePicker?: (isActive: boolean, dateType: DatepickerFieldType) => DatepickerAction;
 	getRef?: (input: any) => any;
 }
 
@@ -70,7 +68,6 @@ export default class Datepicker<P> extends React.Component<P & Props> {
 
 	render(): React.ReactNode {
 		const {
-			toggleDatePicker,
 			selectDate,
 			getRef,
 			locale,
@@ -101,7 +98,6 @@ export default class Datepicker<P> extends React.Component<P & Props> {
 				getRef={getRef}
 				highlightDates={highlightDates}
 				selectDate={selectDate}
-				toggleDatePicker={toggleDatePicker}
 				popperPlacement={this.popperPlacement}
 				specialDate={specialDate}
 				tooltipIsActive={!date && this.showErrors && showErrors}

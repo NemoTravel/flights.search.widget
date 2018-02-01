@@ -7,7 +7,6 @@ import * as classnames from 'classnames';
 import Tooltip from './Tooltip';
 import { isIE } from '../../utils';
 import { DatepickerFieldType } from '../../state';
-import { DatepickerAction } from '../../store/form/dates/actions';
 
 interface Props {
 	date: Moment;
@@ -20,7 +19,6 @@ interface Props {
 	inputProps: any;
 
 	selectDate: (date: Moment, dateType: DatepickerFieldType) => any;
-	toggleDatePicker?: (isActive: boolean, dateType: DatepickerFieldType) => DatepickerAction;
 	getRef?: (inout: any) => any;
 }
 

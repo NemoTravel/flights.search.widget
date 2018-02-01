@@ -11,8 +11,7 @@ import { ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerSta
 import {
 	DatepickerAction,
 	datepickerChange,
-	setAvailableDates,
-	toggleDatePicker
+	setAvailableDates
 } from '../../../store/form/dates/actions';
 import { Moment } from 'moment';
 
@@ -26,7 +25,6 @@ interface StateProps {
 }
 
 interface DispatchProps {
-	toggleDatePicker: (isActive: boolean, dateType: DatepickerFieldType) => DatepickerAction;
 	setAvailableDates: (availableDates: any, dateType: DatepickerFieldType) => DatepickerAction;
 	datepickerChange: (date: Moment, dateType: DatepickerFieldType) => CommonThunkAction;
 }
@@ -35,7 +33,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 	protected returnInput: any = null;
 
 	render(): React.ReactNode {
-		const { departureDatepicker, returnDatepicker, system, showErrors, toggleDatePicker, datepickerChange } = this.props;
+		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange } = this.props;
 
 		let returnInitialDate = departureDatepicker.date;
 
@@ -53,7 +51,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 				locale={system.locale}
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}
-				selectDate={(date, dateType) => {
+				selectDate={(date: Moment, dateType: DatepickerFieldType) => {
 					datepickerChange(date, dateType);
 
 					if (system.autoFocusReturnDate && this.returnInput) {
@@ -74,7 +72,6 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 				isActive={returnDatepicker.isActive}
 				openToDate={returnInitialDate}
 				selectDate={datepickerChange}
-				toggleDatePicker={toggleDatePicker}
 				highlightDates={this.props.getReturnHighlightedDates}
 				getRef={(input: any): any => (this.returnInput = input)}
 				specialDate={departureDatepicker.date}
@@ -96,7 +93,6 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 
 const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
-		toggleDatePicker: bindActionCreators(toggleDatePicker, dispatch),
 		setAvailableDates: bindActionCreators(setAvailableDates, dispatch),
 		datepickerChange: bindActionCreators(datepickerChange, dispatch)
 	};
