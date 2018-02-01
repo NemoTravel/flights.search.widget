@@ -139,7 +139,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 		};
 
 		return <DatePicker
-			ref={calendar => (this.calendar = calendar)}
+			ref={(calendar: any) => (this.calendar = calendar)}
 			disabled={isIE() ? false : !this.state.isActive}
 			locale={locale}
 			dayClassName={specialDayClassName}

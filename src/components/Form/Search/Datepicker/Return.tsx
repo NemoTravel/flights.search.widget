@@ -4,7 +4,7 @@ import MobileHeader from '../../../UI/MobileHeader';
 import { i18n } from '../../../../utils';
 import { DatepickerFieldType } from '../../../../state';
 
-export default class Return extends Datepicker<any> {
+export default class Return extends Datepicker {
 	protected type = DatepickerFieldType.Return;
 	protected placeholder = i18n('form', 'dateBack');
 	protected popperPlacement = 'top-end';

@@ -30,7 +30,7 @@ interface DispatchProps {
 }
 
 class DatesContainer extends React.Component<StateProps & DispatchProps> {
-	protected returnInput: any = null;
+	protected returnInput: HTMLInputElement = null;
 
 	render(): React.ReactNode {
 		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange } = this.props;
@@ -73,7 +73,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 				openToDate={returnInitialDate}
 				selectDate={datepickerChange}
 				highlightDates={this.props.getReturnHighlightedDates}
-				getRef={(input: any): any => (this.returnInput = input)}
+				getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
 				specialDate={departureDatepicker.date}
 			/>
 		</div>;

@@ -20,7 +20,7 @@ interface Props {
 	getRef?: (input: any) => any;
 }
 
-export default class Datepicker<P> extends React.Component<P & Props> {
+export default class Datepicker extends React.Component<Props> {
 	static defaultProps: Partial<Props> = {
 		showErrors: false,
 		highlightDates: []
