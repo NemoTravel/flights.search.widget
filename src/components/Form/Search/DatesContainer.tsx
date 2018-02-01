@@ -34,6 +34,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 
 	render(): React.ReactNode {
 		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange } = this.props;
+		const DATEPICKER_SWITCH_DELAY = 20;
 
 		let returnInitialDate = departureDatepicker.date;
 
@@ -55,11 +56,9 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 					datepickerChange(date, dateType);
 
 					if (system.autoFocusReturnDate && this.returnInput) {
-						const self = this;
-
-						setTimeout(function () {
-							self.returnInput.focus();
-						}, 20);
+						setTimeout(() => {
+							this.returnInput.focus();
+						}, DATEPICKER_SWITCH_DELAY);
 					}
 				}}
 				highlightDates={this.props.getDepartureHighlightedDates}

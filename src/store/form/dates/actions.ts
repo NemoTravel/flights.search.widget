@@ -1,6 +1,9 @@
 import { Moment } from 'moment';
 import { SELECT_DATE, TOGGLE_DATEPICKER, SET_AVAILABLE_DATES } from '../../actions';
-import { ApplicationState, CommonThunkAction, DatepickerFieldType, GetStateFunction } from '../../../state';
+import {
+	ApplicationState, AvailableDateResponse, CommonThunkAction, DatepickerFieldType,
+	GetStateFunction
+} from '../../../state';
 import { AnyAction, Dispatch } from 'redux';
 
 export interface DatepickerAction {
@@ -31,7 +34,7 @@ export const toggleDatePicker = (isActive: boolean, dateType: DatepickerFieldTyp
 	};
 };
 
-export const setAvailableDates = (availableDates: any, dateType: DatepickerFieldType): DatepickerAction => {
+export const setAvailableDates = (availableDates: AvailableDateResponse[], dateType: DatepickerFieldType): DatepickerAction => {
 	return {
 		type: SET_AVAILABLE_DATES,
 		dateType,

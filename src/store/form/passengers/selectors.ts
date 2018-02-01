@@ -35,9 +35,10 @@ export const getTotalPassengersCount = createSelector(
 export const getPassengersTitle = createSelector(
 	[ getTotalPassengersCount ],
 	(totalCount: number): string => {
+		const PASSENGERS_COUNT_PLURAL = 4;
 		let result = '';
 
-		if (totalCount === 0 || totalCount > 4) {
+		if (totalCount === 0 || totalCount > PASSENGERS_COUNT_PLURAL) {
 			result = `${totalCount} ${i18n('form', 'passengers_1')}`;
 		}
 		else if (totalCount === 1) {
@@ -80,6 +81,7 @@ export const getPassengersCounterAvailability = createSelector(
 	[ getPassengersConfig, getTotalPassengersCount ],
 	(passengersConfig: PassengersState, totalCount: number): PassengersCounterAvailability => {
 		const result: PassengersCounterAvailability = {};
+		const MAX_NUM_OF_PASSENGERS = 6;
 
 		for (const passType in passengersConfig) {
 			if (passengersConfig.hasOwnProperty(passType)) {
@@ -87,7 +89,7 @@ export const getPassengersCounterAvailability = createSelector(
 				let canIncrease = true;
 				let canDecrease = true;
 
-				if (totalCount >= 6) {
+				if (totalCount >= MAX_NUM_OF_PASSENGERS) {
 					canIncrease = false;
 				}
 
@@ -138,6 +140,6 @@ export const webskyPassengers = createSelector(
 			.filter(passenger => passenger.count)
 			.map((passenger: PassengerState) => {
 				return { ...passenger, code: WebskyPassengerType[passenger.code] };
-			})
+			});
 	}
 );

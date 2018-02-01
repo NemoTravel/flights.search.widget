@@ -102,12 +102,16 @@ export interface ResponseWithGuide {
 	}
 }
 
-export interface City extends CityResponse {
+export interface AvailableDateResponse {
+	[date: string]: string;
+}
 
+export interface City extends CityResponse {
+	test?: string;
 }
 
 export interface Country extends CountryResponse {
-
+	test?: string;
 }
 
 export interface Airport {
@@ -275,13 +279,13 @@ export enum DatepickerFieldType {
 export interface DatepickerState {
 	isActive: boolean;
 	date?: Moment;
-	availableDates: any;
+	availableDates: AvailableDateResponse[];
 }
 
 export interface CachedDatepickerState {
 	isActive: boolean;
 	date?: string;
-	availableDates: any;
+	availableDates: AvailableDateResponse[];
 }
 
 export interface DatesState {

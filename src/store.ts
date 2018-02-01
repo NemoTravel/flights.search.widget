@@ -49,7 +49,7 @@ if (process.env.NODE_ENV !== 'production') {
  * Get cached state object.
  */
 export const getCachedState = (): ApplicationCachedState => {
-	const cachedState = Cache.get(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION);
+	const cachedState = Cache.get(`${STORE_CACHE_KEY}_${Cache.getLocale()}_${process.env.VERSION}`);
 
 	return cachedState ? cachedState as ApplicationCachedState : null;
 };
@@ -60,7 +60,7 @@ export const getCachedState = (): ApplicationCachedState => {
  * @param state
  */
 export const cacheState = (state: ApplicationState): void => {
-	Cache.set(STORE_CACHE_KEY + '_' + Cache.getLocale() + '_' + process.env.VERSION, state);
+	Cache.set(`${STORE_CACHE_KEY}_${Cache.getLocale()}_${process.env.VERSION}`, state);
 };
 
 /**

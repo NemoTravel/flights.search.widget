@@ -84,7 +84,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	}
 
 	customInputOnFocusHandler(event: FormEvent<HTMLInputElement>): void {
-		(event.target as HTMLInputElement).blur()
+		(event.target as HTMLInputElement).blur();
 	}
 
 	/**
@@ -120,6 +120,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 
 	render(): React.ReactNode {
 		const { date, locale, specialDate, type } = this.props;
+		const NUM_OF_VISIBLE_MONTHS = 2;
 
 		const specialDayClassName = (date: Moment) => {
 			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'widget-ui-datepicker__specialDay' : null;
@@ -135,7 +136,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 			dateFormat={Datepicker.dateFormat}
 			dateFormatCalendar={Datepicker.dateFormatForHeader}
 			selected={date}
-			monthsShown={2}
+			monthsShown={NUM_OF_VISIBLE_MONTHS}
 			onClickOutside={() => date ? null : this.disable()}
 			onFocus={this.enable}
 			{...this.props}

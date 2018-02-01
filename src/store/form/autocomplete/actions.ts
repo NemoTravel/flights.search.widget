@@ -105,11 +105,11 @@ const runDatesAvailability = (dispatch: Dispatch<AnyAction>, state: ApplicationS
 				dispatch(setAvailableDates(dates, type));
 			}
 			else {
-				dispatch(setAvailableDates({}, type));
+				dispatch(setAvailableDates([], type));
 			}
 		})
 		.catch(() => {
-			dispatch(setAvailableDates({}, type));
+			dispatch(setAvailableDates([], type));
 		});
 };
 

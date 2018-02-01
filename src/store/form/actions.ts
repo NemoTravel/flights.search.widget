@@ -1,7 +1,7 @@
 import { AnyAction, Dispatch } from 'redux';
 import { SHOW_ERRORS } from '../actions';
 import { formIsValid } from './selectors';
-import { ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction } from '../../state';
+import { ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState } from '../../state';
 import { URL, clearURL } from '../../utils';
 
 export interface ShowErrorsAction {
@@ -38,9 +38,9 @@ const runNemoSearch = (state: ApplicationState): void => {
 	// Passengers info.
 	for (const passType in state.form.passengers) {
 		if (state.form.passengers.hasOwnProperty(passType) && state.form.passengers[passType].count) {
-			const passConfig = state.form.passengers[passType];
+			const passConfig: PassengerState = state.form.passengers[passType];
 
-			requestURL += passConfig.code + passConfig.count;
+			requestURL += `${passConfig.code}${passConfig.count}`;
 		}
 	}
 
@@ -49,7 +49,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 
 	// VicinityDates
 	if (state.form.additional.vicinityDates) {
-		requestURL += '-vicinityDates=' + state.system.vicinityDays;
+		requestURL += `-vicinityDates=${state.system.vicinityDays}`;
 	}
 
 	// Direct flight

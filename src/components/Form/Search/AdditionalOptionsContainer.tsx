@@ -31,19 +31,15 @@ interface DispatchProps {
 class AdditionalOptionsContainer extends React.Component<StateProps & DispatchProps> {
 	renderVicinityDates(): React.ReactNode {
 		const { vicinityDatesAction, vicinityDatesSelect, vicinityDays } = this.props;
+		const NUM_OF_DAYS_PLURAL = 5;
 		let dayLabel: string;
 
-		if (vicinityDays > 1) {
-			dayLabel = i18n('form', (vicinityDays < 5 ? 'additional_vicinityDates_days' : 'additional_vicinityDates_days_5'));
-		}
-		else {
-			dayLabel = i18n('form', 'additional_vicinityDates_day');
-		}
+		dayLabel = vicinityDays > 1 ? i18n('form', (vicinityDays < NUM_OF_DAYS_PLURAL ? 'additional_vicinityDates_days' : 'additional_vicinityDates_days_5')) : i18n('form', 'additional_vicinityDates_day');
 
 		const label = i18n('form', 'additional_vicinityDates').replace('[%-days-%]', vicinityDays.toString()).replace('[%-dayLabel-%]', dayLabel);
 
 		return <Checkbox
-			id='vicinity'
+			id="vicinity"
 			label={label}
 			trigger={vicinityDatesAction}
 			checked={vicinityDatesSelect}
@@ -55,7 +51,7 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 		const label = i18n('form', 'additional_directFlight');
 
 		return <Checkbox
-			id='directCheckbox'
+			id="directCheckbox"
 			label={label}
 			trigger={directFlightAction}
 			checked={directFlightSelect}

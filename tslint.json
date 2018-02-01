@@ -59,7 +59,7 @@
 		},
 		"no-use-before-declare": true,
 		"no-var-keyword": true,
-		"no-void-expression": [true, "ignore-arrow-function-shorthand"],
+		"no-void-expression": false,
 		"prefer-conditional-expression": true,
 		"prefer-object-spread": true,
 		"restrict-plus-operands": true,
