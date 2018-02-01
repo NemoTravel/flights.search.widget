@@ -65,4 +65,4 @@ class Dropdown extends React.PureComponent<DropdownProps, State> {
 	}
 }
 
-export default onClickOutside<Props>(Dropdown);
+export default onClickOutside(Dropdown);

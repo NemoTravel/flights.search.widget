@@ -127,7 +127,7 @@ class Selector extends React.Component<Props> {
 
 		return <div className="form-group widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
-				<UIDropdown disableOnClickOutside={true} triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()} ref={this.getDropdownRef}/>
+				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()} ref={this.getDropdownRef}/>
 			</Tooltip>
 		</div>;
 	}
