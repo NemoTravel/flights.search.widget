@@ -10,7 +10,7 @@
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
     "prepublish": "npm run test && npm run build",
-    "test": "jest",
+    "test": "npm run tslint",
     "start": "npm run server"
   },
   "pre-commit": [],
