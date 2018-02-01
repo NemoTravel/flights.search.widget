@@ -34,6 +34,13 @@ export default class Datepicker extends React.Component<Props> {
 	protected showErrors = false;
 	protected isDisableable = false;
 
+	constructor(props: Props) {
+		super(props);
+
+		this.onChangeHandler = this.onChangeHandler.bind(this);
+		this.closeDatepicker = this.closeDatepicker.bind(this);
+	}
+
 	/**
 	 * Select date.
 	 *

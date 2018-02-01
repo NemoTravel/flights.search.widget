@@ -3,11 +3,7 @@ import Autocomplete from '../Autocomplete';
 import { i18n } from '../../../../utils';
 import { AutocompleteFieldType } from '../../../../state';
 
-interface Props {
-	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => void;
-}
-
-class Arrival extends Autocomplete<Props> {
+class Arrival extends Autocomplete {
 	protected type = AutocompleteFieldType.Arrival;
 	protected placeholder = i18n('form', 'to_full');
 	protected mobileTitle = i18n('form', 'to');

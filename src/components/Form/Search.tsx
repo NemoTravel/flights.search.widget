@@ -15,6 +15,13 @@ interface Props {
 }
 
 export default class Search extends React.Component<Props> {
+
+	constructor(props: Props) {
+		super(props);
+
+		this.startSearchHandler = this.startSearchHandler.bind(this);
+	}
+
 	startSearchHandler(): void {
 		this.props.startSearch();
 	}

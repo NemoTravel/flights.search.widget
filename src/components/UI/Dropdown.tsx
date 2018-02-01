@@ -11,14 +11,22 @@ interface State {
 	isVisible: boolean;
 }
 
-class Dropdown extends React.PureComponent<Props & InjectedOnClickOutProps, State> {
-	static defaultProps: Partial<Props> = {
+type DropdownProps = Props & InjectedOnClickOutProps;
+
+class Dropdown extends React.PureComponent<DropdownProps, State> {
+	static defaultProps: Partial<DropdownProps> = {
 		triggerType: 'onClick'
 	};
 
 	state: State = {
 		isVisible: false
 	};
+
+	constructor(props: DropdownProps) {
+		super(props);
+
+		this.toggleContent = this.toggleContent.bind(this);
+	}
 
 	/**
 	 * Hide dropdown content if user clicked somewhere else.

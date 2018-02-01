@@ -25,7 +25,7 @@ interface Props {
 	isGridMode?: boolean;
 	showErrors: boolean;
 
-	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
+	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => any;
 	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
 	swapAirports?: () => CommonThunkAction;
@@ -36,7 +36,7 @@ interface State {
 	isFocused: boolean;
 }
 
-export default class Autocomplete<P> extends React.Component<P & Props, State> {
+export default class Autocomplete extends React.Component<Props, State> {
 	protected autocompleteTimeout: number = null;
 	protected autocompleteWaitTime = 200;
 	protected type: AutocompleteFieldType = null;
@@ -48,6 +48,14 @@ export default class Autocomplete<P> extends React.Component<P & Props, State> {
 	state: State = {
 		isFocused: false
 	};
+
+	constructor(props: Props) {
+		super(props);
+
+		this.onFocusHandler = this.onFocusHandler.bind(this);
+		this.selectOption = this.selectOption.bind(this);
+		this.onChangeHandler = this.onChangeHandler.bind(this);
+	}
 
 	/**
 	 * Load autocomplete suggestions by given search string.

@@ -41,6 +41,9 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 		this.state = {
 			isActive: !!props.date || !props.isDisableable
 		};
+
+		this.enable = this.enable.bind(this);
+		this.disable = this.disable.bind(this);
 	}
 
 	/**

@@ -8,7 +8,7 @@ export const unserialize = (string: string): any => {
 		return JSON.parse(string);
 	}
 	catch (e) {
-		throw e;
+		return string;
 	}
 };
 

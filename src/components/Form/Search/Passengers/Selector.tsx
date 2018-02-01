@@ -27,6 +27,12 @@ interface Props {
 class Selector extends React.Component<Props> {
 	private dropdown: any = null;
 
+	constructor(props: Props) {
+		super(props);
+
+		this.getDropdownRef = this.getDropdownRef.bind(this);
+	}
+
 	/**
 	 * Render passengers counters;
 	 */
@@ -84,7 +90,7 @@ class Selector extends React.Component<Props> {
 	 * Render dropdown block with passengers counters.
 	 */
 	renderDropdownContent(): React.ReactNode {
-		const closeBlock = () => this.dropdown.handleClickOutside();
+		const closeBlock = () => this.dropdown.instanceRef.handleClickOutside();
 		const { setClassType, classOptions, selectedClass, isModeNemo } = this.props;
 
 		return <div className="widget-form-passengers__content">

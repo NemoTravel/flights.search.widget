@@ -15,6 +15,14 @@ interface Props {
 }
 
 class Counter extends React.Component<Props> {
+
+	constructor(props: Props) {
+		super(props);
+
+		this.addPassenger = this.addPassenger.bind(this);
+		this.removePassenger = this.removePassenger.bind(this);
+	}
+
 	shouldComponentUpdate(nextProps: Props): boolean {
 		const { count, canAddPassenger, canRemovePassenger } = this.props;
 
