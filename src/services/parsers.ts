@@ -1,4 +1,4 @@
-export const parseAirportFromGuide = (response, IATA) => {
+export const parseAirportFromGuide = (response: any, IATA: string) => {
 	let airport = null;
 
 	if (response && IATA in response.guide.airports) {
@@ -11,15 +11,15 @@ export const parseAirportFromGuide = (response, IATA) => {
 	return airport;
 };
 
-export const parseAutocompleteOptions = (response, aggregationOnly) => {
-	const options = [];
+export const parseAutocompleteOptions = (response: any, aggregationOnly: boolean) => {
+	const options: any[] = [];
 
 	if (response && response.guide.autocomplete.iata instanceof Array) {
 		const { airports, countries, cities, aggregationMap } = response.guide;
-		const iataMap = {};
+		const iataMap: any = {};
 
 		// Sometimes, city has it's own list of airports (ex: Moscow (MOW)), so we have to process them too.
-		const cityHasAirports = responseAirport => {
+		const cityHasAirports = (responseAirport: any) => {
 			if (
 				responseAirport.isCity &&
 				cities.hasOwnProperty(responseAirport.cityId) &&
@@ -31,7 +31,7 @@ export const parseAutocompleteOptions = (response, aggregationOnly) => {
 			return [];
 		};
 
-		const processAirport = ({ IATA, directFlight, isCity }) => {
+		const processAirport = ({ IATA, directFlight, isCity }: any) => {
 			const airport = airports[IATA];
 			const cityIATA = cities.hasOwnProperty(airport.cityId) ? cities[airport.cityId].IATA : null;
 			// aggregationMap is null for nemo autocomplete
@@ -53,20 +53,20 @@ export const parseAutocompleteOptions = (response, aggregationOnly) => {
 		};
 
 		response.guide.autocomplete.iata
-			.filter(({ IATA }) => !iataMap.hasOwnProperty(IATA) && airports.hasOwnProperty(IATA) && airports[IATA].name)
-			.map(responseAirport => {
+			.filter(({ IATA }: any): boolean => !iataMap.hasOwnProperty(IATA) && airports.hasOwnProperty(IATA) && airports[IATA].name)
+			.map((responseAirport: any): any => {
 				options.push(processAirport(responseAirport));
 
 				cityHasAirports(responseAirport)
-					.filter(({ IATA }) => !iataMap.hasOwnProperty(IATA) && airports.hasOwnProperty(IATA) && airports[IATA].name)
-					.map(cityResponseAirport => options.push(processAirport(cityResponseAirport)));
+					.filter(({ IATA }: any): boolean => !iataMap.hasOwnProperty(IATA) && airports.hasOwnProperty(IATA) && airports[IATA].name)
+					.map((cityResponseAirport: any): any => options.push(processAirport(cityResponseAirport)));
 			});
 	}
 
 	return options;
 };
 
-export const parseNearestAirport = response => {
+export const parseNearestAirport = (response: any) => {
 	let airport = null;
 
 	if (response && response.guide && response.guide.nearestAirport) {

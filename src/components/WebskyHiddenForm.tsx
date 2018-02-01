@@ -1,15 +1,27 @@
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import { webskyPassengers } from 'store/form/passengers/selectors';
+import { webskyPassengers } from '../store/form/passengers/selectors';
+import { ApplicationState } from '../state';
+
+interface WebskyPassengerState {
+	title: string;
+	ageTitle: string;
+	code: string;
+	count: number;
+}
+
+interface Props extends ApplicationState {
+	passengersArray: WebskyPassengerState[];
+}
 
 /**
  * Websky engine requires real HTML-form submittion.
  */
-class WebskyHiddenForm extends React.Component {
-	render() {
+class WebskyHiddenForm extends React.Component<Props> {
+	render(): React.ReactNode {
 		const { form, system, passengersArray } = this.props;
 
-		const renderOWBlock = () => {
+		const renderOWBlock = (): React.ReactNode => {
 			return [
 				<input key={1} type="hidden" name="origin-city-code[0]" value={form.autocomplete.departure.airport ? form.autocomplete.departure.airport.IATA : ''}/>,
 				<input key={2} type="hidden" name="destination-city-code[0]" value={form.autocomplete.arrival.airport ? form.autocomplete.arrival.airport.IATA : ''}/>,
@@ -17,7 +29,7 @@ class WebskyHiddenForm extends React.Component {
 			];
 		};
 
-		const renderRTBlock = () => {
+		const renderRTBlock = (): React.ReactNode => {
 			if (form.dates.return.date) {
 				return [
 					<input key={1} type="hidden" name="origin-city-code[1]" value={form.autocomplete.arrival.airport ? form.autocomplete.arrival.airport.IATA : ''}/>,
@@ -29,7 +41,7 @@ class WebskyHiddenForm extends React.Component {
 			return null;
 		};
 
-		const renderCouponBlock = () => {
+		const renderCouponBlock = (): React.ReactNode => {
 			if (form.coupon.number && form.coupon.number.match(/^[\d]+$/g)) {
 				return <input type="hidden" name="promoCode" value={form.coupon.number}/>;
 			}
@@ -37,7 +49,7 @@ class WebskyHiddenForm extends React.Component {
 			return null;
 		};
 
-		const renderMileCardBlock = () => {
+		const renderMileCardBlock = (): React.ReactNode => {
 			if (form.mileCard.number && form.mileCard.password && form.mileCard.number.match(/^[\d]+$/g)) {
 				return [
 					<input key={1} type="hidden" name="cardNumber" value={form.mileCard.number}/>,
@@ -71,7 +83,7 @@ class WebskyHiddenForm extends React.Component {
 }
 
 export default connect(
-	state => {
+	(state: ApplicationState) => {
 		return {
 			...state,
 			passengersArray: webskyPassengers(state)

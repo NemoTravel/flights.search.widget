@@ -1,4 +1,4 @@
-export const parseDatesAvailability = response => {
+export const parseDatesAvailability = (response: any) => {
 	let availableDates = {};
 
 	if (response && response.flights && response.flights.availability && response.flights.availability.dates) {

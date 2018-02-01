@@ -1,5 +1,9 @@
 import * as React from 'react';
 
-export default ({ children }) => {
+interface Props {
+	children?: React.ReactNode;
+}
+
+export default ({ children }: Props) => {
 	return <code className="widget-ui-codeBlock">{children}</code>;
 };

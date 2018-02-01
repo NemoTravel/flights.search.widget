@@ -11,7 +11,7 @@ import { configReducer } from './store/system/reducer';
 import { getTotalPassengersCount } from './store/form/passengers/selectors';
 import {
 	initialState, systemState, fillStateFromCache, ApplicationState, SystemState,
-	AutocompleteFieldType, DatepickerFieldType, ApplicationCachedState
+	AutocompleteFieldType, DatepickerFieldType, ApplicationCachedState, PassengerType
 } from './state';
 import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from './store/form/additional/actions';
 import {
@@ -153,7 +153,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 
 		for (const type in passengers) {
 			if (passengers.hasOwnProperty(type)) {
-				store.dispatch(setCounter(passengers[type], type));
+				store.dispatch(setCounter(passengers[type], type as PassengerType));
 			}
 		}
 	}

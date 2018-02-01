@@ -6,7 +6,7 @@
   "scripts": {
     "eslint": "eslint . --ext .jsx,.jsx",
     "server": "node server.js",
-    "build": "npm run eslint && cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
     "prepublish": "npm run eslint && npm run test && npm run build",

@@ -5,6 +5,7 @@ interface Props {
 	isActive?: boolean;
 	isCentered?: boolean;
 	message: string;
+	children?: React.ReactNode;
 }
 
 class Tooltip extends React.Component<Props> {
@@ -13,7 +14,7 @@ class Tooltip extends React.Component<Props> {
 		isCentered: false
 	};
 
-	shouldComponentUpdate(nextProps): boolean {
+	shouldComponentUpdate(nextProps: Props): boolean {
 		const { isActive, message, children } = this.props;
 
 		return isActive !== nextProps.isActive || message !== nextProps.message || children !== nextProps.children;

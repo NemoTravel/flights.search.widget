@@ -1,5 +1,5 @@
 import {
-	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteState,
+	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteGroupState, AutocompleteState,
 	autocompleteState
 } from '../../../state';
 import {
@@ -16,7 +16,7 @@ export const autocompleteAirportReducer = (state: AutocompleteFieldState, airpor
 	return { ...state, airport };
 };
 
-export const autocompleteGroupsReducer = (state, defaultGroup) => {
+export const autocompleteGroupsReducer = (state: AutocompleteDefaultGroupsState, defaultGroup: AutocompleteGroupState): AutocompleteDefaultGroupsState => {
 	return { ...state, [defaultGroup.name]: defaultGroup };
 };
 

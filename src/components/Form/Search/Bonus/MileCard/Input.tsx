@@ -11,7 +11,7 @@ interface Props {
 }
 
 class Input extends React.Component<Props> {
-	shouldComponentUpdate(nextProps): boolean {
+	shouldComponentUpdate(nextProps: Props): boolean {
 		return this.props.number !== nextProps.number || this.props.showTooltip !== nextProps.showTooltip;
 	}
 
