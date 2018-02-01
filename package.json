@@ -1,6 +1,6 @@
 {
   "name": "@nemo.travel/search-widget",
-  "version": "1.5.4",
+  "version": "2.0.0",
   "description": "Lightweight form for searching airtickets",
   "main": "dist/flights.search.widget.min.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
-    "prepublish": "npm run eslint && npm run test && npm run build",
+    "prepublish": "npm run test && npm run build",
     "test": "jest",
     "start": "npm run server"
   },
