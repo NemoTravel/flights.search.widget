@@ -35,20 +35,24 @@ class CouponContainer extends React.Component<Props, State> {
 		this.state = {
 			isActive: !!this.props.number
 		};
+
+		this.enableField = this.enableField.bind(this);
+		this.disableField = this.disableField.bind(this);
+		this.changeCouponNumber = this.changeCouponNumber.bind(this);
 	}
 
 	enableField(): void {
-		this.setState({ isActive: true });
+		this.setState({ isActive: true } as State);
 	}
 
 	disableField(): void {
 		this.props.changeCouponNumber(null);
-		this.setState({ isActive: false });
+		this.setState({ isActive: false } as State);
 	}
 
 	handleClickOutside(): void {
 		if (this.state.isActive && !this.props.number) {
-			this.setState({ isActive: false });
+			this.setState({ isActive: false } as State);
 		}
 	}
 

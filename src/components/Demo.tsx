@@ -100,7 +100,7 @@ export default class Demo extends React.Component<any, DemoFormState> {
 								<CodeBlock>FlightsSearchWidget.init(...конфиг)</CodeBlock>
 							</div>
 
-							<textarea className="form-control" rows={10} value={this.state.generatedConfig} onClick={this.textAreaClickHandler}/>
+							<textarea className="form-control" rows={10} value={this.state.generatedConfig} onClick={this.textAreaClickHandler} spellCheck={false}/>
 						</label>
 					</div>
 				</div>
