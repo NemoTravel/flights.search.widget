@@ -74,7 +74,9 @@ export const parseAutocompleteOptions = (response: ResponseWithGuide, aggregatio
 
 				cityHasAirports(responseAirport)
 					.filter(({ IATA }: CityResponseAirportItem): boolean => !iataMap.hasOwnProperty(IATA) && airports.hasOwnProperty(IATA) && !!airports[IATA].name)
-					.map((cityResponseAirport: CityResponseAirportItem): any => options.push(processAirport(cityResponseAirport)));
+					.map((cityResponseAirport: CityResponseAirportItem): void => {
+						options.push(processAirport(cityResponseAirport));
+					});
 			});
 	}
 

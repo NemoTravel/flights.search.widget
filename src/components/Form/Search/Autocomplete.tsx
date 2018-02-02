@@ -7,12 +7,12 @@ import Option from './Autocomplete/Option';
 import Value from './Autocomplete/Value';
 import { i18n } from '../../../utils';
 import { DefaultOptionGroup } from '../../../store/form/selectors';
-import { Airport, AutocompleteFieldType, CommonThunkAction } from '../../../state';
+import { Airport, AutocompleteFieldType, AutocompleteOption, CommonThunkAction } from '../../../state';
 import { AutocompleteAction } from '../../../store/form/autocomplete/actions';
 
 interface Props {
 	isLoading?: boolean;
-	suggestions?: any[];
+	suggestions?: AutocompleteOption[];
 	optionsGroup?: DefaultOptionGroup[];
 	sameAirportsError?: boolean;
 	airport?: Airport;
