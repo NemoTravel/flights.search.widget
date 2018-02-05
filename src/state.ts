@@ -39,26 +39,28 @@ export interface AirportResponse {
 }
 
 export interface SystemResponse {
-	info: {
-		response: {
-			responseTime: number;
-			timestamp: number;
-		};
-		user: {
-			agencyID: number;
-			userID: number;
-			isB2B: boolean;
-			status: string;
-			settings: {
-				agencyCurrency: string;
-				currentCurrency: string;
-				currentLanguage: string;
-				googleMapsApiKey: string;
-				googleMapsClientId: string;
-				showFullFlightsResults: boolean;
+	system?: {
+		info: {
+			response: {
+				responseTime: number;
+				timestamp: number;
+			};
+			user: {
+				agencyID: number;
+				userID: number;
+				isB2B: boolean;
+				status: string;
+				settings: {
+					agencyCurrency: string;
+					currentCurrency: string;
+					currentLanguage: string;
+					googleMapsApiKey: string;
+					googleMapsClientId: string;
+					showFullFlightsResults: boolean;
+				};
 			};
 		};
-	}
+	};
 }
 
 export interface AutocompleteAirportItem extends CityResponseAirportItem {
@@ -102,8 +104,16 @@ export interface ResponseWithGuide {
 	}
 }
 
+export interface ResponseWithAvailableDates extends SystemResponse {
+	flights?: {
+		availability?: {
+			dates?: AvailableDateResponse[];
+		};
+	};
+}
+
 export interface AvailableDateResponse {
-	[date: string]: string;
+	date: string;
 }
 
 export interface City extends CityResponse {
@@ -127,6 +137,7 @@ export interface Airport {
 	isCity?: boolean;
 	insideAggregationAirport?: boolean;
 }
+
 // ---------------------------------------------------------------------------------------------------------------------
 
 export enum ApplicationMode {
@@ -177,8 +188,8 @@ export interface SystemState {
 	autoFocusArrivalAirport?: boolean;
 	autoFocusReturnDate?: boolean;
 	mode?: ApplicationMode;
-	defaultDepartureAirport?: string | any;
-	defaultArrivalAirport?: string | any;
+	defaultDepartureAirport?: string | Airport;
+	defaultArrivalAirport?: string | Airport;
 	defaultDepartureDate?: string;
 	defaultReturnDate?: string;
 	defaultPassengers?: PassengersConfig;
@@ -227,8 +238,12 @@ export enum AutocompleteFieldType {
 	Arrival = 'arrival'
 }
 
+export interface AutocompleteGroupOption {
+	[IATA: string]: Airport;
+}
+
 export interface AutocompleteGroupState {
-	options: any;
+	options: AutocompleteGroupOption;
 	className: string;
 	name: string;
 }

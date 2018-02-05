@@ -1,4 +1,5 @@
 import {
+	Airport,
 	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteGroupState, AutocompleteState,
 	autocompleteState
 } from '../../../state';
@@ -12,7 +13,7 @@ import {
 import { AutocompleteAction, PreviousSearchAction } from './actions';
 import { AnyAction } from 'redux';
 
-export const autocompleteAirportReducer = (state: AutocompleteFieldState, airport: any): AutocompleteFieldState => {
+export const autocompleteAirportReducer = (state: AutocompleteFieldState, airport: Airport): AutocompleteFieldState => {
 	return { ...state, airport };
 };
 
