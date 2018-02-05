@@ -54,7 +54,7 @@ export const parseAutocompleteOptions = (response: ResponseWithGuide, aggregatio
 
 			airport.country = countries[airport.country.code];
 			airport.isCity = isCity;
-			airport.insideAggregationAirport = cityIATA && !!aggregationCity;
+			airport.insideAggregationAirport = cityIATA && !!aggregationCity || airport.city.IATA != IATA;
 
 			// Remember all processed IATA codes.
 			iataMap[IATA] = true;
