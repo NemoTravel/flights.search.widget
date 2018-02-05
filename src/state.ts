@@ -126,7 +126,6 @@ export interface Airport {
 	country: Country;
 	isCity?: boolean;
 	insideAggregationAirport?: boolean;
-	isAirport?: boolean;
 }
 // ---------------------------------------------------------------------------------------------------------------------
 

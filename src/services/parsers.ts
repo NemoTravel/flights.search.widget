@@ -32,6 +32,7 @@ export const parseAutocompleteOptions = (response: ResponseWithGuide, aggregatio
 	if (response && response.guide.autocomplete.iata instanceof Array) {
 		const { airports, countries, cities, aggregationMap } = response.guide;
 		const iataMap: { [IATA: string]: boolean } = {};
+		let lastAggregationCityIATA = '';
 
 		// Sometimes, city has it's own list of airports (ex: Moscow (MOW)), so we have to process them too.
 		const cityHasAirports = (responseAirport: AutocompleteAirportItem): CityResponseAirportItem[] => {
@@ -54,13 +55,16 @@ export const parseAutocompleteOptions = (response: ResponseWithGuide, aggregatio
 
 			airport.country = countries[airport.country.code];
 			airport.isCity = isCity;
-			airport.insideAggregationAirport = cityIATA && !!aggregationCity;
-			airport.isAirport = airport.city.IATA !== IATA;
+			airport.insideAggregationAirport = (cityIATA && !!aggregationCity) || (airport.city && airport.city.IATA === lastAggregationCityIATA);
 
 			// Remember all processed IATA codes.
 			iataMap[IATA] = true;
 
 			if (!aggregationOnly || !aggregationCity || Object.keys(aggregationCity).length > 1) {
+				if (airport.isAggregation) {
+					lastAggregationCityIATA = airport.IATA;
+				}
+
 				return { airport: airport, isDirect: directFlight };
 			}
 			else {

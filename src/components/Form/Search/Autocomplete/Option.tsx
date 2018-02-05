@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default ({ option }: Props) => {
-	return <div className={classnames('widget-form-airports__suggestion', { 'widget-form-airports__suggestion_insideAggregation': option.value.airport.insideAggregationAirport || option.value.airport.isAirport })}>
+	return <div className={classnames('widget-form-airports__suggestion', { 'widget-form-airports__suggestion_insideAggregation': option.value.airport.insideAggregationAirport })}>
 		<span className={classnames('widget-form-airports__suggestion__title', { 'widget-form-airports__suggestion__title_bold': option.value.isDirect })}>
 			{option.value.airport.name}
 		</span>
