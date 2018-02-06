@@ -9,13 +9,15 @@ import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } 
 import { parseDatesAvailability } from '../../../services/parsers/datesAvailability';
 import { URL, clearURL } from '../../../utils';
 import {
-	Airport,
-	ApplicationMode, ApplicationState, AutocompleteFieldType, AutocompleteSuggestion, CommonThunkAction,
+	ApplicationMode, ApplicationState, AutocompleteFieldType, CommonThunkAction,
 	DatepickerFieldType, GetStateFunction,
-	Language, ResponseWithGuide
+	Language
 } from '../../../state';
 import { setAvailableDates } from '../dates/actions';
 import { AnyAction, Dispatch } from 'redux';
+import { AutocompleteSuggestion } from '../../../services/models/AutocompleteSuggestion';
+import { Airport } from '../../../services/models/Airport';
+import { ResponseWithGuide } from '../../../services/responses/Guide';
 
 export interface AutocompleteAction {
 	type: string;

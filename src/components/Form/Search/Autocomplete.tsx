@@ -7,8 +7,10 @@ import Option from './Autocomplete/Option';
 import Value from './Autocomplete/Value';
 import { i18n } from '../../../utils';
 import { DefaultOptionGroup } from '../../../store/form/selectors';
-import { Airport, AutocompleteFieldType, AutocompleteOption, CommonThunkAction } from '../../../state';
+import { AutocompleteFieldType, CommonThunkAction } from '../../../state';
 import { AutocompleteAction } from '../../../store/form/autocomplete/actions';
+import { AutocompleteOption } from '../../../services/models/AutocompleteOption';
+import { Airport } from '../../../services/models/Airport';
 
 interface Props {
 	isLoading?: boolean;

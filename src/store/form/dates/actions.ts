@@ -1,10 +1,11 @@
 import { Moment } from 'moment';
 import { SELECT_DATE, TOGGLE_DATEPICKER, SET_AVAILABLE_DATES } from '../../actions';
 import {
-	ApplicationState, AvailableDateResponse, CommonThunkAction, DatepickerFieldType,
+	ApplicationState, CommonThunkAction, DatepickerFieldType,
 	GetStateFunction
 } from '../../../state';
 import { AnyAction, Dispatch } from 'redux';
+import { AvailableDateResponse } from '../../../services/responses/AvailableDates';
 
 export interface DatepickerAction {
 	type: string;

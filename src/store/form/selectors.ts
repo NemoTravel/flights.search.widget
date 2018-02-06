@@ -2,10 +2,12 @@ import { createSelector } from 'reselect';
 import { getTotalPassengersCount } from './passengers/selectors';
 import { getAltLayout, i18n } from '../../utils';
 import {
-	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState, AutocompleteOption, AutocompleteSuggestion,
+	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState,
 	FormState,
 	SystemState
 } from '../../state';
+import { AutocompleteSuggestion } from '../../services/models/AutocompleteSuggestion';
+import { AutocompleteOption } from '../../services/models/AutocompleteOption';
 
 const getConfig = (state: ApplicationState): SystemState => state.system;
 

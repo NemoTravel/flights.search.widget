@@ -1,7 +1,7 @@
-import {
-	Airport, AutocompleteAirportItem, AutocompleteSuggestion, CityResponseAirportItem,
-	ResponseWithGuide
-} from '../state';
+import { AutocompleteAirportItem, ResponseWithGuide } from './responses/Guide';
+import { CityResponseAirportItem } from './responses/City';
+import { Airport } from './models/Airport';
+import { AutocompleteSuggestion } from './models/AutocompleteSuggestion';
 
 export const parseAirportFromGuide = (response: ResponseWithGuide, IATA: string): Airport => {
 	let airport: Airport = null;
@@ -55,7 +55,7 @@ export const parseAutocompleteOptions = (response: ResponseWithGuide, aggregatio
 
 			airport.country = countries[airport.country.code];
 			airport.isCity = isCity;
-			airport.insideAggregationAirport = (cityIATA && !!aggregationCity) || (airport.city && airport.city.IATA === lastAggregationCityIATA);
+			airport.insideAggregationAirport = cityIATA && !!aggregationCity || (airport.city && airport.city.IATA === lastAggregationCityIATA);
 
 			// Remember all processed IATA codes.
 			iataMap[IATA] = true;

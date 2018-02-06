@@ -1,4 +1,4 @@
-import { AvailableDateResponse, ResponseWithAvailableDates } from '../../state';
+import { AvailableDateResponse, ResponseWithAvailableDates } from '../responses/AvailableDates';
 
 export const parseDatesAvailability = (response: ResponseWithAvailableDates): AvailableDateResponse[] => {
 	let availableDates: AvailableDateResponse[] = [];

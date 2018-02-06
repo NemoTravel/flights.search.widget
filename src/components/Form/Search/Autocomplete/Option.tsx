@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
-import { AutocompleteOption } from '../../../../state';
+import { AutocompleteOption } from '../../../../services/models/AutocompleteOption';
 
 interface Props {
 	option: AutocompleteOption;
