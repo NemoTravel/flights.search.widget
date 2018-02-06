@@ -27,12 +27,22 @@
 		font-size: 13px;
 	}
 
+	.widget-ui-datepicker__calendar {
+		&:after {
+			display: none;
+		}
+
+		&-inner {
+			margin-bottom: 2px;
+			display: block;
+		}
+	}
+
 	&__col.col {
 		position: static;
 		padding: 0!important;
 
 		&:last-of-type {
-
 			@include adaptivity(desktop) {
 				border-left: 1px solid #64b5f6;
 			}

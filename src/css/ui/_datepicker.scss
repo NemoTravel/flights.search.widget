@@ -357,6 +357,10 @@
 		cursor: pointer;
 		pointer-events: none;
 
+		&-inner {
+			display: none;
+		}
+
 		&:after {
 			content: $icon-calendar;
 		}

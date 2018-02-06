@@ -93,6 +93,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	renderCustomInput(): React.ReactNode {
 		const { inputProps, date, isDisableable, getRef, tooltipIsActive, tooltipText } = this.props;
 		const formattedDate = date ? date.format('D MMMM, dd') : '';
+		const dayOfMonth = date ? date.get('date').toString() : '31';
 
 		if (getRef) {
 			inputProps.ref = getRef;
@@ -114,7 +115,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 
 			{this.renderCloser()}
 
-			{!isDisableable || !this.state.isActive ? <div className="widget-ui-datepicker__calendar"/> : null}
+			{!isDisableable || !this.state.isActive ? <div className="widget-ui-datepicker__calendar"><span className="widget-ui-datepicker__calendar-inner">{dayOfMonth}</span></div> : null}
 		</div>;
 	}
 
