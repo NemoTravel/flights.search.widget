@@ -72,6 +72,7 @@ export interface SystemState {
 	enableCoupon?: boolean;
 	enableMileCard?: boolean;
 	aggregationOnly?: boolean;
+	isComplexRoute?: boolean;
 }
 
 export const systemState: SystemState = {
@@ -98,7 +99,8 @@ export const systemState: SystemState = {
 	vicinityDays: 3,
 	enableCoupon: false,
 	enableMileCard: false,
-	aggregationOnly: false
+	aggregationOnly: false,
+	isComplexRoute: false
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -133,6 +135,26 @@ export interface AutocompleteState {
 	arrival: AutocompleteFieldState;
 	defaultGroups: AutocompleteDefaultGroupsState;
 }
+
+export interface Segment {
+	departure: {
+		airport: Airport
+	},
+	arrival: {
+		airport: Airport
+	}
+	date: DatepickerState
+}
+
+export const segmentState: Segment = {
+	departure: {
+		airport: null
+	},
+	arrival: {
+		airport: null
+	},
+	date: null
+};
 
 export const autocompleteState: AutocompleteState = {
 	[AutocompleteFieldType.Departure]: {
@@ -283,6 +305,7 @@ export interface FormState {
 	dates: DatesState;
 	passengers: PassengersState;
 	autocomplete: AutocompleteState;
+	segments: Array<Segment>;
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
@@ -315,6 +338,7 @@ export const initialState: ApplicationState = {
 		dates: datesState,
 		passengers: passengersState,
 		autocomplete: autocompleteState,
+		segments: [],
 		additional: additionalState,
 		coupon: couponState,
 		mileCard: mileCardState
@@ -334,6 +358,9 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 		const canBeProcessed = !stateFromCache.system || !stateFromCache.system.locale || stateFromCache.system.locale === state.system.locale;
 
 		if (stateFromCache.form) {
+
+			let tmpSegment: Segment = segmentState;
+
 			if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
 				const cachedArrivalAutocomplete = stateFromCache.form.autocomplete.arrival;
@@ -344,6 +371,8 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						state.form.autocomplete.departure,
 						cachedDepartureAutocomplete.airport
 					);
+
+					tmpSegment.departure.airport = cachedDepartureAutocomplete.airport;
 				}
 
 				if (canBeProcessed && cachedArrivalAutocomplete && cachedArrivalAutocomplete.airport) {
@@ -351,6 +380,8 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						state.form.autocomplete.arrival,
 						cachedArrivalAutocomplete.airport
 					);
+
+                    tmpSegment.arrival.airport = cachedArrivalAutocomplete.airport;
 				}
 
 				if (canBeProcessed && cachedAutocompleteGroups && cachedAutocompleteGroups.previousSearches) {
@@ -373,6 +404,8 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 							availableDates: cachedDepartureDate.availableDates,
 							date: moment(cachedDepartureDate.date).locale(state.system.locale)
 						};
+
+						tmpSegment.date = newDepartureState;
 
 						if (newDepartureState.date.isSameOrAfter(today)) {
 							state.form.dates.departure = newDepartureState;
@@ -402,6 +435,9 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 					}
 				}
 			}
+
+			state.form.segments.push(tmpSegment);
+			console.log(state);
 
 			if (stateFromCache.form.passengers) {
 				for (const passType in stateFromCache.form.passengers) {

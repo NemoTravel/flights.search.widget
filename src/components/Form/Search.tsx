@@ -5,6 +5,7 @@ import PassengersContainer from './Search/PassengersContainer';
 import AdditionalOptionsContainer from './Search/AdditionalOptionsContainer';
 import CouponContainer from './Search/Bonus/CouponContainer';
 import MileCardContainer from './Search/Bonus/MileCardContainer';
+import Segment from './Search/Segment';
 import { i18n } from '../../utils';
 import { CommonThunkAction } from '../../state';
 
@@ -12,6 +13,7 @@ interface Props {
 	startSearch: () => CommonThunkAction;
 	showCouponField: boolean;
 	showMileCardField: boolean;
+	isComplexRoute: boolean;
 }
 
 export default class Search extends React.Component<Props> {
@@ -27,11 +29,11 @@ export default class Search extends React.Component<Props> {
 	}
 
 	render(): React.ReactNode {
-		const { showCouponField, showMileCardField } = this.props;
+		const { showCouponField, showMileCardField, isComplexRoute } = this.props;
 
 		return <div className="widget-form-search">
 			<div className="widget-form-search__wrapper">
-				<AutocompleteContainer/>
+				<Segment segmentId={1}/>
 				<DatesContainer/>
 
 				<div className="row widget-form-search__footer">
@@ -44,6 +46,10 @@ export default class Search extends React.Component<Props> {
 
 					<div className="col">
 						<AdditionalOptionsContainer/>
+
+						<span>
+							{!isComplexRoute ? <span>Сложный маршрут</span>: <span>Простой маршрут</span>}
+						</span>
 
 						<button className="btn btn-primary widget-form-search__startButton" onClick={this.startSearchHandler}>
 							{i18n('form', 'search')}

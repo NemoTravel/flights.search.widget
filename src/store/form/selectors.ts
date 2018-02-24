@@ -8,6 +8,7 @@ import {
 } from '../../state';
 import { AutocompleteSuggestion } from '../../services/models/AutocompleteSuggestion';
 import { AutocompleteOption } from '../../services/models/AutocompleteOption';
+import {create} from "domain";
 
 const getConfig = (state: ApplicationState): SystemState => state.system;
 
@@ -19,6 +20,11 @@ export const isWebsky = createSelector(
 export const showCouponField = createSelector(
 	[ getConfig, isWebsky ],
 	(config: SystemState, isWebskyMode: boolean): boolean => isWebskyMode && config.enableCoupon
+);
+
+export const routeType = createSelector(
+	[ getConfig ],
+	(config: SystemState): boolean => config.isComplexRoute
 );
 
 export const showMileCardField = createSelector(
