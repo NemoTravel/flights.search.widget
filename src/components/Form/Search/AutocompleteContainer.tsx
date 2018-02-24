@@ -29,13 +29,17 @@ interface StateProps {
 }
 
 interface DispatchProps {
-	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
+	selectAirport: (airport: any, segmentId: number, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
 	swapAirports: () => CommonThunkAction;
 }
 
-class AutocompleteContainer extends React.Component<StateProps & DispatchProps> {
+interface Props {
+	segmentId: number;
+}
+
+class AutocompleteContainer extends React.Component<StateProps & DispatchProps & Props> {
 	protected arrivalInput: HTMLInputElement = null;
 
 	render(): React.ReactNode {
@@ -53,7 +57,8 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps> 
 			swapAirports,
 			changeAutocompleteSuggestions,
 			sendAutocompleteRequest,
-			selectAirport
+			selectAirport,
+			segmentId
 		} = this.props;
 
 		if (
@@ -69,6 +74,7 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps> 
 				sameAirportsError={sameAirportsError}
 				isLoading={departureAutocomplete.isLoading}
 				suggestions={departureOptions}
+				segmentId={segmentId}
 				optionsGroup={defaultOptionsGroup}
 				airport={departureAutocomplete.airport}
 				swapAirports={swapAirports}
@@ -76,8 +82,8 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps> 
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				isGridMode={!!system.routingGrid || system.mode === ApplicationMode.WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
-				selectAirport={(airport: any, autocompleteType: AutocompleteFieldType): void => {
-					selectAirport(airport, autocompleteType);
+				selectAirport={(airport: any, segmentId: number, autocompleteType: AutocompleteFieldType): void => {
+					selectAirport(airport, segmentId, autocompleteType);
 
 					if (system.autoFocusArrivalAirport && this.arrivalInput) {
 						this.arrivalInput.focus();
@@ -88,6 +94,7 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps> 
 			<ArrivalAutocomplete
 				showErrors={showErrors}
 				sameAirportsError={sameAirportsError}
+				segmentId={segmentId}
 				isLoading={arrivalAutocomplete.isLoading}
 				suggestions={arrivalOptions}
 				optionsGroup={defaultOptionsGroup}

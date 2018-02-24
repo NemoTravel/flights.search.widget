@@ -2,13 +2,15 @@ import * as React from 'react';
 import AutocompleteContainer from './AutocompleteContainer';
 
 interface Props {
-	segmentId: Number;
+	segmentId: number;
 }
 
 export default class Segment extends React.Component<Props> {
 	render(): React.ReactNode {
+		const { segmentId } = this.props;
+
 		return <div>
-			<AutocompleteContainer/>
+			<AutocompleteContainer segmentId={segmentId}/>
 		</div>
 	}
 }

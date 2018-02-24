@@ -146,15 +146,17 @@ const getDatesAvailability = (dispatch: Dispatch<AnyAction>, getState: GetStateF
  * Store airport selected by user.
  *
  * @param {Object} airport
+ * @param {number} segmentId
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {AutocompleteAction}
  */
-export const setSelectedAirport = (airport: any, autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const setSelectedAirport = (airport: any, segmentId: number, autocompleteType: AutocompleteFieldType): AutocompleteAction => {
 	return {
 		type: AIRPORT_SELECTED,
 		autocompleteType,
 		payload: {
-			airport
+			airport,
+			segmentId
 		}
 	};
 };
@@ -210,12 +212,13 @@ const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getState: Ge
  * Store airport selected by user and run request for getting dates with available flight.
  *
  * @param {Object} airport
+ * @param {number} segmentId
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {Function}
  */
-export const selectAirport = (airport: any, autocompleteType: AutocompleteFieldType): CommonThunkAction => {
+export const selectAirport = (airport: any, segmentId: number, autocompleteType: AutocompleteFieldType): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
-		dispatch(setSelectedAirport(airport, autocompleteType));
+		dispatch(setSelectedAirport(airport, segmentId, autocompleteType));
 		getDatesAvailability(dispatch, getState);
 		pushAiprortInCache(dispatch, getState, airport);
 	};
@@ -359,7 +362,7 @@ export const loadAirportForAutocomplete = (IATA: string, autocompleteType: Autoc
 
 		fetch(`${nemoURL}/api/guide/airports/${IATA}?apilang=${locale}`)
 			.then((response: Response) => response.json())
-			.then((response: ResponseWithGuide) => dispatch(setSelectedAirport(parseAirportFromGuide(response, IATA), autocompleteType)));
+			.then((response: ResponseWithGuide) => dispatch(setSelectedAirport(parseAirportFromGuide(response, IATA), 0, autocompleteType)));
 	};
 };
 
@@ -375,7 +378,7 @@ export const loadNearestAirportForAutocomplete = (autocompleteType: Autocomplete
 
 		fetch(`${nemoURL}/api/guide/airports/nearest?apilang=${locale}`)
 			.then(response => response.json())
-			.then(response => dispatch(setSelectedAirport(parseNearestAirport(response), autocompleteType)));
+			.then(response => dispatch(setSelectedAirport(parseNearestAirport(response), 0, autocompleteType)));
 	};
 };
 
@@ -387,11 +390,12 @@ export const swapAirports = (): CommonThunkAction => {
 		const
 			state = getState(),
 			departureAirport = state.form.autocomplete.departure.airport,
-			arrivalAirport = state.form.autocomplete.arrival.airport;
+			arrivalAirport = state.form.autocomplete.arrival.airport,
+			segmentId = 0;
 
 		if (departureAirport || arrivalAirport) {
-			dispatch(setSelectedAirport(departureAirport, AutocompleteFieldType.Arrival));
-			dispatch(setSelectedAirport(arrivalAirport, AutocompleteFieldType.Departure));
+			dispatch(setSelectedAirport(departureAirport, segmentId, AutocompleteFieldType.Arrival));
+			dispatch(setSelectedAirport(arrivalAirport, segmentId, AutocompleteFieldType.Departure));
 			getDatesAvailability(dispatch, getState);
 		}
 	};

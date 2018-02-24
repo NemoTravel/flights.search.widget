@@ -21,8 +21,9 @@ interface Props {
 	readOnly?: boolean;
 	isGridMode?: boolean;
 	showErrors: boolean;
+	segmentId: number;
 
-	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => any;
+	selectAirport: (airport: any, segmentId: number, autocompleteType: AutocompleteFieldType) => any;
 	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
 	swapAirports?: () => CommonThunkAction;
@@ -123,7 +124,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 	 */
 	selectOption(option: any): void {
 		if (option && option.value && option.value.airport) {
-			this.props.selectAirport(option.value.airport, this.type);
+			this.props.selectAirport(option.value.airport, this.props.segmentId, this.type);
 		}
 	}
 
