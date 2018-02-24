@@ -14,22 +14,21 @@ import {
 	DefaultOptionGroup
 } from '../../../store/form/selectors';
 import {
-	ApplicationMode, ApplicationState, AutocompleteFieldState, AutocompleteFieldType, CommonThunkAction,
+	ApplicationMode, ApplicationState, AutocompleteFieldState, AutocompleteFieldType, CommonThunkAction, SegmentState,
 	SystemState
 } from '../../../state';
 
 interface StateProps {
-	departureAutocomplete: AutocompleteFieldState;
-	arrivalAutocomplete: AutocompleteFieldState;
 	departureOptions: any[];
 	arrivalOptions: any[];
 	defaultOptionsGroup: DefaultOptionGroup[];
 	showErrors: boolean;
 	system: SystemState;
+//	segments: Array<SegmentState>;
 }
 
 interface DispatchProps {
-	selectAirport: (airport: any, segmentId: number, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
+	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
 	swapAirports: () => CommonThunkAction;
@@ -37,6 +36,8 @@ interface DispatchProps {
 
 interface Props {
 	segmentId: number;
+	departureAutocomplete: AutocompleteFieldState;
+	arrivalAutocomplete: AutocompleteFieldState;
 }
 
 class AutocompleteContainer extends React.Component<StateProps & DispatchProps & Props> {
@@ -58,7 +59,8 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			changeAutocompleteSuggestions,
 			sendAutocompleteRequest,
 			selectAirport,
-			segmentId
+			segmentId,
+		//	segments
 		} = this.props;
 
 		if (
@@ -67,6 +69,9 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 		) {
 			sameAirportsError = true;
 		}
+
+		//let arrivalAutocomplete2 = segments[segmentId].autocomplete.arrival;
+	//	let departureAutocomplete2 = segments[segmentId].autocomplete.departure;
 
 		return <div className="form-group row widget-form-airports">
 			<DepartureAutocomplete
@@ -82,8 +87,8 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				isGridMode={!!system.routingGrid || system.mode === ApplicationMode.WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
-				selectAirport={(airport: any, segmentId: number, autocompleteType: AutocompleteFieldType): void => {
-					selectAirport(airport, segmentId, autocompleteType);
+				selectAirport={(airport: any, autocompleteType: AutocompleteFieldType): void => {
+					selectAirport(airport, autocompleteType);
 
 					if (system.autoFocusArrivalAirport && this.arrivalInput) {
 						this.arrivalInput.focus();
@@ -113,8 +118,9 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
-		departureAutocomplete: state.form.segments[0].autocomplete.departure,
-		arrivalAutocomplete: state.form.segments[0].autocomplete.arrival,
+//		departureAutocomplete: state.form.segments[0].autocomplete.departure,
+//		arrivalAutocomplete: state.form.segments[0].autocomplete.arrival,
+//		segments: state.form.segments,
 		departureOptions: getDepartureOptions(state),
 		arrivalOptions: getArrivalOptions(state),
 		defaultOptionsGroup: getDefaultOptionsGroup(state),

@@ -5,7 +5,7 @@ import PassengersContainer from './Search/PassengersContainer';
 import AdditionalOptionsContainer from './Search/AdditionalOptionsContainer';
 import CouponContainer from './Search/Bonus/CouponContainer';
 import MileCardContainer from './Search/Bonus/MileCardContainer';
-import Segment from './Search/Segment';
+import SegmentsContainer from './Search/SegmentsContainer';
 import { i18n } from '../../utils';
 import { CommonThunkAction } from '../../state';
 
@@ -33,7 +33,7 @@ export default class Search extends React.Component<Props> {
 
 		return <div className="widget-form-search">
 			<div className="widget-form-search__wrapper">
-				<Segment segmentId={1}/>
+				<SegmentsContainer/>
 				<DatesContainer/>
 
 				<div className="row widget-form-search__footer">

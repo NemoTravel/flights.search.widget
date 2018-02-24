@@ -99,7 +99,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 				store.dispatch(loadAirportForAutocomplete(state.system.defaultDepartureAirport, AutocompleteFieldType.Departure));
 			}
 			else if (typeof state.system.defaultDepartureAirport === 'object') {
-				store.dispatch(setSelectedAirport(state.system.defaultDepartureAirport, 0, AutocompleteFieldType.Departure));
+				store.dispatch(setSelectedAirport(state.system.defaultDepartureAirport, AutocompleteFieldType.Departure));
 			}
 		}
 
@@ -115,7 +115,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 				store.dispatch(loadAirportForAutocomplete(state.system.defaultArrivalAirport, AutocompleteFieldType.Arrival));
 			}
 			else if (typeof state.system.defaultArrivalAirport === 'object') {
-				store.dispatch(setSelectedAirport(state.system.defaultArrivalAirport, 0, AutocompleteFieldType.Arrival));
+				store.dispatch(setSelectedAirport(state.system.defaultArrivalAirport, AutocompleteFieldType.Arrival));
 			}
 		}
 	}
