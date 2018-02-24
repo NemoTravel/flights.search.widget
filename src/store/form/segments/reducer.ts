@@ -1,8 +1,8 @@
 import { ADD_SEGMENT } from '../../actions';
-import { Segment, segmentState } from "../../../state";
+import { SegmentState, segmentState } from "../../../state";
 import {SegmentAction} from "./actions";
 import {AnyAction} from "redux";
 
-export default (state: Segment = segmentState, action: SegmentAction): any => {
+export default (state: SegmentState = segmentState, action: SegmentAction): SegmentState => {
 	return state;
 }

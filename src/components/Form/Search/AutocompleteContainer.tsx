@@ -113,8 +113,8 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
-		departureAutocomplete: state.form.autocomplete.departure,
-		arrivalAutocomplete: state.form.autocomplete.arrival,
+		departureAutocomplete: state.form.segments[0].autocomplete.departure,
+		arrivalAutocomplete: state.form.segments[0].autocomplete.arrival,
 		departureOptions: getDepartureOptions(state),
 		arrivalOptions: getArrivalOptions(state),
 		defaultOptionsGroup: getDefaultOptionsGroup(state),

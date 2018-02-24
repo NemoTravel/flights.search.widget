@@ -1,6 +1,6 @@
 import {
-	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteGroupState, AutocompleteState, Segment,
-	autocompleteState
+	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteGroupState, AutocompleteState, SegmentState,
+	autocompleteState, FormState
 } from '../../../state';
 import {
 	AUTOCOMPLETE_LOADING_STARTED,

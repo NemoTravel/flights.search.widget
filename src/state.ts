@@ -136,7 +136,7 @@ export interface AutocompleteState {
 	defaultGroups: AutocompleteDefaultGroupsState;
 }
 
-export interface Segment {
+export interface SegmentState {
 	autocomplete: AutocompleteState,
 	date: DatepickerState
 }
@@ -161,7 +161,7 @@ export const autocompleteState: AutocompleteState = {
 	}
 };
 
-export const segmentState: Segment = {
+export const segmentState: SegmentState = {
 	autocomplete: autocompleteState,
 	date: null,
 };
@@ -295,7 +295,7 @@ export interface FormState {
 	dates: DatesState;
 	passengers: PassengersState;
 	autocomplete: AutocompleteState;
-	segments: Array<Segment>;
+	segments: Array<SegmentState>;
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
@@ -306,7 +306,7 @@ export interface CachedFormSate {
 	dates: CachedDatesState;
 	passengers: PassengersState;
 	autocomplete: AutocompleteState;
-	segments: Segment;
+	segments: SegmentState;
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
@@ -329,7 +329,7 @@ export const initialState: ApplicationState = {
 		dates: datesState,
 		passengers: passengersState,
 		autocomplete: autocompleteState,
-		segments: [segmentState],
+		segments: [],
 		additional: additionalState,
 		coupon: couponState,
 		mileCard: mileCardState
@@ -350,7 +350,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 
 		if (stateFromCache.form) {
 
-			let tmpSegment: Segment = segmentState;
+			let tmpSegment: SegmentState = segmentState;
 
 			if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
