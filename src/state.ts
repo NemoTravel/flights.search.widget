@@ -137,24 +137,9 @@ export interface AutocompleteState {
 }
 
 export interface Segment {
-	departure: {
-		airport: Airport
-	},
-	arrival: {
-		airport: Airport
-	}
+	autocomplete: AutocompleteState,
 	date: DatepickerState
 }
-
-export const segmentState: Segment = {
-	departure: {
-		airport: null
-	},
-	arrival: {
-		airport: null
-	},
-	date: null
-};
 
 export const autocompleteState: AutocompleteState = {
 	[AutocompleteFieldType.Departure]: {
@@ -174,6 +159,11 @@ export const autocompleteState: AutocompleteState = {
 			name: 'previousSearches'
 		}
 	}
+};
+
+export const segmentState: Segment = {
+	autocomplete: autocompleteState,
+	date: null,
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -316,6 +306,7 @@ export interface CachedFormSate {
 	dates: CachedDatesState;
 	passengers: PassengersState;
 	autocomplete: AutocompleteState;
+	segments: Segment;
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
@@ -338,7 +329,7 @@ export const initialState: ApplicationState = {
 		dates: datesState,
 		passengers: passengersState,
 		autocomplete: autocompleteState,
-		segments: [],
+		segments: [segmentState],
 		additional: additionalState,
 		coupon: couponState,
 		mileCard: mileCardState
@@ -372,7 +363,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						cachedDepartureAutocomplete.airport
 					);
 
-					tmpSegment.departure.airport = cachedDepartureAutocomplete.airport;
+					tmpSegment.autocomplete.departure.airport = cachedDepartureAutocomplete.airport;
 				}
 
 				if (canBeProcessed && cachedArrivalAutocomplete && cachedArrivalAutocomplete.airport) {
@@ -381,7 +372,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						cachedArrivalAutocomplete.airport
 					);
 
-                    tmpSegment.arrival.airport = cachedArrivalAutocomplete.airport;
+                    tmpSegment.autocomplete.arrival.airport = cachedArrivalAutocomplete.airport;
 				}
 
 				if (canBeProcessed && cachedAutocompleteGroups && cachedAutocompleteGroups.previousSearches) {

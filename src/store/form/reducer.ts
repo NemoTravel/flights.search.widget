@@ -6,6 +6,7 @@ import dates from './dates/reducer';
 import additional from './additional/reducer';
 import coupon from './coupon/reducer';
 import mileCard from './mileCard/reducer';
+import segments from './segments/reducer';
 import { FormState } from '../../state';
 import { ShowErrorsAction } from './actions';
 
@@ -20,6 +21,7 @@ export default (state: FormState, action: AnyAction): FormState => {
 		showErrors: showErrorsReducer,
 		dates,
 		autocomplete,
+		segments,
 		passengers,
 		additional,
 		coupon,

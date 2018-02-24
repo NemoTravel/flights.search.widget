@@ -1,5 +1,5 @@
 import {
-	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteGroupState, AutocompleteState,
+	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteGroupState, AutocompleteState, Segment,
 	autocompleteState
 } from '../../../state';
 import {
