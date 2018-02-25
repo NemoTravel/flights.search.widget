@@ -8,7 +8,6 @@ import {
 } from '../../state';
 import { AutocompleteSuggestion } from '../../services/models/AutocompleteSuggestion';
 import { AutocompleteOption } from '../../services/models/AutocompleteOption';
-import {create} from "domain";
 
 const getConfig = (state: ApplicationState): SystemState => state.system;
 

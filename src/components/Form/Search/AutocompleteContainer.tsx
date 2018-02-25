@@ -24,7 +24,6 @@ interface StateProps {
 	defaultOptionsGroup: DefaultOptionGroup[];
 	showErrors: boolean;
 	system: SystemState;
-//	segments: Array<SegmentState>;
 }
 
 interface DispatchProps {
@@ -59,8 +58,7 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			changeAutocompleteSuggestions,
 			sendAutocompleteRequest,
 			selectAirport,
-			segmentId,
-		//	segments
+			segmentId
 		} = this.props;
 
 		if (
@@ -69,9 +67,6 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 		) {
 			sameAirportsError = true;
 		}
-
-		//let arrivalAutocomplete2 = segments[segmentId].autocomplete.arrival;
-	//	let departureAutocomplete2 = segments[segmentId].autocomplete.departure;
 
 		return <div className="form-group row widget-form-airports">
 			<DepartureAutocomplete
@@ -118,9 +113,6 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
-//		departureAutocomplete: state.form.segments[0].autocomplete.departure,
-//		arrivalAutocomplete: state.form.segments[0].autocomplete.arrival,
-//		segments: state.form.segments,
 		departureOptions: getDepartureOptions(state),
 		arrivalOptions: getArrivalOptions(state),
 		defaultOptionsGroup: getDefaultOptionsGroup(state),

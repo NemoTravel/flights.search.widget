@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Segment from './Segment';
-import {ApplicationState, SegmentState} from "../../../state";
+import { ApplicationState, SegmentState } from '../../../state';
 
 interface StateProps {
-	segments: Array<SegmentState>;
+	segments: SegmentState[];
 }
 
 interface Props {
-	segments: Array<SegmentState>;
+	segments: SegmentState[];
 }
 
 class SegmentsContainer extends React.Component<Props> {
@@ -22,13 +22,13 @@ class SegmentsContainer extends React.Component<Props> {
 		return <div>
 			<Segment segment={segments[0]} segmentId={0}/>
 		</div>;
-	};
+	}
 }
 
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
 		segments: state.form.segments
-	}
+	};
 };
 
 export default connect(mapStateToProps)(SegmentsContainer);

@@ -163,7 +163,7 @@ export const autocompleteState: AutocompleteState = {
 
 export const segmentState: SegmentState = {
 	autocomplete: autocompleteState,
-	date: null,
+	date: null
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -295,7 +295,7 @@ export interface FormState {
 	dates: DatesState;
 	passengers: PassengersState;
 	autocomplete: AutocompleteState;
-	segments: Array<SegmentState>;
+	segments: SegmentState[];
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
@@ -350,7 +350,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 
 		if (stateFromCache.form) {
 
-			let tmpSegment: SegmentState = segmentState;
+			const tmpSegment: SegmentState = segmentState;
 
 			if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
@@ -372,7 +372,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						cachedArrivalAutocomplete.airport
 					);
 
-                    tmpSegment.autocomplete.arrival.airport = cachedArrivalAutocomplete.airport;
+					tmpSegment.autocomplete.arrival.airport = cachedArrivalAutocomplete.airport;
 				}
 
 				if (canBeProcessed && cachedAutocompleteGroups && cachedAutocompleteGroups.previousSearches) {
