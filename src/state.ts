@@ -110,6 +110,12 @@ export enum AutocompleteFieldType {
 	Arrival = 'arrival'
 }
 
+export enum RouteType {
+	OW = 'OW',
+	RT = 'RT',
+	CR = 'CR'
+}
+
 export interface AutocompleteGroupOption {
 	[IATA: string]: Airport;
 }
@@ -299,6 +305,7 @@ export interface FormState {
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
+	routeType: RouteType;
 }
 
 export interface CachedFormSate {
@@ -332,7 +339,8 @@ export const initialState: ApplicationState = {
 		segments: [],
 		additional: additionalState,
 		coupon: couponState,
-		mileCard: mileCardState
+		mileCard: mileCardState,
+		routeType: RouteType.RT
 	}
 };
 

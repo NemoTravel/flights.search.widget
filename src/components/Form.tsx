@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import * as classnames from 'classnames';
 
-import { startSearch as startSearchAction } from '../store/form/actions';
+import {startSearch as startSearchAction} from '../store/form/actions';
 import Search from './Form/Search';
 import WebskyHiddenForm from './WebskyHiddenForm';
 import {
@@ -12,26 +12,33 @@ import {
 	showMileCardField as showMileCardFieldSelector,
 	routeType
 } from '../store/form/selectors';
-import { ApplicationState, CommonThunkAction } from '../state';
+import {ApplicationState, CommonThunkAction, RouteType} from '../state';
+import {setRouteType as setRouteAction, SetRouteTypeAction} from "../store/form/route/actions";
 
 interface StateProps {
 	verticalForm: boolean;
 	isWebskyMode: boolean;
 	showCouponField: boolean;
 	showMileCardField: boolean;
-	isComplexRoute: boolean;
+	isComplexRoute: RouteType;
 }
 
 interface DispatchProps {
 	startSearch: () => CommonThunkAction;
+	setRouteType: (type: RouteType) => SetRouteTypeAction;
 }
 
 class Form extends React.Component<StateProps & DispatchProps> {
 	render(): React.ReactNode {
-		const { startSearch, verticalForm, isWebskyMode, showCouponField, showMileCardField, isComplexRoute } = this.props;
+		const { startSearch, verticalForm, isWebskyMode, showCouponField, showMileCardField, isComplexRoute, setRouteType } = this.props;
 
 		return <section className={classnames('widget-form', { 'widget-form_vertical': verticalForm })}>
-			<Search startSearch={startSearch} showCouponField={showCouponField} isComplexRoute={isComplexRoute} showMileCardField={showMileCardField}/>
+			<Search
+				startSearch={startSearch}
+				showCouponField={showCouponField}
+				isComplexRoute={isComplexRoute}
+				setRouteType={setRouteType}
+				showMileCardField={showMileCardField}/>
 			{isWebskyMode ? <WebskyHiddenForm/> : null}
 		</section>;
 	}
@@ -49,7 +56,8 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 
 const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
-		startSearch: bindActionCreators(startSearchAction, dispatch)
+		startSearch: bindActionCreators(startSearchAction, dispatch),
+		setRouteType: bindActionCreators(setRouteAction, dispatch)
 	};
 };
 

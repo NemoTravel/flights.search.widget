@@ -3,13 +3,14 @@ import { getTotalPassengersCount } from './passengers/selectors';
 import { getAltLayout, i18n } from '../../utils';
 import {
 	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState,
-	FormState,
+	FormState, RouteType,
 	SystemState
 } from '../../state';
 import { AutocompleteSuggestion } from '../../services/models/AutocompleteSuggestion';
 import { AutocompleteOption } from '../../services/models/AutocompleteOption';
 
 const getConfig = (state: ApplicationState): SystemState => state.system;
+const getFormConfig = (state: ApplicationState): FormState => state.form;
 
 export const isWebsky = createSelector(
 	[ getConfig ],
@@ -22,8 +23,8 @@ export const showCouponField = createSelector(
 );
 
 export const routeType = createSelector(
-	[ getConfig ],
-	(config: SystemState): boolean => config.isComplexRoute
+	[ getFormConfig ],
+	(config: FormState): RouteType => config.routeType
 );
 
 export const showMileCardField = createSelector(

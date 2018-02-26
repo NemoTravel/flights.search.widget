@@ -12,6 +12,13 @@
 	&__pseudoBlocks {
 		text-align: center;
 	}
+
+	&__routeTypeSwitch {
+		padding-right: 10px;
+		font-weight: 600;
+		font-size: 13px;
+		cursor: pointer;
+	}
 	
 	&_vertical {
 		.widget-form {

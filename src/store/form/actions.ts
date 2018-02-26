@@ -1,7 +1,10 @@
 import { AnyAction, Dispatch } from 'redux';
-import { SHOW_ERRORS } from '../actions';
+import {SET_ROUTE_TYPE, SHOW_ERRORS} from '../actions';
 import { formIsValid } from './selectors';
-import { ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState } from '../../state';
+import {
+	ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState,
+	RouteType
+} from '../../state';
 import { URL, clearURL } from '../../utils';
 
 export interface ShowErrorsAction {
