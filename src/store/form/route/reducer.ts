@@ -4,7 +4,6 @@ import {SET_ROUTE_TYPE} from "../../actions";
 
 export default (state: RouteType = RouteType.OW, { type, payload }: SetRouteTypeAction): RouteType => {
 
-	console.log(type, payload);
 	if (type === SET_ROUTE_TYPE) {
 		switch (payload) {
 			case 'OW': return RouteType.OW;

@@ -137,6 +137,7 @@ export interface AutocompleteFieldState {
 }
 
 export interface AutocompleteState {
+	[key: string]: any,
 	departure: AutocompleteFieldState;
 	arrival: AutocompleteFieldState;
 	defaultGroups: AutocompleteDefaultGroupsState;

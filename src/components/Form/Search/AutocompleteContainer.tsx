@@ -7,6 +7,10 @@ import {
 	sendAutocompleteRequest,
 	swapAirports, AutocompleteAction
 } from '../../../store/form/autocomplete/actions';
+import {
+	selectAirportInSegment
+} from '../../../store/form/segments/actions';
+
 import DepartureAutocomplete from './Autocomplete/Departure';
 import ArrivalAutocomplete from './Autocomplete/Arrival';
 import {
@@ -124,7 +128,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
 		changeAutocompleteSuggestions: bindActionCreators(changeAutocompleteSuggestions, dispatch),
-		selectAirport: bindActionCreators(selectAirport, dispatch),
+		selectAirport: bindActionCreators(selectAirportInSegment, dispatch),
 		sendAutocompleteRequest: bindActionCreators(sendAutocompleteRequest, dispatch),
 		swapAirports: bindActionCreators(swapAirports, dispatch)
 	};
