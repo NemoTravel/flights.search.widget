@@ -1,26 +1,55 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Segment from './Segment';
-import { ApplicationState, SegmentState } from '../../../state';
+import {ApplicationState, RouteType, SegmentState} from '../../../state';
+import {AnyAction, bindActionCreators, Dispatch} from "redux";
+import {addSegment, SegmentAction} from "../../../store/form/segments/actions";
 
 interface StateProps {
 	segments: SegmentState[];
 }
 
-interface Props {
-	segments: SegmentState[];
+interface DispatchProps {
+	addSegment: () => SegmentAction;
 }
 
-class SegmentsContainer extends React.Component<Props> {
-	constructor(props: Props) {
+interface Props {
+	segments: SegmentState[];
+	routeType: RouteType;
+}
+
+class SegmentsContainer extends React.Component<StateProps & DispatchProps & Props> {
+	constructor(props: StateProps & DispatchProps & Props) {
 		super(props);
+
+		this.continueRoute = this.continueRoute.bind(this);
+	}
+
+	continueRoute(): void {
+		this.props.addSegment();
+	}
+
+	renderAllSegment(): React.ReactNode {
+		const { segments } = this.props;
+
+		return segments.map( (segment:SegmentState, index: number) => {
+			return <div key={index}>
+				<Segment segment={segment} segmentId={index}/>
+			</div>
+		});
 	}
 
 	render(): React.ReactNode {
-		const { segments } = this.props;
+		const { segments, routeType } = this.props;
 
 		return <div>
-			<Segment segment={segments[0]} segmentId={0}/>
+
+			{ this.renderAllSegment() }
+
+			{ routeType === RouteType.CR ?
+				<div className="widget-form__addSegment" onClick={this.continueRoute}>
+					Продолжить маршрут
+				</div> : null }
 		</div>;
 	}
 }
@@ -31,4 +60,10 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 	};
 };
 
-export default connect(mapStateToProps)(SegmentsContainer);
+const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
+	return {
+		addSegment: bindActionCreators(addSegment, dispatch)
+	};
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(SegmentsContainer);

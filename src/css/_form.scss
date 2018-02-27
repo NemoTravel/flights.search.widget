@@ -19,6 +19,19 @@
 		font-size: 13px;
 		cursor: pointer;
 	}
+
+	&__addSegment {
+		height: 40px;
+		background: #f3f3f2;
+		text-align: center;
+		align-self: center;
+		line-height: 40px;
+		color: #6c757d;
+		font-weight: 700;
+		font-size: 15px;
+		margin-bottom: 20px;
+		cursor: pointer;
+	}
 	
 	&_vertical {
 		.widget-form {

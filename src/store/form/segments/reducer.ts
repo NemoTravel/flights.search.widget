@@ -21,13 +21,17 @@ export const addAirportReducer = (state: SegmentState = segmentState, action: An
 export default (state: SegmentState[] = [segmentState], action: AnyAction): SegmentState[] => {
 	if (action.type === SET_AIRPORT_IN_SEGMENT) {
 		return state.map( (item: SegmentState, index: number) => {
-			if (index === 0) {
+			if (index === action.segmentIndex) {
 				return addAirportReducer(item, action);
 			}
 			else {
 				return item;
 			}
 		});
+	}
+
+	if (action.type === ADD_SEGMENT) {
+		return [...state, segmentState];
 	}
 
 	return state;

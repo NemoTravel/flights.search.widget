@@ -47,7 +47,7 @@ export default class Search extends React.Component<Props> {
 
 		return <div className="widget-form-search">
 			<div className="widget-form-search__wrapper">
-				<SegmentsContainer/>
+				<SegmentsContainer routeType={isComplexRoute}/>
 
 				{isComplexRoute !== RouteType.CR ? <DatesContainer/> : null }
 
