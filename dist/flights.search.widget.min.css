@@ -5991,6 +5991,10 @@
   }
 }
 
+.widget-form-airports__segment {
+  width: 100%;
+}
+
 .widget-form-airports__header {
   display: none;
 }
@@ -6595,6 +6599,7 @@
   font-size: 15px;
   margin-bottom: 20px;
   cursor: pointer;
+  width: 100%;
 }
 
 .widget-form_vertical .widget-form-search__wrapper .form-group:last-of-type {

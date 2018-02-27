@@ -33,7 +33,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps & Pro
 		const { segments } = this.props;
 
 		return segments.map( (segment:SegmentState, index: number) => {
-			return <div key={index}>
+			return <div key={index} className="widget-form-airports__segment">
 				<Segment segment={segment} segmentId={index}/>
 			</div>
 		});
@@ -42,7 +42,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps & Pro
 	render(): React.ReactNode {
 		const { segments, routeType } = this.props;
 
-		return <div>
+		return <div className="form-group row widget-form-airports">
 
 			{ this.renderAllSegment() }
 

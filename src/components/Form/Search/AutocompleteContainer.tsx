@@ -31,7 +31,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
+	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number) => CommonThunkAction;
 	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
 	swapAirports: () => CommonThunkAction;
@@ -86,8 +86,8 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 				sendAutocompleteRequest={sendAutocompleteRequest}
 				isGridMode={!!system.routingGrid || system.mode === ApplicationMode.WEBSKY}
 				readOnly={system.readOnlyAutocomplete}
-				selectAirport={(airport: any, autocompleteType: AutocompleteFieldType): void => {
-					selectAirport(airport, autocompleteType);
+				selectAirport={(airport: any, autocompleteType: AutocompleteFieldType, segmentId: number): void => {
+					selectAirport(airport, autocompleteType, segmentId);
 
 					if (system.autoFocusArrivalAirport && this.arrivalInput) {
 						this.arrivalInput.focus();
