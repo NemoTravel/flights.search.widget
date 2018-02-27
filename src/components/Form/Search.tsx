@@ -49,8 +49,6 @@ export default class Search extends React.Component<Props> {
 			<div className="widget-form-search__wrapper">
 				<SegmentsContainer routeType={isComplexRoute}/>
 
-				{isComplexRoute !== RouteType.CR ? <DatesContainer/> : null }
-
 				<div className="row widget-form-search__footer">
 					<div className="col">
 						<PassengersContainer/>

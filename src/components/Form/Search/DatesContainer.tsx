@@ -7,13 +7,17 @@ import {
 	getDepartureHighlightedDates, getReturnHighlightedDates,
 	HighlightedDatesGroup
 } from '../../../store/form/dates/selectors';
-import { ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerState, SystemState } from '../../../state';
+import {
+	ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerState, RouteType,
+	SystemState
+} from '../../../state';
 import {
 	DatepickerAction,
 	datepickerChange,
 	setAvailableDates
 } from '../../../store/form/dates/actions';
 import { Moment } from 'moment';
+import {routeType} from "../../../store/form/selectors";
 
 interface StateProps {
 	system: SystemState;
@@ -22,6 +26,7 @@ interface StateProps {
 	showErrors: boolean;
 	getDepartureHighlightedDates: HighlightedDatesGroup[];
 	getReturnHighlightedDates: HighlightedDatesGroup[];
+	routeType: RouteType;
 }
 
 interface DispatchProps {
@@ -33,7 +38,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 	protected returnInput: HTMLInputElement = null;
 
 	render(): React.ReactNode {
-		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange } = this.props;
+		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, routeType } = this.props;
 		const DATEPICKER_SWITCH_DELAY = 20;
 
 		let returnInitialDate = departureDatepicker.date;
@@ -65,16 +70,17 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 				specialDate={returnDatepicker.date}
 			/>
 
-			<ReturnDatepicker
-				locale={system.locale}
-				date={returnDatepicker.date}
-				isActive={returnDatepicker.isActive}
-				openToDate={returnInitialDate}
-				selectDate={datepickerChange}
-				highlightDates={this.props.getReturnHighlightedDates}
-				getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
-				specialDate={departureDatepicker.date}
-			/>
+			{ routeType !== RouteType.CR ?
+				<ReturnDatepicker
+					locale={system.locale}
+					date={returnDatepicker.date}
+					isActive={returnDatepicker.isActive}
+					openToDate={returnInitialDate}
+					selectDate={datepickerChange}
+					highlightDates={this.props.getReturnHighlightedDates}
+					getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
+					specialDate={departureDatepicker.date}
+				/> : null }
 		</div>;
 	}
 }
@@ -86,7 +92,8 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 		returnDatepicker: state.form.dates.return,
 		showErrors: state.form.showErrors,
 		getDepartureHighlightedDates: getDepartureHighlightedDates(state),
-		getReturnHighlightedDates: getReturnHighlightedDates(state)
+		getReturnHighlightedDates: getReturnHighlightedDates(state),
+		routeType: routeType(state)
 	};
 };
 

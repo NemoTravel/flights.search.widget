@@ -4,6 +4,7 @@ import Segment from './Segment';
 import {ApplicationState, RouteType, SegmentState} from '../../../state';
 import {AnyAction, bindActionCreators, Dispatch} from "redux";
 import {addSegment, SegmentAction} from "../../../store/form/segments/actions";
+import * as classnames from 'classnames';
 
 interface StateProps {
 	segments: SegmentState[];
@@ -30,19 +31,18 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps & Pro
 	}
 
 	renderAllSegment(): React.ReactNode {
-		const { segments } = this.props;
+		const { segments, routeType } = this.props;
 
 		return segments.map( (segment:SegmentState, index: number) => {
-			return <div key={index} className="widget-form-airports__segment">
-				<Segment segment={segment} segmentId={index}/>
-			</div>
+			return <Segment segment={segment} segmentId={index} key={index} routeType={routeType}/>
+
 		});
 	}
 
 	render(): React.ReactNode {
 		const { segments, routeType } = this.props;
 
-		return <div className="form-group row widget-form-airports">
+		return <div className={classnames('form-group row widget-form-airports', {'widget-form-airports_CR': routeType === RouteType.CR })}>
 
 			{ this.renderAllSegment() }
 
