@@ -15,8 +15,9 @@ interface Props {
 	openToDate?: Moment;
 	highlightDates: HighlightedDatesGroup[];
 	specialDate: Moment;
+	segmentId: number;
 
-	selectDate: (date: Moment, dateType: DatepickerFieldType) => any;
+	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
 	getRef?: (input: any) => any;
 }
 
@@ -47,7 +48,7 @@ export default class Datepicker extends React.Component<Props> {
 	 * @param {Moment} date
 	 */
 	onChangeHandler(date: Moment): void {
-		this.props.selectDate(date, this.type);
+		this.props.selectDate(date, this.type, this.props.segmentId);
 	}
 
 	shouldComponentUpdate(nextProps: Props): boolean {

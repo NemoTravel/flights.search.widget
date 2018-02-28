@@ -21,27 +21,33 @@ import {routeType} from "../../../store/form/selectors";
 
 interface StateProps {
 	system: SystemState;
-	departureDatepicker: DatepickerState;
-	returnDatepicker: DatepickerState;
 	showErrors: boolean;
 	getDepartureHighlightedDates: HighlightedDatesGroup[];
 	getReturnHighlightedDates: HighlightedDatesGroup[];
 	routeType: RouteType;
 }
 
-interface DispatchProps {
-	setAvailableDates: (availableDates: any, dateType: DatepickerFieldType) => DatepickerAction;
-	datepickerChange: (date: Moment, dateType: DatepickerFieldType) => CommonThunkAction;
+interface Props {
+	segmentId: number;
+	departureDatepicker: DatepickerState;
+	returnDatepicker: DatepickerState;
 }
 
-class DatesContainer extends React.Component<StateProps & DispatchProps> {
+interface DispatchProps {
+	setAvailableDates: (availableDates: any, dateType: DatepickerFieldType) => DatepickerAction;
+	datepickerChange: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => CommonThunkAction;
+}
+
+class DatesContainer extends React.Component<StateProps & DispatchProps & Props> {
 	protected returnInput: HTMLInputElement = null;
 
 	render(): React.ReactNode {
-		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, routeType } = this.props;
+		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, routeType, segmentId } = this.props;
 		const DATEPICKER_SWITCH_DELAY = 20;
 
 		let returnInitialDate = departureDatepicker.date;
+
+		console.log(returnDatepicker);
 
 		if (
 			departureDatepicker.date &&
@@ -58,7 +64,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}
 				selectDate={(date: Moment, dateType: DatepickerFieldType) => {
-					datepickerChange(date, dateType);
+					datepickerChange(date, dateType, segmentId);
 
 					if (system.autoFocusReturnDate && this.returnInput) {
 						setTimeout(() => {
@@ -68,6 +74,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 				}}
 				highlightDates={this.props.getDepartureHighlightedDates}
 				specialDate={returnDatepicker.date}
+				segmentId={segmentId}
 			/>
 
 			{ routeType !== RouteType.CR ?
@@ -80,6 +87,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 					highlightDates={this.props.getReturnHighlightedDates}
 					getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
 					specialDate={departureDatepicker.date}
+					segmentId={segmentId}
 				/> : null }
 		</div>;
 	}
@@ -88,8 +96,8 @@ class DatesContainer extends React.Component<StateProps & DispatchProps> {
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
 		system: state.system,
-		departureDatepicker: state.form.dates.departure,
-		returnDatepicker: state.form.dates.return,
+	//	departureDatepicker: state.form.dates.departure,
+	//	returnDatepicker: state.form.dates.return,
 		showErrors: state.form.showErrors,
 		getDepartureHighlightedDates: getDepartureHighlightedDates(state),
 		getReturnHighlightedDates: getReturnHighlightedDates(state),

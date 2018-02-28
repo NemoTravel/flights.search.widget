@@ -370,7 +370,8 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 				const cashedSegments = stateFromCache.form.segments;
 				let segments: SegmentState[] = [];
 
-				cashedSegments.map((segment: SegmentState, index: number) => {
+				cashedSegments.map((segment: any, index: number) => {
+					segment.date.date = moment(segment.date.date).locale(state.system.locale);
 					segments.push(segment);
 				});
 

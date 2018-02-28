@@ -18,7 +18,7 @@ interface Props {
 	type: DatepickerFieldType;
 	inputProps: any;
 
-	selectDate: (date: Moment, dateType: DatepickerFieldType) => any;
+	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
 	getRef?: (inout: any) => any;
 }
 
@@ -74,7 +74,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	disable(): void {
 		if (this.props.isDisableable && this.state.isActive) {
 			this.setState({ isActive: false });
-			this.props.selectDate(null, this.props.type);
+			this.props.selectDate(null, this.props.type, 0);
 		}
 	}
 

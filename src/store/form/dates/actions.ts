@@ -7,6 +7,7 @@ import {
 import { AnyAction, Dispatch } from 'redux';
 import { AvailableDateResponse } from '../../../services/responses/AvailableDates';
 import {setRouteType} from "../route/actions";
+import {selectDateInSegment} from "../segments/actions";
 
 export interface DatepickerAction {
 	type: string;
@@ -53,9 +54,10 @@ export const setAvailableDates = (availableDates: AvailableDateResponse[], dateT
  * @param {String} dateType
  * @returns {Function}
  */
-export const datepickerChange = (date: Moment, dateType: DatepickerFieldType): CommonThunkAction => {
+export const datepickerChange = (date: Moment, dateType: DatepickerFieldType, segmentId: number): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		const state = getState();
+		console.log(date);
 
 		// If the new departure date is `bigger` than the selected return date,
 		// clear the return date.
@@ -63,7 +65,7 @@ export const datepickerChange = (date: Moment, dateType: DatepickerFieldType): C
 			const anotherDate = getDateByType(state, DatepickerFieldType.Return);
 
 			if (anotherDate && anotherDate.isBefore(date)) {
-				dispatch(selectDate(null, DatepickerFieldType.Return));
+				dispatch(selectDateInSegment(null, DatepickerFieldType.Return, segmentId));
 				dispatch(toggleDatePicker(false, DatepickerFieldType.Return));
 			}
 		}
@@ -73,11 +75,11 @@ export const datepickerChange = (date: Moment, dateType: DatepickerFieldType): C
 			const anotherDate = getDateByType(state, DatepickerFieldType.Departure);
 
 			if (anotherDate && anotherDate.isAfter(date)) {
-				dispatch(selectDate(date, DatepickerFieldType.Departure));
+				dispatch(selectDateInSegment(date, DatepickerFieldType.Departure, segmentId));
 			}
 		}
 
 		// Update new date.
-		dispatch(selectDate(date, dateType));
+		dispatch(selectDateInSegment(date, dateType, segmentId));
 	};
 };

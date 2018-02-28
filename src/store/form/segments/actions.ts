@@ -1,7 +1,8 @@
 import {Action, AnyAction, Dispatch} from 'redux';
-import {AutocompleteFieldType, CommonThunkAction, GetStateFunction} from "../../../state";
+import {AutocompleteFieldType, CommonThunkAction, DatepickerFieldType, GetStateFunction} from "../../../state";
 import {AutocompleteAction} from "../autocomplete/actions";
-import {ADD_SEGMENT, DELETE_SEGMENT, SET_AIRPORT_IN_SEGMENT} from "../../actions";
+import {ADD_SEGMENT, DELETE_SEGMENT, SET_AIRPORT_IN_SEGMENT, SELECT_DATE_IN_SEGMENT} from "../../actions";
+import { Moment } from 'moment';
 
 export interface SegmentAction extends Action {
 	segmentId: number;
@@ -15,6 +16,13 @@ export interface AutocompleteActionExtend {
 	payload?: any;
 }
 
+export interface DatepickerActionExtend {
+	type: string;
+	dateType: DatepickerFieldType;
+	segmentIndex: number;
+	payload?: any;
+}
+
 export const setAirportInSegment = (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number = 0): AutocompleteActionExtend => {
 	return {
 		type: SET_AIRPORT_IN_SEGMENT,
@@ -24,6 +32,17 @@ export const setAirportInSegment = (airport: any, autocompleteType: Autocomplete
 			airport
 		}
 	}
+};
+
+export const selectDateInSegment = (date: Moment, dateType: DatepickerFieldType, segmentId: number = 0): DatepickerActionExtend => {
+	return {
+		type: SELECT_DATE_IN_SEGMENT,
+		dateType,
+		segmentIndex: segmentId,
+		payload: {
+			date
+		}
+	};
 };
 
 export const addSegment = (): SegmentAction => {
