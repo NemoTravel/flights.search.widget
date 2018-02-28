@@ -29,6 +29,14 @@
 		font-size: 13px;
 	}
 
+	&_CR {
+		flex-wrap: wrap !important;
+	}
+
+	&__segment {
+		margin-bottom: 10px;
+	}
+
 	&__header {
 		background-color: $title-color !important;
 	}

@@ -24,6 +24,19 @@
 	&__segment {
 		width: 100%;
 		padding: 0 20px;
+
+		&__drop {
+			margin: 0 20px;
+			background: #f7db03;
+			height: 40px;
+			width: 40px;
+			color: #726666;
+			font-size: 15px;
+			line-height: 40px;
+			text-align: center;
+			cursor: pointer;
+			font-weight: 700;
+		}
 	}
 	
 	&__header {

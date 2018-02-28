@@ -6007,6 +6007,19 @@
   padding: 0 20px;
 }
 
+.widget-form-airports__segment__drop {
+  margin: 0 20px;
+  background: #f7db03;
+  height: 40px;
+  width: 40px;
+  color: #726666;
+  font-size: 15px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+}
+
 .widget-form-airports__header {
   display: none;
 }

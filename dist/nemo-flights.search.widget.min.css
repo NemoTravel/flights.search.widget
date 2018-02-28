@@ -509,6 +509,15 @@
   font-size: 13px;
 }
 
+.widget-form-airports_CR {
+  -ms-flex-wrap: wrap !important;
+  flex-wrap: wrap !important;
+}
+
+.widget-form-airports__segment {
+  margin-bottom: 10px;
+}
+
 .widget-form-airports__header {
   background-color: #64b5f6 !important;
 }

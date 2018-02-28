@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import Segment from './Segment';
 import {ApplicationState, RouteType, SegmentState} from '../../../state';
 import {AnyAction, bindActionCreators, Dispatch} from "redux";
-import {addSegment, SegmentAction} from "../../../store/form/segments/actions";
+import {addSegment, deleteSegment, SegmentAction} from "../../../store/form/segments/actions";
 import * as classnames from 'classnames';
+import {bind} from "classnames/bind";
 
 interface StateProps {
 	segments: SegmentState[];
@@ -12,6 +13,7 @@ interface StateProps {
 
 interface DispatchProps {
 	addSegment: () => SegmentAction;
+	removeSegment: () => SegmentAction;
 }
 
 interface Props {
@@ -31,11 +33,16 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps & Pro
 	}
 
 	renderAllSegment(): React.ReactNode {
-		const { segments, routeType } = this.props;
+		const { segments, routeType, removeSegment } = this.props;
 
 		return segments.map( (segment:SegmentState, index: number) => {
-			return <Segment segment={segment} segmentId={index} key={index} routeType={routeType}/>
-
+			return <Segment
+				segment={segment}
+				segmentId={index}
+				key={index}
+				removeSegment={removeSegment}
+				canBeRemoved={segments.length > 1 && segments.length - 1 === index && routeType === RouteType.CR}
+			/>
 		});
 	}
 
@@ -62,7 +69,8 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 
 const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
-		addSegment: bindActionCreators(addSegment, dispatch)
+		addSegment: bindActionCreators(addSegment, dispatch),
+		removeSegment: bindActionCreators(deleteSegment, dispatch)
 	};
 };
 

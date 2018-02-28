@@ -314,10 +314,11 @@ export interface CachedFormSate {
 	dates: CachedDatesState;
 	passengers: PassengersState;
 	autocomplete: AutocompleteState;
-	segments: SegmentState;
+	segments: SegmentState[];
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
+	routeType: RouteType
 }
 
 export interface ApplicationState {
@@ -361,6 +362,21 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 
 			const tmpSegment: SegmentState = segmentState;
 
+			if (stateFromCache.form.routeType) {
+				state.form.routeType = stateFromCache.form.routeType;
+			}
+
+			if (stateFromCache.form.segments) {
+				const cashedSegments = stateFromCache.form.segments;
+				let segments: SegmentState[] = [];
+
+				cashedSegments.map((segment: SegmentState, index: number) => {
+					segments.push(segment);
+				});
+
+				state.form.segments = segments;
+			}
+
 			if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
 				const cachedArrivalAutocomplete = stateFromCache.form.autocomplete.arrival;
@@ -371,8 +387,6 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						state.form.autocomplete.departure,
 						cachedDepartureAutocomplete.airport
 					);
-
-					tmpSegment.autocomplete.departure.airport = cachedDepartureAutocomplete.airport;
 				}
 
 				if (canBeProcessed && cachedArrivalAutocomplete && cachedArrivalAutocomplete.airport) {
@@ -380,8 +394,6 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						state.form.autocomplete.arrival,
 						cachedArrivalAutocomplete.airport
 					);
-
-					tmpSegment.autocomplete.arrival.airport = cachedArrivalAutocomplete.airport;
 				}
 
 				if (canBeProcessed && cachedAutocompleteGroups && cachedAutocompleteGroups.previousSearches) {
@@ -435,9 +447,6 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 					}
 				}
 			}
-
-			state.form.segments.push(tmpSegment);
-			console.log(state);
 
 			if (stateFromCache.form.passengers) {
 				for (const passType in stateFromCache.form.passengers) {

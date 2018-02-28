@@ -1,4 +1,4 @@
-import {ADD_SEGMENT, SET_AIRPORT_IN_SEGMENT} from '../../actions';
+import {ADD_SEGMENT, DELETE_SEGMENT, SET_AIRPORT_IN_SEGMENT} from '../../actions';
 import { SegmentState, segmentState } from '../../../state';
 import { SegmentAction } from './actions';
 import {AnyAction} from "redux";
@@ -32,6 +32,10 @@ export default (state: SegmentState[] = [segmentState], action: AnyAction): Segm
 
 	if (action.type === ADD_SEGMENT) {
 		return [...state, segmentState];
+	}
+
+	if (action.type === DELETE_SEGMENT) {
+		return [...state.splice(0, state.length - 1)];
 	}
 
 	return state;
