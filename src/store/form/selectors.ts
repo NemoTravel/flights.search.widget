@@ -3,7 +3,7 @@ import { getTotalPassengersCount } from './passengers/selectors';
 import { getAltLayout, i18n } from '../../utils';
 import {
 	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState,
-	FormState, RouteType,
+	FormState, RouteType, SegmentState,
 	SystemState
 } from '../../state';
 import { AutocompleteSuggestion } from '../../services/models/AutocompleteSuggestion';
@@ -46,20 +46,28 @@ export const formIsValid = createSelector(
 	[ getForm, getTotalPassengersCount ],
 	(form: FormState, totalPassengersCount: number): boolean => {
 		let isValid = true;
+		const segments = form.segments;
+
+		if (!segments.length) {
+			isValid = false;
+		}
+
+		segments.map((segment: SegmentState, index: number) => {
+			if (!segment.dates.departure.date) {
+				isValid = false;
+			}
+			else if (!segment.autocomplete.departure.airport) {
+				isValid = false;
+			}
+			else if (!segment.autocomplete.arrival.airport) {
+				isValid = false;
+			}
+			else if (segment.autocomplete.departure.airport.IATA === segment.autocomplete.arrival.airport.IATA) {
+				isValid = false;
+			}
+		});
 
 		if (totalPassengersCount <= 0) {
-			isValid = false;
-		}
-		else if (!form.dates.departure.date) {
-			isValid = false;
-		}
-		else if (!form.autocomplete.departure.airport) {
-			isValid = false;
-		}
-		else if (!form.autocomplete.arrival.airport) {
-			isValid = false;
-		}
-		else if (form.autocomplete.departure.airport.IATA === form.autocomplete.arrival.airport.IATA) {
 			isValid = false;
 		}
 		else if (form.coupon.number && !form.coupon.number.match(/^[\d]+$/g)) {

@@ -1,4 +1,7 @@
-import {ADD_SEGMENT, DELETE_SEGMENT, SELECT_DATE_IN_SEGMENT, SET_AIRPORT_IN_SEGMENT} from '../../actions';
+import {
+	ADD_SEGMENT, DELETE_SEGMENT, REMOVE_COMPLEX_SEGMENTS, SELECT_DATE_IN_SEGMENT,
+	SET_AIRPORT_IN_SEGMENT
+} from '../../actions';
 import { SegmentState, segmentState } from '../../../state';
 import { SegmentAction } from './actions';
 import {AnyAction} from "redux";
@@ -38,14 +41,18 @@ export default (state: SegmentState[] = [segmentState], action: AnyAction): Segm
 		return [...state.splice(0, state.length - 1)];
 	}
 
+	if (action.type === REMOVE_COMPLEX_SEGMENTS) {
+		return [state[0]];
+	}
+
 	if (action.type === SELECT_DATE_IN_SEGMENT) {
 		return state.map( (item: SegmentState, index: number) => {
 			if (index === action.segmentIndex) {
 				return {
 					...item,
-					date: {
-						...item.date,
-						[action.dateType]: selectDateReducer(item.date[action.dateType], action.payload.date)
+					dates: {
+						...item.dates,
+						[action.dateType]: selectDateReducer(item.dates[action.dateType], action.payload.date)
 					}
 				}
 			}

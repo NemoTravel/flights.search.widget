@@ -57,7 +57,6 @@ export const setAvailableDates = (availableDates: AvailableDateResponse[], dateT
 export const datepickerChange = (date: Moment, dateType: DatepickerFieldType, segmentId: number): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		const state = getState();
-		console.log(date);
 
 		// If the new departure date is `bigger` than the selected return date,
 		// clear the return date.

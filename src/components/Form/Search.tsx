@@ -15,7 +15,7 @@ interface Props {
 	showCouponField: boolean;
 	showMileCardField: boolean;
 	isComplexRoute: RouteType;
-	setRouteType: (type: RouteType) => SetRouteTypeAction;
+	setRouteType: (type: RouteType) => CommonThunkAction;
 }
 
 export default class Search extends React.Component<Props> {

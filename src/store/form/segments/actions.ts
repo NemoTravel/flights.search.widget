@@ -1,7 +1,10 @@
 import {Action, AnyAction, Dispatch} from 'redux';
 import {AutocompleteFieldType, CommonThunkAction, DatepickerFieldType, GetStateFunction} from "../../../state";
 import {AutocompleteAction} from "../autocomplete/actions";
-import {ADD_SEGMENT, DELETE_SEGMENT, SET_AIRPORT_IN_SEGMENT, SELECT_DATE_IN_SEGMENT} from "../../actions";
+import {
+	ADD_SEGMENT, DELETE_SEGMENT, SET_AIRPORT_IN_SEGMENT, SELECT_DATE_IN_SEGMENT,
+	REMOVE_COMPLEX_SEGMENTS
+} from "../../actions";
 import { Moment } from 'moment';
 
 export interface SegmentAction extends Action {
@@ -31,6 +34,13 @@ export const setAirportInSegment = (airport: any, autocompleteType: Autocomplete
 		payload: {
 			airport
 		}
+	}
+};
+
+export const removeComplexSegments = (): SegmentAction => {
+	return {
+		type: REMOVE_COMPLEX_SEGMENTS,
+		segmentId: 0
 	}
 };
 

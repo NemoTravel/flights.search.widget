@@ -3,7 +3,7 @@ import {SET_ROUTE_TYPE, SHOW_ERRORS} from '../actions';
 import { formIsValid } from './selectors';
 import {
 	ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState,
-	RouteType
+	RouteType, SegmentState
 } from '../../state';
 import { URL, clearURL } from '../../utils';
 
@@ -21,20 +21,23 @@ export const showErrors = (shouldShowErrors: boolean): ShowErrorsAction => {
 
 const runNemoSearch = (state: ApplicationState): void => {
 	let requestURL = clearURL(state.system.nemoURL) + '/results/';
+	const segments = state.form.segments;
 
-	// Departure airport info.
-	requestURL += state.form.autocomplete.departure.airport.isCity ? 'c' : 'a';
-	requestURL += state.form.autocomplete.departure.airport.IATA;
+	segments.map((segment: SegmentState) => {
+		// Departure airport info.
+		requestURL += segment.autocomplete.departure.airport.isCity ? 'c' : 'a';
+		requestURL += segment.autocomplete.departure.airport.IATA;
 
-	// Arrival airport info.
-	requestURL += state.form.autocomplete.arrival.airport.isCity ? 'c' : 'a';
-	requestURL += state.form.autocomplete.arrival.airport.IATA;
+		// Arrival airport info.
+		requestURL += segment.autocomplete.arrival.airport.isCity ? 'c' : 'a';
+		requestURL += segment.autocomplete.arrival.airport.IATA;
 
-	// Departure date info.
-	requestURL += state.form.dates.departure.date.format('YYYYMMDD');
+		// Departure date info.
+		requestURL += segment.dates.departure.date.format('YYYYMMDD');
+	});
 
 	// Return date info.
-	if (state.form.dates.return.date) {
+	if (state.form.dates.return.date && segments.length === 1) {
 		requestURL += state.form.dates.return.date.format('YYYYMMDD');
 	}
 

@@ -33,8 +33,8 @@ export default class Segment extends React.Component<Props> {
 
 			<DatesContainer
 				segmentId={segmentId}
-				departureDatepicker={segment.date.departure}
-				returnDatepicker={segment.date.return}/>
+				departureDatepicker={segment.dates.departure}
+				returnDatepicker={segment.dates.return}/>
 
 			{ canBeRemoved ? <div className="widget-form-airports__segment__drop" onClick={this.deleteSegment}> X </div> : null }
 		</div>;

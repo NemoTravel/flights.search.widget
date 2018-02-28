@@ -25,7 +25,7 @@ interface StateProps {
 
 interface DispatchProps {
 	startSearch: () => CommonThunkAction;
-	setRouteType: (type: RouteType) => SetRouteTypeAction;
+	setRouteType: (type: RouteType) => CommonThunkAction;
 }
 
 class Form extends React.Component<StateProps & DispatchProps> {

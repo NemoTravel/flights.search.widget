@@ -153,7 +153,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		}
 	}
 
-	if (!state.form.segments[0].date.return.date) {
+	if (!state.form.segments[0].dates.return.date) {
 		if (state.system.defaultReturnDate) {
 			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
@@ -161,14 +161,13 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		}
 	}
 
-	if (!state.form.segments[0].date.departure.date) {
+	if (!state.form.segments[0].dates.departure.date) {
 		if (state.system.defaultDepartureDate) {
 			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
 			store.dispatch(selectDateInSegment(departureDate, DatepickerFieldType.Departure, 0));
 		}
 	}
-
 
 	if (getTotalPassengersCount(state) === 0) {
 		const passengers = state.system.defaultPassengers;
