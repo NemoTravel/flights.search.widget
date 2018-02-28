@@ -43,7 +43,10 @@ export default (state: SegmentState[] = [segmentState], action: AnyAction): Segm
 			if (index === action.segmentIndex) {
 				return {
 					...item,
-					date: selectDateReducer(item.date, action.payload.date)
+					date: {
+						...item.date,
+						[action.dateType]: selectDateReducer(item.date[action.dateType], action.payload.date)
+					}
 				}
 			}
 			else {

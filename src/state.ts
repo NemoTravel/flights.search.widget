@@ -143,11 +143,6 @@ export interface AutocompleteState {
 	defaultGroups: AutocompleteDefaultGroupsState;
 }
 
-export interface SegmentState {
-	autocomplete: AutocompleteState,
-	date: DatepickerState
-}
-
 export const autocompleteState: AutocompleteState = {
 	[AutocompleteFieldType.Departure]: {
 		isLoading: false,
@@ -166,11 +161,6 @@ export const autocompleteState: AutocompleteState = {
 			name: 'previousSearches'
 		}
 	}
-};
-
-export const segmentState: SegmentState = {
-	autocomplete: autocompleteState,
-	date: null
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -193,6 +183,7 @@ export interface CachedDatepickerState {
 }
 
 export interface DatesState {
+	[key: string]: DatepickerState;
 	departure: DatepickerState;
 	return: DatepickerState;
 }
@@ -216,6 +207,16 @@ export const datesState: DatesState = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
+
+export interface SegmentState {
+	autocomplete: AutocompleteState,
+	date: DatesState
+}
+
+export const segmentState: SegmentState = {
+	autocomplete: autocompleteState,
+	date: datesState
+};
 
 export interface PassengerState {
 	title: string;
@@ -371,7 +372,20 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 				let segments: SegmentState[] = [];
 
 				cashedSegments.map((segment: any, index: number) => {
-					segment.date.date = moment(segment.date.date).locale(state.system.locale);
+					let newDateStateDeparture: DatepickerState = {
+						isActive: segment.date.departure.isActive,
+						availableDates: segment.date.departure.availableDates,
+						date: moment(segment.date.departure.date).locale(state.system.locale)
+					};
+
+					let newDateStateReturn: DatepickerState = {
+						isActive: segment.date.return.isActive,
+						availableDates: segment.date.return.availableDates,
+						date: moment(segment.date.return.date).locale(state.system.locale)
+					};
+
+					segment.date.departure = newDateStateDeparture;
+					segment.date.return = newDateStateReturn;
 					segments.push(segment);
 				});
 
@@ -417,8 +431,6 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 							availableDates: cachedDepartureDate.availableDates,
 							date: moment(cachedDepartureDate.date).locale(state.system.locale)
 						};
-
-						tmpSegment.date = newDepartureState;
 
 						if (newDepartureState.date.isSameOrAfter(today)) {
 							state.form.dates.departure = newDepartureState;
@@ -503,5 +515,6 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 		}
 	}
 
+	console.log(state);
 	return state;
 };

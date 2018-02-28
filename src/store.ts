@@ -19,6 +19,7 @@ import {
 	loadNearestAirportForAutocomplete,
 	setSelectedAirport
 } from './store/form/autocomplete/actions';
+import {addSegment, selectDateInSegment} from "./store/form/segments/actions";
 
 const middlewares = [thunk];
 const STORE_CACHE_KEY = 'cached_store';
@@ -90,6 +91,10 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		applyMiddleware(...middlewares)
 	);
 
+	if (!store.getState().form.segments.length) {
+		store.dispatch(addSegment());
+	}
+
 	const state = store.getState();
 
 	if (!state.form.autocomplete.departure.airport) {
@@ -147,6 +152,23 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 			store.dispatch(selectDate(returnDate, DatepickerFieldType.Return));
 		}
 	}
+
+	if (!state.form.segments[0].date.return.date) {
+		if (state.system.defaultReturnDate) {
+			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
+
+			store.dispatch(selectDateInSegment(returnDate, DatepickerFieldType.Return, 0));
+		}
+	}
+
+	if (!state.form.segments[0].date.departure.date) {
+		if (state.system.defaultDepartureDate) {
+			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
+
+			store.dispatch(selectDateInSegment(departureDate, DatepickerFieldType.Departure, 0));
+		}
+	}
+
 
 	if (getTotalPassengersCount(state) === 0) {
 		const passengers = state.system.defaultPassengers;
