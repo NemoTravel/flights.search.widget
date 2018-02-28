@@ -17,7 +17,7 @@ import {
 	setAvailableDates
 } from '../../../store/form/dates/actions';
 import { Moment } from 'moment';
-import {routeType} from "../../../store/form/selectors";
+import {routeType} from '../../../store/form/selectors';
 
 interface StateProps {
 	system: SystemState;
@@ -46,8 +46,6 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 		const DATEPICKER_SWITCH_DELAY = 20;
 
 		let returnInitialDate = departureDatepicker.date;
-
-		console.log(returnDatepicker);
 
 		if (
 			departureDatepicker.date &&
@@ -96,8 +94,6 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
 		system: state.system,
-	//	departureDatepicker: state.form.dates.departure,
-	//	returnDatepicker: state.form.dates.return,
 		showErrors: state.form.showErrors,
 		getDepartureHighlightedDates: getDepartureHighlightedDates(state),
 		getReturnHighlightedDates: getReturnHighlightedDates(state),

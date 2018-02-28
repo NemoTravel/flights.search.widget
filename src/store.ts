@@ -19,7 +19,7 @@ import {
 	loadNearestAirportForAutocomplete,
 	setSelectedAirport
 } from './store/form/autocomplete/actions';
-import {addSegment, selectDateInSegment} from "./store/form/segments/actions";
+import {addSegment, selectDateInSegment} from './store/form/segments/actions';
 
 const middlewares = [thunk];
 const STORE_CACHE_KEY = 'cached_store';

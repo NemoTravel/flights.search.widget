@@ -368,17 +368,17 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 			}
 
 			if (stateFromCache.form.segments) {
-				const cashedSegments = stateFromCache.form.segments;
-				let segments: SegmentState[] = [];
+				const cashedSegments = stateFromCache.form.segments,
+				segments: SegmentState[] = [];
 
 				cashedSegments.map((segment: any, index: number) => {
-					let newDateStateDeparture: DatepickerState = {
+					const newDateStateDeparture: DatepickerState = {
 						isActive: segment.dates.departure.isActive,
 						availableDates: segment.dates.departure.availableDates,
 						date: moment(segment.dates.departure.date).locale(state.system.locale)
 					};
 
-					let newDateStateReturn: DatepickerState = {
+					const newDateStateReturn: DatepickerState = {
 						isActive: segment.dates.return.isActive,
 						availableDates: segment.dates.return.availableDates,
 						date: moment(segment.dates.return.date).locale(state.system.locale)
@@ -515,6 +515,5 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 		}
 	}
 
-	console.log(state);
 	return state;
 };

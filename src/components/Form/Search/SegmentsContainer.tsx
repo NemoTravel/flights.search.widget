@@ -2,10 +2,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Segment from './Segment';
 import {ApplicationState, RouteType, SegmentState} from '../../../state';
-import {AnyAction, bindActionCreators, Dispatch} from "redux";
-import {addSegment, deleteSegment, SegmentAction} from "../../../store/form/segments/actions";
+import {AnyAction, bindActionCreators, Dispatch} from 'redux';
+import {addSegment, deleteSegment, SegmentAction} from '../../../store/form/segments/actions';
 import * as classnames from 'classnames';
-import {bind} from "classnames/bind";
 
 interface StateProps {
 	segments: SegmentState[];
@@ -35,14 +34,14 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps & Pro
 	renderAllSegment(): React.ReactNode {
 		const { segments, routeType, removeSegment } = this.props;
 
-		return segments.map( (segment:SegmentState, index: number) => {
+		return segments.map((segment: SegmentState, index: number) => {
 			return <Segment
 				segment={segment}
 				segmentId={index}
 				key={index}
 				removeSegment={removeSegment}
 				canBeRemoved={segments.length > 1 && segments.length - 1 === index && routeType === RouteType.CR}
-			/>
+			/>;
 		});
 	}
 

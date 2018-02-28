@@ -1,7 +1,7 @@
 import { AnyAction, Dispatch } from 'redux';
-import {SET_ROUTE_TYPE} from '../../actions';
-import {CommonThunkAction, GetStateFunction, RouteType} from "../../../state";
-import {removeComplexSegments} from "../segments/actions";
+import { SET_ROUTE_TYPE } from '../../actions';
+import { CommonThunkAction, GetStateFunction, RouteType } from '../../../state';
+import { removeComplexSegments } from '../segments/actions';
 
 export interface SetRouteTypeAction {
 	type: string,
@@ -12,7 +12,7 @@ export const setRouteTypeAction = (type: RouteType): SetRouteTypeAction => {
 	return {
 		type: SET_ROUTE_TYPE,
 		payload: type
-	}
+	};
 };
 
 export const setRouteType = (type: RouteType): CommonThunkAction => {

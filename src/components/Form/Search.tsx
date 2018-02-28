@@ -8,7 +8,6 @@ import MileCardContainer from './Search/Bonus/MileCardContainer';
 import SegmentsContainer from './Search/SegmentsContainer';
 import { i18n } from '../../utils';
 import {CommonThunkAction, RouteType} from '../../state';
-import {SetRouteTypeAction} from "../../store/form/route/actions";
 
 interface Props {
 	startSearch: () => CommonThunkAction;
@@ -32,7 +31,7 @@ export default class Search extends React.Component<Props> {
 	}
 
 	changeRouteType(): void {
-		let routeType = this.props.isComplexRoute;
+		const routeType = this.props.isComplexRoute;
 
 		if (routeType === RouteType.CR) {
 			this.props.setRouteType(RouteType.OW);

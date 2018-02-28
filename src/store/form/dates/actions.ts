@@ -6,8 +6,7 @@ import {
 } from '../../../state';
 import { AnyAction, Dispatch } from 'redux';
 import { AvailableDateResponse } from '../../../services/responses/AvailableDates';
-import {setRouteType} from "../route/actions";
-import {selectDateInSegment} from "../segments/actions";
+import { selectDateInSegment } from '../segments/actions';
 
 export interface DatepickerAction {
 	type: string;

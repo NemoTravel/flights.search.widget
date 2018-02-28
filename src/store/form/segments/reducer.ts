@@ -3,22 +3,20 @@ import {
 	SET_AIRPORT_IN_SEGMENT
 } from '../../actions';
 import { SegmentState, segmentState } from '../../../state';
-import { SegmentAction } from './actions';
-import {AnyAction} from "redux";
-import {autocompleteAirportReducer} from "../autocomplete/reducer";
-import {selectDateReducer} from "../dates/reducer";
+import { AnyAction } from 'redux';
+import { selectDateReducer } from '../dates/reducer';
 
 export const addAirportReducer = (state: SegmentState = segmentState, action: AnyAction): SegmentState => {
 	return {
 		...state,
-		'autocomplete': {
+		autocomplete: {
 			...state.autocomplete,
 			[action.autocompleteType]: {
 				...state.autocomplete[action.autocompleteType],
 				airport: action.payload.airport
 			}
 		}
-	}
+	};
 };
 
 export default (state: SegmentState[] = [segmentState], action: AnyAction): SegmentState[] => {
@@ -54,7 +52,7 @@ export default (state: SegmentState[] = [segmentState], action: AnyAction): Segm
 						...item.dates,
 						[action.dateType]: selectDateReducer(item.dates[action.dateType], action.payload.date)
 					}
-				}
+				};
 			}
 			else {
 				return item;

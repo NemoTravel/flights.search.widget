@@ -13,7 +13,7 @@ import {
 	routeType
 } from '../store/form/selectors';
 import {ApplicationState, CommonThunkAction, RouteType} from '../state';
-import {setRouteType as setRouteAction, SetRouteTypeAction} from "../store/form/route/actions";
+import {setRouteType as setRouteAction, SetRouteTypeAction} from '../store/form/route/actions';
 
 interface StateProps {
 	verticalForm: boolean;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import AutocompleteContainer from './AutocompleteContainer';
 import DatesContainer from './DatesContainer';
 import {SegmentState} from '../../../state';
-import {SegmentAction} from "../../../store/form/segments/actions";
+import {SegmentAction} from '../../../store/form/segments/actions';
 
 interface Props {
 	segment: SegmentState;
