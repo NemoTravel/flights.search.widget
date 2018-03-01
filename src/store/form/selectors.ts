@@ -55,6 +55,12 @@ export const formIsValid = createSelector(
 		segments.map((segment: SegmentState, index: number) => {
 			if (!segment.dates.departure.date) {
 				isValid = false;
+
+			}
+			else if (index > 0) {
+				if (segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)) {
+					isValid = false;
+				}
 			}
 			else if (!segment.autocomplete.departure.airport) {
 				isValid = false;

@@ -41,6 +41,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps & Pro
 				key={index}
 				removeSegment={removeSegment}
 				canBeRemoved={segments.length > 1 && segments.length - 1 === index && routeType === RouteType.CR}
+				showDatesError={index > 0 && segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)}
 			/>;
 		});
 	}
