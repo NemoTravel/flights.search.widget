@@ -14,6 +14,7 @@
 	&__segment {
 		display: flex;
 		flex-wrap: nowrap;
+		padding-right: 0;
 
 		&__drop {
 			line-height: 30px;
@@ -32,6 +33,7 @@
 		flex-basis: 100%;
 		flex-shrink: 1;
 		margin-right: 0;
+		margin-bottom: 0;
 	//	margin: 0 auto;
 
 		@include adaptivity(tablet) {
@@ -51,6 +53,10 @@
 
 		.widget-form-airports__segment {
 			margin-left: 30px;
+		}
+
+		.widget-form-additionalOptions {
+			left: -180px;
 		}
 	}
 

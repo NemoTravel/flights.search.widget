@@ -21,6 +21,12 @@
 		margin-top: 50px;
 		right: 0;
 		color: #fff;
+
+		bottom: 0;
+		margin-bottom: -48px;
+		z-index: 1;
+		white-space: nowrap;
+		margin-right: 450px;
 	}
 
 	&__addSegment {
@@ -31,7 +37,7 @@
 		transition: all .2s;
 		text-align: center;
 		margin-left: 50px;
-		margin-right: 20px;
+		margin-right: 0;
 		font-weight: 500;
 		color: #fff;
 
