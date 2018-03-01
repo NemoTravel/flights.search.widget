@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Segment from './Segment';
-import { ApplicationState, RouteType, SegmentState, MAX_SEGMENTS_COUNT } from '../../../state';
+import { ApplicationState, RouteType, SegmentState, MAX_SEGMENTS_COUNT, CommonThunkAction } from '../../../state';
 import { AnyAction, bindActionCreators, Dispatch } from 'redux';
-import { addSegment, deleteSegment, SegmentAction } from '../../../store/form/segments/actions';
+import { continueRoute, deleteSegment, SegmentAction } from '../../../store/form/segments/actions';
 import * as classnames from 'classnames';
 
 interface StateProps {
@@ -12,7 +12,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-	addSegment: () => SegmentAction;
+	continueRoute: () => CommonThunkAction;
 	removeSegment: () => SegmentAction;
 }
 
@@ -24,7 +24,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 	}
 
 	continueRoute(): void {
-		this.props.addSegment();
+		this.props.continueRoute();
 	}
 
 	renderAllSegment(): React.ReactNode {
@@ -43,14 +43,14 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 	}
 
 	render(): React.ReactNode {
-		const { segments, routeType } = this.props;
+		const { segments, routeType, continueRoute } = this.props;
 
 		return <div className={classnames('form-group row widget-form-airports', {'widget-form-airports_CR': routeType === RouteType.CR })}>
 
 			{this.renderAllSegment()}
 
 			{routeType === RouteType.CR && segments.length < MAX_SEGMENTS_COUNT ?
-				<div className="widget-form__addSegment" onClick={this.continueRoute}>
+				<div className="widget-form__addSegment" onClick={this.props.continueRoute}>
 					Продолжить маршрут
 				</div> : null}
 		</div>;
@@ -66,7 +66,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 
 const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
-		addSegment: bindActionCreators(addSegment, dispatch),
+		continueRoute: bindActionCreators(continueRoute, dispatch),
 		removeSegment: bindActionCreators(deleteSegment, dispatch)
 	};
 };

@@ -373,20 +373,26 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 				segments: SegmentState[] = [];
 
 				cashedSegments.map((segment: any, index: number) => {
-					const newDateStateDeparture: DatepickerState = {
-						isActive: segment.dates.departure.isActive,
-						availableDates: segment.dates.departure.availableDates,
-						date: moment(segment.dates.departure.date).locale(state.system.locale)
-					};
+					if (segment.dates.departure.date) {
+						const newDateStateDeparture: DatepickerState = {
+							isActive: segment.dates.departure.isActive,
+							availableDates: segment.dates.departure.availableDates,
+							date: moment(segment.dates.departure.date).locale(state.system.locale)
+						};
 
-					const newDateStateReturn: DatepickerState = {
-						isActive: segment.dates.return.isActive,
-						availableDates: segment.dates.return.availableDates,
-						date: moment(segment.dates.return.date).locale(state.system.locale)
-					};
+						segment.dates.departure = newDateStateDeparture;
+					}
 
-					segment.dates.departure = newDateStateDeparture;
-					segment.dates.return = newDateStateReturn;
+					if (segment.dates.return.date) {
+						const newDateStateReturn: DatepickerState = {
+							isActive: segment.dates.return.isActive,
+							availableDates: segment.dates.return.availableDates,
+							date: moment(segment.dates.return.date).locale(state.system.locale)
+						};
+
+						segment.dates.return = newDateStateReturn;
+					}
+
 					segments.push(segment);
 				});
 

@@ -37,8 +37,8 @@ const runNemoSearch = (state: ApplicationState): void => {
 	});
 
 	// Return date info.
-	if (state.form.dates.return.date && segments.length === 1) {
-		requestURL += state.form.dates.return.date.format('YYYYMMDD');
+	if (state.form.segments[0].dates.return.date && segments.length === 1) {
+		requestURL += state.form.segments[0].dates.return.date.format('YYYYMMDD');
 	}
 
 	// Passengers info.
@@ -54,7 +54,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 	requestURL += '-class=' + state.form.additional.classType;
 
 	// VicinityDates
-	if (state.form.additional.vicinityDates) {
+	if (state.form.additional.vicinityDates && segments.length === 1) {
 		requestURL += `-vicinityDates=${state.system.vicinityDays}`;
 	}
 

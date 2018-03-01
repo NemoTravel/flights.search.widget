@@ -75,3 +75,16 @@ export const selectAirportInSegment = (airport: any, autocompleteType: Autocompl
 		// pushAiprortInCache(dispatch, getState, airport);
 	};
 };
+
+export const continueRoute = (): CommonThunkAction => {
+	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
+		const segments = getState().form.segments;
+		const arrAirportInLastSegment = segments.length > 0 ? segments[segments.length - 1].autocomplete.arrival.airport : null;
+
+		dispatch(addSegment());
+
+		if (arrAirportInLastSegment) {
+			dispatch(setAirportInSegment(arrAirportInLastSegment, AutocompleteFieldType.Departure, segments.length));
+		}
+	}
+};
