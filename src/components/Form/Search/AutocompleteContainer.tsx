@@ -34,7 +34,7 @@ interface DispatchProps {
 	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number) => CommonThunkAction;
 	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
-	swapAirports: () => CommonThunkAction;
+	swapAirports: (segmentId: number) => CommonThunkAction;
 }
 
 interface Props {

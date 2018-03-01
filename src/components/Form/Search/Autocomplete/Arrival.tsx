@@ -10,7 +10,7 @@ class Arrival extends Autocomplete {
 	protected defaultErrorText = i18n('form', 'arrivalError');
 
 	renderSwitcher(): React.ReactNode {
-		return <div className={'widget-ui-icon widget-form-airports__swap'} title={i18n('form', 'swapAirports')} onClick={this.props.swapAirports}/>;
+		return <div className={'widget-ui-icon widget-form-airports__swap'} title={i18n('form', 'swapAirports')} onClick={() => this.props.swapAirports(this.props.segmentId)}/>;
 	}
 }
 

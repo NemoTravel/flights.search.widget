@@ -26,7 +26,7 @@ interface Props {
 	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number) => any;
 	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
 	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
-	swapAirports?: () => CommonThunkAction;
+	swapAirports?: (segmentId: number) => CommonThunkAction;
 	getRef?: (reactSelect: any) => any;
 }
 

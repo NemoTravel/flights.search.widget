@@ -18,6 +18,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { AutocompleteSuggestion } from '../../../services/models/AutocompleteSuggestion';
 import { Airport } from '../../../services/models/Airport';
 import { ResponseWithGuide } from '../../../services/responses/Guide';
+import { selectAirportInSegment, setAirportInSegment } from "../segments/actions";
 
 export interface AutocompleteAction {
 	type: string;
@@ -384,16 +385,16 @@ export const loadNearestAirportForAutocomplete = (autocompleteType: Autocomplete
 /**
  * Change the departure and the arrival airports.
  */
-export const swapAirports = (): CommonThunkAction => {
+export const swapAirports = (segmentId: number): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		const
 			state = getState(),
-			departureAirport = state.form.autocomplete.departure.airport,
-			arrivalAirport = state.form.autocomplete.arrival.airport;
+			departureAirport = state.form.segments[segmentId].autocomplete.departure.airport,
+			arrivalAirport = state.form.segments[segmentId].autocomplete.arrival.airport;
 
 		if (departureAirport || arrivalAirport) {
-			dispatch(setSelectedAirport(departureAirport, AutocompleteFieldType.Arrival));
-			dispatch(setSelectedAirport(arrivalAirport, AutocompleteFieldType.Departure));
+			dispatch(setAirportInSegment(departureAirport, AutocompleteFieldType.Arrival, segmentId));
+			dispatch(setAirportInSegment(arrivalAirport, AutocompleteFieldType.Departure, segmentId));
 			getDatesAvailability(dispatch, getState);
 		}
 	};
