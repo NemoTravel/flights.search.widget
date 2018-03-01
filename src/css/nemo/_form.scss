@@ -16,6 +16,30 @@
 		}
 	}
 
+	&__routeTypeSwitch {
+		position: absolute;
+		margin-top: 50px;
+		right: 0;
+		color: #fff;
+	}
+
+	&__addSegment {
+		line-height: 40px;
+		background: rgba(255,255,255,.25);
+		border-radius: 2px;
+		cursor: pointer;
+		transition: all .2s;
+		text-align: center;
+		margin-left: 50px;
+		margin-right: 20px;
+		font-weight: 500;
+		color: #fff;
+
+		&:hover {
+			box-shadow: inset 0 0 16px rgba(255,255,255,.2);
+		}
+	}
+
 	&_vertical {
 		&:before {
 			display: none;
@@ -121,6 +145,7 @@
 				height: auto;
 				top: 0;
 				left: 0;
+				z-index: 1;
 			}
 		}
 	}

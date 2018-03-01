@@ -484,14 +484,33 @@
   }
 }
 
+.widget-form-airports__segment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+}
+
+.widget-form-airports__segment__drop {
+  line-height: 30px;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 0;
+  background: #b23e13;
+  color: #fff;
+  margin-top: 5px;
+}
+
 .widget-form-airports.row {
-  -ms-flex-wrap: nowrap !important;
-  flex-wrap: nowrap !important;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
   -ms-flex-preferred-size: 100%;
   flex-basis: 100%;
-  -ms-flex-negative: 2;
-  flex-shrink: 2;
-  margin: 0 auto;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  margin-right: 0;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -512,6 +531,10 @@
 .widget-form-airports_CR {
   -ms-flex-wrap: wrap !important;
   flex-wrap: wrap !important;
+}
+
+.widget-form-airports_CR .widget-form-airports__segment {
+  margin-left: 30px;
 }
 
 .widget-form-airports__segment {
@@ -850,6 +873,7 @@
   position: absolute;
   top: 55px;
   left: -300px;
+  z-index: 1;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -977,6 +1001,32 @@
   }
 }
 
+.widget-form__routeTypeSwitch {
+  position: absolute;
+  margin-top: 50px;
+  right: 0;
+  color: #fff;
+}
+
+.widget-form__addSegment {
+  line-height: 40px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  cursor: pointer;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+  text-align: center;
+  margin-left: 50px;
+  margin-right: 20px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.widget-form__addSegment:hover {
+  -webkit-box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2);
+}
+
 .widget-form_vertical:before {
   display: none;
 }
@@ -1076,4 +1126,5 @@
   height: auto;
   top: 0;
   left: 0;
+  z-index: 1;
 }

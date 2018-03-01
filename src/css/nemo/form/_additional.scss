@@ -5,6 +5,7 @@
 	position: absolute;
 	top: 55px;
 	left: -300px;
+	z-index: 1;
 
 	@include adaptivity(tablet) {
 		position: relative;
