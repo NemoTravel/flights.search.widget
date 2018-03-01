@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Checkbox } from '../../UI/Checkbox';
 import { vicinityDatesSelect, directFlightSelect } from '../../../store/form/additional/selector';
 import { i18n } from '../../../utils';
-import { ApplicationMode, ApplicationState, ServiceClass } from '../../../state';
+import { ApplicationMode, ApplicationState, RouteType, ServiceClass } from '../../../state';
 import {
 	BooleanAction, SetClassAction, setClassType,
 	vicinityDatesAction,
@@ -18,6 +18,7 @@ interface StateProps {
 	directFlightSelect: boolean;
 	vicinityDays: number;
 	widgetMode: ApplicationMode;
+	routeType: RouteType;
 }
 
 interface DispatchProps {
@@ -59,10 +60,10 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 	}
 
 	render(): React.ReactNode {
-		const { widgetMode } = this.props;
+		const { widgetMode, routeType } = this.props;
 
 		return widgetMode === ApplicationMode.NEMO ? <div className="form-group widget-form-additionalOptions">
-			{this.renderVicinityDates()}
+			{routeType !== RouteType.CR ? this.renderVicinityDates() : null}
 			{this.renderDirect()}
 		</div> : null;
 	}
@@ -73,7 +74,8 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 		vicinityDatesSelect: vicinityDatesSelect(state),
 		directFlightSelect: directFlightSelect(state),
 		vicinityDays: state.system.vicinityDays,
-		widgetMode: state.system.mode
+		widgetMode: state.system.mode,
+		routeType: state.form.routeType
 	};
 };
 
