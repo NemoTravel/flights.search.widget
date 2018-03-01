@@ -9,6 +9,7 @@ import { Airport } from './services/models/Airport';
 import { AutocompleteSuggestion } from './services/models/AutocompleteSuggestion';
 
 export const CLASS_TYPES = ['Economy', 'Business'];
+export const MAX_SEGMENTS_COUNT = 4;
 
 export enum ApplicationMode {
 	NEMO = 'NEMO',

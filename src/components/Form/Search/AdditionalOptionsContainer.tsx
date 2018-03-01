@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Checkbox } from '../../UI/Checkbox';
 import { vicinityDatesSelect, directFlightSelect } from '../../../store/form/additional/selector';
 import { i18n } from '../../../utils';
-import { ApplicationMode, ApplicationState, RouteType, ServiceClass } from '../../../state';
+import { ApplicationMode, ApplicationState, CommonThunkAction, RouteType, ServiceClass } from '../../../state';
 import {
 	BooleanAction, SetClassAction, setClassType,
 	vicinityDatesAction,
@@ -12,6 +12,7 @@ import {
 	setVicinityDatesCheckbox,
 	setDirectFlightCheckbox
 } from '../../../store/form/additional/actions';
+import { setRouteType } from '../../../store/form/route/actions';
 
 interface StateProps {
 	vicinityDatesSelect: boolean;
@@ -27,9 +28,16 @@ interface DispatchProps {
 	directFlightAction: () => Action;
 	setVicinityDatesCheckbox: (checked: boolean) => BooleanAction;
 	setDirectFlightCheckbox: (checked: boolean) => BooleanAction;
+	setRouteType: (type: RouteType) => CommonThunkAction;
 }
 
 class AdditionalOptionsContainer extends React.Component<StateProps & DispatchProps> {
+	constructor(props: StateProps & DispatchProps) {
+		super(props);
+
+		this.changeRouteType = this.changeRouteType.bind(this);
+	}
+
 	renderVicinityDates(): React.ReactNode {
 		const { vicinityDatesAction, vicinityDatesSelect, vicinityDays } = this.props;
 		const NUM_OF_DAYS_PLURAL = 5;
@@ -45,6 +53,17 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 			trigger={vicinityDatesAction}
 			checked={vicinityDatesSelect}
 		/>;
+	}
+
+	changeRouteType(): void {
+		const routeType = this.props.routeType;
+
+		if (routeType === RouteType.CR) {
+			this.props.setRouteType(RouteType.OW);
+		}
+		else {
+			this.props.setRouteType(RouteType.CR);
+		}
 	}
 
 	renderDirect(): React.ReactNode {
@@ -65,6 +84,10 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 		return widgetMode === ApplicationMode.NEMO ? <div className="form-group widget-form-additionalOptions">
 			{routeType !== RouteType.CR ? this.renderVicinityDates() : null}
 			{this.renderDirect()}
+
+			<span onClick={this.changeRouteType} className="widget-form__routeTypeSwitch">
+				{routeType !== RouteType.CR ? <span>Сложный маршрут</span>: <span>Простой маршрут</span>}
+			</span>
 		</div> : null;
 	}
 }
@@ -85,7 +108,8 @@ const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 		vicinityDatesAction: bindActionCreators(vicinityDatesAction, dispatch),
 		directFlightAction: bindActionCreators(directFlightAction, dispatch),
 		setVicinityDatesCheckbox: bindActionCreators(setVicinityDatesCheckbox, dispatch),
-		setDirectFlightCheckbox: bindActionCreators(setDirectFlightCheckbox, dispatch)
+		setDirectFlightCheckbox: bindActionCreators(setDirectFlightCheckbox, dispatch),
+		setRouteType: bindActionCreators(setRouteType, dispatch)
 	};
 };
 

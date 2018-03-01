@@ -14,7 +14,7 @@
 	&__segment {
 		display: flex;
 		flex-wrap: nowrap;
-		padding-right: 0;
+		padding-right: 0 !important;
 
 		&__drop {
 			line-height: 30px;
@@ -25,6 +25,8 @@
 			background: #b23e13;
 			color: #fff;
 			margin-top: 5px;
+			margin-left: 20px;
+			margin-right: 0;
 		}
 	}
 

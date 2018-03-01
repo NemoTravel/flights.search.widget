@@ -6000,6 +6000,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  padding-right: 65px;
 }
 
 .widget-form-airports__segment {
@@ -6008,7 +6009,9 @@
 }
 
 .widget-form-airports__segment__drop {
-  margin: 0 20px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
   background: #f7db03;
   height: 40px;
   width: 40px;

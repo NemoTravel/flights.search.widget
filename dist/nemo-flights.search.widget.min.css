@@ -490,7 +490,7 @@
   display: flex;
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
-  padding-right: 0;
+  padding-right: 0 !important;
 }
 
 .widget-form-airports__segment__drop {
@@ -502,6 +502,8 @@
   background: #b23e13;
   color: #fff;
   margin-top: 5px;
+  margin-left: 20px;
+  margin-right: 0;
 }
 
 .widget-form-airports.row {
@@ -1014,10 +1016,10 @@
   right: 0;
   color: #fff;
   bottom: 0;
-  margin-bottom: -48px;
+  margin-bottom: 17px;
   z-index: 1;
   white-space: nowrap;
-  margin-right: 450px;
+  margin-right: 350px;
 }
 
 .widget-form__addSegment {
