@@ -24,7 +24,7 @@ interface Props {
 	segmentId: number;
 
 	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number) => any;
-	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
+	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType, segmentId: number) => CommonThunkAction;
 	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
 	swapAirports?: (segmentId: number) => CommonThunkAction;
 	getRef?: (reactSelect: any) => any;
@@ -61,7 +61,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 	 * @param {String} searchText
 	 */
 	fetchSuggestions(searchText: string = ''): void {
-		const { sendAutocompleteRequest } = this.props;
+		const { sendAutocompleteRequest, segmentId } = this.props;
 
 		if (searchText || this.props.isGridMode) {
 			// We don't want to harass servers too much.
@@ -69,7 +69,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 
 			// So we send request only if user hasn't been typing something for a while.
 			this.autocompleteTimeout = window.setTimeout(() => {
-				sendAutocompleteRequest(searchText, this.type);
+				sendAutocompleteRequest(searchText, this.type, segmentId);
 			}, this.autocompleteWaitTime);
 		}
 	}

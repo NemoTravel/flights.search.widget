@@ -4,6 +4,7 @@ import {
 	ADD_SEGMENT, DELETE_SEGMENT, SET_AIRPORT_IN_SEGMENT, SELECT_DATE_IN_SEGMENT,
 	REMOVE_COMPLEX_SEGMENTS
 } from '../../actions';
+import { pushAiprortInCache, getDatesAvailability } from '../autocomplete/actions';
 import { Moment } from 'moment';
 
 export interface SegmentAction extends Action {
@@ -71,8 +72,8 @@ export const deleteSegment = (): SegmentAction => {
 export const selectAirportInSegment = (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		dispatch(setAirportInSegment(airport, autocompleteType, segmentId));
-		// getDatesAvailability(dispatch, getState);
-		// pushAiprortInCache(dispatch, getState, airport);
+		getDatesAvailability(dispatch, getState);
+		pushAiprortInCache(dispatch, getState, airport);
 	};
 };
 

@@ -62,7 +62,7 @@ const isAutocompleteAction = (action: AnyAction): action is AutocompleteAction =
 	return 'autocompleteType' in action;
 };
 
-export default (state: AutocompleteState = autocompleteState, action: AnyAction): AutocompleteState => {
+export const autocompleteMainReducer = (state: AutocompleteState = autocompleteState, action: AnyAction): AutocompleteState => {
 	if (isPreviousSearchAction(action)) {
 		return {
 			...state,
@@ -78,3 +78,25 @@ export default (state: AutocompleteState = autocompleteState, action: AnyAction)
 
 	return state;
 };
+
+export default (state: AutocompleteState = autocompleteState, action: AnyAction): AutocompleteState => {
+	console.log('im changed');
+	return state;
+};
+
+/*export default (state: SegmentState[] = [], action: AnyAction): any => {
+	let segmentId = action.segmentId || 0;
+
+	console.log(state);
+	return state.map( (segment: SegmentState, index: number) => {
+		if (index === segmentId) {
+			return {
+				...segment,
+				autocomlete: autocompleteMainReducer(segment.autocomplete, action)
+			}
+		}
+		else {
+			return segment;
+		}
+	});
+}*/

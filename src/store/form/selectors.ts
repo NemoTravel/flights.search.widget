@@ -91,9 +91,9 @@ export const formIsValid = createSelector(
 	}
 );
 
-const getDepartureOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.autocomplete.departure.suggestions;
-const getArrivalOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.autocomplete.arrival.suggestions;
-const getDefaultOptionsFromState = (state: ApplicationState): AutocompleteDefaultGroupsState => state.form.autocomplete.defaultGroups;
+const getDepartureOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.segments[0].autocomplete.departure.suggestions;
+const getArrivalOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.segments[0].autocomplete.arrival.suggestions;
+const getDefaultOptionsFromState = (state: ApplicationState): AutocompleteDefaultGroupsState => state.form.segments[0].autocomplete.defaultGroups;
 
 const mapOptions = (options: AutocompleteSuggestion[]): AutocompleteOption[] => {
 	return options

@@ -22,8 +22,7 @@ export default (state: FormState, action: AnyAction): FormState => {
 	return combineReducers<FormState>({
 		showErrors: showErrorsReducer,
 		dates,
-		autocomplete,
-		segments,
+		segments: segments,
 		passengers,
 		additional,
 		coupon,

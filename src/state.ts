@@ -315,7 +315,7 @@ export interface CachedFormSate {
 	showErrors: boolean;
 	dates: CachedDatesState;
 	passengers: PassengersState;
-	autocomplete: AutocompleteState;
+	autocomplete: any;
 	segments: SegmentState[];
 	additional: AdditionalState;
 	coupon: CouponState;
@@ -399,7 +399,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 				state.form.segments = segments;
 			}
 
-			if (stateFromCache.form.autocomplete) {
+		/*	if (stateFromCache.form.autocomplete) {
 				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
 				const cachedArrivalAutocomplete = stateFromCache.form.autocomplete.arrival;
 				const cachedAutocompleteGroups = stateFromCache.form.autocomplete.defaultGroups;
@@ -424,9 +424,9 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						cachedAutocompleteGroups.previousSearches
 					);
 				}
-			}
+			}*/
 
-			if (stateFromCache.form.dates) {
+		/*	if (stateFromCache.form.dates) {
 				const cachedDepartureDate = stateFromCache.form.dates.departure;
 				const cachedReturnDate = stateFromCache.form.dates.return;
 				const today = moment().startOf('day');
@@ -466,7 +466,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						state.form.dates.return = setAvailableDatesReducer(state.form.dates.return, cachedReturnDate.availableDates);
 					}
 				}
-			}
+			}*/
 
 			if (stateFromCache.form.passengers) {
 				for (const passType in stateFromCache.form.passengers) {
