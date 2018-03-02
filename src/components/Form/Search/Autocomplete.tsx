@@ -8,7 +8,7 @@ import Value from './Autocomplete/Value';
 import { i18n } from '../../../utils';
 import { DefaultOptionGroup } from '../../../store/form/selectors';
 import { AutocompleteFieldType, CommonThunkAction } from '../../../state';
-import { AutocompleteAction } from '../../../store/form/autocomplete/actions';
+import { AutocompleteAction } from '../../../store/form/segments/autocomplete/actions';
 import { AutocompleteOption } from '../../../services/models/AutocompleteOption';
 import { Airport } from '../../../services/models/Airport';
 

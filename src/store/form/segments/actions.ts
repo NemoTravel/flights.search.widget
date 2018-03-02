@@ -4,7 +4,7 @@ import {
 	ADD_SEGMENT, DELETE_SEGMENT, AIRPORT_SELECTED, SELECT_DATE,
 	REMOVE_COMPLEX_SEGMENTS
 } from '../../actions';
-import { pushAiprortInCache, getDatesAvailability } from '../autocomplete/actions';
+import { pushAiprortInCache, getDatesAvailability } from './autocomplete/actions';
 import { Moment } from 'moment';
 
 export interface SegmentAction extends Action {

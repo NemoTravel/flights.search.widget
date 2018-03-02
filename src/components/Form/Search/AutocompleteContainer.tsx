@@ -6,7 +6,7 @@ import {
 	selectAirport,
 	sendAutocompleteRequest,
 	swapAirports, AutocompleteAction
-} from '../../../store/form/autocomplete/actions';
+} from '../../../store/form/segments/autocomplete/actions';
 import {
 	selectAirportInSegment
 } from '../../../store/form/segments/actions';

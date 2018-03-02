@@ -7,7 +7,7 @@ import {
 import { SegmentState, segmentState } from '../../../state';
 import { AnyAction } from 'redux';
 import { selectDateReducer } from '../dates/reducer';
-import {autocompleteMainReducer} from "../autocomplete/reducer";
+import {autocompleteMainReducer} from "./autocomplete/reducer";
 
 /*export const addAirportReducer = (state: SegmentState = segmentState, action: AnyAction): SegmentState => {
 	return {

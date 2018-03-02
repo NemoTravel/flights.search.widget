@@ -18,7 +18,7 @@ import {
 	loadAirportForAutocomplete,
 	loadNearestAirportForAutocomplete,
 	setSelectedAirport
-} from './store/form/autocomplete/actions';
+} from './store/form/segments/autocomplete/actions';
 import {addSegment, selectDateInSegment} from './store/form/segments/actions';
 
 const middlewares = [thunk];

@@ -2,10 +2,10 @@ import { getDepartureOptions, getArrivalOptions, formIsValid } from '../selector
 import { initialState } from '../../../state';
 import { Selector } from 'redux-testkit';
 import { createStore } from 'redux';
-import { changeAutocompleteSuggestions } from '../autocomplete/actions';
+import { changeAutocompleteSuggestions } from '../segments/autocomplete/actions';
 import { setCounter } from '../passengers/actions';
 import rootReducer from 'store/reducer';
-import { setSelectedAirport } from '../autocomplete/actions';
+import { setSelectedAirport } from '../segments/autocomplete/actions';
 import { selectDate } from '../dates/actions';
 import { getAltLayout } from '../../../utils';
 
