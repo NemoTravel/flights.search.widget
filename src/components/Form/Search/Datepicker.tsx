@@ -5,7 +5,7 @@ import { Moment } from 'moment';
 import UIDatepicker from '../../UI/Datepicker';
 import MobileHeader from '../../UI/MobileHeader';
 import { DatepickerFieldType, Language } from '../../../state';
-import { HighlightedDatesGroup } from '../../../store/form/dates/selectors';
+import { HighlightedDatesGroup } from '../../../store/form/segments/dates/selectors';
 
 interface Props {
 	showErrors?: boolean;

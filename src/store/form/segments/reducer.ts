@@ -3,14 +3,13 @@ import {
 	AUTOCOMPLETE_PUSH_TO_PREVIOUS,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	DELETE_SEGMENT, REMOVE_COMPLEX_SEGMENTS,
-	SELECT_DATE
+	SELECT_DATE, SET_AVAILABLE_DATES, TOGGLE_DATEPICKER
 } from '../../actions';
 import { SegmentState, segmentState } from '../../../state';
-import { AnyAction } from 'redux';
-import { selectDateReducer } from '../dates/reducer';
-import {autocompleteMainReducer} from "./autocomplete/reducer";
+import { datesMainReducer } from './dates/reducer';
+import { autocompleteMainReducer } from "./autocomplete/reducer";
 
-export default (state: SegmentState[] = [segmentState], action: AnyAction): SegmentState[] => {
+export default (state: SegmentState[] = [segmentState], action: any): SegmentState[] => {
 	const segmentId = action.segmentId || 0;
 
 	switch(action.type) {
@@ -31,7 +30,22 @@ export default (state: SegmentState[] = [segmentState], action: AnyAction): Segm
 				}
 			});
 
+		case TOGGLE_DATEPICKER:
 		case SELECT_DATE:
+		case SET_AVAILABLE_DATES:
+			return state.map((segment: SegmentState, index: number) => {
+				if (index === segmentId) {
+					return {
+						...segment,
+						dates: datesMainReducer(segment.dates, action)
+					}
+				}
+				else {
+					return segment;
+				}
+			});
+
+		/*case SELECT_DATE:
 			return state.map((segment: SegmentState, index: number) => {
 				if (index === segmentId) {
 					return {
@@ -45,7 +59,7 @@ export default (state: SegmentState[] = [segmentState], action: AnyAction): Segm
 				else {
 					return segment;
 				}
-			});
+			});*/
 
 		case ADD_SEGMENT:
 			return [...state, segmentState];

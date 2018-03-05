@@ -1,8 +1,6 @@
 import { AnyAction, combineReducers } from 'redux';
 import { SHOW_ERRORS} from '../actions';
 import passengers from './passengers/reducer';
-import autocomplete from './autocomplete/reducer';
-import dates from './dates/reducer';
 import additional from './additional/reducer';
 import coupon from './coupon/reducer';
 import mileCard from './mileCard/reducer';
@@ -21,7 +19,7 @@ export default (state: FormState, action: AnyAction): FormState => {
 
 	return combineReducers<FormState>({
 		showErrors: showErrorsReducer,
-		dates,
+		//dates,
 		segments: segments,
 		passengers,
 		additional,

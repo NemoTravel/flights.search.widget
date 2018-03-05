@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect';
-import { getIntermediateDates } from '../../../utils';
+import { getIntermediateDates } from '../../../../utils';
 import * as moment from 'moment';
-import { ApplicationState } from '../../../state';
+import { ApplicationState } from '../../../../state';
 import { Moment } from 'moment';
 
-const getDepartureDate = (state: ApplicationState): Moment => state.form.dates.departure.date;
-const getDepartureAvailableDates = (state: ApplicationState): any => state.form.dates.departure.availableDates;
-const getReturnDate = (state: ApplicationState): Moment => state.form.dates.return.date;
-const getReturnAvailableDates = (state: ApplicationState): any => state.form.dates.return.availableDates;
+const getDepartureDate = (state: ApplicationState): Moment => state.form.segments[0].dates.departure.date;
+const getDepartureAvailableDates = (state: ApplicationState): any => state.form.segments[0].dates.departure.availableDates;
+const getReturnDate = (state: ApplicationState): Moment => state.form.segments[0].dates.return.date;
+const getReturnAvailableDates = (state: ApplicationState): any => state.form.segments[0].dates.return.availableDates;
 const highlightAvailableDates = (state: ApplicationState): boolean => state.system.highlightAvailableDates;
 
 /**

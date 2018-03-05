@@ -2,8 +2,8 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { ThunkAction } from 'redux-thunk';
 
-import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/form/autocomplete/reducer';
-import { setAvailableDatesReducer } from './store/form/dates/reducer';
+import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/form/segments/autocomplete/reducer';
+import { setAvailableDatesReducer } from './store/form/segments/dates/reducer';
 import { AvailableDateResponse } from './services/responses/AvailableDates';
 import { Airport } from './services/models/Airport';
 import { AutocompleteSuggestion } from './services/models/AutocompleteSuggestion';
@@ -301,7 +301,6 @@ export const mileCardState: MileCardState = {
 
 export interface FormState {
 	showErrors: boolean;
-	dates: DatesState;
 	passengers: PassengersState;
 	segments: SegmentState[];
 	additional: AdditionalState;
@@ -312,7 +311,6 @@ export interface FormState {
 
 export interface CachedFormSate {
 	showErrors: boolean;
-	dates: CachedDatesState;
 	passengers: PassengersState;
 	segments: SegmentState[];
 	additional: AdditionalState;
@@ -335,7 +333,6 @@ export const initialState: ApplicationState = {
 	system: systemState,
 	form: {
 		showErrors: false,
-		dates: datesState,
 		passengers: passengersState,
 		segments: [],
 		additional: additionalState,

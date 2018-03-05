@@ -6,7 +6,7 @@ import ReturnDatepicker from './Datepicker/Return';
 import {
 	getDepartureHighlightedDates, getReturnHighlightedDates,
 	HighlightedDatesGroup
-} from '../../../store/form/dates/selectors';
+} from '../../../store/form/segments/dates/selectors';
 import {
 	ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerState, RouteType,
 	SystemState
@@ -15,7 +15,7 @@ import {
 	DatepickerAction,
 	datepickerChange,
 	setAvailableDates
-} from '../../../store/form/dates/actions';
+} from '../../../store/form/segments/dates/actions';
 import { Moment } from 'moment';
 import {routeType} from '../../../store/form/selectors';
 

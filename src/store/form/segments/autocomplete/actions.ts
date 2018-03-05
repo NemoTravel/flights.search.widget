@@ -13,7 +13,7 @@ import {
 	DatepickerFieldType, GetStateFunction,
 	Language
 } from '../../../../state';
-import { setAvailableDates } from '../../dates/actions';
+import { setAvailableDates } from '../dates/actions';
 import { AnyAction, Dispatch } from 'redux';
 import { AutocompleteSuggestion } from '../../../../services/models/AutocompleteSuggestion';
 import { Airport } from '../../../../services/models/Airport';

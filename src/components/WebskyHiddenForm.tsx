@@ -63,7 +63,7 @@ class WebskyHiddenForm extends React.Component<Props> {
 		const MULTIPLE_SEGMENTS_NUM = 2;
 
 		return <form id="webskyHiddenForm" action={`${system.webskyURL}/search`} method="POST">
-			<input type="hidden" name="segmentsCount" value={form.dates.return.date ? MULTIPLE_SEGMENTS_NUM : 1}/>
+			<input type="hidden" name="segmentsCount" value={form.segments[0].dates.return.date ? MULTIPLE_SEGMENTS_NUM : 1}/>
 			<input type="hidden" name="lang" value={system.locale}/>
 
 			{renderOWBlock()}

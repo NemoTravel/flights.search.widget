@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import * as Cache from './cache';
 import rootReducer from './store/reducer';
 import { setCounter } from './store/form/passengers/actions';
-import { selectDate } from './store/form/dates/actions';
 import { configReducer } from './store/system/reducer';
 import { getTotalPassengersCount } from './store/form/passengers/selectors';
 import {
@@ -137,7 +136,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
 	}
 
-	if (!state.form.dates.departure.date) {
+/*	if (!state.form.dates.departure.date) {
 		if (state.system.defaultDepartureDate) {
 			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
@@ -151,7 +150,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 
 			store.dispatch(selectDate(returnDate, DatepickerFieldType.Return));
 		}
-	}
+	}*/
 
 	if (!state.form.segments[0].dates.return.date) {
 		if (state.system.defaultReturnDate) {
