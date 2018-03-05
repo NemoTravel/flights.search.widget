@@ -4,8 +4,10 @@
 	@import "airports/select";
 	@import "airports/swap";
 	@import "airports/suggestion";
-	
+
 	&.row {
+		margin-left: 0;
+
 		@include adaptivity(phone) {
 			display: block;
 			margin-left: 0;
@@ -17,6 +19,21 @@
 		.widget-form-airports__segment {
 			display: flex;
 			padding-right: 65px;
+
+			@include adaptivity(phone) {
+				padding-right: 0;
+			}
+		}
+
+		@include adaptivity(phone) {
+			.widget-form-dates {
+				width: 100%;
+				margin-left: 0;
+
+				.widget-form-dates__col:last-of-type {
+					padding: 0;
+				}
+			}
 		}
 	}
 
@@ -24,7 +41,8 @@
 
 	&__segment {
 		width: 100%;
-		padding: 0 20px;
+		padding: 0 15px;
+		padding-left: 0;
 
 		&__drop {
 			position: absolute;
@@ -39,6 +57,19 @@
 			text-align: center;
 			cursor: pointer;
 			font-weight: 700;
+		}
+
+		&:only-child {
+			margin-bottom: 0;
+
+			.widget-form-dates {
+				margin-bottom: 0;
+			}
+		}
+
+		@include adaptivity(phone) {
+			padding: 0;
+			flex-wrap: wrap;
 		}
 	}
 	

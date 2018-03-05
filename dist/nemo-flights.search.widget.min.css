@@ -491,6 +491,7 @@
   -ms-flex-wrap: nowrap;
   flex-wrap: nowrap;
   padding-right: 0 !important;
+  position: relative;
 }
 
 .widget-form-airports__segment__drop {
@@ -502,8 +503,19 @@
   background: #b23e13;
   color: #fff;
   margin-top: 5px;
-  margin-left: 20px;
   margin-right: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+  .widget-form-airports__segment__drop {
+    margin-left: -15px;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .widget-form-airports__segment {
+    padding: 0;
+  }
 }
 
 .widget-form-airports.row {
@@ -537,16 +549,25 @@
   flex-wrap: wrap !important;
 }
 
-.widget-form-airports_CR .widget-form-airports__segment {
-  margin-left: 30px;
-}
+@media only screen and (min-width: 1101px) {
+  .widget-form-airports_CR .widget-form-airports__segment {
+    margin-left: 20px;
+  }
 
-.widget-form-airports_CR .widget-form-additionalOptions {
-  left: -180px;
+  .widget-form-airports_CR .widget-form-additionalOptions {
+    left: -180px;
+  }
 }
 
 .widget-form-airports__segment {
   margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 1100px) {
+  .widget-form-airports__segment {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
 }
 
 .widget-form-airports__header {
@@ -891,6 +912,7 @@
     height: 40px;
     top: 0;
     left: 0;
+    margin-bottom: 0 !important;
   }
 }
 
@@ -1022,6 +1044,17 @@
   margin-right: 350px;
 }
 
+@media only screen and (max-width: 1100px) {
+  .widget-form__routeTypeSwitch {
+    position: relative;
+    margin-right: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
 .widget-form__addSegment {
   line-height: 40px;
   background: rgba(255, 255, 255, 0.25);
@@ -1039,6 +1072,18 @@
 .widget-form__addSegment:hover {
   -webkit-box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2);
   box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2);
+}
+
+@media only screen and (max-width: 1100px) {
+  .widget-form__addSegment {
+    margin: 0 15px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form__addSegment {
+    margin-left: 0;
+  }
 }
 
 .widget-form_vertical:before {

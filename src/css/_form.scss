@@ -29,9 +29,13 @@
 		color: #6c757d;
 		font-weight: 700;
 		font-size: 15px;
-		margin-bottom: 20px;
+		margin: 0 15px;
 		cursor: pointer;
 		width: 100%;
+
+		@include adaptivity(phone) {
+			margin: 0;
+		}
 	}
 	
 	&_vertical {

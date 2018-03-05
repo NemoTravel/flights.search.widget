@@ -27,6 +27,15 @@
 		z-index: 1;
 		white-space: nowrap;
 		margin-right: 350px;
+
+		@include adaptivity(tablet) {
+			position: relative;
+			margin-right: 0;
+			margin-bottom: 0;
+			display: inline-block;
+			padding-top: 0;
+			margin-top: 0;
+		}
 	}
 
 	&__addSegment {
@@ -43,6 +52,14 @@
 
 		&:hover {
 			box-shadow: inset 0 0 16px rgba(255,255,255,.2);
+		}
+
+		@include adaptivity(tablet) {
+			margin: 0 15px;
+		}
+
+		@include adaptivity(phone) {
+			margin-left: 0;
 		}
 	}
 

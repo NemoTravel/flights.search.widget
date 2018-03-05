@@ -85,9 +85,9 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 			{routeType !== RouteType.CR ? this.renderVicinityDates() : null}
 			{this.renderDirect()}
 
-			<span onClick={this.changeRouteType} className="widget-form__routeTypeSwitch">
+			<div onClick={this.changeRouteType} className="widget-form__routeTypeSwitch">
 				{routeType !== RouteType.CR ? <span>Сложный маршрут</span>: <span>Простой маршрут</span>}
-			</span>
+			</div>
 		</div> : null;
 	}
 }

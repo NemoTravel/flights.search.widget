@@ -5988,6 +5988,10 @@
   padding-left: 20px;
 }
 
+.widget-form-airports.row {
+  margin-left: 0;
+}
+
 @media only screen and (max-width: 650px) {
   .widget-form-airports.row {
     display: block;
@@ -6003,9 +6007,27 @@
   padding-right: 65px;
 }
 
+@media only screen and (max-width: 650px) {
+  .widget-form-airports_CR .widget-form-airports__segment {
+    padding-right: 0;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-airports_CR .widget-form-dates {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .widget-form-airports_CR .widget-form-dates .widget-form-dates__col:last-of-type {
+    padding: 0;
+  }
+}
+
 .widget-form-airports__segment {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 15px;
+  padding-left: 0;
 }
 
 .widget-form-airports__segment__drop {
@@ -6021,6 +6043,22 @@
   text-align: center;
   cursor: pointer;
   font-weight: 700;
+}
+
+.widget-form-airports__segment:only-child {
+  margin-bottom: 0;
+}
+
+.widget-form-airports__segment:only-child .widget-form-dates {
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-airports__segment {
+    padding: 0;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
 }
 
 .widget-form-airports__header {
@@ -6625,9 +6663,15 @@
   color: #6c757d;
   font-weight: 700;
   font-size: 15px;
-  margin-bottom: 20px;
+  margin: 0 15px;
   cursor: pointer;
   width: 100%;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form__addSegment {
+    margin: 0;
+  }
 }
 
 .widget-form_vertical .widget-form-search__wrapper .form-group:last-of-type {
