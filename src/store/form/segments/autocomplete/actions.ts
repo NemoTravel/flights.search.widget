@@ -18,7 +18,6 @@ import { AnyAction, Dispatch } from 'redux';
 import { AutocompleteSuggestion } from '../../../../services/models/AutocompleteSuggestion';
 import { Airport } from '../../../../services/models/Airport';
 import { ResponseWithGuide } from '../../../../services/responses/Guide';
-import { selectAirportInSegment, setAirportInSegment } from "../actions";
 
 export interface AutocompleteAction {
 	type: string;
@@ -154,10 +153,11 @@ export const getDatesAvailability = (dispatch: Dispatch<AnyAction>, getState: Ge
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {AutocompleteAction}
  */
-export const setSelectedAirport = (airport: any, autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const setSelectedAirport = (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number = 0): AutocompleteAction => {
 	return {
 		type: AIRPORT_SELECTED,
 		autocompleteType,
+		segmentId,
 		payload: {
 			airport
 		}
@@ -219,9 +219,9 @@ export const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getSt
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {Function}
  */
-export const selectAirport = (airport: any, autocompleteType: AutocompleteFieldType): CommonThunkAction => {
+export const selectAirport = (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number = 0): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
-		dispatch(setSelectedAirport(airport, autocompleteType));
+		dispatch(setSelectedAirport(airport, autocompleteType, segmentId));
 		getDatesAvailability(dispatch, getState);
 		pushAiprortInCache(dispatch, getState, airport);
 	};
@@ -399,8 +399,8 @@ export const swapAirports = (segmentId: number): CommonThunkAction => {
 			arrivalAirport = state.form.segments[segmentId].autocomplete.arrival.airport;
 
 		if (departureAirport || arrivalAirport) {
-			dispatch(setAirportInSegment(departureAirport, AutocompleteFieldType.Arrival, segmentId));
-			dispatch(setAirportInSegment(arrivalAirport, AutocompleteFieldType.Departure, segmentId));
+			dispatch(setSelectedAirport(departureAirport, AutocompleteFieldType.Arrival, segmentId));
+			dispatch(setSelectedAirport(arrivalAirport, AutocompleteFieldType.Departure, segmentId));
 			getDatesAvailability(dispatch, getState);
 		}
 	};

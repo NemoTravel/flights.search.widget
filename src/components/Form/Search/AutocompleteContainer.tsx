@@ -128,7 +128,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 	return {
 		changeAutocompleteSuggestions: bindActionCreators(changeAutocompleteSuggestions, dispatch),
-		selectAirport: bindActionCreators(selectAirportInSegment, dispatch),
+		selectAirport: bindActionCreators(selectAirport, dispatch),
 		sendAutocompleteRequest: bindActionCreators(sendAutocompleteRequest, dispatch),
 		swapAirports: bindActionCreators(swapAirports, dispatch)
 	};

@@ -18,7 +18,6 @@ import { AnyAction, Dispatch } from 'redux';
 import { AutocompleteSuggestion } from '../../../services/models/AutocompleteSuggestion';
 import { Airport } from '../../../services/models/Airport';
 import { ResponseWithGuide } from '../../../services/responses/Guide';
-import { selectAirportInSegment, setAirportInSegment } from "../segments/actions";
 
 export interface AutocompleteAction {
 	type: string;
@@ -399,8 +398,8 @@ export const swapAirports = (segmentId: number): CommonThunkAction => {
 			arrivalAirport = state.form.segments[segmentId].autocomplete.arrival.airport;
 
 		if (departureAirport || arrivalAirport) {
-			dispatch(setAirportInSegment(departureAirport, AutocompleteFieldType.Arrival, segmentId));
-			dispatch(setAirportInSegment(arrivalAirport, AutocompleteFieldType.Departure, segmentId));
+		//	dispatch(setAirportInSegment(departureAirport, AutocompleteFieldType.Arrival, segmentId));
+		//	dispatch(setAirportInSegment(arrivalAirport, AutocompleteFieldType.Departure, segmentId));
 			getDatesAvailability(dispatch, getState);
 		}
 	};
