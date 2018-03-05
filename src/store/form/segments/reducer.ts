@@ -1,5 +1,6 @@
 import {
 	ADD_SEGMENT, AIRPORT_SELECTED, AUTOCOMPLETE_LOADING_FINISHED, AUTOCOMPLETE_LOADING_STARTED,
+	AUTOCOMPLETE_PUSH_TO_PREVIOUS,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	DELETE_SEGMENT, REMOVE_COMPLEX_SEGMENTS,
 	SELECT_DATE
@@ -9,19 +10,6 @@ import { AnyAction } from 'redux';
 import { selectDateReducer } from '../dates/reducer';
 import {autocompleteMainReducer} from "./autocomplete/reducer";
 
-/*export const addAirportReducer = (state: SegmentState = segmentState, action: AnyAction): SegmentState => {
-	return {
-		...state,
-		autocomplete: {
-			...state.autocomplete,
-			[action.autocompleteType]: {
-				...state.autocomplete[action.autocompleteType],
-				airport: action.payload.airport
-			}
-		}
-	};
-};*/
-
 export default (state: SegmentState[] = [segmentState], action: AnyAction): SegmentState[] => {
 	const segmentId = action.segmentId || 0;
 
@@ -30,6 +18,7 @@ export default (state: SegmentState[] = [segmentState], action: AnyAction): Segm
 		case AUTOCOMPLETE_LOADING_FINISHED:
 		case AUTOCOMPLETE_SUGGESTIONS_CHANGED:
 		case AIRPORT_SELECTED:
+		case AUTOCOMPLETE_PUSH_TO_PREVIOUS:
 			return state.map((segment: SegmentState, index: number) => {
 				if (index === segmentId) {
 					return {

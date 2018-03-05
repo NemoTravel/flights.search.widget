@@ -97,7 +97,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 
 	const state = store.getState();
 
-	/*if (!state.form.autocomplete.departure.airport) {
+	if (!state.form.segments[0].autocomplete.departure.airport) {
 		// Pre-loading departure airport by specified IATA or airport object.
 		if (state.system.defaultDepartureAirport) {
 			if (typeof state.system.defaultDepartureAirport === 'string') {
@@ -114,7 +114,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		}
 	}
 
-	if (!state.form.autocomplete.arrival.airport) {
+	if (!state.form.segments[0].autocomplete.arrival.airport) {
 		if (state.system.defaultArrivalAirport) {
 			if (typeof state.system.defaultArrivalAirport === 'string') {
 				store.dispatch(loadAirportForAutocomplete(state.system.defaultArrivalAirport, AutocompleteFieldType.Arrival));
@@ -123,7 +123,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 				store.dispatch(setSelectedAirport(state.system.defaultArrivalAirport, AutocompleteFieldType.Arrival));
 			}
 		}
-	}*/
+	}
 
 	if (!state.form.additional.classType) {
 		store.dispatch(setClassType(state.system.defaultServiceClass));

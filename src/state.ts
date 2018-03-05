@@ -303,7 +303,6 @@ export interface FormState {
 	showErrors: boolean;
 	dates: DatesState;
 	passengers: PassengersState;
-	autocomplete: AutocompleteState;
 	segments: SegmentState[];
 	additional: AdditionalState;
 	coupon: CouponState;
@@ -315,7 +314,6 @@ export interface CachedFormSate {
 	showErrors: boolean;
 	dates: CachedDatesState;
 	passengers: PassengersState;
-	autocomplete: any;
 	segments: SegmentState[];
 	additional: AdditionalState;
 	coupon: CouponState;
@@ -339,7 +337,6 @@ export const initialState: ApplicationState = {
 		showErrors: false,
 		dates: datesState,
 		passengers: passengersState,
-		autocomplete: autocompleteState,
 		segments: [],
 		additional: additionalState,
 		coupon: couponState,
