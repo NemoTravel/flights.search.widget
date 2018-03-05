@@ -45,22 +45,6 @@ export default (state: SegmentState[] = [segmentState], action: any): SegmentSta
 				}
 			});
 
-		/*case SELECT_DATE:
-			return state.map((segment: SegmentState, index: number) => {
-				if (index === segmentId) {
-					return {
-						...segment,
-						dates: {
-							...segment.dates,
-							[action.dateType]: selectDateReducer(segment.dates[action.dateType], action.payload.date)
-						}
-					};
-				}
-				else {
-					return segment;
-				}
-			});*/
-
 		case ADD_SEGMENT:
 			return [...state, segmentState];
 
