@@ -16,6 +16,7 @@ interface Props {
 	highlightDates: HighlightedDatesGroup[];
 	specialDate: Moment;
 	segmentId: number;
+	popperPlacement: string;
 
 	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
 	getRef?: (input: any) => any;
@@ -24,13 +25,13 @@ interface Props {
 export default class Datepicker extends React.Component<Props> {
 	static defaultProps: Partial<Props> = {
 		showErrors: false,
-		highlightDates: []
+		highlightDates: [],
+		popperPlacement: 'top-start'
 	};
 
 	protected type: DatepickerFieldType = null;
 	protected nemoDatepicker: any = null;
 	protected placeholder = '';
-	protected popperPlacement = '';
 	protected tooltipText = '';
 	protected showErrors = false;
 	protected isDisableable = false;
@@ -52,14 +53,15 @@ export default class Datepicker extends React.Component<Props> {
 	}
 
 	shouldComponentUpdate(nextProps: Props): boolean {
-		const { isActive, date, highlightDates, specialDate, showErrors, locale } = this.props;
+		const { isActive, date, highlightDates, specialDate, showErrors, locale, popperPlacement } = this.props;
 
 		return isActive !== nextProps.isActive ||
 			date !== nextProps.date ||
 			locale !== nextProps.locale ||
 			specialDate !== nextProps.specialDate ||
 			showErrors !== nextProps.showErrors ||
-			highlightDates !== nextProps.highlightDates;
+			highlightDates !== nextProps.highlightDates ||
+			popperPlacement !== nextProps.popperPlacement;
 	}
 
 	closeDatepicker(): void {
@@ -84,7 +86,8 @@ export default class Datepicker extends React.Component<Props> {
 			showErrors,
 			specialDate,
 			openToDate,
-			highlightDates
+			highlightDates,
+			popperPlacement
 		} = this.props;
 
 		const
@@ -106,7 +109,7 @@ export default class Datepicker extends React.Component<Props> {
 				getRef={getRef}
 				highlightDates={highlightDates}
 				selectDate={selectDate}
-				popperPlacement={this.popperPlacement}
+				popperPlacement={popperPlacement}
 				specialDate={specialDate}
 				tooltipIsActive={!date && this.showErrors && showErrors}
 				tooltipText={this.tooltipText}
