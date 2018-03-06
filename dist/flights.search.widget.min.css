@@ -5988,10 +5988,6 @@
   padding-left: 20px;
 }
 
-.widget-form-airports.row {
-  margin-left: 0;
-}
-
 @media only screen and (max-width: 650px) {
   .widget-form-airports.row {
     display: block;
@@ -6027,7 +6023,6 @@
 .widget-form-airports__segment {
   width: 100%;
   padding: 0 15px;
-  padding-left: 0;
 }
 
 .widget-form-airports__segment__drop {

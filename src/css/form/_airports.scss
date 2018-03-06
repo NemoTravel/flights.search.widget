@@ -6,8 +6,6 @@
 	@import "airports/suggestion";
 
 	&.row {
-		margin-left: 0;
-
 		@include adaptivity(phone) {
 			display: block;
 			margin-left: 0;
@@ -42,7 +40,6 @@
 	&__segment {
 		width: 100%;
 		padding: 0 15px;
-		padding-left: 0;
 
 		&__drop {
 			position: absolute;

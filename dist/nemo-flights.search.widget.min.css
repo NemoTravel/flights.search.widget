@@ -536,6 +536,7 @@
     -ms-flex-negative: 1;
     flex-shrink: 1;
     padding-bottom: 1rem;
+    margin-left: 0;
   }
 }
 
@@ -551,7 +552,7 @@
 
 @media only screen and (min-width: 1101px) {
   .widget-form-airports_CR .widget-form-airports__segment {
-    margin-left: 20px;
+    margin-left: 35px;
   }
 
   .widget-form-airports_CR .widget-form-additionalOptions {
