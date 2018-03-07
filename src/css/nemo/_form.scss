@@ -38,33 +38,8 @@
 		}
 	}
 
-	&__addSegment {
-		line-height: 40px;
-		background: rgba(255,255,255,.25);
-		border-radius: 2px;
-		cursor: pointer;
-		transition: all .2s;
-		text-align: center;
-		margin-left: 50px;
-		margin-right: 0;
-		font-weight: 500;
-		color: #fff;
-
-		&:hover {
-			box-shadow: inset 0 0 16px rgba(255,255,255,.2);
-		}
-
-		@include adaptivity(tablet) {
-			margin: 0 15px;
-		}
-
-		@include adaptivity(phone) {
-			margin-left: 0;
-		}
-	}
-
 	&_vertical {
-		&:before {
+		&:after {
 			display: none;
 		}
 
@@ -139,6 +114,20 @@
 					flex-basis: 100%;
 				}
 
+				&_CR {
+					.widget-form-airports__segment {
+						padding-left: 20px;
+						margin-left: 0;
+						margin-bottom: 2rem;
+					}
+
+					.widget-form-dates__col {
+						&:only-child {
+							padding: 0 !important;
+						}
+					}
+				}
+
 				&__col.col {
 					&:first-of-type {
 						padding-bottom: 1rem;
@@ -169,6 +158,12 @@
 				top: 0;
 				left: 0;
 				z-index: 1;
+				margin-bottom: 1rem !important;
+			}
+
+			&__routeTypeSwitch {
+				position: relative;
+				margin: 0;
 			}
 		}
 	}

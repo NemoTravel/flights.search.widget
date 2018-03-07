@@ -50,7 +50,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 			{this.renderAllSegment()}
 
 			{routeType === RouteType.CR && segments.length < MAX_SEGMENTS_COUNT ?
-				<div className="widget-form__addSegment" onClick={this.props.continueRoute}>
+				<div className="widget-form-search__addSegment" onClick={this.props.continueRoute}>
 					Продолжить маршрут
 				</div> : null}
 		</div>;

@@ -19,24 +19,6 @@
 		font-size: 13px;
 		cursor: pointer;
 	}
-
-	&__addSegment {
-		height: 40px;
-		background: #f3f3f2;
-		text-align: center;
-		align-self: center;
-		line-height: 40px;
-		color: #6c757d;
-		font-weight: 700;
-		font-size: 15px;
-		margin: 0 15px;
-		cursor: pointer;
-		width: 100%;
-
-		@include adaptivity(phone) {
-			margin: 0;
-		}
-	}
 	
 	&_vertical {
 		.widget-form {
@@ -55,8 +37,25 @@
 					}
 				}
 
+				&__addSegment {
+					margin: 0;
+				}
+
 				&__startButton {
 					width: 100%;
+				}
+			}
+
+			&-dates {
+				width: 100%;
+				margin-left: 0;
+
+				&__col {
+					padding: 0;
+
+					&:only-child {
+						padding: 0;
+					}
 				}
 			}
 			
@@ -65,6 +64,11 @@
 					display: block;
 					margin-left: 0;
 					margin-right: 0;
+				}
+
+				&__segment {
+					padding: 0;
+					flex-wrap: wrap;
 				}
 
 				&__col.col {
