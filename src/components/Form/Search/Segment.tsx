@@ -1,9 +1,10 @@
 import * as React from 'react';
 import AutocompleteContainer from './AutocompleteContainer';
 import DatesContainer from './DatesContainer';
-import {SegmentState} from '../../../state';
-import {SegmentAction} from '../../../store/form/segments/actions';
+import { SegmentState } from '../../../state';
+import { SegmentAction } from '../../../store/form/segments/actions';
 import Tooltip from "../../UI/Tooltip";
+import { i18n } from "../../../utils";
 
 interface Props {
 	segment: SegmentState;
@@ -34,7 +35,7 @@ export default class Segment extends React.Component<Props> {
 				segmentId={segmentId}/>
 
 			<div className="widget-form-airports__segment__datesErrorWrap">
-				<Tooltip message="Даты должны идти по порядку" isActive={showDatesError}/>
+				<Tooltip message={i18n('form', 'datesNotInOrderError')} isActive={showDatesError}/>
 			</div>
 			<DatesContainer
 				segmentId={segmentId}

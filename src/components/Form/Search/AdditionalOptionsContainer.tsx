@@ -86,7 +86,9 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 			{this.renderDirect()}
 
 			<div onClick={this.changeRouteType} className="widget-form__routeTypeSwitch">
-				{routeType !== RouteType.CR ? <span>Сложный маршрут</span>: <span>Простой маршрут</span>}
+				<span>
+					{i18n('form', routeType === RouteType.CR ? 'routeType_OW' : 'routeType_CR')}
+				</span>
 			</div>
 		</div> : null;
 	}

@@ -4,6 +4,7 @@ import Segment from './Segment';
 import { ApplicationState, RouteType, SegmentState, MAX_SEGMENTS_COUNT, CommonThunkAction } from '../../../state';
 import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import { continueRoute, deleteSegment, SegmentAction } from '../../../store/form/segments/actions';
+import { i18n } from '../../../utils';
 import * as classnames from 'classnames';
 
 interface StateProps {
@@ -51,7 +52,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 
 			{routeType === RouteType.CR && segments.length < MAX_SEGMENTS_COUNT ?
 				<div className="widget-form-search__addSegment" onClick={this.props.continueRoute}>
-					Продолжить маршрут
+					{i18n('form', 'continue_route')}
 				</div> : null}
 		</div>;
 	}
