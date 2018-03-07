@@ -10,18 +10,13 @@ import {
 
 import DepartureAutocomplete from './Autocomplete/Departure';
 import ArrivalAutocomplete from './Autocomplete/Arrival';
-import {
-	getDepartureOptions, getArrivalOptions, getDefaultOptionsGroup,
-	DefaultOptionGroup
-} from '../../../store/form/selectors';
+import { getDefaultOptionsGroup, DefaultOptionGroup, getSuggestionOptions } from '../../../store/form/selectors';
 import {
 	ApplicationMode, ApplicationState, AutocompleteFieldState, AutocompleteFieldType, CommonThunkAction, SegmentState,
 	SystemState
 } from '../../../state';
 
 interface StateProps {
-	departureOptions: any[];
-	arrivalOptions: any[];
 	defaultOptionsGroup: DefaultOptionGroup[];
 	showErrors: boolean;
 	system: SystemState;
@@ -52,8 +47,6 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			arrivalAutocomplete,
 			system,
 			showErrors,
-			departureOptions,
-			arrivalOptions,
 
 			swapAirports,
 			changeAutocompleteSuggestions,
@@ -61,6 +54,9 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			selectAirport,
 			segmentId
 		} = this.props;
+
+		const departureOptions = getSuggestionOptions(departureAutocomplete);
+		const arrivalOptions = getSuggestionOptions(arrivalAutocomplete);
 
 		if (
 			departureAutocomplete.airport && arrivalAutocomplete.airport &&
@@ -114,8 +110,6 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
-		departureOptions: getDepartureOptions(state),
-		arrivalOptions: getArrivalOptions(state),
 		defaultOptionsGroup: getDefaultOptionsGroup(state),
 		showErrors: state.form.showErrors,
 		system: state.system

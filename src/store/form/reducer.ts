@@ -6,8 +6,7 @@ import coupon from './coupon/reducer';
 import mileCard from './mileCard/reducer';
 import segments from './segments/reducer';
 import routeType from './route/reducer';
-import {FormState} from '../../state';
-import { SetRouteTypeAction } from './route/actions';
+import { FormState } from '../../state';
 import { ShowErrorsAction } from './actions';
 
 export const showErrorsReducer = (state: boolean = false, { type, payload }: ShowErrorsAction): boolean => {

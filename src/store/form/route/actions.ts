@@ -5,7 +5,7 @@ import { removeComplexSegments } from '../segments/actions';
 
 export interface SetRouteTypeAction {
 	type: string,
-	payload: string;
+	payload: RouteType;
 }
 
 export const setRouteTypeAction = (type: RouteType): SetRouteTypeAction => {

@@ -36,6 +36,7 @@ export interface PreviousSearchAction {
  * Show autocomplete field loading spinner.
  *
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  * @returns {AutocompleteAction}
  */
 export const startAutocompleteLoading = (autocompleteType: AutocompleteFieldType, segmentId: number): AutocompleteAction => {
@@ -50,12 +51,14 @@ export const startAutocompleteLoading = (autocompleteType: AutocompleteFieldType
  * Hide autocomplete field loading spinner.
  *
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  * @returns {AutocompleteAction}
  */
-export const finishAutocompleteLoading = (autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const finishAutocompleteLoading = (autocompleteType: AutocompleteFieldType, segmentId: number): AutocompleteAction => {
 	return {
 		type: AUTOCOMPLETE_LOADING_FINISHED,
-		autocompleteType
+		autocompleteType,
+		segmentId
 	};
 };
 
@@ -64,6 +67,7 @@ export const finishAutocompleteLoading = (autocompleteType: AutocompleteFieldTyp
  *
  * @param {Array} suggestions
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  * @returns {AutocompleteAction}
  */
 export const changeAutocompleteSuggestions = (suggestions: AutocompleteSuggestion[], autocompleteType: AutocompleteFieldType, segmentId: number = 0): AutocompleteAction => {
@@ -242,6 +246,7 @@ interface AutocompleteParams {
  * @param {Function} dispatch
  * @param {AutocompleteFieldType} autocompleteType
  * @param {Boolean} aggregationOnly
+ * @param {number} segmentId
  */
 const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOnly = false, segmentId = 0 }: AutocompleteParams): void => {
 	dispatch(startAutocompleteLoading(autocompleteType, segmentId));
@@ -255,11 +260,11 @@ const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOn
 				dispatch(changeAutocompleteSuggestions(options, autocompleteType, segmentId));
 			}
 
-			dispatch(finishAutocompleteLoading(autocompleteType));
+			dispatch(finishAutocompleteLoading(autocompleteType, segmentId));
 		})
 		.catch(() => {
-			dispatch(changeAutocompleteSuggestions([], autocompleteType));
-			dispatch(finishAutocompleteLoading(autocompleteType));
+			dispatch(changeAutocompleteSuggestions([], autocompleteType, segmentId));
+			dispatch(finishAutocompleteLoading(autocompleteType, segmentId));
 		});
 };
 
@@ -309,6 +314,7 @@ const runWebskyAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetState
  * @param {Function} getState
  * @param {String} searchText
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  */
 const runNemoAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFunction, searchText: string, autocompleteType: AutocompleteFieldType, segmentId: number = 0): void => {
 	const state = getState();
@@ -341,16 +347,16 @@ const runNemoAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFu
  *
  * @param {String} searchText
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  * @returns {Function}
  */
 export const sendAutocompleteRequest = (searchText: string, autocompleteType: AutocompleteFieldType, segmentId: number = 0): CommonThunkAction => {
-	console.log(segmentId);
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		if (getState().system.mode === ApplicationMode.WEBSKY) {
 			runWebskyAutocomplete(dispatch, getState, autocompleteType);
 		}
 		else {
-			runNemoAutocomplete(dispatch, getState, searchText, autocompleteType);
+			runNemoAutocomplete(dispatch, getState, searchText, autocompleteType, segmentId);
 		}
 	};
 };

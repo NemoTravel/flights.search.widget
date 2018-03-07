@@ -8,42 +8,54 @@ import {
 import { SegmentState, segmentState } from '../../../state';
 import { datesMainReducer } from './dates/reducer';
 import { autocompleteMainReducer } from "./autocomplete/reducer";
+import { AutocompleteAction } from "./autocomplete/actions";
+import { DatepickerAction } from "./dates/actions";
 
-export default (state: SegmentState[] = [segmentState], action: any): SegmentState[] => {
+const autocompleteReducer = (state: SegmentState[], action: AutocompleteAction): SegmentState[] => {
 	const segmentId = action.segmentId || 0;
 
+	return state.map((segment: SegmentState, index: number) => {
+		if (index === segmentId) {
+			return {
+				...segment,
+				autocomplete: autocompleteMainReducer(segment.autocomplete, action)
+			}
+		}
+		else {
+			return segment;
+		}
+	});
+};
+
+const datesReducer = (state: SegmentState[], action: DatepickerAction): SegmentState[] => {
+	const segmentId = action.segmentId || 0;
+
+	return state.map((segment: SegmentState, index: number) => {
+		if (index === segmentId) {
+			return {
+				...segment,
+				dates: datesMainReducer(segment.dates, action)
+			}
+		}
+		else {
+			return segment;
+		}
+	});
+};
+
+export default (state: SegmentState[] = [segmentState], action: any): SegmentState[] => {
 	switch(action.type) {
 		case AUTOCOMPLETE_LOADING_STARTED:
 		case AUTOCOMPLETE_LOADING_FINISHED:
 		case AUTOCOMPLETE_SUGGESTIONS_CHANGED:
 		case AIRPORT_SELECTED:
 		case AUTOCOMPLETE_PUSH_TO_PREVIOUS:
-			return state.map((segment: SegmentState, index: number) => {
-				if (index === segmentId) {
-					return {
-						...segment,
-						autocomplete: autocompleteMainReducer(segment.autocomplete, action)
-					}
-				}
-				else {
-					return segment;
-				}
-			});
+			return autocompleteReducer(state, action);
 
 		case TOGGLE_DATEPICKER:
 		case SELECT_DATE:
 		case SET_AVAILABLE_DATES:
-			return state.map((segment: SegmentState, index: number) => {
-				if (index === segmentId) {
-					return {
-						...segment,
-						dates: datesMainReducer(segment.dates, action)
-					}
-				}
-				else {
-					return segment;
-				}
-			});
+			return datesReducer(state, action);
 
 		case ADD_SEGMENT:
 			return [...state, segmentState];

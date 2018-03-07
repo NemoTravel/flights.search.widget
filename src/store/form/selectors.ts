@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import { getTotalPassengersCount } from './passengers/selectors';
 import { getAltLayout, i18n } from '../../utils';
 import {
-	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState,
+	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState, AutocompleteFieldState,
 	FormState, RouteType, SegmentState,
 	SystemState
 } from '../../state';
@@ -91,8 +91,7 @@ export const formIsValid = createSelector(
 	}
 );
 
-const getDepartureOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.segments[0].autocomplete.departure.suggestions;
-const getArrivalOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.segments[0].autocomplete.arrival.suggestions;
+const getSuggestionsFromAutocomplete = (state: AutocompleteFieldState): AutocompleteSuggestion[] => state.suggestions;
 const getDefaultOptionsFromState = (state: ApplicationState): AutocompleteDefaultGroupsState => state.form.segments[0].autocomplete.defaultGroups;
 
 const mapOptions = (options: AutocompleteSuggestion[]): AutocompleteOption[] => {
@@ -143,6 +142,5 @@ const mapGroupOptions = (groups: AutocompleteDefaultGroupsState): DefaultOptionG
 /**
  * Create autocomplete options list for arrival and departure.
  */
-export const getDepartureOptions = createSelector(getDepartureOptionsFromState, mapOptions);
-export const getArrivalOptions = createSelector(getArrivalOptionsFromState, mapOptions);
+export const getSuggestionOptions = createSelector(getSuggestionsFromAutocomplete, mapOptions);
 export const getDefaultOptionsGroup = createSelector(getDefaultOptionsFromState, mapGroupOptions);

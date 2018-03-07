@@ -25,7 +25,7 @@ interface Props {
 
 	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number) => any;
 	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType, segmentId: number) => CommonThunkAction;
-	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
+	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType, segmentId: number) => AutocompleteAction;
 	swapAirports?: (segmentId: number) => CommonThunkAction;
 	getRef?: (reactSelect: any) => any;
 }
@@ -142,7 +142,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 	}
 
 	render(): React.ReactNode {
-		const { suggestions, isLoading, optionsGroup, airport, showErrors, sameAirportsError, readOnly, getRef } = this.props;
+		const { suggestions, isLoading, optionsGroup, airport, showErrors, sameAirportsError, readOnly, getRef, segmentId } = this.props;
 
 		const selectedValue = airport ? {
 			label: airport.name,
@@ -181,7 +181,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 					onChange={this.selectOption}
 					onFocus={this.onFocusHandler}
 					onBlur={() => {
-						this.props.changeAutocompleteSuggestions([], this.type);
+						this.props.changeAutocompleteSuggestions([], this.type, segmentId);
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={(option: any) => <Option option={option}/>}
