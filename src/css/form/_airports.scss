@@ -56,6 +56,12 @@
 			font-weight: 700;
 		}
 
+		&__datesErrorWrap {
+			@include adaptivity(tablet) {
+				flex-basis: 100%;
+			}
+		}
+
 		&:only-child {
 			margin-bottom: 0;
 

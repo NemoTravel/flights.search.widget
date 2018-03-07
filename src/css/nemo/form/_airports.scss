@@ -26,11 +26,16 @@
 			background: #b23e13;
 			color: #fff;
 			margin-top: 5px;
-			//margin-left: 20px;
 			margin-right: 0;
 
 			@include adaptivity(tablet) {
 				margin-left: - 15px;
+			}
+		}
+
+		&__datesErrorWrap {
+			@include adaptivity(tablet) {
+				flex-basis: 100%;
 			}
 		}
 

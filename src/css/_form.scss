@@ -18,6 +18,10 @@
 		font-weight: 600;
 		font-size: 13px;
 		cursor: pointer;
+
+		@include adaptivity(phone) {
+			margin: 10px 0;
+		}
 	}
 	
 	&_vertical {
@@ -69,6 +73,10 @@
 				&__segment {
 					padding: 0;
 					flex-wrap: wrap;
+
+					&__datesErrorWrap {
+						flex-basis: 100%;
+					}
 				}
 
 				&__col.col {

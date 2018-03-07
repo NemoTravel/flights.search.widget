@@ -33,7 +33,9 @@ export default class Segment extends React.Component<Props> {
 				arrivalAutocomplete={segment.autocomplete.arrival}
 				segmentId={segmentId}/>
 
-			<Tooltip message="Даты должны идти по порядку" isActive={showDatesError}/>
+			<div className="widget-form-airports__segment__datesErrorWrap">
+				<Tooltip message="Даты должны идти по порядку" isActive={showDatesError}/>
+			</div>
 			<DatesContainer
 				segmentId={segmentId}
 				departureDatepicker={segment.dates.departure}

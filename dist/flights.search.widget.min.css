@@ -6040,6 +6040,13 @@
   font-weight: 700;
 }
 
+@media only screen and (max-width: 750px) {
+  .widget-form-airports__segment__datesErrorWrap {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+  }
+}
+
 .widget-form-airports__segment:only-child {
   margin-bottom: 0;
 }
@@ -6669,6 +6676,12 @@
   cursor: pointer;
 }
 
+@media only screen and (max-width: 650px) {
+  .widget-form__routeTypeSwitch {
+    margin: 10px 0;
+  }
+}
+
 .widget-form_vertical .widget-form-search__wrapper .form-group:last-of-type {
   margin-bottom: 1rem;
 }
@@ -6712,6 +6725,11 @@
   padding: 0;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+}
+
+.widget-form_vertical .widget-form-airports__segment__datesErrorWrap {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
 }
 
 .widget-form_vertical .widget-form-airports__col.col {
