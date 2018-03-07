@@ -7,9 +7,9 @@ import {
 } from '../../actions';
 import { SegmentState, segmentState } from '../../../state';
 import { datesMainReducer } from './dates/reducer';
-import { autocompleteMainReducer } from "./autocomplete/reducer";
-import { AutocompleteAction } from "./autocomplete/actions";
-import { DatepickerAction } from "./dates/actions";
+import { autocompleteMainReducer } from './autocomplete/reducer';
+import { AutocompleteAction } from './autocomplete/actions';
+import { DatepickerAction } from './dates/actions';
 
 const autocompleteReducer = (state: SegmentState[], action: AutocompleteAction): SegmentState[] => {
 	const segmentId = action.segmentId || 0;
@@ -19,7 +19,7 @@ const autocompleteReducer = (state: SegmentState[], action: AutocompleteAction):
 			return {
 				...segment,
 				autocomplete: autocompleteMainReducer(segment.autocomplete, action)
-			}
+			};
 		}
 		else {
 			return segment;
@@ -35,7 +35,7 @@ const datesReducer = (state: SegmentState[], action: DatepickerAction): SegmentS
 			return {
 				...segment,
 				dates: datesMainReducer(segment.dates, action)
-			}
+			};
 		}
 		else {
 			return segment;

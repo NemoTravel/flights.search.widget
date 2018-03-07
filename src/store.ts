@@ -19,7 +19,7 @@ import {
 	setSelectedAirport
 } from './store/form/segments/autocomplete/actions';
 import { addSegment } from './store/form/segments/actions';
-import { selectDate } from "./store/form/segments/dates/actions";
+import { selectDate } from './store/form/segments/dates/actions';
 
 const middlewares = [thunk];
 const STORE_CACHE_KEY = 'cached_store';
@@ -42,7 +42,7 @@ const enableReduxLogger = (isEnabled: boolean = false): void => {
 
 /* global process */
 if (process.env.NODE_ENV !== 'production') {
-	enableReduxLogger(true);
+	enableReduxLogger(false);
 	enableProfiler(false);
 }
 

@@ -35,5 +35,5 @@ export const continueRoute = (): CommonThunkAction => {
 		if (arrAirportInLastSegment) {
 			dispatch(setSelectedAirport(arrAirportInLastSegment, AutocompleteFieldType.Departure, segments.length));
 		}
-	}
+	};
 };
