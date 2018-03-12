@@ -9,7 +9,7 @@
     "build": "npm run tslint && npm test && cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
-    "prepare": "npm run test && npm run build",
+    "prepare": "npm run build",
     "test": "jest",
     "start": "npm run server"
   },
