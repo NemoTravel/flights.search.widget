@@ -6,11 +6,11 @@
   "scripts": {
     "tslint": "tslint -p ./tslint.json",
     "server": "node server.js",
-    "build": "npm run tslint && cross-env NODE_ENV=production webpack",
+    "build": "npm run tslint && npm test && cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
     "prepublish": "npm run test && npm run build",
-    "test": "npm run tslint",
+    "test": "jest",
     "start": "npm run server"
   },
   "pre-commit": [],
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/autobind-decorator": "^2.1.0",
     "@types/classnames": "^2.2.3",
+    "@types/jest": "^22.2.0",
     "@types/js-cookie": "^2.1.0",
     "@types/moment": "^2.13.0",
     "@types/promise-polyfill": "^6.0.0",
@@ -49,6 +50,7 @@
     "opn": "^5.1.0",
     "postcss-loader": "^2.0.6",
     "pre-commit": "^1.2.2",
+    "react-addons-test-utils": "^15.6.2",
     "redux-testkit": "^1.0.6",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
@@ -87,11 +89,19 @@
     ],
     "moduleFileExtensions": [
       "js",
-      "jsx"
+      "ts",
+      "jsx",
+      "tsx"
     ],
     "moduleDirectories": [
       "node_modules",
       "src"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
+    },
+    "testMatch": [
+      "**/__tests__/*.+(ts|tsx|js)"
     ],
     "moduleNameMapper": {}
   }

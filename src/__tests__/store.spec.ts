@@ -1,6 +1,6 @@
+import * as moment from 'moment';
 import { getStore } from '../store';
-import { initialState, systemState } from 'state';
-import moment from 'moment';
+import { initialState, ServiceClass, systemState } from '../state';
 
 /* global describe */
 /* global it */
@@ -13,10 +13,10 @@ describe('preinit options', () => {
 	});
 
 	it('should have passengers set from config', () => {
-		const config = { defaultPassengers: { ADT: 2, CLD: 1 } };
-		let expectValue = initialState.form.passengers;
+		const config: { defaultPassengers: { [passengerType: string]: number } } = { defaultPassengers: { ADT: 2, CLD: 1 } };
+		const expectValue = initialState.form.passengers;
 
-		for (let type in config.defaultPassengers) {
+		for (const type in config.defaultPassengers) {
 			if (config.defaultPassengers.hasOwnProperty(type)) {
 				expectValue[type].count = config.defaultPassengers[type];
 			}
@@ -26,16 +26,18 @@ describe('preinit options', () => {
 	});
 
 	it('should be merge with config additional options and initial. Change Class Type', () => {
-		const config = { defaultServiceClass: 'Business' };
-		let expectValue = systemState;
-		expectValue.defaultServiceClass = 'Business';
+		const config = { defaultServiceClass: ServiceClass.Business };
+		const expectValue = systemState;
+
+		expectValue.defaultServiceClass = ServiceClass.Business;
 
 		expect(getStore(config).getState().system).toEqual(expectValue);
 	});
 
 	it('should be merge with config additional options and initial. Change Vicinity Mode', () => {
 		const config = { vicinityDatesMode: true };
-		let expectValue = systemState;
+		const expectValue = systemState;
+
 		expectValue.vicinityDatesMode = true;
 
 		expect(getStore(config).getState().system).toEqual(expectValue);
@@ -43,7 +45,8 @@ describe('preinit options', () => {
 
 	it('should be merge with config additional options and initial. Change Direct Only', () => {
 		const config = { directOnly: true };
-		let expectValue = systemState;
+		const expectValue = systemState;
+
 		expectValue.directOnly = true;
 
 		expect(getStore(config).getState().system).toEqual(expectValue);
@@ -51,7 +54,8 @@ describe('preinit options', () => {
 
 	it('should be date from config', () => {
 		const config = { defaultDepartureDate: '2018-01-01', defaultReturnDate: '2018-01-09' };
-		let expectValue = initialState.form;
+		const expectValue = initialState.form;
+
 		expectValue.dates.departure.date = moment(config.defaultDepartureDate);
 		expectValue.dates.return.date = moment(config.defaultReturnDate);
 

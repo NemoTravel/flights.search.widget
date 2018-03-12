@@ -64,7 +64,6 @@
 		"prefer-object-spread": true,
 		"restrict-plus-operands": true,
 		"triple-equals": true,
-		"typeof-compare": true,
 		"use-default-type-parameter": true,
 		"use-isnan": true,
 		"eofline": true,

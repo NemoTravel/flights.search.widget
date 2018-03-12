@@ -149,7 +149,7 @@ const getDatesAvailability = (dispatch: Dispatch<AnyAction>, getState: GetStateF
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {AutocompleteAction}
  */
-export const setSelectedAirport = (airport: any, autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const setSelectedAirport = (airport: Airport, autocompleteType: AutocompleteFieldType): AutocompleteAction => {
 	return {
 		type: AIRPORT_SELECTED,
 		autocompleteType,

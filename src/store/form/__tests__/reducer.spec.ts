@@ -1,4 +1,4 @@
-import { Reducer } from 'redux-testkit';
+import { Reducer } from 'redux-testkit'; // tslint:disable-line
 import { showErrors } from '../actions';
 import { showErrorsReducer } from '../reducer';
 
@@ -7,7 +7,7 @@ import { showErrorsReducer } from '../reducer';
 /* global expect */
 describe('store/form/reducer', () => {
 	it('should have initial state', () => {
-		expect(showErrorsReducer()).toEqual(false);
+		expect(showErrorsReducer(undefined, { type: 'WRONG_TYPE', payload: null })).toEqual(false);
 	});
 
 	it('should not affect state', () => {

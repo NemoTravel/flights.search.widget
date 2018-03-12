@@ -2,9 +2,7 @@ import { createSelector } from 'reselect';
 import { i18n } from '../../../utils';
 import { ApplicationState, PassengersState, PassengerState, PassengerType, WebskyPassengerType } from '../../../state';
 
-const getPassengersConfig = (state: ApplicationState): PassengersState => {
-	return state.form.passengers;
-};
+const getPassengersConfig = (state: ApplicationState): PassengersState => state.form.passengers;
 
 export const getPassengersArray = createSelector(
 	[ getPassengersConfig ],
