@@ -100,7 +100,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 		}
 
 		return <div className="widget-ui-input__wrapper">
-			<Tooltip message={tooltipText} isActive={tooltipIsActive}>
+			<Tooltip message={tooltipText} isActive={tooltipIsActive} isCentered={true}>
 				<input
 					type="text"
 					className={classnames('form-control widget-ui-input', { 'widget-ui-input_disabled': !this.state.isActive })}

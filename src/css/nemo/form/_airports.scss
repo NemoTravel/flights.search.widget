@@ -33,12 +33,6 @@
 			}
 		}
 
-		&__datesErrorWrap {
-			@include adaptivity(tablet) {
-				flex-basis: 100%;
-			}
-		}
-
 		@include adaptivity(tablet) {
 			padding: 0;
 		}

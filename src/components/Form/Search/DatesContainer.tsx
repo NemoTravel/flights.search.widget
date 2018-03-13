@@ -18,6 +18,8 @@ import {
 } from '../../../store/form/segments/dates/actions';
 import { Moment } from 'moment';
 import { routeType } from '../../../store/form/selectors';
+import { i18n } from "../../../utils";
+import Tooltip from "../../UI/Tooltip";
 
 interface StateProps {
 	system: SystemState;
@@ -29,6 +31,7 @@ interface StateProps {
 
 interface Props {
 	segmentId: number;
+	datesIsNotOrder?: boolean;
 	departureDatepicker: DatepickerState;
 	returnDatepicker: DatepickerState;
 }
@@ -42,7 +45,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 	protected returnInput: HTMLInputElement = null;
 
 	render(): React.ReactNode {
-		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, routeType, segmentId } = this.props;
+		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, routeType, segmentId, datesIsNotOrder } = this.props;
 		const DATEPICKER_SWITCH_DELAY = 20;
 
 		let returnInitialDate = departureDatepicker.date;
@@ -56,6 +59,10 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 		}
 
 		return <div className="form-group row widget-form-dates">
+			<div className="widget-form-dates__datesErrorWrap">
+				<Tooltip message={i18n('form', 'datesNotInOrderError')} isActive={datesIsNotOrder} isCentered={true}/>
+			</div>
+
 			<DepartureDatepicker
 				showErrors={showErrors}
 				locale={system.locale}

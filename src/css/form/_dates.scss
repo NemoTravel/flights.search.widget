@@ -1,6 +1,8 @@
 @import "../variables";
 
 &-dates {
+	position: relative;
+
 	.widget-ui-input {
 		cursor: pointer;
 		padding-right: 35px;
@@ -9,6 +11,11 @@
 		@include adaptivity(phone) {
 			padding-right: 30px;
 		}
+	}
+
+	&__datesErrorWrap {
+		position: absolute;
+		width: 100%;
 	}
 	
 	&__col.col {

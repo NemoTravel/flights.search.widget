@@ -42,13 +42,11 @@ export default class Segment extends React.Component<Props> {
 				arrivalAutocomplete={segment.autocomplete.arrival}
 				segmentId={segmentId}/>
 
-			<div className="widget-form-airports__segment__datesErrorWrap">
-				<Tooltip message={i18n('form', 'datesNotInOrderError')} isActive={showDatesError}/>
-			</div>
 			<DatesContainer
 				segmentId={segmentId}
 				departureDatepicker={segment.dates.departure}
-				returnDatepicker={segment.dates.return}/>
+				returnDatepicker={segment.dates.return}
+				datesIsNotOrder={showDatesError}/>
 
 			{ canBeRemoved ? <div className="widget-form-airports__segment__drop" onClick={this.deleteSegment}> X </div> : null }
 		</div>;
