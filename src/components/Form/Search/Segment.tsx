@@ -21,6 +21,14 @@ export default class Segment extends React.Component<Props> {
 		this.deleteSegment = this.deleteSegment.bind(this);
 	}
 
+	shouldComponentUpdate(nextProps: Props): boolean {
+		const { canBeRemoved, showDatesError, segment } = this.props;
+
+		return canBeRemoved !== nextProps.canBeRemoved ||
+			showDatesError !== nextProps.showDatesError ||
+			segment !== nextProps.segment;
+	}
+
 	deleteSegment(): void {
 		this.props.removeSegment();
 	}

@@ -138,7 +138,6 @@ export interface AutocompleteFieldState {
 }
 
 export interface AutocompleteState {
-	[key: string]: any,
 	departure: AutocompleteFieldState;
 	arrival: AutocompleteFieldState;
 	defaultGroups: AutocompleteDefaultGroupsState;
@@ -178,7 +177,6 @@ export interface DatepickerState {
 }
 
 export interface DatesState {
-	[key: string]: DatepickerState;
 	departure: DatepickerState;
 	return: DatepickerState;
 }

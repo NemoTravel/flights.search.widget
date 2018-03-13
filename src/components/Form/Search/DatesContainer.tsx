@@ -17,7 +17,7 @@ import {
 	setAvailableDates
 } from '../../../store/form/segments/dates/actions';
 import { Moment } from 'moment';
-import {routeType} from '../../../store/form/selectors';
+import { routeType } from '../../../store/form/selectors';
 
 interface StateProps {
 	system: SystemState;

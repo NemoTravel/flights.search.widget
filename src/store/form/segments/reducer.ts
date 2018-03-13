@@ -14,7 +14,7 @@ import { DatepickerAction } from './dates/actions';
 const autocompleteReducer = (state: SegmentState[], action: AutocompleteAction): SegmentState[] => {
 	const segmentId = action.segmentId || 0;
 
-	return state.map((segment: SegmentState, index: number) => {
+	return state.map((segment, index) => {
 		if (index === segmentId) {
 			return {
 				...segment,
@@ -30,7 +30,7 @@ const autocompleteReducer = (state: SegmentState[], action: AutocompleteAction):
 const datesReducer = (state: SegmentState[], action: DatepickerAction): SegmentState[] => {
 	const segmentId = action.segmentId || 0;
 
-	return state.map((segment: SegmentState, index: number) => {
+	return state.map((segment, index) => {
 		if (index === segmentId) {
 			return {
 				...segment,

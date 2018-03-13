@@ -137,22 +137,6 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
 	}
 
-/*	if (!state.form.dates.departure.date) {
-		if (state.system.defaultDepartureDate) {
-			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
-
-			store.dispatch(selectDate(departureDate, DatepickerFieldType.Departure));
-		}
-	}
-
-	if (!state.form.dates.return.date) {
-		if (state.system.defaultReturnDate) {
-			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
-
-			store.dispatch(selectDate(returnDate, DatepickerFieldType.Return));
-		}
-	}*/
-
 	if (!state.form.segments[0].dates.return.date) {
 		if (state.system.defaultReturnDate) {
 			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);

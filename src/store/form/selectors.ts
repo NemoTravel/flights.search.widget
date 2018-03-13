@@ -10,7 +10,6 @@ import { AutocompleteSuggestion } from '../../services/models/AutocompleteSugges
 import { AutocompleteOption } from '../../services/models/AutocompleteOption';
 
 const getConfig = (state: ApplicationState): SystemState => state.system;
-const getFormConfig = (state: ApplicationState): FormState => state.form;
 
 export const isWebsky = createSelector(
 	[ getConfig ],
@@ -22,17 +21,17 @@ export const showCouponField = createSelector(
 	(config: SystemState, isWebskyMode: boolean): boolean => isWebskyMode && config.enableCoupon
 );
 
-export const routeType = createSelector(
-	[ getFormConfig ],
-	(config: FormState): RouteType => config.routeType
-);
-
 export const showMileCardField = createSelector(
 	[ getConfig, isWebsky ],
 	(config: SystemState, isWebskyMode: boolean): boolean => isWebskyMode && config.enableMileCard && false // Disabled for now (feature is not implemented in Websky yet)
 );
 
 const getForm = (state: ApplicationState): FormState => state.form;
+
+export const routeType = createSelector(
+	[ getForm ],
+	(config: FormState): RouteType => config.routeType
+);
 
 /**
  * Check if search form data is valid and ready for further operations.
@@ -52,27 +51,6 @@ export const formIsValid = createSelector(
 			isValid = false;
 		}
 
-		segments.map((segment: SegmentState, index: number) => {
-			if (!segment.dates.departure.date) {
-				isValid = false;
-
-			}
-			else if (index > 0) {
-				if (segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)) {
-					isValid = false;
-				}
-			}
-			else if (!segment.autocomplete.departure.airport) {
-				isValid = false;
-			}
-			else if (!segment.autocomplete.arrival.airport) {
-				isValid = false;
-			}
-			else if (segment.autocomplete.departure.airport.IATA === segment.autocomplete.arrival.airport.IATA) {
-				isValid = false;
-			}
-		});
-
 		if (totalPassengersCount <= 0) {
 			isValid = false;
 		}
@@ -85,6 +63,27 @@ export const formIsValid = createSelector(
 			form.mileCard.password && (!form.mileCard.number || !form.mileCard.number.match(/^[\d]+$/g))
 		) {
 			isValid = false;
+		}
+		else {
+			segments.forEach((segment, index) => {
+				if (!segment.dates.departure.date) {
+					isValid = false;
+				}
+				else if (index > 0) {
+					if (segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)) {
+						isValid = false;
+					}
+				}
+				else if (!segment.autocomplete.departure.airport) {
+					isValid = false;
+				}
+				else if (!segment.autocomplete.arrival.airport) {
+					isValid = false;
+				}
+				else if (segment.autocomplete.departure.airport.IATA === segment.autocomplete.arrival.airport.IATA) {
+					isValid = false;
+				}
+			});
 		}
 
 		return isValid;
