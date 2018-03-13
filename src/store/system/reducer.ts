@@ -1,9 +1,9 @@
+import { Action } from 'redux';
 import { LOAD_CONFIG } from '../actions';
 import * as Cache from '../../cache';
 import { SystemState, systemState } from '../../state';
 
-interface SystemAction {
-	type: string;
+interface SystemAction extends Action {
 	payload: SystemState;
 }
 

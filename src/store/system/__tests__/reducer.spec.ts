@@ -1,14 +1,14 @@
+import { Reducer } from 'redux-testkit'; // tslint:disable-line
 import systemReducer from '../reducer';
-import { LOAD_CONFIG } from 'store/actions';
-import { systemState } from 'state';
-import { Reducer } from 'redux-testkit';
+import { LOAD_CONFIG } from '../../actions';
+import { systemState } from '../../../state';
 
 /* global describe */
 /* global it */
 /* global expect */
 describe('store/system/reducer', () => {
 	it('should have initial state', () => {
-		expect(systemReducer()).toEqual(systemState);
+		expect(systemReducer(undefined, { type: 'WRONG_TYPE', payload: null })).toEqual(systemState);
 	});
 
 	it('should not affect state', () => {

@@ -1,4 +1,4 @@
-import { getAltLayout, encodeURLParams } from 'utils';
+import { getAltLayout, encodeURLParams } from '../utils';
 
 /* global describe */
 /* global it */
@@ -26,7 +26,6 @@ describe('utils', () => {
 		it('should return `` when `{}` or anything but object passed', () => {
 			expect(encodeURLParams({})).toBe('');
 			expect(encodeURLParams()).toBe('');
-			expect(encodeURLParams('asf')).toBe('');
 		});
 	});
 });

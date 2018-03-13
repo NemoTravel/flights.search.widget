@@ -157,7 +157,7 @@ export const getDatesAvailability = (dispatch: Dispatch<AnyAction>, getState: Ge
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {AutocompleteAction}
  */
-export const setSelectedAirport = (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number = 0): AutocompleteAction => {
+export const setSelectedAirport = (airport: Airport, autocompleteType: AutocompleteFieldType, segmentId: number = 0): AutocompleteAction => {
 	return {
 		type: AIRPORT_SELECTED,
 		autocompleteType,

@@ -1,14 +1,14 @@
+import { Reducer } from 'redux-testkit'; // tslint:disable-line
 import additionalReducer from '../reducer';
 import { setClassType, vicinityDatesAction, directFlightAction } from '../actions';
-import { additionalState } from 'state';
-import { Reducer } from 'redux-testkit';
+import { additionalState, ServiceClass } from '../../../../state';
 
 /* global describe */
 /* global it */
 /* global expect */
 describe('store/additional/reducer', () => {
 	it('should have initial state', () => {
-		expect(additionalReducer()).toEqual(additionalState);
+		expect(additionalReducer(undefined, { type: 'TEST' })).toEqual(additionalState);
 	});
 
 	it('should not affect state', () => {
@@ -16,17 +16,17 @@ describe('store/additional/reducer', () => {
 	});
 
 	it('should handle `SET_CLASS_TYPE`', () => {
-		Reducer(additionalReducer).expect(setClassType('Some class name')).toChangeInState({ classType: 'Some class name' });
+		Reducer(additionalReducer).expect(setClassType(ServiceClass.Business)).toChangeInState({ classType: ServiceClass.Business });
 	});
 
 	it('should handle `SET_CLASS_TYPE` on existing state', () => {
-		const state = { vicinityDates: true, directFlight: false, classType: 'First' };
+		const state = { vicinityDates: true, directFlight: false, classType: ServiceClass.Economy };
 
-		Reducer(additionalReducer).withState(state).expect(setClassType('Some class name')).toChangeInState({ classType: 'Some class name' });
+		Reducer(additionalReducer).withState(state).expect(setClassType(ServiceClass.Business)).toChangeInState({ classType: ServiceClass.Business });
 	});
 
 	it('should handle `TOGGLE_VICINITY_DATES` on existing state', () => {
-		const state = { vicinityDates: true, directFlight: false, classType: 'First' };
+		const state = { vicinityDates: true, directFlight: false, classType: ServiceClass.Economy };
 
 		Reducer(additionalReducer).withState(state).expect(vicinityDatesAction()).toChangeInState({ vicinityDates: false });
 	});
@@ -36,7 +36,7 @@ describe('store/additional/reducer', () => {
 	});
 
 	it('should handle `TOGGLE_DIRECT_FLIGHT` on existing state', () => {
-		const state = { vicinityDates: false, directFlight: true, classType: 'First' };
+		const state = { vicinityDates: false, directFlight: true, classType: ServiceClass.Economy };
 
 		Reducer(additionalReducer).withState(state).expect(directFlightAction()).toChangeInState({ directFlight: false });
 	});
