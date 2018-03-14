@@ -13,13 +13,14 @@ import {
 	setDirectFlightCheckbox
 } from '../../../store/form/additional/actions';
 import { setRouteType } from '../../../store/form/route/actions';
+import { isCR } from "../../../store/form/selectors";
 
 interface StateProps {
 	vicinityDatesSelect: boolean;
 	directFlightSelect: boolean;
 	vicinityDays: number;
 	widgetMode: ApplicationMode;
-	routeType: RouteType;
+	isCR: boolean;
 }
 
 interface DispatchProps {
@@ -56,9 +57,7 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 	}
 
 	changeRouteType(): void {
-		const routeType = this.props.routeType;
-
-		if (routeType === RouteType.CR) {
+		if (this.props.isCR) {
 			this.props.setRouteType(RouteType.OW);
 		}
 		else {
@@ -79,15 +78,15 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 	}
 
 	render(): React.ReactNode {
-		const { widgetMode, routeType } = this.props;
+		const { widgetMode, isCR } = this.props;
 
 		return widgetMode === ApplicationMode.NEMO ? <div className="form-group widget-form-additionalOptions">
-			{routeType !== RouteType.CR ? this.renderVicinityDates() : null}
+			{!isCR ? this.renderVicinityDates() : null}
 			{this.renderDirect()}
 
 			<div onClick={this.changeRouteType} className="widget-form__routeTypeSwitch">
 				<span>
-					{i18n('form', routeType === RouteType.CR ? 'routeType_OW' : 'routeType_CR')}
+					{i18n('form', isCR ? 'routeType_OW' : 'routeType_CR')}
 				</span>
 			</div>
 		</div> : null;
@@ -100,7 +99,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 		directFlightSelect: directFlightSelect(state),
 		vicinityDays: state.system.vicinityDays,
 		widgetMode: state.system.mode,
-		routeType: state.form.routeType
+		isCR: isCR(state)
 	};
 };
 

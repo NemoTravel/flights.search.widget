@@ -27,11 +27,6 @@ export const showMileCardField = createSelector(
 
 const getForm = (state: ApplicationState): FormState => state.form;
 
-export const routeType = createSelector(
-	[ getForm ],
-	(config: FormState): RouteType => config.routeType
-);
-
 export const isCR = createSelector(
 	[ getForm ],
 	(config: FormState): boolean => config.routeType === RouteType.CR

@@ -6,10 +6,11 @@ import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import { continueRoute, deleteSegment, SegmentAction } from '../../../store/form/segments/actions';
 import { i18n } from '../../../utils';
 import * as classnames from 'classnames';
+import { isCR } from "../../../store/form/selectors";
 
 interface StateProps {
 	segments: SegmentState[];
-	routeType: RouteType;
+	isCR: boolean;
 }
 
 interface DispatchProps {
@@ -29,7 +30,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 	}
 
 	renderAllSegment(): React.ReactNode {
-		const { segments, routeType, removeSegment } = this.props;
+		const { segments, isCR, removeSegment } = this.props;
 
 		return segments.map((segment: SegmentState, index: number) => {
 			return <Segment
@@ -37,20 +38,20 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 				segmentId={index}
 				key={index}
 				removeSegment={removeSegment}
-				canBeRemoved={segments.length > 1 && segments.length - 1 === index && routeType === RouteType.CR}
+				canBeRemoved={segments.length > 1 && segments.length - 1 === index && isCR}
 				showDatesError={index > 0 && segment.dates.departure.date && segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)}
 			/>;
 		});
 	}
 
 	render(): React.ReactNode {
-		const { segments, routeType, continueRoute } = this.props;
+		const { segments, isCR, continueRoute } = this.props;
 
-		return <div className={classnames('form-group row widget-form-airports', {'widget-form-airports_CR': routeType === RouteType.CR })}>
+		return <div className={classnames('form-group row widget-form-airports', {'widget-form-airports_CR': isCR })}>
 
 			{this.renderAllSegment()}
 
-			{routeType === RouteType.CR && segments.length < MAX_SEGMENTS_COUNT ?
+			{isCR && segments.length < MAX_SEGMENTS_COUNT ?
 				<div className="widget-form-search__addSegment" onClick={this.props.continueRoute}>
 					{i18n('form', 'continue_route')}
 				</div> : null}
@@ -61,7 +62,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
 		segments: state.form.segments,
-		routeType: state.form.routeType
+		isCR: isCR(state)
 	};
 };
 
