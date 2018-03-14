@@ -1,9 +1,9 @@
 import { Reducer } from 'redux-testkit'; // tslint:disable-line
 import * as moment from 'moment';
-import datesReducer from '../reducer';
-import { TOGGLE_DATEPICKER } from '../../../actions';
-import { toggleDatePicker, selectDate } from '../actions';
-import { DatepickerFieldType, datesState } from '../../../../state';
+import { datesMainReducer as datesReducer } from '../reducer';
+import { TOGGLE_DATEPICKER } from '../../../../actions';
+import { toggleDatePicker, selectDate } from '../../actions';
+import { DatepickerFieldType, datesState } from '../../../../../state';
 
 /* global describe */
 /* global it */

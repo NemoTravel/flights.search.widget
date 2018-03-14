@@ -1,5 +1,5 @@
 import { Reducer } from 'redux-testkit'; // tslint:disable-line
-import autocompleteReducer from '../reducer';
+import { autocompleteMainReducer as autocompleteReducer } from '../reducer';
 import { AIRPORT_SELECTED } from '../../../../actions';
 import {
 	startAutocompleteLoading,
