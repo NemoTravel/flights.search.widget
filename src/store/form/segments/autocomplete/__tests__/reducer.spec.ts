@@ -27,7 +27,7 @@ const correctAirport: Airport = {
 /* global describe */
 /* global it */
 /* global expect */
-describe('store/form/autocomplete', () => {
+describe('store/form/segments/autocomplete', () => {
 	it('should not affect state', () => {
 		Reducer(autocompleteReducer).expect({ type: 'WRONG_TYPE' }).toReturnState(autocompleteState);
 	});

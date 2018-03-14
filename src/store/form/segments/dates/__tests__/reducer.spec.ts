@@ -8,7 +8,7 @@ import { DatepickerFieldType, datesState } from '../../../../../state';
 /* global describe */
 /* global it */
 /* global expect */
-describe('store/form/dates', () => {
+describe('store/form/segments/dates', () => {
 	it('should not affect state', () => {
 		Reducer(datesReducer).expect({ type: 'WRONG_TYPE' }).toReturnState(datesState);
 	});
