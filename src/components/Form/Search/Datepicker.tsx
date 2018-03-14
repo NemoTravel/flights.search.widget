@@ -6,6 +6,7 @@ import UIDatepicker from '../../UI/Datepicker';
 import MobileHeader from '../../UI/MobileHeader';
 import { DatepickerFieldType, Language } from '../../../state';
 import { HighlightedDatesGroup } from '../../../store/form/segments/dates/selectors';
+import { i18n } from "../../../utils";
 
 interface Props {
 	showErrors?: boolean;
@@ -17,6 +18,7 @@ interface Props {
 	specialDate: Moment;
 	segmentId: number;
 	popperPlacement: string;
+	datesIsNotInOrder?: boolean;
 
 	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
 	getRef?: (input: any) => any;
@@ -87,12 +89,14 @@ export default class Datepicker extends React.Component<Props> {
 			specialDate,
 			openToDate,
 			highlightDates,
-			popperPlacement
+			popperPlacement,
+			datesIsNotInOrder
 		} = this.props;
 
 		const
 			minDate = moment(),
-			maxDate = moment().add(1, 'years');
+			maxDate = moment().add(1, 'years'),
+			datesIsNotInOrderText = i18n('form', 'datesNotInOrderError');
 
 		return <div className="col widget-form-dates__col">
 			<UIDatepicker
@@ -111,8 +115,8 @@ export default class Datepicker extends React.Component<Props> {
 				selectDate={selectDate}
 				popperPlacement={popperPlacement}
 				specialDate={specialDate}
-				tooltipIsActive={!date && this.showErrors && showErrors}
-				tooltipText={this.tooltipText}
+				tooltipIsActive={this.showErrors && showErrors && (!date || datesIsNotInOrder)}
+				tooltipText={datesIsNotInOrder ? datesIsNotInOrderText : this.tooltipText}
 				inputProps={{ placeholder: this.placeholder }}
 			>
 				{this.renderInner()}

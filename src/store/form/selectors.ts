@@ -3,8 +3,7 @@ import { getTotalPassengersCount } from './passengers/selectors';
 import { getAltLayout, i18n } from '../../utils';
 import {
 	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState, AutocompleteFieldState,
-	FormState, RouteType, SegmentState,
-	SystemState
+	FormState, RouteType, SystemState
 } from '../../state';
 import { AutocompleteSuggestion } from '../../services/models/AutocompleteSuggestion';
 import { AutocompleteOption } from '../../services/models/AutocompleteOption';
@@ -31,6 +30,11 @@ const getForm = (state: ApplicationState): FormState => state.form;
 export const routeType = createSelector(
 	[ getForm ],
 	(config: FormState): RouteType => config.routeType
+);
+
+export const isCR = createSelector(
+	[ getForm ],
+	(config: FormState): boolean => config.routeType === RouteType.CR
 );
 
 /**

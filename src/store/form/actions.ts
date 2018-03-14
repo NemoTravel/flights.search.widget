@@ -23,7 +23,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 	let requestURL = clearURL(state.system.nemoURL) + '/results/';
 	const segments = state.form.segments;
 
-	segments.forEach((segment) => {
+	segments.forEach(segment => {
 		// Departure airport info.
 		requestURL += segment.autocomplete.departure.airport.isCity ? 'c' : 'a';
 		requestURL += segment.autocomplete.departure.airport.IATA;

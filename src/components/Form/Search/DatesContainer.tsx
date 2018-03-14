@@ -8,7 +8,7 @@ import {
 	HighlightedDatesGroup
 } from '../../../store/form/segments/dates/selectors';
 import {
-	ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerState, RouteType,
+	ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerState,
 	SystemState
 } from '../../../state';
 import {
@@ -17,16 +17,14 @@ import {
 	setAvailableDates
 } from '../../../store/form/segments/dates/actions';
 import { Moment } from 'moment';
-import { routeType } from '../../../store/form/selectors';
-import { i18n } from "../../../utils";
-import Tooltip from "../../UI/Tooltip";
+import { isCR } from '../../../store/form/selectors';
 
 interface StateProps {
 	system: SystemState;
 	showErrors: boolean;
 	getDepartureHighlightedDates: HighlightedDatesGroup[];
 	getReturnHighlightedDates: HighlightedDatesGroup[];
-	routeType: RouteType;
+	isCR: boolean;
 }
 
 interface Props {
@@ -45,7 +43,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 	protected returnInput: HTMLInputElement = null;
 
 	render(): React.ReactNode {
-		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, routeType, segmentId, datesIsNotOrder } = this.props;
+		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, isCR, segmentId, datesIsNotOrder } = this.props;
 		const DATEPICKER_SWITCH_DELAY = 20;
 
 		let returnInitialDate = departureDatepicker.date;
@@ -59,12 +57,9 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 		}
 
 		return <div className="form-group row widget-form-dates">
-			<div className="widget-form-dates__datesErrorWrap">
-				<Tooltip message={i18n('form', 'datesNotInOrderError')} isActive={datesIsNotOrder} isCentered={true}/>
-			</div>
-
 			<DepartureDatepicker
 				showErrors={showErrors}
+				datesIsNotInOrder={datesIsNotOrder}
 				locale={system.locale}
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}
@@ -79,11 +74,11 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 				}}
 				highlightDates={this.props.getDepartureHighlightedDates}
 				specialDate={returnDatepicker.date}
-				popperPlacement={routeType === RouteType.CR ? 'top-end' : 'top-start'}
+				popperPlacement={isCR ? 'top-end' : 'top-start'}
 				segmentId={segmentId}
 			/>
 
-			{ routeType !== RouteType.CR ?
+			{ !isCR ?
 				<ReturnDatepicker
 					locale={system.locale}
 					date={returnDatepicker.date}
@@ -106,7 +101,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 		showErrors: state.form.showErrors,
 		getDepartureHighlightedDates: getDepartureHighlightedDates(state),
 		getReturnHighlightedDates: getReturnHighlightedDates(state),
-		routeType: routeType(state)
+		isCR: isCR(state)
 	};
 };
 

@@ -3,8 +3,6 @@ import AutocompleteContainer from './AutocompleteContainer';
 import DatesContainer from './DatesContainer';
 import { SegmentState } from '../../../state';
 import { SegmentAction } from '../../../store/form/segments/actions';
-import Tooltip from '../../UI/Tooltip';
-import { i18n } from '../../../utils';
 
 interface Props {
 	segment: SegmentState;
