@@ -42,6 +42,8 @@
 		padding: 0 15px;
 
 		&__drop {
+			@extend .widget-ui-icon;
+
 			position: absolute;
 			right: 0;
 			margin-right: 20px;
@@ -54,6 +56,12 @@
 			text-align: center;
 			cursor: pointer;
 			font-weight: 700;
+
+			&:before {
+				content: $icon-cross;
+				line-height: 40px;
+				color: #fff;
+			}
 		}
 
 		&:only-child {
