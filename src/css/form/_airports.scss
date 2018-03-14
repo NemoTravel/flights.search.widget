@@ -18,6 +18,14 @@
 			display: flex;
 			padding-right: 65px;
 
+			.widget-form-airports__swap {
+				display: none;
+			}
+
+			.widget-form-airports__col.col:first-of-type .widget-form-airports__airportCode {
+				right: 17px;
+			}
+
 			@include adaptivity(phone) {
 				padding-right: 0;
 			}
