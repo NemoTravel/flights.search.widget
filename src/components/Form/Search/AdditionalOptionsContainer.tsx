@@ -13,7 +13,7 @@ import {
 	setDirectFlightCheckbox
 } from '../../../store/form/additional/actions';
 import { setRouteType } from '../../../store/form/route/actions';
-import { isCR } from "../../../store/form/selectors";
+import { isCR } from '../../../store/form/selectors';
 
 interface StateProps {
 	vicinityDatesSelect: boolean;

@@ -8,7 +8,7 @@ import rootReducer from '../../reducer';
 import { getAltLayout } from '../../../utils';
 import { AutocompleteSuggestion } from '../../../services/models/AutocompleteSuggestion';
 import { Airport } from '../../../services/models/Airport';
-import { addSegment } from "../segments/actions";
+import { addSegment } from '../segments/actions';
 
 const getStore = () => {
 	return createStore(rootReducer);

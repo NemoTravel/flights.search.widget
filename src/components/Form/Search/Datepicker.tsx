@@ -6,7 +6,7 @@ import UIDatepicker from '../../UI/Datepicker';
 import MobileHeader from '../../UI/MobileHeader';
 import { DatepickerFieldType, Language } from '../../../state';
 import { HighlightedDatesGroup } from '../../../store/form/segments/dates/selectors';
-import { i18n } from "../../../utils";
+import { i18n } from '../../../utils';
 
 interface Props {
 	showErrors?: boolean;

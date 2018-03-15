@@ -6,7 +6,7 @@ import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import { continueRoute, deleteSegment, SegmentAction } from '../../../store/form/segments/actions';
 import { i18n } from '../../../utils';
 import * as classnames from 'classnames';
-import { isCR } from "../../../store/form/selectors";
+import { isCR } from '../../../store/form/selectors';
 
 interface StateProps {
 	segments: SegmentState[];

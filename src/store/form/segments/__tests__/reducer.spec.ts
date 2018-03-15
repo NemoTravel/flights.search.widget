@@ -25,5 +25,5 @@ describe('store/form/segments', () => {
 
 			Reducer(segmentReducer).withState(state).expect(removeComplexSegments()).toReturnState([segmentState]);
 		});
-	})
+	});
 });
