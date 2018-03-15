@@ -49,8 +49,7 @@ export const formIsValid = createSelector(
 		if (!segments.length) {
 			isValid = false;
 		}
-
-		if (totalPassengersCount <= 0) {
+		else if (totalPassengersCount <= 0) {
 			isValid = false;
 		}
 		else if (form.coupon.number && !form.coupon.number.match(/^[\d]+$/g)) {
@@ -63,15 +62,14 @@ export const formIsValid = createSelector(
 		) {
 			isValid = false;
 		}
-		else {
+
+		if (isValid) {
 			segments.forEach((segment, index) => {
 				if (!segment.dates.departure.date) {
 					isValid = false;
 				}
-				else if (index > 0) {
-					if (segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)) {
-						isValid = false;
-					}
+				else if (index > 0 && segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)) {
+					isValid = false;
 				}
 				else if (!segment.autocomplete.departure.airport) {
 					isValid = false;
