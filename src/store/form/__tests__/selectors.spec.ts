@@ -1,13 +1,14 @@
 import * as moment from 'moment';
 import { createStore } from 'redux';
 
-import { getDepartureOptions, getArrivalOptions, formIsValid } from '../selectors';
+import { getSuggestionOptions, formIsValid } from '../selectors';
 import { AutocompleteFieldType, initialState, PassengerType } from '../../../state';
-import { changeAutocompleteSuggestions } from '../autocomplete/actions';
+import { changeAutocompleteSuggestions } from '../segments/autocomplete/actions';
 import rootReducer from '../../reducer';
 import { getAltLayout } from '../../../utils';
 import { AutocompleteSuggestion } from '../../../services/models/AutocompleteSuggestion';
 import { Airport } from '../../../services/models/Airport';
+import { addSegment } from "../segments/actions";
 
 const getStore = () => {
 	return createStore(rootReducer);
@@ -60,9 +61,9 @@ describe('store/form/selectors', () => {
 		const store = getStore();
 		const state = store.getState();
 
-		state.form.autocomplete.departure.airport = correctAirport;
-		state.form.autocomplete.arrival.airport = anotherCorrectAirport;
-		state.form.dates.departure.date = moment();
+		state.form.segments[0].autocomplete.departure.airport = correctAirport;
+		state.form.segments[0].autocomplete.arrival.airport = anotherCorrectAirport;
+		state.form.segments[0].dates.departure.date = moment();
 		state.form.passengers[PassengerType.Adult] = {
 			title: null,
 			ageTitle: null,
@@ -73,54 +74,39 @@ describe('store/form/selectors', () => {
 		expect(formIsValid(state)).toEqual(true);
 	});
 
-	describe('departure', () => {
-		it('should return empty array on initial state', () => {
-			expect(getDepartureOptions(initialState)).toEqual([]);
-		});
-
+	describe('suggestions options', () => {
 		it('should return empty array when wrong options given', () => {
 			const options: AutocompleteSuggestion[] = [wrongAirport];
 			const store = getStore();
 
 			store.dispatch(changeAutocompleteSuggestions(options, AutocompleteFieldType.Departure));
 
-			expect(getDepartureOptions(store.getState())).toEqual([]);
+			expect(getSuggestionOptions(store.getState().form.segments[0].autocomplete.departure)).toEqual([]);
 		});
 
-		it('should return proper array', () => {
+		it('should return proper array for departure', () => {
 			const options: AutocompleteSuggestion[] = [{ airport: correctAirport, isDirect: false }];
 			const store = createStore(rootReducer, initialState);
 
+			store.dispatch(addSegment());
+
 			store.dispatch(changeAutocompleteSuggestions(options, AutocompleteFieldType.Departure));
 
-			expect(getDepartureOptions(store.getState())).toEqual([{
+			expect(getSuggestionOptions(store.getState().form.segments[0].autocomplete.departure)).toEqual([{
 				label: 'МоскваMoscowMOW' + getAltLayout('Москва'),
 				value: { airport: correctAirport, isDirect: false }
 			}]);
 		});
-	});
 
-	describe('arrival', () => {
-		it('should return empty array on initial state', () => {
-			expect(getArrivalOptions(initialState)).toEqual([]);
-		});
-
-		it('should return empty array when wrong options given', () => {
-			const options: AutocompleteSuggestion[] = [wrongAirport];
-			const store = createStore(rootReducer, initialState);
-
-			store.dispatch(changeAutocompleteSuggestions(options, AutocompleteFieldType.Arrival));
-
-			expect(getArrivalOptions(store.getState())).toEqual([]);
-		});
-
-		it('should return proper array', () => {
+		it('should return proper array for arrival', () => {
 			const options: AutocompleteSuggestion[] = [{ airport: correctAirport, isDirect: false }];
 			const store = createStore(rootReducer, initialState);
 
+			store.dispatch(addSegment());
+
 			store.dispatch(changeAutocompleteSuggestions(options, AutocompleteFieldType.Arrival));
 
-			expect(getArrivalOptions(store.getState())).toEqual([{
+			expect(getSuggestionOptions(store.getState().form.segments[0].autocomplete.arrival)).toEqual([{
 				label: 'МоскваMoscowMOW' + getAltLayout('Москва'),
 				value: { airport: correctAirport, isDirect: false }
 			}]);
