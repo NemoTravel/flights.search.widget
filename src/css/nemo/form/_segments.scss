@@ -1,0 +1,68 @@
+@import "../variables";
+
+&-segments {
+	&.row {
+		flex-basis: 100%;
+		margin-left: 0;
+		margin-right: 0;
+		flex-wrap: nowrap;
+		margin-bottom: 0;
+	}
+
+	&__segment {
+		display: flex;
+		flex-wrap: nowrap;
+		padding-right: 0 !important;
+		position: relative;
+		margin-bottom: 10px;
+
+		&__drop {
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			left: 0;
+			background: #b23e13;
+			color: #fff;
+			margin-top: 5px;
+			margin-right: 0;
+			margin-left: -15px;
+
+			&:before {
+				line-height: 30px;
+			}
+
+			@include adaptivity(tablet) {
+				margin-left: - 15px;
+			}
+
+			@include adaptivity(phone) {
+				margin-left: -10px;
+			}
+		}
+
+		@include adaptivity(tablet) {
+			padding: 0;
+			flex-wrap: wrap;
+		}
+	}
+
+	&_CR {
+		flex-wrap: wrap !important;
+
+		@include adaptivity(desktop) {
+			.widget-form-additionalOptions {
+				left: -180px;
+			}
+		}
+
+		@include adaptivity(tablet) {
+			margin-bottom: 1rem !important;
+		}
+
+		@include adaptivity(phone) {
+			.widget-form-segments__segment {
+				padding-left: 20px;
+			}
+		}
+	}
+}

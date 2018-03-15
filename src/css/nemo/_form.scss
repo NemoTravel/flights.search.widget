@@ -2,6 +2,7 @@
 
 &-form {
 	@import "form/search";
+	@import "form/segments";
 
 	@include adaptivity(desktop) {
 		&:after {
@@ -114,15 +115,11 @@
 				}
 			}
 
-			&-airports {
-				padding-bottom: 0;
-
-				&.row {
-					flex-basis: 100%;
-				}
+			&-segments {
+				margin-bottom: 0 !important;
 
 				&_CR {
-					.widget-form-airports__segment {
+					.widget-form-segments__segment {
 						padding-left: 20px;
 						margin-left: 0;
 						margin-bottom: 2rem;
@@ -137,6 +134,12 @@
 							padding: 0 !important;
 						}
 					}
+				}
+			}
+
+			&-airports {
+				&.row {
+					flex-basis: 100%;
 				}
 
 				&__col.col {
