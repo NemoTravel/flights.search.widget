@@ -1,0 +1,82 @@
+@import "../variables";
+
+&-segments {
+	&.row {
+		@include adaptivity(phone) {
+			display: block;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	&_CR {
+		.widget-form-segments__segment {
+			display: flex;
+			padding-right: 65px;
+
+			.widget-form-airports__swap {
+				display: none;
+			}
+
+			.widget-form-airports__col.col:first-of-type .widget-form-airports__airportCode {
+				right: 17px;
+			}
+
+			@include adaptivity(phone) {
+				padding-right: 0;
+			}
+		}
+
+		@include adaptivity(phone) {
+			.widget-form-dates {
+				width: 100%;
+				margin-left: 0;
+
+				.widget-form-dates__col:last-of-type {
+					padding: 0;
+				}
+			}
+		}
+	}
+
+	&__segment {
+		width: 100%;
+		padding: 0 15px;
+
+		&__drop {
+			@extend .widget-ui-icon;
+
+			position: absolute;
+			right: 0;
+			margin-right: 20px;
+			background: #f7db03;
+			height: 40px;
+			width: 40px;
+			color: #726666;
+			font-size: 15px;
+			line-height: 40px;
+			text-align: center;
+			cursor: pointer;
+			font-weight: 700;
+
+			&:before {
+				content: $icon-cross;
+				line-height: 40px;
+				color: #fff;
+			}
+		}
+
+		&:only-child {
+			margin-bottom: 0;
+
+			.widget-form-dates {
+				margin-bottom: 0;
+			}
+		}
+
+		@include adaptivity(phone) {
+			padding: 0;
+			flex-wrap: wrap;
+		}
+	}
+}

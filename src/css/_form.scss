@@ -8,6 +8,7 @@
 
 &-form {
 	@import "form/search";
+	@import "form/segments";
 	
 	&__pseudoBlocks {
 		text-align: center;
@@ -62,17 +63,27 @@
 					}
 				}
 			}
+
+			&-segments {
+				margin-right: 0;
+				margin-left: 0;
+				margin-bottom: 0;
+
+				&_CR {
+					margin-bottom: 1rem;
+				}
+
+				&__segment {
+					padding: 0;
+					flex-wrap: wrap;
+				}
+			}
 			
 			&-airports {
 				&.row {
 					display: block;
 					margin-left: 0;
 					margin-right: 0;
-				}
-
-				&__segment {
-					padding: 0;
-					flex-wrap: wrap;
 				}
 
 				&__col.col {

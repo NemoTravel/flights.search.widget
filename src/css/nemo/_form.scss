@@ -36,6 +36,11 @@
 			padding-top: 0;
 			margin-top: 0;
 		}
+
+		@include adaptivity(phone) {
+			width: 100%;
+			margin-bottom: 1rem;
+		}
 	}
 
 	&_vertical {
@@ -110,6 +115,8 @@
 			}
 
 			&-airports {
+				padding-bottom: 0;
+
 				&.row {
 					flex-basis: 100%;
 				}

@@ -35,10 +35,18 @@
 			@include adaptivity(tablet) {
 				margin-left: - 15px;
 			}
+
+			@include adaptivity(phone) {
+				margin-left: -10px;
+			}
 		}
 
 		@include adaptivity(tablet) {
 			padding: 0;
+		}
+
+		@include adaptivity(phone) {
+			padding-left: 20px;
 		}
 	}
 

@@ -34,7 +34,7 @@ export default class Segment extends React.Component<Props> {
 	render(): React.ReactNode {
 		const { segment, segmentId, canBeRemoved, showDatesError } = this.props;
 
-		return <div className="widget-form-airports__segment">
+		return <div className="widget-form-segments__segment">
 			<AutocompleteContainer
 				departureAutocomplete={segment.autocomplete.departure}
 				arrivalAutocomplete={segment.autocomplete.arrival}
@@ -46,7 +46,7 @@ export default class Segment extends React.Component<Props> {
 				returnDatepicker={segment.dates.return}
 				datesIsNotOrder={showDatesError}/>
 
-			{ canBeRemoved ? <div className="widget-form-airports__segment__drop" onClick={this.deleteSegment}></div> : null }
+			{ canBeRemoved ? <div className="widget-form-segments__segment__drop" onClick={this.deleteSegment}></div> : null }
 		</div>;
 	}
 }
