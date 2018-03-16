@@ -60,7 +60,9 @@ export const getCachedState = (): ApplicationCachedState => {
  * @param state
  */
 export const cacheState = (state: ApplicationState): void => {
-	Cache.set(`${STORE_CACHE_KEY}_${Cache.getLocale()}_${process.env.VERSION}`, state);
+	if (!state.system.disableCaching) {
+		Cache.set(`${STORE_CACHE_KEY}_${Cache.getLocale()}_${process.env.VERSION}`, state);
+	}
 };
 
 /**
@@ -72,7 +74,7 @@ export const cacheState = (state: ApplicationState): void => {
  */
 export const getStore = (config: SystemState): Store<ApplicationState> => {
 	// State object that has been stored in `localStorage` in the past.
-	const stateFromCache = getCachedState();
+	const stateFromCache = !config.disableCaching ? getCachedState() : null;
 
 	// New state object that will be used as the initial state for the new redux-store.
 	let preloadedState = {
