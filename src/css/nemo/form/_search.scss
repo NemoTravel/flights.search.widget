@@ -44,6 +44,8 @@
 			flex-wrap: nowrap !important;
 
 			.col {
+				position: static;
+
 				&:first-of-type {
 					flex-basis: 60%;
 				}

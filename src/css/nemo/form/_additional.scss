@@ -4,10 +4,17 @@
 	height: 50px;
 	position: absolute;
 	//top: 55px;
-	left: -300px;
+	left: 0;
+	width: 100%;
 	z-index: 1;
 	bottom: 0;
-	margin-bottom: -65px !important;
+	margin-bottom: -50px !important;
+
+	@include adaptivity(desktop) {
+		flex-direction: row-reverse;
+		justify-content: flex-end;
+		padding-left: 30px;
+	}
 
 	@include adaptivity(tablet) {
 		position: relative;

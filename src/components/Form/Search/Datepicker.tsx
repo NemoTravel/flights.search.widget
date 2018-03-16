@@ -18,7 +18,7 @@ interface Props {
 	specialDate: Moment;
 	segmentId: number;
 	popperPlacement: string;
-	datesIsNotInOrder?: boolean;
+	wrongDatesOrder?: boolean;
 
 	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
 	getRef?: (input: any) => any;
@@ -90,7 +90,7 @@ export default class Datepicker extends React.Component<Props> {
 			openToDate,
 			highlightDates,
 			popperPlacement,
-			datesIsNotInOrder
+			wrongDatesOrder
 		} = this.props;
 
 		const
@@ -115,8 +115,8 @@ export default class Datepicker extends React.Component<Props> {
 				selectDate={selectDate}
 				popperPlacement={popperPlacement}
 				specialDate={specialDate}
-				tooltipIsActive={this.showErrors && showErrors && (!date || datesIsNotInOrder)}
-				tooltipText={datesIsNotInOrder ? datesIsNotInOrderText : this.tooltipText}
+				tooltipIsActive={this.showErrors && showErrors && (!date || wrongDatesOrder)}
+				tooltipText={wrongDatesOrder ? datesIsNotInOrderText : this.tooltipText}
 				inputProps={{ placeholder: this.placeholder }}
 			>
 				{this.renderInner()}

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classnames from 'classnames';
 import { Action, AnyAction, bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Checkbox } from '../../UI/Checkbox';
@@ -84,7 +85,7 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 			{!isCR ? this.renderVicinityDates() : null}
 			{this.renderDirect()}
 
-			<div onClick={this.changeRouteType} className="widget-form__routeTypeSwitch">
+			<div onClick={this.changeRouteType} className={classnames('widget-form__routeTypeSwitch', { 'widget-form__routeTypeSwitch_toCR': !isCR }, { 'widget-form__routeTypeSwitch_toOW': isCR })}>
 				<span>
 					{i18n('form', isCR ? 'routeType_OW' : 'routeType_CR')}
 				</span>

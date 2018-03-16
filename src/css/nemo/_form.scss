@@ -18,16 +18,44 @@
 	}
 
 	&__routeTypeSwitch {
-		position: absolute;
-		margin-top: 50px;
+		position: relative;
+	//	margin-top: 50px;
 		right: 0;
 		color: #fff;
 
 		bottom: 0;
-		margin-bottom: 17px;
+	//	margin-bottom: 17px;
 		z-index: 1;
 		white-space: nowrap;
-		margin-right: 350px;
+	//	margin-right: 350px;
+
+		&_toCR {
+			&:before {
+				content: ' ';
+				background: url(images/cr.svg) no-repeat center center;
+				background-size: 20px;
+				display: inline-block;
+				width: 20px;
+				height: 11px;
+				margin-right: 5px;
+			}
+		}
+
+		&_toOW {
+			&:before {
+				content: ' ';
+				background: url(images/ow.svg) no-repeat center center;
+				background-size: 20px;
+				display: inline-block;
+				width: 20px;
+				height: 11px;
+				margin-right: 5px;
+			}
+		}
+
+		@include adaptivity(desktop) {
+			width: 60%;
+		}
 
 		@include adaptivity(tablet) {
 			position: relative;
@@ -167,17 +195,22 @@
 			}
 
 			&-additionalOptions {
+				display: block;
 				position: relative;
 				height: auto;
 				top: 0;
 				left: 0;
 				z-index: 1;
 				margin-bottom: 1rem !important;
+				padding-left: 0;
 			}
 
 			&__routeTypeSwitch {
 				position: relative;
 				margin: 0;
+				display: inline-block;
+				width: 100%;
+				padding-top: 10px;
 			}
 		}
 	}

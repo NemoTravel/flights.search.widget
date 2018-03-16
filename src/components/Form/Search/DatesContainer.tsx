@@ -59,7 +59,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 		return <div className="form-group row widget-form-dates">
 			<DepartureDatepicker
 				showErrors={showErrors}
-				datesIsNotInOrder={datesIsNotOrder}
+				wrongDatesOrder={datesIsNotOrder}
 				locale={system.locale}
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}

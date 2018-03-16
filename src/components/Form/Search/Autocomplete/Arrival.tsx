@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Autocomplete from '../Autocomplete';
 import { i18n } from '../../../../utils';
-import { AutocompleteFieldType, CommonThunkAction } from '../../../../state';
+import { AutocompleteFieldType } from '../../../../state';
 
 class Arrival extends Autocomplete {
 	protected type = AutocompleteFieldType.Arrival;
