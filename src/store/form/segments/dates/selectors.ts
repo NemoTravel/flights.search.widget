@@ -11,7 +11,7 @@ const getReturnAvailableDates = (state: ApplicationState): any => state.form.seg
 const highlightAvailableDates = (state: ApplicationState): boolean => state.system.highlightAvailableDates;
 
 const getDepartureDates = (state: ApplicationState): Moment[] => {
-	return state.form.segments.map((segment) => {
+	return state.form.segments.map(segment => {
 		return segment.dates.departure.date;
 	});
 };
@@ -28,7 +28,7 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
 		if (isCR && departureDates && departureDates[0]) {
 			let lastDepartureDate: Moment = null;
 
-			departureDates.forEach((date) => {
+			departureDates.forEach(date => {
 				if (date) {
 					lastDepartureDate = date;
 				}
