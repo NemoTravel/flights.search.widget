@@ -73,7 +73,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 					}
 				}}
 				highlightDates={this.props.getDepartureHighlightedDates}
-				specialDate={returnDatepicker.date}
+				specialDate={!isCR ? returnDatepicker.date : null}
 				popperPlacement={isCR ? 'top-end' : 'top-start'}
 				segmentId={segmentId}
 			/>
