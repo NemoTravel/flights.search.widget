@@ -19,15 +19,23 @@
 
 	&__routeTypeSwitch {
 		position: relative;
-	//	margin-top: 50px;
 		right: 0;
 		color: #fff;
 
 		bottom: 0;
-	//	margin-bottom: 17px;
 		z-index: 1;
 		white-space: nowrap;
-	//	margin-right: 350px;
+
+		& span {
+			padding-left: 25px;
+		}
+
+		&:before {
+			position: absolute;
+			margin-top: 5px;
+			animation-duration: 0.2s;
+			animation-timing-function: ease-in;
+		}
 
 		&_toCR {
 			&:before {
@@ -38,6 +46,17 @@
 				width: 20px;
 				height: 11px;
 				margin-right: 5px;
+				animation-name: bottomTop;
+			}
+
+			@keyframes bottomTop {
+				0% {
+					transform: rotate(-90deg);
+				}
+				100% {
+					transform: rotate(0deg);
+
+				}
 			}
 		}
 
@@ -45,11 +64,21 @@
 			&:before {
 				content: ' ';
 				background: url(images/ow.svg) no-repeat center center;
-				background-size: 20px;
+				background-size: 25px;
 				display: inline-block;
 				width: 20px;
-				height: 11px;
-				margin-right: 5px;
+				height: 13px;
+				margin-top: 3px;
+				animation-name: scaleTo;
+			}
+			
+			@keyframes scaleTo {
+				0% {
+					transform: scale(1.7);
+				}
+				100% {
+					transform: scale(1);
+				}
 			}
 		}
 
@@ -58,17 +87,20 @@
 		}
 
 		@include adaptivity(tablet) {
-			position: relative;
-			margin-right: 0;
-			margin-bottom: 0;
-			display: inline-block;
-			padding-top: 0;
-			margin-top: 0;
+			position: absolute;
+			left: 0;
+			top: 50px;
 		}
 
 		@include adaptivity(phone) {
 			width: 100%;
+			position: relative;
+			margin-right: 0;
 			margin-bottom: 1rem;
+			display: inline-block;
+			padding-top: 0;
+			margin-top: 0;
+			top: 0;
 		}
 	}
 
@@ -211,6 +243,10 @@
 				display: inline-block;
 				width: 100%;
 				padding-top: 10px;
+
+				@include adaptivity(tablet) {
+					top: 0;
+				}
 			}
 		}
 	}

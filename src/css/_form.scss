@@ -18,7 +18,10 @@
 		padding-right: 10px;
 		font-weight: 600;
 		font-size: 13px;
-		cursor: pointer;
+
+		span {
+			cursor: pointer;
+		}
 
 		@include adaptivity(phone) {
 			margin: 10px 0;

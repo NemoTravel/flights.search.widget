@@ -85,8 +85,8 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 			{!isCR ? this.renderVicinityDates() : null}
 			{this.renderDirect()}
 
-			<div onClick={this.changeRouteType} className={classnames('widget-form__routeTypeSwitch', { 'widget-form__routeTypeSwitch_toCR': !isCR }, { 'widget-form__routeTypeSwitch_toOW': isCR })}>
-				<span>
+			<div className={classnames('widget-form__routeTypeSwitch', { 'widget-form__routeTypeSwitch_toCR': !isCR }, { 'widget-form__routeTypeSwitch_toOW': isCR })}>
+				<span onClick={this.changeRouteType}>
 					{i18n('form', isCR ? 'routeType_OW' : 'routeType_CR')}
 				</span>
 			</div>
