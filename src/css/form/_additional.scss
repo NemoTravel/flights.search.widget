@@ -8,6 +8,16 @@
 	min-width: 0;
 	height: 40px;
 
+	&__checkboxes {
+		min-width: 0;
+		display: flex;
+		flex-wrap: nowrap;
+
+		@include adaptivity(phone) {
+			display: block;
+		}
+	}
+
 	label {
 		margin-bottom: 0;
 		white-space: nowrap;

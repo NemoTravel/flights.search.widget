@@ -82,8 +82,10 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 		const { widgetMode, isCR } = this.props;
 
 		return widgetMode === ApplicationMode.NEMO ? <div className="form-group widget-form-additionalOptions">
-			{!isCR ? this.renderVicinityDates() : null}
-			{this.renderDirect()}
+			<div className="widget-form-additionalOptions__checkboxes">
+				{!isCR ? this.renderVicinityDates() : null}
+				{this.renderDirect()}
+			</div>
 
 			<div className={classnames('widget-form__routeTypeSwitch', { 'widget-form__routeTypeSwitch_toCR': !isCR }, { 'widget-form__routeTypeSwitch_toOW': isCR })}>
 				<span onClick={this.changeRouteType}>
