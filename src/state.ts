@@ -72,6 +72,7 @@ export interface SystemState {
 	enableCoupon?: boolean;
 	enableMileCard?: boolean;
 	aggregationOnly?: boolean;
+	disableCaching?: boolean;
 }
 
 export const systemState: SystemState = {
@@ -98,7 +99,8 @@ export const systemState: SystemState = {
 	vicinityDays: 3,
 	enableCoupon: false,
 	enableMileCard: false,
-	aggregationOnly: false
+	aggregationOnly: false,
+	disableCaching: false
 };
 
 // ---------------------------------------------------------------------------------------------------------------------

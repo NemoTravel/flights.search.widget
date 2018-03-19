@@ -8,7 +8,11 @@ import { getStore, cacheState } from './store';
 import './css/main.scss';
 import './css/nemo/main.scss';
 import 'whatwg-fetch';
-import { SystemState } from './state';
+import { ApplicationState, SystemState } from './state';
+import { enableCaching } from './store/system/actions';
+import { Store } from 'redux';
+
+let storeGlobal: Store<ApplicationState>;
 
 /**
  * This will be exported to the global scope as `FlightsSearchWidget.init`.
@@ -26,6 +30,8 @@ export const init = (config: SystemState) => {
 
 	const store = getStore(config);
 
+	storeGlobal = store;
+
 	ReactDOM.render(
 		<Provider store={store}>
 			<Main/>
@@ -35,6 +41,13 @@ export const init = (config: SystemState) => {
 
 	// Subscribe to new state updates and cache new state.
 	store.subscribe(() => cacheState(store.getState()));
+};
+
+/**
+ * Enable saving widget data in Local Storage if `disableCaching` disabled it
+ */
+export const enableCache = (): void => {
+	storeGlobal.dispatch(enableCaching());
 };
 
 export const initDemo = () => {

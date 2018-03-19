@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { LOAD_CONFIG } from '../actions';
+import { ENABLE_CACHING, LOAD_CONFIG } from '../actions';
 import * as Cache from '../../cache';
 import { SystemState, systemState } from '../../state';
 
@@ -20,6 +20,9 @@ export default (state: SystemState = systemState, action: SystemAction): SystemS
 	switch (action.type) {
 		case LOAD_CONFIG:
 			return configReducer(state, action.payload);
+
+		case ENABLE_CACHING:
+			return {...state, disableCaching: false};
 
 		default:
 			return state;
