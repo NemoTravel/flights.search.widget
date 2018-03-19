@@ -29,13 +29,12 @@
 
 		& span {
 			padding-left: 25px;
+			font-weight: 500;
 		}
 
 		&:before {
 			position: absolute;
 			margin-top: 5px;
-			animation-duration: 0.2s;
-			animation-timing-function: ease-in;
 		}
 
 		&_toCR {
@@ -47,17 +46,6 @@
 				width: 20px;
 				height: 11px;
 				margin-right: 5px;
-				animation-name: bottomTop;
-			}
-
-			@keyframes bottomTop {
-				0% {
-					transform: rotate(-90deg);
-				}
-				100% {
-					transform: rotate(0deg);
-
-				}
 			}
 		}
 
@@ -70,16 +58,6 @@
 				width: 20px;
 				height: 13px;
 				margin-top: 3px;
-				animation-name: scaleTo;
-			}
-			
-			@keyframes scaleTo {
-				0% {
-					transform: scale(1.7);
-				}
-				100% {
-					transform: scale(1);
-				}
 			}
 		}
 
