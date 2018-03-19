@@ -1,20 +1,23 @@
 import { createSelector } from 'reselect';
 import { getIntermediateDates } from '../../../../utils';
 import * as moment from 'moment';
-import { ApplicationState } from '../../../../state';
+import { ApplicationState, FormState } from '../../../../state';
 import { Moment } from 'moment';
-import { isCR } from '../../selectors';
+import { isCR, getForm } from '../../selectors';
 
 const getDepartureAvailableDates = (state: ApplicationState): any => state.form.segments[0].dates.departure.availableDates;
 const getReturnDate = (state: ApplicationState): Moment => !isCR(state) ? state.form.segments[0].dates.return.date : null;
 const getReturnAvailableDates = (state: ApplicationState): any => state.form.segments[0].dates.return.availableDates;
 const highlightAvailableDates = (state: ApplicationState): boolean => state.system.highlightAvailableDates;
 
-const getDepartureDates = (state: ApplicationState): Moment[] => {
-	return state.form.segments.map(segment => {
-		return segment.dates.departure.date;
-	});
-};
+const getDepartureDates = createSelector(
+	[getForm],
+	(form: FormState): Moment[] => {
+		return form.segments.map(segment => {
+			return segment.dates.departure.date;
+		});
+	}
+);
 
 /**
  * Get an array of MomentJS dates between the departure and the return date (for simple trip),

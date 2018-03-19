@@ -25,7 +25,7 @@ export const showMileCardField = createSelector(
 	(config: SystemState, isWebskyMode: boolean): boolean => isWebskyMode && config.enableMileCard && false // Disabled for now (feature is not implemented in Websky yet)
 );
 
-const getForm = (state: ApplicationState): FormState => state.form;
+export const getForm = (state: ApplicationState): FormState => state.form;
 
 export const isCR = createSelector(
 	[ getForm ],
