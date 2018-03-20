@@ -30,6 +30,7 @@
 
 		@include adaptivity(phone) {
 			margin-left: 0;
+			margin-top: -1rem;
 		}
 	}
 

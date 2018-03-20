@@ -68,12 +68,14 @@
 		@include adaptivity(tablet) {
 			position: absolute;
 			left: 0;
-			top: 50px;
+			top: 60px;
+			margin-left: calc(-1rem - 100%);
 		}
 
 		@include adaptivity(phone) {
 			width: 100%;
 			position: relative;
+			margin-left: 0;
 			margin-right: 0;
 			margin-bottom: 1rem;
 			display: inline-block;

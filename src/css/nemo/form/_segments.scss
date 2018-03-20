@@ -43,6 +43,7 @@
 		@include adaptivity(tablet) {
 			padding: 0;
 			flex-wrap: wrap;
+			margin-bottom: 0;
 		}
 	}
 
@@ -61,7 +62,17 @@
 
 		@include adaptivity(phone) {
 			.widget-form-segments__segment {
-				padding-left: 20px;
+				&__drop {
+					height: 20px;
+					width: 20px;
+					margin-left: -0.5rem;
+					top: 5px;
+
+					&:before {
+						line-height: 20px;
+						font-size: 9px;
+					}
+				}
 			}
 		}
 	}
