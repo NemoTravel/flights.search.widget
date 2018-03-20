@@ -1,17 +1,17 @@
 import {
-	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteGroupState, AutocompleteState,
-	autocompleteState
-} from '../../../state';
+	AutocompleteDefaultGroupsState, AutocompleteFieldState, AutocompleteGroupState, AutocompleteState, SegmentState,
+	autocompleteState, FormState
+} from '../../../../state';
 import {
 	AUTOCOMPLETE_LOADING_STARTED,
 	AUTOCOMPLETE_LOADING_FINISHED,
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED,
 	AUTOCOMPLETE_PUSH_TO_PREVIOUS
-} from '../../actions';
+} from '../../../actions';
 import { AutocompleteAction, PreviousSearchAction } from './actions';
 import { AnyAction } from 'redux';
-import { Airport } from '../../../services/models/Airport';
+import { Airport } from '../../../../services/models/Airport';
 
 export const autocompleteAirportReducer = (state: AutocompleteFieldState, airport: Airport): AutocompleteFieldState => {
 	return { ...state, airport };
@@ -62,7 +62,7 @@ const isAutocompleteAction = (action: AnyAction): action is AutocompleteAction =
 	return 'autocompleteType' in action;
 };
 
-export default (state: AutocompleteState = autocompleteState, action: AnyAction): AutocompleteState => {
+export const autocompleteMainReducer = (state: AutocompleteState = autocompleteState, action: AnyAction): AutocompleteState => {
 	if (isPreviousSearchAction(action)) {
 		return {
 			...state,

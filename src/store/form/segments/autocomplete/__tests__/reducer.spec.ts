@@ -1,6 +1,6 @@
 import { Reducer } from 'redux-testkit'; // tslint:disable-line
-import autocompleteReducer from '../reducer';
-import { AIRPORT_SELECTED } from '../../../actions';
+import { autocompleteMainReducer as autocompleteReducer } from '../reducer';
+import { AIRPORT_SELECTED } from '../../../../actions';
 import {
 	startAutocompleteLoading,
 	finishAutocompleteLoading,
@@ -8,9 +8,9 @@ import {
 	changeAutocompleteSuggestions,
 	setAirportInPreviousSearchGroup
 } from '../actions';
-import { AutocompleteFieldType, autocompleteState } from '../../../../state';
-import { Airport } from '../../../../services/models/Airport';
-import { AutocompleteSuggestion } from '../../../../services/models/AutocompleteSuggestion';
+import { AutocompleteFieldType, autocompleteState } from '../../../../../state';
+import { Airport } from '../../../../../services/models/Airport';
+import { AutocompleteSuggestion } from '../../../../../services/models/AutocompleteSuggestion';
 
 const correctAirport: Airport = {
 	name: 'Москва',
@@ -27,7 +27,7 @@ const correctAirport: Airport = {
 /* global describe */
 /* global it */
 /* global expect */
-describe('store/form/autocomplete', () => {
+describe('store/form/segments/autocomplete', () => {
 	it('should not affect state', () => {
 		Reducer(autocompleteReducer).expect({ type: 'WRONG_TYPE' }).toReturnState(autocompleteState);
 	});

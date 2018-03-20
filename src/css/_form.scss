@@ -8,9 +8,25 @@
 
 &-form {
 	@import "form/search";
+	@import "form/segments";
 	
 	&__pseudoBlocks {
 		text-align: center;
+	}
+
+	&__routeTypeSwitch {
+		display: none;
+		padding-right: 10px;
+		font-weight: 600;
+		font-size: 13px;
+
+		span {
+			cursor: pointer;
+		}
+
+		@include adaptivity(phone) {
+			margin: 10px 0;
+		}
 	}
 	
 	&_vertical {
@@ -30,8 +46,40 @@
 					}
 				}
 
+				&__addSegment {
+					margin: 0;
+				}
+
 				&__startButton {
 					width: 100%;
+				}
+			}
+
+			&-dates {
+				width: 100%;
+				margin-left: 0;
+
+				&__col {
+					padding: 0;
+
+					&:only-child {
+						padding: 0;
+					}
+				}
+			}
+
+			&-segments {
+				margin-right: 0;
+				margin-left: 0;
+				margin-bottom: 0;
+
+				&_CR {
+					margin-bottom: 1rem;
+				}
+
+				&__segment {
+					padding: 0;
+					flex-wrap: wrap;
 				}
 			}
 			

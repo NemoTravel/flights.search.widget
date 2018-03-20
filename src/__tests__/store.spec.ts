@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import { getStore } from '../store';
-import { initialState, ServiceClass, systemState } from '../state';
+import { initialState, segmentState, ServiceClass, systemState } from '../state';
 
 /* global describe */
 /* global it */
@@ -56,10 +56,12 @@ describe('preinit options', () => {
 		const config = { defaultDepartureDate: '2018-01-01', defaultReturnDate: '2018-01-09' };
 		const expectValue = initialState.form;
 
-		expectValue.dates.departure.date = moment(config.defaultDepartureDate);
-		expectValue.dates.return.date = moment(config.defaultReturnDate);
+		expectValue.segments.push(segmentState);
 
-		expect(getStore(config).getState().form.dates).toEqual(expectValue.dates);
+		expectValue.segments[0].dates.departure.date = moment(config.defaultDepartureDate);
+		expectValue.segments[0].dates.return.date = moment(config.defaultReturnDate);
+
+		expect(getStore(config).getState().form.segments[0].dates).toEqual(expectValue.segments[0].dates);
 	});
 
 });

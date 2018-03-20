@@ -1,10 +1,11 @@
 import * as React from 'react';
+import * as classnames from 'classnames';
 import { Action, AnyAction, bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Checkbox } from '../../UI/Checkbox';
 import { vicinityDatesSelect, directFlightSelect } from '../../../store/form/additional/selector';
 import { i18n } from '../../../utils';
-import { ApplicationMode, ApplicationState, ServiceClass } from '../../../state';
+import { ApplicationMode, ApplicationState, CommonThunkAction, RouteType, ServiceClass } from '../../../state';
 import {
 	BooleanAction, SetClassAction, setClassType,
 	vicinityDatesAction,
@@ -12,12 +13,15 @@ import {
 	setVicinityDatesCheckbox,
 	setDirectFlightCheckbox
 } from '../../../store/form/additional/actions';
+import { setRouteType } from '../../../store/form/route/actions';
+import { isCR } from '../../../store/form/selectors';
 
 interface StateProps {
 	vicinityDatesSelect: boolean;
 	directFlightSelect: boolean;
 	vicinityDays: number;
 	widgetMode: ApplicationMode;
+	isCR: boolean;
 }
 
 interface DispatchProps {
@@ -26,9 +30,16 @@ interface DispatchProps {
 	directFlightAction: () => Action;
 	setVicinityDatesCheckbox: (checked: boolean) => BooleanAction;
 	setDirectFlightCheckbox: (checked: boolean) => BooleanAction;
+	setRouteType: (type: RouteType) => CommonThunkAction;
 }
 
 class AdditionalOptionsContainer extends React.Component<StateProps & DispatchProps> {
+	constructor(props: StateProps & DispatchProps) {
+		super(props);
+
+		this.changeRouteType = this.changeRouteType.bind(this);
+	}
+
 	renderVicinityDates(): React.ReactNode {
 		const { vicinityDatesAction, vicinityDatesSelect, vicinityDays } = this.props;
 		const NUM_OF_DAYS_PLURAL = 5;
@@ -46,6 +57,15 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 		/>;
 	}
 
+	changeRouteType(): void {
+		if (this.props.isCR) {
+			this.props.setRouteType(RouteType.OW);
+		}
+		else {
+			this.props.setRouteType(RouteType.CR);
+		}
+	}
+
 	renderDirect(): React.ReactNode {
 		const { directFlightAction, directFlightSelect } = this.props;
 		const label = i18n('form', 'additional_directFlight');
@@ -59,11 +79,19 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 	}
 
 	render(): React.ReactNode {
-		const { widgetMode } = this.props;
+		const { widgetMode, isCR } = this.props;
 
 		return widgetMode === ApplicationMode.NEMO ? <div className="form-group widget-form-additionalOptions">
-			{this.renderVicinityDates()}
-			{this.renderDirect()}
+			<div className="widget-form-additionalOptions__checkboxes">
+				{!isCR ? this.renderVicinityDates() : null}
+				{this.renderDirect()}
+			</div>
+
+			<div className={classnames('widget-form__routeTypeSwitch', { 'widget-form__routeTypeSwitch_toCR': !isCR }, { 'widget-form__routeTypeSwitch_toOW': isCR })}>
+				<span onClick={this.changeRouteType}>
+					{i18n('form', isCR ? 'routeType_OW' : 'routeType_CR')}
+				</span>
+			</div>
 		</div> : null;
 	}
 }
@@ -73,7 +101,8 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 		vicinityDatesSelect: vicinityDatesSelect(state),
 		directFlightSelect: directFlightSelect(state),
 		vicinityDays: state.system.vicinityDays,
-		widgetMode: state.system.mode
+		widgetMode: state.system.mode,
+		isCR: isCR(state)
 	};
 };
 
@@ -83,7 +112,8 @@ const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
 		vicinityDatesAction: bindActionCreators(vicinityDatesAction, dispatch),
 		directFlightAction: bindActionCreators(directFlightAction, dispatch),
 		setVicinityDatesCheckbox: bindActionCreators(setVicinityDatesCheckbox, dispatch),
-		setDirectFlightCheckbox: bindActionCreators(setDirectFlightCheckbox, dispatch)
+		setDirectFlightCheckbox: bindActionCreators(setDirectFlightCheckbox, dispatch),
+		setRouteType: bindActionCreators(setRouteType, dispatch)
 	};
 };
 

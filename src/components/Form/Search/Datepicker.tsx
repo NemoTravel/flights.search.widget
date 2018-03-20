@@ -5,7 +5,8 @@ import { Moment } from 'moment';
 import UIDatepicker from '../../UI/Datepicker';
 import MobileHeader from '../../UI/MobileHeader';
 import { DatepickerFieldType, Language } from '../../../state';
-import { HighlightedDatesGroup } from '../../../store/form/dates/selectors';
+import { HighlightedDatesGroup } from '../../../store/form/segments/dates/selectors';
+import { i18n } from '../../../utils';
 
 interface Props {
 	showErrors?: boolean;
@@ -15,21 +16,24 @@ interface Props {
 	openToDate?: Moment;
 	highlightDates: HighlightedDatesGroup[];
 	specialDate: Moment;
+	segmentId: number;
+	popperPlacement: string;
+	wrongDatesOrder?: boolean;
 
-	selectDate: (date: Moment, dateType: DatepickerFieldType) => any;
+	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
 	getRef?: (input: any) => any;
 }
 
 export default class Datepicker extends React.Component<Props> {
 	static defaultProps: Partial<Props> = {
 		showErrors: false,
-		highlightDates: []
+		highlightDates: [],
+		popperPlacement: 'top-start'
 	};
 
 	protected type: DatepickerFieldType = null;
 	protected nemoDatepicker: any = null;
 	protected placeholder = '';
-	protected popperPlacement = '';
 	protected tooltipText = '';
 	protected showErrors = false;
 	protected isDisableable = false;
@@ -47,18 +51,19 @@ export default class Datepicker extends React.Component<Props> {
 	 * @param {Moment} date
 	 */
 	onChangeHandler(date: Moment): void {
-		this.props.selectDate(date, this.type);
+		this.props.selectDate(date, this.type, this.props.segmentId);
 	}
 
 	shouldComponentUpdate(nextProps: Props): boolean {
-		const { isActive, date, highlightDates, specialDate, showErrors, locale } = this.props;
+		const { isActive, date, highlightDates, specialDate, showErrors, locale, popperPlacement } = this.props;
 
 		return isActive !== nextProps.isActive ||
 			date !== nextProps.date ||
 			locale !== nextProps.locale ||
 			specialDate !== nextProps.specialDate ||
 			showErrors !== nextProps.showErrors ||
-			highlightDates !== nextProps.highlightDates;
+			highlightDates !== nextProps.highlightDates ||
+			popperPlacement !== nextProps.popperPlacement;
 	}
 
 	closeDatepicker(): void {
@@ -83,12 +88,15 @@ export default class Datepicker extends React.Component<Props> {
 			showErrors,
 			specialDate,
 			openToDate,
-			highlightDates
+			highlightDates,
+			popperPlacement,
+			wrongDatesOrder
 		} = this.props;
 
 		const
 			minDate = moment(),
-			maxDate = moment().add(1, 'years');
+			maxDate = moment().add(1, 'years'),
+			datesIsNotInOrderText = i18n('form', 'datesNotInOrderError');
 
 		return <div className="col widget-form-dates__col">
 			<UIDatepicker
@@ -105,10 +113,10 @@ export default class Datepicker extends React.Component<Props> {
 				getRef={getRef}
 				highlightDates={highlightDates}
 				selectDate={selectDate}
-				popperPlacement={this.popperPlacement}
+				popperPlacement={popperPlacement}
 				specialDate={specialDate}
-				tooltipIsActive={!date && this.showErrors && showErrors}
-				tooltipText={this.tooltipText}
+				tooltipIsActive={this.showErrors && showErrors && (!date || wrongDatesOrder)}
+				tooltipText={wrongDatesOrder ? datesIsNotInOrderText : this.tooltipText}
 				inputProps={{ placeholder: this.placeholder }}
 			>
 				{this.renderInner()}

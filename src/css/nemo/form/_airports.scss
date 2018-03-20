@@ -12,15 +12,17 @@
 	}
 
 	&.row {
-		flex-wrap: nowrap !important;
+		flex-wrap: nowrap;
 		flex-basis: 100%;
-		flex-shrink: 2;
-		margin: 0 auto;
+		flex-shrink: 1;
+		margin-right: 0;
+		margin-bottom: 0;
 
 		@include adaptivity(tablet) {
 			flex-basis: 100%;
 			flex-shrink: 1;
 			padding-bottom: 1rem;
+			margin-left: 0;
 		}
 	}
 

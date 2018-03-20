@@ -4,7 +4,7 @@
 	@import "airports/select";
 	@import "airports/swap";
 	@import "airports/suggestion";
-	
+
 	&.row {
 		@include adaptivity(phone) {
 			display: block;
@@ -12,6 +12,8 @@
 			margin-right: 0;
 		}
 	}
+
+	flex-basis: 100%;
 	
 	&__header {
 		display: none;

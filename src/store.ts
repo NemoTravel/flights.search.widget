@@ -6,7 +6,6 @@ import * as moment from 'moment';
 import * as Cache from './cache';
 import rootReducer from './store/reducer';
 import { setCounter } from './store/form/passengers/actions';
-import { selectDate } from './store/form/dates/actions';
 import { configReducer } from './store/system/reducer';
 import { getTotalPassengersCount } from './store/form/passengers/selectors';
 import {
@@ -18,7 +17,9 @@ import {
 	loadAirportForAutocomplete,
 	loadNearestAirportForAutocomplete,
 	setSelectedAirport
-} from './store/form/autocomplete/actions';
+} from './store/form/segments/autocomplete/actions';
+import { addSegment } from './store/form/segments/actions';
+import { selectDate } from './store/form/segments/dates/actions';
 
 const middlewares = [thunk];
 const STORE_CACHE_KEY = 'cached_store';
@@ -92,9 +93,13 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		applyMiddleware(...middlewares)
 	);
 
+	if (!store.getState().form.segments.length) {
+		store.dispatch(addSegment());
+	}
+
 	const state = store.getState();
 
-	if (!state.form.autocomplete.departure.airport) {
+	if (!state.form.segments[0].autocomplete.departure.airport) {
 		// Pre-loading departure airport by specified IATA or airport object.
 		if (state.system.defaultDepartureAirport) {
 			if (typeof state.system.defaultDepartureAirport === 'string') {
@@ -111,7 +116,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		}
 	}
 
-	if (!state.form.autocomplete.arrival.airport) {
+	if (!state.form.segments[0].autocomplete.arrival.airport) {
 		if (state.system.defaultArrivalAirport) {
 			if (typeof state.system.defaultArrivalAirport === 'string') {
 				store.dispatch(loadAirportForAutocomplete(state.system.defaultArrivalAirport, AutocompleteFieldType.Arrival));
@@ -134,19 +139,19 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
 	}
 
-	if (!state.form.dates.departure.date) {
-		if (state.system.defaultDepartureDate) {
-			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
-
-			store.dispatch(selectDate(departureDate, DatepickerFieldType.Departure));
-		}
-	}
-
-	if (!state.form.dates.return.date) {
+	if (!state.form.segments[0].dates.return.date) {
 		if (state.system.defaultReturnDate) {
 			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(returnDate, DatepickerFieldType.Return));
+			store.dispatch(selectDate(returnDate, DatepickerFieldType.Return, 0));
+		}
+	}
+
+	if (!state.form.segments[0].dates.departure.date) {
+		if (state.system.defaultDepartureDate) {
+			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
+
+			store.dispatch(selectDate(departureDate, DatepickerFieldType.Departure, 0));
 		}
 	}
 

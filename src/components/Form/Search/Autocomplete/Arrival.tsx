@@ -9,8 +9,18 @@ class Arrival extends Autocomplete {
 	protected mobileTitle = i18n('form', 'to');
 	protected defaultErrorText = i18n('form', 'arrivalError');
 
+	constructor(context: any) {
+		super(context);
+
+		this.swapAirports = this.swapAirports.bind(this);
+	}
+
+	swapAirports(): void {
+		this.props.swapAirports(this.props.segmentId);
+	}
+
 	renderSwitcher(): React.ReactNode {
-		return <div className={'widget-ui-icon widget-form-airports__swap'} title={i18n('form', 'swapAirports')} onClick={this.props.swapAirports}/>;
+		return <div className={'widget-ui-icon widget-form-airports__swap'} title={i18n('form', 'swapAirports')} onClick={this.swapAirports}/>;
 	}
 }
 

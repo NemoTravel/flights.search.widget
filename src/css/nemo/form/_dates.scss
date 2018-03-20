@@ -42,7 +42,7 @@
 		position: static;
 		padding: 0!important;
 
-		&:last-of-type {
+		&:last-of-type:not(:only-child) {
 			@include adaptivity(desktop) {
 				border-left: 1px solid #64b5f6;
 			}

@@ -2,13 +2,14 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { ThunkAction } from 'redux-thunk';
 
-import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/form/autocomplete/reducer';
-import { setAvailableDatesReducer } from './store/form/dates/reducer';
+import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/form/segments/autocomplete/reducer';
+import { setAvailableDatesReducer } from './store/form/segments/dates/reducer';
 import { AvailableDateResponse } from './services/responses/AvailableDates';
 import { Airport } from './services/models/Airport';
 import { AutocompleteSuggestion } from './services/models/AutocompleteSuggestion';
 
 export const CLASS_TYPES = ['Economy', 'Business'];
+export const MAX_SEGMENTS_COUNT = 4;
 
 export enum ApplicationMode {
 	NEMO = 'NEMO',
@@ -73,6 +74,7 @@ export interface SystemState {
 	enableMileCard?: boolean;
 	aggregationOnly?: boolean;
 	disableCaching?: boolean;
+	isComplexRoute?: boolean;
 }
 
 export const systemState: SystemState = {
@@ -100,7 +102,8 @@ export const systemState: SystemState = {
 	enableCoupon: false,
 	enableMileCard: false,
 	aggregationOnly: false,
-	disableCaching: false
+	disableCaching: false,
+	isComplexRoute: false
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -108,6 +111,12 @@ export const systemState: SystemState = {
 export enum AutocompleteFieldType {
 	Departure = 'departure',
 	Arrival = 'arrival'
+}
+
+export enum RouteType {
+	OW = 'OW',
+	RT = 'RT',
+	CR = 'CR'
 }
 
 export interface AutocompleteGroupOption {
@@ -169,20 +178,9 @@ export interface DatepickerState {
 	availableDates: AvailableDateResponse[];
 }
 
-export interface CachedDatepickerState {
-	isActive: boolean;
-	date?: string;
-	availableDates: AvailableDateResponse[];
-}
-
 export interface DatesState {
 	departure: DatepickerState;
 	return: DatepickerState;
-}
-
-export interface CachedDatesState {
-	departure: CachedDatepickerState;
-	return: CachedDatepickerState;
 }
 
 export const datesState: DatesState = {
@@ -199,6 +197,16 @@ export const datesState: DatesState = {
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
+
+export interface SegmentState {
+	autocomplete: AutocompleteState,
+	dates: DatesState
+}
+
+export const segmentState: SegmentState = {
+	autocomplete: autocompleteState,
+	dates: datesState
+};
 
 export interface PassengerState {
 	title: string;
@@ -282,22 +290,22 @@ export const mileCardState: MileCardState = {
 
 export interface FormState {
 	showErrors: boolean;
-	dates: DatesState;
 	passengers: PassengersState;
-	autocomplete: AutocompleteState;
+	segments: SegmentState[];
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
+	routeType: RouteType;
 }
 
 export interface CachedFormSate {
 	showErrors: boolean;
-	dates: CachedDatesState;
 	passengers: PassengersState;
-	autocomplete: AutocompleteState;
+	segments: SegmentState[];
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
+	routeType: RouteType
 }
 
 export interface ApplicationState {
@@ -314,12 +322,12 @@ export const initialState: ApplicationState = {
 	system: systemState,
 	form: {
 		showErrors: false,
-		dates: datesState,
 		passengers: passengersState,
-		autocomplete: autocompleteState,
+		segments: [],
 		additional: additionalState,
 		coupon: couponState,
-		mileCard: mileCardState
+		mileCard: mileCardState,
+		routeType: RouteType.RT
 	}
 };
 
@@ -336,73 +344,42 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 		const canBeProcessed = !stateFromCache.system || !stateFromCache.system.locale || stateFromCache.system.locale === state.system.locale;
 
 		if (stateFromCache.form) {
-			if (stateFromCache.form.autocomplete) {
-				const cachedDepartureAutocomplete = stateFromCache.form.autocomplete.departure;
-				const cachedArrivalAutocomplete = stateFromCache.form.autocomplete.arrival;
-				const cachedAutocompleteGroups = stateFromCache.form.autocomplete.defaultGroups;
 
-				if (canBeProcessed && cachedDepartureAutocomplete && cachedDepartureAutocomplete.airport) {
-					state.form.autocomplete.departure = autocompleteAirportReducer(
-						state.form.autocomplete.departure,
-						cachedDepartureAutocomplete.airport
-					);
-				}
+			const tmpSegment: SegmentState = segmentState;
 
-				if (canBeProcessed && cachedArrivalAutocomplete && cachedArrivalAutocomplete.airport) {
-					state.form.autocomplete.arrival = autocompleteAirportReducer(
-						state.form.autocomplete.arrival,
-						cachedArrivalAutocomplete.airport
-					);
-				}
-
-				if (canBeProcessed && cachedAutocompleteGroups && cachedAutocompleteGroups.previousSearches) {
-					state.form.autocomplete.defaultGroups = autocompleteGroupsReducer(
-						state.form.autocomplete.defaultGroups,
-						cachedAutocompleteGroups.previousSearches
-					);
-				}
+			if (stateFromCache.form.routeType) {
+				state.form.routeType = stateFromCache.form.routeType;
 			}
 
-			if (stateFromCache.form.dates) {
-				const cachedDepartureDate = stateFromCache.form.dates.departure;
-				const cachedReturnDate = stateFromCache.form.dates.return;
-				const today = moment().startOf('day');
+			if (stateFromCache.form.segments) {
+				const cashedSegments = stateFromCache.form.segments,
+				segments: SegmentState[] = [];
 
-				if (cachedDepartureDate) {
-					if (cachedDepartureDate.date) {
-						const newDepartureState: DatepickerState = {
-							isActive: cachedDepartureDate.isActive,
-							availableDates: cachedDepartureDate.availableDates,
-							date: moment(cachedDepartureDate.date).locale(state.system.locale)
+				cashedSegments.map((segment: any, index: number) => {
+					if (segment.dates.departure.date) {
+						const newDateStateDeparture: DatepickerState = {
+							isActive: segment.dates.departure.isActive,
+							availableDates: segment.dates.departure.availableDates,
+							date: moment(segment.dates.departure.date).locale(state.system.locale)
 						};
 
-						if (newDepartureState.date.isSameOrAfter(today)) {
-							state.form.dates.departure = newDepartureState;
-						}
+						segment.dates.departure = newDateStateDeparture;
 					}
 
-					if (cachedDepartureDate.availableDates instanceof Array && cachedDepartureDate.availableDates.length) {
-						state.form.dates.departure = setAvailableDatesReducer(state.form.dates.departure, cachedDepartureDate.availableDates);
-					}
-				}
-
-				if (cachedReturnDate) {
-					if (cachedReturnDate.date) {
-						const newReturnState: DatepickerState = {
-							isActive: true,
-							availableDates: cachedReturnDate.availableDates,
-							date: moment(cachedReturnDate.date).locale(state.system.locale)
+					if (segment.dates.return.date) {
+						const newDateStateReturn: DatepickerState = {
+							isActive: segment.dates.return.isActive,
+							availableDates: segment.dates.return.availableDates,
+							date: moment(segment.dates.return.date).locale(state.system.locale)
 						};
 
-						if (newReturnState.date.isSameOrAfter(today)) {
-							state.form.dates.return = newReturnState;
-						}
+						segment.dates.return = newDateStateReturn;
 					}
 
-					if (cachedReturnDate.availableDates instanceof Array && cachedReturnDate.availableDates.length) {
-						state.form.dates.return = setAvailableDatesReducer(state.form.dates.return, cachedReturnDate.availableDates);
-					}
-				}
+					segments.push(segment);
+				});
+
+				state.form.segments = segments;
 			}
 
 			if (stateFromCache.form.passengers) {

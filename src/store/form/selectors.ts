@@ -2,9 +2,8 @@ import { createSelector } from 'reselect';
 import { getTotalPassengersCount } from './passengers/selectors';
 import { getAltLayout, i18n } from '../../utils';
 import {
-	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState,
-	FormState,
-	SystemState
+	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState, AutocompleteFieldState,
+	FormState, RouteType, SystemState
 } from '../../state';
 import { AutocompleteSuggestion } from '../../services/models/AutocompleteSuggestion';
 import { AutocompleteOption } from '../../services/models/AutocompleteOption';
@@ -26,7 +25,12 @@ export const showMileCardField = createSelector(
 	(config: SystemState, isWebskyMode: boolean): boolean => isWebskyMode && config.enableMileCard && false // Disabled for now (feature is not implemented in Websky yet)
 );
 
-const getForm = (state: ApplicationState): FormState => state.form;
+export const getForm = (state: ApplicationState): FormState => state.form;
+
+export const isCR = createSelector(
+	[ getForm ],
+	(config: FormState): boolean => config.routeType === RouteType.CR
+);
 
 /**
  * Check if search form data is valid and ready for further operations.
@@ -40,20 +44,12 @@ export const formIsValid = createSelector(
 	[ getForm, getTotalPassengersCount ],
 	(form: FormState, totalPassengersCount: number): boolean => {
 		let isValid = true;
+		const segments = form.segments;
 
-		if (totalPassengersCount <= 0) {
+		if (!segments.length) {
 			isValid = false;
 		}
-		else if (!form.dates.departure.date) {
-			isValid = false;
-		}
-		else if (!form.autocomplete.departure.airport) {
-			isValid = false;
-		}
-		else if (!form.autocomplete.arrival.airport) {
-			isValid = false;
-		}
-		else if (form.autocomplete.departure.airport.IATA === form.autocomplete.arrival.airport.IATA) {
+		else if (totalPassengersCount <= 0) {
 			isValid = false;
 		}
 		else if (form.coupon.number && !form.coupon.number.match(/^[\d]+$/g)) {
@@ -67,13 +63,32 @@ export const formIsValid = createSelector(
 			isValid = false;
 		}
 
+		if (isValid) {
+			segments.forEach((segment, index) => {
+				if (!segment.dates.departure.date) {
+					isValid = false;
+				}
+				else if (index > 0 && segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)) {
+					isValid = false;
+				}
+				else if (!segment.autocomplete.departure.airport) {
+					isValid = false;
+				}
+				else if (!segment.autocomplete.arrival.airport) {
+					isValid = false;
+				}
+				else if (segment.autocomplete.departure.airport.IATA === segment.autocomplete.arrival.airport.IATA) {
+					isValid = false;
+				}
+			});
+		}
+
 		return isValid;
 	}
 );
 
-const getDepartureOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.autocomplete.departure.suggestions;
-const getArrivalOptionsFromState = (state: ApplicationState): AutocompleteSuggestion[] => state.form.autocomplete.arrival.suggestions;
-const getDefaultOptionsFromState = (state: ApplicationState): AutocompleteDefaultGroupsState => state.form.autocomplete.defaultGroups;
+const getSuggestionsFromAutocomplete = (state: AutocompleteFieldState): AutocompleteSuggestion[] => state.suggestions;
+const getDefaultOptionsFromState = (state: ApplicationState): AutocompleteDefaultGroupsState => state.form.segments[0].autocomplete.defaultGroups;
 
 const mapOptions = (options: AutocompleteSuggestion[]): AutocompleteOption[] => {
 	return options
@@ -123,6 +138,5 @@ const mapGroupOptions = (groups: AutocompleteDefaultGroupsState): DefaultOptionG
 /**
  * Create autocomplete options list for arrival and departure.
  */
-export const getDepartureOptions = createSelector(getDepartureOptionsFromState, mapOptions);
-export const getArrivalOptions = createSelector(getArrivalOptionsFromState, mapOptions);
+export const getSuggestionOptions = createSelector(getSuggestionsFromAutocomplete, mapOptions);
 export const getDefaultOptionsGroup = createSelector(getDefaultOptionsFromState, mapGroupOptions);

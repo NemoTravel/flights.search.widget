@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import * as classnames from 'classnames';
 
-import { startSearch as startSearchAction } from '../store/form/actions';
+import {startSearch as startSearchAction} from '../store/form/actions';
 import Search from './Form/Search';
 import WebskyHiddenForm from './WebskyHiddenForm';
 import {
@@ -29,7 +29,10 @@ class Form extends React.Component<StateProps & DispatchProps> {
 		const { startSearch, verticalForm, isWebskyMode, showCouponField, showMileCardField } = this.props;
 
 		return <section className={classnames('widget-form', { 'widget-form_vertical': verticalForm })}>
-			<Search startSearch={startSearch} showCouponField={showCouponField} showMileCardField={showMileCardField}/>
+			<Search
+				startSearch={startSearch}
+				showCouponField={showCouponField}
+				showMileCardField={showMileCardField}/>
 			{isWebskyMode ? <WebskyHiddenForm/> : null}
 		</section>;
 	}

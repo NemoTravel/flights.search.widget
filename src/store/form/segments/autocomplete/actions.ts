@@ -4,25 +4,26 @@ import {
 	AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 	AIRPORT_SELECTED,
 	AUTOCOMPLETE_PUSH_TO_PREVIOUS
-} from '../../actions';
-import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from '../../../services/parsers';
-import { parseDatesAvailability } from '../../../services/parsers/datesAvailability';
-import { URL, clearURL } from '../../../utils';
+} from '../../../actions';
+import { parseAutocompleteOptions, parseAirportFromGuide, parseNearestAirport } from '../../../../services/parsers';
+import { parseDatesAvailability } from '../../../../services/parsers/datesAvailability';
+import { URL, clearURL } from '../../../../utils';
 import {
 	ApplicationMode, ApplicationState, AutocompleteFieldType, CommonThunkAction,
 	DatepickerFieldType, GetStateFunction,
 	Language
-} from '../../../state';
+} from '../../../../state';
 import { setAvailableDates } from '../dates/actions';
 import { AnyAction, Dispatch } from 'redux';
-import { AutocompleteSuggestion } from '../../../services/models/AutocompleteSuggestion';
-import { Airport } from '../../../services/models/Airport';
-import { ResponseWithGuide } from '../../../services/responses/Guide';
+import { AutocompleteSuggestion } from '../../../../services/models/AutocompleteSuggestion';
+import { Airport } from '../../../../services/models/Airport';
+import { ResponseWithGuide } from '../../../../services/responses/Guide';
 
 export interface AutocompleteAction {
 	type: string;
 	autocompleteType: AutocompleteFieldType;
 	payload?: any;
+	segmentId?: number;
 }
 
 export interface PreviousSearchAction {
@@ -35,12 +36,14 @@ export interface PreviousSearchAction {
  * Show autocomplete field loading spinner.
  *
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  * @returns {AutocompleteAction}
  */
-export const startAutocompleteLoading = (autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const startAutocompleteLoading = (autocompleteType: AutocompleteFieldType, segmentId: number): AutocompleteAction => {
 	return {
 		type: AUTOCOMPLETE_LOADING_STARTED,
-		autocompleteType
+		autocompleteType,
+		segmentId
 	};
 };
 
@@ -48,12 +51,14 @@ export const startAutocompleteLoading = (autocompleteType: AutocompleteFieldType
  * Hide autocomplete field loading spinner.
  *
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  * @returns {AutocompleteAction}
  */
-export const finishAutocompleteLoading = (autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const finishAutocompleteLoading = (autocompleteType: AutocompleteFieldType, segmentId: number): AutocompleteAction => {
 	return {
 		type: AUTOCOMPLETE_LOADING_FINISHED,
-		autocompleteType
+		autocompleteType,
+		segmentId
 	};
 };
 
@@ -62,12 +67,14 @@ export const finishAutocompleteLoading = (autocompleteType: AutocompleteFieldTyp
  *
  * @param {Array} suggestions
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  * @returns {AutocompleteAction}
  */
-export const changeAutocompleteSuggestions = (suggestions: AutocompleteSuggestion[], autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const changeAutocompleteSuggestions = (suggestions: AutocompleteSuggestion[], autocompleteType: AutocompleteFieldType, segmentId: number = 0): AutocompleteAction => {
 	return {
 		type: AUTOCOMPLETE_SUGGESTIONS_CHANGED,
 		autocompleteType,
+		segmentId,
 		payload: {
 			suggestions
 		}
@@ -85,12 +92,12 @@ const runDatesAvailability = (dispatch: Dispatch<AnyAction>, state: ApplicationS
 	let depIATA, arrIATA;
 
 	if (type === DatepickerFieldType.Departure) {
-		depIATA = state.form.autocomplete.departure.airport.IATA;
-		arrIATA = state.form.autocomplete.arrival.airport.IATA;
+		depIATA = state.form.segments[0].autocomplete.departure.airport.IATA;
+		arrIATA = state.form.segments[0].autocomplete.arrival.airport.IATA;
 	}
 	else {
-		depIATA = state.form.autocomplete.arrival.airport.IATA;
-		arrIATA = state.form.autocomplete.departure.airport.IATA;
+		depIATA = state.form.segments[0].autocomplete.arrival.airport.IATA;
+		arrIATA = state.form.segments[0].autocomplete.departure.airport.IATA;
 	}
 
 	const requestURL = `${clearURL(state.system.nemoURL)}/api/proxy/websky/availability/dep/${depIATA}/arr/${arrIATA}`;
@@ -125,14 +132,14 @@ const runDatesAvailability = (dispatch: Dispatch<AnyAction>, state: ApplicationS
  * @param {Dispatch} dispatch
  * @param {ApplicationState} getState
  */
-const getDatesAvailability = (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
+export const getDatesAvailability = (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 	const state = getState();
 
 	if (
 		state.system.mode === ApplicationMode.WEBSKY &&
 		state.system.highlightAvailableDates &&
-		state.form.autocomplete.departure.airport &&
-		state.form.autocomplete.arrival.airport
+		state.form.segments[0].autocomplete.departure.airport &&
+		state.form.segments[0].autocomplete.arrival.airport
 	) {
 		// Searching available dates for the flight forward.
 		runDatesAvailability(dispatch, state, DatepickerFieldType.Departure);
@@ -146,13 +153,15 @@ const getDatesAvailability = (dispatch: Dispatch<AnyAction>, getState: GetStateF
  * Store airport selected by user.
  *
  * @param {Object} airport
+ * @param {number} segmentId
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {AutocompleteAction}
  */
-export const setSelectedAirport = (airport: Airport, autocompleteType: AutocompleteFieldType): AutocompleteAction => {
+export const setSelectedAirport = (airport: Airport, autocompleteType: AutocompleteFieldType, segmentId: number = 0): AutocompleteAction => {
 	return {
 		type: AIRPORT_SELECTED,
 		autocompleteType,
+		segmentId,
 		payload: {
 			airport
 		}
@@ -180,10 +189,10 @@ export const setAirportInPreviousSearchGroup = (pool: any): PreviousSearchAction
  * @param {Function} getState
  * @param airport
  */
-const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getState: GetStateFunction, airport: Airport): void => {
+export const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getState: GetStateFunction, airport: Airport): void => {
 	const MAX_NUM_OF_AIRPORTS = 9;
 	const appState = getState();
-	const state = appState.form.autocomplete.defaultGroups.previousSearches.options;
+	const state = appState.form.segments[0].autocomplete.defaultGroups.previousSearches.options;
 	const newPool: any = {};
 	let counter = 0;
 
@@ -210,12 +219,13 @@ const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getState: Ge
  * Store airport selected by user and run request for getting dates with available flight.
  *
  * @param {Object} airport
+ * @param {number} segmentId
  * @param {AutocompleteFieldType} autocompleteType
  * @returns {Function}
  */
-export const selectAirport = (airport: any, autocompleteType: AutocompleteFieldType): CommonThunkAction => {
+export const selectAirport = (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number = 0): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
-		dispatch(setSelectedAirport(airport, autocompleteType));
+		dispatch(setSelectedAirport(airport, autocompleteType, segmentId));
 		getDatesAvailability(dispatch, getState);
 		pushAiprortInCache(dispatch, getState, airport);
 	};
@@ -226,6 +236,7 @@ interface AutocompleteParams {
 	dispatch: Dispatch<AnyAction>;
 	autocompleteType: AutocompleteFieldType;
 	aggregationOnly?: boolean;
+	segmentId?: number;
 }
 
 /**
@@ -235,9 +246,10 @@ interface AutocompleteParams {
  * @param {Function} dispatch
  * @param {AutocompleteFieldType} autocompleteType
  * @param {Boolean} aggregationOnly
+ * @param {number} segmentId
  */
-const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOnly = false }: AutocompleteParams): void => {
-	dispatch(startAutocompleteLoading(autocompleteType));
+const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOnly = false, segmentId = 0 }: AutocompleteParams): void => {
+	dispatch(startAutocompleteLoading(autocompleteType, segmentId));
 
 	fetch(requestURL)
 		.then(response => response.json())
@@ -245,14 +257,14 @@ const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOn
 			const options = parseAutocompleteOptions(response, aggregationOnly);
 
 			if (options) {
-				dispatch(changeAutocompleteSuggestions(options, autocompleteType));
+				dispatch(changeAutocompleteSuggestions(options, autocompleteType, segmentId));
 			}
 
-			dispatch(finishAutocompleteLoading(autocompleteType));
+			dispatch(finishAutocompleteLoading(autocompleteType, segmentId));
 		})
 		.catch(() => {
-			dispatch(changeAutocompleteSuggestions([], autocompleteType));
-			dispatch(finishAutocompleteLoading(autocompleteType));
+			dispatch(changeAutocompleteSuggestions([], autocompleteType, segmentId));
+			dispatch(finishAutocompleteLoading(autocompleteType, segmentId));
 		});
 };
 
@@ -277,8 +289,8 @@ const runWebskyAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetState
 
 	// For `arrival` autocomplete field, inject selected departure IATA code,
 	// for loading proper list of arrival options.
-	if (autocompleteType === AutocompleteFieldType.Arrival && state.form.autocomplete.departure.airport) {
-		departureIATA = state.form.autocomplete.departure.airport.IATA;
+	if (autocompleteType === AutocompleteFieldType.Arrival && state.form.segments[0].autocomplete.departure.airport) {
+		departureIATA = state.form.segments[0].autocomplete.departure.airport.IATA;
 	}
 
 	const requestURL = `${clearURL(state.system.nemoURL)}/api/proxy/websky/cities/${departureIATA}/${searchType}`;
@@ -302,8 +314,9 @@ const runWebskyAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetState
  * @param {Function} getState
  * @param {String} searchText
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  */
-const runNemoAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFunction, searchText: string, autocompleteType: AutocompleteFieldType): void => {
+const runNemoAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFunction, searchText: string, autocompleteType: AutocompleteFieldType, segmentId: number = 0): void => {
 	const state = getState();
 
 	let requestURL = `${clearURL(state.system.nemoURL)}/api/guide/autocomplete/iata/${searchText}`;
@@ -313,8 +326,8 @@ const runNemoAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFu
 
 	// For `arrival` autocomplete field, inject selected departure IATA code,
 	// for loading proper list of arrival options.
-	if (autocompleteType === 'arrival' && state.form.autocomplete.departure.airport) {
-		requestURL += `/dep/${state.form.autocomplete.departure.airport.IATA}`;
+	if (autocompleteType === 'arrival' && state.form.segments[0].autocomplete.departure.airport) {
+		requestURL += `/dep/${state.form.segments[0].autocomplete.departure.airport.IATA}`;
 	}
 
 	if (state.system.routingGrid) {
@@ -324,7 +337,8 @@ const runNemoAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFu
 	runAutocomplete({
 		requestURL: URL(requestURL, requestParams),
 		dispatch,
-		autocompleteType
+		autocompleteType,
+		segmentId
 	});
 };
 
@@ -333,15 +347,16 @@ const runNemoAutocomplete = (dispatch: Dispatch<AnyAction>, getState: GetStateFu
  *
  * @param {String} searchText
  * @param {AutocompleteFieldType} autocompleteType
+ * @param {number} segmentId
  * @returns {Function}
  */
-export const sendAutocompleteRequest = (searchText: string, autocompleteType: AutocompleteFieldType): CommonThunkAction => {
+export const sendAutocompleteRequest = (searchText: string, autocompleteType: AutocompleteFieldType, segmentId: number = 0): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		if (getState().system.mode === ApplicationMode.WEBSKY) {
 			runWebskyAutocomplete(dispatch, getState, autocompleteType);
 		}
 		else {
-			runNemoAutocomplete(dispatch, getState, searchText, autocompleteType);
+			runNemoAutocomplete(dispatch, getState, searchText, autocompleteType, segmentId);
 		}
 	};
 };
@@ -382,16 +397,16 @@ export const loadNearestAirportForAutocomplete = (autocompleteType: Autocomplete
 /**
  * Change the departure and the arrival airports.
  */
-export const swapAirports = (): CommonThunkAction => {
+export const swapAirports = (segmentId: number): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		const
 			state = getState(),
-			departureAirport = state.form.autocomplete.departure.airport,
-			arrivalAirport = state.form.autocomplete.arrival.airport;
+			departureAirport = state.form.segments[segmentId].autocomplete.departure.airport,
+			arrivalAirport = state.form.segments[segmentId].autocomplete.arrival.airport;
 
 		if (departureAirport || arrivalAirport) {
-			dispatch(setSelectedAirport(departureAirport, AutocompleteFieldType.Arrival));
-			dispatch(setSelectedAirport(arrivalAirport, AutocompleteFieldType.Departure));
+			dispatch(setSelectedAirport(departureAirport, AutocompleteFieldType.Arrival, segmentId));
+			dispatch(setSelectedAirport(arrivalAirport, AutocompleteFieldType.Departure, segmentId));
 			getDatesAvailability(dispatch, getState);
 		}
 	};

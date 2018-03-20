@@ -1,10 +1,9 @@
 import * as React from 'react';
-import DatesContainer from './Search/DatesContainer';
-import AutocompleteContainer from './Search/AutocompleteContainer';
 import PassengersContainer from './Search/PassengersContainer';
 import AdditionalOptionsContainer from './Search/AdditionalOptionsContainer';
 import CouponContainer from './Search/Bonus/CouponContainer';
 import MileCardContainer from './Search/Bonus/MileCardContainer';
+import SegmentsContainer from './Search/SegmentsContainer';
 import { i18n } from '../../utils';
 import { CommonThunkAction } from '../../state';
 
@@ -31,8 +30,7 @@ export default class Search extends React.Component<Props> {
 
 		return <div className="widget-form-search">
 			<div className="widget-form-search__wrapper">
-				<AutocompleteContainer/>
-				<DatesContainer/>
+				<SegmentsContainer/>
 
 				<div className="row widget-form-search__footer">
 					<div className="col">

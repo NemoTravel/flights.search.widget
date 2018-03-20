@@ -2,9 +2,10 @@
 
 &-form {
 	@import "form/search";
+	@import "form/segments";
 
 	@include adaptivity(desktop) {
-		&:before {
+		&:after {
 			content: '';
 			position: absolute;
 			z-index: 0;
@@ -12,13 +13,80 @@
 			left: 0;
 			right: 0;
 			height: 50px;
-			margin-top: 70px;
 			width: 100%;
 		}
 	}
 
-	&_vertical {
+	&__routeTypeSwitch {
+		display: block;
+		position: relative;
+		right: 0;
+		color: #fff;
+
+		bottom: 0;
+		z-index: 1;
+		white-space: nowrap;
+
+		& span {
+			padding-left: 25px;
+			font-weight: 500;
+		}
+
 		&:before {
+			position: absolute;
+			margin-top: 5px;
+		}
+
+		&_toCR {
+			&:before {
+				content: ' ';
+				background: url(images/cr.svg) no-repeat center center;
+				background-size: 20px;
+				display: inline-block;
+				width: 20px;
+				height: 11px;
+				margin-right: 5px;
+			}
+		}
+
+		&_toOW {
+			&:before {
+				content: ' ';
+				background: url(images/ow.svg) no-repeat center center;
+				background-size: 25px;
+				display: inline-block;
+				width: 20px;
+				height: 13px;
+				margin-top: 3px;
+			}
+		}
+
+		@include adaptivity(desktop) {
+			width: 60%;
+		}
+
+		@include adaptivity(tablet) {
+			position: absolute;
+			left: 0;
+			top: 60px;
+			margin-left: calc(-1rem - 100%);
+		}
+
+		@include adaptivity(phone) {
+			width: 100%;
+			position: relative;
+			margin-left: 0;
+			margin-right: 0;
+			margin-bottom: 1rem;
+			display: inline-block;
+			padding-top: 0;
+			margin-top: 0;
+			top: 0;
+		}
+	}
+
+	&_vertical {
+		&:after {
 			display: none;
 		}
 
@@ -88,6 +156,28 @@
 				}
 			}
 
+			&-segments {
+				margin-bottom: 0 !important;
+
+				&_CR {
+					.widget-form-segments__segment {
+						padding-left: 20px;
+						margin-left: 0;
+						margin-bottom: 2rem;
+
+						&__drop {
+							margin-left: -10px;
+						}
+					}
+
+					.widget-form-dates__col {
+						&:only-child {
+							padding: 0 !important;
+						}
+					}
+				}
+			}
+
 			&-airports {
 				&.row {
 					flex-basis: 100%;
@@ -118,10 +208,26 @@
 			}
 
 			&-additionalOptions {
+				display: block;
 				position: relative;
 				height: auto;
 				top: 0;
 				left: 0;
+				z-index: 1;
+				margin-bottom: 1rem !important;
+				padding-left: 0;
+			}
+
+			&__routeTypeSwitch {
+				position: relative;
+				margin: 0;
+				display: inline-block;
+				width: 100%;
+				padding-top: 10px;
+
+				@include adaptivity(tablet) {
+					top: 0;
+				}
 			}
 		}
 	}

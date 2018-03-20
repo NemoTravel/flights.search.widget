@@ -8,7 +8,7 @@ import Value from './Autocomplete/Value';
 import { i18n } from '../../../utils';
 import { DefaultOptionGroup } from '../../../store/form/selectors';
 import { AutocompleteFieldType, CommonThunkAction } from '../../../state';
-import { AutocompleteAction } from '../../../store/form/autocomplete/actions';
+import { AutocompleteAction } from '../../../store/form/segments/autocomplete/actions';
 import { AutocompleteOption } from '../../../services/models/AutocompleteOption';
 import { Airport } from '../../../services/models/Airport';
 
@@ -21,11 +21,12 @@ interface Props {
 	readOnly?: boolean;
 	isGridMode?: boolean;
 	showErrors: boolean;
+	segmentId: number;
 
-	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType) => any;
-	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType) => CommonThunkAction;
-	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType) => AutocompleteAction;
-	swapAirports?: () => CommonThunkAction;
+	selectAirport: (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number) => any;
+	sendAutocompleteRequest: (searchText: string, autocompleteType: AutocompleteFieldType, segmentId: number) => CommonThunkAction;
+	changeAutocompleteSuggestions: (suggestions: any[], autocompleteType: AutocompleteFieldType, segmentId: number) => AutocompleteAction;
+	swapAirports?: (segmentId: number) => CommonThunkAction;
 	getRef?: (reactSelect: any) => any;
 }
 
@@ -60,7 +61,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 	 * @param {String} searchText
 	 */
 	fetchSuggestions(searchText: string = ''): void {
-		const { sendAutocompleteRequest } = this.props;
+		const { sendAutocompleteRequest, segmentId } = this.props;
 
 		if (searchText || this.props.isGridMode) {
 			// We don't want to harass servers too much.
@@ -68,7 +69,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 
 			// So we send request only if user hasn't been typing something for a while.
 			this.autocompleteTimeout = window.setTimeout(() => {
-				sendAutocompleteRequest(searchText, this.type);
+				sendAutocompleteRequest(searchText, this.type, segmentId);
 			}, this.autocompleteWaitTime);
 		}
 	}
@@ -123,7 +124,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 	 */
 	selectOption(option: any): void {
 		if (option && option.value && option.value.airport) {
-			this.props.selectAirport(option.value.airport, this.type);
+			this.props.selectAirport(option.value.airport, this.type, this.props.segmentId);
 		}
 	}
 
@@ -141,7 +142,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 	}
 
 	render(): React.ReactNode {
-		const { suggestions, isLoading, optionsGroup, airport, showErrors, sameAirportsError, readOnly, getRef } = this.props;
+		const { suggestions, isLoading, optionsGroup, airport, showErrors, sameAirportsError, readOnly, getRef, segmentId } = this.props;
 
 		const selectedValue = airport ? {
 			label: airport.name,
@@ -180,7 +181,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 					onChange={this.selectOption}
 					onFocus={this.onFocusHandler}
 					onBlur={() => {
-						this.props.changeAutocompleteSuggestions([], this.type);
+						this.props.changeAutocompleteSuggestions([], this.type, segmentId);
 						this.setState({ isFocused: false });
 					}}
 					optionRenderer={(option: any) => <Option option={option}/>}

@@ -3,17 +3,50 @@
 &-additionalOptions {
 	height: 50px;
 	position: absolute;
-	top: 55px;
-	left: -300px;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+	bottom: 0;
+	margin-bottom: -50px !important;
+	display: flex;
+
+	&__checkboxes {
+		display: flex;
+		flex-wrap: nowrap;
+
+		@include adaptivity(desktop) {
+			margin-right: calc(100px + 1.5rem);
+
+			.widget-ui-checkbox:last-child {
+				margin-right: 0;
+			}
+		}
+
+		@include adaptivity(tablet) {
+			width: 100%;
+		}
+
+		@include adaptivity(phone) {
+			display: block;
+		}
+	}
+
+	@include adaptivity(desktop) {
+		flex-direction: row-reverse;
+		justify-content: space-between;
+		padding-left: 30px;
+	}
 
 	@include adaptivity(tablet) {
 		position: relative;
 		height: 40px;
 		top: 0;
 		left: 0;
+		margin-bottom: 0 !important;
 	}
 
 	@include adaptivity(phone) {
 		height: auto;
+		display: block;
 	}
 }
