@@ -9,7 +9,7 @@
 		"no-inferrable-types": [true, "ignore-params", "ignore-properties"],
 		"no-internal-module": true,
 		"no-magic-numbers": true,
-		"no-namespace": true,
+		"no-namespace": false,
 		"no-non-null-assertion": true,
 		"no-parameter-reassignment": true,
 		"no-reference": true,

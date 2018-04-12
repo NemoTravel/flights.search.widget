@@ -56,3 +56,9 @@ export const initDemo = () => {
 		document.getElementById('root')
 	);
 };
+
+export class WrappedMain extends React.Component {
+	render(): React.ReactNode {
+		return <div>123</div>;
+	}
+}
