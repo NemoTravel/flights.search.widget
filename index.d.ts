@@ -1,12 +1,6 @@
-export = SearchWidget;
-export as namespace SearchWidget;
+import * as React from 'react';
 
-declare namespace SearchWidget {
-	import { WrappedMain } from './src/main';
-
-	const init: (config: any) => void;
-	const initDemo: () => void;
-	const enableCache: () => void;
-
-	export type Component = WrappedMain;
-}
+export const init: (config: any) => void;
+export const initDemo: () => void;
+export const enableCache: () => void;
+export const Component: React.ComponentType;
