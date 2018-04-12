@@ -57,4 +57,4 @@ export const initDemo = () => {
 	);
 };
 
-export { default } from './components/Component';
+export { default as Component } from './components/Component';
