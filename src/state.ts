@@ -288,6 +288,31 @@ export const mileCardState: MileCardState = {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+export interface SearchInfoLocation {
+	IATA: string;
+	isCity: boolean;
+}
+
+export interface SearchInfoSegment {
+	departure: SearchInfoLocation;
+	arrival: SearchInfoLocation;
+	date: string;
+}
+
+export interface SearchInfoPassenger {
+	type: PassengerType;
+	count: number;
+}
+
+export interface SearchInfo {
+	segments: SearchInfoSegment[];
+	routeType: RouteType;
+	passengers: SearchInfoPassenger[];
+	serviceClass: ServiceClass;
+}
+
+export type OnSearchFunction = (params: SearchInfo) => void;
+
 export interface FormState {
 	showErrors: boolean;
 	passengers: PassengersState;

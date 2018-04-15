@@ -3,7 +3,7 @@ import {SET_ROUTE_TYPE, SHOW_ERRORS} from '../actions';
 import { formIsValid } from './selectors';
 import {
 	ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState,
-	RouteType, SegmentState
+	RouteType, SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger
 } from '../../state';
 import { URL, clearURL } from '../../utils';
 
@@ -76,18 +76,57 @@ const runWebskySearch = (): void => {
 	}
 };
 
+const createSearchInfo = (state: ApplicationState): SearchInfo => {
+	const segments = state.form.segments.map((segment: SegmentState): SearchInfoSegment => {
+		return {
+			departure: {
+				IATA: segment.autocomplete.departure.airport.IATA,
+				isCity: !!segment.autocomplete.departure.airport.isCity
+			},
+			arrival: {
+				IATA: segment.autocomplete.arrival.airport.IATA,
+				isCity: !!segment.autocomplete.arrival.airport.isCity
+			},
+			date: segment.dates.departure.date.format()
+		};
+	});
+
+	const passengers: SearchInfoPassenger[] = [];
+
+	for (const passType in state.form.passengers) {
+		if (state.form.passengers.hasOwnProperty(passType)) {
+			passengers.push({
+				type: state.form.passengers[passType].code,
+				count: state.form.passengers[passType].count
+			});
+		}
+	}
+
+	return {
+		segments,
+		passengers,
+		routeType: state.form.routeType,
+		serviceClass: state.form.additional.classType
+	};
+};
+
 /**
  * Starting search:
  * - run validation
  * - do some optional checks
  * - run search itself
+ *
+ * @param onSearch
  */
-export const startSearch = (): CommonThunkAction => {
+export const startSearch = (onSearch?: OnSearchFunction): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		const state = getState();
 
 		if (formIsValid(state)) {
-			if (state.system.mode === ApplicationMode.NEMO) {
+			if (typeof onSearch === 'function') {
+				onSearch(createSearchInfo(state));
+			}
+			else if (state.system.mode === ApplicationMode.NEMO) {
 				runNemoSearch(state);
 			}
 			else if (state.system.mode === ApplicationMode.WEBSKY) {
