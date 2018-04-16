@@ -1,9 +1,9 @@
 import { AnyAction, Dispatch } from 'redux';
-import {SET_ROUTE_TYPE, SHOW_ERRORS} from '../actions';
+import { SHOW_ERRORS} from '../actions';
 import { formIsValid } from './selectors';
 import {
 	ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState,
-	RouteType, SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger
+	SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger
 } from '../../state';
 import { URL, clearURL } from '../../utils';
 
@@ -87,7 +87,8 @@ const createSearchInfo = (state: ApplicationState): SearchInfo => {
 				IATA: segment.autocomplete.arrival.airport.IATA,
 				isCity: !!segment.autocomplete.arrival.airport.isCity
 			},
-			date: segment.dates.departure.date.format()
+			departureDate: segment.dates.departure.date.format(),
+			returnDate: segment.dates.return.date ? segment.dates.return.date.format() : ''
 		};
 	});
 

@@ -296,7 +296,8 @@ export interface SearchInfoLocation {
 export interface SearchInfoSegment {
 	departure: SearchInfoLocation;
 	arrival: SearchInfoLocation;
-	date: string;
+	departureDate: string;
+	returnDate?: string;
 }
 
 export interface SearchInfoPassenger {
