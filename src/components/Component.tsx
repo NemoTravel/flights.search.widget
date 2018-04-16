@@ -6,7 +6,7 @@ import { ApplicationState, SystemState, OnSearchFunction } from '../state';
 import { Store } from 'redux';
 import { cacheState, getStore } from '../store';
 
-interface Props extends SystemState {
+export interface Props extends SystemState {
 	onSearch?: OnSearchFunction;
 }
 
