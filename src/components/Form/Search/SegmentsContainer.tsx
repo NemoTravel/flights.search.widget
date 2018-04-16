@@ -32,6 +32,17 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 	renderAllSegment(): React.ReactNode {
 		const { segments, isCR, removeSegment } = this.props;
 
+		if (!isCR) {
+			return <Segment
+				segment={segments[0]}
+				segmentId={0}
+				key={0}
+				removeSegment={removeSegment}
+				canBeRemoved={false}
+				showDatesError={false}
+			/>;
+		}
+
 		return segments.map((segment: SegmentState, index: number) => {
 			return <Segment
 				segment={segment}

@@ -6,7 +6,8 @@ import * as classnames from 'classnames';
 
 import Tooltip from './Tooltip';
 import { isIE } from '../../utils';
-import { DatepickerFieldType } from '../../state';
+import { CommonThunkAction, DatepickerFieldType, RouteType } from '../../state';
+import { SetRouteTypeAction } from "../../store/form/route/actions";
 
 interface Props {
 	date: Moment;
@@ -18,6 +19,7 @@ interface Props {
 	type: DatepickerFieldType;
 	inputProps: any;
 
+	setRouteType?: (type: RouteType) => CommonThunkAction;
 	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
 	getRef?: (inout: any) => any;
 }
@@ -65,6 +67,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	enable(): void {
 		if (this.props.isDisableable && !this.state.isActive) {
 			this.setState({ isActive: true });
+			this.props.setRouteType(RouteType.RT);
 		}
 	}
 
@@ -75,6 +78,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 		if (this.props.isDisableable && this.state.isActive) {
 			this.setState({ isActive: false });
 			this.props.selectDate(null, this.props.type, 0);
+			this.props.setRouteType(RouteType.OW);
 		}
 	}
 

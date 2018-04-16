@@ -32,6 +32,11 @@ export const isCR = createSelector(
 	(config: FormState): boolean => config.routeType === RouteType.CR
 );
 
+export const isRT = createSelector(
+	[ getForm ],
+	(config: FormState): boolean => config.routeType === RouteType.RT
+);
+
 /**
  * Check if search form data is valid and ready for further operations.
  *

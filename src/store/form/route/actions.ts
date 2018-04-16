@@ -1,7 +1,7 @@
 import { AnyAction, Dispatch } from 'redux';
 import { SET_ROUTE_TYPE } from '../../actions';
 import { CommonThunkAction, GetStateFunction, RouteType } from '../../../state';
-import { removeComplexSegments } from '../segments/actions';
+import { addSegment, removeComplexSegments } from '../segments/actions';
 
 export interface SetRouteTypeAction {
 	type: string,
@@ -17,7 +17,13 @@ export const setRouteTypeAction = (type: RouteType): SetRouteTypeAction => {
 
 export const setRouteType = (type: RouteType): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
+		if (type === RouteType.OW) {
+			dispatch(removeComplexSegments());
+		}
+		else if (type === RouteType.RT && getState().form.segments.length < 2) {
+			dispatch(addSegment());
+		}
+
 		dispatch(setRouteTypeAction(type));
-		dispatch(removeComplexSegments());
 	};
 };

@@ -4,9 +4,10 @@ import { Moment } from 'moment';
 
 import UIDatepicker from '../../UI/Datepicker';
 import MobileHeader from '../../UI/MobileHeader';
-import { DatepickerFieldType, Language } from '../../../state';
+import { CommonThunkAction, DatepickerFieldType, Language, RouteType } from '../../../state';
 import { HighlightedDatesGroup } from '../../../store/form/segments/dates/selectors';
 import { i18n } from '../../../utils';
+import { setRouteType, SetRouteTypeAction } from "../../../store/form/route/actions";
 
 interface Props {
 	showErrors?: boolean;
@@ -20,6 +21,7 @@ interface Props {
 	popperPlacement: string;
 	wrongDatesOrder?: boolean;
 
+	setRouteType?: (type: RouteType) => CommonThunkAction;
 	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
 	getRef?: (input: any) => any;
 }
@@ -90,7 +92,8 @@ export default class Datepicker extends React.Component<Props> {
 			openToDate,
 			highlightDates,
 			popperPlacement,
-			wrongDatesOrder
+			wrongDatesOrder,
+			setRouteType
 		} = this.props;
 
 		const
@@ -118,6 +121,7 @@ export default class Datepicker extends React.Component<Props> {
 				tooltipIsActive={this.showErrors && showErrors && (!date || wrongDatesOrder)}
 				tooltipText={wrongDatesOrder ? datesIsNotInOrderText : this.tooltipText}
 				inputProps={{ placeholder: this.placeholder }}
+				setRouteType={setRouteType ? setRouteType : null}
 			>
 				{this.renderInner()}
 			</UIDatepicker>
