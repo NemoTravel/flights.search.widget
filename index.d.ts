@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { Props as ComponentProps } from './src/components/Component';
+import { SearchInfo, SystemState } from './src/state';
 
+export interface ComponentProps extends SystemState {
+	onSearch?: (params: SearchInfo) => void;
+}
 export const init: (config: any) => void;
 export const initDemo: () => void;
 export const enableCache: () => void;
