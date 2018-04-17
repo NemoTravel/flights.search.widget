@@ -13,6 +13,10 @@ const highlightAvailableDates = (state: ApplicationState): boolean => state.syst
 const getDepartureDates = createSelector(
 	[getForm],
 	(form: FormState): Moment[] => {
+		if (!isCR) {
+			return [form.segments[0].dates.departure.date];
+		}
+
 		return form.segments.map(segment => {
 			return segment.dates.departure.date;
 		});
@@ -73,7 +77,7 @@ export interface HighlightedDatesGroup {
  * @param {Array} departureDates
  * @returns {Array}
  */
-const createHighlightedDates = (availableDates: any, intermediateDates: Moment[], highlightAvailableDates: boolean, departureDates?: Moment[]): HighlightedDatesGroup[] => {
+const createHighlightedDates = (availableDates: any, intermediateDates: Moment[], highlightAvailableDates: boolean, departureDates?: Moment[], isCR?: boolean): HighlightedDatesGroup[] => {
 	const result: HighlightedDatesGroup[] = [];
 
 	if (highlightAvailableDates && availableDates.length) {
@@ -88,7 +92,7 @@ const createHighlightedDates = (availableDates: any, intermediateDates: Moment[]
 		});
 	}
 
-	if (departureDates && departureDates.length > 1) {
+	if (departureDates && departureDates.length > 1 && isCR) {
 		result.push({
 			'react-datepicker__day--selected': departureDates
 		});
@@ -98,7 +102,7 @@ const createHighlightedDates = (availableDates: any, intermediateDates: Moment[]
 };
 
 export const getDepartureHighlightedDates = createSelector(
-	[getDepartureAvailableDates, getDatesBetweenDepartureAndReturn, highlightAvailableDates, getDepartureDates],
+	[getDepartureAvailableDates, getDatesBetweenDepartureAndReturn, highlightAvailableDates, getDepartureDates, isCR],
 	createHighlightedDates
 );
 
