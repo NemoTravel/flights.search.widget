@@ -77,7 +77,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	disable(): void {
 		if (this.props.isDisableable && this.state.isActive) {
 			this.setState({ isActive: false });
-			this.props.selectDate(null, this.props.type, 0);
+			this.props.selectDate(null, this.props.type, 1);
 			this.props.setRouteType(RouteType.OW);
 		}
 	}

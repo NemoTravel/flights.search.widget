@@ -36,10 +36,9 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 			return <Segment
 				segment={segments[0]}
 				segmentId={0}
-				key={0}
 				removeSegment={removeSegment}
 				canBeRemoved={false}
-				showDatesError={false}
+				showDatesError={true}
 			/>;
 		}
 

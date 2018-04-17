@@ -3,10 +3,10 @@ import { getIntermediateDates } from '../../../../utils';
 import * as moment from 'moment';
 import { ApplicationState, FormState } from '../../../../state';
 import { Moment } from 'moment';
-import { isCR, getForm } from '../../selectors';
+import { isCR, getForm, isRT } from '../../selectors';
 
 const getDepartureAvailableDates = (state: ApplicationState): any => state.form.segments[0].dates.departure.availableDates;
-const getReturnDate = (state: ApplicationState): Moment => !isCR(state) ? state.form.segments[0].dates.return.date : null;
+const getReturnDate = (state: ApplicationState): Moment => isRT(state) ? state.form.segments[1].dates.departure.date : null;
 const getReturnAvailableDates = (state: ApplicationState): any => state.form.segments[0].dates.return.availableDates;
 const highlightAvailableDates = (state: ApplicationState): boolean => state.system.highlightAvailableDates;
 
