@@ -1,5 +1,5 @@
 import { TOGGLE_DATEPICKER, SELECT_DATE, SET_AVAILABLE_DATES } from '../../../actions';
-import { DatepickerFieldType, DatepickerState, DatesState, datesState } from '../../../../state';
+import { DatepickerFieldType, DatepickerState, DatesState, datesState, dateState } from '../../../../state';
 import { DatepickerAction } from './actions';
 import { Moment } from 'moment';
 
@@ -30,12 +30,14 @@ const datesReducer = (state: DatepickerState, { type, payload }: DatepickerActio
 	return state;
 };
 
-export const datesMainReducer = (state: DatesState = datesState, action: DatepickerAction): DatesState => {
+export const datesMainReducer = (state: DatepickerState = dateState, action: DatepickerAction): DatepickerState => {
 	if (action.dateType) {
-		return {
-			...state,
-			[DatepickerFieldType.Departure]: datesReducer(state[action.dateType], action)
-		};
+//		return {
+//			...state,
+//			datesReducer(state[action.dateType], action)
+//		};
+
+		return datesReducer(state, action);
 	}
 
 	return state;

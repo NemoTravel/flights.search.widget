@@ -33,7 +33,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 		requestURL += segment.autocomplete.arrival.airport.IATA;
 
 		// Departure date info.
-		requestURL += segment.dates.departure.date.format('YYYYMMDD');
+		requestURL += segment.date.date.format('YYYYMMDD');
 	});
 
 	// Return date info.

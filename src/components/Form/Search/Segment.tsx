@@ -42,7 +42,7 @@ export default class Segment extends React.Component<Props> {
 
 			<DatesContainer
 				segmentId={segmentId}
-				departureDatepicker={segment.dates.departure}
+				departureDatepicker={segment.date}
 				returnDatepicker={segment.dates.return}
 				datesIsNotOrder={showDatesError}/>
 

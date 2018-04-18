@@ -196,16 +196,24 @@ export const datesState: DatesState = {
 	}
 };
 
+export const dateState: DatepickerState = {
+	isActive: true,
+	date: null,
+	availableDates: []
+};
+
 // ---------------------------------------------------------------------------------------------------------------------
 
 export interface SegmentState {
 	autocomplete: AutocompleteState,
-	dates: DatesState
+	dates: DatesState,
+	date?: DatepickerState
 }
 
 export const segmentState: SegmentState = {
 	autocomplete: autocompleteState,
-	dates: datesState
+	dates: datesState,
+	date: dateState
 };
 
 export interface PassengerState {
@@ -400,6 +408,16 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						};
 
 						segment.dates.return = newDateStateReturn;
+					}
+
+					if (segment.date) {
+						const newDateState: DatepickerState = {
+							isActive: segment.date.isActive,
+							availableDates: segment.date.availableDates,
+							date: moment(segment.date.date).locale(state.system.locale)
+						};
+
+						segment.date = newDateState;
 					}
 
 					segments.push(segment);

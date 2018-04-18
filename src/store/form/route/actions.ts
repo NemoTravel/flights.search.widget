@@ -23,6 +23,8 @@ export const setRouteType = (type: RouteType): CommonThunkAction => {
 		if (type === RouteType.OW && getState().form.routeType === RouteType.CR) {
 			if (segments.length > 1) {
 				if (
+					segments[0].autocomplete.arrival.airport &&
+					segments[1].autocomplete.departure.airport &&
 					segments[0].autocomplete.arrival.airport.IATA === segments[1].autocomplete.departure.airport.IATA &&
 					segments[0].autocomplete.departure.airport.IATA === segments[1].autocomplete.arrival.airport.IATA
 				) {
