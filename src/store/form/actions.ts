@@ -3,7 +3,7 @@ import { SHOW_ERRORS} from '../actions';
 import { formIsValid } from './selectors';
 import {
 	ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState,
-	SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger
+	SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger, RouteType
 } from '../../state';
 import { URL, clearURL } from '../../utils';
 
@@ -19,26 +19,38 @@ export const showErrors = (shouldShowErrors: boolean): ShowErrorsAction => {
 	};
 };
 
+const nemoFastSearchSegment = (segment: SegmentState): string => {
+	let request = '';
+
+	request += segment.autocomplete.departure.airport.isCity ? 'c' : 'a';
+	request += segment.autocomplete.departure.airport.IATA;
+
+	// Arrival airport info.
+	request += segment.autocomplete.arrival.airport.isCity ? 'c' : 'a';
+	request += segment.autocomplete.arrival.airport.IATA;
+
+	// Departure date info.
+	request += segment.date.date.format('YYYYMMDD');
+
+	return request;
+};
+
 const runNemoSearch = (state: ApplicationState): void => {
 	let requestURL = clearURL(state.system.nemoURL) + '/results/';
 	const segments = state.form.segments;
 
-	segments.forEach(segment => {
-		// Departure airport info.
-		requestURL += segment.autocomplete.departure.airport.isCity ? 'c' : 'a';
-		requestURL += segment.autocomplete.departure.airport.IATA;
+	requestURL += nemoFastSearchSegment(segments[0]);
 
-		// Arrival airport info.
-		requestURL += segment.autocomplete.arrival.airport.isCity ? 'c' : 'a';
-		requestURL += segment.autocomplete.arrival.airport.IATA;
-
-		// Departure date info.
-		requestURL += segment.date.date.format('YYYYMMDD');
-	});
-
-	// Return date info.
-	if (state.form.segments[0].dates.return.date && segments.length === 1) {
-		requestURL += state.form.segments[0].dates.return.date.format('YYYYMMDD');
+	if (segments.length > 1) {
+		if (state.form.routeType === RouteType.RT) {
+			// Return date info
+			requestURL += segments[1].date.date.format('YYYYMMDD');
+		}
+		else if (state.form.routeType === RouteType.CR) {
+			segments.forEach((segment, index) => {
+				requestURL += index > 0 ? nemoFastSearchSegment(segment) : '';
+			})
+		}
 	}
 
 	// Passengers info.

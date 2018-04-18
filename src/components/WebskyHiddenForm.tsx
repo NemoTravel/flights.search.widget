@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { webskyPassengers } from '../store/form/passengers/selectors';
-import { ApplicationState } from '../state';
+import { ApplicationState, RouteType } from '../state';
 
 interface WebskyPassengerState {
 	title: string;
@@ -25,16 +25,16 @@ class WebskyHiddenForm extends React.Component<Props> {
 			return [
 				<input key="1" type="hidden" name="origin-city-code[0]" value={form.segments[0].autocomplete.departure.airport ? form.segments[0].autocomplete.departure.airport.IATA : ''}/>,
 				<input key="2" type="hidden" name="destination-city-code[0]" value={form.segments[0].autocomplete.arrival.airport ? form.segments[0].autocomplete.arrival.airport.IATA : ''}/>,
-				<input key="3" type="hidden" name="date[0]" value={form.segments[0].dates.departure.date ? form.segments[0].dates.departure.date.format('DD.MM.YYYY') : ''}/>
+				<input key="3" type="hidden" name="date[0]" value={form.segments[0].date.date ? form.segments[0].date.date.format('DD.MM.YYYY') : ''}/>
 			];
 		};
 
 		const renderRTBlock = (): React.ReactNode => {
-			if (form.segments[0].dates.return.date) {
+			if (form.routeType === RouteType.RT) {
 				return [
 					<input key="1" type="hidden" name="origin-city-code[1]" value={form.segments[0].autocomplete.arrival.airport ? form.segments[0].autocomplete.arrival.airport.IATA : ''}/>,
 					<input key="2" type="hidden" name="destination-city-code[1]" value={form.segments[0].autocomplete.departure.airport ? form.segments[0].autocomplete.departure.airport.IATA : ''}/>,
-					<input key="3" type="hidden" name="date[1]" value={form.segments[0].dates.return.date ? form.segments[0].dates.return.date.format('DD.MM.YYYY') : ''}/>
+					<input key="3" type="hidden" name="date[1]" value={form.segments[1].date.date ? form.segments[1].date.date.format('DD.MM.YYYY') : ''}/>
 				];
 			}
 
@@ -63,7 +63,7 @@ class WebskyHiddenForm extends React.Component<Props> {
 		const MULTIPLE_SEGMENTS_NUM = 2;
 
 		return <form id="webskyHiddenForm" action={`${system.webskyURL}/search`} method="POST">
-			<input type="hidden" name="segmentsCount" value={form.segments[0].dates.return.date ? MULTIPLE_SEGMENTS_NUM : 1}/>
+			<input type="hidden" name="segmentsCount" value={form.routeType === RouteType.RT ? MULTIPLE_SEGMENTS_NUM : 1}/>
 			<input type="hidden" name="lang" value={system.locale}/>
 
 			{renderOWBlock()}

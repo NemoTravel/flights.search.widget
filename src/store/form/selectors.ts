@@ -92,7 +92,7 @@ export const formIsValid = createSelector(
 			if (isCR) {
 				segments.forEach((segment, index) => {
 					if(segmentIsValid(segment)) {
-						if (segment.date.date.isBefore(segments[index - 1].date.date)) {
+						if (index > 0 && segment.date.date.isBefore(segments[index - 1].date.date)) {
 							isValid = false;
 						}
 					}
