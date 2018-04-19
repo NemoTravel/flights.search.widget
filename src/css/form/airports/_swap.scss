@@ -1,11 +1,11 @@
 @import "../../variables";
 
 &__swap {
-	width: 24px;
-	height: 24px;
+	width: 32px;
+	height: 100%;
 	position: absolute;
 	top: 50%;
-	left: -12px;
+	left: -31px;
 	z-index: 11;
 
 	transform: translateY(-50%);
@@ -15,7 +15,7 @@
 	background: #fff;
 
 	border: 1px solid #ccc;
-	border-radius: 50%;
+	border-radius: 0;
 
 	display: flex;
 	justify-content: center;
@@ -44,7 +44,7 @@
 	@include adaptivity(phone) {
 		right: 75px;
 		left: auto;
-		transform: rotate(90deg);
-		top: -12px;
+		transform: translateY(-50%);
+		top: 0%;
 	}
 }

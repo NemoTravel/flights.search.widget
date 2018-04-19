@@ -8,7 +8,7 @@
 		bottom: 0;
 		position: absolute;
 	}
-	
+
 	&-popper {
 		@include adaptivity(phone) {
 			position: fixed !important;
@@ -35,18 +35,18 @@
 	&_return {
 		padding-bottom: 35px;
 	}
-	
+
 	@include adaptivity(phone) {
 		overflow: auto;
 		padding: 50px 0 75px 0;
 		font-size: 1rem;
 	}
-	
+
 	&__header {
 		@extend .widget-ui-mobile__header;
 		display: block;
 		padding-top: 20px;
-		
+
 		.widget-ui-mobile__title {
 			&:before {
 				content: $icon-plane;
@@ -71,7 +71,7 @@
 				}
 			}
 		}
-		
+
 		&_return {
 			.widget-ui-mobile__title {
 				&:before {
@@ -89,7 +89,7 @@
 			padding: 0;
 		}
 	}
-	
+
 	&__footer {
 		position: absolute;
 		bottom: $main-padding-size;
@@ -100,15 +100,15 @@
 		@include adaptivity(phone) {
 			position: fixed;
 		}
-		
+
 		&__button {
 			display: inline-block;
 			line-height: 14px;
 			padding: 10px $main-padding-size;
-			
+
 			font-size: 13px;
 			font-weight: 400;
-			
+
 			border: 1px solid rgba($title-color, 0.2);
 			background: #fff;
 			color: $title-color;
@@ -122,12 +122,12 @@
 			@include adaptivity(phone) {
 				padding: 14px 0;
 				width: 100%;
-				
+
 				font-size: 17px;
 				background: $title-color;
 				color: #fff;
 			}
-			
+
 			&:active {
 				background-color: $title-color;
 				color: #fff;
@@ -140,18 +140,18 @@
 		font-weight: 700 !important;
 		background: rgba($title-color, 0.2) !important;
 	}
-	
+
 	.react-datepicker {
 		&__triangle {
 			display: none;
 		}
-		
+
 		&__header {
 			background-color: #fff;
 			border-bottom: none;
 			padding-top: 0;
 		}
-		
+
 		&__navigation {
 			top: 52px;
 
@@ -159,21 +159,21 @@
 				position: fixed;
 				top: 65px;
 			}
-			
+
 			&--previous, &--next {
 				@extend .widget-ui-icon;
 
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				
+
 				height: 30px;
 				width: 30px;
 				border: 1px solid #bbb;
 				border-radius: 50%;
 				color: #bbb !important;
 				font-size: 12px;
-				
+
 				&:before {
 					content: $icon-short-arrow;
 					position: relative;
@@ -214,7 +214,7 @@
 				}
 			}
 		}
-		
+
 		&__month {
 			margin: 5px;
 
@@ -226,7 +226,7 @@
 						display: none;
 					}
 				}
-				
+
 				@include adaptivity(phone) {
 					width: 100%;
 					float: none;
@@ -235,7 +235,7 @@
 				}
 			}
 		}
-		
+
 		&__current {
 			&-month {
 				padding-bottom: 20px;
@@ -246,12 +246,12 @@
 				text-transform: capitalize;
 			}
 		}
-		
+
 		&__week {
 			margin-bottom: 2px;
 			white-space: nowrap;
 		}
-		
+
 		&__day {
 			color: $font-color;
 			position: relative;
@@ -260,17 +260,17 @@
 			line-height: 2.3rem;
 			margin: 0;
 			transition: background 0.2s $transition-function;
-			
+
 			@include adaptivity(phone) {
 				width: 2.8rem;
 				height: 2.5rem;
 				line-height: 2.5rem;
 			}
-			
+
 			&-names {
 				white-space: nowrap;
 			}
-			
+
 			&-name {
 				color: #ccc;
 				font-size: 12px;
@@ -340,7 +340,7 @@
 
 	&__calendar {
 		@extend .widget-ui-icon;
-		
+
 		position: absolute;
 		right: 0;
 		top: 0;
@@ -353,7 +353,7 @@
 		justify-content: center;
 
 		font-size: 17px;
-		color: #B3B3B3;
+		color: #abbdc5;
 		cursor: pointer;
 		pointer-events: none;
 
@@ -364,7 +364,7 @@
 		&:after {
 			content: $icon-calendar;
 		}
-		
+
 		@include adaptivity(phone) {
 			font-size: 15px;
 		}

@@ -18,11 +18,11 @@
 	font-size: 14px;
 	height: 40px;
 	line-height: 40px;
-	
+
 	&:active {
 		border: none;
 	}
-	
+
 	&:focus {
 		box-shadow: none;
 	}
@@ -30,13 +30,15 @@
 
 .btn-primary {
 	background-color: $main-button-color;
-	color: $font-color;
-	
+	// color: $font-color;
+	color: #fbfbfb;
+
 	&:hover {
 		background-color: $main-button-color_hover;
-		color: $font-color;
+		// color: $font-color;
+		color: #fbfbfb;
 	}
-	
+
 	&:active {
 		background-color: $main-button-color_hover;
 	}
@@ -65,7 +67,7 @@
 	&[readonly] {
 		background-color: #fff;
 	}
-	
+
 	&:focus {
 		border-color: #ccc;
 		z-index: 10;

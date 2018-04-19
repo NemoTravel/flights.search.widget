@@ -55,14 +55,14 @@
 
 	&__input:checked + label {
 		&:before {
-			background: #1B75BC;
+			background: #2aabe8;
 		}
 
 		.widget-ui-checkbox__caption {
-			color: #1B75BC;
+			color: #2aabe8;
 
 			&:before {
-				border-color: #1B75BC;
+				border-color: #2aabe8;
 				transform: translateX(20px);
 			}
 		}

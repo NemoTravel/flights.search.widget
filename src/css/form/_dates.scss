@@ -1,11 +1,20 @@
 @import "../variables";
 
 &-dates {
+
+	flex-basis: 50%;
+	display: flex;
+	flex-wrap: wrap;
+
+	@include adaptivity(phone) {
+		flex-basis: 100%;
+	}
+
 	.widget-ui-input {
 		cursor: pointer;
 		padding-right: 35px;
 		-webkit-appearance: none;
-		
+
 		@include adaptivity(phone) {
 			padding-right: 30px;
 		}
@@ -15,16 +24,18 @@
 		position: absolute;
 		width: 100%;
 	}
-	
+
 	&__col.col {
 		position: static;
-		
+
 		&:first-of-type {
-			padding-right: 0.5rem;
+			padding-right: 0;
+			padding-left: 0;
 		}
-		
+
 		&:last-of-type {
-			padding-left: 0.5rem;
+			padding-left: 0;
+			padding-right: 0;
 		}
 	}
 }

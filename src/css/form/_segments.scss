@@ -41,7 +41,7 @@
 
 	&__segment {
 		width: 100%;
-		padding: 0 15px;
+		// padding: 0 15px;
 
 		&__drop {
 			@extend .widget-ui-icon;
@@ -68,6 +68,7 @@
 
 		&:only-child {
 			margin-bottom: 0;
+			display: flex;
 
 			.widget-form-dates {
 				margin-bottom: 0;

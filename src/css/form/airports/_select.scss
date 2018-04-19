@@ -1,7 +1,7 @@
 @import "../../variables";
 
 &__select {
-	// React-select plugin has a shitty CSS styling, 
+	// React-select plugin has a shitty CSS styling,
 	// so we have to do a lot of dirty overwriting.
 	.Select {
 		&-loading {
@@ -21,7 +21,7 @@
 			cursor: pointer;
 			border-radius: 0;
 			height: 40px;
-			border-color: #ccc !important;
+			// border-color: #ccc !important;
 
 			&:hover {
 				box-shadow: none;
@@ -41,7 +41,7 @@
 				font-weight: 600;
 				font-size: 15px;
 				color: #666 !important;
-				
+
 				&[readonly] {
 					cursor: pointer;
 				}
@@ -69,7 +69,7 @@
 
 				border: 1px solid #ccc;
 				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-				background-color: #ffffff;
+				background-color: #fff;
 				//transition: 250ms ease;
 			}
 		}
@@ -91,9 +91,9 @@
 			cursor: pointer;
 
 			&:hover, &.is-focused {
-				background: rgba(0, 76, 186, 0.07);
+				background: #e0eff6;
 			}
-			
+
 			&:last-of-type {
 				@include adaptivity(not-phone) {
 					border-bottom: none;
@@ -123,7 +123,7 @@
 	&__wrapper {
 		position: relative;
 	}
-	
+
 	&__value {
 		position: absolute;
 		left: 0;
@@ -135,13 +135,13 @@
 		align-items: center;
 		padding-left: 13px;
 		white-space: nowrap;
-		
+
 		&__airportName, &__comma {
 			font-weight: 600;
 			font-size: 15px;
 			color: #666;
 		}
-		
+
 		&__countryName {
 			font-weight: 600;
 			font-size: 15px;
@@ -150,7 +150,7 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
-		
+
 		&__placeholder {
 			@extend .Select-placeholder;
 			display: none;
@@ -171,12 +171,12 @@
 					&__placeholder {
 						display: block;
 					}
-					
+
 					&_readOnly {
 						.widget-form-airports__select__value__placeholder {
 							display: none;
 						}
-						
+
 						.widget-form-airports__select__value__airportName,
 						.widget-form-airports__select__value__countryName {
 							display: block;
@@ -195,7 +195,7 @@
 					display: flex;
 					height: $mobile-input-height;
 					line-height: normal;
-					
+
 					.Select-multi-value-wrapper {
 						width: 100%;
 					}
@@ -203,7 +203,7 @@
 					.widget-form-airports__select__value {
 						right: 0;
 					}
-					
+
 					.Select-arrow-zone {
 						display: none;
 					}
@@ -213,7 +213,7 @@
 						display: flex;
 						align-items: center;
 					}
-					
+
 					input {
 						line-height: normal;
 					}
@@ -229,7 +229,7 @@
 			&-menu {
 				&-outer {
 					margin-top: -1px;
-					
+
 					@include adaptivity(phone) {
 						position: fixed;
 						top: $mobile-header-height;
@@ -245,7 +245,7 @@
 					}
 				}
 			}
-			
+
 			&-noresults, &-defaultOptions-hint {
 				@include adaptivity(not-phone) {
 					text-align: left;
@@ -279,7 +279,7 @@
 			}
 		}
 	}
-	
+
 	&_readOnly {
 		.Select-placeholder {
 			cursor: pointer;

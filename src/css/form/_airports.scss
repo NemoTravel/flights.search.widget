@@ -13,11 +13,18 @@
 		}
 	}
 
-	flex-basis: 100%;
-	
+	flex-basis: 50%;
+	display: flex;
+	flex-wrap: wrap;
+
+	@include adaptivity(phone) {
+		flex-basis: 100%;
+		margin-bottom: 1rem;
+	}
+
 	&__header {
 		display: none;
-		
+
 		&_visible {
 			display: block;
 		}
@@ -26,7 +33,7 @@
 			display: none;
 		}
 	}
-	
+
 	&__underlay {
 		display: none;
 		position: fixed;
@@ -34,7 +41,7 @@
 		left: 0;
 		bottom: 0;
 		right: 0;
-		
+
 		background: #fff;
 		max-height: none;
 
@@ -54,7 +61,7 @@
 		line-height: 16px;
 		align-items: center;
 		pointer-events: none;
-		
+
 		color: #B3B3B3;
 		font-weight: 400;
 		font-size: 15px;
@@ -63,11 +70,18 @@
 			right: 35px;
 		}
 	}
-	
+
 	&__col.col {
+
+		max-width: 50%;
+
+		@include adaptivity(phone) {
+			max-width: 100%;
+			flex-basis: 100%;
+		}
+
 		&:first-of-type {
-			padding-right: 0;
-			
+
 			.widget-ui-input__arrow {
 				right: 12px;
 
@@ -75,7 +89,7 @@
 					right: 0;
 				}
 			}
-			
+
 			.widget-form-airports__airportCode {
 				right: 29px;
 
@@ -94,14 +108,12 @@
 		}
 
 		&:last-of-type {
-			padding-left: 0;
+			padding-right: 0;
 
 			.Select-control {
 				@include adaptivity(not-phone) {
-					border-left: none;
-					
-					.Select-placeholder, 
-					.Select-input:not(input), 
+					.Select-placeholder,
+					.Select-input:not(input),
 					.widget-form-airports__select__value {
 						padding-left: 20px !important;
 					}

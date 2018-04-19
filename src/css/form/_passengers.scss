@@ -4,6 +4,7 @@
 	position: relative;
 
 	&.form-group {
+		margin-bottom: 0;
 		@include adaptivity(not-phone) {
 			margin-bottom: 0;
 		}

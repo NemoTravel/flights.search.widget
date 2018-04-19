@@ -9,7 +9,7 @@
 &-form {
 	@import "form/search";
 	@import "form/segments";
-	
+
 	&__pseudoBlocks {
 		text-align: center;
 	}
@@ -28,7 +28,7 @@
 			margin: 10px 0;
 		}
 	}
-	
+
 	&_vertical {
 		.widget-form {
 			&-search {
@@ -82,7 +82,7 @@
 					flex-wrap: wrap;
 				}
 			}
-			
+
 			&-airports {
 				&.row {
 					display: block;
@@ -98,7 +98,7 @@
 
 						.widget-form-airports__airportCode {
 							right: 17px;
-							
+
 							&_withArrow {
 								right: 35px;
 							}
@@ -111,7 +111,7 @@
 							border-top: none;
 							border-left: 1px solid rgba(0, 0, 0, 0.15);
 						}
-						
+
 						.widget-form-airports__select__value,
 						.Select-placeholder {
 							padding-left: 13px !important;
