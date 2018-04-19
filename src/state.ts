@@ -206,13 +206,11 @@ export const dateState: DatepickerState = {
 
 export interface SegmentState {
 	autocomplete: AutocompleteState,
-//	dates: DatesState,
 	date?: DatepickerState
 }
 
 export const segmentState: SegmentState = {
 	autocomplete: autocompleteState,
-//	dates: datesState,
 	date: dateState
 };
 

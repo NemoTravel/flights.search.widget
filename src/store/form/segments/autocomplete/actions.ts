@@ -18,6 +18,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { AutocompleteSuggestion } from '../../../../services/models/AutocompleteSuggestion';
 import { Airport } from '../../../../services/models/Airport';
 import { ResponseWithGuide } from '../../../../services/responses/Guide';
+import { isRT } from "../../selectors";
 
 export interface AutocompleteAction {
 	type: string;
@@ -226,6 +227,16 @@ export const pushAiprortInCache = (dispatch: Dispatch<AutocompleteAction>, getSt
 export const selectAirport = (airport: any, autocompleteType: AutocompleteFieldType, segmentId: number = 0): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		dispatch(setSelectedAirport(airport, autocompleteType, segmentId));
+
+		if (isRT(getState())) {
+			if (autocompleteType === AutocompleteFieldType.Departure) {
+				dispatch(setSelectedAirport(airport, AutocompleteFieldType.Arrival, 1));
+			}
+			else {
+				dispatch(setSelectedAirport(airport, AutocompleteFieldType.Departure, 1));
+			}
+		}
+
 		getDatesAvailability(dispatch, getState);
 		pushAiprortInCache(dispatch, getState, airport);
 	};
@@ -407,6 +418,11 @@ export const swapAirports = (segmentId: number): CommonThunkAction => {
 		if (departureAirport || arrivalAirport) {
 			dispatch(setSelectedAirport(departureAirport, AutocompleteFieldType.Arrival, segmentId));
 			dispatch(setSelectedAirport(arrivalAirport, AutocompleteFieldType.Departure, segmentId));
+
+			if (segmentId === 0 && isRT(getState())) {
+				dispatch(setSelectedAirport(departureAirport, AutocompleteFieldType.Departure, 1));
+				dispatch(setSelectedAirport(arrivalAirport, AutocompleteFieldType.Arrival, 1));
+			}
 			getDatesAvailability(dispatch, getState);
 		}
 	};
