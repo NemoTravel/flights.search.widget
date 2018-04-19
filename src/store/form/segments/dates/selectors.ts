@@ -6,7 +6,7 @@ import { Moment } from 'moment';
 import { isCR, getForm, isRT } from '../../selectors';
 
 const getDepartureAvailableDates = (state: ApplicationState): any => state.form.segments[0].date.availableDates;
-const getReturnDate = (state: ApplicationState): Moment => isRT(state) && state.form.segments.length > 1 ? state.form.segments[1].date.date : null;
+const getReturnDate = (state: ApplicationState): Moment => isRT(state) ? state.form.segments[1].date.date : null;
 const getReturnAvailableDates = (state: ApplicationState): any => state.form.segments[0].date.availableDates;
 const highlightAvailableDates = (state: ApplicationState): boolean => state.system.highlightAvailableDates;
 

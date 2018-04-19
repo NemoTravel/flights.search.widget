@@ -89,7 +89,7 @@ const runWebskySearch = (): void => {
 };
 
 const createSearchInfo = (state: ApplicationState): SearchInfo => {
-	const segments = state.form.segments.map((segment: SegmentState): SearchInfoSegment => {
+	let segments = state.form.segments.map((segment: SegmentState): SearchInfoSegment => {
 		return {
 			departure: {
 				IATA: segment.autocomplete.departure.airport.IATA,
@@ -99,10 +99,16 @@ const createSearchInfo = (state: ApplicationState): SearchInfo => {
 				IATA: segment.autocomplete.arrival.airport.IATA,
 				isCity: !!segment.autocomplete.arrival.airport.isCity
 			},
-			departureDate: segment.dates.departure.date.format(),
-			returnDate: segment.dates.return.date ? segment.dates.return.date.format() : ''
+			departureDate: segment.date.date.format()
 		};
 	});
+
+	if (state.form.routeType === RouteType.OW) {
+		segments = segments.slice(0, 1);
+	}
+	else if (state.form.routeType === RouteType.RT) {
+		segments = segments.slice(0, 2);
+	}
 
 	const passengers: SearchInfoPassenger[] = [];
 

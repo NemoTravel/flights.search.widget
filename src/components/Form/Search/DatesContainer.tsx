@@ -53,6 +53,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 		let returnInitialDate = departureDatepicker.date;
 
 		if (
+			returnDatepicker &&
 			departureDatepicker.date &&
 			returnDatepicker.date &&
 			Math.round(returnDatepicker.date.diff(departureDatepicker.date, 'months', true)) > 1
@@ -85,7 +86,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 			{ !isCR ?
 				<ReturnDatepicker
 					locale={system.locale}
-					date={isRT && segments.length >= 2 ? segments[1].date.date : null}
+					date={isRT ? segments[1].date.date : null}
 					isActive={isRT}
 					openToDate={returnInitialDate}
 					selectDate={datepickerChange}

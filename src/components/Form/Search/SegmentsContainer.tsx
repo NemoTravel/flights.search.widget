@@ -6,11 +6,12 @@ import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import { continueRoute, deleteSegment, SegmentAction } from '../../../store/form/segments/actions';
 import { i18n } from '../../../utils';
 import * as classnames from 'classnames';
-import { isCR } from '../../../store/form/selectors';
+import { isCR, isRT } from '../../../store/form/selectors';
 
 interface StateProps {
 	segments: SegmentState[];
 	isCR: boolean;
+	isRT: boolean;
 }
 
 interface DispatchProps {
@@ -30,7 +31,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 	}
 
 	renderAllSegment(): React.ReactNode {
-		const { segments, isCR, removeSegment } = this.props;
+		const { segments, isCR, isRT, removeSegment } = this.props;
 
 		if (!isCR) {
 			return <Segment
@@ -39,6 +40,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 				removeSegment={removeSegment}
 				canBeRemoved={false}
 				showDatesError={true}
+				returnDate={isRT && segments.length > 1 ? segments[1].date : null}
 			/>;
 		}
 
@@ -49,7 +51,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 				key={index}
 				removeSegment={removeSegment}
 				canBeRemoved={segments.length > 1 && segments.length - 1 === index && isCR}
-				showDatesError={index > 0 && segment.dates.departure.date && segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)}
+				showDatesError={index > 0 && segment.date.date && segment.date.date.isBefore(segments[index - 1].date.date)}
 			/>;
 		});
 	}
@@ -72,7 +74,8 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
 		segments: state.form.segments,
-		isCR: isCR(state)
+		isCR: isCR(state),
+		isRT: isRT(state)
 	};
 };
 

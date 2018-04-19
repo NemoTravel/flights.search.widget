@@ -206,13 +206,13 @@ export const dateState: DatepickerState = {
 
 export interface SegmentState {
 	autocomplete: AutocompleteState,
-	dates: DatesState,
+//	dates: DatesState,
 	date?: DatepickerState
 }
 
 export const segmentState: SegmentState = {
 	autocomplete: autocompleteState,
-	dates: datesState,
+//	dates: datesState,
 	date: dateState
 };
 
@@ -390,27 +390,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 				segments: SegmentState[] = [];
 
 				cashedSegments.map((segment: any, index: number) => {
-					if (segment.dates.departure.date) {
-						const newDateStateDeparture: DatepickerState = {
-							isActive: segment.dates.departure.isActive,
-							availableDates: segment.dates.departure.availableDates,
-							date: moment(segment.dates.departure.date).locale(state.system.locale)
-						};
-
-						segment.dates.departure = newDateStateDeparture;
-					}
-
-					if (segment.dates.return.date) {
-						const newDateStateReturn: DatepickerState = {
-							isActive: segment.dates.return.isActive,
-							availableDates: segment.dates.return.availableDates,
-							date: moment(segment.dates.return.date).locale(state.system.locale)
-						};
-
-						segment.dates.return = newDateStateReturn;
-					}
-
-					if (segment.date) {
+					if (segment.date.date) {
 						const newDateState: DatepickerState = {
 							isActive: segment.date.isActive,
 							availableDates: segment.date.availableDates,

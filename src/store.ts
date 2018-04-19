@@ -42,7 +42,7 @@ const enableReduxLogger = (isEnabled: boolean = false): void => {
 
 /* global process */
 if (process.env.NODE_ENV !== 'production') {
-	enableReduxLogger(false);
+	enableReduxLogger(true);
 	enableProfiler(false);
 }
 
@@ -97,6 +97,10 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(addSegment());
 	}
 
+	if (store.getState().system.defaultReturnDate && store.getState().form.segments.length < 2) {
+		store.dispatch(addSegment());
+	}
+
 	const state = store.getState();
 
 	if (!state.form.segments[0].autocomplete.departure.airport) {
@@ -139,19 +143,19 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
 	}
 
-	if (!state.form.segments[0].dates.return.date) {
-		if (state.system.defaultReturnDate) {
+	if (state.system.defaultReturnDate) {
+		if (!state.form.segments[1].date.date) {
 			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(returnDate, DatepickerFieldType.Return, 0));
+			store.dispatch(selectDate(returnDate, 1));
 		}
 	}
 
-	if (!state.form.segments[0].dates.departure.date) {
+	if (!state.form.segments[0].date.date) {
 		if (state.system.defaultDepartureDate) {
 			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(departureDate, DatepickerFieldType.Departure, 0));
+			store.dispatch(selectDate(departureDate, 0));
 		}
 	}
 

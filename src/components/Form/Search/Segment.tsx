@@ -1,7 +1,7 @@
 import * as React from 'react';
 import AutocompleteContainer from './AutocompleteContainer';
 import DatesContainer from './DatesContainer';
-import { SegmentState } from '../../../state';
+import { DatepickerState, SegmentState } from '../../../state';
 import { SegmentAction } from '../../../store/form/segments/actions';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 	removeSegment: () => SegmentAction;
 	canBeRemoved: boolean;
 	showDatesError: boolean;
+	returnDate?: DatepickerState;
 }
 
 export default class Segment extends React.Component<Props> {
@@ -32,7 +33,7 @@ export default class Segment extends React.Component<Props> {
 	}
 
 	render(): React.ReactNode {
-		const { segment, segmentId, canBeRemoved, showDatesError } = this.props;
+		const { segment, segmentId, returnDate, canBeRemoved, showDatesError } = this.props;
 
 		return <div className="widget-form-segments__segment">
 			<AutocompleteContainer
@@ -43,7 +44,7 @@ export default class Segment extends React.Component<Props> {
 			<DatesContainer
 				segmentId={segmentId}
 				departureDatepicker={segment.date}
-				returnDatepicker={segment.dates.return}
+				returnDatepicker={returnDate}
 				datesIsNotOrder={showDatesError}/>
 
 			{ canBeRemoved ? <div className="widget-form-segments__segment__drop" onClick={this.deleteSegment}></div> : null }

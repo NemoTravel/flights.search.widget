@@ -34,7 +34,7 @@ export const isCR = createSelector(
 
 export const isRT = createSelector(
 	[ getForm ],
-	(config: FormState): boolean => config.routeType === RouteType.RT
+	(config: FormState): boolean => config.routeType === RouteType.RT && config.segments.length > 1
 );
 
 

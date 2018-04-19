@@ -31,14 +31,5 @@ const datesReducer = (state: DatepickerState, { type, payload }: DatepickerActio
 };
 
 export const datesMainReducer = (state: DatepickerState = dateState, action: DatepickerAction): DatepickerState => {
-	if (action.dateType) {
-//		return {
-//			...state,
-//			datesReducer(state[action.dateType], action)
-//		};
-
-		return datesReducer(state, action);
-	}
-
-	return state;
+	return datesReducer(state, action);
 };
