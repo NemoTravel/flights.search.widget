@@ -7,7 +7,6 @@ import * as classnames from 'classnames';
 import Tooltip from './Tooltip';
 import { isIE } from '../../utils';
 import { CommonThunkAction, DatepickerFieldType, RouteType } from '../../state';
-import { SetRouteTypeAction } from "../../store/form/route/actions";
 
 interface Props {
 	date: Moment;

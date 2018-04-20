@@ -20,7 +20,7 @@ import {
 } from './store/form/segments/autocomplete/actions';
 import { addSegment } from './store/form/segments/actions';
 import { selectDate } from './store/form/segments/dates/actions';
-import { setRouteType } from "./store/form/route/actions";
+import { setRouteType } from './store/form/route/actions';
 
 const middlewares = [thunk];
 const STORE_CACHE_KEY = 'cached_store';

@@ -7,7 +7,6 @@ import MobileHeader from '../../UI/MobileHeader';
 import { CommonThunkAction, DatepickerFieldType, Language, RouteType } from '../../../state';
 import { HighlightedDatesGroup } from '../../../store/form/segments/dates/selectors';
 import { i18n } from '../../../utils';
-import { setRouteType, SetRouteTypeAction } from "../../../store/form/route/actions";
 
 interface Props {
 	showErrors?: boolean;

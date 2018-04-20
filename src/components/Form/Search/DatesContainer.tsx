@@ -18,7 +18,7 @@ import {
 } from '../../../store/form/segments/dates/actions';
 import { Moment } from 'moment';
 import { isCR, isRT } from '../../../store/form/selectors';
-import { setRouteType } from "../../../store/form/route/actions";
+import { setRouteType } from '../../../store/form/route/actions';
 
 interface StateProps {
 	system: SystemState;
