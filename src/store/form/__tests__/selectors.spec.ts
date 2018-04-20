@@ -63,7 +63,7 @@ describe('store/form/selectors', () => {
 
 		state.form.segments[0].autocomplete.departure.airport = correctAirport;
 		state.form.segments[0].autocomplete.arrival.airport = anotherCorrectAirport;
-		state.form.segments[0].dates.departure.date = moment();
+		state.form.segments[0].departureDate.date = moment();
 		state.form.passengers[PassengerType.Adult] = {
 			title: null,
 			ageTitle: null,
