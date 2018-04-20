@@ -5,20 +5,20 @@ import { ApplicationState, FormState } from '../../../../state';
 import { Moment } from 'moment';
 import { isCR, getForm, isRT } from '../../selectors';
 
-const getDepartureAvailableDates = (state: ApplicationState): any => state.form.segments[0].date.availableDates;
-const getReturnDate = (state: ApplicationState): Moment => isRT(state) ? state.form.segments[1].date.date : null;
-const getReturnAvailableDates = (state: ApplicationState): any => state.form.segments[0].date.availableDates;
+const getDepartureAvailableDates = (state: ApplicationState): any => state.form.segments[0].departureDate.availableDates;
+const getReturnDate = (state: ApplicationState): Moment => isRT(state) ? state.form.segments[1].departureDate.date : null;
+const getReturnAvailableDates = (state: ApplicationState): any => state.form.segments[0].departureDate.availableDates;
 const highlightAvailableDates = (state: ApplicationState): boolean => state.system.highlightAvailableDates;
 
 const getDepartureDates = createSelector(
 	[getForm, isCR],
 	(form: FormState, isCR: boolean): Moment[] => {
 		if (!isCR) {
-			return [form.segments[0].date.date];
+			return [form.segments[0].departureDate.date];
 		}
 
 		return form.segments.map(segment => {
-			return segment.date.date;
+			return segment.departureDate.date;
 		});
 	}
 );

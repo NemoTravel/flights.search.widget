@@ -38,7 +38,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 			segmentId={0}
 			canBeRemoved={false}
 			showDatesError={true}
-			returnDate={isRT ? segments[1].date : null}
+			returnDate={isRT ? segments[1].departureDate : null}
 		/>;
 	}
 
@@ -52,7 +52,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 				key={index}
 				removeSegment={removeSegment}
 				canBeRemoved={segments.length > 1 && segments.length - 1 === index && isCR}
-				showDatesError={index > 0 && segment.date.date && segment.date.date.isBefore(segments[index - 1].date.date)}
+				showDatesError={index > 0 && segment.departureDate.date && segment.departureDate.date.isBefore(segments[index - 1].departureDate.date)}
 			/>;
 		});
 	}

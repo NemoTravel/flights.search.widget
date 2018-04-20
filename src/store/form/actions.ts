@@ -48,7 +48,7 @@ const nemoFastSearchSegment = (segment: SegmentState): string => {
 	request += segment.autocomplete.arrival.airport.IATA;
 
 	// Departure date info.
-	request += segment.date.date.format('YYYYMMDD');
+	request += segment.departureDate.date.format('YYYYMMDD');
 
 	return request;
 };
@@ -62,7 +62,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 	if (segments.length > 1) {
 		if (isSearchRT(state)) {
 			// Return date info
-			requestURL += segments[1].date.date.format('YYYYMMDD');
+			requestURL += segments[1].departureDate.date.format('YYYYMMDD');
 		}
 		else if (state.form.routeType === RouteType.CR) {
 			segments.forEach((segment, index) => {
@@ -117,7 +117,7 @@ const createSearchInfo = (state: ApplicationState): SearchInfo => {
 				IATA: segment.autocomplete.arrival.airport.IATA,
 				isCity: !!segment.autocomplete.arrival.airport.isCity
 			},
-			departureDate: segment.date.date.format()
+			departureDate: segment.departureDate.date.format()
 		};
 	});
 

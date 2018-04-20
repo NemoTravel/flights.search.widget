@@ -78,7 +78,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 					}
 				}}
 				highlightDates={this.props.getDepartureHighlightedDates}
-				specialDate={isRT ? segments[1].date.date : null}
+				specialDate={isRT ? segments[1].departureDate.date : null}
 				popperPlacement={isCR ? 'top-end' : 'top-start'}
 				segmentId={segmentId}
 			/>
@@ -86,13 +86,13 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 			{ !isCR ?
 				<ReturnDatepicker
 					locale={system.locale}
-					date={isRT ? segments[1].date.date : null}
+					date={isRT ? segments[1].departureDate.date : null}
 					isActive={isRT}
 					openToDate={returnInitialDate}
 					selectDate={datepickerChange}
 					highlightDates={this.props.getReturnHighlightedDates}
 					getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
-					specialDate={segments.length ? segments[0].date.date : null}
+					specialDate={segments.length ? segments[0].departureDate.date : null}
 					popperPlacement="top-end"
 					segmentId={isRT ? 1 : null}
 					setRouteType={setRouteType}

@@ -15,7 +15,7 @@ export interface DatepickerAction {
 	segmentId?: number;
 }
 
-const getDate = (state: ApplicationState, segmentId: number = 0): Moment => state.form.segments[segmentId].date.date;
+const getDate = (state: ApplicationState, segmentId: number = 0): Moment => state.form.segments[segmentId].departureDate.date;
 
 export const selectDate = (date: Moment, segmentId: number = 0): DatepickerAction => {
 	return {

@@ -25,7 +25,7 @@ class WebskyHiddenForm extends React.Component<Props> {
 			return [
 				<input key="1" type="hidden" name="origin-city-code[0]" value={form.segments[0].autocomplete.departure.airport ? form.segments[0].autocomplete.departure.airport.IATA : ''}/>,
 				<input key="2" type="hidden" name="destination-city-code[0]" value={form.segments[0].autocomplete.arrival.airport ? form.segments[0].autocomplete.arrival.airport.IATA : ''}/>,
-				<input key="3" type="hidden" name="date[0]" value={form.segments[0].date.date ? form.segments[0].date.date.format('DD.MM.YYYY') : ''}/>
+				<input key="3" type="hidden" name="date[0]" value={form.segments[0].departureDate.date ? form.segments[0].departureDate.date.format('DD.MM.YYYY') : ''}/>
 			];
 		};
 
@@ -34,7 +34,7 @@ class WebskyHiddenForm extends React.Component<Props> {
 				return [
 					<input key="1" type="hidden" name="origin-city-code[1]" value={form.segments[0].autocomplete.arrival.airport ? form.segments[0].autocomplete.arrival.airport.IATA : ''}/>,
 					<input key="2" type="hidden" name="destination-city-code[1]" value={form.segments[0].autocomplete.departure.airport ? form.segments[0].autocomplete.departure.airport.IATA : ''}/>,
-					<input key="3" type="hidden" name="date[1]" value={form.segments[1].date.date ? form.segments[1].date.date.format('DD.MM.YYYY') : ''}/>
+					<input key="3" type="hidden" name="date[1]" value={form.segments[1].departureDate.date ? form.segments[1].departureDate.date.format('DD.MM.YYYY') : ''}/>
 				];
 			}
 

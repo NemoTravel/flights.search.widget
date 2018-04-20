@@ -144,14 +144,14 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
 	}
 
-	if (state.system.defaultReturnDate && !state.form.segments[1].date.date) {
+	if (state.system.defaultReturnDate && !state.form.segments[1].departureDate.date) {
 		const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
 		store.dispatch(selectDate(returnDate, 1));
 		store.dispatch(setRouteType(RouteType.RT));
 	}
 
-	if (state.system.defaultDepartureDate && !state.form.segments[0].date.date) {
+	if (state.system.defaultDepartureDate && !state.form.segments[0].departureDate.date) {
 		const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
 		store.dispatch(selectDate(departureDate, 0));

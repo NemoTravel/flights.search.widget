@@ -34,7 +34,7 @@ const datesReducer = (state: SegmentState[], action: DatepickerAction): SegmentS
 		if (index === segmentId) {
 			return {
 				...segment,
-				date: datesMainReducer(segment.date, action)
+				departureDate: datesMainReducer(segment.departureDate, action)
 			};
 		}
 		else {

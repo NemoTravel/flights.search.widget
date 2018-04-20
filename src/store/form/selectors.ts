@@ -40,7 +40,7 @@ export const isRT = createSelector(
 const segmentIsValid = (segment: SegmentState): boolean => {
 	let isValid = true;
 
-	if (!segment.date.date) {
+	if (!segment.departureDate.date) {
 		isValid = false;
 	}
 	else if (!segment.autocomplete.departure.airport) {
@@ -91,7 +91,7 @@ export const formIsValid = createSelector(
 			if (isCR) {
 				segments.forEach((segment, index) => {
 					if(segmentIsValid(segment)) {
-						if (index > 0 && segment.date.date.isBefore(segments[index - 1].date.date)) {
+						if (index > 0 && segment.departureDate.date.isBefore(segments[index - 1].departureDate.date)) {
 							isValid = false;
 						}
 					}
@@ -105,7 +105,7 @@ export const formIsValid = createSelector(
 					isValid = false;
 				}
 				if (isRT) {
-					if (segments[1].date.date && segments[1].date.date.isBefore(segments[0].date.date)) {
+					if (segments[1].departureDate.date && segments[1].departureDate.date.isBefore(segments[0].departureDate.date)) {
 						isValid = false;
 					}
 				}

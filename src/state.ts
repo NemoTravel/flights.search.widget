@@ -186,12 +186,12 @@ export const dateState: DatepickerState = {
 
 export interface SegmentState {
 	autocomplete: AutocompleteState,
-	date?: DatepickerState
+	departureDate?: DatepickerState
 }
 
 export const segmentState: SegmentState = {
 	autocomplete: autocompleteState,
-	date: dateState
+	departureDate: dateState
 };
 
 export interface PassengerState {
@@ -370,14 +370,14 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						segment.autocomplete = autocompleteState;
 					}
 
-					if (segment.date.date) {
+					if (segment.departureDate.date) {
 						const newDateState: DatepickerState = {
-							isActive: segment.date.isActive,
-							availableDates: segment.date.availableDates,
-							date: moment(segment.date.date).locale(state.system.locale)
+							isActive: segment.departureDate.isActive,
+							availableDates: segment.departureDate.availableDates,
+							date: moment(segment.departureDate.date).locale(state.system.locale)
 						};
 
-						segment.date = newDateState;
+						segment.departureDate = newDateState;
 					}
 
 					segments.push(segment);
