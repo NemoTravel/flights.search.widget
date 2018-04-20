@@ -30,19 +30,20 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 		this.props.continueRoute();
 	}
 
+	renderFirstSegment(): React.ReactNode {
+		const { segments, isRT } = this.props;
+
+		return <Segment
+			segment={segments[0]}
+			segmentId={0}
+			canBeRemoved={false}
+			showDatesError={true}
+			returnDate={isRT ? segments[1].date : null}
+		/>;
+	}
+
 	renderAllSegment(): React.ReactNode {
 		const { segments, isCR, isRT, removeSegment } = this.props;
-
-		if (!isCR) {
-			return <Segment
-				segment={segments[0]}
-				segmentId={0}
-				removeSegment={removeSegment}
-				canBeRemoved={false}
-				showDatesError={true}
-				returnDate={isRT && segments.length > 1 ? segments[1].date : null}
-			/>;
-		}
 
 		return segments.map((segment: SegmentState, index: number) => {
 			return <Segment
@@ -61,10 +62,10 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 
 		return <div className={classnames('form-group row widget-form-segments', {'widget-form-segments_CR': isCR })}>
 
-			{this.renderAllSegment()}
+			{isCR ? this.renderAllSegment() : this.renderFirstSegment()}
 
 			{isCR && segments.length < MAX_SEGMENTS_COUNT ?
-				<div className="widget-form-search__addSegment" onClick={this.props.continueRoute}>
+				<div className="widget-form-search__addSegment" onClick={continueRoute}>
 					{i18n('form', 'continue_route')}
 				</div> : null}
 		</div>;

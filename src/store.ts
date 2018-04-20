@@ -10,7 +10,7 @@ import { configReducer } from './store/system/reducer';
 import { getTotalPassengersCount } from './store/form/passengers/selectors';
 import {
 	initialState, systemState, fillStateFromCache, ApplicationState, SystemState,
-	AutocompleteFieldType, DatepickerFieldType, ApplicationCachedState, PassengerType
+	AutocompleteFieldType, ApplicationCachedState, PassengerType, RouteType
 } from './state';
 import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from './store/form/additional/actions';
 import {
@@ -20,6 +20,7 @@ import {
 } from './store/form/segments/autocomplete/actions';
 import { addSegment } from './store/form/segments/actions';
 import { selectDate } from './store/form/segments/dates/actions';
+import { setRouteType } from "./store/form/route/actions";
 
 const middlewares = [thunk];
 const STORE_CACHE_KEY = 'cached_store';
@@ -143,20 +144,17 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
 	}
 
-	if (state.system.defaultReturnDate) {
-		if (!state.form.segments[1].date.date) {
-			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
+	if (state.system.defaultReturnDate && !state.form.segments[1].date.date) {
+		const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(returnDate, 1));
-		}
+		store.dispatch(selectDate(returnDate, 1));
+		store.dispatch(setRouteType(RouteType.RT));
 	}
 
-	if (!state.form.segments[0].date.date) {
-		if (state.system.defaultDepartureDate) {
-			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
+	if (state.system.defaultDepartureDate && !state.form.segments[0].date.date) {
+		const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(departureDate, 0));
-		}
+		store.dispatch(selectDate(departureDate, 0));
 	}
 
 	if (getTotalPassengersCount(state) === 0) {

@@ -11,8 +11,8 @@ const getReturnAvailableDates = (state: ApplicationState): any => state.form.seg
 const highlightAvailableDates = (state: ApplicationState): boolean => state.system.highlightAvailableDates;
 
 const getDepartureDates = createSelector(
-	[getForm],
-	(form: FormState): Moment[] => {
+	[getForm, isCR],
+	(form: FormState, isCR: boolean): Moment[] => {
 		if (!isCR) {
 			return [form.segments[0].date.date];
 		}
@@ -32,7 +32,7 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
 	(departureDates?: Moment[], returnDate?: Moment, isCR?: boolean): Moment[] => {
 		let result: Moment[] = [];
 
-		if (isCR && departureDates && departureDates[0]) {
+		if (isCR && departureDates) {
 			let lastDepartureDate: Moment = null;
 
 			departureDates.forEach(date => {
@@ -44,7 +44,7 @@ export const getDatesBetweenDepartureAndReturn = createSelector(
 			result = getIntermediateDates(departureDates[0], lastDepartureDate);
 		}
 		else {
-			if (departureDates && departureDates[0]) {
+			if (departureDates) {
 				if (returnDate) {
 					result = getIntermediateDates(departureDates[0], returnDate, true);
 				}

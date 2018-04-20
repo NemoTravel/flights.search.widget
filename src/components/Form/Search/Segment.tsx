@@ -7,7 +7,7 @@ import { SegmentAction } from '../../../store/form/segments/actions';
 interface Props {
 	segment: SegmentState;
 	segmentId: number;
-	removeSegment: () => SegmentAction;
+	removeSegment?: () => SegmentAction;
 	canBeRemoved: boolean;
 	showDatesError: boolean;
 	returnDate?: DatepickerState;

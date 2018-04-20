@@ -2,8 +2,6 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { ThunkAction } from 'redux-thunk';
 
-import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/form/segments/autocomplete/reducer';
-import { setAvailableDatesReducer } from './store/form/segments/dates/reducer';
 import { AvailableDateResponse } from './services/responses/AvailableDates';
 import { Airport } from './services/models/Airport';
 import { AutocompleteSuggestion } from './services/models/AutocompleteSuggestion';
@@ -177,24 +175,6 @@ export interface DatepickerState {
 	date?: Moment;
 	availableDates: AvailableDateResponse[];
 }
-
-export interface DatesState {
-	departure: DatepickerState;
-	return: DatepickerState;
-}
-
-export const datesState: DatesState = {
-	[DatepickerFieldType.Departure]: {
-		isActive: true,
-		date: null,
-		availableDates: []
-	},
-	[DatepickerFieldType.Return]: {
-		isActive: false,
-		date: null,
-		availableDates: []
-	}
-};
 
 export const dateState: DatepickerState = {
 	isActive: true,
@@ -377,8 +357,6 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 
 		if (stateFromCache.form) {
 
-			const tmpSegment: SegmentState = segmentState;
-
 			if (stateFromCache.form.routeType) {
 				state.form.routeType = stateFromCache.form.routeType;
 			}
@@ -387,7 +365,11 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 				const cashedSegments = stateFromCache.form.segments,
 				segments: SegmentState[] = [];
 
-				cashedSegments.map((segment: any, index: number) => {
+				cashedSegments.map((segment: any) => {
+					if (!canBeProcessed) {
+						segment.autocomplete = autocompleteState;
+					}
+
 					if (segment.date.date) {
 						const newDateState: DatepickerState = {
 							isActive: segment.date.isActive,

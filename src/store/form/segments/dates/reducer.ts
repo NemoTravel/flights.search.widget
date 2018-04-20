@@ -1,5 +1,5 @@
 import { TOGGLE_DATEPICKER, SELECT_DATE, SET_AVAILABLE_DATES } from '../../../actions';
-import { DatepickerFieldType, DatepickerState, DatesState, datesState, dateState } from '../../../../state';
+import { DatepickerFieldType, DatepickerState, dateState } from '../../../../state';
 import { DatepickerAction } from './actions';
 import { Moment } from 'moment';
 

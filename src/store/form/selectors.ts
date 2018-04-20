@@ -37,7 +37,6 @@ export const isRT = createSelector(
 	(config: FormState): boolean => config.routeType === RouteType.RT && config.segments.length > 1
 );
 
-
 const segmentIsValid = (segment: SegmentState): boolean => {
 	let isValid = true;
 

@@ -19,6 +19,24 @@ export const showErrors = (shouldShowErrors: boolean): ShowErrorsAction => {
 	};
 };
 
+/**
+ * Complex route may be as round-trip. Checking it
+ *
+ * @param {ApplicationState} state
+ * @return {boolean}
+ */
+const isSearchRT = (state: ApplicationState): boolean => {
+	const form = state.form;
+
+	return form.routeType === RouteType.RT ||
+		(
+			form.routeType === RouteType.CR &&
+			form.segments.length === 2 &&
+			form.segments[0].autocomplete.arrival.airport.IATA === form.segments[1].autocomplete.departure.airport.IATA &&
+			form.segments[0].autocomplete.departure.airport.IATA === form.segments[1].autocomplete.arrival.airport.IATA
+		);
+};
+
 const nemoFastSearchSegment = (segment: SegmentState): string => {
 	let request = '';
 
@@ -42,7 +60,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 	requestURL += nemoFastSearchSegment(segments[0]);
 
 	if (segments.length > 1) {
-		if (state.form.routeType === RouteType.RT) {
+		if (isSearchRT(state)) {
 			// Return date info
 			requestURL += segments[1].date.date.format('YYYYMMDD');
 		}

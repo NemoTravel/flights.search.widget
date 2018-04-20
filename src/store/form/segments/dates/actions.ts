@@ -27,7 +27,7 @@ export const selectDate = (date: Moment, segmentId: number = 0): DatepickerActio
 	};
 };
 
-export const toggleDatePicker = (isActive: boolean, dateType: DatepickerFieldType, segmentId: number = 0): DatepickerAction => {
+export const toggleDatePicker = (isActive: boolean, dateType: DatepickerFieldType): DatepickerAction => {
 	return {
 		type: TOGGLE_DATEPICKER,
 		dateType,
@@ -37,7 +37,7 @@ export const toggleDatePicker = (isActive: boolean, dateType: DatepickerFieldTyp
 	};
 };
 
-export const setAvailableDates = (availableDates: AvailableDateResponse[], dateType: DatepickerFieldType, segmentId: number = 0): DatepickerAction => {
+export const setAvailableDates = (availableDates: AvailableDateResponse[], dateType: DatepickerFieldType): DatepickerAction => {
 	return {
 		type: SET_AVAILABLE_DATES,
 		dateType,
@@ -52,6 +52,7 @@ export const setAvailableDates = (availableDates: AvailableDateResponse[], dateT
  *
  * @param {Moment|null} date
  * @param {String} dateType
+ * @param {Number} segmentId
  * @returns {Function}
  */
 export const datepickerChange = (date: Moment, dateType: DatepickerFieldType, segmentId: number): CommonThunkAction => {
