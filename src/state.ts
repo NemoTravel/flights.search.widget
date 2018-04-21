@@ -8,6 +8,7 @@ import { AutocompleteSuggestion } from './services/models/AutocompleteSuggestion
 
 export const CLASS_TYPES = ['Economy', 'Business'];
 export const MAX_SEGMENTS_COUNT = 4;
+export const SEGMENTS_COUNT_RT = 2;
 
 export enum ApplicationMode {
 	NEMO = 'NEMO',

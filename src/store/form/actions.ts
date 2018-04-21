@@ -3,7 +3,7 @@ import { SHOW_ERRORS} from '../actions';
 import { formIsValid } from './selectors';
 import {
 	ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState,
-	SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger, RouteType
+	SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger, RouteType, SEGMENTS_COUNT_RT
 } from '../../state';
 import { URL, clearURL } from '../../utils';
 
@@ -31,7 +31,7 @@ const isSearchRT = (state: ApplicationState): boolean => {
 	return form.routeType === RouteType.RT ||
 		(
 			form.routeType === RouteType.CR &&
-			form.segments.length === 2 &&
+			form.segments.length === SEGMENTS_COUNT_RT &&
 			form.segments[0].autocomplete.arrival.airport.IATA === form.segments[1].autocomplete.departure.airport.IATA &&
 			form.segments[0].autocomplete.departure.airport.IATA === form.segments[1].autocomplete.arrival.airport.IATA
 		);
@@ -59,7 +59,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 
 	requestURL += nemoFastSearchSegment(segments[0]);
 
-	if (segments.length > 1) {
+	if (segments.length >= SEGMENTS_COUNT_RT) {
 		if (isSearchRT(state)) {
 			// Return date info
 			requestURL += segments[1].departureDate.date.format('YYYYMMDD');
@@ -67,7 +67,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 		else if (state.form.routeType === RouteType.CR) {
 			segments.forEach((segment, index) => {
 				requestURL += index > 0 ? nemoFastSearchSegment(segment) : '';
-			})
+			});
 		}
 	}
 
@@ -125,7 +125,7 @@ const createSearchInfo = (state: ApplicationState): SearchInfo => {
 		segments = segments.slice(0, 1);
 	}
 	else if (state.form.routeType === RouteType.RT) {
-		segments = segments.slice(0, 2);
+		segments = segments.slice(0, SEGMENTS_COUNT_RT);
 	}
 
 	const passengers: SearchInfoPassenger[] = [];

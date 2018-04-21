@@ -18,7 +18,7 @@ import { AnyAction, Dispatch } from 'redux';
 import { AutocompleteSuggestion } from '../../../../services/models/AutocompleteSuggestion';
 import { Airport } from '../../../../services/models/Airport';
 import { ResponseWithGuide } from '../../../../services/responses/Guide';
-import { isRT } from "../../selectors";
+import { isRT } from '../../selectors';
 
 export interface AutocompleteAction {
 	type: string;

@@ -10,7 +10,7 @@ import { configReducer } from './store/system/reducer';
 import { getTotalPassengersCount } from './store/form/passengers/selectors';
 import {
 	initialState, systemState, fillStateFromCache, ApplicationState, SystemState,
-	AutocompleteFieldType, ApplicationCachedState, PassengerType, RouteType
+	AutocompleteFieldType, ApplicationCachedState, PassengerType, RouteType, SEGMENTS_COUNT_RT
 } from './state';
 import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from './store/form/additional/actions';
 import {
@@ -98,7 +98,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(addSegment());
 	}
 
-	if (store.getState().system.defaultReturnDate && store.getState().form.segments.length < 2) {
+	if (store.getState().system.defaultReturnDate && store.getState().form.segments.length < SEGMENTS_COUNT_RT) {
 		store.dispatch(addSegment());
 	}
 

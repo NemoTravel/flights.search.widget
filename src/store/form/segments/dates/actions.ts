@@ -6,7 +6,7 @@ import {
 } from '../../../../state';
 import { AnyAction, Dispatch } from 'redux';
 import { AvailableDateResponse } from '../../../../services/responses/AvailableDates';
-import { isRT } from "../../selectors";
+import { isRT } from '../../selectors';
 
 export interface DatepickerAction {
 	type: string;
