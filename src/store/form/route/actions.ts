@@ -6,6 +6,7 @@ import {
 } from '../../../state';
 import { addSegment } from '../segments/actions';
 import { setSelectedAirport } from '../segments/autocomplete/actions';
+import { Airport } from "../../../services/models/Airport";
 
 export interface SetRouteTypeAction {
 	type: string,
@@ -19,6 +20,10 @@ export const setRouteTypeAction = (type: RouteType): SetRouteTypeAction => {
 	};
 };
 
+const airportsIsEqual = (airport1: Airport, airport2: Airport): boolean => {
+	return ((airport1 && airport2) && airport1.IATA === airport2.IATA);
+};
+
 export const setRouteType = (newRouteType: RouteType): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		const currentRouteType = getState().form.routeType,
@@ -28,18 +33,18 @@ export const setRouteType = (newRouteType: RouteType): CommonThunkAction => {
 		if (currentRouteType === RouteType.CR && newRouteType === RouteType.OW) {
 			if (
 				segments.length >= SEGMENTS_COUNT_RT &&
-				segments[0].autocomplete.arrival.airport &&
-				segments[1].autocomplete.departure.airport &&
-				segments[0].autocomplete.arrival.airport.IATA === segments[1].autocomplete.departure.airport.IATA &&
-				segments[0].autocomplete.departure.airport.IATA === segments[1].autocomplete.arrival.airport.IATA
+				airportsIsEqual(segments[0].autocomplete.arrival.airport, segments[1].autocomplete.departure.airport) &&
+				airportsIsEqual(segments[0].autocomplete.departure.airport, segments[1].autocomplete.arrival.airport) &&
+				segments[1].departureDate.date
 			) {
 				dispatch(setRouteTypeAction(RouteType.RT));
 
 				return;
 			}
 		}
-		else if (newRouteType === RouteType.RT && segments.length < SEGMENTS_COUNT_RT) {
+		else if ((newRouteType === RouteType.RT || newRouteType === RouteType.CR) && segments.length < SEGMENTS_COUNT_RT) {
 			dispatch(addSegment());
+			dispatch(setSelectedAirport(segments[0].autocomplete.arrival.airport, AutocompleteFieldType.Departure, 1));
 		}
 		else if (currentRouteType === RouteType.RT && newRouteType === RouteType.CR) {
 			dispatch(setSelectedAirport(segments[0].autocomplete.arrival.airport, AutocompleteFieldType.Departure, 1));
