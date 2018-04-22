@@ -6,7 +6,7 @@ import {
 } from '../../../state';
 import { addSegment } from '../segments/actions';
 import { setSelectedAirport } from '../segments/autocomplete/actions';
-import { Airport } from "../../../services/models/Airport";
+import { Airport } from '../../../services/models/Airport';
 
 export interface SetRouteTypeAction {
 	type: string,

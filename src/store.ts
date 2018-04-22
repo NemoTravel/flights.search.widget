@@ -43,7 +43,7 @@ const enableReduxLogger = (isEnabled: boolean = false): void => {
 
 /* global process */
 if (process.env.NODE_ENV !== 'production') {
-	enableReduxLogger(true);
+	enableReduxLogger(false);
 	enableProfiler(false);
 }
 
