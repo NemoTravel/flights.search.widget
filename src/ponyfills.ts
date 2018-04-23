@@ -1,3 +1,5 @@
+import 'promise-polyfill/src/polyfill';
+
 /* tslint:disable */
 (() => {
 	if (!Object.assign) {
