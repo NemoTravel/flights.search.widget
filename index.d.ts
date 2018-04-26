@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { SearchInfo, SystemState } from './src/state';
+import { SearchInfo, SystemState, SearchInfoPassenger, SearchInfoSegment } from './src/state';
 
 export interface ComponentProps extends SystemState {
 	onSearch?: (params: SearchInfo) => void;
 }
 
-export { SearchInfo };
+export { SearchInfo, SearchInfoPassenger, SearchInfoSegment };
 
 export const init: (config: any) => void;
 export const initDemo: () => void;
