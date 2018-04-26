@@ -20,7 +20,7 @@ export const setRouteTypeAction = (type: RouteType): SetRouteTypeAction => {
 	};
 };
 
-const airportsIsEqual = (airport1: Airport, airport2: Airport): boolean => {
+const airportsAreEqual = (airport1: Airport, airport2: Airport): boolean => {
 	return ((airport1 && airport2) && airport1.IATA === airport2.IATA);
 };
 
@@ -33,8 +33,8 @@ export const setRouteType = (newRouteType: RouteType): CommonThunkAction => {
 		if (currentRouteType === RouteType.CR && newRouteType === RouteType.OW) {
 			if (
 				segments.length >= SEGMENTS_COUNT_RT &&
-				airportsIsEqual(segments[0].autocomplete.arrival.airport, segments[1].autocomplete.departure.airport) &&
-				airportsIsEqual(segments[0].autocomplete.departure.airport, segments[1].autocomplete.arrival.airport) &&
+				airportsAreEqual(segments[0].autocomplete.arrival.airport, segments[1].autocomplete.departure.airport) &&
+				airportsAreEqual(segments[0].autocomplete.departure.airport, segments[1].autocomplete.arrival.airport) &&
 				segments[1].departureDate.date
 			) {
 				dispatch(setRouteTypeAction(RouteType.RT));

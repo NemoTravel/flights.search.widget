@@ -47,18 +47,24 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 	protected returnInput: HTMLInputElement = null;
 
 	render(): React.ReactNode {
-		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, isCR, isRT, segmentId, datesIsNotOrder, setRouteType, segments } = this.props;
+		const { departureDatepicker, system, showErrors, datepickerChange, isCR, isRT, segmentId, datesIsNotOrder, setRouteType, segments } = this.props;
 		const DATEPICKER_SWITCH_DELAY = 20;
 
-		let returnInitialDate = departureDatepicker.date;
+		let initialDate = departureDatepicker.date;
 
-		if (
-			returnDatepicker &&
-			departureDatepicker.date &&
-			returnDatepicker.date &&
-			Math.round(returnDatepicker.date.diff(departureDatepicker.date, 'months', true)) > 1
-		) {
-			returnInitialDate = returnDatepicker.date;
+		if (segmentId >= 1 || isRT) {
+			const firstDate = segments[0].departureDate.date;
+			const currDate = segments[isRT ? 1 : segmentId].departureDate.date;
+
+			initialDate = prevDate;
+
+			if (
+				firstDate &&
+				currDate &&
+				Math.round(currDate.diff(firstDate, 'months', true)) > 1
+			) {
+				initialDate = currDate;
+			}
 		}
 
 		return <div className="form-group row widget-form-dates">
@@ -78,9 +84,10 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 					}
 				}}
 				highlightDates={this.props.getDepartureHighlightedDates}
-				specialDate={isRT ? segments[1].departureDate.date : null}
+				specialDate={isRT ? segments[1].departureDate.date : segments[segmentId].departureDate.date}
 				popperPlacement={isCR ? 'top-end' : 'top-start'}
 				segmentId={segmentId}
+				openToDate={isCR ? initialDate : null}
 			/>
 
 			{ !isCR ?
@@ -88,11 +95,11 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 					locale={system.locale}
 					date={isRT ? segments[1].departureDate.date : null}
 					isActive={isRT}
-					openToDate={returnInitialDate}
+					openToDate={initialDate}
 					selectDate={datepickerChange}
 					highlightDates={this.props.getReturnHighlightedDates}
 					getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
-					specialDate={segments.length ? segments[0].departureDate.date : null}
+					specialDate={isRT ? segments[0].departureDate.date : null}
 					popperPlacement="top-end"
 					segmentId={isRT ? 1 : null}
 					setRouteType={setRouteType}

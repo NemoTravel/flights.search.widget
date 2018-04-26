@@ -363,10 +363,9 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 			}
 
 			if (stateFromCache.form.segments) {
-				const cashedSegments = stateFromCache.form.segments,
-				segments: SegmentState[] = [];
+				const cachedSegments = stateFromCache.form.segments;
 
-				cashedSegments.map((segment: any) => {
+				const segments = cachedSegments.map((segment) => {
 					if (!canBeProcessed) {
 						segment.autocomplete = autocompleteState;
 					}
@@ -381,7 +380,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 						segment.departureDate = newDateState;
 					}
 
-					segments.push(segment);
+					return segment;
 				});
 
 				state.form.segments = segments;
