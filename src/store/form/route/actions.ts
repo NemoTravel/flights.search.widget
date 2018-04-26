@@ -24,33 +24,56 @@ const airportsAreEqual = (airport1: Airport, airport2: Airport): boolean => {
 	return ((airport1 && airport2) && airport1.IATA === airport2.IATA);
 };
 
+const setSimpleRoute = (getState: GetStateFunction, dispatch: Dispatch<AnyAction>): void => {
+	const segments = getState().form.segments;
+
+	if (
+		segments.length >= SEGMENTS_COUNT_RT &&
+		airportsAreEqual(segments[0].autocomplete.arrival.airport, segments[1].autocomplete.departure.airport) &&
+		airportsAreEqual(segments[0].autocomplete.departure.airport, segments[1].autocomplete.arrival.airport) &&
+		segments[1].departureDate.date
+	) {
+		dispatch(setRouteTypeAction(RouteType.RT));
+	}
+	else {
+		dispatch(setRouteTypeAction(RouteType.OW));
+	}
+};
+
 export const setRouteType = (newRouteType: RouteType): CommonThunkAction => {
 	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
 		const currentRouteType = getState().form.routeType,
 					  segments = getState().form.segments;
 
-		// back from complex route mode
-		if (currentRouteType === RouteType.CR && newRouteType === RouteType.OW) {
-			if (
-				segments.length >= SEGMENTS_COUNT_RT &&
-				airportsAreEqual(segments[0].autocomplete.arrival.airport, segments[1].autocomplete.departure.airport) &&
-				airportsAreEqual(segments[0].autocomplete.departure.airport, segments[1].autocomplete.arrival.airport) &&
-				segments[1].departureDate.date
-			) {
-				dispatch(setRouteTypeAction(RouteType.RT));
-
-				return;
+		if (newRouteType === RouteType.OW) {
+			if (currentRouteType === RouteType.RT) {
+				dispatch(setRouteTypeAction(RouteType.OW));
+			}
+			else if (currentRouteType === RouteType.CR) {
+				setSimpleRoute(getState, dispatch);
 			}
 		}
-		else if ((newRouteType === RouteType.RT || newRouteType === RouteType.CR) && segments.length < SEGMENTS_COUNT_RT) {
-			dispatch(addSegment());
-			dispatch(setSelectedAirport(segments[0].autocomplete.arrival.airport, AutocompleteFieldType.Departure, 1));
-		}
-		else if (currentRouteType === RouteType.RT && newRouteType === RouteType.CR) {
-			dispatch(setSelectedAirport(segments[0].autocomplete.arrival.airport, AutocompleteFieldType.Departure, 1));
-			dispatch(setSelectedAirport(segments[0].autocomplete.departure.airport, AutocompleteFieldType.Arrival, 1));
+
+		else if (newRouteType === RouteType.RT) {
+			if (segments.length < SEGMENTS_COUNT_RT) {
+				dispatch(addSegment());
+			}
+
+			dispatch(setRouteTypeAction(RouteType.RT));
 		}
 
-		dispatch(setRouteTypeAction(newRouteType));
+		else if (newRouteType === RouteType.CR) {
+			if (segments.length < 2) {
+				dispatch(addSegment());
+				dispatch(setSelectedAirport(segments[0].autocomplete.arrival.airport, AutocompleteFieldType.Departure, 1));
+			}
+
+			if (currentRouteType === RouteType.RT) {
+				dispatch(setSelectedAirport(segments[0].autocomplete.arrival.airport, AutocompleteFieldType.Departure, 1));
+				dispatch(setSelectedAirport(segments[0].autocomplete.departure.airport, AutocompleteFieldType.Arrival, 1));
+			}
+
+			dispatch(setRouteTypeAction(RouteType.CR));
+		}
 	};
 };

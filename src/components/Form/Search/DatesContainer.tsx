@@ -56,7 +56,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 			const firstDate = segments[0].departureDate.date;
 			const currDate = segments[isRT ? 1 : segmentId].departureDate.date;
 
-			initialDate = prevDate;
+			initialDate = firstDate;
 
 			if (
 				firstDate &&
