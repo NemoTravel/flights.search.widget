@@ -1,6 +1,6 @@
 import { AnyAction, Dispatch } from 'redux';
 import { SHOW_ERRORS} from '../actions';
-import { formIsValid } from './selectors';
+import { formIsValid, getSearchInfo } from './selectors';
 import {
 	ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState,
 	SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger
@@ -76,41 +76,6 @@ const runWebskySearch = (): void => {
 	}
 };
 
-const createSearchInfo = (state: ApplicationState): SearchInfo => {
-	const segments = state.form.segments.map((segment: SegmentState): SearchInfoSegment => {
-		return {
-			departure: {
-				IATA: segment.autocomplete.departure.airport.IATA,
-				isCity: !!segment.autocomplete.departure.airport.isCity
-			},
-			arrival: {
-				IATA: segment.autocomplete.arrival.airport.IATA,
-				isCity: !!segment.autocomplete.arrival.airport.isCity
-			},
-			departureDate: segment.dates.departure.date.format(),
-			returnDate: segment.dates.return.date ? segment.dates.return.date.format() : ''
-		};
-	});
-
-	const passengers: SearchInfoPassenger[] = [];
-
-	for (const passType in state.form.passengers) {
-		if (state.form.passengers.hasOwnProperty(passType)) {
-			passengers.push({
-				type: state.form.passengers[passType].code,
-				count: state.form.passengers[passType].count
-			});
-		}
-	}
-
-	return {
-		segments,
-		passengers,
-		routeType: state.form.routeType,
-		serviceClass: state.form.additional.classType
-	};
-};
-
 /**
  * Starting search:
  * - run validation
@@ -125,7 +90,7 @@ export const startSearch = (onSearch?: OnSearchFunction): CommonThunkAction => {
 
 		if (formIsValid(state)) {
 			if (typeof onSearch === 'function') {
-				onSearch(createSearchInfo(state));
+				onSearch(getSearchInfo(state));
 			}
 			else if (state.system.mode === ApplicationMode.NEMO) {
 				runNemoSearch(state);

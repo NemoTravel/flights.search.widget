@@ -3,7 +3,7 @@ import { getTotalPassengersCount } from './passengers/selectors';
 import { getAltLayout, i18n } from '../../utils';
 import {
 	ApplicationMode, ApplicationState, AutocompleteDefaultGroupsState, AutocompleteFieldState,
-	FormState, RouteType, SystemState
+	FormState, RouteType, SearchInfo, SearchInfoPassenger, SearchInfoSegment, SegmentState, SystemState
 } from '../../state';
 import { AutocompleteSuggestion } from '../../services/models/AutocompleteSuggestion';
 import { AutocompleteOption } from '../../services/models/AutocompleteOption';
@@ -30,6 +30,44 @@ export const getForm = (state: ApplicationState): FormState => state.form;
 export const isCR = createSelector(
 	[ getForm ],
 	(config: FormState): boolean => config.routeType === RouteType.CR
+);
+
+export const getSearchInfo = createSelector(
+	[ getForm ],
+	(form: FormState): SearchInfo => {
+		const segments = form.segments.map((segment: SegmentState): SearchInfoSegment => {
+			return {
+				departure: {
+					IATA: segment.autocomplete.departure.airport.IATA,
+					isCity: !!segment.autocomplete.departure.airport.isCity
+				},
+				arrival: {
+					IATA: segment.autocomplete.arrival.airport.IATA,
+					isCity: !!segment.autocomplete.arrival.airport.isCity
+				},
+				departureDate: segment.dates.departure.date.format(),
+				returnDate: segment.dates.return.date ? segment.dates.return.date.format() : ''
+			};
+		});
+
+		const passengers: SearchInfoPassenger[] = [];
+
+		for (const passType in form.passengers) {
+			if (form.passengers.hasOwnProperty(passType)) {
+				passengers.push({
+					type: form.passengers[passType].code,
+					count: form.passengers[passType].count
+				});
+			}
+		}
+
+		return {
+			segments,
+			passengers,
+			routeType: form.routeType,
+			serviceClass: form.additional.classType
+		};
+	}
 );
 
 /**
