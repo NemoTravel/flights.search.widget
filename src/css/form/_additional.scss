@@ -16,6 +16,10 @@
 		@include adaptivity(phone) {
 			display: block;
 		}
+
+		&_nemo {
+			display: none;
+		}
 	}
 
 	label {

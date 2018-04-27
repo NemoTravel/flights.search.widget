@@ -57,7 +57,7 @@ class Dropdown extends React.PureComponent<DropdownProps, State> {
 		};
 
 		return <div className="widget-ui-dropdown">
-			<div className="widget-ui-dropdown__trigger" {...triggerProps}>{triggerElement}</div>
+			<div className={`widget-ui-dropdown__trigger${isVisible ? ' widget-ui-dropdown__trigger_open' : ''}`} {...triggerProps}>{triggerElement}</div>
 			<div className={`widget-ui-dropdown__content${isVisible ? '' : ' widget-ui-dropdown__content_hidden'}`}>
 				{contentElement}
 			</div>

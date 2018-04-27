@@ -16,6 +16,8 @@ import {
 import { setRouteType } from '../../../store/form/route/actions';
 import { isCR } from '../../../store/form/selectors';
 
+import UIDropdown from '../../UI/Dropdown';
+
 interface StateProps {
 	vicinityDatesSelect: boolean;
 	directFlightSelect: boolean;
@@ -78,6 +80,34 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 		/>;
 	}
 
+	renderDropdownTrigger(): React.ReactNode {
+		return (
+			<div className="widget-ui-select__toggle">{i18n('form', 'moreOptions')}</div>
+		);
+	}
+
+	renderDropdownContent(): React.ReactNode {
+		const { isCR } = this.props;
+
+		return (
+			<div className="widget-ui-select__dropdown">
+				{!isCR ? this.renderVicinityDates() : null}
+				{this.renderDirect()}
+			</div>
+		);
+	}
+
+	renderSelect(): JSX.Element {
+		return (
+			<div className="widget-ui-select">
+					<UIDropdown
+						triggerElement={this.renderDropdownTrigger()}
+						contentElement={this.renderDropdownContent()}
+					/>
+			</div>
+		);
+	}
+
 	render(): React.ReactNode {
 		const { widgetMode, isCR } = this.props;
 
@@ -85,6 +115,10 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 			<div className="widget-form-additionalOptions__checkboxes">
 				{!isCR ? this.renderVicinityDates() : null}
 				{this.renderDirect()}
+			</div>
+			
+			<div className="widget-form-additionalOptions__checkboxes widget-form-additionalOptions__checkboxes_nemo">
+				{this.renderSelect()}
 			</div>
 
 			<div className={classnames('widget-form__routeTypeSwitch', { 'widget-form__routeTypeSwitch_toCR': !isCR }, { 'widget-form__routeTypeSwitch_toOW': isCR })}>
