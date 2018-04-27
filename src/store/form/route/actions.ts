@@ -63,7 +63,7 @@ export const setRouteType = (newRouteType: RouteType): CommonThunkAction => {
 		}
 
 		else if (newRouteType === RouteType.CR) {
-			if (segments.length < 2) {
+			if (segments.length < SEGMENTS_COUNT_RT) {
 				dispatch(addSegment());
 				dispatch(setSelectedAirport(segments[0].autocomplete.arrival.airport, AutocompleteFieldType.Departure, 1));
 			}

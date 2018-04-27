@@ -365,7 +365,7 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 			if (stateFromCache.form.segments) {
 				const cachedSegments = stateFromCache.form.segments;
 
-				const segments = cachedSegments.map((segment) => {
+				const segments = cachedSegments.map(segment => {
 					if (!canBeProcessed) {
 						segment.autocomplete = autocompleteState;
 					}
