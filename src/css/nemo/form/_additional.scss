@@ -11,13 +11,13 @@
 	display: flex;
 
 	&__checkboxes {
-		display: flex;
 		flex-wrap: nowrap;
 		display: none;
 
 		&_nemo {
 			display: block;
 		}
+
 		@include adaptivity(desktop) {
 			margin-right: calc(100px + 1.5rem);
 
@@ -25,18 +25,18 @@
 				margin-right: 0;
 			}
 		}
+
 		@include adaptivity(tablet) {
 			width: 100%;
 		}
-		@include adaptivity(phone) {
-			// display: block;
-		}
 	}
+
 	@include adaptivity(desktop) {
 		flex-direction: row-reverse;
 		justify-content: space-between;
 		padding-left: 30px;
 	}
+
 	@include adaptivity(tablet) {
 		position: relative;
 		height: 40px;
@@ -44,10 +44,12 @@
 		left: 0;
 		margin-bottom: 0 !important;
 	}
+
 	@include adaptivity(phone) {
 		height: auto;
 		display: block;
 	}
+
 	.widget-ui-select {
 		width: 200px;
 		position: relative;

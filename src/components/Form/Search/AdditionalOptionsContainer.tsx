@@ -15,7 +15,6 @@ import {
 } from '../../../store/form/additional/actions';
 import { setRouteType } from '../../../store/form/route/actions';
 import { isCR } from '../../../store/form/selectors';
-
 import UIDropdown from '../../UI/Dropdown';
 
 interface StateProps {
@@ -97,13 +96,13 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 		);
 	}
 
-	renderSelect(): JSX.Element {
+	renderSelect(): React.ReactNode {
 		return (
 			<div className="widget-ui-select">
-					<UIDropdown
-						triggerElement={this.renderDropdownTrigger()}
-						contentElement={this.renderDropdownContent()}
-					/>
+				<UIDropdown
+					triggerElement={this.renderDropdownTrigger()}
+					contentElement={this.renderDropdownContent()}
+				/>
 			</div>
 		);
 	}
@@ -116,7 +115,7 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 				{!isCR ? this.renderVicinityDates() : null}
 				{this.renderDirect()}
 			</div>
-			
+
 			<div className="widget-form-additionalOptions__checkboxes widget-form-additionalOptions__checkboxes_nemo">
 				{this.renderSelect()}
 			</div>
