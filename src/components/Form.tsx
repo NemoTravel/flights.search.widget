@@ -53,7 +53,7 @@ const mapStateToProps = (state: ApplicationState, ownProps: OwnProps): OwnProps 
 	};
 };
 
-const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
+const mapActionsToProps = (dispatch: Dispatch<AnyAction, any>): DispatchProps => {
 	return {
 		startSearch: bindActionCreators(startSearchAction, dispatch)
 	};

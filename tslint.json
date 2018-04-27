@@ -64,7 +64,7 @@
 		"prefer-object-spread": true,
 		"restrict-plus-operands": true,
 		"triple-equals": true,
-		"use-default-type-parameter": true,
+		"use-default-type-parameter": false,
 		"use-isnan": true,
 		"eofline": true,
 		"indent": [true, "tabs", 4],

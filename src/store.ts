@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStore, applyMiddleware, Store } from 'redux';
+import { createStore, applyMiddleware, Store, AnyAction } from 'redux';
 import thunk from 'redux-thunk';
 import * as moment from 'moment';
 
@@ -62,7 +62,9 @@ export const getCachedState = (): ApplicationCachedState => {
  */
 export const cacheState = (state: ApplicationState): void => {
 	if (!state.system.disableCaching) {
-		Cache.set(`${STORE_CACHE_KEY}_${Cache.getLocale()}_${process.env.VERSION}`, state);
+		const newState: ApplicationState = { ...state, system: { ...state.system, rootElement: null } };
+
+		Cache.set(`${STORE_CACHE_KEY}_${Cache.getLocale()}_${process.env.VERSION}`, newState);
 	}
 };
 
@@ -87,7 +89,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 
 	// Thunk middleware allows us to create functions instead of plain objects in action-creators (for async purposes).
 	// @see https://github.com/gaearon/redux-thunk#motivation
-	const store = createStore<ApplicationState>(
+	const store = createStore<ApplicationState, AnyAction, any, any>(
 		rootReducer,
 		preloadedState,
 		applyMiddleware(...middlewares)

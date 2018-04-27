@@ -106,7 +106,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 	};
 };
 
-const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
+const mapActionsToProps = (dispatch: Dispatch<AnyAction, any>): DispatchProps => {
 	return {
 		setClassType: bindActionCreators(setClassType, dispatch),
 		vicinityDatesAction: bindActionCreators(vicinityDatesAction, dispatch),

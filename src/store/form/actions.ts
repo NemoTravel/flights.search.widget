@@ -85,7 +85,7 @@ const runWebskySearch = (): void => {
  * @param onSearch
  */
 export const startSearch = (onSearch?: OnSearchFunction): CommonThunkAction => {
-	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
+	return (dispatch, getState): void => {
 		const state = getState();
 
 		if (formIsValid(state)) {

@@ -64,7 +64,7 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 	};
 };
 
-const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
+const mapActionsToProps = (dispatch: Dispatch<AnyAction, any>): DispatchProps => {
 	return {
 		addPassenger: bindActionCreators(addPassenger, dispatch),
 		removePassenger: bindActionCreators(removePassenger, dispatch),
