@@ -76,14 +76,15 @@
 
 	&__startButton.btn-primary {
 		color: #fff;
-		font-size: 18px;
 		line-height: 40px;
-		box-shadow: 0 4px 8px 0 rgba(93, 134, 41, .5), inset 0 1px 2px 0 #b8dc8b;
 		background-color: $main-button-color;
-		font-weight: normal;
 		padding: 0 15px;
-		border-radius: 4px;
 		transition: background .1s ease-in;
+		border-radius: 0;
+		box-shadow: 0 4px 8px 0 rgba(93, 134, 41, .5);
+		text-transform: uppercase;
+		font-size: 0.875rem;
+		font-weight: 600;
 
 		&:hover {
 			color: #fff;
@@ -92,7 +93,11 @@
 
 		&:active {
 			background: $main-button-color_hover !important;
-			box-shadow: 0 4px 8px 0 rgba(93, 134, 41, .5), inset 0 1px 2px 0 #b8dc8b !important;
+			box-shadow: 0 4px 8px 0 rgba(93, 134, 41, .5) !important;
+		}
+
+		&:focus {
+			box-shadow: 0 4px 8px 0 rgba(93, 134, 41, .5) !important;
 		}
 	}
 
