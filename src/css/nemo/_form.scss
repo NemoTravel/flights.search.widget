@@ -68,7 +68,7 @@
 		@include adaptivity(tablet) {
 			position: absolute;
 			left: 0;
-			top: 60px;
+			top: 65px;
 			margin-left: calc(-1rem - 100%);
 		}
 
@@ -216,6 +216,15 @@
 				z-index: 1;
 				margin-bottom: 1rem !important;
 				padding-left: 0;
+
+				&__checkboxes {
+					margin-bottom: 1rem;
+					margin-right: 0;
+
+					.widget-ui-select {
+						width: 100%;
+					}
+				}
 			}
 
 			&__routeTypeSwitch {
@@ -223,7 +232,6 @@
 				margin: 0;
 				display: inline-block;
 				width: 100%;
-				padding-top: 10px;
 
 				@include adaptivity(tablet) {
 					top: 0;
