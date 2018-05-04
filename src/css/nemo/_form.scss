@@ -115,6 +115,10 @@
 				&__startButton {
 					width: 100%;
 				}
+
+				&__addSegment {
+					margin-top: -1rem;
+				}
 			}
 
 			&-dates {
@@ -161,12 +165,19 @@
 
 				&_CR {
 					.widget-form-segments__segment {
-						padding-left: 20px;
 						margin-left: 0;
 						margin-bottom: 2rem;
 
 						&__drop {
-							margin-left: -10px;
+							height: 20px;
+							width: 20px;
+							margin-left: -1rem;
+							top: 5px;
+
+							&:before {
+								line-height: 20px;
+								font-size: 9px;
+							}
 						}
 					}
 
