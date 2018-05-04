@@ -14,6 +14,10 @@
 		flex-wrap: nowrap;
 		display: none;
 
+		@include adaptivity(phone) {
+			margin-bottom: 0.625rem;
+		}
+
 		&_nemo {
 			display: block;
 		}
@@ -53,6 +57,10 @@
 	.widget-ui-select {
 		width: 200px;
 		position: relative;
+
+		@include adaptivity(tablet) {
+			width: auto;
+		}
 
 		&__toggle {
 			display: block;
