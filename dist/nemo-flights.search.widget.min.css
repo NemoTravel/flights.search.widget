@@ -1299,6 +1299,9 @@
 
 .widget-form_vertical .widget-form-segments_CR .widget-form-segments__segment__drop {
   margin-left: -10px;
+  left: 0;
+  right: auto;
+  margin-top: 5px;
 }
 
 .widget-form_vertical .widget-form-segments_CR .widget-form-dates__col:only-child {
@@ -1344,14 +1347,19 @@
 
 .widget-form_vertical .widget-form__routeTypeSwitch {
   position: relative;
-  margin: 0;
   display: inline-block;
   width: 100%;
-  padding-top: 10px;
+  margin: 1rem 0 0;
 }
 
 @media only screen and (max-width: 1100px) {
   .widget-form_vertical .widget-form__routeTypeSwitch {
     top: 0;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form_vertical .widget-form__routeTypeSwitch {
+    margin-top: 0;
   }
 }
