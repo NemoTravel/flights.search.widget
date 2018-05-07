@@ -31,9 +31,14 @@
 					min-width: 0;
 				}
 			}
-			
+
+			@include adaptivity(not-phone) {
+				position: static;
+			}
+
 			@include adaptivity(phone) {
 				flex: 100%;
+				position: relative;
 			}
 		}
 	}

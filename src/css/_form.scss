@@ -15,8 +15,10 @@
 	}
 
 	&__routeTypeSwitch {
-		display: none;
-		padding-right: 10px;
+		position: absolute;
+		left: 0;
+		margin-top: 55px;
+		margin-left: 1rem;
 		font-weight: 600;
 		font-size: 13px;
 
@@ -25,7 +27,8 @@
 		}
 
 		@include adaptivity(phone) {
-			margin: 10px 0;
+			margin: 0 0 10px;
+			position: relative;
 		}
 	}
 	
