@@ -20,7 +20,7 @@
 		margin-top: 55px;
 		margin-left: 1rem;
 		font-weight: 600;
-		font-size: 13px;
+		font-size: 15px;
 
 		span {
 			cursor: pointer;
@@ -66,11 +66,22 @@
 				}
 
 				&__addSegment {
-					margin: 0;
+					margin: -1rem 0 0;
 				}
 
 				&__startButton {
 					width: 100%;
+				}
+			}
+
+			&__routeTypeSwitch {
+				margin: 1rem 0 0;
+				position: relative;
+				width: 100%;
+
+				@include adaptivity(phone) {
+					margin-top: 0;
+					margin-bottom: 1rem;
 				}
 			}
 
@@ -94,11 +105,26 @@
 
 				&_CR {
 					margin-bottom: 1rem;
+
+					.widget-form-dates {
+						margin-right: 0;
+						margin-left: 0;
+					}
+
+					.widget-form-segments__segment {
+						margin-bottom: 1rem;
+					}
 				}
 
 				&__segment {
 					padding: 0;
 					flex-wrap: wrap;
+
+					&__drop {
+						left: auto;
+						right: 0;
+						margin-top: 25px;
+					}
 				}
 			}
 			
@@ -149,6 +175,16 @@
 					left: auto;
 					transform: rotate(90deg);
 					top: -12px;
+				}
+			}
+
+			&-additionalOptions {
+				flex-wrap: wrap;
+				min-height: 40px;
+				height: auto;
+
+				&__checkboxes {
+					width: 100%;
 				}
 			}
 		}
