@@ -1100,6 +1100,10 @@
   }
 }
 
+.widget-form-segments__segment .widget-form-airports__col:first-of-type {
+  padding-right: 0 !important;
+}
+
 @media only screen and (max-width: 1100px) {
   .widget-form-segments__segment {
     padding: 0;
@@ -1123,6 +1127,10 @@
 @media only screen and (max-width: 1100px) {
   .widget-form-segments_CR {
     margin-bottom: 1rem !important;
+  }
+
+  .widget-form-segments_CR .widget-form-segments__segment {
+    margin-bottom: 0;
   }
 }
 
@@ -1162,6 +1170,7 @@
   margin-left: 0;
   margin-top: 0;
   bottom: 0;
+  height: 18px;
   z-index: 1;
   white-space: nowrap;
 }

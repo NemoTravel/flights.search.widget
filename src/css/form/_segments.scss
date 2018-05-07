@@ -31,6 +31,20 @@
 				right: 17px;
 			}
 
+			@include adaptivity(not-phone) {
+				.widget-form-airports__col {
+					&:first-of-type {
+						padding-right: 1rem;
+					}
+
+					&:last-of-type {
+						.Select-control {
+							border-left: 1px solid;
+						}
+					}
+				}
+			}
+
 			@include adaptivity(phone) {
 				margin-bottom: 1rem;
 				padding-right: 0;

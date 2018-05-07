@@ -57,7 +57,7 @@
 		width: 100%;
 
 		@include adaptivity(phone) {
-			margin: 0;
+			margin: -1rem 0 0;
 		}
 	}
 	
