@@ -40,27 +40,18 @@
 		}
 
 		&_toCR {
-			&:before {
-				content: ' ';
-				background: url(images/cr.svg) no-repeat center center;
-				background-size: 20px;
-				display: inline-block;
-				width: 20px;
-				height: 11px;
-				margin-right: 5px;
+			background: url(images/cr.svg) no-repeat left center;
+			background-size: 20px;
+
+			span {
+				padding-left: 25px;
 			}
 		}
 
 		&_toOW {
-			&:before {
-				content: ' ';
-				background: url(images/ow.svg) no-repeat center center;
-				background-size: 25px;
-				display: inline-block;
-				width: 20px;
-				height: 13px;
-				margin-top: 3px;
-			}
+			background: url(images/ow.svg) no-repeat left center;
+			background-size: 20px;
+
 		}
 
 		@include adaptivity(desktop) {

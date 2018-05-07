@@ -24,6 +24,22 @@
 
 		span {
 			cursor: pointer;
+			padding-left: 20px;
+		}
+
+		&_toCR {
+			background: url(images/cr.svg) no-repeat left center;
+			background-size: 20px;
+
+			span {
+				padding-left: 25px;
+			}
+		}
+
+		&_toOW {
+			background: url(images/ow.svg) no-repeat left center;
+			background-size: 20px;
+
 		}
 
 		@include adaptivity(phone) {
