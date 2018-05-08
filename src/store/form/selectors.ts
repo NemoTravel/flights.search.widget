@@ -37,16 +37,10 @@ export const getSearchInfo = createSelector(
 	(form: FormState): SearchInfo => {
 		const segments = form.segments.map((segment: SegmentState): SearchInfoSegment => {
 			return {
-				departure: {
-					IATA: segment.autocomplete.departure.airport.IATA,
-					isCity: !!segment.autocomplete.departure.airport.isCity
-				},
-				arrival: {
-					IATA: segment.autocomplete.arrival.airport.IATA,
-					isCity: !!segment.autocomplete.arrival.airport.isCity
-				},
-				departureDate: segment.dates.departure.date.format(),
-				returnDate: segment.dates.return.date ? segment.dates.return.date.format() : ''
+				departure: segment.autocomplete.departure.airport,
+				arrival: segment.autocomplete.arrival.airport,
+				departureDate: segment.dates.departure.date,
+				returnDate: segment.dates.return.date ? segment.dates.return.date : null
 			};
 		});
 

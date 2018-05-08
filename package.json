@@ -1,6 +1,6 @@
 {
   "name": "@nemo.travel/search-widget",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Lightweight form for searching airtickets",
   "main": "dist/flights.search.widget.min.js",
   "scripts": {

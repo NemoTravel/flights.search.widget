@@ -288,16 +288,11 @@ export const mileCardState: MileCardState = {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-export interface SearchInfoLocation {
-	IATA: string;
-	isCity: boolean;
-}
-
 export interface SearchInfoSegment {
-	departure: SearchInfoLocation;
-	arrival: SearchInfoLocation;
-	departureDate: string;
-	returnDate?: string;
+	departure: Airport;
+	arrival: Airport;
+	departureDate: moment.Moment;
+	returnDate?: moment.Moment;
 }
 
 export interface SearchInfoPassenger {
