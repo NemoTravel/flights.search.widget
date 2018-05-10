@@ -104,7 +104,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 			<Tooltip message={tooltipText} isActive={tooltipIsActive} isCentered={true}>
 				<input
 					type="text"
-					className={classnames('form-control widget-ui-input widget-form-dates__wrapper', { 'widget-ui-input_disabled': !this.state.isActive })}
+					className={classnames('form-control widget-ui-input', { 'widget-ui-input_disabled': !this.state.isActive })}
 					ref={getRef ? getRef : null}
 					onClick={this.enable}
 					onFocus={this.customInputOnFocusHandler}
