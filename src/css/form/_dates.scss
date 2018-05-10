@@ -5,6 +5,7 @@
 		cursor: pointer;
 		padding-right: 35px;
 		-webkit-appearance: none;
+		z-index: 0;
 		
 		@include adaptivity(phone) {
 			padding-right: 30px;
@@ -29,6 +30,9 @@
 		font-weight: 600;
 		font-size: 15px;
 		line-height: 40px;
+		z-index: 1;
+
+		cursor: pointer;
 	}
 
 	&__wrapper {

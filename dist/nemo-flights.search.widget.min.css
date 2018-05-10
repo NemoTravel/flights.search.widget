@@ -610,6 +610,17 @@
   padding-right: 13px;
   -webkit-appearance: none;
   font-size: 13px;
+  background: #fff;
+}
+
+.widget-form-dates__caption {
+  font-size: 13px;
+  color: #0a0a0f;
+  font-weight: 500;
+}
+
+.widget-form-dates__dayOfWeek {
+  color: rgba(100, 100, 100, 0.75);
 }
 
 .widget-form-dates .widget-ui-datepicker__calendar:after {
