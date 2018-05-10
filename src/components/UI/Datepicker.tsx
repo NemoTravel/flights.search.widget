@@ -104,14 +104,17 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 			<Tooltip message={tooltipText} isActive={tooltipIsActive} isCentered={true}>
 				<input
 					type="text"
-					className="widget-ui-input__hidden"
-					ref={getRef}
-					onFocus={this.customInputOnFocusHandler}
-				/>
-				<div
 					className={classnames('form-control widget-ui-input widget-form-dates__wrapper', { 'widget-ui-input_disabled': !this.state.isActive })}
+					ref={getRef ? getRef : null}
 					onClick={this.enable}
-				>{formattedDate ? <span>{formattedDate}, <span className="widget-form-dates__dayOfWeek">{formattedDayOfWeek}</span></span> : inputProps.placeholder}</div>
+					onFocus={this.customInputOnFocusHandler}
+					placeholder={this.state.isActive ? '' : inputProps.placeholder}
+				/>
+
+				{this.state.isActive ?
+					<div className="widget-form-dates__caption">
+						{formattedDate ? <span>{formattedDate}, <span className="widget-form-dates__dayOfWeek">{formattedDayOfWeek}</span></span> : inputProps.placeholder}
+					</div> : null}
 			</Tooltip>
 
 			{this.renderCloser()}
