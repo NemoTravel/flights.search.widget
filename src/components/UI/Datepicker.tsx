@@ -109,11 +109,16 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 					onClick={this.enable}
 					onFocus={this.customInputOnFocusHandler}
 					placeholder={this.state.isActive ? '' : inputProps.placeholder}
+					readOnly={true}
+					spellCheck={false}
 				/>
 
 				{this.state.isActive ?
 					<div className="widget-form-dates__caption">
-						{formattedDate ? <span>{formattedDate}, <span className="widget-form-dates__dayOfWeek">{formattedDayOfWeek}</span></span> : inputProps.placeholder}
+						{formattedDate ?
+							<span>
+								{formattedDate}, <span className="widget-form-dates__dayOfWeek">{formattedDayOfWeek}</span>
+							</span> : inputProps.placeholder}
 					</div> : null}
 			</Tooltip>
 

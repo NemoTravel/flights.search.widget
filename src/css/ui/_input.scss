@@ -7,11 +7,6 @@
 		position: relative;
 	}
 
-	&__hidden {
-		opacity: 0;
-		z-index: -10;
-	}
-
 	&__arrow {
 		position: absolute;
 		right: 0;
