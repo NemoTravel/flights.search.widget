@@ -15,6 +15,14 @@
 		position: absolute;
 		width: 100%;
 	}
+
+	&__wrapper {
+		margin-top: -25px;
+	}
+
+	&__dayOfWeek {
+		color: #b3b3b3;
+	}
 	
 	&__col.col {
 		position: static;
