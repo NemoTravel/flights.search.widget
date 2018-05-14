@@ -24,6 +24,17 @@
 		padding-right: 13px;
 		-webkit-appearance: none;
 		font-size: 13px;
+		background: #ffffff;
+	}
+
+	&__caption {
+		font-size: 13px;
+		color: #0a0a0f;
+		font-weight: 500;
+	}
+
+	&__dayOfWeek {
+		color: rgba(100, 100, 100, 0.75);
 	}
 
 	.widget-ui-datepicker__calendar {

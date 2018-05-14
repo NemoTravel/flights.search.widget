@@ -95,7 +95,8 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	 */
 	renderCustomInput(): React.ReactNode {
 		const { inputProps, date, isDisableable, getRef, tooltipIsActive, tooltipText } = this.props;
-		const formattedDate = date ? date.format('D MMMM, dd') : '';
+		const formattedDate = date ? date.format('D MMMM') : '';
+		const formattedDayOfWeek = date ? date.format('dd') : '';
 		const dayOfMonth = date ? date.get('date').toString() : '31';
 
 		if (getRef) {
@@ -107,13 +108,21 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 				<input
 					type="text"
 					className={classnames('form-control widget-ui-input', { 'widget-ui-input_disabled': !this.state.isActive })}
+					ref={getRef ? getRef : null}
+					onClick={this.enable}
+					onFocus={this.customInputOnFocusHandler}
+					placeholder={this.state.isActive ? '' : inputProps.placeholder}
 					readOnly={true}
 					spellCheck={false}
-					value={formattedDate}
-					{...inputProps}
-					onFocus={this.customInputOnFocusHandler}
-					onClick={this.enable}
 				/>
+
+				{this.state.isActive ?
+					<div className="widget-form-dates__caption">
+						{formattedDate ?
+							<span>
+								{formattedDate}, <span className="widget-form-dates__dayOfWeek">{formattedDayOfWeek}</span>
+							</span> : inputProps.placeholder}
+					</div> : null}
 			</Tooltip>
 
 			{this.renderCloser()}
