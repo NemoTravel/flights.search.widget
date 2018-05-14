@@ -5,10 +5,11 @@ import CouponContainer from './Search/Bonus/CouponContainer';
 import MileCardContainer from './Search/Bonus/MileCardContainer';
 import SegmentsContainer from './Search/SegmentsContainer';
 import { i18n } from '../../utils';
-import { CommonThunkAction } from '../../state';
+import { CommonThunkAction, OnSearchFunction } from '../../state';
 
 interface Props {
-	startSearch: () => CommonThunkAction;
+	onSearch?: OnSearchFunction;
+	startSearch: (onSearch?: OnSearchFunction) => CommonThunkAction;
 	showCouponField: boolean;
 	showMileCardField: boolean;
 }
@@ -22,7 +23,7 @@ export default class Search extends React.Component<Props> {
 	}
 
 	startSearchHandler(): void {
-		this.props.startSearch();
+		this.props.startSearch(this.props.onSearch);
 	}
 
 	render(): React.ReactNode {

@@ -45,8 +45,9 @@ const config = {
 
 		// Output file name.
 		filename: `${moduleName}.min.js`,
-		library: 'FlightsSearchWidget'
-	},
+		library: 'FlightsSearchWidget',
+		libraryTarget: 'umd'
+    },
 
 	resolve: {
 		// Where to look for modules.

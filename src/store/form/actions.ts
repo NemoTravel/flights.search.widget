@@ -1,9 +1,9 @@
 import { AnyAction, Dispatch } from 'redux';
-import {SET_ROUTE_TYPE, SHOW_ERRORS} from '../actions';
-import { formIsValid } from './selectors';
+import { SHOW_ERRORS} from '../actions';
+import { formIsValid, getSearchInfo } from './selectors';
 import {
 	ApplicationMode, ApplicationState, CommonThunkAction, GetStateFunction, PassengerState,
-	RouteType, SegmentState
+	SegmentState, SearchInfo, OnSearchFunction, SearchInfoSegment, SearchInfoPassenger, RouteType, SEGMENTS_COUNT_RT
 } from '../../state';
 import { URL, clearURL } from '../../utils';
 
@@ -19,26 +19,56 @@ export const showErrors = (shouldShowErrors: boolean): ShowErrorsAction => {
 	};
 };
 
+/**
+ * Complex route may be as round-trip. Checking it
+ *
+ * @param {ApplicationState} state
+ * @return {boolean}
+ */
+const isSearchRT = (state: ApplicationState): boolean => {
+	const form = state.form;
+
+	return form.routeType === RouteType.RT ||
+		(
+			form.routeType === RouteType.CR &&
+			form.segments.length === SEGMENTS_COUNT_RT &&
+			form.segments[0].autocomplete.arrival.airport.IATA === form.segments[1].autocomplete.departure.airport.IATA &&
+			form.segments[0].autocomplete.departure.airport.IATA === form.segments[1].autocomplete.arrival.airport.IATA
+		);
+};
+
+const nemoFastSearchSegment = (segment: SegmentState): string => {
+	let request = '';
+
+	request += segment.autocomplete.departure.airport.isCity ? 'c' : 'a';
+	request += segment.autocomplete.departure.airport.IATA;
+
+	// Arrival airport info.
+	request += segment.autocomplete.arrival.airport.isCity ? 'c' : 'a';
+	request += segment.autocomplete.arrival.airport.IATA;
+
+	// Departure date info.
+	request += segment.departureDate.date.format('YYYYMMDD');
+
+	return request;
+};
+
 const runNemoSearch = (state: ApplicationState): void => {
 	let requestURL = clearURL(state.system.nemoURL) + '/results/';
 	const segments = state.form.segments;
 
-	segments.forEach(segment => {
-		// Departure airport info.
-		requestURL += segment.autocomplete.departure.airport.isCity ? 'c' : 'a';
-		requestURL += segment.autocomplete.departure.airport.IATA;
+	requestURL += nemoFastSearchSegment(segments[0]);
 
-		// Arrival airport info.
-		requestURL += segment.autocomplete.arrival.airport.isCity ? 'c' : 'a';
-		requestURL += segment.autocomplete.arrival.airport.IATA;
-
-		// Departure date info.
-		requestURL += segment.dates.departure.date.format('YYYYMMDD');
-	});
-
-	// Return date info.
-	if (state.form.segments[0].dates.return.date && segments.length === 1) {
-		requestURL += state.form.segments[0].dates.return.date.format('YYYYMMDD');
+	if (segments.length >= SEGMENTS_COUNT_RT) {
+		if (isSearchRT(state)) {
+			// Return date info
+			requestURL += segments[1].departureDate.date.format('YYYYMMDD');
+		}
+		else if (state.form.routeType === RouteType.CR) {
+			segments.forEach((segment, index) => {
+				requestURL += index > 0 ? nemoFastSearchSegment(segment) : '';
+			});
+		}
 	}
 
 	// Passengers info.
@@ -81,13 +111,18 @@ const runWebskySearch = (): void => {
  * - run validation
  * - do some optional checks
  * - run search itself
+ *
+ * @param onSearch
  */
-export const startSearch = (): CommonThunkAction => {
-	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
+export const startSearch = (onSearch?: OnSearchFunction): CommonThunkAction => {
+	return (dispatch, getState): void => {
 		const state = getState();
 
 		if (formIsValid(state)) {
-			if (state.system.mode === ApplicationMode.NEMO) {
+			if (typeof onSearch === 'function') {
+				onSearch(getSearchInfo(state));
+			}
+			else if (state.system.mode === ApplicationMode.NEMO) {
 				runNemoSearch(state);
 			}
 			else if (state.system.mode === ApplicationMode.WEBSKY) {

@@ -8,7 +8,7 @@ import {
 	HighlightedDatesGroup
 } from '../../../store/form/segments/dates/selectors';
 import {
-	ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerState,
+	ApplicationState, CommonThunkAction, DatepickerFieldType, DatepickerState, RouteType, SegmentState,
 	SystemState
 } from '../../../state';
 import {
@@ -17,7 +17,8 @@ import {
 	setAvailableDates
 } from '../../../store/form/segments/dates/actions';
 import { Moment } from 'moment';
-import { isCR } from '../../../store/form/selectors';
+import { isCR, isRT } from '../../../store/form/selectors';
+import { setRouteType } from '../../../store/form/route/actions';
 
 interface StateProps {
 	system: SystemState;
@@ -25,6 +26,8 @@ interface StateProps {
 	getDepartureHighlightedDates: HighlightedDatesGroup[];
 	getReturnHighlightedDates: HighlightedDatesGroup[];
 	isCR: boolean;
+	isRT: boolean;
+	segments: SegmentState[];
 }
 
 interface Props {
@@ -36,6 +39,7 @@ interface Props {
 
 interface DispatchProps {
 	setAvailableDates: (availableDates: any, dateType: DatepickerFieldType) => DatepickerAction;
+	setRouteType: (type: RouteType) => CommonThunkAction;
 	datepickerChange: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => CommonThunkAction;
 }
 
@@ -43,17 +47,24 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 	protected returnInput: HTMLInputElement = null;
 
 	render(): React.ReactNode {
-		const { departureDatepicker, returnDatepicker, system, showErrors, datepickerChange, isCR, segmentId, datesIsNotOrder } = this.props;
+		const { departureDatepicker, system, showErrors, datepickerChange, isCR, isRT, segmentId, datesIsNotOrder, setRouteType, segments } = this.props;
 		const DATEPICKER_SWITCH_DELAY = 20;
 
-		let returnInitialDate = departureDatepicker.date;
+		let initialDate = departureDatepicker.date;
 
-		if (
-			departureDatepicker.date &&
-			returnDatepicker.date &&
-			Math.round(returnDatepicker.date.diff(departureDatepicker.date, 'months', true)) > 1
-		) {
-			returnInitialDate = returnDatepicker.date;
+		if (segmentId >= 1 || isRT) {
+			const firstDate = segments[0].departureDate.date;
+			const currDate = segments[isRT ? 1 : segmentId].departureDate.date;
+
+			initialDate = firstDate;
+
+			if (
+				firstDate &&
+				currDate &&
+				Math.round(currDate.diff(firstDate, 'months', true)) > 1
+			) {
+				initialDate = currDate;
+			}
 		}
 
 		return <div className="form-group row widget-form-dates">
@@ -73,23 +84,25 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 					}
 				}}
 				highlightDates={this.props.getDepartureHighlightedDates}
-				specialDate={!isCR ? returnDatepicker.date : null}
+				specialDate={isRT ? segments[1].departureDate.date : segments[segmentId].departureDate.date}
 				popperPlacement={isCR ? 'top-end' : 'top-start'}
 				segmentId={segmentId}
+				openToDate={isCR ? initialDate : null}
 			/>
 
 			{ !isCR ?
 				<ReturnDatepicker
 					locale={system.locale}
-					date={returnDatepicker.date}
-					isActive={returnDatepicker.isActive}
-					openToDate={returnInitialDate}
+					date={isRT ? segments[1].departureDate.date : null}
+					isActive={isRT}
+					openToDate={initialDate}
 					selectDate={datepickerChange}
 					highlightDates={this.props.getReturnHighlightedDates}
 					getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
-					specialDate={departureDatepicker.date}
+					specialDate={isRT ? segments[0].departureDate.date : null}
 					popperPlacement="top-end"
-					segmentId={segmentId}
+					segmentId={isRT ? 1 : null}
+					setRouteType={setRouteType}
 				/> : null }
 		</div>;
 	}
@@ -101,13 +114,16 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 		showErrors: state.form.showErrors,
 		getDepartureHighlightedDates: getDepartureHighlightedDates(state),
 		getReturnHighlightedDates: getReturnHighlightedDates(state),
-		isCR: isCR(state)
+		isCR: isCR(state),
+		isRT: isRT(state),
+		segments: state.form.segments
 	};
 };
 
-const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
+const mapActionsToProps = (dispatch: Dispatch<AnyAction, any>): DispatchProps => {
 	return {
 		setAvailableDates: bindActionCreators(setAvailableDates, dispatch),
+		setRouteType: bindActionCreators(setRouteType, dispatch),
 		datepickerChange: bindActionCreators(datepickerChange, dispatch)
 	};
 };

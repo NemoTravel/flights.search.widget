@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStore, applyMiddleware, Store } from 'redux';
+import { createStore, applyMiddleware, Store, AnyAction } from 'redux';
 import thunk from 'redux-thunk';
 import * as moment from 'moment';
 
@@ -10,7 +10,7 @@ import { configReducer } from './store/system/reducer';
 import { getTotalPassengersCount } from './store/form/passengers/selectors';
 import {
 	initialState, systemState, fillStateFromCache, ApplicationState, SystemState,
-	AutocompleteFieldType, DatepickerFieldType, ApplicationCachedState, PassengerType
+	AutocompleteFieldType, ApplicationCachedState, PassengerType, RouteType, SEGMENTS_COUNT_RT
 } from './state';
 import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from './store/form/additional/actions';
 import {
@@ -20,6 +20,7 @@ import {
 } from './store/form/segments/autocomplete/actions';
 import { addSegment } from './store/form/segments/actions';
 import { selectDate } from './store/form/segments/dates/actions';
+import { setRouteType } from './store/form/route/actions';
 
 const middlewares = [thunk];
 const STORE_CACHE_KEY = 'cached_store';
@@ -62,7 +63,9 @@ export const getCachedState = (): ApplicationCachedState => {
  */
 export const cacheState = (state: ApplicationState): void => {
 	if (!state.system.disableCaching) {
-		Cache.set(`${STORE_CACHE_KEY}_${Cache.getLocale()}_${process.env.VERSION}`, state);
+		const newState: ApplicationState = { ...state, system: { ...state.system, rootElement: null } };
+
+		Cache.set(`${STORE_CACHE_KEY}_${Cache.getLocale()}_${process.env.VERSION}`, newState);
 	}
 };
 
@@ -87,13 +90,17 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 
 	// Thunk middleware allows us to create functions instead of plain objects in action-creators (for async purposes).
 	// @see https://github.com/gaearon/redux-thunk#motivation
-	const store = createStore<ApplicationState>(
+	const store = createStore<ApplicationState, AnyAction, any, any>(
 		rootReducer,
 		preloadedState,
 		applyMiddleware(...middlewares)
 	);
 
 	if (!store.getState().form.segments.length) {
+		store.dispatch(addSegment());
+	}
+
+	if (store.getState().system.defaultReturnDate && store.getState().form.segments.length < SEGMENTS_COUNT_RT) {
 		store.dispatch(addSegment());
 	}
 
@@ -139,20 +146,17 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 		store.dispatch(setDirectFlightCheckbox(state.system.directOnly));
 	}
 
-	if (!state.form.segments[0].dates.return.date) {
-		if (state.system.defaultReturnDate) {
-			const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
+	if (state.system.defaultReturnDate && !state.form.segments[1].departureDate.date) {
+		const returnDate = moment(state.system.defaultReturnDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(returnDate, DatepickerFieldType.Return, 0));
-		}
+		store.dispatch(selectDate(returnDate, 1));
+		store.dispatch(setRouteType(RouteType.RT));
 	}
 
-	if (!state.form.segments[0].dates.departure.date) {
-		if (state.system.defaultDepartureDate) {
-			const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
+	if (state.system.defaultDepartureDate && !state.form.segments[0].departureDate.date) {
+		const departureDate = moment(state.system.defaultDepartureDate).locale(state.system.locale);
 
-			store.dispatch(selectDate(departureDate, DatepickerFieldType.Departure, 0));
-		}
+		store.dispatch(selectDate(departureDate, 0));
 	}
 
 	if (getTotalPassengersCount(state) === 0) {

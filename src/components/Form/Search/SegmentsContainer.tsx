@@ -6,11 +6,12 @@ import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import { continueRoute, deleteSegment, SegmentAction } from '../../../store/form/segments/actions';
 import { i18n } from '../../../utils';
 import * as classnames from 'classnames';
-import { isCR } from '../../../store/form/selectors';
+import { isCR, isRT } from '../../../store/form/selectors';
 
 interface StateProps {
 	segments: SegmentState[];
 	isCR: boolean;
+	isRT: boolean;
 }
 
 interface DispatchProps {
@@ -29,8 +30,20 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 		this.props.continueRoute();
 	}
 
+	renderFirstSegment(): React.ReactNode {
+		const { segments, isRT } = this.props;
+
+		return <Segment
+			segment={segments[0]}
+			segmentId={0}
+			canBeRemoved={false}
+			showDatesError={true}
+			returnDate={isRT ? segments[1].departureDate : null}
+		/>;
+	}
+
 	renderAllSegment(): React.ReactNode {
-		const { segments, isCR, removeSegment } = this.props;
+		const { segments, isCR, isRT, removeSegment } = this.props;
 
 		return segments.map((segment: SegmentState, index: number) => {
 			return <Segment
@@ -39,7 +52,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 				key={index}
 				removeSegment={removeSegment}
 				canBeRemoved={segments.length > 1 && segments.length - 1 === index && isCR}
-				showDatesError={index > 0 && segment.dates.departure.date && segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)}
+				showDatesError={index > 0 && segment.departureDate.date && segment.departureDate.date.isBefore(segments[index - 1].departureDate.date)}
 			/>;
 		});
 	}
@@ -49,10 +62,10 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 
 		return <div className={classnames('form-group row widget-form-segments', {'widget-form-segments_CR': isCR })}>
 
-			{this.renderAllSegment()}
+			{isCR ? this.renderAllSegment() : this.renderFirstSegment()}
 
 			{isCR && segments.length < MAX_SEGMENTS_COUNT ?
-				<div className="widget-form-search__addSegment" onClick={this.props.continueRoute}>
+				<div className="widget-form-search__addSegment" onClick={continueRoute}>
 					{i18n('form', 'continue_route')}
 				</div> : null}
 		</div>;
@@ -62,11 +75,12 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
 		segments: state.form.segments,
-		isCR: isCR(state)
+		isCR: isCR(state),
+		isRT: isRT(state)
 	};
 };
 
-const mapActionsToProps = (dispatch: Dispatch<AnyAction>): DispatchProps => {
+const mapActionsToProps = (dispatch: Dispatch<AnyAction, any>): DispatchProps => {
 	return {
 		continueRoute: bindActionCreators(continueRoute, dispatch),
 		removeSegment: bindActionCreators(deleteSegment, dispatch)

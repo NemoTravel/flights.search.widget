@@ -56,3 +56,5 @@ export const initDemo = () => {
 		document.getElementById('root')
 	);
 };
+
+export { default as Component } from './components/Component';

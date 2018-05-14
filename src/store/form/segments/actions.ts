@@ -26,7 +26,7 @@ export const deleteSegment = (): SegmentAction => {
 };
 
 export const continueRoute = (): CommonThunkAction => {
-	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
+	return (dispatch, getState): void => {
 		const segments = getState().form.segments;
 		const arrAirportInLastSegment = segments.length > 0 ? segments[segments.length - 1].autocomplete.arrival.airport : null;
 
