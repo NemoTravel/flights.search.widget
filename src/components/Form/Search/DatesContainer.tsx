@@ -120,12 +120,10 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 	};
 };
 
-const mapActionsToProps = (dispatch: Dispatch<AnyAction, any>): DispatchProps => {
-	return {
-		setAvailableDates: bindActionCreators(setAvailableDates, dispatch),
-		setRouteType: bindActionCreators(setRouteType, dispatch),
-		datepickerChange: bindActionCreators(datepickerChange, dispatch)
-	};
+const mapActionsToProps = {
+	setAvailableDates,
+	setRouteType,
+	datepickerChange
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(DatesContainer);

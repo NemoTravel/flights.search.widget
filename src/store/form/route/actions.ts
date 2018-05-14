@@ -4,7 +4,7 @@ import {
 	SEGMENTS_COUNT_RT
 } from '../../../state';
 import { AnyAction, Dispatch } from 'redux';
-import { addSegment } from '../segments/actions';
+import {addSegment, deleteSegment, removeComplexSegments} from '../segments/actions';
 import { setSelectedAirport } from '../segments/autocomplete/actions';
 import { Airport } from '../../../services/models/Airport';
 
@@ -37,6 +37,7 @@ const setSimpleRoute = (getState: GetStateFunction, dispatch: Dispatch<AnyAction
 	}
 	else {
 		dispatch(setRouteTypeAction(RouteType.OW));
+		dispatch(removeComplexSegments());
 	}
 };
 
@@ -48,20 +49,21 @@ export const setRouteType = (newRouteType: RouteType): CommonThunkAction => {
 		if (newRouteType === RouteType.OW) {
 			if (currentRouteType === RouteType.RT) {
 				dispatch(setRouteTypeAction(RouteType.OW));
+				dispatch(deleteSegment());
 			}
 			else if (currentRouteType === RouteType.CR) {
 				setSimpleRoute(getState, dispatch);
 			}
 		}
-
 		else if (newRouteType === RouteType.RT) {
 			if (segments.length < SEGMENTS_COUNT_RT) {
 				dispatch(addSegment());
+				dispatch(setSelectedAirport(segments[0].autocomplete.arrival.airport, AutocompleteFieldType.Departure, 1));
+				dispatch(setSelectedAirport(segments[0].autocomplete.departure.airport, AutocompleteFieldType.Arrival, 1));
 			}
 
 			dispatch(setRouteTypeAction(RouteType.RT));
 		}
-
 		else if (newRouteType === RouteType.CR) {
 			if (segments.length < SEGMENTS_COUNT_RT) {
 				dispatch(addSegment());

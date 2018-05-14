@@ -1,5 +1,5 @@
-import { Action, AnyAction, Dispatch } from 'redux';
-import { AutocompleteFieldType, CommonThunkAction, GetStateFunction } from '../../../state';
+import { Action } from 'redux';
+import { AutocompleteFieldType, CommonThunkAction } from '../../../state';
 import { ADD_SEGMENT, DELETE_SEGMENT, REMOVE_COMPLEX_SEGMENTS } from '../../actions';
 import { setSelectedAirport } from './autocomplete/actions';
 

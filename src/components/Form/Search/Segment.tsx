@@ -47,7 +47,7 @@ export default class Segment extends React.Component<Props> {
 				returnDatepicker={returnDate}
 				datesIsNotOrder={showDatesError}/>
 
-			{ canBeRemoved ? <div className="widget-form-segments__segment__drop" onClick={this.deleteSegment}></div> : null }
+			{ canBeRemoved ? <div className="widget-form-segments__segment__drop" onClick={this.deleteSegment}/> : null }
 		</div>;
 	}
 }
