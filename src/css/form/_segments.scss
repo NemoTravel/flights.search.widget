@@ -32,8 +32,10 @@
 				width: 100%;
 				margin-left: 0;
 
-				.widget-form-dates__col:last-of-type {
-					padding: 0;
+				.widget-form-dates__col {
+					&:last-of-type {
+						padding: 0;
+					}
 				}
 			}
 		}
@@ -62,7 +64,7 @@
 			&:before {
 				content: $icon-cross;
 				line-height: 40px;
-				color: #fff;
+				color: #ffffff;
 			}
 		}
 

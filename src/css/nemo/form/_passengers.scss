@@ -5,7 +5,7 @@
 		&__title {
 			border: none !important;
 			font-weight: normal !important;
-			background-color: #fff !important;
+			background-color: #ffffff !important;
 			line-height: 40px !important;
 		}
 	}
@@ -19,7 +19,7 @@
 			min-width: 260px;
 			border-radius: 4px;
 			margin-top: 5px !important;
-			box-shadow: 0 1px 16px rgba(10, 10, 15, .25);
+			box-shadow: 0 1px 16px rgba(10, 10, 15, 0.25);
 		}
 	}
 
@@ -41,10 +41,6 @@
 		&__title {
 			font-size: 13px !important;
 			color: #0a0a0f !important;
-
-			@include adaptivity(desktop) {
-				//min-width: 180px;
-			}
 		}
 	}
 
@@ -70,7 +66,7 @@
 		width: 30px;
 		height: 30px;
 		border: 1px solid #cae0ed;
-		transition: background-color .2s;
+		transition: background-color 0.2s;
 
 		&:after {
 			width: 28px;
@@ -85,7 +81,7 @@
 			border-color: #cae0ed;
 
 			&:after {
-				color: #1B75BC;
+				color: #1b75bc;
 			}
 		}
 

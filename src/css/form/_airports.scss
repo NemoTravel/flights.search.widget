@@ -5,6 +5,8 @@
 	@import "airports/swap";
 	@import "airports/suggestion";
 
+	flex-basis: 100%;
+
 	&.row {
 		@include adaptivity(phone) {
 			display: block;
@@ -13,11 +15,9 @@
 		}
 	}
 
-	flex-basis: 100%;
-	
 	&__header {
 		display: none;
-		
+
 		&_visible {
 			display: block;
 		}
@@ -26,7 +26,7 @@
 			display: none;
 		}
 	}
-	
+
 	&__underlay {
 		display: none;
 		position: fixed;
@@ -34,8 +34,8 @@
 		left: 0;
 		bottom: 0;
 		right: 0;
-		
-		background: #fff;
+
+		background: #ffffff;
 		max-height: none;
 
 		@include adaptivity(phone) {
@@ -54,8 +54,8 @@
 		line-height: 16px;
 		align-items: center;
 		pointer-events: none;
-		
-		color: #B3B3B3;
+
+		color: #b3b3b3;
 		font-weight: 400;
 		font-size: 15px;
 
@@ -63,58 +63,60 @@
 			right: 35px;
 		}
 	}
-	
-	&__col.col {
-		&:first-of-type {
-			padding-right: 0;
-			
-			.widget-ui-input__arrow {
-				right: 12px;
 
-				@include adaptivity(phone) {
-					right: 0;
-				}
-			}
-			
-			.widget-form-airports__airportCode {
-				right: 29px;
+	&__col {
+		&.col {
+			&:first-of-type {
+				padding-right: 0;
 
-				@include adaptivity(phone) {
-					right: 17px;
-				}
-
-				&_withArrow {
-					right: 47px;
+				.widget-ui-input__arrow {
+					right: 12px;
 
 					@include adaptivity(phone) {
-						right: 35px;
-					}
-				}
-			}
-		}
-
-		&:last-of-type {
-			padding-left: 0;
-
-			.Select-control {
-				@include adaptivity(not-phone) {
-					border-left: none;
-					
-					.Select-placeholder, 
-					.Select-input:not(input), 
-					.widget-form-airports__select__value {
-						padding-left: 20px !important;
+						right: 0;
 					}
 				}
 
-				@include adaptivity(phone) {
-					border-top: none;
+				.widget-form-airports__airportCode {
+					right: 29px;
+
+					@include adaptivity(phone) {
+						right: 17px;
+					}
+
+					&_withArrow {
+						right: 47px;
+
+						@include adaptivity(phone) {
+							right: 35px;
+						}
+					}
 				}
 			}
-		}
 
-		@include adaptivity(phone) {
-			padding: 0;
+			&:last-of-type {
+				padding-left: 0;
+
+				.Select-control {
+					@include adaptivity(not-phone) {
+						border-left: none;
+
+						.Select-placeholder,
+						.Select-input:not(input),
+						.widget-form-airports__select__value {
+							padding-left: 20px !important;
+						}
+					}
+
+					@include adaptivity(phone) {
+						border-top: none;
+					}
+				}
+			}
+
+			@include adaptivity(phone) {
+				padding: 0;
+			}
 		}
 	}
 }

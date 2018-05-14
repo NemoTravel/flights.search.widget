@@ -10,18 +10,17 @@
 
 	&__addSegment {
 		line-height: 40px;
-		background: rgba(255,255,255,.25);
+		background: rgba(255, 255, 255, 0.25);
 		border-radius: 2px;
 		cursor: pointer;
-		transition: all .2s;
 		text-align: center;
 		margin-left: 15px;
 		margin-right: 0;
 		font-weight: 500;
-		color: #fff;
+		color: #ffffff;
 
 		&:hover {
-			box-shadow: inset 0 0 16px rgba(255,255,255,.2);
+			box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2);
 		}
 
 		@include adaptivity(tablet) {
@@ -50,6 +49,7 @@
 				&:first-of-type {
 					flex-basis: 60%;
 				}
+
 				&:last-of-type {
 					flex-basis: 0;
 					min-width: 100px;
@@ -74,30 +74,32 @@
 		flex-wrap: wrap !important;
 	}
 
-	&__startButton.btn-primary {
-		color: #fff;
-		line-height: 40px;
-		background-color: $main-button-color;
-		padding: 0 15px;
-		transition: background .1s ease-in;
-		border-radius: 0;
-		box-shadow: 0 4px 8px 0 rgba(93, 134, 41, .5);
-		text-transform: uppercase;
-		font-size: 0.875rem;
-		font-weight: 600;
+	&__startButton {
+		&.btn-primary {
+			color: #ffffff;
+			line-height: 40px;
+			background-color: $main-button-color;
+			padding: 0 15px;
+			transition: background 0.1s ease-in;
+			border-radius: 0;
+			box-shadow: 0 4px 8px 0 rgba(93, 134, 41, 0.5);
+			text-transform: uppercase;
+			font-size: 0.875rem;
+			font-weight: 600;
 
-		&:hover {
-			color: #fff;
-			background: $main-button-color_hover !important;
-		}
+			&:hover {
+				color: #ffffff;
+				background: $main-button-color_hover !important;
+			}
 
-		&:active {
-			background: $main-button-color_hover !important;
-			box-shadow: 0 4px 8px 0 rgba(93, 134, 41, .5) !important;
-		}
+			&:active {
+				background: $main-button-color_hover !important;
+				box-shadow: 0 4px 8px 0 rgba(93, 134, 41, 0.5) !important;
+			}
 
-		&:focus {
-			box-shadow: 0 4px 8px 0 rgba(93, 134, 41, .5) !important;
+			&:focus {
+				box-shadow: 0 4px 8px 0 rgba(93, 134, 41, 0.5) !important;
+			}
 		}
 	}
 

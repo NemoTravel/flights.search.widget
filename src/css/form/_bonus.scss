@@ -1,69 +1,80 @@
 .widget-form {
-	&-mileCard, &-coupon {
+	&-mileCard,
+	&-coupon {
 		&__dummy {
-			background: #F2F2F2;
-			padding: 0px 5px 0px 42px;
-			color: #1B75BC;
+			background: #f2f2f2;
+			padding: 0 5px 0 42px;
+			color: #1b75bc;
 			cursor: pointer;
-			border: 0px;
-			
+			border: none;
+
 			&:hover {
-				background: #E6E6E6;
+				background: #e6e6e6;
 			}
-			
-			&__icon:before {
-				position: absolute;
-				left: 15px;
-				top: 13px;
+
+			&__icon {
+				&:before {
+					position: absolute;
+					left: 15px;
+					top: 13px;
+				}
 			}
 		}
-		
+
 		&__wrapper {
 			&__block {
 				position: relative;
-				
-				input:focus {
-					box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-				}
-				
-				&:first-of-type input {
-					padding-right: 35px;
-					
+
+				input {
 					&:focus {
-						z-index: 2;
+						box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+					}
+				}
+
+				&:first-of-type {
+					input {
+						padding-right: 35px;
+
+						&:focus {
+							z-index: 2;
+						}
 					}
 				}
 			}
 		}
 	}
-	
+
 	&-coupon {
-		&__dummy__icon:before {
-			content: "\e904";
+		&__dummy__icon {
+			&:before {
+				content: "\e904";
+			}
 		}
 	}
-	
+
 	&-mileCard {
-		&__dummy__icon:before {
-			content: "\e917";
+		&__dummy__icon {
+			&:before {
+				content: "\e917";
+			}
 		}
-		
+
 		&__wrapper__block {
 			@include adaptivity(not-phone) {
 				display: inline-block;
 				width: 49%;
 			}
-			
+
 			&:first-of-type {
 				@include adaptivity(not-phone) {
 					margin-right: 1%;
 				}
-				
+
 				@include adaptivity(phone) {
 					margin-bottom: 1rem;
 				}
 			}
-			
+
 			&:last-of-type {
 				@include adaptivity(not-phone) {
 					margin-left: 1%;

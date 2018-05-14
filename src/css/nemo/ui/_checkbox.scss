@@ -11,7 +11,7 @@
 	&__caption {
 		position: relative;
 		display: inline-block;
-		color: #fff;
+		color: #ffffff;
 		font-weight: normal;
 		font-size: 13px;
 		height: 20px;
@@ -25,7 +25,7 @@
 		max-width: 100%;
 
 		&:before {
-			content: '';
+			content: "";
 			position: absolute;
 			left: 0;
 			top: 0;
@@ -34,29 +34,32 @@
 			width: 19px;
 			height: 19px;
 			border-radius: 5px;
-			transition: background-color .1s ease;
-			background-image: url(images/checkbox_sprite.svg);
+			transition: background-color 0.1s ease;
+			background-image: url("images/checkbox_sprite.svg");
 			background-color: #e6e6e6;
-			//background-position-y: 19px;
 		}
 	}
 
-	& label:before {
-		display: none;
-	}
-
-	&__input:checked + label {
+	& label {
 		&:before {
-			background: none;
+			display: none;
 		}
+	}
 
-		.widget-ui-checkbox__caption {
-			color: #fff;
-
+	&__input {
+		&:checked + label {
 			&:before {
-				background-color: #64b5f6;
-				transform: none;
-				border: none;
+				background: none;
+			}
+
+			.widget-ui-checkbox__caption {
+				color: #ffffff;
+
+				&:before {
+					background-color: #64b5f6;
+					transform: none;
+					border: none;
+				}
 			}
 		}
 	}

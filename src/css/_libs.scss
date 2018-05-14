@@ -1,5 +1,4 @@
 @import "variables";
-
 // External libraries.
 @import "libs/bootstrap";
 @import "libs/reactDatepicker";
@@ -18,11 +17,11 @@
 	font-size: 14px;
 	height: 40px;
 	line-height: 40px;
-	
+
 	&:active {
 		border: none;
 	}
-	
+
 	&:focus {
 		box-shadow: none;
 	}
@@ -31,12 +30,12 @@
 .btn-primary {
 	background-color: $main-button-color;
 	color: $font-color;
-	
+
 	&:hover {
 		background-color: $main-button-color_hover;
 		color: $font-color;
 	}
-	
+
 	&:active {
 		background-color: $main-button-color_hover;
 	}
@@ -49,7 +48,7 @@
  */
 .form-control {
 	border-radius: 0;
-	border-color: #ccc;
+	border-color: #cccccc;
 	color: $font-color;
 	background-color: transparent;
 	font-weight: 600;
@@ -63,11 +62,11 @@
 	line-height: 40px;
 
 	&[readonly] {
-		background-color: #fff;
+		background-color: #ffffff;
 	}
-	
+
 	&:focus {
-		border-color: #ccc;
+		border-color: #cccccc;
 		z-index: 10;
 	}
 }
@@ -81,6 +80,7 @@
 	z-index: 15;
 }
 
-.react-datepicker-wrapper, .react-datepicker__input-container {
+.react-datepicker-wrapper,
+.react-datepicker__input-container {
 	display: block;
 }

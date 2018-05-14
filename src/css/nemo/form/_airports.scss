@@ -35,60 +35,61 @@
 		background-color: $title-color !important;
 	}
 
-	&__col.col {
-		&:first-of-type {
-			padding-right: 0;
+	&__col {
+		&.col {
+			&:first-of-type {
+				padding-right: 0;
 
-			.widget-form-airports__select__value {
-				width: 80%;
-			}
+				.widget-form-airports__select__value {
+					width: 80%;
+				}
 
-			.widget-form-airports__airportCode {
-				right: 57px;
+				.widget-form-airports__airportCode {
+					right: 57px;
+
+					@include adaptivity(phone) {
+						right: 17px;
+					}
+				}
 
 				@include adaptivity(phone) {
-					right: 17px;
+					padding-bottom: 1rem;
+				}
+
+			}
+
+			&:last-of-type {
+				@include adaptivity(desktop) {
+					padding-left: 0;
+
+					.widget-form-airports__select__wrapper {
+						padding-left: 15px;
+					}
+				}
+
+				@include adaptivity(tablet) {
+					padding-left: 15px;
+				}
+
+				.Select-control {
+					@include adaptivity(not-phone) {
+						.Select-placeholder,
+						.Select-input:not(input),
+						.widget-form-airports__select__value {
+							padding-left: 13px !important;
+						}
+
+						.widget-form-airports__select__value__placeholder {
+							padding-left: 13px !important;
+						}
+					}
 				}
 			}
 
 			@include adaptivity(phone) {
-				padding-bottom: 1rem;
+				padding-right: 0;
+				padding-left: 0 !important;
 			}
-
-		}
-
-		&:last-of-type {
-			@include adaptivity(desktop) {
-				padding-left: 0;
-
-				.widget-form-airports__select__wrapper {
-					padding-left: 15px;
-				}
-			}
-
-			@include adaptivity(tablet) {
-				padding-left: 15px;
-			}
-
-			.Select-control {
-				@include adaptivity(not-phone) {
-
-					.Select-placeholder,
-					.Select-input:not(input),
-					.widget-form-airports__select__value {
-						padding-left: 13px !important;
-					}
-
-					.widget-form-airports__select__value__placeholder {
-						padding-left: 13px !important;
-					}
-				}
-			}
-		}
-
-		@include adaptivity(phone) {
-			padding-right: 0;
-			padding-left: 0 !important;
 		}
 	}
 }

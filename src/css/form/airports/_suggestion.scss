@@ -3,13 +3,12 @@
 		position: absolute;
 		right: 15px;
 		top: 50%;
-
 		margin-top: -1px;
 
 		font-weight: 400;
 		font-size: 15px;
 		line-height: 16px;
-		color: #B3B3B3;
+		color: #b3b3b3;
 		text-transform: uppercase;
 		transform: translateY(-50%);
 		pointer-events: none;
@@ -39,7 +38,7 @@
 			display: block;
 		}
 	}
-	
+
 	&_insideAggregation {
 		padding-left: 20px;
 	}

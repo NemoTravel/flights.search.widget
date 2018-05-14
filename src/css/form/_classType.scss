@@ -18,7 +18,7 @@
 			font-size: 13px;
 			font-weight: 400;
 			border: 1px solid rgba($title-color, 0.2);
-			background: #fff;
+			background: #ffffff;
 			color: $title-color;
 			cursor: pointer;
 			margin-right: 15px;
@@ -27,12 +27,12 @@
 
 			&_selected {
 				background: $title-color;
-				color: #fff;
+				color: #ffffff;
 			}
 
 			&:hover {
 				background: $title-color;
-				color: #fff;
+				color: #ffffff;
 			}
 
 			&:last-child {

@@ -2,8 +2,9 @@
 
 Run `npm run build` before **every** commit.
 
-## Install required peer dependencies
-* `npm i react@16.x.x react-dom@16.x.x redux@4.x.x`
+## Install required dependencies
+* `npm install react@16.x.x react-dom@16.x.x redux@4.x.x --no-save`
+* `npm install`
 
 ## Build commands
 

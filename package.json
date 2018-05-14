@@ -1,12 +1,13 @@
 {
   "name": "@nemo.travel/search-widget",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "Lightweight form for searching airtickets",
   "main": "dist/flights.search.widget.min.js",
   "scripts": {
+    "sass-lint": "sass-lint -v -c .sass-lint.yml",
     "tslint": "tslint -p ./tslint.json",
     "server": "node server.js",
-    "build": "npm run tslint && npm test && cross-env NODE_ENV=production webpack",
+    "build": "npm run tslint && npm run sass-lint && npm test && cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
     "prepare": "npm run build",
@@ -40,6 +41,7 @@
     "pre-commit": "^1.2.2",
     "redux-testkit": "^1.0.6",
     "resolve-url-loader": "^2.3.0",
+    "sass-lint": "^1.12.1",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.18.2",
     "ts-loader": "^3.5.0",
