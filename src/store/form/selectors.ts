@@ -32,21 +32,19 @@ export const isCR = createSelector(
 	(config: FormState): boolean => config.routeType === RouteType.CR
 );
 
+export const isRT = createSelector(
+	[ getForm ],
+	(config: FormState): boolean => config.routeType === RouteType.RT && config.segments.length > 1
+);
+
 export const getSearchInfo = createSelector(
 	[ getForm ],
 	(form: FormState): SearchInfo => {
 		const segments = form.segments.map((segment: SegmentState): SearchInfoSegment => {
 			return {
-				departure: {
-					IATA: segment.autocomplete.departure.airport.IATA,
-					isCity: !!segment.autocomplete.departure.airport.isCity
-				},
-				arrival: {
-					IATA: segment.autocomplete.arrival.airport.IATA,
-					isCity: !!segment.autocomplete.arrival.airport.isCity
-				},
-				departureDate: segment.dates.departure.date.format(),
-				returnDate: segment.dates.return.date ? segment.dates.return.date.format() : ''
+				departure: segment.autocomplete.departure.airport,
+				arrival: segment.autocomplete.arrival.airport,
+				departureDate: segment.departureDate.date
 			};
 		});
 
@@ -70,6 +68,25 @@ export const getSearchInfo = createSelector(
 	}
 );
 
+const segmentIsValid = (segment: SegmentState): boolean => {
+	let isValid = true;
+
+	if (!segment.departureDate.date) {
+		isValid = false;
+	}
+	else if (!segment.autocomplete.departure.airport) {
+		isValid = false;
+	}
+	else if (!segment.autocomplete.arrival.airport) {
+		isValid = false;
+	}
+	else if (segment.autocomplete.departure.airport.IATA === segment.autocomplete.arrival.airport.IATA) {
+		isValid = false;
+	}
+
+	return isValid;
+};
+
 /**
  * Check if search form data is valid and ready for further operations.
  *
@@ -79,8 +96,8 @@ export const getSearchInfo = createSelector(
  * - valid number of selected passengers
  */
 export const formIsValid = createSelector(
-	[ getForm, getTotalPassengersCount ],
-	(form: FormState, totalPassengersCount: number): boolean => {
+	[ getForm, getTotalPassengersCount, isCR, isRT ],
+	(form: FormState, totalPassengersCount: number, isCR: boolean, isRT: boolean): boolean => {
 		let isValid = true;
 		const segments = form.segments;
 
@@ -102,23 +119,28 @@ export const formIsValid = createSelector(
 		}
 
 		if (isValid) {
-			segments.forEach((segment, index) => {
-				if (!segment.dates.departure.date) {
+			if (isCR) {
+				segments.forEach((segment, index) => {
+					if(segmentIsValid(segment)) {
+						if (index > 0 && segment.departureDate.date.isBefore(segments[index - 1].departureDate.date)) {
+							isValid = false;
+						}
+					}
+					else {
+						isValid = false;
+					}
+				});
+			}
+			else {
+				if (!segmentIsValid(segments[0])) {
 					isValid = false;
 				}
-				else if (index > 0 && segment.dates.departure.date.isBefore(segments[index - 1].dates.departure.date)) {
-					isValid = false;
+				if (isRT) {
+					if (segments[1].departureDate.date && segments[1].departureDate.date.isBefore(segments[0].departureDate.date)) {
+						isValid = false;
+					}
 				}
-				else if (!segment.autocomplete.departure.airport) {
-					isValid = false;
-				}
-				else if (!segment.autocomplete.arrival.airport) {
-					isValid = false;
-				}
-				else if (segment.autocomplete.departure.airport.IATA === segment.autocomplete.arrival.airport.IATA) {
-					isValid = false;
-				}
-			});
+			}
 		}
 
 		return isValid;

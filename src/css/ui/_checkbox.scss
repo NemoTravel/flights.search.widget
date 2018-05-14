@@ -25,11 +25,11 @@
 		max-width: 100%;
 
 		&:before {
-			content: '';
+			content: "";
 			border-radius: 50%;
 			width: 20px;
 			height: 20px;
-			background: #fff;
+			background: #ffffff;
 			border: 2px solid #b3b3b3;
 			font-size: 16px;
 			cursor: pointer;
@@ -43,27 +43,31 @@
 		}
 	}
 
-	& label:before {
-		content: '';
-		width: 40px;
-		height: 20px;
-		transition: background 0.2s;
-		background: #b3b3b3;
-		position: absolute;
-		border-radius: 20px;
+	& label {
+		&:before {
+			content: "";
+			width: 40px;
+			height: 20px;
+			transition: background 0.2s;
+			background: #b3b3b3;
+			position: absolute;
+			border-radius: 20px;
+		}
 	}
 
-	&__input:checked + label {
-		&:before {
-			background: #1B75BC;
-		}
-
-		.widget-ui-checkbox__caption {
-			color: #1B75BC;
-
+	&__input {
+		&:checked + label {
 			&:before {
-				border-color: #1B75BC;
-				transform: translateX(20px);
+				background: #1b75bc;
+			}
+
+			.widget-ui-checkbox__caption {
+				color: #1b75bc;
+
+				&:before {
+					border-color: #1b75bc;
+					transform: translateX(20px);
+				}
 			}
 		}
 	}

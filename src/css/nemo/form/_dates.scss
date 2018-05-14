@@ -24,7 +24,7 @@
 		padding-right: 13px;
 		-webkit-appearance: none;
 		font-size: 13px;
-		background: #fff;
+		background: #ffffff;
 	}
 
 	&__caption {
@@ -48,56 +48,58 @@
 		}
 	}
 
-	&__col.col {
-		position: static;
-		padding: 0!important;
+	&__col {
+		&.col {
+			position: static;
+			padding: 0 !important;
 
-		&:last-of-type:not(:only-child) {
-			@include adaptivity(desktop) {
-				border-left: 1px solid #64b5f6;
+			&:last-of-type:not(:only-child) {
+				@include adaptivity(desktop) {
+					border-left: 1px solid #64b5f6;
+				}
+
+				.widget-ui-datepicker__calendar {
+					display: none;
+				}
 			}
 
-			.widget-ui-datepicker__calendar {
-				display: none;
-			}
-		}
+			@include adaptivity(tablet) {
+				&:first-of-type {
+					padding-left: 15px !important;
+				}
 
-		@include adaptivity(tablet) {
-			&:first-of-type {
-				padding-left: 15px !important;
-			}
-
-			&:last-of-type {
-				padding-left: 15px !important;
-				padding-right: 15px !important;
-			}
-		}
-
-		@include adaptivity(phone) {
-			flex-basis: 100%;
-
-			&:first-of-type {
-				padding-bottom: 1rem !important;
-				padding-left: 0 !important;
+				&:last-of-type {
+					padding-left: 15px !important;
+					padding-right: 15px !important;
+				}
 			}
 
-			&:last-of-type {
-				padding-left: 0 !important;
-				padding-right: 0 !important;
+			@include adaptivity(phone) {
+				flex-basis: 100%;
+
+				&:first-of-type {
+					padding-bottom: 1rem !important;
+					padding-left: 0 !important;
+				}
+
+				&:last-of-type {
+					padding-left: 0 !important;
+					padding-right: 0 !important;
+				}
 			}
-		}
 
-		.widget-ui-input_disabled {
-			text-align: center;
-			background: rgba(255,255,255,.25) !important;
-			color: #fff !important;
+			.widget-ui-input_disabled {
+				text-align: center;
+				background: rgba(255, 255, 255, 0.25) !important;
+				color: #ffffff !important;
 
-			&:hover {
-				box-shadow: inset 0 0 16px rgba(255,255,255,.2) !important;
-			}
+				&:hover {
+					box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2) !important;
+				}
 
-			&::placeholder {
-				color: #fff;
+				&::placeholder {
+					color: #ffffff;
+				}
 			}
 		}
 	}

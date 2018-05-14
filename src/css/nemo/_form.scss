@@ -6,7 +6,7 @@
 
 	@include adaptivity(desktop) {
 		&:after {
-			content: '';
+			content: "";
 			position: absolute;
 			z-index: 0;
 			background: #8bc8f9;
@@ -21,7 +21,7 @@
 		display: block;
 		position: relative;
 		right: 0;
-		color: #fff;
+		color: #ffffff;
 
 		bottom: 0;
 		z-index: 1;
@@ -39,8 +39,8 @@
 
 		&_toCR {
 			&:before {
-				content: ' ';
-				background: url(images/cr.svg) no-repeat center center;
+				content: " ";
+				background: url("images/cr.svg") no-repeat center center;
 				background-size: 20px;
 				display: inline-block;
 				width: 20px;
@@ -51,8 +51,8 @@
 
 		&_toOW {
 			&:before {
-				content: ' ';
-				background: url(images/ow.svg) no-repeat center center;
+				content: " ";
+				background: url("images/ow.svg") no-repeat center center;
 				background-size: 25px;
 				display: inline-block;
 				width: 20px;
@@ -95,8 +95,10 @@
 				&__wrapper {
 					flex-wrap: wrap;
 
-					.form-group:last-of-type {
-						margin-bottom: 1rem;
+					.form-group {
+						&:last-of-type {
+							margin-bottom: 1rem;
+						}
 					}
 				}
 
@@ -183,20 +185,22 @@
 					flex-basis: 100%;
 				}
 
-				&__col.col {
-					&:first-of-type {
-						padding-bottom: 1rem;
-					}
+				&__col {
+					&.col {
+						&:first-of-type {
+							padding-bottom: 1rem;
+						}
 
-					&:last-of-type {
-						padding-left: 0;
+						&:last-of-type {
+							padding-left: 0;
 
-						.widget-form-airports__select__wrapper {
-							padding-left: 0 !important;
-
-							.Select-input {
-								height: 40px;
+							.widget-form-airports__select__wrapper {
 								padding-left: 0 !important;
+
+								.Select-input {
+									height: 40px;
+									padding-left: 0 !important;
+								}
 							}
 						}
 					}

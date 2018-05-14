@@ -12,15 +12,15 @@
 	}
 
 	&__title {
-		color: #333;
+		color: #333333;
 	}
 
 	&__countryName {
 		padding-left: 0 !important;
-		color: #333;
+		color: #333333;
 
 		&:before {
-			content: ', ';
+			content: ", ";
 		}
 	}
 

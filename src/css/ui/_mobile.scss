@@ -7,7 +7,7 @@
 		left: 0;
 		right: 0;
 		z-index: 12;
-		
+
 		color: $title-color;
 		font-weight: 600;
 		font-size: 17px;
@@ -15,7 +15,7 @@
 
 		@include adaptivity(phone) {
 			background: $title-color;
-			color: #fff;
+			color: #ffffff;
 			position: fixed;
 			height: $mobile-header-height;
 			line-height: $mobile-header-height;
@@ -25,7 +25,7 @@
 	&__back {
 		display: none;
 		position: absolute;
-		color: #fff;
+		color: #ffffff;
 		font-weight: normal;
 		font-size: 11px;
 		cursor: pointer;
@@ -46,7 +46,7 @@
 			display: block;
 		}
 	}
-	
+
 	&__title {
 		display: inline-block;
 	}

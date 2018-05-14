@@ -5,7 +5,7 @@
 	// so we have to do a lot of dirty overwriting.
 	.Select {
 		&-loading {
-			border-right-color: #888;
+			border-right-color: #888888;
 
 			&-zone {
 				position: absolute;
@@ -21,7 +21,7 @@
 			cursor: pointer;
 			border-radius: 0;
 			height: 40px;
-			border-color: #ccc !important;
+			border-color: #cccccc !important;
 
 			&:hover {
 				box-shadow: none;
@@ -40,8 +40,8 @@
 				padding: 0;
 				font-weight: 600;
 				font-size: 15px;
-				color: #666 !important;
-				
+				color: #666666 !important;
+
 				&[readonly] {
 					cursor: pointer;
 				}
@@ -63,19 +63,15 @@
 				max-height: 370px;
 				overflow: auto;
 				border-radius: 0;
-				//visibility: hidden;
-				//opacity: 0;
-				//filter: alpha(opacity = 0);
 
-				border: 1px solid #ccc;
+				border: 1px solid #cccccc;
 				box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 				background-color: #ffffff;
-				//transition: 250ms ease;
 			}
 		}
 
 		&-option {
-			transition: background, .4s, ease;
+			transition: background, 0.4s, ease;
 			display: block;
 			position: relative;
 
@@ -83,17 +79,18 @@
 			line-height: 16px;
 
 			list-style-type: none;
-			background: #fff;
+			background: #ffffff;
 			border-bottom: 1px solid #e6e6e6;
 			color: $font-color;
 			font-size: 15px;
 			font-weight: 400;
 			cursor: pointer;
 
-			&:hover, &.is-focused {
+			&:hover,
+			&.is-focused {
 				background: rgba(0, 76, 186, 0.07);
 			}
-			
+
 			&:last-of-type {
 				@include adaptivity(not-phone) {
 					border-bottom: none;
@@ -105,13 +102,13 @@
 	&.is-open {
 		.Select {
 			&-control {
-				border-color: #ccc;
+				border-color: #cccccc;
 			}
 		}
 	}
 
 	&_loading {
-		background: url('/images/form/spinner.svg') no-repeat 90% center;
+		background: url("/images/form/spinner.svg") no-repeat 90% center;
 		background-size: 20px;
 	}
 
@@ -123,7 +120,7 @@
 	&__wrapper {
 		position: relative;
 	}
-	
+
 	&__value {
 		position: absolute;
 		left: 0;
@@ -135,13 +132,14 @@
 		align-items: center;
 		padding-left: 13px;
 		white-space: nowrap;
-		
-		&__airportName, &__comma {
+
+		&__airportName,
+		&__comma {
 			font-weight: 600;
 			font-size: 15px;
-			color: #666;
+			color: #666666;
 		}
-		
+
 		&__countryName {
 			font-weight: 600;
 			font-size: 15px;
@@ -150,7 +148,7 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}
-		
+
 		&__placeholder {
 			@extend .Select-placeholder;
 			display: none;
@@ -164,19 +162,20 @@
 				background-color: transparent;
 
 				.widget-form-airports__select__value {
-					&__airportName, &__countryName {
+					&__airportName,
+					&__countryName {
 						display: none;
 					}
 
 					&__placeholder {
 						display: block;
 					}
-					
+
 					&_readOnly {
 						.widget-form-airports__select__value__placeholder {
 							display: none;
 						}
-						
+
 						.widget-form-airports__select__value__airportName,
 						.widget-form-airports__select__value__countryName {
 							display: block;
@@ -195,7 +194,13 @@
 					display: flex;
 					height: $mobile-input-height;
 					line-height: normal;
-					
+
+					background-color: #ffffff;
+					box-shadow: none;
+					border-top: none;
+					border-left: none;
+					border-right: none;
+
 					.Select-multi-value-wrapper {
 						width: 100%;
 					}
@@ -203,33 +208,28 @@
 					.widget-form-airports__select__value {
 						right: 0;
 					}
-					
+
 					.Select-arrow-zone {
 						display: none;
 					}
 
-					.Select-input:not(input), .Select-placeholder {
+					.Select-input:not(input),
+					.Select-placeholder {
 						height: $mobile-input-height;
 						display: flex;
 						align-items: center;
 					}
-					
+
 					input {
 						line-height: normal;
 					}
-
-					background-color: #fff;
-					box-shadow: none;
-					border-top: none;
-					border-left: none;
-					border-right: none;
 				}
 			}
 
 			&-menu {
 				&-outer {
 					margin-top: -1px;
-					
+
 					@include adaptivity(phone) {
 						position: fixed;
 						top: $mobile-header-height;
@@ -245,8 +245,9 @@
 					}
 				}
 			}
-			
-			&-noresults, &-defaultOptions-hint {
+
+			&-noresults,
+			&-defaultOptions-hint {
 				@include adaptivity(not-phone) {
 					text-align: left;
 				}
@@ -257,7 +258,7 @@
 				line-height: 16px;
 				text-align: center;
 
-				background: #fff;
+				background: #ffffff;
 				border-bottom: 1px solid #e6e6e6;
 				color: #b3b3b3;
 				font-size: 15px;
@@ -279,7 +280,7 @@
 			}
 		}
 	}
-	
+
 	&_readOnly {
 		.Select-placeholder {
 			cursor: pointer;

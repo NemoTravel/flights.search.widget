@@ -1,8 +1,14 @@
-## Команды для разработки
+# Development
 
-* `npm run build` — генерирует минифицированные CSS и JavaScript пакеты в папку `/dist/`
-* `npm run build-dev` — генерирует полноразмерные CSS и JavaScript пакеты, и Webpack начинает отслеживать изменения в файлах (`watch: true`)
-* `npm run server` — запускает Express-сервер в корне проекта и сразу же открывает браузер на `http://localhost:5555`
-* `npm run dev` — **использовать для разработки**: запускает Express-сервер, открывает браузер и запускает Webpack в `dev` режиме (аналогично `npm run server && npm run build-dev`)
+Run `npm run build` before **every** commit.
 
-Перед коммитом обязательно необходимо выполнять команду `npm run build`, для сборки минифицированного пакета.
+## Install required dependencies
+* `npm install react@16.x.x react-dom@16.x.x redux@4.x.x --no-save`
+* `npm install`
+
+## Build commands
+
+* `npm run build` — builds minified (production-ready) JS and CSS files
+* `npm run build-dev` — builds uncompressed JS and CSS files and runs Webpack in `dev` mode
+* `npm run server` — runs Express-server and opens browser on `http://localhost:5555`
+* `npm run dev` — **use for development**: runs Express-server, opens browser and runs Webpack in `dev` mode

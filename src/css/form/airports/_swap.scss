@@ -11,10 +11,10 @@
 	transform: translateY(-50%);
 	font-size: 12px;
 	cursor: pointer;
-	color: #ccc;
-	background: #fff;
+	color: #cccccc;
+	background: #ffffff;
 
-	border: 1px solid #ccc;
+	border: 1px solid #cccccc;
 	border-radius: 50%;
 
 	display: flex;
@@ -25,7 +25,7 @@
 		@include adaptivity(not-phone) {
 			background: $title-color;
 			border-color: $title-color;
-			color: #fff;
+			color: #ffffff;
 		}
 	}
 
@@ -33,7 +33,7 @@
 		@include adaptivity(phone) {
 			background: $title-color;
 			border-color: $title-color;
-			color: #fff;
+			color: #ffffff;
 		}
 	}
 

@@ -1,61 +1,61 @@
 &-demo {
 	@import "ui";
-	
+
 	&-config {
 		position: fixed;
 		left: 0;
 		top: 0;
 		bottom: 0;
-		
+
 		width: 400px;
 		padding: 15px;
 		overflow-y: scroll;
-		
+
 		background: #f7f7f7;
-		border-right: 1px solid #ccc;
+		border-right: 1px solid #cccccc;
 		font-family: "Open Sans", sans-serif;
 		font-size: 14px;
-		
+
 		@include adaptivity(phone) {
 			position: static;
 			width: 100%;
-			border-bottom: 1px solid #ccc;
+			border-bottom: 1px solid #cccccc;
 			border-right: none;
 		}
-		
+
 		h3 {
 			margin-bottom: 30px;
 		}
-		
+
 		label {
 			display: block;
 		}
-		
+
 		&__description {
 			margin-bottom: 3px;
 		}
-		
+
 		&__inputBlock {
 			margin-bottom: 1rem;
-			border-bottom: 1px solid #ddd;
-			
+			border-bottom: 1px solid #dddddd;
+
 			label {
 				margin-bottom: 0;
 			}
 		}
-		
+
 		&__information {
-			border-bottom: 1px solid #ddd;
+			border-bottom: 1px solid #dddddd;
 			margin-bottom: 1rem;
 			text-align: justify;
 		}
-		
+
 		&__generator {
-			border-top: 1px solid #ddd;
+			border-top: 1px solid #dddddd;
 			padding-top: 1rem;
 		}
 	}
-	
+
 	&-content {
 		padding-left: 400px;
 		padding-top: 100px;

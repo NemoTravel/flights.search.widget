@@ -57,11 +57,12 @@ describe('preinit options', () => {
 		const expectValue = initialState.form;
 
 		expectValue.segments.push(segmentState);
+		expectValue.segments.push(segmentState);
 
-		expectValue.segments[0].dates.departure.date = moment(config.defaultDepartureDate);
-		expectValue.segments[0].dates.return.date = moment(config.defaultReturnDate);
+		expectValue.segments[0].departureDate.date = moment(config.defaultDepartureDate);
+		expectValue.segments[1].departureDate.date = moment(config.defaultReturnDate);
 
-		expect(getStore(config).getState().form.segments[0].dates).toEqual(expectValue.segments[0].dates);
+		expect(getStore(config).getState().form.segments).toEqual(expectValue.segments);
 	});
 
 });

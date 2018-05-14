@@ -10,7 +10,8 @@
 	}
 
 	&__trigger {
-		&, input {
+		&,
+		input {
 			cursor: pointer;
 		}
 	}
@@ -36,7 +37,7 @@
 		border: 1px solid #e6e6e6;
 		border-top: none;
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-		background-color: #fff;
+		background-color: #ffffff;
 		font-weight: 400;
 
 		@include adaptivity(phone) {
@@ -57,7 +58,7 @@
 		border-top: 1px solid #e6e6e6;
 
 		&_disabled {
-			color: #B3B3B3;
+			color: #b3b3b3;
 		}
 
 		@include adaptivity(phone) {
@@ -87,7 +88,7 @@
 		text-overflow: ellipsis;
 
 		&__age {
-			color: #ccc;
+			color: #cccccc;
 			font-size: 13px;
 			padding-left: 10px;
 
@@ -141,7 +142,7 @@
 			@include adaptivity(not-phone) {
 				background-color: $title-color;
 				border-color: $title-color;
-				color: #fff;
+				color: #ffffff;
 			}
 		}
 
@@ -149,15 +150,16 @@
 			@include adaptivity(phone) {
 				background-color: $title-color;
 				border-color: $title-color;
-				color: #fff;
+				color: #ffffff;
 			}
 		}
 
 		&_disabled {
-			&, &:hover {
-				background-color: #fff;
-				border-color: #F2F2F2;
-				color: #F2F2F2;
+			&,
+			&:hover {
+				background-color: #ffffff;
+				border-color: #f2f2f2;
+				color: #f2f2f2;
 				cursor: not-allowed;
 			}
 		}

@@ -6,20 +6,20 @@ import {
 } from '../../../../state';
 import { AnyAction, Dispatch } from 'redux';
 import { AvailableDateResponse } from '../../../../services/responses/AvailableDates';
+import { isRT } from '../../selectors';
 
 export interface DatepickerAction {
 	type: string;
-	dateType: DatepickerFieldType;
+	dateType?: DatepickerFieldType;
 	payload?: any;
 	segmentId?: number;
 }
 
-const getDateByType = (state: ApplicationState, dateType: DatepickerFieldType, segmentId: number = 0): Moment => state.form.segments[segmentId].dates[dateType].date;
+const getDate = (state: ApplicationState, segmentId: number = 0): Moment => state.form.segments[segmentId].departureDate.date;
 
-export const selectDate = (date: Moment, dateType: DatepickerFieldType, segmentId: number = 0): DatepickerAction => {
+export const selectDate = (date: Moment, segmentId: number = 0): DatepickerAction => {
 	return {
 		type: SELECT_DATE,
-		dateType,
 		segmentId,
 		payload: {
 			date
@@ -27,7 +27,7 @@ export const selectDate = (date: Moment, dateType: DatepickerFieldType, segmentI
 	};
 };
 
-export const toggleDatePicker = (isActive: boolean, dateType: DatepickerFieldType, segmentId: number = 0): DatepickerAction => {
+export const toggleDatePicker = (isActive: boolean, dateType: DatepickerFieldType): DatepickerAction => {
 	return {
 		type: TOGGLE_DATEPICKER,
 		dateType,
@@ -37,7 +37,7 @@ export const toggleDatePicker = (isActive: boolean, dateType: DatepickerFieldTyp
 	};
 };
 
-export const setAvailableDates = (availableDates: AvailableDateResponse[], dateType: DatepickerFieldType, segmentId: number = 0): DatepickerAction => {
+export const setAvailableDates = (availableDates: AvailableDateResponse[], dateType: DatepickerFieldType): DatepickerAction => {
 	return {
 		type: SET_AVAILABLE_DATES,
 		dateType,
@@ -59,27 +59,28 @@ export const datepickerChange = (date: Moment, dateType: DatepickerFieldType, se
 	return (dispatch, getState): void => {
 		const state = getState();
 
-		// If the new departure date is `bigger` than the selected return date,
-		// clear the return date.
-		if (dateType === 'departure') {
-			const anotherDate = getDateByType(state, DatepickerFieldType.Return, segmentId);
+		if (isRT(state)) {
+			// If the new departure date is `bigger` than the selected return date,
+			// clear the return date.
+			if (segmentId === 0) {
+				const anotherDate = getDate(state, 1);
 
-			if (anotherDate && anotherDate.isBefore(date)) {
-				dispatch(selectDate(null, DatepickerFieldType.Return, segmentId));
-				dispatch(toggleDatePicker(false, DatepickerFieldType.Return));
+				if (anotherDate && anotherDate.isBefore(date)) {
+					dispatch(selectDate(null, 1));
+					dispatch(toggleDatePicker(false, DatepickerFieldType.Return));
+				}
 			}
-		}
+			// Do the same thing if the selected departure date is `smaller` than the new return date.
+			else if (segmentId === 1) {
+				const anotherDate = getDate(state, 0);
 
-		// Do the same thing if the selected departure date is `smaller` than the new return date.
-		else if (dateType === 'return') {
-			const anotherDate = getDateByType(state, DatepickerFieldType.Departure, segmentId);
-
-			if (anotherDate && anotherDate.isAfter(date)) {
-				dispatch(selectDate(date, DatepickerFieldType.Departure, segmentId));
+				if (anotherDate && anotherDate.isAfter(date)) {
+					dispatch(selectDate(date, 0));
+				}
 			}
 		}
 
 		// Update new date.
-		dispatch(selectDate(date, dateType, segmentId));
+		dispatch(selectDate(date, segmentId));
 	};
 };

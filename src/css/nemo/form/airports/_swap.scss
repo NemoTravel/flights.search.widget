@@ -33,27 +33,27 @@
 	}
 
 	&:after {
-		content: '';
+		content: "";
 		width: 17px;
 		height: 7px;
-		background-image: url(images/arrow.svg);
+		background-image: url("images/arrow.svg");
 		position: absolute;
 		top: 21px;
 		left: 12px;
 		transform: rotate(180deg) translateX(1px);
-		transition: transform .1s ease-in-out;
+		transition: transform 0.1s ease-in-out;
 	}
 
 	&:before {
-		content: '';
+		content: "";
 		width: 17px;
 		height: 7px;
-		background-image: url(images/arrow.svg);
+		background-image: url("images/arrow.svg");
 		position: absolute;
 		top: 12px;
 		left: 12px;
 		transform: translateX(1px);
-		transition: transform .1s ease-in-out;
+		transition: transform 0.1s ease-in-out;
 	}
 
 	@include adaptivity(phone) {

@@ -2,25 +2,25 @@
 
 .widget-ui-tooltip {
 	position: relative;
-	
+
 	&__pop {
 		display: none;
 		position: absolute;
 		transform: translateY(-40px);
 		z-index: 10;
-		
+
 		margin: 5px;
 		padding: 7px 10px 8px;
 
 		border-radius: 3px;
-		background: #4D4D4D;
-		color: #fff;
+		background: #4d4d4d;
+		color: #ffffff;
 		font-size: 12px;
 		line-height: 14px;
 		font-weight: 400;
 		white-space: nowrap;
 		user-select: none;
-		
+
 		&:after {
 			position: absolute;
 			top: 100%;
@@ -29,11 +29,11 @@
 			width: 0;
 
 			margin-left: -6px;
-			
+
 			pointer-events: none;
 			content: " ";
 			border: 6px solid rgba(0, 0, 0, 0);
-			border-top-color: #4D4D4D;
+			border-top-color: #4d4d4d;
 		}
 
 		&_visible {

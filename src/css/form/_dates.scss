@@ -6,7 +6,7 @@
 		padding-right: 35px;
 		-webkit-appearance: none;
 		z-index: 0;
-		
+
 		@include adaptivity(phone) {
 			padding-right: 30px;
 		}
@@ -38,16 +38,18 @@
 	&__dayOfWeek {
 		color: #b3b3b3;
 	}
-	
-	&__col.col {
-		position: static;
-		
-		&:first-of-type {
-			padding-right: 0.5rem;
-		}
-		
-		&:last-of-type {
-			padding-left: 0.5rem;
+
+	&__col {
+		&.col {
+			position: static;
+
+			&:first-of-type {
+				padding-right: 0.5rem;
+			}
+
+			&:last-of-type {
+				padding-left: 0.5rem;
+			}
 		}
 	}
 }

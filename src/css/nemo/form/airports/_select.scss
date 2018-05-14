@@ -24,8 +24,8 @@
 			&-outer {
 				border-radius: 4px;
 				margin-top: 5px !important;
-				box-shadow: 0 1px 16px rgba(10,10,15,.25);
-				border: none!important;
+				box-shadow: 0 1px 16px rgba(10, 10, 15, 0.25);
+				border: none !important;
 
 				.Select-option {
 					padding-right: 10px !important;
@@ -41,7 +41,8 @@
 	&__value {
 		width: 100%;
 
-		&__airportName, &__comma {
+		&__airportName,
+		&__comma {
 			font-size: 13px;
 			color: #0a0a0f;
 			font-weight: normal;
@@ -49,7 +50,7 @@
 
 		&__countryName {
 			font-size: 13px;
-			color: rgba(100,100,100,.75);
+			color: rgba(100, 100, 100, 0.75);
 			font-weight: normal;
 		}
 
@@ -64,10 +65,11 @@
 		.Select {
 			&-control {
 				box-shadow: none;
-				background-color: #fff;
+				background-color: #ffffff;
 			}
 
-			&-noresults, &-defaultOptions-hint {
+			&-noresults,
+			&-defaultOptions-hint {
 				font-weight: normal;
 				font-size: 13px;
 			}
