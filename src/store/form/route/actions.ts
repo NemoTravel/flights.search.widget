@@ -3,6 +3,7 @@ import {
 	AutocompleteFieldType, CommonThunkAction, GetStateFunction, RouteType,
 	SEGMENTS_COUNT_RT
 } from '../../../state';
+import { AnyAction, Dispatch } from 'redux';
 import { addSegment } from '../segments/actions';
 import { setSelectedAirport } from '../segments/autocomplete/actions';
 import { Airport } from '../../../services/models/Airport';
@@ -23,7 +24,7 @@ const airportsAreEqual = (airport1: Airport, airport2: Airport): boolean => {
 	return ((airport1 && airport2) && airport1.IATA === airport2.IATA);
 };
 
-const setSimpleRoute = (getState: GetStateFunction, dispatch: Dispatch<AnyAction>): void => {
+const setSimpleRoute = (getState: GetStateFunction, dispatch: Dispatch<AnyAction, any>): void => {
 	const segments = getState().form.segments;
 
 	if (
@@ -40,7 +41,7 @@ const setSimpleRoute = (getState: GetStateFunction, dispatch: Dispatch<AnyAction
 };
 
 export const setRouteType = (newRouteType: RouteType): CommonThunkAction => {
-	return (dispatch: Dispatch<AnyAction>, getState: GetStateFunction): void => {
+	return (dispatch: Dispatch<AnyAction, any>, getState: GetStateFunction): void => {
 		const currentRouteType = getState().form.routeType,
 					  segments = getState().form.segments;
 

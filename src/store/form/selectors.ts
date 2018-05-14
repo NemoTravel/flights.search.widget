@@ -44,8 +44,7 @@ export const getSearchInfo = createSelector(
 			return {
 				departure: segment.autocomplete.departure.airport,
 				arrival: segment.autocomplete.arrival.airport,
-				departureDate: segment.dates.departure.date,
-				returnDate: segment.dates.return.date ? segment.dates.return.date : null
+				departureDate: segment.departureDate.date
 			};
 		});
 
