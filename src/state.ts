@@ -2,14 +2,13 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { ThunkAction } from 'redux-thunk';
 
-import { autocompleteAirportReducer, autocompleteGroupsReducer } from './store/form/segments/autocomplete/reducer';
-import { setAvailableDatesReducer } from './store/form/segments/dates/reducer';
 import { AvailableDateResponse } from './services/responses/AvailableDates';
 import { Airport } from './services/models/Airport';
 import { AutocompleteSuggestion } from './services/models/AutocompleteSuggestion';
 
 export const CLASS_TYPES = ['Economy', 'Business'];
 export const MAX_SEGMENTS_COUNT = 4;
+export const SEGMENTS_COUNT_RT = 2;
 
 export enum ApplicationMode {
 	NEMO = 'NEMO',
@@ -178,34 +177,22 @@ export interface DatepickerState {
 	availableDates: AvailableDateResponse[];
 }
 
-export interface DatesState {
-	departure: DatepickerState;
-	return: DatepickerState;
-}
-
-export const datesState: DatesState = {
-	[DatepickerFieldType.Departure]: {
-		isActive: true,
-		date: null,
-		availableDates: []
-	},
-	[DatepickerFieldType.Return]: {
-		isActive: false,
-		date: null,
-		availableDates: []
-	}
+export const dateState: DatepickerState = {
+	isActive: true,
+	date: null,
+	availableDates: []
 };
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 export interface SegmentState {
 	autocomplete: AutocompleteState,
-	dates: DatesState
+	departureDate?: DatepickerState
 }
 
 export const segmentState: SegmentState = {
 	autocomplete: autocompleteState,
-	dates: datesState
+	departureDate: dateState
 };
 
 export interface PassengerState {
@@ -366,38 +353,29 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 
 		if (stateFromCache.form) {
 
-			const tmpSegment: SegmentState = segmentState;
-
 			if (stateFromCache.form.routeType) {
 				state.form.routeType = stateFromCache.form.routeType;
 			}
 
 			if (stateFromCache.form.segments) {
-				const cashedSegments = stateFromCache.form.segments,
-				segments: SegmentState[] = [];
+				const cachedSegments = stateFromCache.form.segments;
 
-				cashedSegments.map((segment: any, index: number) => {
-					if (segment.dates.departure.date) {
-						const newDateStateDeparture: DatepickerState = {
-							isActive: segment.dates.departure.isActive,
-							availableDates: segment.dates.departure.availableDates,
-							date: moment(segment.dates.departure.date).locale(state.system.locale)
-						};
-
-						segment.dates.departure = newDateStateDeparture;
+				const segments = cachedSegments.map(segment => {
+					if (!canBeProcessed) {
+						segment.autocomplete = autocompleteState;
 					}
 
-					if (segment.dates.return.date) {
-						const newDateStateReturn: DatepickerState = {
-							isActive: segment.dates.return.isActive,
-							availableDates: segment.dates.return.availableDates,
-							date: moment(segment.dates.return.date).locale(state.system.locale)
+					if (segment.departureDate.date) {
+						const newDateState: DatepickerState = {
+							isActive: segment.departureDate.isActive,
+							availableDates: segment.departureDate.availableDates,
+							date: moment(segment.departureDate.date).locale(state.system.locale)
 						};
 
-						segment.dates.return = newDateStateReturn;
+						segment.departureDate = newDateState;
 					}
 
-					segments.push(segment);
+					return segment;
 				});
 
 				state.form.segments = segments;
