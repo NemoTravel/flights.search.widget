@@ -48,6 +48,17 @@
 			position: relative;
 		}
 	}
+
+	&_CR {
+		@include adaptivity(not-phone) {
+			.widget-form-search__footer {
+				.col:first-of-type {
+					flex-basis: 0;
+					min-width: calc(85% / 2 - 13px);
+				}
+			}
+		}
+	}
 	
 	&_vertical {
 		.widget-form {

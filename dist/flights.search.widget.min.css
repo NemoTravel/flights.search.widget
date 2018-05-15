@@ -6677,6 +6677,19 @@
   }
 }
 
+@media only screen and (min-width: 651px) {
+  .widget-form-segments_CR .widget-form-airports {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    min-width: 85%;
+  }
+
+  .widget-form-segments_CR .widget-form-dates {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+  }
+}
+
 @media only screen and (max-width: 650px) {
   .widget-form-segments_CR .widget-form-dates {
     width: 100%;
@@ -6777,6 +6790,14 @@
   .widget-form__routeTypeSwitch {
     margin: 0 0 1rem;
     position: relative;
+  }
+}
+
+@media only screen and (min-width: 651px) {
+  .widget-form_CR .widget-form-search__footer .col:first-of-type {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    min-width: calc(85% / 2 - 13px);
   }
 }
 

@@ -51,6 +51,19 @@
 			}
 		}
 
+		@include adaptivity(not-phone) {
+			.widget-form {
+				&-airports {
+					flex-basis: 0;
+					min-width: 85%;
+				}
+
+				&-dates {
+					flex-basis: 100%;
+				}
+			}
+		}
+
 		@include adaptivity(phone) {
 			.widget-form-dates {
 				width: 100%;
