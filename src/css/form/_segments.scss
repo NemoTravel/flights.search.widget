@@ -13,6 +13,20 @@
 		.widget-form-segments__segment {
 			display: flex;
 
+			&:last-of-type {
+				.widget-form {
+					&-airports, &-dates {
+						margin-bottom: 0;
+					}
+
+					@include adaptivity(phone) {
+						&-airports {
+							margin-bottom: 1rem;
+						}
+					}
+				}
+			}
+
 			.widget-form-airports__swap {
 				display: none;
 			}
@@ -101,7 +115,7 @@
 			&:before {
 				content: $icon-cross;
 				line-height: 30px;
-				color: #fff;
+				color: $font-color;
 			}
 
 			@include adaptivity(phone) {

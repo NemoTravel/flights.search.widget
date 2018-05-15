@@ -6640,6 +6640,17 @@
   display: flex;
 }
 
+.widget-form-segments_CR .widget-form-segments__segment:last-of-type .widget-form-airports,
+.widget-form-segments_CR .widget-form-segments__segment:last-of-type .widget-form-dates {
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-segments_CR .widget-form-segments__segment:last-of-type .widget-form-airports {
+    margin-bottom: 1rem;
+  }
+}
+
 .widget-form-segments_CR .widget-form-segments__segment .widget-form-airports__swap {
   display: none;
 }
@@ -6726,7 +6737,7 @@
 .widget-form-segments__segment__drop:before {
   content: "\E908";
   line-height: 30px;
-  color: #fff;
+  color: #666666;
 }
 
 @media only screen and (max-width: 650px) {
@@ -6790,6 +6801,9 @@
   .widget-form__routeTypeSwitch {
     margin: 0 0 1rem;
     position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
 
@@ -6864,6 +6878,15 @@
 
 .widget-form_vertical .widget-form-segments_CR .widget-form-segments__segment {
   margin-bottom: 1rem;
+}
+
+.widget-form_vertical .widget-form-segments_CR .widget-form-segments__segment:last-of-type .widget-form-airports {
+  margin-bottom: 1rem;
+}
+
+.widget-form_vertical .widget-form-segments_CR .widget-form-airports {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
 }
 
 .widget-form_vertical .widget-form-segments__segment {

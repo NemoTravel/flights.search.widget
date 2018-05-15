@@ -29,6 +29,7 @@
 
 			&:before {
 				line-height: 30px;
+				color: #fff;
 			}
 
 			@include adaptivity(tablet) {

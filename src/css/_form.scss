@@ -46,6 +46,10 @@
 		@include adaptivity(phone) {
 			margin: 0 0 1rem;
 			position: relative;
+
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
 		}
 	}
 
@@ -125,6 +129,16 @@
 
 					.widget-form-segments__segment {
 						margin-bottom: 1rem;
+
+						&:last-of-type {
+							.widget-form-airports {
+								margin-bottom: 1rem;
+							}
+						}
+					}
+
+					.widget-form-airports {
+						flex-basis: 100%;
 					}
 				}
 

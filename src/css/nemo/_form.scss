@@ -80,6 +80,16 @@
 		}
 	}
 
+	&_CR {
+		@include adaptivity(not-phone) {
+			.widget-form-search__footer {
+				.col:first-of-type {
+					flex-basis: 50%;
+				}
+			}
+		}
+	}
+
 	&_vertical {
 		&:after {
 			display: none;

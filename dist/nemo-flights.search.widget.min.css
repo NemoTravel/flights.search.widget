@@ -1086,6 +1086,7 @@
 
 .widget-form-segments__segment__drop:before {
   line-height: 30px;
+  color: #fff;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -1225,6 +1226,13 @@
     padding-top: 0;
     margin-top: 0;
     top: 0;
+  }
+}
+
+@media only screen and (min-width: 651px) {
+  .widget-form_CR .widget-form-search__footer .col:first-of-type {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
   }
 }
 
