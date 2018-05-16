@@ -1,7 +1,6 @@
 node_modules
 .idea
-/npm-debug.log
-nbproject
+src
 webpack.config.js
 .gitignore
 .npmignore
@@ -9,6 +8,7 @@ webpack.config.js
 server.js
 tsconfig.json
 tslint.json
+.sass-lint.yml
 preprocessor.js
 postcss.config.js
 package-lock.json
