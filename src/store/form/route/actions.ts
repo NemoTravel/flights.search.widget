@@ -37,7 +37,6 @@ const setSimpleRoute = (getState: GetStateFunction, dispatch: Dispatch<AnyAction
 	}
 	else {
 		dispatch(setRouteTypeAction(RouteType.OW));
-		dispatch(removeComplexSegments());
 	}
 };
 
