@@ -68,7 +68,7 @@
 		@include adaptivity(tablet) {
 			position: absolute;
 			left: 0;
-			top: 60px;
+			top: 65px;
 			margin-left: calc(-1rem - 100%);
 		}
 
@@ -117,6 +117,10 @@
 				&__startButton {
 					width: 100%;
 				}
+
+				&__addSegment {
+					margin-top: -1rem;
+				}
 			}
 
 			&-dates {
@@ -163,12 +167,19 @@
 
 				&_CR {
 					.widget-form-segments__segment {
-						padding-left: 20px;
 						margin-left: 0;
 						margin-bottom: 2rem;
 
 						&__drop {
-							margin-left: -10px;
+							height: 20px;
+							width: 20px;
+							margin-left: -1rem;
+							top: 5px;
+
+							&:before {
+								line-height: 20px;
+								font-size: 9px;
+							}
 						}
 					}
 
@@ -220,6 +231,15 @@
 				z-index: 1;
 				margin-bottom: 1rem !important;
 				padding-left: 0;
+
+				&__checkboxes {
+					margin-bottom: 1rem;
+					margin-right: 0;
+
+					.widget-ui-select {
+						width: 100%;
+					}
+				}
 			}
 
 			&__routeTypeSwitch {
@@ -227,7 +247,6 @@
 				margin: 0;
 				display: inline-block;
 				width: 100%;
-				padding-top: 10px;
 
 				@include adaptivity(tablet) {
 					top: 0;

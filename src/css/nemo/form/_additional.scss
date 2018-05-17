@@ -11,8 +11,16 @@
 	display: flex;
 
 	&__checkboxes {
-		display: flex;
 		flex-wrap: nowrap;
+		display: none;
+
+		@include adaptivity(phone) {
+			margin-bottom: 1rem;
+		}
+
+		&_nemo {
+			display: block;
+		}
 
 		@include adaptivity(desktop) {
 			margin-right: calc(100px + 1.5rem);
@@ -27,10 +35,6 @@
 		@include adaptivity(tablet) {
 			width: 100%;
 		}
-
-		@include adaptivity(phone) {
-			display: block;
-		}
 	}
 
 	@include adaptivity(desktop) {
@@ -44,11 +48,94 @@
 		height: 40px;
 		top: 0;
 		left: 0;
-		margin-bottom: 0 !important;
+		margin-bottom: 10px !important;
 	}
 
 	@include adaptivity(phone) {
 		height: auto;
 		display: block;
+		margin-bottom: 0 !important;
+	}
+
+	.widget-ui-select {
+		width: 200px;
+		position: relative;
+
+		@include adaptivity(tablet) {
+			width: auto;
+		}
+
+		&__toggle {
+			display: block;
+			font-size: 13px;
+			padding: 0 40px 0 20px;
+			height: 30px;
+			line-height: 30px;
+			text-align: left;
+			color: #0a0a0f;
+			background-color: #ebebeb;
+			background-image: linear-gradient(to bottom,rgba(250,250,250,.75),rgba(240,240,240,.75));
+			position: relative;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			vertical-align: baseline;
+			cursor: pointer;
+			text-decoration: none;
+			outline: 0;
+			user-select: none;
+			transition: all 0.1s ease-in;
+			border: none;
+			border-radius: 4px;
+
+			&::after {
+				content: '';
+				position: absolute;
+				width: 12px;
+				height: 9px;
+				top: 50%;
+				margin-top: -3px;
+				right: 14px;
+				transition: all 0.2s;
+				background: url("images/widget-ui-select-arrow.svg") no-repeat;
+			}
+		}
+
+		&__dropdown {
+			display: flex;
+			flex-direction: column;
+			left: 0;
+			right: auto;
+			min-width: 1px;
+			width: 100%;
+			padding: 10px 15px;
+			position: absolute;
+			z-index: 50;
+			margin: 5px 0;
+			background: #fff 0 0;
+			border-radius: 4px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.25);
+
+			.widget-ui-checkbox {
+				margin-bottom: 10px;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+
+				&__caption {
+					color: #636467;
+				}
+			}
+
+			.widget-ui-checkbox__input:checked + label .widget-ui-checkbox__caption {
+				color: #636467;
+			}
+
+			&__item {
+				color: #636467;
+				padding: 5px 0;
+			}
+		}
 	}
 }

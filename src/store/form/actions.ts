@@ -84,7 +84,7 @@ const runNemoSearch = (state: ApplicationState): void => {
 	requestURL += '-class=' + state.form.additional.classType;
 
 	// VicinityDates
-	if (state.form.additional.vicinityDates && segments.length === 1) {
+	if (state.form.additional.vicinityDates) {
 		requestURL += `-vicinityDates=${state.system.vicinityDays}`;
 	}
 
