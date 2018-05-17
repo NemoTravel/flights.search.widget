@@ -32,6 +32,16 @@
 					display: none;
 				}
 
+				&__col {
+					&:last-of-type {
+						.Select-control .Select-placeholder,
+						.Select-input:not(input),
+						.widget-form-airports__select__value {
+							padding-left: 13px !important;
+						}
+					}
+				}
+
 				@include adaptivity(phone) {
 					margin-bottom: -1px;
 				}
