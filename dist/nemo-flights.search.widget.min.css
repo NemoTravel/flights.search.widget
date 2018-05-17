@@ -330,7 +330,7 @@
 }
 
 .widget-form-airports__select .Select-menu-outer .Select-option {
-  padding-right: 10px !important;
+  padding: 0;
 }
 
 .widget-form-airports__select .Select-option {
@@ -453,9 +453,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-right: 40px;
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
+  padding: 10px 40px 10px 13px;
 }
 
 .widget-form-airports__suggestion__code {
@@ -475,10 +475,7 @@
 
 .widget-form-airports__suggestion_insideAggregation {
   background: #fafafa;
-  margin: -10px;
   padding-left: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 .widget-form-airports__suggestion_insideAggregation .widget-form-airports__suggestion__countryName {
@@ -496,7 +493,7 @@
 }
 
 .widget-form-airports__suggestion_insideAggregation:hover {
-  background: rgba(100, 181, 246, 0.1);
+  background: rgba(0, 76, 186, 0.07);
 }
 
 .widget-form-airports__suggestion_isAggregation:before {

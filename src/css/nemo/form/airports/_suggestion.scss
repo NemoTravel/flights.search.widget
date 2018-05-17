@@ -4,8 +4,9 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding-right: 40px;
+	//padding-right: 40px;
 	transition: background-color 0.2s;
+	padding: 10px 40px 10px 13px;
 
 	&__code {
 		color: #868e96;
@@ -24,10 +25,7 @@
 
 	&_insideAggregation {
 		background: #fafafa;
-		margin: -10px;
 		padding-left: 30px;
-		padding-top: 10px;
-		padding-bottom: 10px;
 
 		.widget-form-airports__suggestion__countryName {
 			display: none;
@@ -44,7 +42,7 @@
 		}
 
 		&:hover {
-			background: rgba(100,181,246,.1);
+			background: rgba(0, 76, 186, 0.07);
 		}
 	}
 
