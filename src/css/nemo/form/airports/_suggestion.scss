@@ -1,5 +1,5 @@
 &__suggestion {
-	font-size: 13px;
+	font-size: 15px;
 	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
@@ -16,15 +16,21 @@
 	}
 
 	&__countryName {
+		display: block;
 		padding-left: 0 !important;
-		color: #333333;
-
-		&:before {
-			content: ", ";
-		}
+		color: #868e96;
 	}
 
 	&_insideAggregation {
-		padding-left: 15px;
+		background: #fafafa;
+	//	padding-left: 15px;
+		margin: -10px;
+		padding-left: 30px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	&_isAggregation {
+
 	}
 }
