@@ -57,6 +57,14 @@
 	&_CR {
 		flex-wrap: wrap !important;
 
+		.widget-form-segments__segment {
+			&:last-of-type {
+				.widget-form-dates {
+					padding-bottom: 0;
+				}
+			}
+		}
+
 		@include adaptivity(desktop) {
 			.widget-form-additionalOptions {
 				left: -180px;

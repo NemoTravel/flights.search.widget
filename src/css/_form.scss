@@ -131,14 +131,17 @@
 						margin-bottom: 1rem;
 
 						&:last-of-type {
+							margin-bottom: 0;
+
 							.widget-form-airports {
-								margin-bottom: 1rem;
+								margin-bottom: -1px;
 							}
 						}
 					}
 
 					.widget-form-airports {
 						flex-basis: 100%;
+						margin-bottom: -1px;
 					}
 				}
 
@@ -147,8 +150,6 @@
 					flex-wrap: wrap;
 
 					&__drop {
-						left: auto;
-						right: 0;
 						margin-top: 25px;
 					}
 

@@ -21,14 +21,20 @@
 
 					@include adaptivity(phone) {
 						&-airports {
-							margin-bottom: 1rem;
+							margin-bottom: -1px;
 						}
 					}
 				}
 			}
 
-			.widget-form-airports__swap {
-				display: none;
+			.widget-form-airports {
+				&__swap {
+					display: none;
+				}
+
+				@include adaptivity(phone) {
+					margin-bottom: -1px;
+				}
 			}
 
 			.widget-form-dates {
@@ -120,8 +126,6 @@
 
 			@include adaptivity(phone) {
 				margin-top: 25px;
-				left: auto;
-				right: 0;
 			}
 		}
 
