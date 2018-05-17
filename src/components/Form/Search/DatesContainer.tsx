@@ -18,6 +18,7 @@ import {
 } from '../../../store/form/segments/dates/actions';
 import { Moment } from 'moment';
 import { isCR } from '../../../store/form/selectors';
+import { i18n } from '../../../utils';
 
 interface StateProps {
 	system: SystemState;
@@ -75,6 +76,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 				highlightDates={this.props.getDepartureHighlightedDates}
 				specialDate={!isCR ? returnDatepicker.date : null}
 				popperPlacement={isCR ? 'top-end' : 'top-start'}
+				placeholder={i18n('form', isCR ? 'dateDeparture' : 'dateTo')}
 				segmentId={segmentId}
 			/>
 
@@ -89,6 +91,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 					getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
 					specialDate={departureDatepicker.date}
 					popperPlacement="top-end"
+					placeholder={i18n('form', 'dateBack')}
 					segmentId={segmentId}
 				/> : null }
 		</div>;

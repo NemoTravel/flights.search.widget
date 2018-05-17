@@ -23,6 +23,7 @@
 	"datesNotInOrderError": "Даты должны идти по порядку",
 	"dateTo": "Туда",
 	"dateBack": "Обратно",
+	"dateDeparture": "Дата вылета",
 	"noBackTicket": "Обратный билет не нужен",
   	"passengersSelectHeader": "Пассажиры",
 	"passengers_1": "Пассажиров",

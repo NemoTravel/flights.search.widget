@@ -18,6 +18,7 @@ interface Props {
 	specialDate: Moment;
 	segmentId: number;
 	popperPlacement: string;
+	placeholder: string;
 	wrongDatesOrder?: boolean;
 
 	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
@@ -33,7 +34,6 @@ export default class Datepicker extends React.Component<Props> {
 
 	protected type: DatepickerFieldType = null;
 	protected nemoDatepicker: any = null;
-	protected placeholder = '';
 	protected tooltipText = '';
 	protected showErrors = false;
 	protected isDisableable = false;
@@ -73,9 +73,10 @@ export default class Datepicker extends React.Component<Props> {
 	}
 
 	renderInner(): React.ReactNode {
-		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`;
+		const mobileHeaderClassName = `widget-ui-datepicker__header widget-ui-datepicker__header_${this.type}`,
+						placeholder = this.props.placeholder;
 
-		return <MobileHeader className={mobileHeaderClassName} title={this.placeholder} onClose={this.closeDatepicker}/>;
+		return <MobileHeader className={mobileHeaderClassName} title={placeholder} onClose={this.closeDatepicker}/>;
 	}
 
 	render(): React.ReactNode {
@@ -90,6 +91,7 @@ export default class Datepicker extends React.Component<Props> {
 			openToDate,
 			highlightDates,
 			popperPlacement,
+			placeholder,
 			wrongDatesOrder
 		} = this.props;
 
@@ -117,7 +119,7 @@ export default class Datepicker extends React.Component<Props> {
 				specialDate={specialDate}
 				tooltipIsActive={this.showErrors && showErrors && (!date || wrongDatesOrder)}
 				tooltipText={wrongDatesOrder ? datesIsNotInOrderText : this.tooltipText}
-				inputProps={{ placeholder: this.placeholder }}
+				inputProps={{ placeholder: placeholder }}
 			>
 				{this.renderInner()}
 			</UIDatepicker>

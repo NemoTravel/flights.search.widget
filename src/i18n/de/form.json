@@ -23,6 +23,7 @@
 	"datesNotInOrderError": "Die Daten sind nicht aufeinanderfolgend",
 	"dateTo": "Hinflug",
 	"dateBack": "Ruckflug",
+	"dateDeparture": "Abreisedatum",
 	"noBackTicket": "Nur Hinflug",
 	"passengersSelectHeader": "Fluggaste",
 	"passengers_1": "Fluggaste",
