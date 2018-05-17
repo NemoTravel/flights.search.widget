@@ -11,7 +11,7 @@
 		&_open {
 			.widget-ui-select {
 				&__toggle {
-					background-image: linear-gradient(to top, rgba(250,250,250,.75), rgba(240,240,240,.75));
+					background-image: linear-gradient(to top, rgba(250, 250, 250, 0.75), rgba(240, 240, 240, 0.75));
 
 					&::after {
 						transform: translateY(-1px) rotate(180deg);
