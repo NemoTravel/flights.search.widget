@@ -119,10 +119,8 @@
 			position: absolute;
 			left: 0;
 			margin-right: 30px;
-			margin-top: 5px;
+			margin-top: 7px;
 			background: #f7db03;
-			height: 30px;
-			width: 30px;
 			color: #726666;
 			font-size: 15px;
 			line-height: 30px;
@@ -131,9 +129,16 @@
 			font-weight: 700;
 			z-index: 2;
 
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			height: 25px;
+			width: 25px;
+
 			&:before {
+				font-size: 11px;
 				content: $icon-cross;
-				line-height: 30px;
 				color: $font-color;
 			}
 
