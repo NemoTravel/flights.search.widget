@@ -7,6 +7,7 @@ import { startSearch as startSearchAction } from '../store/form/actions';
 import Search from './Form/Search';
 import WebskyHiddenForm from './WebskyHiddenForm';
 import {
+	isCR,
 	isWebsky,
 	showCouponField as showCouponFieldSelector,
 	showMileCardField as showMileCardFieldSelector
@@ -22,6 +23,7 @@ interface StateProps {
 	isWebskyMode: boolean;
 	showCouponField: boolean;
 	showMileCardField: boolean;
+	isComplexRouteMode: boolean;
 }
 
 interface DispatchProps {
@@ -30,9 +32,9 @@ interface DispatchProps {
 
 class Form extends React.Component<OwnProps & StateProps & DispatchProps> {
 	render(): React.ReactNode {
-		const { startSearch, onSearch, verticalForm, isWebskyMode, showCouponField, showMileCardField } = this.props;
+		const { startSearch, onSearch, verticalForm, isWebskyMode, showCouponField, showMileCardField, isComplexRouteMode } = this.props;
 
-		return <section className={classnames('widget-form', { 'widget-form_vertical': verticalForm })}>
+		return <section className={classnames('widget-form', { 'widget-form_vertical': verticalForm }, { 'widget-form_CR': isComplexRouteMode })}>
 			<Search
 				onSearch={onSearch}
 				startSearch={startSearch}
@@ -49,7 +51,8 @@ const mapStateToProps = (state: ApplicationState, ownProps: OwnProps): OwnProps 
 		verticalForm: state.system.verticalForm,
 		isWebskyMode: isWebsky(state),
 		showCouponField: showCouponFieldSelector(state),
-		showMileCardField: showMileCardFieldSelector(state)
+		showMileCardField: showMileCardFieldSelector(state),
+		isComplexRouteMode: isCR(state)
 	};
 };
 

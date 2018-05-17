@@ -15,17 +15,52 @@
 	}
 
 	&__routeTypeSwitch {
-		display: none;
-		padding-right: 10px;
+		position: absolute;
+		left: 0;
+		margin-top: 55px;
+		margin-left: 1rem;
 		font-weight: 600;
-		font-size: 13px;
+		font-size: 15px;
+		color: #1b75bc;
 
 		span {
 			cursor: pointer;
+			padding-left: 15px;
+		}
+
+		&_toCR {
+			background: url("images/cr.svg") no-repeat left center;
+			background-size: 20px;
+
+			span {
+				padding-left: 25px;
+			}
+		}
+
+		&_toOW {
+			background: url("images/ow.svg") no-repeat left center;
+			background-size: 20px;
+			background-position-x: -5px;
 		}
 
 		@include adaptivity(phone) {
-			margin: 10px 0;
+			margin: 0 0 1rem;
+			position: relative;
+
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	}
+
+	&_CR {
+		@include adaptivity(not-phone) {
+			.widget-form-search__footer {
+				.col:first-of-type {
+					flex-basis: 0;
+					min-width: calc(85% / 2 - 13px);
+				}
+			}
 		}
 	}
 
@@ -49,11 +84,22 @@
 				}
 
 				&__addSegment {
-					margin: 0;
+					margin: -1rem 0 0;
 				}
 
 				&__startButton {
 					width: 100%;
+				}
+			}
+
+			&__routeTypeSwitch {
+				margin: 1rem 0 0;
+				position: relative;
+				width: 100%;
+
+				@include adaptivity(phone) {
+					margin-top: 0;
+					margin-bottom: 1rem;
 				}
 			}
 
@@ -77,11 +123,43 @@
 
 				&_CR {
 					margin-bottom: 1rem;
+
+					.widget-form-dates {
+						margin-right: 0;
+						margin-left: 0;
+					}
+
+					.widget-form-segments__segment {
+						margin-bottom: 1rem;
+
+						&:last-of-type {
+							margin-bottom: 0;
+
+							.widget-form-airports {
+								margin-bottom: -1px;
+							}
+						}
+					}
+
+					.widget-form-airports {
+						flex-basis: 100%;
+						margin-bottom: -1px;
+					}
 				}
 
 				&__segment {
 					padding: 0;
 					flex-wrap: wrap;
+
+					&__drop {
+						margin-top: 25px;
+					}
+
+					.widget-form-airports__col {
+						&:first-of-type {
+							padding-right: 0;
+						}
+					}
 				}
 			}
 
@@ -136,6 +214,16 @@
 					left: auto;
 					transform: rotate(90deg);
 					top: -12px;
+				}
+			}
+
+			&-additionalOptions {
+				flex-wrap: wrap;
+				min-height: 40px;
+				height: auto;
+
+				&__checkboxes {
+					width: 100%;
 				}
 			}
 		}

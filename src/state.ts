@@ -73,7 +73,6 @@ export interface SystemState {
 	enableMileCard?: boolean;
 	aggregationOnly?: boolean;
 	disableCaching?: boolean;
-	isComplexRoute?: boolean;
 }
 
 export const systemState: SystemState = {
@@ -101,8 +100,7 @@ export const systemState: SystemState = {
 	enableCoupon: false,
 	enableMileCard: false,
 	aggregationOnly: false,
-	disableCaching: false,
-	isComplexRoute: false
+	disableCaching: false
 };
 
 // ---------------------------------------------------------------------------------------------------------------------

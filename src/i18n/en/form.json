@@ -23,6 +23,7 @@
 	"datesNotInOrderError": "Dates are not in order",
 	"dateTo": "Date to",
 	"dateBack": "Date back",
+	"dateDeparture": "Departure date",
 	"noBackTicket": "I do not need a return ticket",
 	"moreOptions": "More options",
 	"passengersSelectHeader": "Passengers",

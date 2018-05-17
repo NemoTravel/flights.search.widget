@@ -12,18 +12,76 @@
 	&_CR {
 		.widget-form-segments__segment {
 			display: flex;
-			padding-right: 65px;
 
-			.widget-form-airports__swap {
-				display: none;
+			&:last-of-type {
+				.widget-form {
+					&-airports,
+					&-dates {
+						margin-bottom: 0;
+					}
+
+					@include adaptivity(phone) {
+						&-airports {
+							margin-bottom: -1px;
+						}
+					}
+				}
+			}
+
+			.widget-form-airports {
+				&__swap {
+					display: none;
+				}
+
+				@include adaptivity(phone) {
+					margin-bottom: -1px;
+				}
+			}
+
+			.widget-form-dates {
+				margin-left: 0.5rem;
+				margin-right: -5px;
+
+				@include adaptivity(phone) {
+					margin-left: 0;
+					margin-right: 0;
+				}
 			}
 
 			.widget-form-airports__col.col:first-of-type .widget-form-airports__airportCode {
 				right: 17px;
 			}
 
+			@include adaptivity(not-phone) {
+				.widget-form-airports__col {
+					&:first-of-type {
+						padding-right: 1rem;
+					}
+
+					&:last-of-type {
+						.Select-control {
+							border-left: 1px solid;
+						}
+					}
+				}
+			}
+
 			@include adaptivity(phone) {
+				margin-bottom: 1rem;
 				padding-right: 0;
+			}
+		}
+
+		@include adaptivity(not-phone) {
+			.widget-form {
+				&-airports {
+					flex-basis: 0;
+					min-width: 85%;
+				}
+
+				&-dates {
+					flex-basis: 100%;
+				}
 			}
 		}
 
@@ -49,22 +107,28 @@
 			@extend .widget-ui-icon;
 
 			position: absolute;
-			right: 0;
-			margin-right: 20px;
+			left: 0;
+			margin-right: 30px;
+			margin-top: 5px;
 			background: #f7db03;
-			height: 40px;
-			width: 40px;
+			height: 30px;
+			width: 30px;
 			color: #726666;
 			font-size: 15px;
-			line-height: 40px;
+			line-height: 30px;
 			text-align: center;
 			cursor: pointer;
 			font-weight: 700;
+			z-index: 2;
 
 			&:before {
 				content: $icon-cross;
-				line-height: 40px;
-				color: #ffffff;
+				line-height: 30px;
+				color: $font-color;
+			}
+
+			@include adaptivity(phone) {
+				margin-top: 25px;
 			}
 		}
 

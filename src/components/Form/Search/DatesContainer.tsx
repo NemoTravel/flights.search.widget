@@ -17,6 +17,7 @@ import {
 	setAvailableDates
 } from '../../../store/form/segments/dates/actions';
 import { Moment } from 'moment';
+import { i18n } from '../../../utils';
 import { isCR, isRT } from '../../../store/form/selectors';
 import { setRouteType } from '../../../store/form/route/actions';
 
@@ -86,6 +87,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 				highlightDates={this.props.getDepartureHighlightedDates}
 				specialDate={isRT ? segments[1].departureDate.date : segments[segmentId].departureDate.date}
 				popperPlacement={isCR ? 'top-end' : 'top-start'}
+				placeholder={i18n('form', isCR ? 'dateDeparture' : 'dateTo')}
 				segmentId={segmentId}
 				openToDate={isCR ? initialDate : null}
 			/>
@@ -101,7 +103,8 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 					getRef={(input: HTMLInputElement): any => (this.returnInput = input)}
 					specialDate={isRT ? segments[0].departureDate.date : null}
 					popperPlacement="top-end"
-					segmentId={isRT ? 1 : null}
+					placeholder={i18n('form', 'dateBack')}
+					segmentId={segmentId}
 					setRouteType={setRouteType}
 				/> : null }
 		</div>;

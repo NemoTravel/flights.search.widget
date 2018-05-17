@@ -29,6 +29,7 @@
 
 			&:before {
 				line-height: 30px;
+				color: #ffffff;
 			}
 
 			@include adaptivity(tablet) {
@@ -37,6 +38,12 @@
 
 			@include adaptivity(phone) {
 				margin-left: -10px;
+			}
+		}
+
+		.widget-form-airports__col {
+			&:first-of-type {
+				padding-right: 0 !important;
 			}
 		}
 
@@ -50,6 +57,14 @@
 	&_CR {
 		flex-wrap: wrap !important;
 
+		.widget-form-segments__segment {
+			&:last-of-type {
+				.widget-form-dates {
+					padding-bottom: 0;
+				}
+			}
+		}
+
 		@include adaptivity(desktop) {
 			.widget-form-additionalOptions {
 				left: -180px;
@@ -58,6 +73,10 @@
 
 		@include adaptivity(tablet) {
 			margin-bottom: 1rem !important;
+
+			.widget-form-segments__segment {
+				margin-bottom: 0;
+			}
 		}
 
 		@include adaptivity(phone) {
