@@ -35,10 +35,11 @@
 
 		&-option {
 			font-size: 13px;
-			transition: background .1s ease-in;
+			transition: background 0.1s ease-in;
 
-			&:hover, &.is-focused {
-				background: rgba(100,181,246,.1);
+			&:hover,
+			&.is-focused {
+				background: rgba(100, 181, 246, 0.1);
 			}
 		}
 	}
