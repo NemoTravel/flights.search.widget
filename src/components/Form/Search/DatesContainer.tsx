@@ -104,7 +104,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 					specialDate={isRT ? segments[0].departureDate.date : null}
 					popperPlacement="top-end"
 					placeholder={i18n('form', 'dateBack')}
-					segmentId={segmentId}
+					segmentId={isRT ? 1 : segmentId}
 					setRouteType={setRouteType}
 				/> : null }
 		</div>;
