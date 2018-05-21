@@ -1,10 +1,6 @@
 import { Moment } from 'moment';
 import { SELECT_DATE, TOGGLE_DATEPICKER, SET_AVAILABLE_DATES } from '../../../actions';
-import {
-	ApplicationState, CommonThunkAction, DatepickerFieldType,
-	GetStateFunction
-} from '../../../../state';
-import { AnyAction, Dispatch } from 'redux';
+import { ApplicationState, CommonThunkAction, DatepickerFieldType } from '../../../../state';
 import { AvailableDateResponse } from '../../../../services/responses/AvailableDates';
 import { isRT } from '../../selectors';
 

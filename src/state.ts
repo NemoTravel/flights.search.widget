@@ -333,7 +333,7 @@ export const initialState: ApplicationState = {
 		additional: additionalState,
 		coupon: couponState,
 		mileCard: mileCardState,
-		routeType: RouteType.RT
+		routeType: RouteType.OW
 	}
 };
 
@@ -358,25 +358,21 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 			if (stateFromCache.form.segments) {
 				const cachedSegments = stateFromCache.form.segments;
 
-				const segments = cachedSegments.map(segment => {
+				state.form.segments = cachedSegments.map(segment => {
 					if (!canBeProcessed) {
 						segment.autocomplete = autocompleteState;
 					}
 
 					if (segment.departureDate.date) {
-						const newDateState: DatepickerState = {
+						segment.departureDate = {
 							isActive: segment.departureDate.isActive,
 							availableDates: segment.departureDate.availableDates,
 							date: moment(segment.departureDate.date).locale(state.system.locale)
 						};
-
-						segment.departureDate = newDateState;
 					}
 
 					return segment;
 				});
-
-				state.form.segments = segments;
 			}
 
 			if (stateFromCache.form.passengers) {
