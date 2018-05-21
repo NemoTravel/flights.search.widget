@@ -33,19 +33,14 @@
 		}
 	}
 
-	&__footer {
+	&-footer {
 		flex-wrap: wrap !important;
 		flex-shrink: 4;
 		margin: 0 !important;
 		flex-basis: 100%;
 
-		@include adaptivity(desktop) {
-			min-width: 300px;
-			flex-wrap: nowrap !important;
-
-			.col {
-				position: static;
-
+		&__col {
+			@include adaptivity(desktop) {
 				&:first-of-type {
 					flex-basis: 60%;
 				}
@@ -55,13 +50,15 @@
 					min-width: 100px;
 				}
 			}
-		}
 
-		@include adaptivity(phone) {
-			.col {
+			@include adaptivity(phone) {
 				padding-left: 0;
 				padding-right: 0;
 			}
+		}
+
+		@include adaptivity(desktop) {
+			min-width: 300px;
 		}
 	}
 

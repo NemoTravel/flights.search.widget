@@ -60,7 +60,7 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 	render(): React.ReactNode {
 		const { segments, isCR, continueRoute } = this.props;
 
-		return <div className={classnames('form-group row widget-form-segments', {'widget-form-segments_CR': isCR })}>
+		return <div className={classnames('widget-form-segments', {'widget-form-segments_CR': isCR })}>
 
 			{isCR ? this.renderAllSegment() : this.renderFirstSegment()}
 

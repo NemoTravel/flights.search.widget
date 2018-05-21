@@ -10,6 +10,14 @@
 	@import "form/search";
 	@import "form/segments";
 
+	&-airports {
+		display: flex;
+
+		&__col {
+			flex: 50%;
+		}
+	}
+
 	&__pseudoBlocks {
 		text-align: center;
 	}
@@ -55,8 +63,8 @@
 
 	&_CR {
 		@include adaptivity(not-phone) {
-			.widget-form-search__footer {
-				.col:first-of-type {
+			.widget-form-search-footer {
+				&__col:first-of-type {
 					flex-basis: 0;
 					min-width: calc(85% / 2 - 13px);
 				}
@@ -67,16 +75,8 @@
 	&_vertical {
 		.widget-form {
 			&-search {
-				&__wrapper {
-					.form-group {
-						&:last-of-type {
-							margin-bottom: 1rem;
-						}
-					}
-				}
-
-				&__footer {
-					.col {
+				&-footer {
+					&__col {
 						flex: 100%;
 						padding-right: 15px;
 						padding-left: 15px;
@@ -164,46 +164,42 @@
 			}
 
 			&-airports {
-				&.row {
-					display: block;
-					margin-left: 0;
-					margin-right: 0;
-				}
+				display: block;
+				margin-left: 0;
+				margin-right: 0;
 
 				&__col {
-					&.col {
-						padding: 0;
+					padding: 0;
 
-						&:first-of-type {
-							.widget-ui-input__arrow {
-								right: 0;
-							}
-
-							.widget-form-airports__airportCode {
-								right: 17px;
-
-								&_withArrow {
-									right: 35px;
-								}
-							}
+					&:first-of-type {
+						.widget-ui-input__arrow {
+							right: 0;
 						}
 
-						&:last-of-type {
-							.Select-control {
-								padding-left: 13px;
-								border-top: none;
-								border-left: 1px solid rgba(0, 0, 0, 0.15);
-							}
+						.widget-form-airports__airportCode {
+							right: 17px;
 
-							.widget-form-airports__select__value,
-							.Select-placeholder {
-								padding-left: 13px !important;
+							&_withArrow {
+								right: 35px;
 							}
+						}
+					}
 
-							.Select-input {
-								&:not(input) {
-									padding-left: 0 !important;
-								}
+					&:last-of-type {
+						.Select-control {
+							padding-left: 13px;
+							border-top: none;
+							border-left: 1px solid rgba(0, 0, 0, 0.15);
+						}
+
+						.widget-form-airports__select__value,
+						.Select-placeholder {
+							padding-left: 13px !important;
+						}
+
+						.Select-input {
+							&:not(input) {
+								padding-left: 0 !important;
 							}
 						}
 					}

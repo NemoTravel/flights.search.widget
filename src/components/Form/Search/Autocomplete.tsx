@@ -156,7 +156,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 
 		const errorText = sameAirportsError ? this.sameAirportsErrorText : this.defaultErrorText;
 
-		return <div className="col widget-form-airports__col">
+		return <div className="widget-form-airports__col">
 			<MobileHeader title={this.mobileTitle} className={mobileHeaderClassName}>
 				<div className="widget-form-airports__underlay"/>
 			</MobileHeader>

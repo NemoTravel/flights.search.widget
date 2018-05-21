@@ -3,10 +3,8 @@
 &-passengers {
 	position: relative;
 
-	&.form-group {
-		@include adaptivity(not-phone) {
-			margin-bottom: 0;
-		}
+	@include adaptivity(not-phone) {
+		margin-bottom: 0;
 	}
 
 	&__trigger {

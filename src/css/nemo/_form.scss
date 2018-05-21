@@ -81,8 +81,8 @@
 
 	&_CR {
 		@include adaptivity(not-phone) {
-			.widget-form-search__footer {
-				.col:first-of-type {
+			.widget-form-search-footer {
+				&__col:first-of-type {
 					flex-basis: 50%;
 				}
 			}
@@ -98,21 +98,15 @@
 			&-search {
 				&__wrapper {
 					flex-wrap: wrap;
-
-					.form-group {
-						&:last-of-type {
-							margin-bottom: 1rem;
-						}
-					}
 				}
 
-				&__footer {
+				&-footer {
 					flex-basis: 100%;
 					padding-top: 1rem;
 					display: block;
 					width: 100%;
 
-					.col {
+					&__col {
 						flex: 100%;
 						padding: 0;
 					}
@@ -191,26 +185,22 @@
 			}
 
 			&-airports {
-				&.row {
-					flex-basis: 100%;
-				}
+				flex-basis: 100%;
 
 				&__col {
-					&.col {
-						&:first-of-type {
-							padding-bottom: 1rem;
-						}
+					&:first-of-type {
+						padding-bottom: 1rem;
+					}
 
-						&:last-of-type {
-							padding-left: 0;
+					&:last-of-type {
+						padding-left: 0;
 
-							.widget-form-airports__select__wrapper {
+						.widget-form-airports__select__wrapper {
+							padding-left: 0 !important;
+
+							.Select-input {
+								height: 40px;
 								padding-left: 0 !important;
-
-								.Select-input {
-									height: 40px;
-									padding-left: 0 !important;
-								}
 							}
 						}
 					}

@@ -1,6 +1,21 @@
 @import "../variables";
 
 &-dates {
+	display: flex;
+	margin-bottom: 1rem;
+
+	&__col {
+		flex: 50%;
+
+		&:first-of-type {
+			padding-right: 0.5rem;
+		}
+
+		&:last-of-type {
+			padding-left: 0.5rem;
+		}
+	}
+
 	.widget-ui-input {
 		cursor: pointer;
 		padding-right: 35px;
@@ -37,19 +52,5 @@
 
 	&__dayOfWeek {
 		color: #b3b3b3;
-	}
-
-	&__col {
-		&.col {
-			position: static;
-
-			&:first-of-type {
-				padding-right: 0.5rem;
-			}
-
-			&:last-of-type {
-				padding-left: 0.5rem;
-			}
-		}
 	}
 }

@@ -68,7 +68,7 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 			}
 		}
 
-		return <div className="form-group row widget-form-dates">
+		return <div className="widget-form-dates">
 			<DepartureDatepicker
 				showErrors={showErrors}
 				wrongDatesOrder={datesIsNotOrder}

@@ -110,7 +110,7 @@ class AdditionalOptionsContainer extends React.Component<StateProps & DispatchPr
 	render(): React.ReactNode {
 		const { widgetMode, isCR } = this.props;
 
-		return widgetMode === ApplicationMode.NEMO ? <div className="form-group widget-form-additionalOptions">
+		return widgetMode === ApplicationMode.NEMO ? <div className="widget-form-additionalOptions">
 			<div className="widget-form-additionalOptions__checkboxes">
 				{!isCR ? this.renderVicinityDates() : null}
 				{this.renderDirect()}

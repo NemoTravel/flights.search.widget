@@ -102,7 +102,7 @@ class MileCardContainer extends React.Component<Props, State> {
 	}
 
 	render(): React.ReactNode {
-		return <div className="form-group widget-form-mileCard">
+		return <div className="widget-form-mileCard">
 			{this.state.isActive ? this.renderField() : this.renderDummy()}
 		</div>;
 	}

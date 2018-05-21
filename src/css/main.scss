@@ -7,6 +7,14 @@
 	@import "form";
 	@import "demo";
 
+	* {
+		&,
+		&:after,
+		&:before {
+			box-sizing: border-box;
+		}
+	}
+
 	font-family: "Open Sans", sans-serif;
 	font-size: inherit;
 	color: $font-color;

@@ -33,15 +33,15 @@ export default class Search extends React.Component<Props> {
 			<div className="widget-form-search__wrapper">
 				<SegmentsContainer/>
 
-				<div className="row widget-form-search__footer">
-					<div className="col">
+				<div className="widget-form-search-footer">
+					<div className="widget-form-search-footer__col">
 						<PassengersContainer/>
 					</div>
 
-					{showCouponField ? <div className="col"><CouponContainer /></div> : null}
-					{showMileCardField ? <div className="col"><MileCardContainer /></div> : null}
+					{showCouponField ? <div className="widget-form-search-footer__col"><CouponContainer /></div> : null}
+					{showMileCardField ? <div className="widget-form-search-footer__col"><MileCardContainer /></div> : null}
 
-					<div className="col">
+					<div className="widget-form-search-footer__col">
 						<AdditionalOptionsContainer/>
 
 						<button className="btn btn-primary widget-form-search__startButton" onClick={this.startSearchHandler}>

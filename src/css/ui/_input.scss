@@ -1,7 +1,15 @@
 @import "../variables";
 
 .widget-ui-input {
+	display: block;
+	width: 100%;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
 	-webkit-appearance: none;
+
+	border: 1px solid #ced4da;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
 	&__wrapper {
 		position: relative;

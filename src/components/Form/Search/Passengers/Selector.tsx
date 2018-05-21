@@ -125,7 +125,7 @@ class Selector extends React.Component<Props> {
 	render(): React.ReactNode {
 		const { totalPassengersCount } = this.props;
 
-		return <div className="form-group widget-form-passengers">
+		return <div className="widget-form-passengers">
 			<Tooltip message={i18n('form', 'passengersError')} isActive={totalPassengersCount <= 0}>
 				<UIDropdown triggerElement={this.renderDropdownTrigger()} contentElement={this.renderDropdownContent()} ref={this.getDropdownRef}/>
 			</Tooltip>

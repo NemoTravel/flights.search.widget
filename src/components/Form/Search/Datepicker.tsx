@@ -102,7 +102,7 @@ export default class Datepicker extends React.Component<Props> {
 			maxDate = moment().add(1, 'years'),
 			datesIsNotInOrderText = i18n('form', 'datesNotInOrderError');
 
-		return <div className="col widget-form-dates__col">
+		return <div className="widget-form-dates__col">
 			<UIDatepicker
 				isDisableable={this.isDisableable}
 				ref={(calendar: any) => (this.nemoDatepicker = calendar)}

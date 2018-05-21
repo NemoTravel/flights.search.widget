@@ -1,13 +1,11 @@
 @import "../variables";
 
 &-segments {
-	&.row {
-		flex-basis: 100%;
-		margin-left: 0;
-		margin-right: 0;
-		flex-wrap: nowrap;
-		margin-bottom: 0;
-	}
+	flex-basis: 100%;
+	margin-left: 0;
+	margin-right: 0;
+	flex-wrap: nowrap;
+	margin-bottom: 0;
 
 	&__segment {
 		display: flex;
