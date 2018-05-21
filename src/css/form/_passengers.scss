@@ -8,9 +8,17 @@
 	}
 
 	&__trigger {
+		border: 1px solid #cccccc;
+
 		&,
 		input {
 			cursor: pointer;
+		}
+	}
+
+	.widget-ui-dropdown__trigger_open {
+		.widget-ui-input__arrow {
+			transform: rotate(180deg);
 		}
 	}
 

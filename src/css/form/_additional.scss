@@ -5,8 +5,10 @@
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: center;
+
 	min-width: 0;
 	height: 40px;
+	margin-bottom: 1rem;
 
 	&__checkboxes {
 		min-width: 0;
