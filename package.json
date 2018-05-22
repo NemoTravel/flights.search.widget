@@ -10,7 +10,8 @@
     "build": "npm run tslint && npm run sass-lint && npm test && cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=dev webpack",
     "dev": "run-p build-dev server",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "postinstall": "npm install react@16.x.x react-dom@16.x.x redux@4.x.x --no-save",
     "test": "jest",
     "start": "npm run server"
   },
@@ -51,6 +52,7 @@
     "webpack": "^3.11.0"
   },
   "dependencies": {
+    "@material-ui/core": "^1.0.0",
     "@nemo.travel/react-datepicker": "^0.57.4",
     "@nemo.travel/react-select": "^1.0.9",
     "@nemo.travel/why-did-you-update": "0.0.8",
