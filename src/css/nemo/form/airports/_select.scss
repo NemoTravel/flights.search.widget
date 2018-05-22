@@ -28,13 +28,19 @@
 				border: none !important;
 
 				.Select-option {
-					padding-right: 10px !important;
+					padding: 0;
 				}
 			}
 		}
 
 		&-option {
 			font-size: 13px;
+			transition: background 0.1s ease-in;
+
+			&:hover,
+			&.is-focused {
+				background: rgba(100, 181, 246, 0.1);
+			}
 		}
 	}
 
