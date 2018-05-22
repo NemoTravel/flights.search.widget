@@ -6,6 +6,7 @@ import MileCardContainer from './Search/Bonus/MileCardContainer';
 import SegmentsContainer from './Search/SegmentsContainer';
 import { i18n } from '../../utils';
 import { CommonThunkAction, OnSearchFunction } from '../../state';
+import Button from '@material-ui/core/Button';
 
 interface Props {
 	onSearch?: OnSearchFunction;
@@ -44,12 +45,13 @@ export default class Search extends React.Component<Props> {
 					<div className="col">
 						<AdditionalOptionsContainer/>
 
-						<button className="btn btn-primary widget-form-search__startButton" onClick={this.startSearchHandler}>
+						<Button color="primary" className="btn btn-primary widget-form-search__startButton" onClick={this.startSearchHandler}>
 							{i18n('form', 'search')}
+
 							<span className="widget-form-search__tickets">
 								{(i18n('form', 'search_tickets'))}
 							</span>
-						</button>
+						</Button>
 					</div>
 				</div>
 			</div>
