@@ -6,42 +6,49 @@
 [![npm version](https://badge.fury.io/js/%40nemo.travel%2Fsearch-widget.svg)](https://badge.fury.io/js/%40nemo.travel%2Fsearch-widget)
 [![Build Status](https://travis-ci.org/NemoTravel/flights.search.widget.svg?branch=master)](https://travis-ci.org/NemoTravel/flights.search.widget)
 
-## Установка виджета
+## Usage
 
-Для работы виджета необходимо любым удобным способом подключить на страницу файлы из папки `dist`:
-* файл стилизации виджета: `flights.search.widget.min.css`
-* файл с JavaScript-кодом виджета: `flights.search.widget.min.js`
-* в той же папке, где будет расположен файл стилизации, следует разместить папку `images`, необходимую для корректного отображения изображений
+Place the following code in the head section of your HTML page:
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;subset=cyrillic">
+<link rel="stylesheet" href="flights.search.widget.min.css">
+```
 
-## Инициализация виджета на странице
-
-При подключении файла `flights.search.widget.min.js`, на странице становится доступен JavaScript-объект `FlightsSearchWidget` с методом `init`, запускающим инициализацию виджета:
+Place this where you want the search form to appear:
 
 ```html
-<div id="root"></div>
-<link rel="stylesheet" href="flights.search.widget.min.css">
+<div id="nemo-widget-root"></div>
+```
+
+And add this at the very bottom of the page:
+```html
 <script src="flights.search.widget.min.js"></script>
 <script>
     FlightsSearchWidget.init({
         webskyURL: 'http://demo.websky.aero/gru',
         nemoURL: 'http://sys.nemo.travel',
-        rootElement: document.getElementById('root'),
-        locale: 'ru'
+        rootElement: document.getElementById('nemo-widget-root'),
+        locale: 'en'
     });
 </script>
 ```
 
-Также, пример инициализации виджета приведен в файле `/dist/index.html`.
+Files used in the example above (`flights.search.widget.min.css` and `flights.search.widget.min.js`) are located in the `dist` [folder](https://github.com/NemoTravel/flights.search.widget/tree/master/dist). You are free to keep these files wherever you like to (e.g. CDN services), but be sure to provide the correct paths in the HTML code.
+
+Extended version of the example is available [here](https://github.com/NemoTravel/flights.search.widget/blob/master/dist/index.html).
+
+## Nemo.travel appearance
+
+If you want to achieve the common Nemo.travel appearance of the Search Form, just add this code to the head section of the page, right after the `flights.search.widget.min.css` file:
+```html
+<link rel="stylesheet" href="nemo-flights.search.widget.min.css">
+```
 
 ## Сохранение данных в локальное хранилище браузера
 
 По-умолчанию, виджет автоматически сохраняет все данные формы поиска в локальное хранилище браузера. Это позволяет избежать потери данных при перезагрузке страницы.
 
 Эту возможность можно отключить с помощью параметра `disableCaching` при вызове метода `init`. Затем, чтобы обратно включить работу с локальным хранилищем после инициализации виджета, необходимо вызвать глобальную функцию `FlightsSearchWidget.enableCache()`.
-
-## Стилизация под внешний вид системы Nemo Travel
-
-Для упрощения интеграции виджета с готовыми сайтами был добавлен файл `/dist/nemo-flights.search.widget.min.css`, подключив который, виджет принимает внешний вид системы Nemo Travel.
 
 ## Конфигурация
 
