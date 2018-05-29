@@ -51,7 +51,7 @@ export const setAvailableDates = (availableDates: AvailableDateResponse[], dateT
  * @param {Number} segmentId
  * @returns {Function}
  */
-export const datepickerChange = (date: Moment, dateType: DatepickerFieldType, segmentId: number): CommonThunkAction => {
+export const datepickerChange = (date: Moment, segmentId: number): CommonThunkAction => {
 	return (dispatch, getState): void => {
 		const state = getState();
 

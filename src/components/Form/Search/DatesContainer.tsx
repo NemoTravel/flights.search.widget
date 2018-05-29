@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { AnyAction, bindActionCreators, Dispatch } from 'redux';
 import DepartureDatepicker from './Datepicker/Departure';
 import ReturnDatepicker from './Datepicker/Return';
 import {
@@ -41,7 +40,7 @@ interface Props {
 interface DispatchProps {
 	setAvailableDates: (availableDates: any, dateType: DatepickerFieldType) => DatepickerAction;
 	setRouteType: (type: RouteType) => CommonThunkAction;
-	datepickerChange: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => CommonThunkAction;
+	datepickerChange: (date: Moment, segmentId: number) => CommonThunkAction;
 }
 
 class DatesContainer extends React.Component<StateProps & DispatchProps & Props> {
@@ -75,8 +74,8 @@ class DatesContainer extends React.Component<StateProps & DispatchProps & Props>
 				locale={system.locale}
 				date={departureDatepicker.date}
 				isActive={departureDatepicker.isActive}
-				selectDate={(date: Moment, dateType: DatepickerFieldType) => {
-					datepickerChange(date, dateType, segmentId);
+				selectDate={(date: Moment) => {
+					datepickerChange(date, segmentId);
 
 					if (system.autoFocusReturnDate && this.returnInput) {
 						setTimeout(() => {

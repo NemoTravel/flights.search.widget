@@ -1,8 +1,8 @@
 import * as React from 'react';
+import * as classnames from 'classnames';
 import { FormEvent } from 'react';
 import { Moment } from 'moment';
 import DatePicker, { ReactDatePickerProps } from '@nemo.travel/react-datepicker';
-import * as classnames from 'classnames';
 
 import Tooltip from './Tooltip';
 import { isIE } from '../../utils';
@@ -19,7 +19,7 @@ interface Props {
 	inputProps: any;
 
 	setRouteType?: (type: RouteType) => CommonThunkAction;
-	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
+	selectDate: (date: Moment, segmentId: number) => any;
 	getRef?: (inout: any) => any;
 }
 
@@ -76,7 +76,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	disable(): void {
 		if (this.props.isDisableable && this.state.isActive) {
 			this.setState({ isActive: false });
-			this.props.selectDate(null, this.props.type, 1);
+			this.props.selectDate(null, 1);
 			this.props.setRouteType(RouteType.OW);
 		}
 	}

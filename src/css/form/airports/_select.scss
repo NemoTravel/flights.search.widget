@@ -107,11 +107,6 @@
 		}
 	}
 
-	&_loading {
-		background: url("/images/form/spinner.svg") no-repeat 90% center;
-		background-size: 20px;
-	}
-
 	&_focused {
 		box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 		background-color: transparent;

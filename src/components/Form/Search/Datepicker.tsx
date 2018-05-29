@@ -22,7 +22,7 @@ interface Props {
 	wrongDatesOrder?: boolean;
 
 	setRouteType?: (type: RouteType) => CommonThunkAction;
-	selectDate: (date: Moment, dateType: DatepickerFieldType, segmentId: number) => any;
+	selectDate: (date: Moment, segmentId: number) => any;
 	getRef?: (input: any) => any;
 }
 
@@ -52,7 +52,7 @@ export default class Datepicker extends React.Component<Props> {
 	 * @param {Moment} date
 	 */
 	onChangeHandler(date: Moment): void {
-		this.props.selectDate(date, this.type, this.props.segmentId);
+		this.props.selectDate(date, this.props.segmentId);
 	}
 
 	shouldComponentUpdate(nextProps: Props): boolean {
