@@ -8,23 +8,25 @@
 &-search {
 	background: #64b5f6;
 
+	&__wrapper {
+		@include adaptivity(tablet) {
+			padding: 0 15px;
+		}
+	}
+
 	&__addSegment {
 		line-height: 40px;
 		background: rgba(255, 255, 255, 0.25);
 		border-radius: 2px;
 		cursor: pointer;
 		text-align: center;
-		margin-left: 15px;
+		margin-left: 0;
 		margin-right: 0;
 		font-weight: 500;
 		color: #ffffff;
 
 		&:hover {
 			box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2);
-		}
-
-		@include adaptivity(tablet) {
-			margin: 0 15px;
 		}
 
 		@include adaptivity(phone) {
@@ -40,19 +42,33 @@
 		flex-basis: 100%;
 
 		&__col {
-			@include adaptivity(desktop) {
-				&:first-of-type {
+			&:first-of-type {
+				@include adaptivity(desktop) {
 					flex-basis: 60%;
 				}
 
-				&:last-of-type {
-					flex-basis: 0;
-					min-width: 100px;
+				@include adaptivity(tablet) {
+					padding-right: 0;
+					padding-left: 0;
 				}
 			}
 
-			@include adaptivity(phone) {
+			&:last-of-type {
+				@include adaptivity(desktop) {
+					flex-basis: 0;
+					min-width: 100px;
+				}
+
+				@include adaptivity(tablet) {
+					padding-right: 0;
+				}
+			}
+
+			@include adaptivity(tablet) {
 				padding-left: 0;
+			}
+
+			@include adaptivity(phone) {
 				padding-right: 0;
 			}
 		}

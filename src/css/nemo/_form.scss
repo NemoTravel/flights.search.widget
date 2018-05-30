@@ -80,6 +80,16 @@
 	}
 
 	&_CR {
+		.widget-form-search-footer__col {
+			&:first-of-type {
+				padding-left: 1rem;
+
+				@include adaptivity(tablet) {
+					padding-left: 0;
+				}
+			}
+		}
+
 		@include adaptivity(not-phone) {
 			.widget-form-search-footer {
 				&__col:first-of-type {

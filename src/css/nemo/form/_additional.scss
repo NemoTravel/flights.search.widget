@@ -34,6 +34,11 @@
 
 		@include adaptivity(tablet) {
 			width: 100%;
+			margin-left: 0.5rem;
+		}
+
+		@include adaptivity(phone) {
+			margin-left: 0;
 		}
 	}
 

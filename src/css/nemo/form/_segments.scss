@@ -2,7 +2,7 @@
 
 &-segments {
 	flex-basis: 100%;
-	margin-left: 0;
+	margin-left: 15px;
 	margin-right: 0;
 	flex-wrap: nowrap;
 	margin-bottom: 0;
@@ -83,6 +83,16 @@
 
 			.widget-form-segments__segment {
 				margin-bottom: 0;
+
+				.widget-form-airports {
+					flex-basis: 100%;
+				}
+
+				.widget-form-dates {
+					&__col {
+						padding-left: 0 !important;
+					}
+				}
 			}
 		}
 
@@ -101,5 +111,9 @@
 				}
 			}
 		}
+	}
+
+	@include adaptivity(tablet) {
+		margin-left: 0;
 	}
 }
