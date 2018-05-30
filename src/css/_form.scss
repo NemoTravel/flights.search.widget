@@ -56,9 +56,16 @@
 	&_CR {
 		@include adaptivity(not-phone) {
 			.widget-form-search-footer {
-				&__col:first-of-type {
-					flex-basis: 0;
-					min-width: calc(85% / 2 - 13px);
+				&__col {
+					&:first-of-type {
+						flex-basis: 0;
+						min-width: calc(85% / 2 - 16px);
+						padding-right: 0;
+					}
+
+					&:last-of-type {
+						padding-left: 1rem;
+					}
 				}
 			}
 		}

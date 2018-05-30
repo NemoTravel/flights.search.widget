@@ -3285,7 +3285,12 @@
   .widget-form_CR .widget-form-search-footer__col:first-of-type {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
-    min-width: calc(85% / 2 - 13px);
+    min-width: calc(85% / 2 - 16px);
+    padding-right: 0;
+  }
+
+  .widget-form_CR .widget-form-search-footer__col:last-of-type {
+    padding-left: 1rem;
   }
 }
 

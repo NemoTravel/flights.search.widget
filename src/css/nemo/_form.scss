@@ -88,6 +88,10 @@
 					padding-left: 0;
 				}
 			}
+
+			&:last-of-type {
+				padding-left: 0;
+			}
 		}
 
 		@include adaptivity(not-phone) {
@@ -136,7 +140,7 @@
 					margin-top: -1rem;
 
 					@include adaptivity(desktop) {
-						margin-top: -2rem;
+						margin-top: -1rem;
 					}
 				}
 			}
@@ -187,13 +191,20 @@
 				&_CR {
 					.widget-form-segments__segment {
 						margin-left: 0;
-						margin-bottom: 2rem;
+						margin-bottom: 1rem;
 
 						&__drop {
 							margin-left: -10px;
 							left: 0;
 							right: auto;
+							top: 5px;
 							margin-top: 5px;
+							width: 20px;
+							height: 20px;
+						}
+
+						@include adaptivity(tablet) {
+							margin-bottom: 2rem;
 						}
 					}
 

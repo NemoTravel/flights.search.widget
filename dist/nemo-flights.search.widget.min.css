@@ -1219,7 +1219,7 @@
   color: #ffffff;
   margin-top: 5px;
   margin-right: 0;
-  margin-left: -15px;
+  margin-left: -30px;
 }
 
 .widget-form-segments__segment__drop:before {
@@ -1229,7 +1229,7 @@
 
 @media only screen and (max-width: 1100px) {
   .widget-form-segments__segment__drop {
-    margin-left: -15px;
+    margin-left: -30px;
   }
 }
 
@@ -1405,6 +1405,10 @@
   }
 }
 
+.widget-form_CR .widget-form-search-footer__col:last-of-type {
+  padding-left: 0;
+}
+
 @media only screen and (min-width: 651px) {
   .widget-form_CR .widget-form-search-footer__col:first-of-type {
     -ms-flex-preferred-size: 50%;
@@ -1452,7 +1456,7 @@
 
 @media only screen and (min-width: 1101px) {
   .widget-form_vertical .widget-form-search__addSegment {
-    margin-top: -2rem;
+    margin-top: -1rem;
   }
 }
 
@@ -1499,14 +1503,23 @@
 
 .widget-form_vertical .widget-form-segments_CR .widget-form-segments__segment {
   margin-left: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .widget-form_vertical .widget-form-segments_CR .widget-form-segments__segment__drop {
   margin-left: -10px;
   left: 0;
   right: auto;
+  top: 5px;
   margin-top: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+@media only screen and (max-width: 1100px) {
+  .widget-form_vertical .widget-form-segments_CR .widget-form-segments__segment {
+    margin-bottom: 2rem;
+  }
 }
 
 .widget-form_vertical .widget-form-segments_CR .widget-form-dates__col:only-child {
