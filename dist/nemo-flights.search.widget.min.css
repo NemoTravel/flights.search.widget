@@ -883,7 +883,7 @@
 
 @media only screen and (min-width: 1101px) {
   .widget-form-additionalOptions__checkboxes {
-    margin-right: calc(100px + 1.5rem);
+    margin-right: calc(100px + 1rem);
   }
 
   .widget-form-additionalOptions__checkboxes .widget-ui-checkbox:last-child {
@@ -1075,6 +1075,7 @@
   .widget-form-search-footer__col:first-of-type {
     -ms-flex-preferred-size: 60%;
     flex-basis: 60%;
+    padding-right: 0;
   }
 }
 
@@ -1090,6 +1091,7 @@
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
     min-width: 100px;
+    padding-right: 0.5rem;
   }
 }
 
@@ -1129,6 +1131,12 @@
   .widget-form-search {
     -ms-flex-wrap: wrap !important;
     flex-wrap: wrap !important;
+  }
+}
+
+@media only screen and (min-width: 1101px) {
+  .widget-form-search__startButton {
+    margin-left: 0.5rem;
   }
 }
 
@@ -1435,6 +1443,7 @@
 
 .widget-form_vertical .widget-form-search__startButton {
   width: 100%;
+  margin: 0;
 }
 
 .widget-form_vertical .widget-form-search__addSegment {

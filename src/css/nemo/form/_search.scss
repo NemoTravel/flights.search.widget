@@ -45,6 +45,7 @@
 			&:first-of-type {
 				@include adaptivity(desktop) {
 					flex-basis: 60%;
+					padding-right: 0;
 				}
 
 				@include adaptivity(tablet) {
@@ -57,6 +58,7 @@
 				@include adaptivity(desktop) {
 					flex-basis: 0;
 					min-width: 100px;
+					padding-right: 0.5rem;
 				}
 
 				@include adaptivity(tablet) {
@@ -88,6 +90,10 @@
 	}
 
 	&__startButton {
+		@include adaptivity(desktop) {
+			margin-left: 0.5rem;
+		}
+
 		&.btn-primary {
 			color: #ffffff;
 			line-height: 40px;

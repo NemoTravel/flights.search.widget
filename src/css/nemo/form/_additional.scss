@@ -23,7 +23,7 @@
 		}
 
 		@include adaptivity(desktop) {
-			margin-right: calc(100px + 1.5rem);
+			margin-right: calc(100px + 1rem);
 
 			.widget-ui-checkbox {
 				&:last-child {
