@@ -6,7 +6,7 @@
 	flex-basis: 100%;
 
 	@include adaptivity(desktop) {
-		margin: 0 !important;
+		margin-right: 1rem;
 	}
 
 	@include adaptivity(tablet) {

@@ -42,7 +42,15 @@
 			@include adaptivity(phone) {
 				flex: 100%;
 				position: relative;
+
+				&:last-of-type {
+					margin-top: 1rem;
+				}
 			}
+		}
+
+		@include adaptivity(phone) {
+			flex-wrap: wrap;
 		}
 	}
 

@@ -8,6 +8,19 @@
 }
 
 .widget {
+  /*@import "~bootstrap/scss/bootstrap-reboot";
+	@import "~bootstrap/scss/functions";
+	@import "~bootstrap/scss/variables";
+	@import "~bootstrap/scss/mixins";
+	@import "~bootstrap/scss/reboot";
+	@import "~bootstrap/scss/type";
+	@import "~bootstrap/scss/grid";
+	@import "~bootstrap/scss/forms";
+	@import "~bootstrap/scss/buttons";
+	@import "~bootstrap/scss/transitions";
+	@import "~bootstrap/scss/badge";
+	@import "~bootstrap/scss/progress";
+	@import "~bootstrap/scss/media";*/
   /**
  * React Select
  * ============
@@ -1480,10 +1493,8 @@
 
 .widget .widget-ui-datepicker__footer,
 .widget .widget-form-passengers__footer {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  right: 15px;
+  clear: both;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -1491,6 +1502,9 @@
   .widget .widget-ui-datepicker__footer,
   .widget .widget-form-passengers__footer {
     position: fixed;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
   }
 }
 
@@ -3014,6 +3028,17 @@
     flex: 100%;
     position: relative;
   }
+
+  .widget-form-search-footer__col:last-of-type {
+    margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .widget-form-search-footer {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
 }
 
 .widget-form-search__addSegment {
@@ -3264,14 +3289,23 @@
   }
 }
 
+.widget-form_vertical .widget-form-search-footer {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
 .widget-form_vertical .widget-form-search-footer__col {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
   -ms-flex: 100%;
   flex: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.widget-form_vertical .widget-form-search-footer__col:last-of-type {
+  margin-top: 1rem;
 }
 
 .widget-form_vertical .widget-form-search__addSegment {
@@ -3300,10 +3334,6 @@
   margin-left: 0;
 }
 
-.widget-form_vertical .widget-form-dates__col {
-  padding: 0;
-}
-
 .widget-form_vertical .widget-form-dates__col:only-child {
   padding: 0;
 }
@@ -3311,7 +3341,6 @@
 .widget-form_vertical .widget-form-segments {
   margin-right: 0;
   margin-left: 0;
-  margin-bottom: 0;
 }
 
 .widget-form_vertical .widget-form-segments_CR {
@@ -3700,10 +3729,8 @@
 
 .widget-demo .widget-ui-datepicker__footer,
 .widget-demo .widget-form-passengers__footer {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  right: 15px;
+  clear: both;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -3711,6 +3738,9 @@
   .widget-demo .widget-ui-datepicker__footer,
   .widget-demo .widget-form-passengers__footer {
     position: fixed;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
   }
 }
 

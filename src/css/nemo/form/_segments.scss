@@ -55,10 +55,19 @@
 	&_CR {
 		flex-wrap: wrap !important;
 
-		.widget-form-segments__segment {
-			&:last-of-type {
+		.widget-form-segments {
+			&__segment {
+				margin-bottom: 0;
+
+				&:last-of-type {
+					.widget-form-dates {
+						padding-bottom: 0;
+					}
+				}
+
 				.widget-form-dates {
-					padding-bottom: 0;
+					margin-right: 0;
+					margin-left: 0;
 				}
 			}
 		}

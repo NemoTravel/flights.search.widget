@@ -10,6 +10,14 @@
 		}
 	}
 
+	.widget-ui-dropdown {
+		background: #fff;
+	}
+
+	.widget-ui-input__wrapper {
+		border: none;
+	}
+
 	&__header {
 		background-color: $title-color !important;
 	}

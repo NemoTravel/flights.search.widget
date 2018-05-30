@@ -312,7 +312,7 @@
   flex-basis: 100%;
   -ms-flex-negative: 1;
   flex-shrink: 1;
-  margin-right: 0;
+  margin-right: 1rem;
   margin-bottom: 0;
 }
 
@@ -585,7 +585,7 @@
 
 @media only screen and (min-width: 1101px) {
   .widget-form-dates {
-    margin: 0 !important;
+    margin-right: 1rem;
   }
 }
 
@@ -706,6 +706,14 @@
   font-weight: normal !important;
   background-color: #ffffff !important;
   line-height: 40px !important;
+}
+
+.widget-form-passengers .widget-ui-dropdown {
+  background: #fff;
+}
+
+.widget-form-passengers .widget-ui-input__wrapper {
+  border: none;
 }
 
 .widget-form-passengers__header {
@@ -1218,8 +1226,17 @@
   flex-wrap: wrap !important;
 }
 
+.widget-form-segments_CR .widget-form-segments__segment {
+  margin-bottom: 0;
+}
+
 .widget-form-segments_CR .widget-form-segments__segment:last-of-type .widget-form-dates {
   padding-bottom: 0;
+}
+
+.widget-form-segments_CR .widget-form-segments__segment .widget-form-dates {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 @media only screen and (min-width: 1101px) {
