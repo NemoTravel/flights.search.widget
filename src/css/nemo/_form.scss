@@ -108,6 +108,7 @@
 			&-search {
 				&__wrapper {
 					flex-wrap: wrap;
+					padding: 0;
 				}
 
 				&-footer {
@@ -119,6 +120,10 @@
 					&__col {
 						flex: 100%;
 						padding: 0;
+
+						&:first-of-type {
+							padding-left: 0;
+						}
 					}
 				}
 
@@ -128,12 +133,17 @@
 
 				&__addSegment {
 					margin-top: -1rem;
+
+					@include adaptivity(desktop) {
+						margin-top: -2rem;
+					}
 				}
 			}
 
 			&-dates {
 				flex-basis: 100%;
 				padding-top: 1rem;
+				margin-right: 0;
 
 				@include adaptivity(desktop) {
 					&__col {
@@ -232,8 +242,8 @@
 				padding-left: 0;
 
 				&__checkboxes {
-					margin-bottom: 1rem;
 					margin-right: 0;
+					margin-left: 0;
 
 					.widget-ui-select {
 						width: 100%;
