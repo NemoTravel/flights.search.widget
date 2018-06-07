@@ -82,8 +82,9 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	}
 
 	renderCloser(): React.ReactNode {
-		return this.state.isActive && this.props.isDisableable ?
-			<div className="widget-ui-input__closer" onClick={this.disable}/> : null;
+		return this.state.isActive && this.props.isDisableable ? (
+			<div className="widget-ui-input__closer" onClick={this.disable}/>
+		) : null;
 	}
 
 	customInputOnFocusHandler(event: FormEvent<HTMLInputElement>): void {
@@ -117,11 +118,13 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 				/>
 
 				{this.state.isActive ?
-					<div className="widget-form-dates__caption">
-						{formattedDate ?
+					<div className={classnames('widget-form-dates__caption', { 'widget-form-dates__caption_filled': !!formattedDate })}>
+						{formattedDate ? (
 							<span>
-								{formattedDate}, <span className="widget-form-dates__dayOfWeek">{formattedDayOfWeek}</span>
-							</span> : inputProps.placeholder}
+								{formattedDate},&nbsp;
+								<span className="widget-form-dates__dayOfWeek">{formattedDayOfWeek}</span>
+							</span>
+						) : inputProps.placeholder}
 					</div> : null}
 			</Tooltip>
 
