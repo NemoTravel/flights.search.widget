@@ -7,7 +7,7 @@ const moduleName = 'flights.search.widget';
 // For DEV mode prepend "NODE_ENV=dev" before "webpack" command.
 // terminal: NODE_ENV=dev webpack
 /* global process */
-const isDevMode = process.env.NODE_ENV === 'dev';
+const isDevMode = process.env.NODE_ENV === 'development';
 
 // Streaming compiled styles to the separate ".css" file.
 const extractSass = new ExtractTextPlugin({
@@ -22,8 +22,10 @@ const config = {
 	// Root folder for Webpack.
 	context: __dirname,
 
-	// Entry file.
-	entry: ['whatwg-fetch', './src/main.tsx'],
+	entry: {
+		[moduleName]: ['whatwg-fetch', './src/main.tsx'],
+		demo: './src/demo.tsx'
+	},
 
 	// Watch for changes in file.
 	watch: isDevMode,
@@ -46,7 +48,7 @@ const config = {
 		publicPath: '/dist/',
 
 		// Output file name.
-		filename: `${moduleName}.min.js`,
+		filename: '[name].min.js',
 		library: 'FlightsSearchWidget',
 		libraryTarget: 'umd'
     },

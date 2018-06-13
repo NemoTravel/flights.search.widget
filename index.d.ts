@@ -119,7 +119,6 @@ export interface ComponentProps extends SystemState {
 }
 
 export const init: (config: any) => void;
-export const initDemo: () => void;
 export const enableCache: () => void;
 
 export class Component extends React.Component<ComponentProps> {

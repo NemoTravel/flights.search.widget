@@ -2,7 +2,6 @@ import './ponyfills';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Main from './components/Main';
-import DemoForm from './components/Demo';
 import { Provider } from 'react-redux';
 import { getStore, cacheState } from './store';
 import './css/main.scss';
@@ -48,13 +47,6 @@ export const init = (config: SystemState) => {
  */
 export const enableCache = (): void => {
 	storeGlobal.dispatch(enableCaching());
-};
-
-export const initDemo = () => {
-	ReactDOM.render(
-		<DemoForm/>,
-		document.getElementById('root')
-	);
 };
 
 export { default as Component } from './components/Component';
