@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const packageJSON = require('./package.json');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const moduleName = 'flights.search.widget';
 
 // For DEV mode prepend "NODE_ENV=dev" before "webpack" command.
@@ -29,6 +28,8 @@ const config = {
 	// Watch for changes in file.
 	watch: isDevMode,
 
+	mode: isDevMode ? 'development' : 'production',
+
 	watchOptions: {
 		// Do not watch for changes in "node_modules".
 		ignored: /node_modules/,
@@ -49,6 +50,15 @@ const config = {
 		library: 'FlightsSearchWidget',
 		libraryTarget: 'umd'
     },
+
+	performance: {
+		hints: false
+	},
+
+	optimization: {
+		minimize: !isDevMode,
+		noEmitOnErrors: true
+	},
 
 	resolve: {
 		// Where to look for modules.
@@ -161,21 +171,11 @@ const config = {
 	plugins: [
 		extractSass,
 		extractNemoSass,
-		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru|en|de|ro/)
 	]
 };
 
 if (!isDevMode) {
-	config.plugins.push(
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false,
-				drop_console: false
-			}
-		})
-	);
-
 	config.plugins.push(new webpack.optimize.OccurrenceOrderPlugin());
 }
 

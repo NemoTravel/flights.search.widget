@@ -8,12 +8,12 @@
     "tslint": "tslint -p ./tslint.json",
     "server": "node server.js",
     "build": "npm run tslint && npm run sass-lint && npm test && cross-env NODE_ENV=production webpack",
-    "build-dev": "cross-env NODE_ENV=dev webpack",
+    "build-dev": "cross-env NODE_ENV=development webpack",
     "dev": "run-p build-dev server",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm build",
     "postinstall": "npm install react@16.x.x react-dom@16.x.x redux@4.x.x --no-save",
     "test": "jest",
-    "start": "npm run server"
+    "start": "npm run dev"
   },
   "pre-commit": [],
   "repository": {
@@ -33,7 +33,7 @@
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.10",
     "express": "^4.16.3",
-    "extract-text-webpack-plugin": "^3.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "jest": "^23.1.0",
     "node-sass": "^4.8.1",
     "npm-run-all": "^4.1.2",
@@ -43,13 +43,14 @@
     "redux-testkit": "^1.0.6",
     "resolve-url-loader": "^2.3.0",
     "sass-lint": "^1.12.1",
-    "sass-loader": "^6.0.7",
+    "sass-loader": "^7.0.1",
     "style-loader": "^0.18.2",
-    "ts-loader": "^3.5.0",
+    "ts-loader": "^4.3.0",
     "tslint": "^5.9.1",
     "typescript": "^2.8.3",
     "url-loader": "^0.5.9",
-    "webpack": "^3.11.0"
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.4"
   },
   "dependencies": {
     "@material-ui/core": "^1.0.0",
