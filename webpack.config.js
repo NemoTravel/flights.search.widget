@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const packageJSON = require('./package.json');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const moduleName = 'flights.search.widget';
 
 // For DEV mode prepend "NODE_ENV=dev" before "webpack" command.
@@ -160,7 +161,8 @@ const config = {
 	plugins: [
 		extractSass,
 		extractNemoSass,
-		new webpack.NoEmitOnErrorsPlugin()
+		new webpack.NoEmitOnErrorsPlugin(),
+		new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /ru|en|de|ro/)
 	]
 };
 
