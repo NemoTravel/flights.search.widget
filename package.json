@@ -1,6 +1,6 @@
 {
   "name": "@nemo.travel/search-widget",
-  "version": "2.4.6",
+  "version": "2.4.7",
   "description": "Lightweight form for searching airtickets",
   "main": "dist/flights.search.widget.min.js",
   "scripts": {
@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^1.0.0",
-    "@nemo.travel/react-datepicker": "^0.57.4",
+    "@nemo.travel/react-datepicker": "^0.57.5",
     "@nemo.travel/react-select": "^1.0.9",
     "@nemo.travel/why-did-you-update": "0.0.8",
     "@types/classnames": "^2.2.3",
