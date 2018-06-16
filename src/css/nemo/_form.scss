@@ -101,6 +101,16 @@
 				}
 			}
 		}
+
+		.widget-form-additionalOptions__checkboxes {
+			@include adaptivity(tablet) {
+				margin-left: 1rem;
+			}
+
+			@include adaptivity(phone) {
+				margin-left: 0;
+			}
+		}
 	}
 
 	&_vertical {
