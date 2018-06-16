@@ -244,7 +244,8 @@
 			}
 
 			&-additionalOptions {
-				display: block;
+				display: flex;
+				flex-wrap: wrap;
 				position: relative;
 				height: auto;
 				top: 0;

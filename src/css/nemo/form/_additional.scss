@@ -58,7 +58,7 @@
 
 	@include adaptivity(phone) {
 		height: auto;
-		display: block;
+		flex-wrap: wrap;
 		margin-bottom: 0 !important;
 	}
 

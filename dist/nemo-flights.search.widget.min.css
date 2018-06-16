@@ -930,7 +930,8 @@
 @media only screen and (max-width: 650px) {
   .widget-form-additionalOptions {
     height: auto;
-    display: block;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
     margin-bottom: 0 !important;
   }
 }
@@ -1553,7 +1554,11 @@
 }
 
 .widget-form_vertical .widget-form-additionalOptions {
-  display: block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   position: relative;
   height: auto;
   top: 0;

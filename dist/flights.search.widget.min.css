@@ -8,19 +8,6 @@
 }
 
 .widget {
-  /*@import "~bootstrap/scss/bootstrap-reboot";
-	@import "~bootstrap/scss/functions";
-	@import "~bootstrap/scss/variables";
-	@import "~bootstrap/scss/mixins";
-	@import "~bootstrap/scss/reboot";
-	@import "~bootstrap/scss/type";
-	@import "~bootstrap/scss/grid";
-	@import "~bootstrap/scss/forms";
-	@import "~bootstrap/scss/buttons";
-	@import "~bootstrap/scss/transitions";
-	@import "~bootstrap/scss/badge";
-	@import "~bootstrap/scss/progress";
-	@import "~bootstrap/scss/media";*/
   /**
  * React Select
  * ============
@@ -3273,7 +3260,7 @@
 
 @media only screen and (max-width: 650px) {
   .widget-form__routeTypeSwitch {
-    margin: 0 0 1rem;
+    margin: 0 0 0.5rem;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -3311,6 +3298,7 @@
 
 .widget-form_vertical .widget-form-search-footer__col:last-of-type {
   margin-top: 1rem;
+  padding-left: 0;
 }
 
 .widget-form_vertical .widget-form-search__addSegment {
@@ -3330,7 +3318,7 @@
 @media only screen and (max-width: 650px) {
   .widget-form_vertical .widget-form__routeTypeSwitch {
     margin-top: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 }
 
