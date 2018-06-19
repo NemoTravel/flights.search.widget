@@ -38,6 +38,7 @@
 		flex-shrink: 4;
 		margin: 0 !important;
 		flex-basis: 100%;
+		position: static;
 
 		@include adaptivity(desktop) {
 			min-width: 300px;

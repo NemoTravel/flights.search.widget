@@ -11,6 +11,7 @@
 
 	&_CR {
 		.widget-form-segments__segment {
+			position: relative;
 			display: flex;
 
 			&:last-of-type {
