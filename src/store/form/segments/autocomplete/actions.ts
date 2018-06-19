@@ -346,8 +346,8 @@ const runNemoAutocomplete = (dispatch: Dispatch<AnyAction, any>, getState: GetSt
 
 	// For `arrival` autocomplete field, inject selected departure IATA code,
 	// for loading proper list of arrival options.
-	if (autocompleteType === 'arrival' && state.form.segments[0].autocomplete.departure.airport) {
-		departureIATA = state.form.segments[0].autocomplete.departure.airport.IATA;
+	if (autocompleteType === 'arrival' && state.form.segments[segmentId].autocomplete.departure.airport) {
+		departureIATA = state.form.segments[segmentId].autocomplete.departure.airport.IATA;
 		requestURL += `/dep/${departureIATA}`;
 	}
 

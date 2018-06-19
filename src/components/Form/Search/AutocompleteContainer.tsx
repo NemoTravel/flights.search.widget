@@ -46,6 +46,26 @@ interface Props {
 class AutocompleteContainer extends React.Component<StateProps & DispatchProps & Props> {
 	protected arrivalInput: HTMLInputElement = null;
 
+	getAutocomplete(type: AutocompleteFieldType): AutocompleteOption[] {
+		if (this.props.isGridMode) {
+			if (
+				type === AutocompleteFieldType.Departure ||
+				!this.props.departureAutocomplete.airport
+			) {
+				return getGridSuggestionOptions(this.props.gridAutocomplete['default']);
+			}
+
+			if (this.props.gridAutocomplete.hasOwnProperty(this.props.departureAutocomplete.airport.IATA)) {
+				return getGridSuggestionOptions(this.props.gridAutocomplete[this.props.departureAutocomplete.airport.IATA]);
+			}
+		}
+		else {
+			return getSuggestionOptions(type === AutocompleteFieldType.Arrival ? this.props.arrivalAutocomplete : this.props.departureAutocomplete);
+		}
+
+		return [];
+	}
+
 	render(): React.ReactNode {
 		let sameAirportsError = false;
 
@@ -55,8 +75,6 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			arrivalAutocomplete,
 			system,
 			showErrors,
-			gridAutocomplete,
-			isGridMode,
 
 			swapAirports,
 			changeAutocompleteSuggestions,
@@ -65,19 +83,8 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			segmentId
 		} = this.props;
 
-		let departureOptions, arrivalOptions: AutocompleteOption[] = [];
-
-		if (isGridMode) {
-			departureOptions = getGridSuggestionOptions(gridAutocomplete['default']);
-
-			if (departureAutocomplete.airport && gridAutocomplete.hasOwnProperty(departureAutocomplete.airport.IATA)) {
-				arrivalOptions = getGridSuggestionOptions(gridAutocomplete[departureAutocomplete.airport.IATA]);
-			}
-		}
-		else {
-			departureOptions = getSuggestionOptions(departureAutocomplete);
-			arrivalOptions = getSuggestionOptions(arrivalAutocomplete);
-		}
+		const departureOptions = this.getAutocomplete(AutocompleteFieldType.Departure),
+				arrivalOptions = this.getAutocomplete(AutocompleteFieldType.Arrival);
 
 		if (
 			departureAutocomplete.airport && arrivalAutocomplete.airport &&
