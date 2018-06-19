@@ -10,16 +10,24 @@ import {
 
 import DepartureAutocomplete from './Autocomplete/Departure';
 import ArrivalAutocomplete from './Autocomplete/Arrival';
-import { getDefaultOptionsGroup, DefaultOptionGroup, getSuggestionOptions } from '../../../store/form/selectors';
 import {
-	ApplicationMode, ApplicationState, AutocompleteFieldState, AutocompleteFieldType, CommonThunkAction, SegmentState,
+	getDefaultOptionsGroup, DefaultOptionGroup, getSuggestionOptions,
+	getGridSuggestionOptions
+} from '../../../store/form/selectors';
+import {
+	ApplicationMode, ApplicationState, AutocompleteFieldState, AutocompleteFieldType, CommonThunkAction,
+	GridAutocompleteState, SegmentState,
 	SystemState
 } from '../../../state';
+import { is } from "redux-saga/utils";
+import { AutocompleteOption } from "../../../services/models/AutocompleteOption";
 
 interface StateProps {
 	defaultOptionsGroup: DefaultOptionGroup[];
 	showErrors: boolean;
 	system: SystemState;
+	gridAutocomplete: GridAutocompleteState;
+	isGridMode: boolean;
 }
 
 interface DispatchProps {
@@ -47,6 +55,8 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			arrivalAutocomplete,
 			system,
 			showErrors,
+			gridAutocomplete,
+			isGridMode,
 
 			swapAirports,
 			changeAutocompleteSuggestions,
@@ -55,8 +65,19 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			segmentId
 		} = this.props;
 
-		const departureOptions = getSuggestionOptions(departureAutocomplete);
-		const arrivalOptions = getSuggestionOptions(arrivalAutocomplete);
+		let departureOptions, arrivalOptions: AutocompleteOption[] = [];
+
+		if (isGridMode) {
+			departureOptions = getGridSuggestionOptions(gridAutocomplete['default']);
+
+			if (departureAutocomplete.airport && gridAutocomplete.hasOwnProperty(departureAutocomplete.airport.IATA)) {
+				arrivalOptions = getGridSuggestionOptions(gridAutocomplete[departureAutocomplete.airport.IATA]);
+			}
+		}
+		else {
+			departureOptions = getSuggestionOptions(departureAutocomplete);
+			arrivalOptions = getSuggestionOptions(arrivalAutocomplete);
+		}
 
 		if (
 			departureAutocomplete.airport && arrivalAutocomplete.airport &&
@@ -112,7 +133,9 @@ const mapStateToProps = (state: ApplicationState): StateProps => {
 	return {
 		defaultOptionsGroup: getDefaultOptionsGroup(state),
 		showErrors: state.form.showErrors,
-		system: state.system
+		system: state.system,
+		gridAutocomplete: state.form.gridAutocomplete,
+		isGridMode: !!state.system.routingGrid
 	};
 };
 

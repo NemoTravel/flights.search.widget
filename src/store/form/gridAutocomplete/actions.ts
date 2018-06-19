@@ -7,7 +7,7 @@ export interface GridAction {
 	suggestions?: AutocompleteSuggestion[];
 }
 
-export const setGrid = (IATA: string, suggestions: AutocompleteSuggestion[]) => {
+export const setAutocompleteSuggestionsForGrid = (IATA: string, suggestions: AutocompleteSuggestion[]) => {
 	const departureIATA = !!IATA ? IATA : 'default';
 
 	return {

@@ -63,7 +63,7 @@ export default class Autocomplete extends React.Component<Props, State> {
 	fetchSuggestions(searchText: string = ''): void {
 		const { sendAutocompleteRequest, segmentId } = this.props;
 
-		if (searchText || this.props.isGridMode) {
+		if (searchText || (this.props.isGridMode && !this.props.suggestions.length)) {
 			// We don't want to harass servers too much.
 			clearTimeout(this.autocompleteTimeout);
 

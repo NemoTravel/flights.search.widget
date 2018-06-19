@@ -19,7 +19,7 @@ import { AutocompleteSuggestion } from '../../../../services/models/Autocomplete
 import { Airport } from '../../../../services/models/Airport';
 import { ResponseWithGuide } from '../../../../services/responses/Guide';
 import { isRT } from '../../selectors';
-import { setGrid } from "../../gridAutocomplete/actions";
+import { setAutocompleteSuggestionsForGrid } from "../../gridAutocomplete/actions";
 
 export interface AutocompleteAction {
 	type: string;
@@ -271,15 +271,15 @@ const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOn
 			const options = parseAutocompleteOptions(response, aggregationOnly);
 
 			if (options) {
-				dispatch(changeAutocompleteSuggestions(options, autocompleteType, segmentId));
+				if (gridRoute) {
+					dispatch(setAutocompleteSuggestionsForGrid(departureIATA, options));
+				}
+				else {
+					dispatch(changeAutocompleteSuggestions(options, autocompleteType, segmentId));
+				}
 			}
 
 			dispatch(finishAutocompleteLoading(autocompleteType, segmentId));
-
-			if (gridRoute) {
-				console.log("needed to save ", departureIATA, options);
-				dispatch(setGrid(departureIATA, options));
-			}
 		})
 		.catch(() => {
 			dispatch(changeAutocompleteSuggestions([], autocompleteType, segmentId));

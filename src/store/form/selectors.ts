@@ -200,3 +200,4 @@ const mapGroupOptions = (groups: AutocompleteDefaultGroupsState): DefaultOptionG
  */
 export const getSuggestionOptions = createSelector(getSuggestionsFromAutocomplete, mapOptions);
 export const getDefaultOptionsGroup = createSelector(getDefaultOptionsFromState, mapGroupOptions);
+export const getGridSuggestionOptions = (suggestions: AutocompleteSuggestion[]): AutocompleteOption[] => mapOptions(suggestions);

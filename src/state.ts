@@ -339,7 +339,9 @@ export const initialState: ApplicationState = {
 		coupon: couponState,
 		mileCard: mileCardState,
 		routeType: RouteType.OW,
-		gridAutocomplete: {}
+		gridAutocomplete: {
+			default: []
+		}
 	}
 };
 
