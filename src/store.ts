@@ -15,7 +15,7 @@ import {
 import { setClassType, setVicinityDatesCheckbox, setDirectFlightCheckbox } from './store/form/additional/actions';
 import {
 	loadAirportForAutocomplete,
-	loadNearestAirportForAutocomplete,
+	loadNearestAirportForAutocomplete, sendAutocompleteRequest,
 	setSelectedAirport
 } from './store/form/segments/autocomplete/actions';
 import { addSegment } from './store/form/segments/actions';
@@ -43,7 +43,7 @@ const enableReduxLogger = (isEnabled: boolean = false): void => {
 
 /* global process */
 if (process.env.NODE_ENV !== 'production') {
-	enableReduxLogger(false);
+	enableReduxLogger(true);
 	enableProfiler(false);
 }
 
@@ -105,6 +105,10 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 	}
 
 	const state = store.getState();
+
+	if (state.system.routingGrid) {
+		store.dispatch(sendAutocompleteRequest('', AutocompleteFieldType.Departure, 0));
+	}
 
 	if (!state.form.segments[0].autocomplete.departure.airport) {
 		// Pre-loading departure airport by specified IATA or airport object.

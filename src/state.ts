@@ -294,6 +294,10 @@ export interface SearchInfo {
 
 export type OnSearchFunction = (params: SearchInfo) => void;
 
+export interface GridAutocompleteState {
+	[IATA: string]: AutocompleteSuggestion[];
+}
+
 export interface FormState {
 	showErrors: boolean;
 	passengers: PassengersState;
@@ -302,6 +306,7 @@ export interface FormState {
 	coupon: CouponState;
 	mileCard: MileCardState;
 	routeType: RouteType;
+	gridAutocomplete: GridAutocompleteState;
 }
 
 export interface CachedFormSate {
@@ -333,7 +338,8 @@ export const initialState: ApplicationState = {
 		additional: additionalState,
 		coupon: couponState,
 		mileCard: mileCardState,
-		routeType: RouteType.OW
+		routeType: RouteType.OW,
+		gridAutocomplete: {}
 	}
 };
 

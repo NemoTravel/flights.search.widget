@@ -19,6 +19,7 @@ import { AutocompleteSuggestion } from '../../../../services/models/Autocomplete
 import { Airport } from '../../../../services/models/Airport';
 import { ResponseWithGuide } from '../../../../services/responses/Guide';
 import { isRT } from '../../selectors';
+import { setGrid } from "../../gridAutocomplete/actions";
 
 export interface AutocompleteAction {
 	type: string;
@@ -248,6 +249,8 @@ interface AutocompleteParams {
 	autocompleteType: AutocompleteFieldType;
 	aggregationOnly?: boolean;
 	segmentId?: number;
+	departureIATA?: string;
+	gridRoute?: boolean;
 }
 
 /**
@@ -259,7 +262,7 @@ interface AutocompleteParams {
  * @param {Boolean} aggregationOnly
  * @param {number} segmentId
  */
-const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOnly = false, segmentId = 0 }: AutocompleteParams): void => {
+const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOnly = false, segmentId = 0, departureIATA = '', gridRoute = false }: AutocompleteParams): void => {
 	dispatch(startAutocompleteLoading(autocompleteType, segmentId));
 
 	fetch(requestURL)
@@ -272,6 +275,11 @@ const runAutocomplete = ({ requestURL, dispatch, autocompleteType, aggregationOn
 			}
 
 			dispatch(finishAutocompleteLoading(autocompleteType, segmentId));
+
+			if (gridRoute) {
+				console.log("needed to save ", departureIATA, options);
+				dispatch(setGrid(departureIATA, options));
+			}
 		})
 		.catch(() => {
 			dispatch(changeAutocompleteSuggestions([], autocompleteType, segmentId));
@@ -329,6 +337,7 @@ const runWebskyAutocomplete = (dispatch: Dispatch<AnyAction, any>, getState: Get
  */
 const runNemoAutocomplete = (dispatch: Dispatch<AnyAction, any>, getState: GetStateFunction, searchText: string, autocompleteType: AutocompleteFieldType, segmentId: number = 0): void => {
 	const state = getState();
+	let departureIATA = '';
 
 	let requestURL = `${clearURL(state.system.nemoURL)}/api/guide/autocomplete/iata/${searchText}`;
 	const requestParams: AutocompleteRequestParams = {
@@ -338,7 +347,8 @@ const runNemoAutocomplete = (dispatch: Dispatch<AnyAction, any>, getState: GetSt
 	// For `arrival` autocomplete field, inject selected departure IATA code,
 	// for loading proper list of arrival options.
 	if (autocompleteType === 'arrival' && state.form.segments[0].autocomplete.departure.airport) {
-		requestURL += `/dep/${state.form.segments[0].autocomplete.departure.airport.IATA}`;
+		departureIATA = state.form.segments[0].autocomplete.departure.airport.IATA;
+		requestURL += `/dep/${departureIATA}`;
 	}
 
 	if (state.system.routingGrid) {
@@ -349,7 +359,9 @@ const runNemoAutocomplete = (dispatch: Dispatch<AnyAction, any>, getState: GetSt
 		requestURL: URL(requestURL, requestParams),
 		dispatch,
 		autocompleteType,
-		segmentId
+		segmentId,
+		departureIATA: departureIATA,
+		gridRoute: !!state.system.routingGrid
 	});
 };
 
