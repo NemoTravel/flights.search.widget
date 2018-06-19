@@ -1,5 +1,5 @@
-import { AutocompleteSuggestion } from "../../../services/models/AutocompleteSuggestion";
-import { SET_GRID_AUTOCOMPLETE } from "../../actions";
+import { AutocompleteSuggestion } from '../../../services/models/AutocompleteSuggestion';
+import { SET_GRID_AUTOCOMPLETE } from '../../actions';
 
 export interface GridAction {
 	type: string;
@@ -14,5 +14,5 @@ export const setAutocompleteSuggestionsForGrid = (IATA: string, suggestions: Aut
 		type: SET_GRID_AUTOCOMPLETE,
 		IATA: departureIATA,
 		suggestions
-	}
+	};
 };

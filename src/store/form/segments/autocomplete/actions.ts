@@ -19,7 +19,7 @@ import { AutocompleteSuggestion } from '../../../../services/models/Autocomplete
 import { Airport } from '../../../../services/models/Airport';
 import { ResponseWithGuide } from '../../../../services/responses/Guide';
 import { isRT } from '../../selectors';
-import { setAutocompleteSuggestionsForGrid } from "../../gridAutocomplete/actions";
+import { setAutocompleteSuggestionsForGrid } from '../../gridAutocomplete/actions';
 
 export interface AutocompleteAction {
 	type: string;

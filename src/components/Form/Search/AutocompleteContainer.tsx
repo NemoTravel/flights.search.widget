@@ -12,15 +12,13 @@ import DepartureAutocomplete from './Autocomplete/Departure';
 import ArrivalAutocomplete from './Autocomplete/Arrival';
 import {
 	getDefaultOptionsGroup, DefaultOptionGroup, getSuggestionOptions,
-	getGridSuggestionOptions
+	suggestionsToOptionsArray
 } from '../../../store/form/selectors';
 import {
 	ApplicationMode, ApplicationState, AutocompleteFieldState, AutocompleteFieldType, CommonThunkAction,
-	GridAutocompleteState, SegmentState,
-	SystemState
+	GridAutocompleteState, SystemState
 } from '../../../state';
-import { is } from "redux-saga/utils";
-import { AutocompleteOption } from "../../../services/models/AutocompleteOption";
+import { AutocompleteOption } from '../../../services/models/AutocompleteOption';
 
 interface StateProps {
 	defaultOptionsGroup: DefaultOptionGroup[];
@@ -52,11 +50,11 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 				type === AutocompleteFieldType.Departure ||
 				!this.props.departureAutocomplete.airport
 			) {
-				return getGridSuggestionOptions(this.props.gridAutocomplete['default']);
+				return suggestionsToOptionsArray(this.props.gridAutocomplete['default']);
 			}
 
 			if (this.props.gridAutocomplete.hasOwnProperty(this.props.departureAutocomplete.airport.IATA)) {
-				return getGridSuggestionOptions(this.props.gridAutocomplete[this.props.departureAutocomplete.airport.IATA]);
+				return suggestionsToOptionsArray(this.props.gridAutocomplete[this.props.departureAutocomplete.airport.IATA]);
 			}
 		}
 		else {

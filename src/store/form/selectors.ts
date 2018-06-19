@@ -150,7 +150,7 @@ export const formIsValid = createSelector(
 const getSuggestionsFromAutocomplete = (state: AutocompleteFieldState): AutocompleteSuggestion[] => state.suggestions;
 const getDefaultOptionsFromState = (state: ApplicationState): AutocompleteDefaultGroupsState => state.form.segments[0].autocomplete.defaultGroups;
 
-const mapOptions = (options: AutocompleteSuggestion[]): AutocompleteOption[] => {
+export const suggestionsToOptionsArray = (options: AutocompleteSuggestion[]): AutocompleteOption[] => {
 	return options
 		.filter(option => option && option.airport && option.airport.name && option.airport.nameEn && option.airport.IATA)
 		.map((option): AutocompleteOption => {
@@ -198,6 +198,5 @@ const mapGroupOptions = (groups: AutocompleteDefaultGroupsState): DefaultOptionG
 /**
  * Create autocomplete options list for arrival and departure.
  */
-export const getSuggestionOptions = createSelector(getSuggestionsFromAutocomplete, mapOptions);
+export const getSuggestionOptions = createSelector(getSuggestionsFromAutocomplete, suggestionsToOptionsArray);
 export const getDefaultOptionsGroup = createSelector(getDefaultOptionsFromState, mapGroupOptions);
-export const getGridSuggestionOptions = (suggestions: AutocompleteSuggestion[]): AutocompleteOption[] => mapOptions(suggestions);
