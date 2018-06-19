@@ -1,15 +1,16 @@
 import './ponyfills';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Main from './components/Main';
 import { Provider } from 'react-redux';
+import { Store } from 'redux';
+import 'whatwg-fetch';
+
+import Main from './components/Main';
 import { getStore, cacheState } from './store';
 import './css/main.scss';
 import './css/nemo/main.scss';
-import 'whatwg-fetch';
 import { ApplicationState, SystemState } from './state';
 import { enableCaching } from './store/system/actions';
-import { Store } from 'redux';
 
 let storeGlobal: Store<ApplicationState>;
 
