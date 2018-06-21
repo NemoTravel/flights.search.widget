@@ -13,6 +13,7 @@
 
 	&_CR {
 		.widget-form-segments__segment {
+			position: relative;
 			display: flex;
 
 			&:last-of-type {
@@ -121,6 +122,9 @@
 			left: 0;
 			margin-right: 30px;
 			margin-top: 7px;
+			transform: translateX(-50%);
+			z-index: 2;
+
 			background: #f7db03;
 			color: #726666;
 			font-size: 15px;
@@ -128,7 +132,6 @@
 			text-align: center;
 			cursor: pointer;
 			font-weight: 700;
-			z-index: 2;
 
 			display: flex;
 			justify-content: center;

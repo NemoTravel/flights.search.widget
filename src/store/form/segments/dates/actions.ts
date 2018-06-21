@@ -47,26 +47,24 @@ export const setAvailableDates = (availableDates: AvailableDateResponse[], dateT
  * Some wrapper for `SELECT_DATE` action.
  *
  * @param {Moment|null} date
- * @param {String} dateType
  * @param {Number} segmentId
  * @returns {Function}
  */
-export const datepickerChange = (date: Moment, dateType: DatepickerFieldType, segmentId: number): CommonThunkAction => {
+export const datepickerChange = (date: Moment, segmentId: number): CommonThunkAction => {
 	return (dispatch, getState): void => {
 		const state = getState();
 
 		if (isRT(state)) {
-			// If the new departure date is `bigger` than the selected return date,
-			// clear the return date.
+			// If new departure date goes after the selected return date,
+			// update return date with that new departure date.
 			if (segmentId === 0) {
 				const anotherDate = getDate(state, 1);
 
 				if (anotherDate && anotherDate.isBefore(date)) {
-					dispatch(selectDate(null, 1));
-					dispatch(toggleDatePicker(false, DatepickerFieldType.Return));
+					dispatch(selectDate(date, 1));
 				}
 			}
-			// Do the same thing if the selected departure date is `smaller` than the new return date.
+			// Do the same thing if the selected departure date goes before the new return date.
 			else if (segmentId === 1) {
 				const anotherDate = getDate(state, 0);
 

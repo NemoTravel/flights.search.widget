@@ -65,11 +65,6 @@
 		}
 	}
 
-	&_loading {
-		background: url("/images/form/spinner.svg") no-repeat 90% center;
-		background-size: 20px;
-	}
-
 	&_disabled {
 		background: #f2f2f2 !important;
 		border-color: #f2f2f2 !important;

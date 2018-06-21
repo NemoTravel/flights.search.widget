@@ -48,7 +48,12 @@
 		line-height: 40px;
 		z-index: 1;
 
+		color: #868e96;
 		cursor: pointer;
+
+		&_filled {
+			color: #666666;
+		}
 	}
 
 	&__dayOfWeek {

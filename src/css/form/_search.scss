@@ -78,6 +78,15 @@
 		&.btn-primary {
 			padding: 0 43px;
 
+			&:active {
+				color: $font-color !important;
+				background-color: $main-button-color_hover !important;
+			}
+
+			&:active:focus {
+				box-shadow: none !important;
+			}
+
 			@include adaptivity(phone) {
 				width: 100%;
 			}

@@ -5,7 +5,7 @@ import { i18n } from '../../../../utils';
 import { DatepickerFieldType } from '../../../../state';
 
 export default class Return extends Datepicker {
-	protected type = DatepickerFieldType.Departure;
+	protected type = DatepickerFieldType.Return;
 	protected placeholder = i18n('form', 'dateBack');
 	protected popperPlacement = 'top-end';
 	protected isDisableable = true;

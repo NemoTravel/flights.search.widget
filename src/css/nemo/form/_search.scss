@@ -113,11 +113,16 @@
 			}
 
 			&:active {
+				color: #ffffff !important;
 				background: $main-button-color_hover !important;
 				box-shadow: 0 4px 8px 0 rgba(93, 134, 41, 0.5) !important;
 			}
 
 			&:focus {
+				box-shadow: 0 4px 8px 0 rgba(93, 134, 41, 0.5) !important;
+			}
+
+			&:active:focus {
 				box-shadow: 0 4px 8px 0 rgba(93, 134, 41, 0.5) !important;
 			}
 		}

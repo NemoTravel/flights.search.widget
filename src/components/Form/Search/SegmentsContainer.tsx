@@ -37,13 +37,13 @@ class SegmentsContainer extends React.Component<StateProps & DispatchProps> {
 			segment={segments[0]}
 			segmentId={0}
 			canBeRemoved={false}
-			showDatesError={true}
+			showDatesError={false}
 			returnDate={isRT ? segments[1].departureDate : null}
 		/>;
 	}
 
 	renderAllSegment(): React.ReactNode {
-		const { segments, isCR, isRT, removeSegment } = this.props;
+		const { segments, isCR, removeSegment } = this.props;
 
 		return segments.map((segment: SegmentState, index: number) => {
 			return <Segment
