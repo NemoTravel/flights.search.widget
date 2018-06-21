@@ -66,7 +66,6 @@
     "@types/react-onclickoutside": "^6.0.3",
     "@types/react-redux": "^5.0.15",
     "@types/redux-logger": "^3.0.5",
-    "bootstrap": "^4.0.0",
     "classnames": "^2.2.5",
     "js-cookie": "^2.1.4",
     "moment": "^2.x.x",

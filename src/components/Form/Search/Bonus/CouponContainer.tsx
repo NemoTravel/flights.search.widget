@@ -92,7 +92,7 @@ class CouponContainer extends React.Component<Props, State> {
 	}
 
 	render(): React.ReactNode {
-		return <div className="form-group widget-form-coupon">
+		return <div className="widget-form-coupon">
 			{this.state.isActive ? this.renderField() : this.renderDummy()}
 		</div>;
 	}

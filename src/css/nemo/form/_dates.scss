@@ -6,7 +6,7 @@
 	flex-basis: 100%;
 
 	@include adaptivity(desktop) {
-		margin: 0 !important;
+		margin-right: 1rem;
 	}
 
 	@include adaptivity(tablet) {
@@ -53,57 +53,50 @@
 	}
 
 	&__col {
-		&.col {
-			position: static;
-			padding: 0 !important;
+		padding: 0 !important;
 
-			&:last-of-type:not(:only-child) {
-				@include adaptivity(desktop) {
-					border-left: 1px solid #64b5f6;
-				}
-
-				.widget-ui-datepicker__calendar {
-					display: none;
-				}
+		&:last-of-type:not(:only-child) {
+			@include adaptivity(desktop) {
+				border-left: 1px solid #64b5f6;
 			}
 
-			@include adaptivity(tablet) {
-				&:first-of-type {
-					padding-left: 15px !important;
-				}
+			.widget-ui-datepicker__calendar {
+				display: none;
+			}
+		}
 
-				&:last-of-type {
-					padding-left: 15px !important;
-					padding-right: 15px !important;
-				}
+		@include adaptivity(tablet) {
+			&:last-of-type {
+				padding-left: 15px !important;
+			}
+		}
+
+		@include adaptivity(phone) {
+			flex-basis: 100%;
+
+			&:first-of-type {
+				padding-bottom: 1rem !important;
+				padding-left: 0 !important;
 			}
 
-			@include adaptivity(phone) {
-				flex-basis: 100%;
+			&:last-of-type {
+				padding-left: 0 !important;
+				padding-right: 0 !important;
+			}
+		}
 
-				&:first-of-type {
-					padding-bottom: 1rem !important;
-					padding-left: 0 !important;
-				}
+		.widget-ui-input_disabled {
+			text-align: center;
+			background: rgba(255, 255, 255, 0.25) !important;
+			color: #ffffff !important;
 
-				&:last-of-type {
-					padding-left: 0 !important;
-					padding-right: 0 !important;
-				}
+			&:hover {
+				box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2) !important;
+				background-color: rgba(255, 255, 255, 0.2) !important;
 			}
 
-			.widget-ui-input_disabled {
-				text-align: center;
-				background: rgba(255, 255, 255, 0.25) !important;
-				color: #ffffff !important;
-
-				&:hover {
-					box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2) !important;
-				}
-
-				&::placeholder {
-					color: #ffffff;
-				}
+			&::placeholder {
+				color: #ffffff;
 			}
 		}
 	}

@@ -1,13 +1,11 @@
 @import "../variables";
 
 &-segments {
-	&.row {
-		flex-basis: 100%;
-		margin-left: 0;
-		margin-right: 0;
-		flex-wrap: nowrap;
-		margin-bottom: 0;
-	}
+	flex-basis: 100%;
+	margin-left: 15px;
+	margin-right: 0;
+	flex-wrap: nowrap;
+	margin-bottom: 0;
 
 	&__segment {
 		display: flex;
@@ -25,7 +23,8 @@
 			color: #ffffff;
 			margin-top: 5px;
 			margin-right: 0;
-			margin-left: -15px;
+			margin-left: -30px;
+			transform: translateX(0);
 
 			&:before {
 				line-height: 30px;
@@ -33,7 +32,7 @@
 			}
 
 			@include adaptivity(tablet) {
-				margin-left: - 15px;
+				margin-left: - 30px;
 			}
 
 			@include adaptivity(phone) {
@@ -57,10 +56,19 @@
 	&_CR {
 		flex-wrap: wrap !important;
 
-		.widget-form-segments__segment {
-			&:last-of-type {
+		.widget-form-segments {
+			&__segment {
+				margin-bottom: 0;
+
+				&:last-of-type {
+					.widget-form-dates {
+						padding-bottom: 0;
+					}
+				}
+
 				.widget-form-dates {
-					padding-bottom: 0;
+					margin-right: 0;
+					margin-left: 0;
 				}
 			}
 		}
@@ -76,6 +84,16 @@
 
 			.widget-form-segments__segment {
 				margin-bottom: 0;
+
+				.widget-form-airports {
+					flex-basis: 100%;
+				}
+
+				.widget-form-dates {
+					&__col {
+						padding-left: 0 !important;
+					}
+				}
 			}
 		}
 
@@ -94,5 +112,9 @@
 				}
 			}
 		}
+	}
+
+	@include adaptivity(tablet) {
+		margin-left: 0;
 	}
 }

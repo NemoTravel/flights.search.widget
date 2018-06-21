@@ -8,13 +8,19 @@
 &-search {
 	background: #64b5f6;
 
+	&__wrapper {
+		@include adaptivity(tablet) {
+			padding: 0 15px;
+		}
+	}
+
 	&__addSegment {
 		line-height: 40px;
 		background: rgba(255, 255, 255, 0.25);
 		border-radius: 2px;
 		cursor: pointer;
 		text-align: center;
-		margin-left: 15px;
+		margin-left: 0;
 		margin-right: 0;
 		font-weight: 500;
 		color: #ffffff;
@@ -23,46 +29,55 @@
 			box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.2);
 		}
 
-		@include adaptivity(tablet) {
-			margin: 0 15px;
-		}
-
 		@include adaptivity(phone) {
 			margin-left: 0;
 			margin-top: -1rem;
 		}
 	}
 
-	&__footer {
+	&-footer {
 		flex-wrap: wrap !important;
 		flex-shrink: 4;
 		margin: 0 !important;
 		flex-basis: 100%;
 		position: static;
 
-		@include adaptivity(desktop) {
-			min-width: 300px;
-			flex-wrap: nowrap !important;
-
-			.col {
-				position: static;
-
-				&:first-of-type {
+		&__col {
+			&:first-of-type {
+				@include adaptivity(desktop) {
 					flex-basis: 60%;
+					padding-right: 0;
 				}
 
-				&:last-of-type {
+				@include adaptivity(tablet) {
+					padding-right: 0;
+					padding-left: 0;
+				}
+			}
+
+			&:last-of-type {
+				@include adaptivity(desktop) {
 					flex-basis: 0;
 					min-width: 100px;
+					padding-right: 0.5rem;
 				}
+
+				@include adaptivity(tablet) {
+					padding-right: 0;
+				}
+			}
+
+			@include adaptivity(tablet) {
+				padding-left: 0;
+			}
+
+			@include adaptivity(phone) {
+				padding-right: 0;
 			}
 		}
 
-		@include adaptivity(phone) {
-			.col {
-				padding-left: 0;
-				padding-right: 0;
-			}
+		@include adaptivity(desktop) {
+			min-width: 300px;
 		}
 	}
 
@@ -76,6 +91,10 @@
 	}
 
 	&__startButton {
+		@include adaptivity(desktop) {
+			margin-left: 0.5rem;
+		}
+
 		&.btn-primary {
 			color: #ffffff;
 			line-height: 40px;

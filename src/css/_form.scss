@@ -17,8 +17,8 @@
 	&__routeTypeSwitch {
 		position: absolute;
 		left: 0;
-		margin-top: 55px;
-		margin-left: 1rem;
+		top: 0;
+		margin-top: calc(40px + 1rem + 10px);
 		font-weight: 600;
 		font-size: 15px;
 		color: #1b75bc;
@@ -44,7 +44,7 @@
 		}
 
 		@include adaptivity(phone) {
-			margin: 0 0 1rem;
+			margin: 0 0 0.5rem;
 			position: relative;
 
 			overflow: hidden;
@@ -55,10 +55,17 @@
 
 	&_CR {
 		@include adaptivity(not-phone) {
-			.widget-form-search__footer {
-				.col:first-of-type {
-					flex-basis: 0;
-					min-width: calc(85% / 2 - 13px);
+			.widget-form-search-footer {
+				&__col {
+					&:first-of-type {
+						flex-basis: 0;
+						min-width: calc(85% / 2 - 16px);
+						padding-right: 0;
+					}
+
+					&:last-of-type {
+						padding-left: 1rem;
+					}
 				}
 			}
 		}
@@ -67,19 +74,20 @@
 	&_vertical {
 		.widget-form {
 			&-search {
-				&__wrapper {
-					.form-group {
-						&:last-of-type {
-							margin-bottom: 1rem;
-						}
-					}
-				}
+				&-footer {
+					flex-wrap: wrap;
 
-				&__footer {
-					.col {
+					&__col {
+						flex-grow: 1;
 						flex: 100%;
-						padding-right: 15px;
-						padding-left: 15px;
+
+						padding-right: 0;
+						padding-left: 0;
+
+						&:last-of-type {
+							margin-top: 1rem;
+							padding-left: 0;
+						}
 					}
 				}
 
@@ -99,7 +107,7 @@
 
 				@include adaptivity(phone) {
 					margin-top: 0;
-					margin-bottom: 1rem;
+					margin-bottom: 0.5rem;
 				}
 			}
 
@@ -108,8 +116,6 @@
 				margin-left: 0;
 
 				&__col {
-					padding: 0;
-
 					&:only-child {
 						padding: 0;
 					}
@@ -119,7 +125,6 @@
 			&-segments {
 				margin-right: 0;
 				margin-left: 0;
-				margin-bottom: 0;
 
 				&_CR {
 					margin-bottom: 1rem;
@@ -164,46 +169,42 @@
 			}
 
 			&-airports {
-				&.row {
-					display: block;
-					margin-left: 0;
-					margin-right: 0;
-				}
+				display: block;
+				margin-left: 0;
+				margin-right: 0;
 
 				&__col {
-					&.col {
-						padding: 0;
+					padding: 0;
 
-						&:first-of-type {
-							.widget-ui-input__arrow {
-								right: 0;
-							}
-
-							.widget-form-airports__airportCode {
-								right: 17px;
-
-								&_withArrow {
-									right: 35px;
-								}
-							}
+					&:first-of-type {
+						.widget-ui-input__arrow {
+							right: 0;
 						}
 
-						&:last-of-type {
-							.Select-control {
-								padding-left: 13px;
-								border-top: none;
-								border-left: 1px solid rgba(0, 0, 0, 0.15);
-							}
+						.widget-form-airports__airportCode {
+							right: 17px;
 
-							.widget-form-airports__select__value,
-							.Select-placeholder {
-								padding-left: 13px !important;
+							&_withArrow {
+								right: 35px;
 							}
+						}
+					}
 
-							.Select-input {
-								&:not(input) {
-									padding-left: 0 !important;
-								}
+					&:last-of-type {
+						.Select-control {
+							padding-left: 13px;
+							border-top: none;
+							border-left: 1px solid rgba(0, 0, 0, 0.15);
+						}
+
+						.widget-form-airports__select__value,
+						.Select-placeholder {
+							padding-left: 13px !important;
+						}
+
+						.Select-input {
+							&:not(input) {
+								padding-left: 0 !important;
 							}
 						}
 					}

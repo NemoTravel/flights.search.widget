@@ -9,10 +9,12 @@
 &-search {
 	padding: 15px;
 
-	&__footer {
+	&-footer {
+		display: flex;
 		position: relative;
 
-		.col {
+		&__col {
+			flex-grow: 1;
 			flex-basis: 50%;
 
 			&:nth-of-type(2n+1) {
@@ -41,22 +43,31 @@
 			@include adaptivity(phone) {
 				flex: 100%;
 				position: relative;
+
+				&:last-of-type {
+					margin-top: 1rem;
+				}
 			}
+		}
+
+		@include adaptivity(phone) {
+			flex-wrap: wrap;
 		}
 	}
 
 	&__addSegment {
+		width: 100%;
 		height: 40px;
+		line-height: 40px;
+
 		background: #f3f3f2;
 		text-align: center;
 		align-self: center;
-		line-height: 40px;
+
 		color: #6c757d;
 		font-weight: 700;
 		font-size: 15px;
-		margin: 0 15px;
 		cursor: pointer;
-		width: 100%;
 
 		@include adaptivity(phone) {
 			margin: -1rem 0 0;
