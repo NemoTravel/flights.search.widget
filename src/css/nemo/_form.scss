@@ -80,11 +80,35 @@
 	}
 
 	&_CR {
+		.widget-form-search-footer__col {
+			&:first-of-type {
+				padding-left: 1rem;
+
+				@include adaptivity(tablet) {
+					padding-left: 0;
+				}
+			}
+
+			&:last-of-type {
+				padding-left: 0;
+			}
+		}
+
 		@include adaptivity(not-phone) {
-			.widget-form-search__footer {
-				.col:first-of-type {
+			.widget-form-search-footer {
+				&__col:first-of-type {
 					flex-basis: 50%;
 				}
+			}
+		}
+
+		.widget-form-additionalOptions__checkboxes {
+			@include adaptivity(tablet) {
+				margin-left: 1rem;
+			}
+
+			@include adaptivity(phone) {
+				margin-left: 0;
 			}
 		}
 	}
@@ -98,38 +122,43 @@
 			&-search {
 				&__wrapper {
 					flex-wrap: wrap;
-
-					.form-group {
-						&:last-of-type {
-							margin-bottom: 1rem;
-						}
-					}
+					padding: 0;
 				}
 
-				&__footer {
+				&-footer {
 					flex-basis: 100%;
 					padding-top: 1rem;
 					display: block;
 					width: 100%;
 
-					.col {
+					&__col {
 						flex: 100%;
 						padding: 0;
+
+						&:first-of-type {
+							padding-left: 0;
+						}
 					}
 				}
 
 				&__startButton {
 					width: 100%;
+					margin: 0;
 				}
 
 				&__addSegment {
 					margin-top: -1rem;
+
+					@include adaptivity(desktop) {
+						margin-top: -1rem;
+					}
 				}
 			}
 
 			&-dates {
 				flex-basis: 100%;
 				padding-top: 1rem;
+				margin-right: 0;
 
 				@include adaptivity(desktop) {
 					&__col {
@@ -172,13 +201,20 @@
 				&_CR {
 					.widget-form-segments__segment {
 						margin-left: 0;
-						margin-bottom: 2rem;
+						margin-bottom: 1rem;
 
 						&__drop {
 							margin-left: -10px;
 							left: 0;
 							right: auto;
+							top: 5px;
 							margin-top: 5px;
+							width: 20px;
+							height: 20px;
+						}
+
+						@include adaptivity(tablet) {
+							margin-bottom: 2rem;
 						}
 					}
 
@@ -191,26 +227,22 @@
 			}
 
 			&-airports {
-				&.row {
-					flex-basis: 100%;
-				}
+				flex-basis: 100%;
 
 				&__col {
-					&.col {
-						&:first-of-type {
-							padding-bottom: 1rem;
-						}
+					&:first-of-type {
+						padding-bottom: 1rem;
+					}
 
-						&:last-of-type {
-							padding-left: 0;
+					&:last-of-type {
+						padding-left: 0;
 
-							.widget-form-airports__select__wrapper {
+						.widget-form-airports__select__wrapper {
+							padding-left: 0 !important;
+
+							.Select-input {
+								height: 40px;
 								padding-left: 0 !important;
-
-								.Select-input {
-									height: 40px;
-									padding-left: 0 !important;
-								}
 							}
 						}
 					}
@@ -222,7 +254,8 @@
 			}
 
 			&-additionalOptions {
-				display: block;
+				display: flex;
+				flex-wrap: wrap;
 				position: relative;
 				height: auto;
 				top: 0;
@@ -232,8 +265,8 @@
 				padding-left: 0;
 
 				&__checkboxes {
-					margin-bottom: 1rem;
 					margin-right: 0;
+					margin-left: 0;
 
 					.widget-ui-select {
 						width: 100%;

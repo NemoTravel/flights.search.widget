@@ -11,4 +11,12 @@
 	font-size: inherit;
 	color: $font-color;
 	background-color: #ffffff;
+
+	* {
+		&,
+		&:after,
+		&:before {
+			box-sizing: border-box;
+		}
+	}
 }

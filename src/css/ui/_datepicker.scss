@@ -91,14 +91,15 @@
 	}
 
 	&__footer {
-		position: absolute;
-		bottom: $main-padding-size;
-		left: $main-padding-size;
-		right: $main-padding-size;
+		clear: both;
+		margin-bottom: $main-padding-size;
 		text-align: center;
 
 		@include adaptivity(phone) {
 			position: fixed;
+			bottom: $main-padding-size;
+			left: $main-padding-size;
+			right: $main-padding-size;
 		}
 
 		&__button {

@@ -65,7 +65,7 @@ class AutocompleteContainer extends React.Component<StateProps & DispatchProps &
 			sameAirportsError = true;
 		}
 
-		return <div className="form-group row widget-form-airports">
+		return <div className="widget-form-airports">
 			<DepartureAutocomplete
 				showErrors={showErrors}
 				sameAirportsError={sameAirportsError}

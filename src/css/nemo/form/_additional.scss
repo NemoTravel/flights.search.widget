@@ -23,7 +23,7 @@
 		}
 
 		@include adaptivity(desktop) {
-			margin-right: calc(100px + 1.5rem);
+			margin-right: calc(100px + 1rem);
 
 			.widget-ui-checkbox {
 				&:last-child {
@@ -34,6 +34,11 @@
 
 		@include adaptivity(tablet) {
 			width: 100%;
+			margin-left: 0.5rem;
+		}
+
+		@include adaptivity(phone) {
+			margin-left: 0;
 		}
 	}
 
@@ -53,7 +58,7 @@
 
 	@include adaptivity(phone) {
 		height: auto;
-		display: block;
+		flex-wrap: wrap;
 		margin-bottom: 0 !important;
 	}
 
