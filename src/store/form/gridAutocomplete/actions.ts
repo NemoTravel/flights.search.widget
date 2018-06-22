@@ -1,7 +1,8 @@
 import { AutocompleteSuggestion } from '../../../services/models/AutocompleteSuggestion';
 import { SET_GRID_AUTOCOMPLETE } from '../../actions';
+import { Action } from 'redux';
 
-export interface GridAction {
+export interface GridAction extends Action {
 	type: string;
 	IATA?: string;
 	suggestions?: AutocompleteSuggestion[];

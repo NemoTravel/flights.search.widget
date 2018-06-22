@@ -58,8 +58,18 @@
 				}
 			}
 
-			.widget-form-airports__col.col:first-of-type .widget-form-airports__airportCode {
-				right: 17px;
+			.widget-form-airports__col.col:first-of-type {
+				.widget-ui-input__arrow {
+					right: 0;
+				}
+
+				.widget-form-airports__airportCode {
+					right: 17px;
+
+					&.widget-form-airports__airportCode_withArrow {
+						right: 35px;
+					}
+				}
 			}
 
 			@include adaptivity(not-phone) {

@@ -106,7 +106,7 @@ export const getStore = (config: SystemState): Store<ApplicationState> => {
 
 	const state = store.getState();
 
-	if (state.system.routingGrid) {
+	if (state.system.routingGrid && !state.form.gridAutocomplete['default'].length) {
 		store.dispatch(sendAutocompleteRequest('', AutocompleteFieldType.Departure, 0));
 	}
 
