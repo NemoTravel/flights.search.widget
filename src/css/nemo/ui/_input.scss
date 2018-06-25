@@ -6,6 +6,12 @@
 	font-weight: normal !important;
 	color: #0a0a0f;
 
+	&__arrow {
+      	&::after {
+			content: url("images/widget-ui-select-arrow.svg");
+		}
+	}
+
 	&__closer {
 		color: #64b5f6;
 	}
