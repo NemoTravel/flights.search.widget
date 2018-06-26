@@ -294,6 +294,10 @@ export interface SearchInfo {
 
 export type OnSearchFunction = (params: SearchInfo) => void;
 
+export interface GridAutocompleteState {
+	[IATA: string]: AutocompleteSuggestion[];
+}
+
 export interface FormState {
 	showErrors: boolean;
 	passengers: PassengersState;
@@ -302,6 +306,7 @@ export interface FormState {
 	coupon: CouponState;
 	mileCard: MileCardState;
 	routeType: RouteType;
+	gridAutocomplete: GridAutocompleteState;
 }
 
 export interface CachedFormSate {
@@ -311,7 +316,8 @@ export interface CachedFormSate {
 	additional: AdditionalState;
 	coupon: CouponState;
 	mileCard: MileCardState;
-	routeType: RouteType
+	routeType: RouteType;
+	gridAutocomplete: GridAutocompleteState;
 }
 
 export interface ApplicationState {
@@ -333,7 +339,10 @@ export const initialState: ApplicationState = {
 		additional: additionalState,
 		coupon: couponState,
 		mileCard: mileCardState,
-		routeType: RouteType.OW
+		routeType: RouteType.OW,
+		gridAutocomplete: {
+			default: []
+		}
 	}
 };
 
@@ -425,6 +434,14 @@ export const fillStateFromCache = (currentState: ApplicationState, stateFromCach
 				if (cachedMileCardPassword) {
 					state.form.mileCard.password = cachedMileCardPassword;
 				}
+			}
+
+			if (
+				currentState.system.routingGrid &&
+				stateFromCache.form.gridAutocomplete &&
+				state.form.gridAutocomplete.hasOwnProperty('default')
+			) {
+				state.form.gridAutocomplete = stateFromCache.form.gridAutocomplete;
 			}
 		}
 	}

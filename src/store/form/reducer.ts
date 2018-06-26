@@ -6,6 +6,7 @@ import coupon from './coupon/reducer';
 import mileCard from './mileCard/reducer';
 import segments from './segments/reducer';
 import routeType from './route/reducer';
+import gridAutocomplete from './gridAutocomplete/reducer';
 import { FormState } from '../../state';
 import { ShowErrorsAction } from './actions';
 
@@ -23,6 +24,7 @@ export default (state: FormState, action: AnyAction): FormState => {
 		additional,
 		coupon,
 		mileCard,
-		routeType
+		routeType,
+		gridAutocomplete
 	})(state, action);
 };
