@@ -9,9 +9,9 @@
 
 	.widget-ui-select {
 		&__toggle {
-          &::after {
-            transition: transform 0.15s ease-in-out
-          }
+			&::after {
+				transition: transform 0.15s ease-in-out
+			}
 		}
 	}
 
