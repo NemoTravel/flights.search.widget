@@ -9,6 +9,7 @@
 			}
 		}
 	}
+
 	&:nth-child(2) {
 		.widget-ui-input {
 			@include adaptivity(desktop) {
@@ -23,6 +24,7 @@
 	border: none !important;
 	font-weight: normal !important;
 	color: #0a0a0f;
+
 	&_disabled {
 		border-radius: 0 4px 4px 0;
 	}
