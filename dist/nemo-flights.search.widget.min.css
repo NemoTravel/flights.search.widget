@@ -50,8 +50,8 @@
   border: 2px solid #7f7f7f;
   border-radius: 2px;
   cursor: pointer;
-  -webkit-transition: background .3s, border-color .3s;
-  transition: background .3s, border-color .3s;
+  -webkit-transition: background .1s, border-color .1s;
+  transition: background .1s, border-color .1s;
 }
 
 .widget .widget-ui-checkbox__caption::after {
