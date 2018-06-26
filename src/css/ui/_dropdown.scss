@@ -7,6 +7,14 @@
 		}
 	}
 
+	.widget-ui-select {
+		&__toggle {
+			&::after {
+				transition: transform 0.15s ease-in-out;
+			}
+		}
+	}
+
 	&__trigger {
 		&_open {
 			.widget-ui-select {

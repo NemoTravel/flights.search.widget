@@ -24,19 +24,33 @@
 		overflow: hidden;
 		max-width: 100%;
 
-		&:before {
+		&::before,
+		&::after {
 			content: "";
 			position: absolute;
-			left: 0;
 			top: 0;
-			border: none;
-			overflow: hidden;
-			width: 19px;
-			height: 19px;
-			border-radius: 5px;
-			transition: background-color 0.1s ease;
-			background-image: url("images/checkbox_sprite.svg");
-			background-color: #e6e6e6;
+			left: 0;
+		}
+
+		&::before {
+			width: 17px;
+			height: 17px;
+			background: #ffffff;
+			border: 2px solid #7f7f7f;
+			border-radius: 2px;
+			cursor: pointer;
+			transition: background 0.1s, border-color 0.1s;
+		}
+
+		&::after {
+			transform: rotate(-45deg);
+			width: 10px;
+			height: 6px;
+			border: 2px solid #ffffff;
+			border-top: none;
+			border-right: none;
+			top: 4px;
+			left: 3.5px;
 		}
 	}
 
@@ -57,8 +71,8 @@
 
 				&:before {
 					background-color: #64b5f6;
+					border-color: #64b5f6;
 					transform: none;
-					border: none;
 				}
 			}
 		}

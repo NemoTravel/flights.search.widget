@@ -1,10 +1,48 @@
 @import "../variables";
 
+.widget-form-dates__col {
+	&:nth-child(1) {
+		.widget-ui-input {
+			@include adaptivity(desktop) {
+				border-top-left-radius: 4px;
+				border-bottom-left-radius: 4px;
+			}
+		}
+	}
+
+	&:nth-child(2) {
+		.widget-ui-input {
+			@include adaptivity(desktop) {
+				border-radius: 0 4px 4px 0;
+			}
+		}
+	}
+}
+
 .widget-ui-input {
 	-webkit-appearance: none;
 	border: none !important;
 	font-weight: normal !important;
 	color: #0a0a0f;
+
+	&_disabled {
+		border-radius: 0 4px 4px 0;
+	}
+
+	@include adaptivity(phone) {
+		border-radius: 4px;
+	}
+
+	@include adaptivity(tablet) {
+		background-color: #ff0000;
+		border-radius: 4px;
+	}
+
+	&__arrow {
+		&::after {
+			content: url("images/widget-ui-select-arrow.svg");
+		}
+	}
 
 	&__closer {
 		color: #64b5f6;

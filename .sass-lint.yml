@@ -4,7 +4,7 @@ files:
     include: 'src/**/*.s+(a|c)ss'
 rules:
     one-declaration-per-line: 2
-    empty-line-between-blocks: 0
+    empty-line-between-blocks: 2
     single-line-per-selector: 2
     attribute-quotes: 2
     border-zero:
