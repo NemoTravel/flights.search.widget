@@ -1138,7 +1138,7 @@
 }
 
 .widget-form-additionalOptions .widget-ui-select__dropdown .widget-ui-checkbox__input:checked + label .widget-ui-checkbox__caption {
-  color: #636467;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .widget-form-additionalOptions .widget-ui-select__dropdown__item {
