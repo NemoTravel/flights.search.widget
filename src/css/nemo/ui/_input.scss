@@ -3,13 +3,17 @@
 .widget-form-dates__col {
 	&:nth-child(1) {
 		.widget-ui-input {
-			border-top-left-radius: 4px;
-			border-bottom-left-radius: 4px;
+			@include adaptivity(desktop) {
+				border-top-left-radius: 4px;
+				border-bottom-left-radius: 4px;
+			}
 		}
 	}
 	&:nth-child(2) {
 		.widget-ui-input {
-			border-radius: 0 4px 4px 0;
+			@include adaptivity(desktop) {
+				border-radius: 0 4px 4px 0;
+			}
 		}
 	}
 }
@@ -21,6 +25,15 @@
 	color: #0a0a0f;
 	&_disabled {
 		border-radius: 0 4px 4px 0;
+	}
+
+	@include adaptivity(phone) {
+		border-radius: 4px;
+	}
+
+	@include adaptivity(tablet) {
+		background-color: #ff0000;
+		border-radius: 4px;
 	}
 
 	&__arrow {
