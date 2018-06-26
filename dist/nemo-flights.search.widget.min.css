@@ -1542,6 +1542,10 @@
   }
 }
 
+.widget-form_CR .widget-ui-input {
+  border-radius: 4px;
+}
+
 .widget-form_vertical:after {
   display: none;
 }
