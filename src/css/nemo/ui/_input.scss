@@ -40,7 +40,11 @@
 
 	&__arrow {
 		&::after {
-			content: url("images/widget-ui-select-arrow.svg");
+			content: "";
+			background: url("images/widget-ui-select-arrow.svg") no-repeat;
+
+			width: 12px;
+			height: 9px;
 		}
 	}
 

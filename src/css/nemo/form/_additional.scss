@@ -95,6 +95,7 @@
 			@include adaptivity(tablet) {
 				line-height: 40px;
 				height: 40px;
+				padding: 0 13px;
 			}
 
 			&::after {
@@ -104,7 +105,7 @@
 				height: 9px;
 				top: 50%;
 				margin-top: -3px;
-				right: 14px;
+				right: 12px;
 				background: url("images/widget-ui-select-arrow.svg") no-repeat;
 			}
 		}
