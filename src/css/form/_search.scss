@@ -9,10 +9,6 @@
 &-search {
 	padding: 15px;
 
-	@include adaptivity(tablet) {
-		padding: 15px 0 1rem;
-	}
-
 	&-footer {
 		display: flex;
 		position: relative;

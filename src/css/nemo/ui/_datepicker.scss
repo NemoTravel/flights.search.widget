@@ -5,6 +5,7 @@
 	color: #333333;
 	background: #ffffff;
 	border: none !important;
+	border-radius: 4px;
 	border-bottom-color: #bbbbbb;
 	padding-top: 0;
 	font-family: "Open Sans", sans-serif !important;
@@ -28,6 +29,8 @@
 	}
 
 	&__footer {
+		margin-bottom: 0;
+
 		&__button {
 			display: none;
 
@@ -107,12 +110,13 @@
 			&-month {
 				padding-bottom: 15px;
 				padding-top: 15px;
-				font-size: 17px;
+				font-size: 15px;
 				line-height: 18px;
 				font-weight: normal;
 				color: #64b5f6;
 				text-transform: capitalize;
 				background: #ffffff;
+				border-radius: 4px;
 
 				@include adaptivity(phone) {
 					background: none !important;
@@ -152,10 +156,6 @@
 			}
 
 			&--highlighted {
-				//color: $title-color;
-				//background: rgba($title-color, 0.1);
-				//background: #64b5f6 !important;
-				//border-color: #64b5f6!important;
 				background: rgba(100, 181, 246, 0.1); //!important;
 				color: #414042;
 			}
@@ -163,7 +163,7 @@
 			&--selected {
 				@extend .widget-ui-datepicker__specialDay;
 				background: #64b5f6 !important;
-				border-color: #64b5f6 !important;
+				border-color: #e6e6e6 !important;
 				color: #ffffff;
 			}
 		}

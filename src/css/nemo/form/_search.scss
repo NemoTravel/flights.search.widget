@@ -8,6 +8,10 @@
 &-search {
 	background: #64b5f6;
 
+	@include adaptivity(tablet) {
+		padding: 15px 0 1rem;
+	}
+
 	&__wrapper {
 		@include adaptivity(tablet) {
 			padding: 0 15px;

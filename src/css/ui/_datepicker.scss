@@ -32,10 +32,6 @@
 	padding-top: 30px;
 	font-family: "Open Sans", sans-serif !important;
 
-	&_return {
-		padding-bottom: 35px;
-	}
-
 	@include adaptivity(phone) {
 		overflow: auto;
 		padding: 50px 0 75px 0;
@@ -200,7 +196,7 @@
 			}
 
 			&--previous {
-				left: 35px;
+				left: 25px;
 				transform: rotate(180deg);
 
 				@include adaptivity(phone) {
@@ -209,7 +205,7 @@
 			}
 
 			&--next {
-				right: 35px;
+				right: 25px;
 
 				@include adaptivity(phone) {
 					right: 15px;
@@ -221,7 +217,7 @@
 			margin: 5px;
 
 			&-container {
-				padding: 30px;
+				padding: 30px 15px 15px;
 
 				&:nth-of-type(3) {
 					@include adaptivity(phone) {
@@ -241,8 +237,8 @@
 		&__current {
 			&-month {
 				padding-bottom: 20px;
-				font-size: 17px;
-				line-height: 18px;
+				font-size: 15px;
+				line-height: 15px;
 				font-weight: 600;
 				color: #808080;
 				text-transform: capitalize;
@@ -257,9 +253,9 @@
 		&__day {
 			color: $font-color;
 			position: relative;
-			width: 2.3rem;
-			height: 2.3rem;
-			line-height: 2.3rem;
+			width: 2.1rem;
+			height: 2.1rem;
+			line-height: 2.1rem;
 			margin: 0;
 			transition: background 0.2s $transition-function;
 
@@ -281,7 +277,7 @@
 				text-align: center;
 				padding-bottom: 3px;
 				text-transform: lowercase;
-				width: 2.3rem;
+				width: 2.1rem;
 				height: 2rem;
 				line-height: 2rem;
 				margin: 0;

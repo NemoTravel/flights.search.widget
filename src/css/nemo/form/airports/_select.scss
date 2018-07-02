@@ -1,6 +1,11 @@
 @import "../../variables";
 
 &__select {
+	&.is-open > .Select-control {
+		border-bottom-right-radius: 4px !important;
+		border-bottom-left-radius: 4px !important;
+	}
+
 	.Select {
 		&-control {
 			border: none !important;

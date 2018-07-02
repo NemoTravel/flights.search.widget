@@ -10,12 +10,14 @@
 
 		color: $title-color;
 		font-weight: 600;
-		font-size: 17px;
+		font-size: 15px;
 		text-align: center;
 
 		@include adaptivity(phone) {
 			background: $title-color;
 			color: #ffffff;
+			font-size: 17px;
+
 			position: fixed;
 			height: $mobile-header-height;
 			line-height: $mobile-header-height;
