@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const packageJSON = require('./package.json');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const moduleName = 'flights.search.widget';
 
 // For DEV mode prepend "NODE_ENV=dev" before "webpack" command.
@@ -58,8 +59,15 @@ const config = {
 	},
 
 	optimization: {
-		minimize: !isDevMode,
-		noEmitOnErrors: true
+		minimizer: [
+			!isDevMode ? new UglifyJsPlugin({
+				uglifyOptions: {
+					compress: {
+						reduce_funcs: false
+					}
+				}
+			}) : null
+		]
 	},
 
 	resolve: {
