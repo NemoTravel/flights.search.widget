@@ -62,7 +62,9 @@ const config = {
 		minimizer: [
 			!isDevMode ? new UglifyJsPlugin({
 				uglifyOptions: {
-					compress: false
+					compress: {
+						reduce_funcs: false
+					}
 				}
 			}) : null
 		]
