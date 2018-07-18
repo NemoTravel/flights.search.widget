@@ -10,8 +10,12 @@
 		font-size: 11px;
 		margin-top: 0;
 
-		&:after {
-			display: none;
+		&_bottom {
+			top: 5px !important;
 		}
+	}
+
+	&__arrow {
+		display: none;
 	}
 }

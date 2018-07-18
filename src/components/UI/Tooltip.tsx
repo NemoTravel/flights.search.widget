@@ -34,11 +34,14 @@ class Tooltip extends React.Component<Props> {
 					)
 				}
 			</Reference>
+
 			<Popper placement="top">
 				{
-					({ ref, style, placement }) => (
-						isActive ? <div ref={ref} style={style} data-placement={placement} className="widget-ui-tooltip__pop">
+					({ ref, style, placement, arrowProps }) => (
+						isActive ? <div ref={ref} style={style} data-placement={placement} className={classnames('widget-ui-tooltip__pop', 'widget-ui-tooltip__pop_' + placement)}>
 							{message}
+
+							<div className="widget-ui-tooltip__arrow" ref={arrowProps.ref} style={arrowProps.style} />
 						</div> : null
 					)
 				}

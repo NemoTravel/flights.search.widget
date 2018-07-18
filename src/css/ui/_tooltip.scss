@@ -18,19 +18,11 @@
 		white-space: nowrap;
 		user-select: none;
 
-		&:after {
-			position: absolute;
-			top: 100%;
-			left: 20px;
-			height: 0;
-			width: 0;
-
-			margin-left: -6px;
-
-			pointer-events: none;
-			content: " ";
-			border: 6px solid rgba(0, 0, 0, 0);
-			border-top-color: #4d4d4d;
+		&_bottom {
+			.widget-ui-tooltip__arrow {
+				top: -12px;
+				transform: rotate(180deg);
+			}
 		}
 
 		&_visible {
@@ -47,5 +39,20 @@
 				transform: translateX(-50%);
 			}
 		}
+	}
+
+	&__arrow {
+		position: absolute;
+		top: 100%;
+		left: 20px !important;
+		height: 0;
+		width: 0;
+
+		margin-left: -6px;
+
+		pointer-events: none;
+		content: " ";
+		border: 6px solid rgba(0, 0, 0, 0);
+		border-top-color: #4d4d4d;
 	}
 }
