@@ -4,9 +4,6 @@
 	position: relative;
 
 	&__pop {
-		display: none;
-		position: absolute;
-		transform: translateY(-40px);
 		z-index: 10;
 
 		margin: 5px;

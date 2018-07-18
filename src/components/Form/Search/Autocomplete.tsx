@@ -162,38 +162,39 @@ export default class Autocomplete extends React.Component<Props, State> {
 			</MobileHeader>
 
 			<div className="widget-form-airports__select__wrapper">
-				<Tooltip isActive={(!airport || sameAirportsError) && showErrors} isCentered={true} message={errorText}/>
-				<Select
-					ref={getRef}
-					clearable={false}
-					autoBlur={true}
-					autosize={false}
-					noResultsText={i18n('form', 'noResults')}
-					openOnFocus={true}
-					backspaceRemoves={false}
-					className={classnames('widget-form-airports__select', { 'widget-form-airports__select_readOnly': readOnly && this.props.isGridMode })}
-					value={selectedValue}
-					options={suggestions}
-					optionsGroup={optionsGroup}
-					isLoading={isLoading}
-					onInputChange={this.onChangeHandler}
-					placeholder={this.placeholder}
-					onChange={this.selectOption}
-					onFocus={this.onFocusHandler}
-					onBlur={() => {
-						this.props.changeAutocompleteSuggestions([], this.type, segmentId);
-						this.setState({ isFocused: false });
-					}}
-					optionRenderer={(option: any) => <Option option={option}/>}
-					valueRenderer={(value: any) =>
-						<Value value={value} placeholder={this.placeholder} readOnly={readOnly && this.props.isGridMode}/>}
-					arrowRenderer={() => this.props.isGridMode ?
-						<div className="widget-ui-icon widget-ui-input__arrow"/> : null}
-					inputProps={{
-						spellCheck: false,
-						readOnly: readOnly && this.props.isGridMode
-					}}
-				/>
+				<Tooltip isActive={(!airport || sameAirportsError) && showErrors} isCentered={true} message={errorText}>
+					<Select
+						ref={getRef}
+						clearable={false}
+						autoBlur={true}
+						autosize={false}
+						noResultsText={i18n('form', 'noResults')}
+						openOnFocus={true}
+						backspaceRemoves={false}
+						className={classnames('widget-form-airports__select', { 'widget-form-airports__select_readOnly': readOnly && this.props.isGridMode })}
+						value={selectedValue}
+						options={suggestions}
+						optionsGroup={optionsGroup}
+						isLoading={isLoading}
+						onInputChange={this.onChangeHandler}
+						placeholder={this.placeholder}
+						onChange={this.selectOption}
+						onFocus={this.onFocusHandler}
+						onBlur={() => {
+							this.props.changeAutocompleteSuggestions([], this.type, segmentId);
+							this.setState({ isFocused: false });
+						}}
+						optionRenderer={(option: any) => <Option option={option}/>}
+						valueRenderer={(value: any) =>
+							<Value value={value} placeholder={this.placeholder} readOnly={readOnly && this.props.isGridMode}/>}
+						arrowRenderer={() => this.props.isGridMode ?
+							<div className="widget-ui-icon widget-ui-input__arrow"/> : null}
+						inputProps={{
+							spellCheck: false,
+							readOnly: readOnly && this.props.isGridMode
+						}}
+					/>
+				</Tooltip>
 
 				{this.renderAirportCode()}
 				{this.renderSwitcher()}

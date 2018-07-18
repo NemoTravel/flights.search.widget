@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import { Manager, Popper, Reference } from 'react-popper';
 
 interface Props {
 	isActive?: boolean;
@@ -23,16 +24,26 @@ class Tooltip extends React.Component<Props> {
 	render(): React.ReactNode {
 		const { children, message, isActive, isCentered } = this.props;
 
-		return <div className="widget-ui-tooltip">
-			<div className={classnames('widget-ui-tooltip__pop', {
-				'widget-ui-tooltip__pop_visible': isActive,
-				'widget-ui-tooltip__pop_centered': isCentered
-			})}>
-				{message}
-			</div>
-
-			{children}
-		</div>;
+		return <Manager>
+			<Reference>
+				{
+					({ ref }) => (
+						<div ref={ref}>
+							{children}
+						</div>
+					)
+				}
+			</Reference>
+			<Popper placement="top">
+				{
+					({ ref, style, placement }) => (
+						isActive ? <div ref={ref} style={style} data-placement={placement} className="widget-ui-tooltip__pop">
+							{message}
+						</div> : null
+					)
+				}
+			</Popper>
+		</Manager>;
 	}
 }
 
