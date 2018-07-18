@@ -65,7 +65,7 @@ const config = {
 						reduce_funcs: false
 					}
 				}
-		})] : null
+		})] : []
 	},
 
 	resolve: {
