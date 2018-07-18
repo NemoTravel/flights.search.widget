@@ -59,15 +59,13 @@ const config = {
 	},
 
 	optimization: {
-		minimizer: [
-			!isDevMode ? new UglifyJsPlugin({
+		minimizer: !isDevMode ? [new UglifyJsPlugin({
 				uglifyOptions: {
 					compress: {
 						reduce_funcs: false
 					}
 				}
-			}) : null
-		]
+		})] : null
 	},
 
 	resolve: {
