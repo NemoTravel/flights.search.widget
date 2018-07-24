@@ -47,4 +47,8 @@
 		transform: rotate(90deg);
 		top: -12px;
 	}
+
+	@include adaptivity(not-phone) {
+		z-index: 102;
+	}
 }

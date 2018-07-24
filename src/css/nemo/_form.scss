@@ -102,6 +102,10 @@
 			}
 		}
 
+		.widget-ui-tooltip__pop_bottom {
+			top: -21px !important;
+		}
+
 		.widget-form-additionalOptions__checkboxes {
 			@include adaptivity(tablet) {
 				margin-left: 1rem;

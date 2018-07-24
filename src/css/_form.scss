@@ -54,6 +54,10 @@
 	}
 
 	&_CR {
+		.widget-ui-tooltip__pop_bottom {
+			top: -23px !important;
+		}
+
 		@include adaptivity(not-phone) {
 			.widget-form-search-footer {
 				&__col {
@@ -215,6 +219,7 @@
 					left: auto;
 					transform: rotate(90deg);
 					top: -12px;
+					z-index: 10;
 				}
 			}
 

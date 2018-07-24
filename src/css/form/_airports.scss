@@ -73,6 +73,10 @@
 		&:first-of-type {
 			padding-right: 0;
 
+			.widget-form-airports__select.is-focused {
+				z-index: 100;
+			}
+
 			.widget-ui-input__arrow {
 				right: 12px;
 
@@ -100,6 +104,10 @@
 
 		&:last-of-type {
 			padding-left: 0;
+
+			.widget-form-airports__select.is-focused {
+				z-index: 101;
+			}
 
 			.Select-control {
 				@include adaptivity(not-phone) {
