@@ -20,6 +20,18 @@
 			margin-top: 0 !important;
 		}
 	}
+
+	&__container {
+		.react-datepicker-popper {
+			opacity: 0;
+		}
+
+		&_showCalendar {
+			.react-datepicker-popper {
+				opacity: 1;
+			}
+		}
+	}
 }
 
 .widget-ui-datepicker {

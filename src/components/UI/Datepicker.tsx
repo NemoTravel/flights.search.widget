@@ -17,6 +17,7 @@ interface Props {
 	tooltipText: string;
 	type: DatepickerFieldType;
 	inputProps: any;
+	onChange: (date: Moment) => void;
 
 	setRouteType?: (type: RouteType) => CommonThunkAction;
 	selectDate: (date: Moment, segmentId: number) => any;
@@ -25,7 +26,10 @@ interface Props {
 
 interface State {
 	isActive: boolean;
+	showCalendar: boolean;
 }
+
+const CALENDAR_OPENING_DELAY = 150;
 
 type DatepickerProps = Props & ReactDatePickerProps;
 
@@ -35,18 +39,24 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 	public calendar: any = null;
 
 	state: State = {
-		isActive: false
+		isActive: false,
+		showCalendar: false
 	};
 
 	constructor(props: DatepickerProps) {
 		super(props);
 
 		this.state = {
-			isActive: !!props.date || !props.isDisableable
+			isActive: !!props.date || !props.isDisableable,
+			showCalendar: false
 		};
 
 		this.enable = this.enable.bind(this);
 		this.disable = this.disable.bind(this);
+		this.customInputOnFocusHandler = this.customInputOnFocusHandler.bind(this);
+		this.showCalendar = this.showCalendar.bind(this);
+		this.closeDatepicker = this.closeDatepicker.bind(this);
+		this.onChangeHandler = this.onChangeHandler.bind(this);
 	}
 
 	/**
@@ -68,6 +78,8 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 			this.setState({ isActive: true });
 			this.props.setRouteType(RouteType.RT);
 		}
+
+		this.showCalendar();
 	}
 
 	/**
@@ -79,6 +91,10 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 			this.props.selectDate(null, 1);
 			this.props.setRouteType(RouteType.OW);
 		}
+
+		this.setState({
+			showCalendar: false
+		});
 	}
 
 	renderCloser(): React.ReactNode {
@@ -89,6 +105,32 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 
 	customInputOnFocusHandler(event: FormEvent<HTMLInputElement>): void {
 		(event.target as HTMLInputElement).blur();
+	}
+
+	showCalendar(): void {
+		setTimeout(() => {
+			this.setState({
+				showCalendar: true
+			});
+		}, CALENDAR_OPENING_DELAY);
+	}
+
+	closeDatepicker(): void {
+		if (!this.props.date) {
+			this.disable();
+		}
+
+		this.setState({
+			showCalendar: false
+		});
+	}
+
+	onChangeHandler(date: Moment): void {
+		this.props.onChange(date);
+
+		this.setState({
+			showCalendar: false
+		});
 	}
 
 	/**
@@ -118,7 +160,7 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 				/>
 
 				{this.state.isActive ?
-					<div className={classnames('widget-form-dates__caption', { 'widget-form-dates__caption_filled': !!formattedDate })}>
+					<div className={classnames('widget-form-dates__caption', { 'widget-form-dates__caption_filled': !!formattedDate })} onClick={this.showCalendar}>
 						{formattedDate ? (
 							<span>
 								{formattedDate},&nbsp;
@@ -142,22 +184,25 @@ export default class Datepicker extends React.Component<DatepickerProps, State> 
 			return specialDate && date.format('YYYY-MM-DD') === specialDate.format('YYYY-MM-DD') ? 'widget-ui-datepicker__specialDay' : null;
 		};
 
-		return <DatePicker
-			ref={(calendar: any) => (this.calendar = calendar)}
-			disabled={isIE() ? false : !this.state.isActive}
-			locale={locale}
-			dayClassName={specialDayClassName}
-			customInput={this.renderCustomInput()}
-			calendarClassName={`widget-ui-datepicker widget-ui-datepicker_${type}`}
-			dateFormat={Datepicker.dateFormat}
-			dateFormatCalendar={Datepicker.dateFormatForHeader}
-			selected={date}
-			monthsShown={NUM_OF_VISIBLE_MONTHS}
-			onClickOutside={() => date ? null : this.disable()}
-			onFocus={this.enable}
-			{...this.props}
-		>
-			{this.props.children}
-		</DatePicker>;
+		return <div className={classnames('react-datepicker__container', { 'react-datepicker__container_showCalendar': this.state.showCalendar })}>
+			<DatePicker
+				{...this.props}
+				ref={(calendar: any) => (this.calendar = calendar)}
+				disabled={isIE() ? false : !this.state.isActive}
+				locale={locale}
+				dayClassName={specialDayClassName}
+				customInput={this.renderCustomInput()}
+				calendarClassName={`widget-ui-datepicker widget-ui-datepicker_${type}`}
+				dateFormat={Datepicker.dateFormat}
+				dateFormatCalendar={Datepicker.dateFormatForHeader}
+				selected={date}
+				monthsShown={NUM_OF_VISIBLE_MONTHS}
+				onClickOutside={this.closeDatepicker}
+				onFocus={this.enable}
+				onChange={this.onChangeHandler}
+			>
+				{this.props.children}
+			</DatePicker>
+		</div>;
 	}
 }
